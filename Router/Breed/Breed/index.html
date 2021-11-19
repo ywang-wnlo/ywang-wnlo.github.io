@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ywang-wnlo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="介绍Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Breed 介绍、刷入和使用">
+<meta property="og:url" content="https://ywang-wnlo.github.io/Router/Breed/Breed/index.html">
+<meta property="og:site_name" content="王宇的个人博客">
+<meta property="og:description" content="介绍Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ywang-wnlo.github.io/images/Breed-WEB.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/images/Breed-upgrade.png">
+<meta property="article:published_time" content="2021-10-31T15:00:37.000Z">
+<meta property="article:modified_time" content="2021-10-31T15:00:37.000Z">
+<meta property="article:author" content="王宇">
+<meta property="article:tag" content="Breed">
+<meta property="article:tag" content="BootLoader">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/images/Breed-WEB.png">
+
+<link rel="canonical" href="https://ywang-wnlo.github.io/Router/Breed/Breed/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Breed 介绍、刷入和使用 | 王宇的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">王宇的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个新时代农民工的随手笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/ywang-wnlo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/Router/Breed/Breed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王宇">
+      <meta itemprop="description" content="一个新时代农民工的随手笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王宇的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Breed 介绍、刷入和使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-31 23:00:37" itemprop="dateCreated datePublished" datetime="2021-10-31T23:00:37+08:00">2021-10-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">路由器</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Breed 是国内个人 <a target="_blank" rel="noopener" href="https://github.com/hackpascal">hackpascal</a> 开发的闭源 Bootloader，也被称为“不死鸟”</p>
+<p>因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖</p>
+<span id="more"></span>
+<p>Breed 拥有以下特性：</p>
+<ul>
+<li>实时刷机进度，进度条能准确反映刷机进度</li>
+<li>Web 页面快速响应</li>
+<li>最大固件备份速度，依 Flash 而定，一般能达到 1MB/s</li>
+<li>免按复位键进入 Web 刷机模式</li>
+<li>Telnet 功能，免 TTL 进入 Breed 命令控制台</li>
+<li>复位键定义测试功能</li>
+<li>固件启动失败自动进入 Web 刷机模式</li>
+<li>可自定义位置和大小的环境变量块</li>
+</ul>
+<p>由于是闭源，无法进行二次开发，所有支持的设备均由 hackpascal 一人完成。在 2020-10-09 后已经停止版本更新，但<a target="_blank" rel="noopener" href="https://breed.hackpascal.net/">官网</a>目前仍然开放所有的 Breed 下载</p>
+<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><p>下表为 Breed 的文件对应的设备介绍，发布在<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-161906-1-1.html">恩山论坛</a>上，在此处做一个备份</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BreedEnter.exe</td>
+<td>Breed 启动中断工具，实现免按复位键进入 Web 刷机模式</td>
+</tr>
+<tr>
+<td>md5sum.txt</td>
+<td>当前版本所有 Breed 文件的 MD5 值，用于校验文件的完整性</td>
+</tr>
+<tr>
+<td>breed-mt7620-reset1.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-mt7620-reset2.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-mt7620-reset11.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-mt7620-reset12.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-mt7620-reset13.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#13</td>
+</tr>
+<tr>
+<td>breed-mt7620-reset26.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#26</td>
+</tr>
+<tr>
+<td>breed-mt7620-reset30.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#30</td>
+</tr>
+<tr>
+<td>breed-mt7620-rt-n14u.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#1，WPS 键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-mt7620-whr-1166dhp.bin</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#52，AOSS 键 GPIO#53</td>
+</tr>
+<tr>
+<td>breed-mt7620-lenovo-y1.bin</td>
+<td>联想 Y1 (newifi mini) 专用，波特率 115200，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-mt7620-lenovo-y1s.bin</td>
+<td>联想 Y1S (newifi) 专用，千兆口可用，波特率 115200，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-mt7620-zte-q7.bin</td>
+<td>中兴 ZTE Q7 专用，波特率 57600，复位键 GPIO#26</td>
+</tr>
+<tr>
+<td>breed-mt7620-youku-yk1.bin</td>
+<td>优酷路由宝专用，波特率 57600，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-mt7620-xiaomi-mini.bin</td>
+<td>小米 Mini 专用，波特率 115200，复位键 GPIO#30</td>
+</tr>
+<tr>
+<td>breed-mt7620-fir302m.bin</td>
+<td>斐讯 FIR300M/302M 专用，波特率 57600，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-mt7620-phicomm-psg1208.bin</td>
+<td>斐讯 PSG1208 (K1)/ PSG1218 (K2) 专用，波特率 57600，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-mt7620-hiwifi-hc5761.bin</td>
+<td>极路由 极壹S (HC5661)/极贰 (HC5761) 专用，波特率 115200，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-mt7620-hiwifi-hc5861.bin</td>
+<td>极路由 极叁 (HC5861) 专用，千兆LAN可用，波特率 115200，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-mt7620-oye-0001.bin</td>
+<td>哦耶 Oye-0001 专用，波特率 115200，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-mt7620-airmobi-iplay2.bin</td>
+<td>AirMobi iPlay2 专用，波特率 57600，复位键 GPIO#26</td>
+</tr>
+<tr>
+<td>breed-mt7621-newifi-d1.bin</td>
+<td>联想 Newifi D1 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#15，WPS 键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-mt7621-newifi-d2.bin</td>
+<td>联想 Newifi D2 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#3，WPS 键 GPIO#7</td>
+</tr>
+<tr>
+<td>breed-mt7621-xunlei-timeplug.bin</td>
+<td>迅雷时光机 (时光云) 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#4</td>
+</tr>
+<tr>
+<td>breed-mt7621-youku-l2.bin</td>
+<td>优酷路由宝 YK-L2 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18，WPS 键 GPIO#17</td>
+</tr>
+<tr>
+<td>breed-mt7621-phicomm-k2p.bin</td>
+<td>斐讯 K2P 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 57600，复位键 GPIO#3</td>
+</tr>
+<tr>
+<td>breed-mt7621-pbr-m1.bin</td>
+<td>PandoraBox PBR-M1 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-mt7621-totolink-a3004ns.bin</td>
+<td>TOTOLINK A3004NS 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 57600，复位键 GPIO#4，WPS 键 GPIO#3</td>
+</tr>
+<tr>
+<td>breed-mt7621-xiaomi-r3g.bin</td>
+<td>小米路由器 3G 专用，NAND 启动，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-mt7621-creativebox-v1.bin</td>
+<td>CreativeBox v1 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-mt7621-hiwifi-hc5962.bin</td>
+<td>极路由4/HC5962/B70 专用，NAND 启动，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-mt7621-r6220.bin</td>
+<td>Netgear R6220 专用，NAND 启动，DDR2 内存适用，固定 128MB DDR AC 时序参数，波特率 57600，复位键 GPIO#14，WPS 键 GPIO#7，RFKILL 键 GPIO#8</td>
+</tr>
+<tr>
+<td>breed-mt7621-wndr3700v5.bin</td>
+<td>Netgear WNDR3700 v5 专用，DDR2 内存适用，固定 128MB DDR AC 时序参数，波特率 57600，复位键 GPIO#14，WPS 键 GPIO#7，RFKILL 键 GPIO#8</td>
+</tr>
+<tr>
+<td>breed-mt7621-gehua-ghl-r-001.bin</td>
+<td>歌华 GHL-R-001 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 57600，复位键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-mt7621-jd-cloud-1.bin</td>
+<td>京东云路由宝 RE-SP-01B 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-mt7628-hiwifi-hc5661a.bin</td>
+<td>极路由 极壹S (HC5661A) 专用，波特率 115200，复位键 GPIO#38</td>
+</tr>
+<tr>
+<td>breed-mt7628-oye-0006.bin</td>
+<td>哦耶 OYE-0006 专用，波特率 115200，复位键 GPIO#38</td>
+</tr>
+<tr>
+<td>breed-mt7688-reset38.bin</td>
+<td>MT7628AN/KN 全通用，波特率 57600，复位键 GPIO#38</td>
+</tr>
+<tr>
+<td>breed-mt7688-wrtnode2r.bin</td>
+<td>MT7628AN/KN 全通用，波特率 115200，复位键 GPIO#5</td>
+</tr>
+<tr>
+<td>breed-rt3050-buffalo-wcr-hp-gn.bin (不再更新)</td>
+<td>Buffalo WCR-HP-GN 专用，SPI 启动，波特率 57600，复位键 GPIO#10，WPS 键 GPIO#0</td>
+</tr>
+<tr>
+<td>breed-rt3050-di-524m-b1.bin (不再更新)</td>
+<td>D-LINK DI-624M B1 专用，SPI 启动，波特率 57600，复位键 GPIO#10</td>
+</tr>
+<tr>
+<td>breed-rt305x-nor-reset0.bin (不再更新)</td>
+<td>RT305X 通用，NOR 启动，波特率 57600，复位键 GPIO#0</td>
+</tr>
+<tr>
+<td>breed-rt305x-nor-reset10.bin (不再更新)</td>
+<td>RT305X 通用，NOR 启动，波特率 57600，复位键 GPIO#10</td>
+</tr>
+<tr>
+<td>breed-rt3052-dir-605-b1.bin (不再更新)</td>
+<td>D-LINK DIR-605 B1 专用，NOR 启动，波特率 57600，复位键 GPIO#10，WPS 键 GPIO#0</td>
+</tr>
+<tr>
+<td>breed-rt3052-hg255d.bin (不再更新)</td>
+<td>华为 HG255D 专用，NOR 启动，波特率 115200，复位键 GPIO#4，WPS 键 GPIO#10</td>
+</tr>
+<tr>
+<td>breed-rt5350-airmobi-iplay.bin (不再更新)</td>
+<td>AirMobi iPlay 专用，波特率 57600，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-rt5350-hame-a5.bin (不再更新)</td>
+<td>华美 A5 专用，波特率 57600，复位键 GPIO#0</td>
+</tr>
+<tr>
+<td>breed-rt5350-zm-10.bin (不再更新)</td>
+<td>中沃 ZM-10 专用，波特率 57600，复位键 GPIO#10</td>
+</tr>
+<tr>
+<td>breed-ar7161-dir-825-b1.bin (不再更新)</td>
+<td>D-LINK DIR-825 B1 专用，波特率 115200，复位键 GPIO#3，WPS 键 GPIO#8</td>
+</tr>
+<tr>
+<td>breed-ar724x.bin (不再更新)</td>
+<td>AR724X 通用，百兆有线，波特率 115200，复位键 GPIO#11，QSS 键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar724x-reset11.bin (不再更新)</td>
+<td>AR724X 通用，百兆有线，波特率 115200，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-ar724x-reset12.bin (不再更新)</td>
+<td>AR724X 通用，百兆有线，波特率 115200，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar7240-wnr1000v2.bin (不再更新)</td>
+<td>Netgear WNR1000 v2 专用，百兆有线，波特率 115200</td>
+</tr>
+<tr>
+<td>breed-ar7242-wr2543nd.bin (不再更新)</td>
+<td>TP-LINK WR2543ND 专用，波特率 115200，复位键 GPIO#11，QSS 键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar7242-aruba-ap93.bin (不再更新)</td>
+<td>Aruba-AP93 专用，千兆有线，波特率 115200，复位键 GPIO#11，WPS 键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar913x.bin (不再更新)</td>
+<td>AR913X 通用，百兆有线，波特率 115200，复位键 GPIO#7，WPS 键 GPIO#3</td>
+</tr>
+<tr>
+<td>breed-ar9132-wr1043ndv1.bin (不再更新)</td>
+<td>TP-LINK WR1043ND v1 专用，波特率 115200，复位键 GPIO#7，WPS 键 GPIO#3</td>
+</tr>
+<tr>
+<td>breed-ar9331.bin (不再更新)</td>
+<td>AR9331 通用，波特率 115200，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-ar9331-mr12u.bin (不再更新)</td>
+<td>TP-LINK MR12U 专用，波特率 115200，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-ar9331-pisen.bin (不再更新)</td>
+<td>品胜云路由 (云座易充 WMM003N/无线音乐路由 WPR001N) 专用，波特率 115200，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar9331-wr710n.bin (不再更新)</td>
+<td>TP-LINK WR710N/WR720N v3 专用，波特率 115200，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-ar9331-hiwifi-hc6361.bin (不再更新)</td>
+<td>极路由 极壹 (HC6361) 专用，仅支持 TP 类固件，波特率 115200，复位键 GPIO#11</td>
+</tr>
+<tr>
+<td>breed-ar9341.bin (不再更新)</td>
+<td>AR9341 通用，波特率 115200，复位键 GPIO#17</td>
+</tr>
+<tr>
+<td>breed-ar9341-wnr2000v4.bin (不再更新)</td>
+<td>Netgear WNR2000 v4 专用，波特率 115200，复位键 GPIO#4</td>
+</tr>
+<tr>
+<td>breed-ar9341-pisen-wmp002n.bin (不再更新)</td>
+<td>品胜云追剧 WMP002N 专用，波特率 115200，复位键 GPIO#17</td>
+</tr>
+<tr>
+<td>breed-ar9341-wr800n.bin (不再更新)</td>
+<td>TP-LINK WR800N 专用，波特率 115200，复位键 GPIO#18</td>
+</tr>
+<tr>
+<td>breed-ar9342-wr1041nv2.bin (不再更新)</td>
+<td>TP-LINK WR1042N v2 专用，波特率 115200，复位键 GPIO#14</td>
+</tr>
+<tr>
+<td>breed-ar9342-huawei-ws322.bin (不再更新)</td>
+<td>华为 WS322 专用，波特率 115200，复位键 GPIO#0，WPS 键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-ar9344.bin (不再更新)</td>
+<td>AR9344 百兆版，通用，波特率 115200，复位键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-ar9344-ar8327n.bin (不再更新)</td>
+<td>AR9344 + AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-ar9344-wdr3320v2.bin (不再更新)</td>
+<td>TP-LINK WDR3320  v2 专用，波特率 115200，复位键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-ar9344-wr941nv6.bin (不再更新)</td>
+<td>TP-LINK WR941N v6 专用，波特率 115200，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar9344-mw4530r.bin (不再更新)</td>
+<td>水星 MW4530R 专用，波特率 115200，复位键 GPIO#17，QSS 键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-ar9344-wndr4300-spi.bin (不再更新)</td>
+<td>Netgear WNDR4300/WNDR3700 v4 专用，SPI 启动，波特率 115200，复位键 GPIO#21，QSS 键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar9344-wndr4300-spi-recovery.bin (不再更新)</td>
+<td>Netgear WNDR4300/WNDR3700 v4 专用，SPI 启动，仅用于恢复目的，波特率 115200，复位键 GPIO#21，QSS 键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar9344-belair20e11.bin (不再更新)</td>
+<td>BelAir20E-11 专用，波特率 115200，复位键 GPIO#17，WPS 键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-ar9344-sgr-w500-n85b-v2.bin</td>
+<td>国人通信 GRENTECH SGR-W500-N85b v2 专用，波特率 115200，支持 RTL8211E，复位键 GPIO#3</td>
+</tr>
+<tr>
+<td>breed-qca953x.bin</td>
+<td>QCA9531/QCA9533，通用，波特率 115200，复位键 GPIO#12</td>
+</tr>
+<tr>
+<td>breed-qca953x-letv-lba-047-ch.bin</td>
+<td>乐视路由专用，波特率 115200，复位键 GPIO#17</td>
+</tr>
+<tr>
+<td>breed-qca9558-wr941nv7.bin</td>
+<td>TP-LINK WR941N v7 专用，波特率 115200，复位键 GPIO#17</td>
+</tr>
+<tr>
+<td>breed-qca9558-ar8236.bin</td>
+<td>QCA9558 + AR8236 百兆版，通用，波特率 115200，复位键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-qca9558-ar8327n.bin</td>
+<td>QCA9558 + AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-qca9558-wr2041nv2.bin</td>
+<td>TP-LINK WR2041N v2 专用，波特率 115200，复位键 GPIO#17</td>
+</tr>
+<tr>
+<td>breed-qca9558-wr1043ndv2.bin</td>
+<td>TP-LINK WR1043ND v2 专用，波特率 115200，复位键 GPIO#16</td>
+</tr>
+<tr>
+<td>breed-qca9558-dw33d.bin</td>
+<td>大麦 DW33D 专用，波特率 115200，复位键 GPIO#17</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx18_tx20-reset1.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#20，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx18_tx20-reset2.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#20，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx18_tx22-reset1.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#22，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx18_tx22-reset2.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#22，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx19_tx20-reset1.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#20，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx19_tx20-reset2.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#20，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx19_tx20-reset1.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#22，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx19_tx22-reset2.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#22，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx20_tx22-reset1.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#20，TX GPIO#22，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-qca956x-uart_rx20_tx22-reset2.bin</td>
+<td>QCA956X 通用，百兆/千兆自适应，波特率 115200，UART RX GPIO#20，TX GPIO#22，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca956x-reset2.bin</td>
+<td>QCA956X 百兆版，通用，波特率 115200，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca9561-wdr6500v2.bin (不再更新)</td>
+<td>TP-LINK WDR6500 v2 专用，波特率 115200，复位键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-qca9563-wndr4500v3.bin</td>
+<td>Netgear WNDR4500 v3 专用，波特率 115200，复位键 GPIO#2，WPS 键 GPIO#1</td>
+</tr>
+<tr>
+<td>breed-qca9563-phicomm-k2t.bin</td>
+<td>斐讯 K2T 专用，波特率 115200，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca9563-rosinson-wr818.bin</td>
+<td>ROSINSON WR818 专用，波特率 115200，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca9563-jhr-848q.bin</td>
+<td>JHR-848Q 专用，波特率 115200，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-qca9563-dir-859-a.bin</td>
+<td>D-Link DIR-859 A1/A2 专用，波特率 115200，复位键 GPIO#2</td>
+</tr>
+<tr>
+<td>breed-tp9343.bin</td>
+<td>TP9343，通用，波特率 115200，复位键 GPIO#1，WPS 键 GPIO#1</td>
+</tr>
+</tbody></table>
+<p>注：专用版能够点亮所有 LED</p>
+<p>以下是可以支持自定义复位键 GPIO 的特别版</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>breed-ar7161-blank.bin (不再更新)</td>
+<td>AR7161 专用，支持 AR8035 IP1001 MV88E1116 BCM5481 千兆 PHY</td>
+</tr>
+<tr>
+<td>breed-ar913x-blank.bin (不再更新)</td>
+<td>AR913X 专用，仅支持 88E6060 百兆交换机</td>
+</tr>
+<tr>
+<td>breed-ar724x-blank.bin (不再更新)</td>
+<td>AR724X 专用，支持内置百兆交换机和 AR8021 千兆 PHY</td>
+</tr>
+<tr>
+<td>breed-ar9331-blank.bin (不再更新)</td>
+<td>AR9331 专用，仅支持内置百兆交换机</td>
+</tr>
+<tr>
+<td>breed-ar934x-blank.bin (不再更新)</td>
+<td>AR934X 专用，支持内置百兆交换机和  AR8327(N) 千兆交换机、AR8035 RTL8211E 千兆 PHY、RTL8201 百兆 PHY</td>
+</tr>
+<tr>
+<td>breed-mt7620-blank.bin</td>
+<td>MT7620 专用，仅支持内置百兆交换机</td>
+</tr>
+<tr>
+<td>breed-mt76x8-blank.bin</td>
+<td>MT7628/MT7688 专用，仅支持内置百兆交换机</td>
+</tr>
+<tr>
+<td>breed-rt305x-nor-blank.bin (不再更新)</td>
+<td>RT305X 专用，从 NOR 闪存启动，仅支持内置百兆交换机</td>
+</tr>
+<tr>
+<td>breed-rt305x-spi-blank.bin (不再更新)</td>
+<td>RT305X 专用，从 SPI 闪存启动，仅支持内置百兆交换机</td>
+</tr>
+<tr>
+<td>breed-rt5350-blank.bin (不再更新)</td>
+<td>RT5350 专用，仅支持内置百兆交换机</td>
+</tr>
+</tbody></table>
+<h2 id="刷入-Breed"><a href="#刷入-Breed" class="headerlink" title="刷入 Breed"></a>刷入 Breed</h2><p>Breed 的刷入和固件刷入流程基本一致：</p>
+<ol>
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li>[可选] 备份原有的所有 ROM 分区数据，主要目的是为了恢复原厂固件</li>
+<li>利用 <code>mtd</code> 等命令直接对 Bootloader 所在的 ROM 区域进行写入镜像</li>
+<li>重启设备</li>
+</ol>
+<p>刷入 Breed 后，耐心等待设备重启，通常可以通过 192.168.1.1 这个地址来进入 Breed 的 Web 管理界面</p>
+<p><img src="/images/Breed-WEB.png" alt="Breed 的 Web 管理界面"></p>
+<h2 id="通过-Breed-刷机"><a href="#通过-Breed-刷机" class="headerlink" title="通过 Breed 刷机"></a>通过 Breed 刷机</h2><p>通过 Breed 刷机就很方便了，直接在<a target="_blank" rel="noopener" href="http://192.168.1.1/upgrade.html">固件更新</a>界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可</p>
+<p><img src="/images/Breed-upgrade.png" alt="固件更新"></p>
+<h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><p>除去 Web 界面刷机，Breed 还支持一些其他的功能，包括固件备份、超频等，更多的使用方式推荐参考网上的其他资料</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-161906-1-1.html">【恩山论坛】Breed</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-154561-1-1.html">【恩山论坛】U-Boot 刷机</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-690605-1-1.html">【恩山论坛】小米路由器 MINI 刷 Breed 及 Pandavan 教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-257423-1-1.html">【恩山论坛】小米路由器 3G 刷 Breed 及老毛子 Padavan 固件教程</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Breed/" rel="tag"># Breed</a>
+              <a href="/tags/BootLoader/" rel="tag"># BootLoader</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/io_uring/%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="prev" title="io_uring 内核源码分析（更新中）">
+      <i class="fa fa-chevron-left"></i> io_uring 内核源码分析（更新中）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/" rel="next" title="OpenWrt 手动编译 ipk">
+      OpenWrt 手动编译 ipk <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">文件说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B7%E5%85%A5-Breed"><span class="nav-number">2.</span> <span class="nav-text">刷入 Breed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Breed-%E5%88%B7%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">通过 Breed 刷机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">王宇</p>
+  <div class="site-description" itemprop="description">一个新时代农民工的随手笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ywang-wnlo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ywang_wnlo@qq.com" title="E-Mail → mailto:ywang_wnlo@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王宇</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'neutral',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'c8fce49e429f332025b8',
+      clientSecret: '08ad73ba0da32f47646c81f2f80fab63d3341564',
+      repo        : 'ywang-wnlo.github.io',
+      owner       : 'ywang-wnlo',
+      admin       : ['ywang-wnlo'],
+      id          : '723bde605d39b9a1575a792fd7bd16b3',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
