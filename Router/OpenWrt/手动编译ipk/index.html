@@ -28,8 +28,8 @@
 <meta property="og:site_name" content="王宇的个人博客">
 <meta property="og:description" content=".ipk 文件.ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等 但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 .ipk 文件，因此需要交叉编译来">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ywang-wnlo.github.io/images/Target-Config.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/images/MiniEAP-Config.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/Target-Config.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/MiniEAP-Config.png">
 <meta property="article:published_time" content="2021-11-01T03:08:42.000Z">
 <meta property="article:modified_time" content="2021-11-01T03:08:42.000Z">
 <meta property="article:author" content="王宇">
@@ -37,7 +37,7 @@
 <meta property="article:tag" content="交叉编译">
 <meta property="article:tag" content="ipk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ywang-wnlo.github.io/images/Target-Config.png">
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/Target-Config.png">
 
 
 <link rel="canonical" href="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/">
@@ -280,7 +280,7 @@
 
 <p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
 <p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
-<p><img src="/images/Target-Config.png" alt="Target-Config"></p>
+<p><img src="Target-Config.png" alt="平台配置"></p>
 <h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
 
@@ -296,7 +296,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
 
 <p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<p><img src="/images/MiniEAP-Config.png" alt="MiniEAP-Config"></p>
+<p><img src="MiniEAP-Config.png" alt="MiniEAP 配置"></p>
 <p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
 
