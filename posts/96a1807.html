@@ -24,12 +24,12 @@
 <meta name="description" content=".ipk 文件.ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等 但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 .ipk 文件，因此需要交叉编译来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenWrt 手动编译 ipk">
-<meta property="og:url" content="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/index.html">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/96a1807.html">
 <meta property="og:site_name" content="王宇的个人博客">
 <meta property="og:description" content=".ipk 文件.ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等 但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 .ipk 文件，因此需要交叉编译来">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/Target-Config.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/MiniEAP-Config.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/96a1807/Target-Config.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/96a1807/MiniEAP-Config.png">
 <meta property="article:published_time" content="2021-11-01T03:08:42.000Z">
 <meta property="article:modified_time" content="2021-11-01T03:08:42.000Z">
 <meta property="article:author" content="王宇">
@@ -37,14 +37,14 @@
 <meta property="article:tag" content="交叉编译">
 <meta property="article:tag" content="ipk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/Target-Config.png">
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/posts/96a1807/Target-Config.png">
 
 
-<link rel="canonical" href="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/">
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/96a1807.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/","path":"Router/OpenWrt/手动编译ipk/","title":"OpenWrt 手动编译 ipk"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/96a1807.html","path":"posts/96a1807.html","title":"OpenWrt 手动编译 ipk"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>OpenWrt 手动编译 ipk | 王宇的个人博客</title>
@@ -199,7 +199,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/96a1807.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -264,7 +264,7 @@
 <p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
 <span id="more"></span>
 <p>而官方的 <a target="_blank" rel="noopener" href="https://github.com/openwrt/openwrt">OpenWrt</a> 仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考<a target="_blank" rel="noopener" href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">官网给出的要求</a>，可以通过下面命令来进行安装依赖包</p>
+<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <a target="_blank" rel="noopener" href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">官网给出的要求</a>，可以通过下面命令来进行安装依赖包</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
 
 <p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
@@ -280,7 +280,7 @@
 
 <p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
 <p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
-<p><img src="Target-Config.png" alt="平台配置"></p>
+<p><img src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
 <h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
 
@@ -296,7 +296,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
 
 <p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<p><img src="MiniEAP-Config.png" alt="MiniEAP 配置"></p>
+<p><img src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
 <p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
 
@@ -316,6 +316,23 @@
     
 
     <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王宇
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ywang-wnlo.github.io/posts/96a1807.html" title="OpenWrt 手动编译 ipk">https://ywang-wnlo.github.io/posts/96a1807.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
           <div class="post-tags">
               <a href="/tags/OpenWrt/" rel="tag"># OpenWrt</a>
               <a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/" rel="tag"># 交叉编译</a>
@@ -326,12 +343,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Router/Breed/Breed/" rel="prev" title="Breed 介绍、刷入和使用">
+                <a href="/posts/53d6c2d9.html" rel="prev" title="Breed 介绍、刷入和使用">
                   <i class="fa fa-chevron-left"></i> Breed 介绍、刷入和使用
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/IO_stack/page_cache/writeback/" rel="next" title="page cache 回写机制">
+                <a href="/posts/646202b9.html" rel="next" title="page cache 回写机制">
                   page cache 回写机制 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -390,7 +407,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"adfdc03a9e805eea03be0991db5a4f6c"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"202db4846671daa6e20f422387510bcf"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

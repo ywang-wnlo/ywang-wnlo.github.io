@@ -24,26 +24,26 @@
 <meta name="description" content="介绍Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Breed 介绍、刷入和使用">
-<meta property="og:url" content="https://ywang-wnlo.github.io/Router/Breed/Breed/index.html">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/53d6c2d9.html">
 <meta property="og:site_name" content="王宇的个人博客">
 <meta property="og:description" content="介绍Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ywang-wnlo.github.io/Router/Breed/Breed/Breed-WEB.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/Router/Breed/Breed/Breed-upgrade.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/53d6c2d9/Breed-WEB.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/53d6c2d9/Breed-upgrade.png">
 <meta property="article:published_time" content="2021-10-31T15:00:37.000Z">
 <meta property="article:modified_time" content="2021-10-31T15:00:37.000Z">
 <meta property="article:author" content="王宇">
 <meta property="article:tag" content="Breed">
 <meta property="article:tag" content="BootLoader">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ywang-wnlo.github.io/Router/Breed/Breed/Breed-WEB.png">
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/posts/53d6c2d9/Breed-WEB.png">
 
 
-<link rel="canonical" href="https://ywang-wnlo.github.io/Router/Breed/Breed/">
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/53d6c2d9.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/Router/Breed/Breed/","path":"Router/Breed/Breed/","title":"Breed 介绍、刷入和使用"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/53d6c2d9.html","path":"posts/53d6c2d9.html","title":"Breed 介绍、刷入和使用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Breed 介绍、刷入和使用 | 王宇的个人博客</title>
@@ -198,7 +198,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/Router/Breed/Breed/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/53d6c2d9.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -273,8 +273,8 @@
 <li>固件启动失败自动进入 Web 刷机模式</li>
 <li>可自定义位置和大小的环境变量块</li>
 </ul>
-<p>由于是闭源，无法进行二次开发，所有支持的设备均由 hackpascal 一人完成。在 2020-10-09 后已经停止版本更新，但<a target="_blank" rel="noopener" href="https://breed.hackpascal.net/">官网</a>目前仍然开放所有的 Breed 下载</p>
-<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><p>下表为 Breed 的文件对应的设备介绍，发布在<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-161906-1-1.html">恩山论坛</a>上，在此处做一个备份</p>
+<p>由于是闭源，无法进行二次开发，所有支持的设备均由 hackpascal 一人完成。在 2020-10-09 后已经停止版本更新，但 <a target="_blank" rel="noopener" href="https://breed.hackpascal.net/">官网</a> 目前仍然开放所有的 Breed 下载</p>
+<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><p>下表为 Breed 的文件对应的设备介绍，发布在 <a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-161906-1-1.html">恩山论坛</a> 上，在此处做一个备份</p>
 <table>
 <thead>
 <tr>
@@ -758,9 +758,9 @@
 <li>重启设备</li>
 </ol>
 <p>刷入 Breed 后，耐心等待设备重启，通常可以通过 192.168.1.1 这个地址来进入 Breed 的 Web 管理界面</p>
-<p><img src="Breed-WEB.png" alt="Breed 的 Web 管理界面"></p>
-<h2 id="通过-Breed-刷机"><a href="#通过-Breed-刷机" class="headerlink" title="通过 Breed 刷机"></a>通过 Breed 刷机</h2><p>通过 Breed 刷机就很方便了，直接在<a target="_blank" rel="noopener" href="http://192.168.1.1/upgrade.html">固件更新</a>界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可</p>
-<p><img src="Breed-upgrade.png" alt="Breed 进行固件更新"></p>
+<p><img src="/posts/53d6c2d9/Breed-WEB.png" alt="Breed 的 Web 管理界面"></p>
+<h2 id="通过-Breed-刷机"><a href="#通过-Breed-刷机" class="headerlink" title="通过 Breed 刷机"></a>通过 Breed 刷机</h2><p>通过 Breed 刷机就很方便了，直接在 <a target="_blank" rel="noopener" href="http://192.168.1.1/upgrade.html">固件更新</a> 界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可</p>
+<p><img src="/posts/53d6c2d9/Breed-upgrade.png" alt="Breed 进行固件更新"></p>
 <h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><p>除去 Web 界面刷机，Breed 还支持一些其他的功能，包括固件备份、超频等，更多的使用方式推荐参考网上的其他资料</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-161906-1-1.html">【恩山论坛】Breed</a></li>
@@ -776,6 +776,23 @@
     
 
     <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王宇
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ywang-wnlo.github.io/posts/53d6c2d9.html" title="Breed 介绍、刷入和使用">https://ywang-wnlo.github.io/posts/53d6c2d9.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
           <div class="post-tags">
               <a href="/tags/Breed/" rel="tag"># Breed</a>
               <a href="/tags/BootLoader/" rel="tag"># BootLoader</a>
@@ -785,12 +802,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/io_uring/%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="prev" title="io_uring 内核源码分析（更新中）">
+                <a href="/posts/4f0d345c.html" rel="prev" title="io_uring 内核源码分析（更新中）">
                   <i class="fa fa-chevron-left"></i> io_uring 内核源码分析（更新中）
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/" rel="next" title="OpenWrt 手动编译 ipk">
+                <a href="/posts/96a1807.html" rel="next" title="OpenWrt 手动编译 ipk">
                   OpenWrt 手动编译 ipk <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -849,7 +866,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"723bde605d39b9a1575a792fd7bd16b3"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"fff9d5121e2492378ce3412ebabd7f91"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

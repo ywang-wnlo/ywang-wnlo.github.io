@@ -24,7 +24,7 @@
 <meta name="description" content="简介io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK[1]，同时支持 buffer IO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="io_uring 简介和使用">
-<meta property="og:url" content="https://ywang-wnlo.github.io/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/c142853f.html">
 <meta property="og:site_name" content="王宇的个人博客">
 <meta property="og:description" content="简介io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK[1]，同时支持 buffer IO">
 <meta property="og:locale" content="zh_CN">
@@ -37,11 +37,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://ywang-wnlo.github.io/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/">
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/c142853f.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/","path":"io_uring/简介和使用/","title":"io_uring 简介和使用"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/c142853f.html","path":"posts/c142853f.html","title":"io_uring 简介和使用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>io_uring 简介和使用 | 王宇的个人博客</title>
@@ -196,7 +196,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/c142853f.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -295,7 +295,7 @@
 <tr>
 <td><code>ucontext-cp.c</code></td>
 <td>复制 n 个文件的内容到另 n 个文件</td>
-<td>使用 <code>ucontext</code> 进行上下文切换，模拟<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq910894904/article/details/41911175">协程</a></td>
+<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq910894904/article/details/41911175">协程</a></td>
 </tr>
 </tbody></table>
 <h4 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h4><p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
@@ -333,7 +333,7 @@
 
 <p>而 <code>liburing</code> 库也需要编译生成，推荐直接在 <code>liburing</code> 的顶层目录直接 <code>make all</code></p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="io_uring.pdf">【PDF】官方 pdf</a></li>
+<li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">【Kernel】io_uring 性能测试</a></li>
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jens_Axboe">【维基百科】Jens Axboe</a></li>
 <li><a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">【Kernel】io_uring IOSQE_IO_LINK</a></li>
@@ -346,6 +346,23 @@
     
 
     <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王宇
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ywang-wnlo.github.io/posts/c142853f.html" title="io_uring 简介和使用">https://ywang-wnlo.github.io/posts/c142853f.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
           <div class="post-tags">
               <a href="/tags/io-uring/" rel="tag"># io_uring</a>
               <a href="/tags/liburing/" rel="tag"># liburing</a>
@@ -356,12 +373,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Router/OpenWrt/%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/" rel="prev" title="OpenWrt 配置使用">
+                <a href="/posts/51140c4a.html" rel="prev" title="OpenWrt 配置使用">
                   <i class="fa fa-chevron-left"></i> OpenWrt 配置使用
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/io_uring/%E7%94%A8%E6%88%B7%E5%BA%93%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="next" title="io_uring 用户库源码分析">
+                <a href="/posts/d7259d1d.html" rel="next" title="io_uring 用户库源码分析">
                   io_uring 用户库源码分析 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -420,7 +437,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"ac7d1ea3846755af9479436677bb1702"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"2a791089e9db8692d921efb34b06dd58"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

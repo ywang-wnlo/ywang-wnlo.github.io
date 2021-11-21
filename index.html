@@ -190,7 +190,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/IO_stack/page_cache/writeback/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/646202b9.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/IO_stack/page_cache/writeback/" class="post-title-link" itemprop="url">page cache 回写机制</a>
+          <a href="/posts/646202b9.html" class="post-title-link" itemprop="url">page cache 回写机制</a>
         </h2>
 
         <div class="post-meta-container">
@@ -256,13 +256,13 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>当前内容基于 Linux Kernel <a target="_blank" rel="noopener" href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121">v5.4.121</a></p>
-<h2 id="writeback-回写"><a href="#writeback-回写" class="headerlink" title="writeback 回写"></a>writeback 回写</h2><p>之前在 <a href="/IO_stack/page_cache/page_cache">page cache 简介</a> 有过介绍</p>
+<h2 id="writeback-回写"><a href="#writeback-回写" class="headerlink" title="writeback 回写"></a>writeback 回写</h2><p>之前在 <a href="/TODO">page cache 简介</a> 有过介绍</p>
 <p>buffer IO 通过 page cache 进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能</p>
 <p>写入到 page cache 的数据不会立刻写入后端设备，而是标记为“脏”，并被加入到脏页链表，后续由内核中的回写进程周期性的将脏页写回到底层存储设备</p>
 <p>下面主要分析 page cache 回写机制的策略和实现</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/IO_stack/page_cache/writeback/#more" rel="contents">
+              <a class="btn" href="/posts/646202b9.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -293,7 +293,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/96a1807.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -306,7 +306,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/" class="post-title-link" itemprop="url">OpenWrt 手动编译 ipk</a>
+          <a href="/posts/96a1807.html" class="post-title-link" itemprop="url">OpenWrt 手动编译 ipk</a>
         </h2>
 
         <div class="post-meta-container">
@@ -358,7 +358,7 @@
 <p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Router/OpenWrt/%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91ipk/#more" rel="contents">
+              <a class="btn" href="/posts/96a1807.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -389,7 +389,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/Router/Breed/Breed/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/53d6c2d9.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -402,7 +402,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/Router/Breed/Breed/" class="post-title-link" itemprop="url">Breed 介绍、刷入和使用</a>
+          <a href="/posts/53d6c2d9.html" class="post-title-link" itemprop="url">Breed 介绍、刷入和使用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -454,7 +454,7 @@
 <p>因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Router/Breed/Breed/#more" rel="contents">
+              <a class="btn" href="/posts/53d6c2d9.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -485,7 +485,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/io_uring/%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/4f0d345c.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -498,7 +498,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/io_uring/%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">io_uring 内核源码分析（更新中）</a>
+          <a href="/posts/4f0d345c.html" class="post-title-link" itemprop="url">io_uring 内核源码分析（更新中）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -551,11 +551,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>当前内容基于 Linux Kernel <a target="_blank" rel="noopener" href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121">v5.4.121</a></p>
-<h2 id="1-io-uring"><a href="#1-io-uring" class="headerlink" title="1. io_uring"></a>1. <code>io_uring</code></h2><p><a href="/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8">之前</a>介绍过 io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
+<h2 id="1-io-uring"><a href="#1-io-uring" class="headerlink" title="1. io_uring"></a>1. <code>io_uring</code></h2><p><a href="/posts/c142853f.html#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8">之前</a> 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
 <p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中，下面将逐个分析</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/io_uring/%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more" rel="contents">
+              <a class="btn" href="/posts/4f0d345c.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -586,7 +586,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/io_uring/%E7%94%A8%E6%88%B7%E5%BA%93%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/d7259d1d.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -599,7 +599,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/io_uring/%E7%94%A8%E6%88%B7%E5%BA%93%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">io_uring 用户库源码分析</a>
+          <a href="/posts/d7259d1d.html" class="post-title-link" itemprop="url">io_uring 用户库源码分析</a>
         </h2>
 
         <div class="post-meta-container">
@@ -652,10 +652,10 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>当前内容基于 <a target="_blank" rel="noopener" href="https://github.com/axboe/liburing/releases/tag/liburing-2.1">liburing 2.1</a> 版本</p>
-<h2 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h2><p>之前在 <a href="/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B">io_uring 简介和使用</a>有过总结，使用 io_uring 的一般流程如下：</p>
+<h2 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h2><p>之前在 <a href="/posts/c142853f.html#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B">io_uring 简介和使用</a> 有过总结，使用 io_uring 的一般流程如下：</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/io_uring/%E7%94%A8%E6%88%B7%E5%BA%93%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more" rel="contents">
+              <a class="btn" href="/posts/d7259d1d.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -686,7 +686,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/c142853f.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -699,7 +699,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">io_uring 简介和使用</a>
+          <a href="/posts/c142853f.html" class="post-title-link" itemprop="url">io_uring 简介和使用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -754,7 +754,7 @@
           <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">[1]</a>，同时支持 buffer IO</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/io_uring/%E7%AE%80%E4%BB%8B%E5%92%8C%E4%BD%BF%E7%94%A8/#more" rel="contents">
+              <a class="btn" href="/posts/c142853f.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -785,7 +785,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/Router/OpenWrt/%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/51140c4a.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -798,7 +798,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/Router/OpenWrt/%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">OpenWrt 配置使用</a>
+          <a href="/posts/51140c4a.html" class="post-title-link" itemprop="url">OpenWrt 配置使用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -849,7 +849,7 @@
           <h2 id="Web-界面"><a href="#Web-界面" class="headerlink" title="Web 界面"></a>Web 界面</h2><p>一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是 <code>root</code>，无密码，直接点击登录即可进入</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Router/OpenWrt/%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/#more" rel="contents">
+              <a class="btn" href="/posts/51140c4a.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -880,7 +880,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/Router/OpenWrt/%E7%AE%80%E4%BB%8B%E5%92%8C%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/8507aaa1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -893,7 +893,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/Router/OpenWrt/%E7%AE%80%E4%BB%8B%E5%92%8C%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">OpenWrt 简介和安装</a>
+          <a href="/posts/8507aaa1.html" class="post-title-link" itemprop="url">OpenWrt 简介和安装</a>
         </h2>
 
         <div class="post-meta-container">
@@ -944,7 +944,7 @@
           <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Router/OpenWrt/%E7%AE%80%E4%BB%8B%E5%92%8C%E5%AE%89%E8%A3%85/#more" rel="contents">
+              <a class="btn" href="/posts/8507aaa1.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -975,7 +975,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/LaTeX/%E8%AF%AD%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/2033aa70.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -988,7 +988,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/LaTeX/%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">LaTeX 语法（更新中）</a>
+          <a href="/posts/2033aa70.html" class="post-title-link" itemprop="url">LaTeX 语法（更新中）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1036,10 +1036,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>中文支持参考环境配置中的<a href="/LaTeX/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+          <p>中文支持参考环境配置中的<a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/LaTeX/%E8%AF%AD%E6%B3%95/#more" rel="contents">
+              <a class="btn" href="/posts/2033aa70.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1070,7 +1070,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/LaTeX/PPT/">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/499c5a19.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1083,7 +1083,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/LaTeX/PPT/" class="post-title-link" itemprop="url">LaTeX PPT（更新中）</a>
+          <a href="/posts/499c5a19.html" class="post-title-link" itemprop="url">LaTeX PPT（更新中）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1134,7 +1134,7 @@
           <h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <a target="_blank" rel="noopener" href="https://www.overleaf.com/learn/latex/Beamer">Overleaf 上相关介绍</a> 来使用</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/LaTeX/PPT/#more" rel="contents">
+              <a class="btn" href="/posts/499c5a19.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
