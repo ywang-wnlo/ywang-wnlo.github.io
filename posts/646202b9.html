@@ -343,19 +343,19 @@
 <p> <code>WB_SYNC_ALL</code>：<code>sync</code> 系统调用时配置，必须等待回调函数执行完成，写的数据真正落盘之后才会返回</p>
 </li>
 <li><p><code>tagged_writepages</code> 字段</p>
-<p> 值为 1 表示开启 <code>tag-and-write</code> 机制用于避免活锁。该机制详情参考<a href="#tag-and-write">后续小节</a></p>
+<p> 值为 1 表示开启 <code>tag-and-write</code> 机制用于避免活锁。该机制详情参考 <a href="#tag-and-write">后续小节</a></p>
 </li>
 <li><p><code>for_kupdate</code> 字段</p>
-<p> 值为 1 表示当前任务是定期回写任务，用于回写已经至脏超过指定时间（内核中当前配置为 30s）的脏页。定期回写详情参考<a href="#%E5%AE%9A%E6%9C%9F%E5%9B%9E%E5%86%99">后续小节</a></p>
+<p> 值为 1 表示当前任务是定期回写任务，用于回写已经至脏超过指定时间（内核中当前配置为 30s）的脏页。定期回写详情参考 <a href="#%E5%AE%9A%E6%9C%9F%E5%9B%9E%E5%86%99">后续小节</a></p>
 </li>
 <li><p><code>range_cyclic</code> 字段</p>
-<p> 值为 1 表示当前任务的回写范围为整个 <code>inode</code>，并且从上次完成的位置作为起始位置进行循环回写。值为 0 则根据 <code>struct writeback_control wbc</code> 的 <code>range_start</code> 以及 <code>range_end</code> 作为回写的范围。<code>range_cyclic</code> 的详情参考<a href="#range_cyclic">后续小节</a></p>
+<p> 值为 1 表示当前任务的回写范围为整个 <code>inode</code>，并且从上次完成的位置作为起始位置进行循环回写。值为 0 则根据 <code>struct writeback_control wbc</code> 的 <code>range_start</code> 以及 <code>range_end</code> 作为回写的范围。<code>range_cyclic</code> 的详情参考 <a href="#range_cyclic">后续小节</a></p>
 </li>
 <li><p><code>for_background</code> 字段</p>
-<p> 值为 1 表示当前任务是阈值回写任务，当脏页比例超过阈值后才会触发。阈值回写详情参考<a href="#%E9%98%88%E5%80%BC%E5%9B%9E%E5%86%99">后续小节</a></p>
+<p> 值为 1 表示当前任务是阈值回写任务，当脏页比例超过阈值后才会触发。阈值回写详情参考 <a href="#%E9%98%88%E5%80%BC%E5%9B%9E%E5%86%99">后续小节</a></p>
 </li>
 <li><p><code>for_sync</code> 字段</p>
-<p> 值为 1 表示当前任务是阈值回写任务 <code>sync</code> 系统调用手动触发的回写任务。<code>sync</code> 系统调用详情参考<a href="#sync">后续小节</a></p>
+<p> 值为 1 表示当前任务是阈值回写任务 <code>sync</code> 系统调用手动触发的回写任务。<code>sync</code> 系统调用详情参考 <a href="#sync">后续小节</a></p>
 </li>
 </ol>
 <h2 id="回写线程"><a href="#回写线程" class="headerlink" title="回写线程"></a>回写线程</h2><p>前面说过 <code>bdi_writeback</code> 结构体中 <code>struct delayed_work dwork</code> 就是关键的负责 page cache 回写工作的结构体</p>
