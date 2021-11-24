@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="当前内容基于 Linux Kernel v5.4.121 writeback 回写之前在 page cache 简介 有过介绍 buffer IO 通过 page cache 进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能 写入到 page cache 的数据不会立刻写入后端设备，而是标记为“脏”，并被加入到脏页链表，后续由内核中的回写进程周期性的将脏页写回到底层存储设备 下面主要分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="page cache 回写机制">
@@ -290,7 +290,7 @@
 <h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>该结构体只会由 <code>mm/backing-dev.c</code> 中的 <code>bdi_alloc_node</code> 函数来申请内存空间并调用 <code>bdi_init</code> 初始化</p>
 <h4 id="部分字段说明"><a href="#部分字段说明" class="headerlink" title="部分字段说明"></a>部分字段说明</h4><ol>
 <li><p><code>name</code> 字段</p>
-<p> <img src="/posts/646202b9/bdi_name.png" alt="name 字段"></p>
+<p> <img data-src="/posts/646202b9/bdi_name.png" alt="name 字段"></p>
 <p> 在 <code>block/blk-core.c</code> 中 <code>blk_alloc_queue_node</code> 会调用 <code>bdi_alloc_node</code> 来初始化该结构体，其中 <code>name</code> 字段赋值为 <code>&quot;block&quot;</code></p>
 </li>
 <li><p><code>dev</code> 字段</p>
@@ -298,12 +298,12 @@
 </li>
 <li><p><code>dev_name</code> 字段</p>
 <p> 在 <code>mm/backing-dev.c</code> 的 <code>bdi_register_va</code> 还会对 <code>dev_name</code> 进行赋值</p>
-<p> <img src="/posts/646202b9/bdi_dev_name.png" alt="dev_name 字段"></p>
+<p> <img data-src="/posts/646202b9/bdi_dev_name.png" alt="dev_name 字段"></p>
 <p> 根据调用栈溯源可以发现，<code>mm/backing-dev.c</code> 的 <code>bdi_register_owner</code> 将 <code>fmt</code> 和 <code>args</code> 传递到 <code>bdi_register_va</code>，最终会将主设备号和次设备号拼接组合后进行赋值</p>
 </li>
 <li><p><code>owner</code> 字段</p>
 <p> 在 <code>mm/backing-dev.c</code> 的 <code>bdi_register_owner</code> 还会对 <code>owner</code> 进行赋值</p>
-<p> <img src="/posts/646202b9/bdi_owner.png" alt="owner 字段"></p>
+<p> <img data-src="/posts/646202b9/bdi_owner.png" alt="owner 字段"></p>
 <p> 实际赋值的为 <code>disk</code> 对应的 <code>dev</code>，通过 <code>disk_to_dev</code> 宏转换得到</p>
 </li>
 </ol>
@@ -370,11 +370,11 @@
 <h2 id="回写线程"><a href="#回写线程" class="headerlink" title="回写线程"></a>回写线程</h2><p>前面说过 <code>bdi_writeback</code> 结构体中 <code>struct delayed_work dwork</code> 就是关键的负责 page cache 回写工作的结构体</p>
 <h3 id="初始化-2"><a href="#初始化-2" class="headerlink" title="初始化"></a>初始化</h3><p><code>wb_init</code> 函数会对 <code>wb-&gt;dwork</code> 赋值，注册实际的工作函数 <code>wb_workfn</code></p>
 <p>由于这是个 <code>delayed_work</code>，注册的工作函数不会立即执行，需要后续利用 <code>mod_delayed_work</code> 来修改 <code>delayed_work</code> 内置的定时器时间来唤醒</p>
-<p><img src="/posts/646202b9/wb_init.png" alt="wb_init 调用图"></p>
+<p><img data-src="/posts/646202b9/wb_init.png" alt="wb_init 调用图"></p>
 <p>(P.S. 图片中函数开头为 <code>cg</code> 代表和 <code>cgroup</code> 相关，同一层级多个同名函数和宏定义的编译控制有关)</p>
 <p>根据函数调用图，大致分析可知，当设备申请 <code>queue</code> 时会初始化 <code>backing_dev_info</code> 结构体和 <code>bdi_writeback</code> 结构体，以及初始化回写线程</p>
 <h3 id="立即唤醒"><a href="#立即唤醒" class="headerlink" title="立即唤醒"></a>立即唤醒</h3><p>虽然 <code>dwork</code> 是个 <code>delayed_work</code>，但是我们可以在调用 <code>mod_delayed_work</code> 将延时设置为 0，来立即唤醒回写线程</p>
-<p><img src="/posts/646202b9/dwork_callers.png" alt="dwork 调用图"></p>
+<p><img data-src="/posts/646202b9/dwork_callers.png" alt="dwork 调用图"></p>
 <h4 id="wb-wakeup"><a href="#wb-wakeup" class="headerlink" title="wb_wakeup"></a><code>wb_wakeup</code></h4><p><code>wb_wakeup</code> 就是修改延时为 0，直接唤醒回写线程</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fs/fs-writeback.c</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">wb_wakeup</span><span class="params">(struct bdi_writeback *wb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	spin_lock_bh(&amp;wb-&gt;work_lock);</span><br><span class="line">	<span class="keyword">if</span> (test_bit(WB_registered, &amp;wb-&gt;state))</span><br><span class="line">		mod_delayed_work(bdi_wq, &amp;wb-&gt;dwork, <span class="number">0</span>);</span><br><span class="line">	spin_unlock_bh(&amp;wb-&gt;work_lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -387,14 +387,14 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mm/backing-dev.c</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This function is used when the first inode for this wb is marked dirty. It</span></span><br><span class="line"><span class="comment"> * wakes-up the corresponding bdi thread which should then take care of the</span></span><br><span class="line"><span class="comment"> * periodic background write-out of dirty inodes. Since the write-out would</span></span><br><span class="line"><span class="comment"> * starts only &#x27;dirty_writeback_interval&#x27; centisecs from now anyway, we just</span></span><br><span class="line"><span class="comment"> * set up a timer which wakes the bdi thread up later.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Note, we wouldn&#x27;t bother setting up the timer, but this function is on the</span></span><br><span class="line"><span class="comment"> * fast-path (used by &#x27;__mark_inode_dirty()&#x27;), so we save few context switches</span></span><br><span class="line"><span class="comment"> * by delaying the wake-up.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * We have to be careful not to postpone flush work if it is scheduled for</span></span><br><span class="line"><span class="comment"> * earlier. Thus we use queue_delayed_work().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wb_wakeup_delayed</span><span class="params">(struct bdi_writeback *wb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> timeout;</span><br><span class="line"></span><br><span class="line">	timeout = msecs_to_jiffies(dirty_writeback_interval * <span class="number">10</span>);</span><br><span class="line">	spin_lock_bh(&amp;wb-&gt;work_lock);</span><br><span class="line">	<span class="keyword">if</span> (test_bit(WB_registered, &amp;wb-&gt;state))</span><br><span class="line">		queue_delayed_work(bdi_wq, &amp;wb-&gt;dwork, timeout);</span><br><span class="line">	spin_unlock_bh(&amp;wb-&gt;work_lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>wb_wakeup_delayed</code> 使用 5s 作为时间间隔，当调用 <code>wb_wakeup_delayed</code> 后，回写线程会在 5s 后被唤醒</p>
-<p><img src="/posts/646202b9/wb_wakeup_delayed.png" alt="wb_wakeup_delayed 调用图"></p>
+<p><img data-src="/posts/646202b9/wb_wakeup_delayed.png" alt="wb_wakeup_delayed 调用图"></p>
 <p>定时唤醒只会在两种情形下被调用：</p>
 <ul>
 <li><code>__mark_inode_dirty</code>：当给一个 <code>inode</code> 标记为脏时，如果脏的不仅仅是时间戳，而且当前的 <code>b_dirty</code> 链表是空的，也就是说第一次将脏页挂在 <code>b_dirty</code> 链表时，开启定时唤醒</li>
 <li><code>wb_workfn</code>：当回写线程处理完 <code>work_list</code> 上的所有任务后，如果仍有脏 <code>inode</code> 在 <code>b_&#123;dirty|io|more_io&#125;</code> 上时，开启定时唤醒</li>
 </ul>
 <p>简单的讲，就是只要存在脏 <code>inode</code> 在 <code>b_&#123;dirty|io|more_io&#125;</code> 上时，内核的回写线程每 5s 内肯定会被唤醒一次</p>
-<h3 id="释放销毁"><a href="#释放销毁" class="headerlink" title="释放销毁"></a>释放销毁</h3><p><img src="/posts/646202b9/release_bdi.png" alt="release_bdi 调用图"></p>
+<h3 id="释放销毁"><a href="#释放销毁" class="headerlink" title="释放销毁"></a>释放销毁</h3><p><img data-src="/posts/646202b9/release_bdi.png" alt="release_bdi 调用图"></p>
 <p>当需要对整个 <code>backing_dev_info</code> 结构释放时，也会立即唤醒内核回写线程，并且会下刷现有的所有工作</p>
 <pre class="mermaid">  graph TD;
   release_bdi --> bdi_unregister --> wb_shutdown
@@ -585,6 +585,7 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
