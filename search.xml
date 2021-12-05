@@ -1,6 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>LaTeX 基础介绍</title>
+    <url>/posts/a4752f87.html</url>
+    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
+<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
+<span id="more"></span>
+<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
+<ul>
+<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
+<li>XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
+<li>LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
+</ul>
+<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
+<li>pdfTeX 的主要特性是能直接生成 pdf</li>
+<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
+<li>LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.overleaf.com/learn/latex/Articles/What%27s_in_a_Name%3A_A_Guide_to_the_Many_Flavours_of_TeX#And_finally:_from_TeX_to_pdfTeX.2C_XeTeX_and_LuaTeX">【Overleaf】pdfTeX, XeTeX and LuaTeX</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NexT 主题的配置使用记录</title>
+    <url>/posts/9a0b7c3b.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
+<span id="more"></span>
+<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>在 <a href="https://github.com/next-theme/hexo-theme-next/issues/4">【必读】更新说明及常见问题</a> 中有相关说明，NexT 一共有三个不同的仓库：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>年份</th>
+<th>仓库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v5.1.4 或更低</td>
+<td>2014 ~ 2017</td>
+<td><a href="https://github.com/iissnan/hexo-theme-next">iissnan/hexo-theme-next</a></td>
+</tr>
+<tr>
+<td>v6.0.0 ~ v7.8.0</td>
+<td>2018 ~ 2019</td>
+<td><a href="https://github.com/theme-next/hexo-theme-next">theme-next/hexo-theme-next</a></td>
+</tr>
+<tr>
+<td>v8.0.0 或更高</td>
+<td>2020</td>
+<td><a href="https://github.com/next-theme/hexo-theme-next">next-theme/hexo-theme-next</a></td>
+</tr>
+</tbody></table>
+<p>旧的仓库基本上已经不再更新，因此推荐选择最新的 <a href="https://github.com/next-theme/hexo-theme-next">next-theme/hexo-theme-next</a> 仓库的 NexT 主题</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>推荐使用 GitHub 进行安装，可以随时更新</p>
+<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell?view=powershell-7.2">PowerShell</a> 为例</p>
+<figure class="highlight ps"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;hexo<span class="literal">-dir</span>&gt;</span><br><span class="line"><span class="comment"># git clone https://github.com/next-theme/hexo-theme-next.git .\themes\next\</span></span><br><span class="line">git clone git@github.com:next<span class="literal">-theme</span>/hexo<span class="literal">-theme</span><span class="literal">-next</span>.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> .\themes\next\_config.yml .\_config.next.yml</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置记录"><a href="#配置记录" class="headerlink" title="配置记录"></a>配置记录</h2><p>对 NexT 主题的配置可以直接在 <code>hexo</code> 仓库下的配置文件 <code>_config.next.yml</code> 中进行修改即可，该文件的修改会在生成页面时覆盖主题目录下的配置文件 <code>.\themes\next\_config.yml</code></p>
+<p>衍生拓展：<a href="https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">【Hexo】配置文件优先级</a></p>
+<h3 id="风格-主题"><a href="#风格-主题" class="headerlink" title="风格/主题"></a>风格/主题</h3><p>NexT 主题包含了 4 个风格，个人喜欢 Gemini，类似卡片的风格，边界比较明显</p>
+<p><img data-src="/posts/9a0b7c3b/NexT_Schemes.png" alt="NexT_Schemes"></p>
+<p>修改 <code>_config.next.yml</code> 之后，用 <code>hexo clean; hexo g; hexo s</code> 重新生成一下，就可以在 <a href="http://localhost:4000/">本地</a> 预览了（后续流程如果没有特殊说明则基本一致）</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line"><span class="comment"># scheme: Mist</span></span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="网页图标"><a href="#网页图标" class="headerlink" title="网页图标"></a>网页图标</h3><p>在各类网站上下载合适图标，按照配置文件中的文件名命名，并放在 <code>images</code> 下即可</p>
+<p>衍生阅读：<a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">【Apple】Configuring Web Applications</a></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/favicon-32x32-next.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br><span class="line">  <span class="comment">#android_manifest: /manifest.json</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p>菜单栏配置默认没有开启，个人开启了 <code>首页</code>、<code>标签</code>、<code>分类</code>、<code>归档</code> 四个子项目，并开启了图标和数量的气泡显示</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-sensitive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="comment">#about: /about/ || fa fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable / Disable menu icons / item badges.</span></span><br><span class="line"><span class="attr">menu_settings:</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">badges:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="侧边栏"><a href="#侧边栏" class="headerlink" title="侧边栏"></a>侧边栏</h3><p>默认头像会开启旋转功能，花里胡哨的而且旋转有点快，个人选择了关闭</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/avatar.gif</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be displayed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>在单独的文章页面时侧边栏会默认显示为目录，并且 <code>标签</code>、<code>分类</code>、<code>归档</code> 已经在菜单栏开启了，所以个人选择了关闭</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Posts / Categories / Tags in sidebar.</span></span><br><span class="line"><span class="attr">site_state:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>其他社交网站的主页的配置起来也很简单，简单替换一下链接，并且取消注释即可</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Social Links</span></span><br><span class="line"><span class="comment"># Usage: `Key: permalink || icon`</span></span><br><span class="line"><span class="comment"># Key is the link label showing to end users.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/ywang-wnlo</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:ywang_wnlo@qq.com</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br><span class="line">  <span class="comment">#Weibo: https://weibo.com/yourname || fab fa-weibo</span></span><br><span class="line">  <span class="comment">#Google: https://plus.google.com/yourname || fab fa-google</span></span><br><span class="line">  <span class="comment">#Twitter: https://twitter.com/yourname || fab fa-twitter</span></span><br><span class="line">  <span class="comment">#FB Page: https://www.facebook.com/yourname || fab fa-facebook</span></span><br><span class="line">  <span class="comment">#StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span></span><br><span class="line">  <span class="comment">#YouTube: https://youtube.com/yourname || fab fa-youtube</span></span><br><span class="line">  <span class="comment">#Instagram: https://instagram.com/yourname || fab fa-instagram</span></span><br><span class="line">  <span class="comment">#Skype: skype:yourname?call|chat || fab fa-skype</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="本地搜索"><a href="#本地搜索" class="headerlink" title="本地搜索"></a>本地搜索</h3><p>本地搜索可以快速的检索所有的文章，有时候还是很有用的</p>
+<p>配置本地搜索之前，首先要在 <code>hexo</code> 下安装插件</p>
+<figure class="highlight ps"><table><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator</span><span class="literal">-searchdb</span> -<span class="literal">-save</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在配置中开启即可</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">-1</span></span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  <span class="attr">unescape:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  <span class="attr">preload:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块的高亮有很多种配色可以选，并且可以开启一键复制功能</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># All available themes: https://theme-next.js.org/highlight/</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">vs</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">vs2015</span></span><br><span class="line">  <span class="attr">prism:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">prism</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">prism-dark</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">default</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="动画效果"><a href="#动画效果" class="headerlink" title="动画效果"></a>动画效果</h3><p>NexT 默认开启了动画效果，但是感觉比较慢，感觉有些影响阅读，推荐开启 <code>async</code>，并且适当的修改动画效果</p>
+<p>P.S. 菜单栏的动画不可以关闭和调整，应该是个 <a href="https://github.com/next-theme/hexo-theme-next/issues/412">bug</a></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use Animate.css to animate everything.</span></span><br><span class="line"><span class="comment"># For more information: https://animate.style</span></span><br><span class="line"><span class="attr">motion:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">async:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">transition:</span></span><br><span class="line">    <span class="comment"># All available transition variants: https://theme-next.js.org/animate/</span></span><br><span class="line">    <span class="attr">post_block:</span> <span class="string">fadeIn</span></span><br><span class="line">    <span class="attr">post_header:</span></span><br><span class="line">    <span class="attr">post_body:</span></span><br><span class="line">    <span class="attr">coll_header:</span></span><br><span class="line">    <span class="comment"># Only for Pisces | Gemini.</span></span><br><span class="line">    <span class="attr">sidebar:</span> <span class="string">fadeInDown</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="阅读进度"><a href="#阅读进度" class="headerlink" title="阅读进度"></a>阅读进度</h3><p>阅读进度有两种展示方式，一个在回到首页的按钮上直接显示百分比，另一个可以配置在首位部增加进度条，个人两个都开启了</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Back to top in sidebar.</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Scroll percent label in b2t button.</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Reading progress bar</span></span><br><span class="line"><span class="attr">reading_progress:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available values: left | right</span></span><br><span class="line">  <span class="attr">start_at:</span> <span class="string">left</span></span><br><span class="line">  <span class="comment"># Available values: top | bottom</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">bottom</span></span><br><span class="line">  <span class="attr">reversed:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;#37c6c0&quot;</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">5px</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3><p>NexT 的书签功能可以保存当前的阅读进度，下次打开是会在续接该进度</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Customize the color of the bookmark.</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;#222&quot;</span></span><br><span class="line">  <span class="comment"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span></span><br><span class="line">  <span class="comment"># If manual, only save it by clicking the bookmark-icon.</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Mermaid"><a href="#Mermaid" class="headerlink" title="Mermaid"></a>Mermaid</h3><p><a href="https://mermaid-js.github.io/mermaid/#/">Mermaid</a> 可以快速的用代码生成简单的流程图、时序图、甘特图等</p>
+<p>NexT 中开启 Mermaid 支持很方便，同时还有不同的风格可以选</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">neutral</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">dark</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="lazyload"><a href="#lazyload" class="headerlink" title="lazyload"></a>lazyload</h3><p>lazyload 是网站常用的技术，通过按需加载，避免一次性加载过多内容导致的打开缓慢</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Vanilla JavaScript plugin for lazyloading images.</span></span><br><span class="line"><span class="comment"># For more information: https://apoorv.pro/lozad.js/demo/</span></span><br><span class="line"><span class="attr">lazyload:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="fancybox"><a href="#fancybox" class="headerlink" title="fancybox"></a>fancybox</h3><p>fancybox 可以在点击图片时放大该图片，并且可以快速浏览当前文章的所有图片</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.</span></span><br><span class="line"><span class="comment"># For more information: https://fancyapps.com/fancybox/</span></span><br><span class="line"><span class="attr">fancybox:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pangu"><a href="#pangu" class="headerlink" title="pangu"></a>pangu</h3><p>对于强迫症来说，中英文混排时加上空格能很大程度改善阅读体验，但是有时候会不小心打漏部分空格，而 <a href="https://github.com/vinta/pangu.js">pangu</a> 这个项目就可以帮你在展示时自动加上空格</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Pangu Support</span></span><br><span class="line"><span class="comment"># For more information: https://github.com/vinta/pangu.js</span></span><br><span class="line"><span class="comment"># Server-side plugin: https://github.com/next-theme/hexo-pangu</span></span><br><span class="line"><span class="attr">pangu:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="捐赠"><a href="#捐赠" class="headerlink" title="捐赠"></a>捐赠</h3><p>文章末尾还可以求打赏，需要配置好相应的二维码图片，并且可以修改提示语句</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Donate (Sponsor) settings</span></span><br><span class="line"><span class="comment"># Front-matter variable (nonsupport animation).</span></span><br><span class="line"><span class="attr">reward_settings:</span></span><br><span class="line">  <span class="comment"># If true, a donate button will be displayed in every article by default.</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">animation:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">comment:</span> <span class="string">赏个鸡腿🍗</span></span><br><span class="line"></span><br><span class="line"><span class="attr">reward:</span></span><br><span class="line">  <span class="attr">wechatpay:</span> <span class="string">/images/wechatpay.png</span></span><br><span class="line">  <span class="attr">alipay:</span> <span class="string">/images/alipay.jpg</span></span><br><span class="line">  <span class="comment">#paypal: /images/paypal.png</span></span><br><span class="line">  <span class="comment">#bitcoin: /images/bitcoin.png</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="版权声明"><a href="#版权声明" class="headerlink" title="版权声明"></a>版权声明</h3><p>NexT 内置了文章末尾增加版权声明，只需手动开启即可</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/about/cclicenses/</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="comment"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="comment"># Available values: big | small</span></span><br><span class="line">  <span class="attr">size:</span> <span class="string">small</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line">  <span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="不蒜子"><a href="#不蒜子" class="headerlink" title="不蒜子"></a>不蒜子</h3><p><a href="https://busuanzi.ibruce.info/">不蒜子</a> 是一个极简的网页计数器，NexT 已经内置，只需打开即可</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Show Views / Visitors of the website / page with busuanzi.</span></span><br><span class="line"><span class="comment"># For more information: http://ibruce.info/2015/04/04/busuanzi/</span></span><br><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">fa</span> <span class="string">fa-eye</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">far</span> <span class="string">fa-eye</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="gitalk"><a href="#gitalk" class="headerlink" title="gitalk"></a>gitalk</h3><p>评论系统也是一个博客必不可少的，由于本博客搭在 GitHub Pages 上，所以评论系统就采用利用 GitHub Issues 实现的 <a href="https://github.com/gitalk/gitalk">gitalk</a></p>
+<p>NexT 已经内置的 gitalk 的 <code>js</code> 和 <code>css</code>，在配置文件中开启并进行配置即可</p>
+<p>在修改配置文件之前需要先在 GitHub 上申请一个 OAuth<br> Application，入口在 <code>【Settings】</code> -&gt; <code>【Developer settings】</code> -&gt; <code>【OAuth Apps】</code> -&gt; <code>【New OAuth App】</code>，或者直接使用这个 <a href="https://github.com/settings/applications/new">链接</a></p>
+<p><img data-src="/posts/9a0b7c3b/OAuth_APP_Register.png" alt="OAuth_APP_Register"></p>
+<p>填写好之后，记录下应用 id 以及密钥，如果没有显示密钥需要手动生成一下</p>
+<p><img data-src="/posts/9a0b7c3b/OAuth_APP_ID_Secrets.png" alt="OAuth_APP_ID_Secrets"></p>
+<p>然后首先选用 gitalk 作为评论系统</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Multiple Comment System Support</span></span><br><span class="line"><span class="attr">comments:</span></span><br><span class="line">  <span class="comment"># Available values: tabs | buttons</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">tabs</span></span><br><span class="line">  <span class="comment"># Choose a comment system to be displayed by default.</span></span><br><span class="line">  <span class="comment"># Available values: disqus | disqusjs | changyan | livere | gitalk | utterances</span></span><br><span class="line">  <span class="attr">active:</span> <span class="string">gitalk</span></span><br><span class="line">  <span class="comment"># Setting `true` means remembering the comment system selected by the visitor.</span></span><br><span class="line">  <span class="attr">storage:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Lazyload all comment systems.</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Modify texts or order for any naves, here are some examples.</span></span><br><span class="line">  <span class="attr">nav:</span></span><br><span class="line">    <span class="comment">#disqus:</span></span><br><span class="line">    <span class="comment">#  text: Load Disqus</span></span><br><span class="line">    <span class="comment">#  order: -1</span></span><br><span class="line">    <span class="comment">#gitalk:</span></span><br><span class="line">    <span class="comment">#  order: -2</span></span><br></pre></td></tr></table></figure>
+
+<p>在 gitalk 配置中填上相应的内容</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;.github.io</span> <span class="comment"># Repository name to store issues</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">&lt;应用</span> <span class="string">id&gt;</span> <span class="comment"># GitHub Application Client ID</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">&lt;应用密钥&gt;</span> <span class="comment"># GitHub Application Client Secret</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner and collaborators, only these guys can initialize gitHub issues</span></span><br><span class="line">  <span class="attr">distraction_free_mode:</span> <span class="literal">true</span> <span class="comment"># Facebook-like distraction free mode</span></span><br><span class="line">  <span class="comment"># When the official proxy is not available, you can change it to your own proxy address</span></span><br><span class="line">  <span class="attr">proxy:</span> <span class="string">https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</span> <span class="comment"># This is official proxy address</span></span><br><span class="line">  <span class="comment"># Gitalk&#x27;s display language depends on user&#x27;s browser or system environment</span></span><br><span class="line">  <span class="comment"># If you want everyone visiting your site to see a uniform language, you can set a force language value</span></span><br><span class="line">  <span class="comment"># Available values: en | es-ES | fr | ru | zh-CN | zh-TW</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://theme-next.js.org/">【NexT】v8.0.0+ 官网</a></li>
+<li><a href="https://github.com/next-theme/hexo-theme-next/issues/4">【必读】更新说明及常见问题</a></li>
+<li><a href="https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">【Hexo】配置文件优先级</a></li>
+<li><a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">【Apple】Configuring Web Applications</a></li>
+<li><a href="https://mermaid-js.github.io/mermaid/#/">【Mermaid】官网</a></li>
+<li><a href="https://github.com/vinta/pangu.js">【GitHub】pangu</a></li>
+<li><a href="https://busuanzi.ibruce.info/">【不蒜子】官网</a></li>
+<li><a href="https://github.com/gitalk/gitalk">【GitHub】Gitalk</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo 插件推荐以及使用小技巧</title>
     <url>/posts/4143201a.html</url>
     <content><![CDATA[<p><a href="https://hexo.io/zh-cn/">Hexo</a> 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
@@ -85,137 +244,6 @@
       </tags>
   </entry>
   <entry>
-    <title>NexT 主题的配置使用记录</title>
-    <url>/posts/9a0b7c3b.html</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
-<span id="more"></span>
-<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>在 <a href="https://github.com/next-theme/hexo-theme-next/issues/4">【必读】更新说明及常见问题</a> 中有相关说明，NexT 一共有三个不同的仓库：</p>
-<table>
-<thead>
-<tr>
-<th>版本</th>
-<th>年份</th>
-<th>仓库</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>v5.1.4 或更低</td>
-<td>2014 ~ 2017</td>
-<td><a href="https://github.com/iissnan/hexo-theme-next">iissnan/hexo-theme-next</a></td>
-</tr>
-<tr>
-<td>v6.0.0 ~ v7.8.0</td>
-<td>2018 ~ 2019</td>
-<td><a href="https://github.com/theme-next/hexo-theme-next">theme-next/hexo-theme-next</a></td>
-</tr>
-<tr>
-<td>v8.0.0 或更高</td>
-<td>2020</td>
-<td><a href="https://github.com/next-theme/hexo-theme-next">next-theme/hexo-theme-next</a></td>
-</tr>
-</tbody></table>
-<p>旧的仓库基本上已经不再更新，因此推荐选择最新的 <a href="https://github.com/next-theme/hexo-theme-next">next-theme/hexo-theme-next</a> 仓库的 NexT 主题</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>推荐使用 GitHub 进行安装，可以随时更新</p>
-<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell?view=powershell-7.2">PowerShell</a> 为例</p>
-<figure class="highlight ps"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;hexo<span class="literal">-dir</span>&gt;</span><br><span class="line"><span class="comment"># git clone https://github.com/next-theme/hexo-theme-next.git .\themes\next\</span></span><br><span class="line">git clone git@github.com:next<span class="literal">-theme</span>/hexo<span class="literal">-theme</span><span class="literal">-next</span>.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> .\themes\next\_config.yml .\_config.next.yml</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置记录"><a href="#配置记录" class="headerlink" title="配置记录"></a>配置记录</h2><p>对 NexT 主题的配置可以直接在 <code>hexo</code> 仓库下的配置文件 <code>_config.next.yml</code> 中进行修改即可，该文件的修改会在生成页面时覆盖主题目录下的配置文件 <code>.\themes\next\_config.yml</code></p>
-<p>衍生拓展：<a href="https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">【Hexo】配置文件优先级</a></p>
-<h3 id="风格-主题"><a href="#风格-主题" class="headerlink" title="风格/主题"></a>风格/主题</h3><p>NexT 主题包含了 4 个风格，个人喜欢 Gemini，类似卡片的风格，边界比较明显</p>
-<p><img data-src="/posts/9a0b7c3b/NexT_Schemes.png" alt="NexT_Schemes"></p>
-<p>修改 <code>_config.next.yml</code> 之后，用 <code>hexo clean; hexo g; hexo s</code> 重新生成一下，就可以在 <a href="http://localhost:4000/">本地</a> 预览了（后续流程如果没有特殊说明则基本一致）</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line"><span class="comment"># scheme: Mist</span></span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="网页图标"><a href="#网页图标" class="headerlink" title="网页图标"></a>网页图标</h3><p>在各类网站上下载合适图标，按照配置文件中的文件名命名，并放在 <code>images</code> 下即可</p>
-<p>衍生阅读：<a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">【Apple】Configuring Web Applications</a></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/favicon-32x32-next.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br><span class="line">  <span class="comment">#android_manifest: /manifest.json</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p>菜单栏配置默认没有开启，个人开启了 <code>首页</code>、<code>标签</code>、<code>分类</code>、<code>归档</code> 四个子项目，并开启了图标和数量的气泡显示</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-sensitive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="comment">#about: /about/ || fa fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable / Disable menu icons / item badges.</span></span><br><span class="line"><span class="attr">menu_settings:</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">badges:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="侧边栏"><a href="#侧边栏" class="headerlink" title="侧边栏"></a>侧边栏</h3><p>默认头像会开启旋转功能，花里胡哨的而且旋转有点快，个人选择了关闭</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/avatar.gif</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be displayed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>在单独的文章页面时侧边栏会默认显示为目录，并且 <code>标签</code>、<code>分类</code>、<code>归档</code> 已经在菜单栏开启了，所以个人选择了关闭</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Posts / Categories / Tags in sidebar.</span></span><br><span class="line"><span class="attr">site_state:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>其他社交网站的主页的配置起来也很简单，简单替换一下链接，并且取消注释即可</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Social Links</span></span><br><span class="line"><span class="comment"># Usage: `Key: permalink || icon`</span></span><br><span class="line"><span class="comment"># Key is the link label showing to end users.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/ywang-wnlo</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:ywang_wnlo@qq.com</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br><span class="line">  <span class="comment">#Weibo: https://weibo.com/yourname || fab fa-weibo</span></span><br><span class="line">  <span class="comment">#Google: https://plus.google.com/yourname || fab fa-google</span></span><br><span class="line">  <span class="comment">#Twitter: https://twitter.com/yourname || fab fa-twitter</span></span><br><span class="line">  <span class="comment">#FB Page: https://www.facebook.com/yourname || fab fa-facebook</span></span><br><span class="line">  <span class="comment">#StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span></span><br><span class="line">  <span class="comment">#YouTube: https://youtube.com/yourname || fab fa-youtube</span></span><br><span class="line">  <span class="comment">#Instagram: https://instagram.com/yourname || fab fa-instagram</span></span><br><span class="line">  <span class="comment">#Skype: skype:yourname?call|chat || fab fa-skype</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="本地搜索"><a href="#本地搜索" class="headerlink" title="本地搜索"></a>本地搜索</h3><p>本地搜索可以快速的检索所有的文章，有时候还是很有用的</p>
-<p>配置本地搜索之前，首先要在 <code>hexo</code> 下安装插件</p>
-<figure class="highlight ps"><table><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator</span><span class="literal">-searchdb</span> -<span class="literal">-save</span></span><br></pre></td></tr></table></figure>
-
-<p>然后在配置中开启即可</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">-1</span></span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  <span class="attr">unescape:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  <span class="attr">preload:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块的高亮有很多种配色可以选，并且可以开启一键复制功能</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># All available themes: https://theme-next.js.org/highlight/</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">vs</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">vs2015</span></span><br><span class="line">  <span class="attr">prism:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">prism</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">prism-dark</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">default</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="动画效果"><a href="#动画效果" class="headerlink" title="动画效果"></a>动画效果</h3><p>NexT 默认开启了动画效果，但是感觉比较慢，感觉有些影响阅读，推荐开启 <code>async</code>，并且适当的修改动画效果</p>
-<p>PS. 菜单栏的动画不可以关闭和调整，应该是个 <a href="https://github.com/next-theme/hexo-theme-next/issues/412">bug</a></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use Animate.css to animate everything.</span></span><br><span class="line"><span class="comment"># For more information: https://animate.style</span></span><br><span class="line"><span class="attr">motion:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">async:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">transition:</span></span><br><span class="line">    <span class="comment"># All available transition variants: https://theme-next.js.org/animate/</span></span><br><span class="line">    <span class="attr">post_block:</span> <span class="string">fadeIn</span></span><br><span class="line">    <span class="attr">post_header:</span></span><br><span class="line">    <span class="attr">post_body:</span></span><br><span class="line">    <span class="attr">coll_header:</span></span><br><span class="line">    <span class="comment"># Only for Pisces | Gemini.</span></span><br><span class="line">    <span class="attr">sidebar:</span> <span class="string">fadeInDown</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="阅读进度"><a href="#阅读进度" class="headerlink" title="阅读进度"></a>阅读进度</h3><p>阅读进度有两种展示方式，一个在回到首页的按钮上直接显示百分比，另一个可以配置在首位部增加进度条，个人两个都开启了</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Back to top in sidebar.</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Scroll percent label in b2t button.</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Reading progress bar</span></span><br><span class="line"><span class="attr">reading_progress:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available values: left | right</span></span><br><span class="line">  <span class="attr">start_at:</span> <span class="string">left</span></span><br><span class="line">  <span class="comment"># Available values: top | bottom</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">bottom</span></span><br><span class="line">  <span class="attr">reversed:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;#37c6c0&quot;</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">5px</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3><p>NexT 的书签功能可以保存当前的阅读进度，下次打开是会在续接该进度</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Customize the color of the bookmark.</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;#222&quot;</span></span><br><span class="line">  <span class="comment"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span></span><br><span class="line">  <span class="comment"># If manual, only save it by clicking the bookmark-icon.</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Mermaid"><a href="#Mermaid" class="headerlink" title="Mermaid"></a>Mermaid</h3><p><a href="https://mermaid-js.github.io/mermaid/#/">Mermaid</a> 可以快速的用代码生成简单的流程图、时序图、甘特图等</p>
-<p>NexT 中开启 Mermaid 支持很方便，同时还有不同的风格可以选</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">neutral</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">dark</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="lazyload"><a href="#lazyload" class="headerlink" title="lazyload"></a>lazyload</h3><p>lazyload 是网站常用的技术，通过按需加载，避免一次性加载过多内容导致的打开缓慢</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Vanilla JavaScript plugin for lazyloading images.</span></span><br><span class="line"><span class="comment"># For more information: https://apoorv.pro/lozad.js/demo/</span></span><br><span class="line"><span class="attr">lazyload:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="fancybox"><a href="#fancybox" class="headerlink" title="fancybox"></a>fancybox</h3><p>fancybox 可以在点击图片时放大该图片，并且可以快速浏览当前文章的所有图片</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.</span></span><br><span class="line"><span class="comment"># For more information: https://fancyapps.com/fancybox/</span></span><br><span class="line"><span class="attr">fancybox:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="pangu"><a href="#pangu" class="headerlink" title="pangu"></a>pangu</h3><p>对于强迫症来说，中英文混排时加上空格能很大程度改善阅读体验，但是有时候会不小心打漏部分空格，而 <a href="https://github.com/vinta/pangu.js">pangu</a> 这个项目就可以帮你在展示时自动加上空格</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Pangu Support</span></span><br><span class="line"><span class="comment"># For more information: https://github.com/vinta/pangu.js</span></span><br><span class="line"><span class="comment"># Server-side plugin: https://github.com/next-theme/hexo-pangu</span></span><br><span class="line"><span class="attr">pangu:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="捐赠"><a href="#捐赠" class="headerlink" title="捐赠"></a>捐赠</h3><p>文章末尾还可以求打赏，需要配置好相应的二维码图片，并且可以修改提示语句</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Donate (Sponsor) settings</span></span><br><span class="line"><span class="comment"># Front-matter variable (nonsupport animation).</span></span><br><span class="line"><span class="attr">reward_settings:</span></span><br><span class="line">  <span class="comment"># If true, a donate button will be displayed in every article by default.</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">animation:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">comment:</span> <span class="string">赏个鸡腿🍗</span></span><br><span class="line"></span><br><span class="line"><span class="attr">reward:</span></span><br><span class="line">  <span class="attr">wechatpay:</span> <span class="string">/images/wechatpay.png</span></span><br><span class="line">  <span class="attr">alipay:</span> <span class="string">/images/alipay.jpg</span></span><br><span class="line">  <span class="comment">#paypal: /images/paypal.png</span></span><br><span class="line">  <span class="comment">#bitcoin: /images/bitcoin.png</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="版权声明"><a href="#版权声明" class="headerlink" title="版权声明"></a>版权声明</h3><p>NexT 内置了文章末尾增加版权声明，只需手动开启即可</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/about/cclicenses/</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="comment"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="comment"># Available values: big | small</span></span><br><span class="line">  <span class="attr">size:</span> <span class="string">small</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line">  <span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="不蒜子"><a href="#不蒜子" class="headerlink" title="不蒜子"></a>不蒜子</h3><p><a href="https://busuanzi.ibruce.info/">不蒜子</a> 是一个极简的网页计数器，NexT 已经内置，只需打开即可</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Show Views / Visitors of the website / page with busuanzi.</span></span><br><span class="line"><span class="comment"># For more information: http://ibruce.info/2015/04/04/busuanzi/</span></span><br><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">fa</span> <span class="string">fa-eye</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">far</span> <span class="string">fa-eye</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="gitalk"><a href="#gitalk" class="headerlink" title="gitalk"></a>gitalk</h3><p>评论系统也是一个博客必不可少的，由于本博客搭在 GitHub Pages 上，所以评论系统就采用利用 GitHub Issues 实现的 <a href="https://github.com/gitalk/gitalk">gitalk</a></p>
-<p>NexT 已经内置的 gitalk 的 <code>js</code> 和 <code>css</code>，在配置文件中开启并进行配置即可</p>
-<p>在修改配置文件之前需要先在 GitHub 上申请一个 OAuth<br> Application，入口在 <code>【Settings】</code> -&gt; <code>【Developer settings】</code> -&gt; <code>【OAuth Apps】</code> -&gt; <code>【New OAuth App】</code>，或者直接使用这个 <a href="https://github.com/settings/applications/new">链接</a></p>
-<p><img data-src="/posts/9a0b7c3b/OAuth_APP_Register.png" alt="OAuth_APP_Register"></p>
-<p>填写好之后，记录下应用 id 以及密钥，如果没有显示密钥需要手动生成一下</p>
-<p><img data-src="/posts/9a0b7c3b/OAuth_APP_ID_Secrets.png" alt="OAuth_APP_ID_Secrets"></p>
-<p>然后首先选用 gitalk 作为评论系统</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Multiple Comment System Support</span></span><br><span class="line"><span class="attr">comments:</span></span><br><span class="line">  <span class="comment"># Available values: tabs | buttons</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">tabs</span></span><br><span class="line">  <span class="comment"># Choose a comment system to be displayed by default.</span></span><br><span class="line">  <span class="comment"># Available values: disqus | disqusjs | changyan | livere | gitalk | utterances</span></span><br><span class="line">  <span class="attr">active:</span> <span class="string">gitalk</span></span><br><span class="line">  <span class="comment"># Setting `true` means remembering the comment system selected by the visitor.</span></span><br><span class="line">  <span class="attr">storage:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Lazyload all comment systems.</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Modify texts or order for any naves, here are some examples.</span></span><br><span class="line">  <span class="attr">nav:</span></span><br><span class="line">    <span class="comment">#disqus:</span></span><br><span class="line">    <span class="comment">#  text: Load Disqus</span></span><br><span class="line">    <span class="comment">#  order: -1</span></span><br><span class="line">    <span class="comment">#gitalk:</span></span><br><span class="line">    <span class="comment">#  order: -2</span></span><br></pre></td></tr></table></figure>
-
-<p>在 gitalk 配置中填上相应的内容</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;.github.io</span> <span class="comment"># Repository name to store issues</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">&lt;应用</span> <span class="string">id&gt;</span> <span class="comment"># GitHub Application Client ID</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">&lt;应用密钥&gt;</span> <span class="comment"># GitHub Application Client Secret</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner and collaborators, only these guys can initialize gitHub issues</span></span><br><span class="line">  <span class="attr">distraction_free_mode:</span> <span class="literal">true</span> <span class="comment"># Facebook-like distraction free mode</span></span><br><span class="line">  <span class="comment"># When the official proxy is not available, you can change it to your own proxy address</span></span><br><span class="line">  <span class="attr">proxy:</span> <span class="string">https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</span> <span class="comment"># This is official proxy address</span></span><br><span class="line">  <span class="comment"># Gitalk&#x27;s display language depends on user&#x27;s browser or system environment</span></span><br><span class="line">  <span class="comment"># If you want everyone visiting your site to see a uniform language, you can set a force language value</span></span><br><span class="line">  <span class="comment"># Available values: en | es-ES | fr | ru | zh-CN | zh-TW</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://theme-next.js.org/">【NexT】v8.0.0+ 官网</a></li>
-<li><a href="https://github.com/next-theme/hexo-theme-next/issues/4">【必读】更新说明及常见问题</a></li>
-<li><a href="https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">【Hexo】配置文件优先级</a></li>
-<li><a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">【Apple】Configuring Web Applications</a></li>
-<li><a href="https://mermaid-js.github.io/mermaid/#/">【Mermaid】官网</a></li>
-<li><a href="https://github.com/vinta/pangu.js">【GitHub】pangu</a></li>
-<li><a href="https://busuanzi.ibruce.info/">【不蒜子】官网</a></li>
-<li><a href="https://github.com/gitalk/gitalk">【GitHub】Gitalk</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LaTeX PPT</title>
     <url>/posts/499c5a19.html</url>
     <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <a href="https://www.overleaf.com/learn/latex/Beamer">Overleaf 上相关介绍</a> 来使用</p>
@@ -237,24 +265,63 @@
       </tags>
   </entry>
   <entry>
-    <title>LaTeX 基础介绍</title>
-    <url>/posts/a4752f87.html</url>
-    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
-<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
 <span id="more"></span>
-<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
-<ul>
-<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
-<li>XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
-<li>LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
-</ul>
-<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
-<li>pdfTeX 的主要特性是能直接生成 pdf</li>
-<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
-<li>LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.overleaf.com/learn/latex/Articles/What%27s_in_a_Name%3A_A_Guide_to_the_Many_Flavours_of_TeX#And_finally:_from_TeX_to_pdfTeX.2C_XeTeX_and_LuaTeX">【Overleaf】pdfTeX, XeTeX and LuaTeX</a></li>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th>换成算成 mm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pt</td>
+<td>基本单位</td>
+<td>1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>毫米</td>
+<td>2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr>
+<td>cm</td>
+<td>厘米</td>
+<td>28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr>
+<td>in</td>
+<td>英寸</td>
+<td>72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>ex</td>
+<td>当前字体的 x 字母高度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>em</td>
+<td>当前字体的 m 字母宽度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://en.wikibooks.org/wiki/LaTeX/Lengths">【维基百科】LaTeX Lengths</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -262,6 +329,7 @@
       </categories>
       <tags>
         <tag>LaTeX</tag>
+        <tag>更新中</tag>
       </tags>
   </entry>
   <entry>
@@ -354,74 +422,6 @@
       <tags>
         <tag>LaTeX</tag>
         <tag>VSCode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
-<span id="more"></span>
-<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
-<table>
-<thead>
-<tr>
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th>换成算成 mm</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pt</td>
-<td>基本单位</td>
-<td>1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>mm</td>
-<td>毫米</td>
-<td>2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr>
-<td>cm</td>
-<td>厘米</td>
-<td>28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr>
-<td>in</td>
-<td>英寸</td>
-<td>72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>ex</td>
-<td>当前字体的 x 字母高度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>em</td>
-<td>当前字体的 m 字母宽度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://en.wikibooks.org/wiki/LaTeX/Lengths">【维基百科】LaTeX Lengths</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>更新中</tag>
       </tags>
   </entry>
   <entry>
@@ -692,10 +692,53 @@
       </tags>
   </entry>
   <entry>
+    <title>page cache 简介</title>
+    <url>/posts/9ba60726.html</url>
+    <content><![CDATA[<h2 id="page-cache"><a href="#page-cache" class="headerlink" title="page cache"></a>page cache</h2><p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
+<span id="more"></span>
+<p>经过这层 page cache 的作用，读取底层设备数据的 IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9.html">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的 <a href="/TODO">预读机制</a> 提升了顺序读性能</p>
+<h2 id="直接-IO-与-缓存-IO"><a href="#直接-IO-与-缓存-IO" class="headerlink" title="直接 IO 与 缓存 IO"></a>直接 IO 与 缓存 IO</h2><p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
+<ol>
+<li>不经过缓存，直接写底层存储设备</li>
+<li>只写缓存，缓存中数据定期刷到底层存储设备上，也叫写回（write back）</li>
+<li>同时写缓存和底层存储设备，也叫写穿（write through）</li>
+</ol>
+<p>前两种就是 Linux 在 IO 栈中支持的直接 IO（direct IO）和缓存 IO（buffer IO）</p>
+<p>第三种策略虽然能非常简单保证缓存和底层设备的一致性，不过基于时间局部性原理，page cache 中的数据可能只是中间态，会被频繁修改，每次写穿会产生大量的开销</p>
+<h2 id="Linux-IO-栈"><a href="#Linux-IO-栈" class="headerlink" title="Linux IO 栈"></a>Linux IO 栈</h2><p>详细的 Linux IO 栈图如下（来源于 <a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">Thomas-Krenn-Wiki</a>）：</p>
+<p><img data-src="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png" alt="Linux-storage-stack-diagram"></p>
+<p>其实简划一下，可以分为文件系统、page cache 以及块 IO 层和设备驱动层这四个大模块</p>
+<p><img data-src="/posts/9ba60726/simple_IO_stack.jpg" alt="simple_IO_stack"></p>
+<p>P.S. 其中 <code>mmap</code> 是一种内存映射文件的方法，在这里不做过多介绍</p>
+<h2 id="Linux-中的具体实现"><a href="#Linux-中的具体实现" class="headerlink" title="Linux 中的具体实现"></a>Linux 中的具体实现</h2><p>这里介绍和 page cache 相关的主要结构体和一些常用的函数</p>
+<h3 id="相关结构体"><a href="#相关结构体" class="headerlink" title="相关结构体"></a>相关结构体</h3><p>TODO</p>
+<p>superblock</p>
+<p>inode</p>
+<p>file</p>
+<p>dentry</p>
+<p>mapping</p>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p>TODO</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">【Thomas-Krenn-Wiki】Linux Storage Stack Diagram</a></li>
+<li><a href="https://blog.csdn.net/juS3Ve/article/details/82322637">【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储</category>
+        <category>IO</category>
+      </categories>
+      <tags>
+        <tag>更新中</tag>
+        <tag>page cache</tag>
+        <tag>buffer IO</tag>
+        <tag>writeback</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>page cache 回写机制</title>
     <url>/posts/646202b9.html</url>
     <content><![CDATA[<p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121">v5.4.121</a></p>
-<h2 id="writeback-回写"><a href="#writeback-回写" class="headerlink" title="writeback 回写"></a>writeback 回写</h2><p>之前在 <a href="/TODO">page cache 简介</a> 有过介绍</p>
+<h2 id="writeback-回写"><a href="#writeback-回写" class="headerlink" title="writeback 回写"></a>writeback 回写</h2><p>在 <a href="/posts/9ba60726">page cache 简介</a> 有过介绍</p>
 <p>buffer IO 通过 page cache 进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能</p>
 <p>写入到 page cache 的数据不会立刻写入后端设备，而是标记为“脏”，并被加入到脏页链表，后续由内核中的回写进程周期性的将脏页写回到底层存储设备</p>
 <p>下面主要分析 page cache 回写机制的策略和实现</p>
@@ -912,6 +955,67 @@
         <tag>page cache</tag>
         <tag>buffer IO</tag>
         <tag>writeback</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 手动编译 ipk</title>
+    <url>/posts/96a1807.html</url>
+    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
+<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
+<span id="more"></span>
+<p>而官方的 <a href="https://github.com/openwrt/openwrt">OpenWrt</a> 仓库就提供了一个方便使用的交叉编译环境</p>
+<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">官网给出的要求</a>，可以通过下面命令来进行安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
+
+<p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
+
+<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
+<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
+<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
+<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
+<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
+</ul>
+<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
+<p>以 <code>minieap</code> 为例，<a href="https://github.com/BoringCat/minieap-openwrt">github</a> 上有已经完成的仓库，依次可以直接拉取来编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
+
+<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
+<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
+<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">【OpenWrt】编译系统准备</a></li>
+<li><a href="https://openwrt-nctu.gitbook.io/project/openwrt-compile-env/openwrt-sdk-and-ipk-format">【Gitbook】建立编译环境</a></li>
+<li><a href="https://github.com/openwrt/openwrt">【GitHub】OpenWrt</a></li>
+<li><a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk">【GitHub】MentoHUST-OpenWrt-ipk</a></li>
+<li><a href="https://github.com/BoringCat/minieap-openwrt">【GitHub】minieap-openwrt</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+        <tag>交叉编译</tag>
+        <tag>ipk</tag>
       </tags>
   </entry>
   <entry>
@@ -1510,67 +1614,6 @@
       <tags>
         <tag>Breed</tag>
         <tag>BootLoader</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 手动编译 ipk</title>
-    <url>/posts/96a1807.html</url>
-    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
-<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
-<span id="more"></span>
-<p>而官方的 <a href="https://github.com/openwrt/openwrt">OpenWrt</a> 仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">官网给出的要求</a>，可以通过下面命令来进行安装依赖包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
-
-<p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
-
-<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
-
-<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
-<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
-<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
-<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
-<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
-</ul>
-<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
-<p>以 <code>minieap</code> 为例，<a href="https://github.com/BoringCat/minieap-openwrt">github</a> 上有已经完成的仓库，依次可以直接拉取来编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
-
-<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
-<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">【OpenWrt】编译系统准备</a></li>
-<li><a href="https://openwrt-nctu.gitbook.io/project/openwrt-compile-env/openwrt-sdk-and-ipk-format">【Gitbook】建立编译环境</a></li>
-<li><a href="https://github.com/openwrt/openwrt">【GitHub】OpenWrt</a></li>
-<li><a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk">【GitHub】MentoHUST-OpenWrt-ipk</a></li>
-<li><a href="https://github.com/BoringCat/minieap-openwrt">【GitHub】minieap-openwrt</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-        <tag>交叉编译</tag>
-        <tag>ipk</tag>
       </tags>
   </entry>
   <entry>
