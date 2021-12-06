@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LaTeX 基础介绍</title>
-    <url>/posts/a4752f87.html</url>
-    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
-<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
-<span id="more"></span>
-<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
-<ul>
-<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
-<li>XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
-<li>LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
-</ul>
-<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
-<li>pdfTeX 的主要特性是能直接生成 pdf</li>
-<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
-<li>LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.overleaf.com/learn/latex/Articles/What%27s_in_a_Name%3A_A_Guide_to_the_Many_Flavours_of_TeX#And_finally:_from_TeX_to_pdfTeX.2C_XeTeX_and_LuaTeX">【Overleaf】pdfTeX, XeTeX and LuaTeX</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NexT 主题的配置使用记录</title>
     <url>/posts/9a0b7c3b.html</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
@@ -160,6 +132,27 @@
       </tags>
   </entry>
   <entry>
+    <title>LaTeX PPT</title>
+    <url>/posts/499c5a19.html</url>
+    <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <a href="https://www.overleaf.com/learn/latex/Beamer">Overleaf 上相关介绍</a> 来使用</p>
+<span id="more"></span>
+<p><img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer"></p>
+<!-- TODO: Beamer 介绍和额外的特性 -->
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.overleaf.com/learn/latex/Beamer">【Overleaf】Beamer</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>Beamer</tag>
+        <tag>更新中</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo 插件推荐以及使用小技巧</title>
     <url>/posts/4143201a.html</url>
     <content><![CDATA[<p><a href="https://hexo.io/zh-cn/">Hexo</a> 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
@@ -244,15 +237,24 @@
       </tags>
   </entry>
   <entry>
-    <title>LaTeX PPT</title>
-    <url>/posts/499c5a19.html</url>
-    <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <a href="https://www.overleaf.com/learn/latex/Beamer">Overleaf 上相关介绍</a> 来使用</p>
+    <title>LaTeX 基础介绍</title>
+    <url>/posts/a4752f87.html</url>
+    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
+<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
 <span id="more"></span>
-<p><img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer"></p>
-<!-- TODO: Beamer 介绍和额外的特性 -->
-
+<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
+<ul>
+<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
+<li>XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
+<li>LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
+</ul>
+<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
+<li>pdfTeX 的主要特性是能直接生成 pdf</li>
+<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
+<li>LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
+</ul>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.overleaf.com/learn/latex/Beamer">【Overleaf】Beamer</a></li>
+<li><a href="https://www.overleaf.com/learn/latex/Articles/What%27s_in_a_Name%3A_A_Guide_to_the_Many_Flavours_of_TeX#And_finally:_from_TeX_to_pdfTeX.2C_XeTeX_and_LuaTeX">【Overleaf】pdfTeX, XeTeX and LuaTeX</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -260,76 +262,6 @@
       </categories>
       <tags>
         <tag>LaTeX</tag>
-        <tag>Beamer</tag>
-        <tag>更新中</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
-<span id="more"></span>
-<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
-<table>
-<thead>
-<tr>
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th>换成算成 mm</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pt</td>
-<td>基本单位</td>
-<td>1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>mm</td>
-<td>毫米</td>
-<td>2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr>
-<td>cm</td>
-<td>厘米</td>
-<td>28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr>
-<td>in</td>
-<td>英寸</td>
-<td>72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>ex</td>
-<td>当前字体的 x 字母高度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>em</td>
-<td>当前字体的 m 字母宽度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://en.wikibooks.org/wiki/LaTeX/Lengths">【维基百科】LaTeX Lengths</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>更新中</tag>
       </tags>
   </entry>
   <entry>
@@ -425,6 +357,74 @@
       </tags>
   </entry>
   <entry>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+<span id="more"></span>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th>换成算成 mm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pt</td>
+<td>基本单位</td>
+<td>1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>毫米</td>
+<td>2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr>
+<td>cm</td>
+<td>厘米</td>
+<td>28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr>
+<td>in</td>
+<td>英寸</td>
+<td>72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>ex</td>
+<td>当前字体的 x 字母高度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>em</td>
+<td>当前字体的 m 字母宽度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://en.wikibooks.org/wiki/LaTeX/Lengths">【维基百科】LaTeX Lengths</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>更新中</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>io_uring 内核源码分析</title>
     <url>/posts/4f0d345c.html</url>
     <content><![CDATA[<p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121">v5.4.121</a></p>
@@ -510,228 +510,80 @@
       </tags>
   </entry>
   <entry>
-    <title>io_uring 用户库源码分析</title>
-    <url>/posts/d7259d1d.html</url>
-    <content><![CDATA[<p>当前内容基于 <a href="https://github.com/axboe/liburing/releases/tag/liburing-2.1">liburing 2.1</a> 版本</p>
-<h2 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h2><p>之前在 <a href="/posts/c142853f.html#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B">io_uring 简介和使用</a> 有过总结，使用 io_uring 的一般流程如下：</p>
+    <title>rm -r 与 rmdir 区别</title>
+    <url>/posts/935ae1f0.html</url>
+    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
+<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和 <code>rmdir</code> 这两个命令上</p>
 <span id="more"></span>
-<ul>
-<li>使用 <code>open</code>、<code>fstat</code> 等函数来打开文件以及元数据查看等操作<ul>
-<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
-</ul>
-</li>
-<li>使用 <code>io_uring_queue_init</code> 初始化 <code>struct io_uring ring</code> 结构体</li>
-<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度</li>
-<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
-<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及 offset 信息<ul>
-<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code> 中进行返回）</li>
-</ul>
-</li>
-<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有 <code>sqe</code> 进行下发</li>
-<li>通过 <code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code> 来获取 <code>cqe</code><ul>
-<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个 <code>cqe</code> 返回</li>
-<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有 <code>cqe</code>，就会返回错误</li>
-<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取 <code>user_data</code></li>
-</ul>
-</li>
-<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code> 进行清除，避免被二次处理</li>
-<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</li>
-</ul>
-<h2 id="io-uring-queue-init"><a href="#io-uring-queue-init" class="headerlink" title="io_uring_queue_init"></a><code>io_uring_queue_init</code></h2><ul>
-<li><p>函数调用逻辑</p>
-<pre class="mermaid">  graph TD
-    io_uring_queue_init --> io_uring_queue_init_params --> __sys_io_uring_setup --> syscall -->|陷入内核|io_uring_setup
-    io_uring_queue_init_params --> io_uring_queue_mmap --> io_uring_mmap --> mmap</pre></li>
-<li><p>函数功能</p>
-<p>该函数主要将队列深度以及额外的 <code>flags</code> 参数传递到内核，让内核的 <code>io_uring_setup</code> 来初始化 <code>io_uring</code> 结构体，同时使用 <code>mmap</code> 将在内核中初始化的 <code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code> 映射到用户态</p>
-<p>初始化时传递的 <code>flags</code> 将影响 <code>io_uring</code> 的运行方式：</p>
-<ul>
-<li><code>IORING_SETUP_IOPOLL</code>：开启此选项必须保证后续只用 <code>O_DIRECT</code> 打开文件并且文件系统的 <code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO 将下发失败。开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认 IO 是否完成<!-- ，`iopoll` 的触发时机可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></li>
-<li><code>IORING_SETUP_SQPOLL</code>：将启动一个单独的内核线程 <code>io_sq_thread</code>，内核将主动轮询 SQ，然后将 IO 下发至驱动设备，能大大减少提交 IO 时的系统调用开销（内核线程工作时，提交 IO 将无需系统调用；但是该线程可能会休眠，休眠时需要系统调用来唤醒该线程）</li>
-<li><code>IORING_SETUP_SQ_AFF</code>：当 <code>IORING_SETUP_SQPOLL</code> 已经配置后，启用 <code>sq_thread_cpu</code> 字段，用于配置内核线程 <code>io_sq_thread</code> 的跑在哪个 CPU 上</li>
-</ul>
-</li>
-</ul>
-<h2 id="io-uring-get-sqe"><a href="#io-uring-get-sqe" class="headerlink" title="io_uring_get_sqe"></a><code>io_uring_get_sqe</code></h2><p>由于 SQ 已经通过 <code>mmap</code> 映射到用户态，该函数只需在读取 <code>sq-&gt;khead</code> 时通过 <code>io_uring_smp_load_acquire</code> 保证一致性，而 <code>sq-&gt;sqe_tail</code> 只用于用户态，直接读取即可，根据 <code>sq-&gt;khead</code> 以及 <code>sq-&gt;sqe_tail</code> 判断 SQ 是否已满，未满则给出 <code>sq-&gt;sqe_tail</code> 处的 <code>sqe</code> 即可，然后更新 <code>sq-&gt;sqe_tail</code></p>
-<h2 id="io-uring-prep-OP"><a href="#io-uring-prep-OP" class="headerlink" title="io_uring_prep_#OP"></a><code>io_uring_prep_#OP</code></h2><p>通过调用 <code>io_uring_prep_rw</code> 对 <code>sqe</code> 填充命令 OP、<code>fd</code>、buffer 指针以及 offset 信息等</p>
-<h2 id="io-uring-sqe-set-data"><a href="#io-uring-sqe-set-data" class="headerlink" title="io_uring_sqe_set_data"></a><code>io_uring_sqe_set_data</code></h2><p>直接对 <code>sqe-&gt;user_data</code> 进行赋值</p>
-<h2 id="io-uring-submit"><a href="#io-uring-submit" class="headerlink" title="io_uring_submit"></a><code>io_uring_submit</code></h2><ul>
-<li><p>函数调用逻辑</p>
-  <pre class="mermaid">    graph TD
-      io_uring_submit --> __io_uring_submit_and_wait --> __io_uring_flush_sq
-      __io_uring_submit_and_wait --> __io_uring_submit --> sq_ring_needs_enter
-      __io_uring_submit --> __sys_io_uring_enter --> __sys_io_uring_enter2 --> syscall -->|陷入内核|io_uring_enter</pre></li>
-<li><p>函数功能</p>
-<ul>
-<li><p><code>__io_uring_flush_sq</code></p>
-<p>根据 <code>sq-&gt;sqe_tail</code>、<code>sq-&gt;sqe_head</code> 差值依次填充 <code>sq-&gt;array</code>，然后一次性更新 <code>sq-&gt;ktail</code>，并返回内核中仍未处理 <code>sqe</code> 数量（<code>sq-&gt;ktail - sq-&gt;khead</code>）</p>
-</li>
-<li><p><code>sq_ring_needs_enter</code></p>
-<p>判断内核线程 <code>io_sq_thread</code> 是否启用以及正常工作（没有休眠）:</p>
-<ul>
-<li>首先要判断用户态 <code>ring-&gt;flags</code> 是否配置了 <code>IORING_SETUP_SQPOLL</code> 标志位，判断是否启用了内核线程 <code>io_sq_thread</code></li>
-<li>然后再判断内核态 <code>ring-&gt;sq.kflags</code> 是否配置了 <code>IORING_SQ_NEED_WAKEUP</code> 标志位，判断内核线程 <code>io_sq_thread</code> 是否需要唤醒</li>
-</ul>
-<p>当内核线程 <code>io_sq_thread</code> 启用并且正常工作时，则整个 <code>io_uring_submit</code> 到此结束，无需后续的 <code>__sys_io_uring_enter</code> 系统调用，减少了 IO 下发的系统调用的开销</p>
-</li>
-<li><p><code>__sys_io_uring_enter</code></p>
-<p>系统调用陷入内核态，将参数传递给内核的 <code>io_uring_setup</code> 函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的 <code>ring-&gt;flags</code> 相关<!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="io-uring-wait-cqe"><a href="#io-uring-wait-cqe" class="headerlink" title="io_uring_wait_cqe"></a><code>io_uring_wait_cqe</code></h2><p>在用户态轮询判断是否有一个新的 <code>cqe</code>，无需系统调用陷入内核，但是会阻塞当前线程直到有一个新的 <code>cqe</code> 或者出错</p>
-<h2 id="io-uring-peek-cqe"><a href="#io-uring-peek-cqe" class="headerlink" title="io_uring_peek_cqe"></a><code>io_uring_peek_cqe</code></h2><p>仅在用户态判断一次是否有新的 <code>cqe</code>，无需系统调用陷入内核，如果没有新的 <code>cqe</code>，会返回失败信息 <code>-errno</code></p>
-<h2 id="io-uring-cqe-get-data"><a href="#io-uring-cqe-get-data" class="headerlink" title="io_uring_cqe_get_data"></a><code>io_uring_cqe_get_data</code></h2><p><code>cqe-&gt;user_data</code> 会在 IO 完成后，从 <code>sqe</code> 复制到对应的 <code>cqe</code> 中，该函数只用直接对 <code>cqe-&gt;user_data</code> 进行读取</p>
-<h2 id="io-uring-cqe-seen"><a href="#io-uring-cqe-seen" class="headerlink" title="io_uring_cqe_seen"></a><code>io_uring_cqe_seen</code></h2><p>更新 <code>cq-&gt;khead</code>，避免当前 <code>cqe</code> 被重复获取</p>
-<h2 id="io-uring-queue-exit"><a href="#io-uring-queue-exit" class="headerlink" title="io_uring_queue_exit"></a><code>io_uring_queue_exit</code></h2><p>首先通过 <code>munmap</code> 将初始化时 <code>mmap</code> 的 <code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code> 解除映射，然后通过 <code>close</code> 关闭 <code>io_uring</code> 对应的 <code>fd</code>，<code>close</code> 会调用到该 <code>fd</code> 注册的 <code>io_uring_release</code> 来释放 <code>io_uring</code></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">【Kernel】io_uring IOSQE_IO_LINK</a></li>
-<li><a href="https://www.skyzh.dev/posts/articles/2021-06-14-deep-dive-io-uring/">【个人博客】io_uring 的接口与实现</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>存储</category>
-        <category>IO</category>
-      </categories>
-      <tags>
-        <tag>io_uring</tag>
-        <tag>liburing</tag>
-        <tag>异步 IO</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>io_uring 简介和使用</title>
-    <url>/posts/c142853f.html</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<a href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">[1]</a>，同时支持 buffer IO</p>
-<span id="more"></span>
-<p>io_uring 的作者 <a href="https://en.wikipedia.org/wiki/Jens_Axboe">Jens Axboe</a> 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
-<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
-<p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code> 的方式直接调用，使用起来很麻烦</p>
-<h3 id="liburing"><a href="#liburing" class="headerlink" title="liburing"></a>liburing</h3><p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库 liburing，简化了 io_uring 的使用，代码位置在 <a href="https://github.com/axboe/liburing">github</a> 上</p>
-<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><p>liburing 仓库的 <code>examples/</code> 目录下提供了几个简单的样例程序：</p>
-<table>
+<h2 id="二者区别"><a href="#二者区别" class="headerlink" title="二者区别"></a>二者区别</h2><table>
 <thead>
 <tr>
-<th>文件</th>
-<th>功能</th>
-<th>其他</th>
+<th>命令</th>
+<th>主要系统调用</th>
+<th>操作对象</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>io_uring-test.c</code></td>
-<td>读取一个文件的全部内容</td>
-<td>-</td>
+<td><code>rmdir</code></td>
+<td><code>rmdir</code></td>
+<td>仅目录</td>
 </tr>
 <tr>
-<td><code>io_uring-cp.c</code></td>
-<td>复制一个文件的内容到另一个文件</td>
-<td>使用 <code>user_data</code> 手动处理读写 IO 之间的依赖，读 IO 返回之后才下发写 IO</td>
-</tr>
-<tr>
-<td><code>link-cp.c</code></td>
-<td>复制一个文件的内容到另一个文件</td>
-<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">[2]</a></td>
-</tr>
-<tr>
-<td><code>ucontext-cp.c</code></td>
-<td>复制 n 个文件的内容到另 n 个文件</td>
-<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <a href="https://blog.csdn.net/qq910894904/article/details/41911175">协程</a></td>
+<td><code>rm -r</code></td>
+<td><code>openat</code>, <code>getdents64</code>, <code>close</code>, <code>unlinkat</code></td>
+<td>目录，以及目录所有文件</td>
 </tr>
 </tbody></table>
-<h4 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h4><p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
-<ul>
-<li>使用 <code>open</code>、<code>fstat</code> 等函数来打开文件以及元数据查看等操作<ul>
-<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
-</ul>
-</li>
-<li>使用 <code>io_uring_queue_init</code> 初始化 <code>struct io_uring ring</code> 结构体</li>
-<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度</li>
-<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
-<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及 offset 信息<ul>
-<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code> 中进行返回）</li>
-</ul>
-</li>
-<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有 <code>sqe</code> 进行下发</li>
-<li>通过 <code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code> 来获取 <code>cqe</code><ul>
-<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个 <code>cqe</code> 返回</li>
-<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有 <code>cqe</code>，就会返回错误</li>
-<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取 <code>user_data</code></li>
-</ul>
-</li>
-<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code> 进行清除，避免被二次处理</li>
-<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</li>
-</ul>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>根据官方 <code>Makefile</code> 可以看出编译时有额外的三个条件</p>
-<ul>
-<li>定义 <code>_GNU_SOURCE</code> 宏，<code>-D</code> 宏定义</li>
-<li>指定额外的头文件目录，<code>-I</code> 指定头文件目录位置</li>
-<li>使用 <code>liburing</code> 库，<code>-L</code> 指定库位置，<code>-l</code> 指定库名</li>
-</ul>
-<p>即 <code>gcc -D_GNU_SOURCE -I../src/include/ -L../src/ -o test test.c -luring</code></p>
-<p>其中头文件目录下主要有三个头文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tree src/include/</span><br><span class="line">src/include/</span><br><span class="line">├── liburing</span><br><span class="line">│   ├── barrier.h</span><br><span class="line">│   └── io_uring.h</span><br><span class="line">└── liburing.h</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br></pre></td></tr></table></figure>
-
-<p>而 <code>liburing</code> 库也需要编译生成，推荐直接在 <code>liburing</code> 的顶层目录直接 <code>make all</code></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
-<li><a href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">【Kernel】io_uring 性能测试</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Jens_Axboe">【维基百科】Jens Axboe</a></li>
-<li><a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">【Kernel】io_uring IOSQE_IO_LINK</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>存储</category>
-        <category>IO</category>
-      </categories>
-      <tags>
-        <tag>io_uring</tag>
-        <tag>liburing</tag>
-        <tag>异步 IO</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>page cache 简介</title>
-    <url>/posts/9ba60726.html</url>
-    <content><![CDATA[<h2 id="page-cache"><a href="#page-cache" class="headerlink" title="page cache"></a>page cache</h2><p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
-<span id="more"></span>
-<p>经过这层 page cache 的作用，读取底层设备数据的 IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9.html">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的 <a href="/TODO">预读机制</a> 提升了顺序读性能</p>
-<h2 id="直接-IO-与-缓存-IO"><a href="#直接-IO-与-缓存-IO" class="headerlink" title="直接 IO 与 缓存 IO"></a>直接 IO 与 缓存 IO</h2><p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
-<ol>
-<li>不经过缓存，直接写底层存储设备</li>
-<li>只写缓存，缓存中数据定期刷到底层存储设备上，也叫写回（write back）</li>
-<li>同时写缓存和底层存储设备，也叫写穿（write through）</li>
+<h3 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><p><code>rmdir</code> 直接调用 <code>rmdir</code> 来删除目录，如果目录非空，则会删除失败</p>
+<h3 id="rm-r"><a href="#rm-r" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><ol>
+<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>再第二次加上 <code>O_CLOEXEC</code> 标记<code>openat</code> 打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
+<li>最后通过 <code>unlinkat</code> 删除目录</li>
 </ol>
-<p>前两种就是 Linux 在 IO 栈中支持的直接 IO（direct IO）和缓存 IO（buffer IO）</p>
-<p>第三种策略虽然能非常简单保证缓存和底层设备的一致性，不过基于时间局部性原理，page cache 中的数据可能只是中间态，会被频繁修改，每次写穿会产生大量的开销</p>
-<h2 id="Linux-IO-栈"><a href="#Linux-IO-栈" class="headerlink" title="Linux IO 栈"></a>Linux IO 栈</h2><p>详细的 Linux IO 栈图如下（来源于 <a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">Thomas-Krenn-Wiki</a>）：</p>
-<p><img data-src="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png" alt="Linux-storage-stack-diagram"></p>
-<p>其实简划一下，可以分为文件系统、page cache 以及块 IO 层和设备驱动层这四个大模块</p>
-<p><img data-src="/posts/9ba60726/simple_IO_stack.jpg" alt="simple_IO_stack"></p>
-<p>P.S. 其中 <code>mmap</code> 是一种内存映射文件的方法，在这里不做过多介绍</p>
-<h2 id="Linux-中的具体实现"><a href="#Linux-中的具体实现" class="headerlink" title="Linux 中的具体实现"></a>Linux 中的具体实现</h2><p>这里介绍和 page cache 相关的主要结构体和一些常用的函数</p>
-<h3 id="相关结构体"><a href="#相关结构体" class="headerlink" title="相关结构体"></a>相关结构体</h3><p>TODO</p>
-<p>superblock</p>
-<p>inode</p>
-<p>file</p>
-<p>dentry</p>
-<p>mapping</p>
-<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p>TODO</p>
+<h3 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><p>但是如果使用的是 <code>rm -rf</code>，并且在第 3 步删除目录内文件失败时，则会跳过第 4 步，也就是说不会再对目录做任何操作</p>
+<h2 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h2><h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir dir</span><br><span class="line">touch dir/file</span><br><span class="line">sudo chattr +i dir/file</span><br></pre></td></tr></table></figure>
+
+<p>此时目录树如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tree dir</span><br><span class="line">dir</span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></table></figure>
+
+<h3 id="rmdir-1"><a href="#rmdir-1" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ strace -o rmdir rmdir dir/</span><br><span class="line">rmdir: failed to remove <span class="string">&#x27;dir/&#x27;</span>: Directory not empty</span><br></pre></td></tr></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rmdir&quot;, [&quot;rmdir&quot;, &quot;dir/&quot;], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir(&quot;dir/&quot;)                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/locale.alias&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=2996, ...&#125;) = 0</span><br><span class="line">read(3, &quot;# Locale name alias data base.\n#&quot;..., 4096) = 2996</span><br><span class="line">read(3, &quot;&quot;, 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;rmdir: &quot;, 7)                  = 7</span><br><span class="line">write(2, &quot;failed to remove &#x27;dir/&#x27;&quot;, 23) = 23</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;: Directory not empty&quot;, 21)   = 21</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></table></figure>
+
+<h3 id="rm-r-1"><a href="#rm-r-1" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace rm -r dir/</span><br><span class="line">rm: cannot remove <span class="string">&#x27;dir/file&#x27;</span>: Operation not permitted</span><br><span class="line">rm: cannot remove <span class="string">&#x27;dir/&#x27;</span>: Directory not empty</span><br></pre></td></tr></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96 行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rm&quot;, [&quot;rm&quot;, &quot;-r&quot;, &quot;dir/&quot;], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, &#123;B38400 opost isig icanon echo ...&#125;) = 0</span><br><span class="line">lstat(&quot;/&quot;, &#123;st_mode=S_IFDIR|0755, st_size=4096, ...&#125;) = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, &quot;dir/&quot;, W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, &#123;f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid=&#123;val=[3258576323, 2412010735]&#125;, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME&#125;) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, &quot;file&quot;, &#123;st_mode=S_IFREG|0664, st_size=0, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, &quot;file&quot;, W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/locale.alias&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=2996, ...&#125;) = 0</span><br><span class="line">read(3, &quot;# Locale name alias data base.\n#&quot;..., 4096) = 2996</span><br><span class="line">read(3, &quot;&quot;, 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;rm: &quot;, 4)                     = 4</span><br><span class="line">write(2, &quot;cannot remove &#x27;dir/file&#x27;&quot;, 24) = 24</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;: Operation not permitted&quot;, 25) = 25</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, &quot;dir/&quot;, W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, &quot;dir/&quot;, AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, &quot;rm: &quot;, 4)                     = 4</span><br><span class="line">write(2, &quot;cannot remove &#x27;dir/&#x27;&quot;, 20)    = 20</span><br><span class="line">write(2, &quot;: Directory not empty&quot;, 21)   = 21</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></table></figure>
+
+<h3 id="rm-rf-1"><a href="#rm-rf-1" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace rm -rf dir/</span><br><span class="line">rm: cannot remove <span class="string">&#x27;dir/file&#x27;</span>: Operation not permitted</span><br></pre></td></tr></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rm&quot;, [&quot;rm&quot;, &quot;-rf&quot;, &quot;dir/&quot;], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, &#123;B38400 opost isig icanon echo ...&#125;) = 0</span><br><span class="line">lstat(&quot;/&quot;, &#123;st_mode=S_IFDIR|0755, st_size=4096, ...&#125;) = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, &#123;f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid=&#123;val=[3258576323, 2412010735]&#125;, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME&#125;) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, &quot;file&quot;, 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/locale.alias&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=2996, ...&#125;) = 0</span><br><span class="line">read(3, &quot;# Locale name alias data base.\n#&quot;..., 4096) = 2996</span><br><span class="line">read(3, &quot;&quot;, 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;rm: &quot;, 4)                     = 4</span><br><span class="line">write(2, &quot;cannot remove &#x27;dir/file&#x27;&quot;, 24) = 24</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;: Operation not permitted&quot;, 25) = 25</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></table></figure>
+
+<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chattr -i dir/file</span><br><span class="line">strace -o rm_rf_succ.strace rm -rf dir/</span><br></pre></td></tr></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rm&quot;, [&quot;rm&quot;, &quot;-rf&quot;, &quot;dir/&quot;], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, &#123;B38400 opost isig icanon echo ...&#125;) = 0</span><br><span class="line">lstat(&quot;/&quot;, &#123;st_mode=S_IFDIR|0755, st_size=4096, ...&#125;) = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, &#123;f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid=&#123;val=[3258576323, 2412010735]&#125;, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME&#125;) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, &quot;file&quot;, 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, &quot;dir/&quot;, AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">【Thomas-Krenn-Wiki】Linux Storage Stack Diagram</a></li>
-<li><a href="https://blog.csdn.net/juS3Ve/article/details/82322637">【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈</a></li>
+<li><a href="https://community.mellanox.com/s/article/howto-configure-nvme-over-fabrics">【mellanox 社区】HowTo Configure NVMe over Fabrics</a></li>
+<li><a href="https://open.tech2real.com/info_detail_page?id=18441">【硬见】NVMe-oF 不只是 RDMA，还有 TCP</a></li>
+<li><a href="https://blog.csdn.net/codedancing/article/details/103835085">【CSDN】Linux 防止文件和目录被意外删除或修改</a></li>
+<li><a href="https://man7.org/linux/man-pages/man2/open.2.html">【man】open</a></li>
+<li><a href="https://unix.stackexchange.com/questions/150960/why-are-rmdir-and-unlink-two-separate-system-calls">【stackexchange】Why are rmdir and unlink two separate system calls?</a></li>
 </ul>
 ]]></content>
       <categories>
-        <category>存储</category>
-        <category>IO</category>
+        <category>Linux</category>
+        <category>Shell</category>
       </categories>
       <tags>
-        <tag>更新中</tag>
-        <tag>page cache</tag>
-        <tag>buffer IO</tag>
-        <tag>writeback</tag>
+        <tag>Linux</tag>
+        <tag>strace</tag>
       </tags>
   </entry>
   <entry>
@@ -958,141 +810,228 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenWrt 手动编译 ipk</title>
-    <url>/posts/96a1807.html</url>
-    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
-<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
+    <title>io_uring 简介和使用</title>
+    <url>/posts/c142853f.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<a href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">[1]</a>，同时支持 buffer IO</p>
 <span id="more"></span>
-<p>而官方的 <a href="https://github.com/openwrt/openwrt">OpenWrt</a> 仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">官网给出的要求</a>，可以通过下面命令来进行安装依赖包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
-
-<p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
-
-<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
-
-<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
-<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
-<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
-<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
-<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
-</ul>
-<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
-<p>以 <code>minieap</code> 为例，<a href="https://github.com/BoringCat/minieap-openwrt">github</a> 上有已经完成的仓库，依次可以直接拉取来编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
-
-<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
-<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">【OpenWrt】编译系统准备</a></li>
-<li><a href="https://openwrt-nctu.gitbook.io/project/openwrt-compile-env/openwrt-sdk-and-ipk-format">【Gitbook】建立编译环境</a></li>
-<li><a href="https://github.com/openwrt/openwrt">【GitHub】OpenWrt</a></li>
-<li><a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk">【GitHub】MentoHUST-OpenWrt-ipk</a></li>
-<li><a href="https://github.com/BoringCat/minieap-openwrt">【GitHub】minieap-openwrt</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-        <tag>交叉编译</tag>
-        <tag>ipk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>rm -r 与 rmdir 区别</title>
-    <url>/posts/935ae1f0.html</url>
-    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
-<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和 <code>rmdir</code> 这两个命令上</p>
-<span id="more"></span>
-<h2 id="二者区别"><a href="#二者区别" class="headerlink" title="二者区别"></a>二者区别</h2><table>
+<p>io_uring 的作者 <a href="https://en.wikipedia.org/wiki/Jens_Axboe">Jens Axboe</a> 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
+<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
+<p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code> 的方式直接调用，使用起来很麻烦</p>
+<h3 id="liburing"><a href="#liburing" class="headerlink" title="liburing"></a>liburing</h3><p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库 liburing，简化了 io_uring 的使用，代码位置在 <a href="https://github.com/axboe/liburing">github</a> 上</p>
+<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><p>liburing 仓库的 <code>examples/</code> 目录下提供了几个简单的样例程序：</p>
+<table>
 <thead>
 <tr>
-<th>命令</th>
-<th>主要系统调用</th>
-<th>操作对象</th>
+<th>文件</th>
+<th>功能</th>
+<th>其他</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>rmdir</code></td>
-<td><code>rmdir</code></td>
-<td>仅目录</td>
+<td><code>io_uring-test.c</code></td>
+<td>读取一个文件的全部内容</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>rm -r</code></td>
-<td><code>openat</code>, <code>getdents64</code>, <code>close</code>, <code>unlinkat</code></td>
-<td>目录，以及目录所有文件</td>
+<td><code>io_uring-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>使用 <code>user_data</code> 手动处理读写 IO 之间的依赖，读 IO 返回之后才下发写 IO</td>
+</tr>
+<tr>
+<td><code>link-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">[2]</a></td>
+</tr>
+<tr>
+<td><code>ucontext-cp.c</code></td>
+<td>复制 n 个文件的内容到另 n 个文件</td>
+<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <a href="https://blog.csdn.net/qq910894904/article/details/41911175">协程</a></td>
 </tr>
 </tbody></table>
-<h3 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><p><code>rmdir</code> 直接调用 <code>rmdir</code> 来删除目录，如果目录非空，则会删除失败</p>
-<h3 id="rm-r"><a href="#rm-r" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><ol>
-<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>再第二次加上 <code>O_CLOEXEC</code> 标记<code>openat</code> 打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
-<li>最后通过 <code>unlinkat</code> 删除目录</li>
-</ol>
-<h3 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><p>但是如果使用的是 <code>rm -rf</code>，并且在第 3 步删除目录内文件失败时，则会跳过第 4 步，也就是说不会再对目录做任何操作</p>
-<h2 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h2><h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir dir</span><br><span class="line">touch dir/file</span><br><span class="line">sudo chattr +i dir/file</span><br></pre></td></tr></table></figure>
+<h4 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h4><p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
+<ul>
+<li>使用 <code>open</code>、<code>fstat</code> 等函数来打开文件以及元数据查看等操作<ul>
+<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
+</ul>
+</li>
+<li>使用 <code>io_uring_queue_init</code> 初始化 <code>struct io_uring ring</code> 结构体</li>
+<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度</li>
+<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
+<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及 offset 信息<ul>
+<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code> 中进行返回）</li>
+</ul>
+</li>
+<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有 <code>sqe</code> 进行下发</li>
+<li>通过 <code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code> 来获取 <code>cqe</code><ul>
+<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个 <code>cqe</code> 返回</li>
+<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有 <code>cqe</code>，就会返回错误</li>
+<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取 <code>user_data</code></li>
+</ul>
+</li>
+<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code> 进行清除，避免被二次处理</li>
+<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</li>
+</ul>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>根据官方 <code>Makefile</code> 可以看出编译时有额外的三个条件</p>
+<ul>
+<li>定义 <code>_GNU_SOURCE</code> 宏，<code>-D</code> 宏定义</li>
+<li>指定额外的头文件目录，<code>-I</code> 指定头文件目录位置</li>
+<li>使用 <code>liburing</code> 库，<code>-L</code> 指定库位置，<code>-l</code> 指定库名</li>
+</ul>
+<p>即 <code>gcc -D_GNU_SOURCE -I../src/include/ -L../src/ -o test test.c -luring</code></p>
+<p>其中头文件目录下主要有三个头文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tree src/include/</span><br><span class="line">src/include/</span><br><span class="line">├── liburing</span><br><span class="line">│   ├── barrier.h</span><br><span class="line">│   └── io_uring.h</span><br><span class="line">└── liburing.h</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br></pre></td></tr></table></figure>
 
-<p>此时目录树如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tree dir</span><br><span class="line">dir</span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></table></figure>
-
-<h3 id="rmdir-1"><a href="#rmdir-1" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ strace -o rmdir rmdir dir/</span><br><span class="line">rmdir: failed to remove <span class="string">&#x27;dir/&#x27;</span>: Directory not empty</span><br></pre></td></tr></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rmdir&quot;, [&quot;rmdir&quot;, &quot;dir/&quot;], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir(&quot;dir/&quot;)                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/locale.alias&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=2996, ...&#125;) = 0</span><br><span class="line">read(3, &quot;# Locale name alias data base.\n#&quot;..., 4096) = 2996</span><br><span class="line">read(3, &quot;&quot;, 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;rmdir: &quot;, 7)                  = 7</span><br><span class="line">write(2, &quot;failed to remove &#x27;dir/&#x27;&quot;, 23) = 23</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;: Directory not empty&quot;, 21)   = 21</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></table></figure>
-
-<h3 id="rm-r-1"><a href="#rm-r-1" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace rm -r dir/</span><br><span class="line">rm: cannot remove <span class="string">&#x27;dir/file&#x27;</span>: Operation not permitted</span><br><span class="line">rm: cannot remove <span class="string">&#x27;dir/&#x27;</span>: Directory not empty</span><br></pre></td></tr></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96 行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rm&quot;, [&quot;rm&quot;, &quot;-r&quot;, &quot;dir/&quot;], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, &#123;B38400 opost isig icanon echo ...&#125;) = 0</span><br><span class="line">lstat(&quot;/&quot;, &#123;st_mode=S_IFDIR|0755, st_size=4096, ...&#125;) = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, &quot;dir/&quot;, W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, &#123;f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid=&#123;val=[3258576323, 2412010735]&#125;, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME&#125;) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, &quot;file&quot;, &#123;st_mode=S_IFREG|0664, st_size=0, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, &quot;file&quot;, W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/locale.alias&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=2996, ...&#125;) = 0</span><br><span class="line">read(3, &quot;# Locale name alias data base.\n#&quot;..., 4096) = 2996</span><br><span class="line">read(3, &quot;&quot;, 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;rm: &quot;, 4)                     = 4</span><br><span class="line">write(2, &quot;cannot remove &#x27;dir/file&#x27;&quot;, 24) = 24</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;: Operation not permitted&quot;, 25) = 25</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, &quot;dir/&quot;, W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, &quot;dir/&quot;, AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, &quot;rm: &quot;, 4)                     = 4</span><br><span class="line">write(2, &quot;cannot remove &#x27;dir/&#x27;&quot;, 20)    = 20</span><br><span class="line">write(2, &quot;: Directory not empty&quot;, 21)   = 21</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></table></figure>
-
-<h3 id="rm-rf-1"><a href="#rm-rf-1" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace rm -rf dir/</span><br><span class="line">rm: cannot remove <span class="string">&#x27;dir/file&#x27;</span>: Operation not permitted</span><br></pre></td></tr></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rm&quot;, [&quot;rm&quot;, &quot;-rf&quot;, &quot;dir/&quot;], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, &#123;B38400 opost isig icanon echo ...&#125;) = 0</span><br><span class="line">lstat(&quot;/&quot;, &#123;st_mode=S_IFDIR|0755, st_size=4096, ...&#125;) = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, &#123;f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid=&#123;val=[3258576323, 2412010735]&#125;, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME&#125;) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, &quot;file&quot;, 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/locale.alias&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=2996, ...&#125;) = 0</span><br><span class="line">read(3, &quot;# Locale name alias data base.\n#&quot;..., 4096) = 2996</span><br><span class="line">read(3, &quot;&quot;, 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;rm: &quot;, 4)                     = 4</span><br><span class="line">write(2, &quot;cannot remove &#x27;dir/file&#x27;&quot;, 24) = 24</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, &quot;: Operation not permitted&quot;, 25) = 25</span><br><span class="line">write(2, &quot;\n&quot;, 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></table></figure>
-
-<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chattr -i dir/file</span><br><span class="line">strace -o rm_rf_succ.strace rm -rf dir/</span><br></pre></td></tr></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/usr/bin/rm&quot;, [&quot;rm&quot;, &quot;-rf&quot;, &quot;dir/&quot;], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=46019, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&quot;..., 832) = 832</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2029224, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784</span><br><span class="line">pread64(3, &quot;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&quot;, 32, 848) = 32</span><br><span class="line">pread64(3, &quot;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&quot;..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, &quot;/usr/lib/locale/locale-archive&quot;, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=3035952, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, &#123;B38400 opost isig icanon echo ...&#125;) = 0</span><br><span class="line">lstat(&quot;/&quot;, &#123;st_mode=S_IFDIR|0755, st_size=4096, ...&#125;) = 0</span><br><span class="line">newfstatat(AT_FDCWD, &quot;dir/&quot;, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, &quot;dir/&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFDIR|0775, st_size=4096, ...&#125;) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, &#123;f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid=&#123;val=[3258576323, 2412010735]&#125;, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME&#125;) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, &quot;file&quot;, 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, &quot;dir/&quot;, AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></table></figure>
-
+<p>而 <code>liburing</code> 库也需要编译生成，推荐直接在 <code>liburing</code> 的顶层目录直接 <code>make all</code></p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://community.mellanox.com/s/article/howto-configure-nvme-over-fabrics">【mellanox 社区】HowTo Configure NVMe over Fabrics</a></li>
-<li><a href="https://open.tech2real.com/info_detail_page?id=18441">【硬见】NVMe-oF 不只是 RDMA，还有 TCP</a></li>
-<li><a href="https://blog.csdn.net/codedancing/article/details/103835085">【CSDN】Linux 防止文件和目录被意外删除或修改</a></li>
-<li><a href="https://man7.org/linux/man-pages/man2/open.2.html">【man】open</a></li>
-<li><a href="https://unix.stackexchange.com/questions/150960/why-are-rmdir-and-unlink-two-separate-system-calls">【stackexchange】Why are rmdir and unlink two separate system calls?</a></li>
+<li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
+<li><a href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">【Kernel】io_uring 性能测试</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Jens_Axboe">【维基百科】Jens Axboe</a></li>
+<li><a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">【Kernel】io_uring IOSQE_IO_LINK</a></li>
 </ul>
 ]]></content>
       <categories>
-        <category>Linux</category>
-        <category>Shell</category>
+        <category>存储</category>
+        <category>IO</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
-        <tag>strace</tag>
+        <tag>io_uring</tag>
+        <tag>liburing</tag>
+        <tag>异步 IO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>io_uring 用户库源码分析</title>
+    <url>/posts/d7259d1d.html</url>
+    <content><![CDATA[<p>当前内容基于 <a href="https://github.com/axboe/liburing/releases/tag/liburing-2.1">liburing 2.1</a> 版本</p>
+<h2 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h2><p>之前在 <a href="/posts/c142853f.html#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B">io_uring 简介和使用</a> 有过总结，使用 io_uring 的一般流程如下：</p>
+<span id="more"></span>
+<ul>
+<li>使用 <code>open</code>、<code>fstat</code> 等函数来打开文件以及元数据查看等操作<ul>
+<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
+</ul>
+</li>
+<li>使用 <code>io_uring_queue_init</code> 初始化 <code>struct io_uring ring</code> 结构体</li>
+<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度</li>
+<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
+<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及 offset 信息<ul>
+<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code> 中进行返回）</li>
+</ul>
+</li>
+<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有 <code>sqe</code> 进行下发</li>
+<li>通过 <code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code> 来获取 <code>cqe</code><ul>
+<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个 <code>cqe</code> 返回</li>
+<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有 <code>cqe</code>，就会返回错误</li>
+<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取 <code>user_data</code></li>
+</ul>
+</li>
+<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code> 进行清除，避免被二次处理</li>
+<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</li>
+</ul>
+<h2 id="io-uring-queue-init"><a href="#io-uring-queue-init" class="headerlink" title="io_uring_queue_init"></a><code>io_uring_queue_init</code></h2><ul>
+<li><p>函数调用逻辑</p>
+<pre class="mermaid">  graph TD
+    io_uring_queue_init --> io_uring_queue_init_params --> __sys_io_uring_setup --> syscall -->|陷入内核|io_uring_setup
+    io_uring_queue_init_params --> io_uring_queue_mmap --> io_uring_mmap --> mmap</pre></li>
+<li><p>函数功能</p>
+<p>该函数主要将队列深度以及额外的 <code>flags</code> 参数传递到内核，让内核的 <code>io_uring_setup</code> 来初始化 <code>io_uring</code> 结构体，同时使用 <code>mmap</code> 将在内核中初始化的 <code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code> 映射到用户态</p>
+<p>初始化时传递的 <code>flags</code> 将影响 <code>io_uring</code> 的运行方式：</p>
+<ul>
+<li><code>IORING_SETUP_IOPOLL</code>：开启此选项必须保证后续只用 <code>O_DIRECT</code> 打开文件并且文件系统的 <code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO 将下发失败。开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认 IO 是否完成<!-- ，`iopoll` 的触发时机可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></li>
+<li><code>IORING_SETUP_SQPOLL</code>：将启动一个单独的内核线程 <code>io_sq_thread</code>，内核将主动轮询 SQ，然后将 IO 下发至驱动设备，能大大减少提交 IO 时的系统调用开销（内核线程工作时，提交 IO 将无需系统调用；但是该线程可能会休眠，休眠时需要系统调用来唤醒该线程）</li>
+<li><code>IORING_SETUP_SQ_AFF</code>：当 <code>IORING_SETUP_SQPOLL</code> 已经配置后，启用 <code>sq_thread_cpu</code> 字段，用于配置内核线程 <code>io_sq_thread</code> 的跑在哪个 CPU 上</li>
+</ul>
+</li>
+</ul>
+<h2 id="io-uring-get-sqe"><a href="#io-uring-get-sqe" class="headerlink" title="io_uring_get_sqe"></a><code>io_uring_get_sqe</code></h2><p>由于 SQ 已经通过 <code>mmap</code> 映射到用户态，该函数只需在读取 <code>sq-&gt;khead</code> 时通过 <code>io_uring_smp_load_acquire</code> 保证一致性，而 <code>sq-&gt;sqe_tail</code> 只用于用户态，直接读取即可，根据 <code>sq-&gt;khead</code> 以及 <code>sq-&gt;sqe_tail</code> 判断 SQ 是否已满，未满则给出 <code>sq-&gt;sqe_tail</code> 处的 <code>sqe</code> 即可，然后更新 <code>sq-&gt;sqe_tail</code></p>
+<h2 id="io-uring-prep-OP"><a href="#io-uring-prep-OP" class="headerlink" title="io_uring_prep_#OP"></a><code>io_uring_prep_#OP</code></h2><p>通过调用 <code>io_uring_prep_rw</code> 对 <code>sqe</code> 填充命令 OP、<code>fd</code>、buffer 指针以及 offset 信息等</p>
+<h2 id="io-uring-sqe-set-data"><a href="#io-uring-sqe-set-data" class="headerlink" title="io_uring_sqe_set_data"></a><code>io_uring_sqe_set_data</code></h2><p>直接对 <code>sqe-&gt;user_data</code> 进行赋值</p>
+<h2 id="io-uring-submit"><a href="#io-uring-submit" class="headerlink" title="io_uring_submit"></a><code>io_uring_submit</code></h2><ul>
+<li><p>函数调用逻辑</p>
+  <pre class="mermaid">    graph TD
+      io_uring_submit --> __io_uring_submit_and_wait --> __io_uring_flush_sq
+      __io_uring_submit_and_wait --> __io_uring_submit --> sq_ring_needs_enter
+      __io_uring_submit --> __sys_io_uring_enter --> __sys_io_uring_enter2 --> syscall -->|陷入内核|io_uring_enter</pre></li>
+<li><p>函数功能</p>
+<ul>
+<li><p><code>__io_uring_flush_sq</code></p>
+<p>根据 <code>sq-&gt;sqe_tail</code>、<code>sq-&gt;sqe_head</code> 差值依次填充 <code>sq-&gt;array</code>，然后一次性更新 <code>sq-&gt;ktail</code>，并返回内核中仍未处理 <code>sqe</code> 数量（<code>sq-&gt;ktail - sq-&gt;khead</code>）</p>
+</li>
+<li><p><code>sq_ring_needs_enter</code></p>
+<p>判断内核线程 <code>io_sq_thread</code> 是否启用以及正常工作（没有休眠）:</p>
+<ul>
+<li>首先要判断用户态 <code>ring-&gt;flags</code> 是否配置了 <code>IORING_SETUP_SQPOLL</code> 标志位，判断是否启用了内核线程 <code>io_sq_thread</code></li>
+<li>然后再判断内核态 <code>ring-&gt;sq.kflags</code> 是否配置了 <code>IORING_SQ_NEED_WAKEUP</code> 标志位，判断内核线程 <code>io_sq_thread</code> 是否需要唤醒</li>
+</ul>
+<p>当内核线程 <code>io_sq_thread</code> 启用并且正常工作时，则整个 <code>io_uring_submit</code> 到此结束，无需后续的 <code>__sys_io_uring_enter</code> 系统调用，减少了 IO 下发的系统调用的开销</p>
+</li>
+<li><p><code>__sys_io_uring_enter</code></p>
+<p>系统调用陷入内核态，将参数传递给内核的 <code>io_uring_setup</code> 函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的 <code>ring-&gt;flags</code> 相关<!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="io-uring-wait-cqe"><a href="#io-uring-wait-cqe" class="headerlink" title="io_uring_wait_cqe"></a><code>io_uring_wait_cqe</code></h2><p>在用户态轮询判断是否有一个新的 <code>cqe</code>，无需系统调用陷入内核，但是会阻塞当前线程直到有一个新的 <code>cqe</code> 或者出错</p>
+<h2 id="io-uring-peek-cqe"><a href="#io-uring-peek-cqe" class="headerlink" title="io_uring_peek_cqe"></a><code>io_uring_peek_cqe</code></h2><p>仅在用户态判断一次是否有新的 <code>cqe</code>，无需系统调用陷入内核，如果没有新的 <code>cqe</code>，会返回失败信息 <code>-errno</code></p>
+<h2 id="io-uring-cqe-get-data"><a href="#io-uring-cqe-get-data" class="headerlink" title="io_uring_cqe_get_data"></a><code>io_uring_cqe_get_data</code></h2><p><code>cqe-&gt;user_data</code> 会在 IO 完成后，从 <code>sqe</code> 复制到对应的 <code>cqe</code> 中，该函数只用直接对 <code>cqe-&gt;user_data</code> 进行读取</p>
+<h2 id="io-uring-cqe-seen"><a href="#io-uring-cqe-seen" class="headerlink" title="io_uring_cqe_seen"></a><code>io_uring_cqe_seen</code></h2><p>更新 <code>cq-&gt;khead</code>，避免当前 <code>cqe</code> 被重复获取</p>
+<h2 id="io-uring-queue-exit"><a href="#io-uring-queue-exit" class="headerlink" title="io_uring_queue_exit"></a><code>io_uring_queue_exit</code></h2><p>首先通过 <code>munmap</code> 将初始化时 <code>mmap</code> 的 <code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code> 解除映射，然后通过 <code>close</code> 关闭 <code>io_uring</code> 对应的 <code>fd</code>，<code>close</code> 会调用到该 <code>fd</code> 注册的 <code>io_uring_release</code> 来释放 <code>io_uring</code></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">【Kernel】io_uring IOSQE_IO_LINK</a></li>
+<li><a href="https://www.skyzh.dev/posts/articles/2021-06-14-deep-dive-io-uring/">【个人博客】io_uring 的接口与实现</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储</category>
+        <category>IO</category>
+      </categories>
+      <tags>
+        <tag>io_uring</tag>
+        <tag>liburing</tag>
+        <tag>异步 IO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>page cache 简介</title>
+    <url>/posts/9ba60726.html</url>
+    <content><![CDATA[<h2 id="page-cache"><a href="#page-cache" class="headerlink" title="page cache"></a>page cache</h2><p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
+<span id="more"></span>
+<p>经过这层 page cache 的作用，读取底层设备数据的 IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9.html">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的 <a href="/TODO">预读机制</a> 提升了顺序读性能</p>
+<h2 id="直接-IO-与-缓存-IO"><a href="#直接-IO-与-缓存-IO" class="headerlink" title="直接 IO 与 缓存 IO"></a>直接 IO 与 缓存 IO</h2><p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
+<ol>
+<li>不经过缓存，直接写底层存储设备</li>
+<li>只写缓存，缓存中数据定期刷到底层存储设备上，也叫写回（write back）</li>
+<li>同时写缓存和底层存储设备，也叫写穿（write through）</li>
+</ol>
+<p>前两种就是 Linux 在 IO 栈中支持的直接 IO（direct IO）和缓存 IO（buffer IO）</p>
+<p>第三种策略虽然能非常简单保证缓存和底层设备的一致性，不过基于时间局部性原理，page cache 中的数据可能只是中间态，会被频繁修改，每次写穿会产生大量的开销</p>
+<h2 id="Linux-IO-栈"><a href="#Linux-IO-栈" class="headerlink" title="Linux IO 栈"></a>Linux IO 栈</h2><p>详细的 Linux IO 栈图如下（来源于 <a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">Thomas-Krenn-Wiki</a>）：</p>
+<p><img data-src="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png" alt="Linux-storage-stack-diagram"></p>
+<p>其实简划一下，可以分为文件系统、page cache 以及块 IO 层和设备驱动层这四个大模块</p>
+<p><img data-src="/posts/9ba60726/simple_IO_stack.jpg" alt="simple_IO_stack"></p>
+<p>P.S. 其中 <code>mmap</code> 是一种内存映射文件的方法，在这里不做过多介绍</p>
+<h2 id="Linux-中的具体实现"><a href="#Linux-中的具体实现" class="headerlink" title="Linux 中的具体实现"></a>Linux 中的具体实现</h2><p>这里介绍和 page cache 相关的主要结构体和一些常用的函数</p>
+<h3 id="相关结构体"><a href="#相关结构体" class="headerlink" title="相关结构体"></a>相关结构体</h3><p>TODO</p>
+<p>superblock</p>
+<p>inode</p>
+<p>file</p>
+<p>dentry</p>
+<p>mapping</p>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p>TODO</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">【Thomas-Krenn-Wiki】Linux Storage Stack Diagram</a></li>
+<li><a href="https://blog.csdn.net/juS3Ve/article/details/82322637">【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储</category>
+        <category>IO</category>
+      </categories>
+      <tags>
+        <tag>更新中</tag>
+        <tag>page cache</tag>
+        <tag>buffer IO</tag>
+        <tag>writeback</tag>
       </tags>
   </entry>
   <entry>
@@ -1617,31 +1556,55 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
+    <title>OpenWrt 手动编译 ipk</title>
+    <url>/posts/96a1807.html</url>
+    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
+<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
 <span id="more"></span>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <a href="https://openwrt.org/toh/start">支持设备列表</a> 中找到对应设备所在的 <a href="https://openwrt.org/toh/start?datasrt=%5Edevice%20page">设备专属页面</a>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
-<ol>
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li>[可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li>rootfs 镜像</li>
+<p>而官方的 <a href="https://github.com/openwrt/openwrt">OpenWrt</a> 仓库就提供了一个方便使用的交叉编译环境</p>
+<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">官网给出的要求</a>，可以通过下面命令来进行安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
+
+<p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
+
+<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
+<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
+<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
+<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
+<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
 </ul>
-</li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <a href="https://firmware-selector.openwrt.org/">固件搜索</a> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
+<p>以 <code>minieap</code> 为例，<a href="https://github.com/BoringCat/minieap-openwrt">github</a> 上有已经完成的仓库，依次可以直接拉取来编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
+
+<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
+<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
+<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://zh.wikipedia.org/wiki/OpenWrt">【维基百科】OpenWrt</a></li>
-<li><a href="https://openwrt.org/">【OpenWrt】官网</a></li>
-<li><a href="https://openwrt.org/toh/start">【OpenWrt】支持设备列表</a></li>
-<li><a href="https://firmware-selector.openwrt.org/">【OpenWrt】固件搜索</a></li>
+<li><a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem">【OpenWrt】编译系统准备</a></li>
+<li><a href="https://openwrt-nctu.gitbook.io/project/openwrt-compile-env/openwrt-sdk-and-ipk-format">【Gitbook】建立编译环境</a></li>
+<li><a href="https://github.com/openwrt/openwrt">【GitHub】OpenWrt</a></li>
+<li><a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk">【GitHub】MentoHUST-OpenWrt-ipk</a></li>
+<li><a href="https://github.com/BoringCat/minieap-openwrt">【GitHub】minieap-openwrt</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -1649,6 +1612,8 @@
       </categories>
       <tags>
         <tag>OpenWrt</tag>
+        <tag>交叉编译</tag>
+        <tag>ipk</tag>
       </tags>
   </entry>
   <entry>
@@ -1861,6 +1826,41 @@
         <tag>锐捷</tag>
         <tag>IPv6</tag>
         <tag>NAS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
+<span id="more"></span>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <a href="https://openwrt.org/toh/start">支持设备列表</a> 中找到对应设备所在的 <a href="https://openwrt.org/toh/start?datasrt=%5Edevice%20page">设备专属页面</a>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
+<ol>
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li>[可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li>rootfs 镜像</li>
+</ul>
+</li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <a href="https://firmware-selector.openwrt.org/">固件搜索</a> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/OpenWrt">【维基百科】OpenWrt</a></li>
+<li><a href="https://openwrt.org/">【OpenWrt】官网</a></li>
+<li><a href="https://openwrt.org/toh/start">【OpenWrt】支持设备列表</a></li>
+<li><a href="https://firmware-selector.openwrt.org/">【OpenWrt】固件搜索</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
 </search>
