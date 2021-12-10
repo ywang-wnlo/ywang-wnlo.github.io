@@ -85,74 +85,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo 配置主流搜索引擎收录流程记录</title>
-    <url>/posts/abac0c46.html</url>
-    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎到来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
-<span id="more"></span>
-<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
-<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="是否已经被收录"><a href="#是否已经被收录" class="headerlink" title="是否已经被收录"></a>是否已经被收录</h2><p>为了查看网站是否已经被收录，可以在 Google 或者 Bing 以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code> 链接进行替换即可</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="/posts/abac0c46/google_site.png" alt="google_site"></p>
-<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
-<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
-<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用 <code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
-<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
-<h2 id="提交站点地图"><a href="#提交站点地图" class="headerlink" title="提交站点地图"></a>提交站点地图</h2><p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
-<p>（由于 GitHub 屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
-<h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
-<p>而对我们来说，主要分三个步骤：注册 Search Console，验证网站所有权，提交站点地图</p>
-<h4 id="注册-Search-Console"><a href="#注册-Search-Console" class="headerlink" title="注册 Search Console"></a>注册 Search Console</h4><p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC 官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
-<h4 id="验证网站所有权"><a href="#验证网站所有权" class="headerlink" title="验证网站所有权"></a>验证网站所有权</h4><p>登录之后，就需要添加我们的网站了</p>
-<p><img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website"></p>
-<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS 配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code> 后会有五种方式供我们选择</p>
-<p><img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership"></p>
-<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
-<p><img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership"></p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;google-site-verification&quot;</span> <span class="attr">content</span>=<span class="string">&quot;F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></table></figure>
-
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
-<h4 id="提交站点地图-1"><a href="#提交站点地图-1" class="headerlink" title="提交站点地图"></a>提交站点地图</h4><p>之前 <code>hexo-generator-sitemap</code> 插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
-<p><img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap"></p>
-<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC 的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为 <code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
-<h3 id="Bing"><a href="#Bing" class="headerlink" title="Bing"></a>Bing</h3><h4 id="从-GSC-导入"><a href="#从-GSC-导入" class="headerlink" title="从 GSC 导入"></a>从 GSC 导入</h4><p><img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website"></p>
-<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从 GSC 进行导入即可</p>
-<h4 id="手动添加网站"><a href="#手动添加网站" class="headerlink" title="手动添加网站"></a>手动添加网站</h4><p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
-<p><img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership"></p>
-<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;msvalidate.01&quot;</span> <span class="attr">content</span>=<span class="string">&quot;65AB321A829DD5542989CC078C3ABD9E&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></table></figure>
-
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
-<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code> 即可</p>
-<p><img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap"></p>
-<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing 给我们网站建立索引即可，一般来说一两天就可以完成</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览 Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo 博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo 博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NexT 主题的配置使用记录</title>
     <url>/posts/9a0b7c3b.html</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
@@ -284,6 +216,74 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo 配置主流搜索引擎收录流程记录</title>
+    <url>/posts/abac0c46.html</url>
+    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎到来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
+<span id="more"></span>
+<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
+<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="是否已经被收录"><a href="#是否已经被收录" class="headerlink" title="是否已经被收录"></a>是否已经被收录</h2><p>为了查看网站是否已经被收录，可以在 Google 或者 Bing 以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code> 链接进行替换即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/posts/abac0c46/google_site.png" alt="google_site"></p>
+<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
+<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
+<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用 <code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
+<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
+<h2 id="提交站点地图"><a href="#提交站点地图" class="headerlink" title="提交站点地图"></a>提交站点地图</h2><p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
+<p>（由于 GitHub 屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
+<h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
+<p>而对我们来说，主要分三个步骤：注册 Search Console，验证网站所有权，提交站点地图</p>
+<h4 id="注册-Search-Console"><a href="#注册-Search-Console" class="headerlink" title="注册 Search Console"></a>注册 Search Console</h4><p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC 官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
+<h4 id="验证网站所有权"><a href="#验证网站所有权" class="headerlink" title="验证网站所有权"></a>验证网站所有权</h4><p>登录之后，就需要添加我们的网站了</p>
+<p><img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website"></p>
+<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS 配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code> 后会有五种方式供我们选择</p>
+<p><img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership"></p>
+<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
+<p><img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership"></p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;google-site-verification&quot;</span> <span class="attr">content</span>=<span class="string">&quot;F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></table></figure>
+
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
+<h4 id="提交站点地图-1"><a href="#提交站点地图-1" class="headerlink" title="提交站点地图"></a>提交站点地图</h4><p>之前 <code>hexo-generator-sitemap</code> 插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
+<p><img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap"></p>
+<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC 的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为 <code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
+<h3 id="Bing"><a href="#Bing" class="headerlink" title="Bing"></a>Bing</h3><h4 id="从-GSC-导入"><a href="#从-GSC-导入" class="headerlink" title="从 GSC 导入"></a>从 GSC 导入</h4><p><img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website"></p>
+<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从 GSC 进行导入即可</p>
+<h4 id="手动添加网站"><a href="#手动添加网站" class="headerlink" title="手动添加网站"></a>手动添加网站</h4><p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
+<p><img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership"></p>
+<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;msvalidate.01&quot;</span> <span class="attr">content</span>=<span class="string">&quot;65AB321A829DD5542989CC078C3ABD9E&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></table></figure>
+
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
+<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code> 即可</p>
+<p><img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap"></p>
+<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing 给我们网站建立索引即可，一般来说一两天就可以完成</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览 Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo 博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo 博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LaTeX PPT</title>
     <url>/posts/499c5a19.html</url>
     <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf 上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用</p>
@@ -322,6 +322,73 @@
 </ul>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX, XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+<span id="more"></span>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th>换成算成 mm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pt</td>
+<td>基本单位</td>
+<td>1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>毫米</td>
+<td>2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr>
+<td>cm</td>
+<td>厘米</td>
+<td>28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr>
+<td>in</td>
+<td>英寸</td>
+<td>72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>ex</td>
+<td>当前字体的 x 字母高度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>em</td>
+<td>当前字体的 m 字母宽度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
@@ -424,70 +491,87 @@
       </tags>
   </entry>
   <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+    <title>io_uring 内核源码分析</title>
+    <url>/posts/4f0d345c.html</url>
+    <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="1-io-uring"><a href="#1-io-uring" class="headerlink" title="1. io_uring"></a>1. <code>io_uring</code></h2><p><a href="/posts/c142853f.html#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8">之前</a> 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
+<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中，下面将逐个分析</p>
 <span id="more"></span>
-<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
-<table>
-<thead>
-<tr>
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th>换成算成 mm</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pt</td>
-<td>基本单位</td>
-<td>1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>mm</td>
-<td>毫米</td>
-<td>2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr>
-<td>cm</td>
-<td>厘米</td>
-<td>28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr>
-<td>in</td>
-<td>英寸</td>
-<td>72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>ex</td>
-<td>当前字体的 x 字母高度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>em</td>
-<td>当前字体的 m 字母宽度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-系统调用-io-uring-setup"><a href="#2-系统调用-io-uring-setup" class="headerlink" title="2. 系统调用 io_uring_setup"></a>2. 系统调用 <code>io_uring_setup</code></h2><p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d.html#io-uring-queue-init">用户库源码分析</a> 中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
+<h3 id="2-1-io-uring-setup"><a href="#2-1-io-uring-setup" class="headerlink" title="2.1. io_uring_setup"></a>2.1. <code>io_uring_setup</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Sets up an aio uring context, and returns the fd. Applications asks for a</span></span><br><span class="line"><span class="comment"> * ring size, we return the actual sq/cq ring sizes (among other things) in the</span></span><br><span class="line"><span class="comment"> * params structure passed in.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">long</span> <span class="title">io_uring_setup</span><span class="params">(u32 entries, struct io_uring_params __user *params)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_uring_params</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="keyword">long</span> ret;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用户态拷贝到内核态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(&amp;p, params, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	<span class="comment">// 确认保留区域没有被赋值</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ARRAY_SIZE(p.resv); i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p.resv[i])</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查 flags 参数</span></span><br><span class="line">	<span class="keyword">if</span> (p.flags &amp; ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |</span><br><span class="line">			IORING_SETUP_SQ_AFF))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分配内存空间，创建 workqueue，创建 fd 等</span></span><br><span class="line">	ret = io_uring_create(entries, &amp;p);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 内核态拷贝回用户态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_to_user(params, &amp;p, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SYSCALL_DEFINE2(io_uring_setup, u32, entries,</span><br><span class="line">		struct io_uring_params __user *, params)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> io_uring_setup(entries, params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>io_uring_setup</code> 的核心函数是 <code>io_uring_create</code></p>
+<h3 id="2-2-io-uring-create"><a href="#2-2-io-uring-create" class="headerlink" title="2.2. io_uring_create"></a>2.2. <code>io_uring_create</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">io_uring_create</span><span class="params">(<span class="keyword">unsigned</span> entries, struct io_uring_params *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">user_struct</span> *<span class="title">user</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="keyword">bool</span> account_mem;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!entries || entries &gt; IORING_MAX_ENTRIES)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Use twice as many entries for the CQ ring. It&#x27;s possible for the</span></span><br><span class="line"><span class="comment">	 * application to drive a higher depth than the size of the SQ ring,</span></span><br><span class="line"><span class="comment">	 * since the sqes are only used at submission time. This allows for</span></span><br><span class="line"><span class="comment">	 * some flexibility in overcommitting a bit.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	p-&gt;sq_entries = roundup_pow_of_two(entries);</span><br><span class="line">	p-&gt;cq_entries = <span class="number">2</span> * p-&gt;sq_entries;</span><br><span class="line"></span><br><span class="line">	user = get_uid(current_user());</span><br><span class="line">	<span class="comment">// 允许对共享内存段进行锁定</span></span><br><span class="line">	account_mem = !capable(CAP_IPC_LOCK);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (account_mem) &#123;</span><br><span class="line">		<span class="comment">// 不能对共享内存段进行锁定，就需要增加当前可以锁定的内存</span></span><br><span class="line">		ret = io_account_mem(user,</span><br><span class="line">				ring_pages(p-&gt;sq_entries, p-&gt;cq_entries));</span><br><span class="line">		<span class="keyword">if</span> (ret) &#123;</span><br><span class="line">			free_uid(user);</span><br><span class="line">			<span class="keyword">return</span> ret;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ctx = io_ring_ctx_alloc(p);</span><br><span class="line">	<span class="keyword">if</span> (!ctx) &#123;</span><br><span class="line">		<span class="keyword">if</span> (account_mem)</span><br><span class="line">			io_unaccount_mem(user, ring_pages(p-&gt;sq_entries,</span><br><span class="line">								p-&gt;cq_entries));</span><br><span class="line">		free_uid(user);</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">	&#125;</span><br><span class="line">	ctx-&gt;compat = in_compat_syscall();</span><br><span class="line">	ctx-&gt;account_mem = account_mem;</span><br><span class="line">	ctx-&gt;user = user;</span><br><span class="line"></span><br><span class="line">	ctx-&gt;creds = get_current_cred();</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;creds) &#123;</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 申请 io_rings SQEs</span></span><br><span class="line">	ret = io_allocate_scq_urings(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化 workqueue，[初始化内核线程用于进行 IO poll]</span></span><br><span class="line">	ret = io_sq_offload_start(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;sq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;sq_off));</span><br><span class="line">	p-&gt;sq_off.head = offsetof(struct io_rings, sq.head);</span><br><span class="line">	p-&gt;sq_off.tail = offsetof(struct io_rings, sq.tail);</span><br><span class="line">	p-&gt;sq_off.ring_mask = offsetof(struct io_rings, sq_ring_mask);</span><br><span class="line">	p-&gt;sq_off.ring_entries = offsetof(struct io_rings, sq_ring_entries);</span><br><span class="line">	p-&gt;sq_off.flags = offsetof(struct io_rings, sq_flags);</span><br><span class="line">	p-&gt;sq_off.dropped = offsetof(struct io_rings, sq_dropped);</span><br><span class="line">	p-&gt;sq_off.<span class="built_in">array</span> = (<span class="keyword">char</span> *)ctx-&gt;sq_array - (<span class="keyword">char</span> *)ctx-&gt;rings;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;cq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;cq_off));</span><br><span class="line">	p-&gt;cq_off.head = offsetof(struct io_rings, cq.head);</span><br><span class="line">	p-&gt;cq_off.tail = offsetof(struct io_rings, cq.tail);</span><br><span class="line">	p-&gt;cq_off.ring_mask = offsetof(struct io_rings, cq_ring_mask);</span><br><span class="line">	p-&gt;cq_off.ring_entries = offsetof(struct io_rings, cq_ring_entries);</span><br><span class="line">	p-&gt;cq_off.overflow = offsetof(struct io_rings, cq_overflow);</span><br><span class="line">	p-&gt;cq_off.cqes = offsetof(struct io_rings, cqes);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Install ring fd as the very last thing, so we don&#x27;t risk someone</span></span><br><span class="line"><span class="comment">	 * having closed it before we finish setup</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 创建 fd 便于用户态访问 ctx</span></span><br><span class="line">	ret = io_uring_get_fd(ctx);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	p-&gt;features = IORING_FEAT_SINGLE_MMAP;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">err:</span><br><span class="line">	io_ring_ctx_wait_and_kill(ctx);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
+<pre class="mermaid">  graph TD;
+  io_uring_setup --> io_ring_ctx_alloc;
+  io_uring_setup --> io_allocate_scq_urings;
+  io_uring_setup --> io_sq_offload_start;
+  io_uring_setup --> io_uring_get_fd;</pre>
+
+<ol>
+<li><p><code>io_ring_ctx_alloc</code> 主要用来申请空间，初始化列表头、互斥锁、自旋锁等结构</p>
+</li>
+<li><p><code>io_allocate_scq_urings</code> 来初始化整个 <code>struct io_rings *rings</code>，包括 <code>SQ</code>、<code>CQ</code> 头尾指针的初始化，以及 <code>SQE</code>、<code>CQE</code> 的初始化</p>
+<ul>
+<li>不同的是 <code>SQ</code>、<code>CQ</code> 头尾指针以及 <code>CQE</code> 都在 <code>struct io_rings *rings</code> 结构体中</li>
+<li>而 <code>SQE</code> 则是在 <code>struct io_ring_ctx *ctx</code> 结构体中</li>
 </ul>
+</li>
+<li><p><code>io_sq_offload_start</code> 会根据用户通过 <code>io_uring_setup</code> 传递的 <code>flags</code> 来配置 <code>io_uring</code> 的运行方式，后续详细展开</p>
+</li>
+<li><p><code>io_uring_get_fd</code> 将 <code>struct io_ring_ctx *ctx</code> 暴露给用户态访问</p>
+</li>
+</ol>
+<h3 id="2-3-io-sq-offload-start"><a href="#2-3-io-sq-offload-start" class="headerlink" title="2.3. io_sq_offload_start"></a>2.3. <code>io_sq_offload_start</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">io_sq_offload_start</span><span class="params">(struct io_ring_ctx *ctx,</span></span></span><br><span class="line"><span class="params"><span class="function">			       struct io_uring_params *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">	mmgrab(current-&gt;mm);</span><br><span class="line">	ctx-&gt;sqo_mm = current-&gt;mm;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) &#123;</span><br><span class="line">		<span class="comment">// IORING_SETUP_SQPOLL 将会创建一个内核线程来 poll SQ</span></span><br><span class="line">		ret = -EPERM;</span><br><span class="line">		<span class="keyword">if</span> (!capable(CAP_SYS_ADMIN))</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">		ctx-&gt;sq_thread_idle = msecs_to_jiffies(p-&gt;sq_thread_idle);</span><br><span class="line">		<span class="keyword">if</span> (!ctx-&gt;sq_thread_idle)</span><br><span class="line">			ctx-&gt;sq_thread_idle = HZ;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) &#123;</span><br><span class="line">			<span class="keyword">int</span> cpu = p-&gt;sq_thread_cpu;</span><br><span class="line"></span><br><span class="line">			ret = -EINVAL;</span><br><span class="line">			<span class="keyword">if</span> (cpu &gt;= nr_cpu_ids)</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line">			<span class="keyword">if</span> (!cpu_online(cpu))</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create_on_cpu(io_sq_thread,</span><br><span class="line">							ctx, cpu,</span><br><span class="line">							<span class="string">&quot;io_uring-sq&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create(io_sq_thread, ctx,</span><br><span class="line">							<span class="string">&quot;io_uring-sq&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (IS_ERR(ctx-&gt;sqo_thread)) &#123;</span><br><span class="line">			ret = PTR_ERR(ctx-&gt;sqo_thread);</span><br><span class="line">			ctx-&gt;sqo_thread = <span class="literal">NULL</span>;</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		&#125;</span><br><span class="line">		wake_up_process(ctx-&gt;sqo_thread);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) &#123;</span><br><span class="line">		<span class="comment">/* Can&#x27;t have SQ_AFF without SQPOLL */</span></span><br><span class="line">		ret = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Do QD, or 2 * CPUS, whatever is smallest */</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">0</span>] = alloc_workqueue(<span class="string">&quot;io_ring-wq&quot;</span>,</span><br><span class="line">			WQ_UNBOUND | WQ_FREEZABLE,</span><br><span class="line">			min(ctx-&gt;sq_entries - <span class="number">1</span>, <span class="number">2</span> * num_online_cpus()));</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">0</span>]) &#123;</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * This is for buffered writes, where we want to limit the parallelism</span></span><br><span class="line"><span class="comment">	 * due to file locking in file systems. As &quot;normal&quot; buffered writes</span></span><br><span class="line"><span class="comment">	 * should parellelize on writeout quite nicely, limit us to having 2</span></span><br><span class="line"><span class="comment">	 * pending. This avoids massive contention on the inode when doing</span></span><br><span class="line"><span class="comment">	 * buffered async writes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 对 buffer 写的 workqueue 深度进行限制，减少锁争用开销?</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">1</span>] = alloc_workqueue(<span class="string">&quot;io_ring-write-wq&quot;</span>,</span><br><span class="line">						WQ_UNBOUND | WQ_FREEZABLE, <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">1</span>]) &#123;</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">err:</span><br><span class="line">	io_finish_async(ctx);</span><br><span class="line">	mmdrop(ctx-&gt;sqo_mm);</span><br><span class="line">	ctx-&gt;sqo_mm = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 <code>flags</code> 中配置了 <code>IORING_SETUP_SQPOLL</code> 时，将启动一个单独的内核线程 <code>io_sq_thread</code>，而当 <code>IORING_SETUP_SQ_AFF</code> 字段也配置时，将根据 <code>sq_thread_cpu</code> 字段，在指定的 CPU 上启用内核线程 <code>io_sq_thread</code></p>
+<p>同时该函数还会创建两个工作队列 <code>ctx-&gt;sqo_wq[2]</code> 分别名为 <code>io_ring-wq</code> 和 <code>io_ring-write-wq</code></p>
+<ul>
+<li><code>io_ring-wq</code> 主要处理读 IO，以及 direct 写 IO</li>
+<li><code>io_ring-write-wq</code> 主要是处理 buffer 写 IO</li>
+</ul>
+<h2 id="3-系统调用-io-uring-enter"><a href="#3-系统调用-io-uring-enter" class="headerlink" title="3. 系统调用 io_uring_enter"></a>3. 系统调用 <code>io_uring_enter</code></h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE6(io_uring_enter, <span class="keyword">unsigned</span> <span class="keyword">int</span>, fd, u32, to_submit,</span><br><span class="line">		u32, min_complete, u32, flags, <span class="keyword">const</span> <span class="keyword">sigset_t</span> __user *, sig,</span><br><span class="line">		<span class="keyword">size_t</span>, sigsz)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="keyword">long</span> ret = -EBADF;</span><br><span class="line">	<span class="keyword">int</span> submitted = <span class="number">0</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ret = -ENXIO;</span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line">	<span class="keyword">if</span> (!percpu_ref_tryget(&amp;ctx-&gt;refs))</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * For SQ polling, the thread will do all submissions and completions.</span></span><br><span class="line"><span class="comment">	 * Just return the requested submit count, and wake the thread if</span></span><br><span class="line"><span class="comment">	 * we were asked to.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) &#123;</span><br><span class="line">		<span class="keyword">if</span> (flags &amp; IORING_ENTER_SQ_WAKEUP)</span><br><span class="line">			wake_up(&amp;ctx-&gt;sqo_wait);</span><br><span class="line">		submitted = to_submit;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (to_submit) &#123;</span><br><span class="line">		to_submit = min(to_submit, ctx-&gt;sq_entries);</span><br><span class="line"></span><br><span class="line">		mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">		submitted = io_ring_submit(ctx, to_submit);</span><br><span class="line">		mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (submitted != to_submit)</span><br><span class="line">			<span class="keyword">goto</span> out;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; IORING_ENTER_GETEVENTS) &#123;</span><br><span class="line">		<span class="keyword">unsigned</span> nr_events = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		min_complete = min(min_complete, ctx-&gt;cq_entries);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) &#123;</span><br><span class="line">			ret = io_iopoll_check(ctx, &amp;nr_events, min_complete);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			ret = io_cqring_wait(ctx, min_complete, sig, sigsz);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">	percpu_ref_put(&amp;ctx-&gt;refs);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> submitted ? submitted : ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TODO</p>
+<h2 id="4-系统调用-io-uring-register"><a href="#4-系统调用-io-uring-register" class="headerlink" title="4. 系统调用 io_uring_register"></a>4. 系统调用 <code>io_uring_register</code></h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE4(io_uring_register, <span class="keyword">unsigned</span> <span class="keyword">int</span>, fd, <span class="keyword">unsigned</span> <span class="keyword">int</span>, opcode,</span><br><span class="line">		<span class="keyword">void</span> __user *, arg, <span class="keyword">unsigned</span> <span class="keyword">int</span>, nr_args)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="keyword">long</span> ret = -EBADF;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line"></span><br><span class="line">	mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">	ret = __io_uring_register(ctx, opcode, arg, nr_args);</span><br><span class="line">	mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TODO</p>
+<h2 id="5-内核线程-io-sq-thread"><a href="#5-内核线程-io-sq-thread" class="headerlink" title="5. 内核线程 io_sq_thread"></a>5. 内核线程 <code>io_sq_thread</code></h2><p>TODO</p>
+<h2 id="6-IOPOLL-模式"><a href="#6-IOPOLL-模式" class="headerlink" title="6. IOPOLL 模式"></a>6. <code>IOPOLL</code> 模式</h2><h3 id="6-1-启用"><a href="#6-1-启用" class="headerlink" title="6.1. 启用"></a>6.1. 启用</h3><p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了 <code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code> 模式</p>
+<h3 id="6-2-限制"><a href="#6-2-限制" class="headerlink" title="6.2. 限制"></a>6.2. 限制</h3><p>开启此选项必须保证后续只用 <code>O_DIRECT</code> 打开文件并且文件系统的 <code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO 将下发失败</p>
+<h3 id="6-3-调用栈"><a href="#6-3-调用栈" class="headerlink" title="6.3. 调用栈"></a>6.3. 调用栈</h3><p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认 IO 是否完成</p>
+<p>对 <code>f_op-&gt;iopoll</code> 函数调用关系进行了分析</p>
+<pre class="mermaid">graph TD
+  io_uring_create --> io_ring_ctx_wait_and_kill
+  io_uring_release --> io_ring_ctx_wait_and_kill
+  io_ring_ctx_wait_and_kill --> io_iopoll_reap_events
+  io_ring_ctx_wait_and_kill --> io_ring_ctx_free
+  io_ring_ctx_free --> io_iopoll_reap_events
+  io_iopoll_reap_events --> io_iopoll_getevents
+
+  syscall["SYSCALL_DEFINE6(io_uring_enter, ……)"] --> io_iopoll_check --> io_iopoll_getevents
+
+  io_sq_thread --> io_iopoll_getevents
+
+  io_iopoll_getevents --> io_do_iopoll --> iopoll["f_op->iopoll"]</pre>
+
+<p>主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了 <code>IORING_SETUP_IOPOLL</code>）：</p>
+<ol>
+<li><code>io_uring</code> 销毁时需要调用</li>
+<li>系统调用 <code>io_uring_enter</code> 将会触发，用于轮询 IO 完成情况，直到到达指定的 <code>wait_nr</code> 数量 IO 完成后才会退出轮询</li>
+<li>当初始化时同时配置了 <code>IORING_SETUP_SQPOLL</code> 时，<code>io_sq_thread</code> 内核线程触发，当存在未完成的 IO 时调用，用于更新 IO 完成情况（ <code>io_do_iopoll</code> 的参数 <code>min = 0</code>，即每次调用无论是否有新完成的 IO 都会退出轮询，不会阻塞线程）</li>
+</ol>
 ]]></content>
       <categories>
-        <category>LaTeX</category>
+        <category>存储</category>
+        <category>IO</category>
       </categories>
       <tags>
-        <tag>LaTeX</tag>
+        <tag>io_uring</tag>
+        <tag>liburing</tag>
+        <tag>异步 IO</tag>
+        <tag>内核</tag>
       </tags>
   </entry>
   <entry>
@@ -579,90 +663,6 @@
         <tag>io_uring</tag>
         <tag>liburing</tag>
         <tag>异步 IO</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>io_uring 内核源码分析</title>
-    <url>/posts/4f0d345c.html</url>
-    <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="1-io-uring"><a href="#1-io-uring" class="headerlink" title="1. io_uring"></a>1. <code>io_uring</code></h2><p><a href="/posts/c142853f.html#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8">之前</a> 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
-<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中，下面将逐个分析</p>
-<span id="more"></span>
-<h2 id="2-系统调用-io-uring-setup"><a href="#2-系统调用-io-uring-setup" class="headerlink" title="2. 系统调用 io_uring_setup"></a>2. 系统调用 <code>io_uring_setup</code></h2><p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d.html#io-uring-queue-init">用户库源码分析</a> 中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
-<h3 id="2-1-io-uring-setup"><a href="#2-1-io-uring-setup" class="headerlink" title="2.1. io_uring_setup"></a>2.1. <code>io_uring_setup</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Sets up an aio uring context, and returns the fd. Applications asks for a</span></span><br><span class="line"><span class="comment"> * ring size, we return the actual sq/cq ring sizes (among other things) in the</span></span><br><span class="line"><span class="comment"> * params structure passed in.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">long</span> <span class="title">io_uring_setup</span><span class="params">(u32 entries, struct io_uring_params __user *params)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_uring_params</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="keyword">long</span> ret;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用户态拷贝到内核态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(&amp;p, params, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	<span class="comment">// 确认保留区域没有被赋值</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ARRAY_SIZE(p.resv); i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p.resv[i])</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查 flags 参数</span></span><br><span class="line">	<span class="keyword">if</span> (p.flags &amp; ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |</span><br><span class="line">			IORING_SETUP_SQ_AFF))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分配内存空间，创建 workqueue，创建 fd 等</span></span><br><span class="line">	ret = io_uring_create(entries, &amp;p);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 内核态拷贝回用户态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_to_user(params, &amp;p, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SYSCALL_DEFINE2(io_uring_setup, u32, entries,</span><br><span class="line">		struct io_uring_params __user *, params)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> io_uring_setup(entries, params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到 <code>io_uring_setup</code> 的核心函数是 <code>io_uring_create</code></p>
-<h3 id="2-2-io-uring-create"><a href="#2-2-io-uring-create" class="headerlink" title="2.2. io_uring_create"></a>2.2. <code>io_uring_create</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">io_uring_create</span><span class="params">(<span class="keyword">unsigned</span> entries, struct io_uring_params *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">user_struct</span> *<span class="title">user</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="keyword">bool</span> account_mem;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!entries || entries &gt; IORING_MAX_ENTRIES)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Use twice as many entries for the CQ ring. It&#x27;s possible for the</span></span><br><span class="line"><span class="comment">	 * application to drive a higher depth than the size of the SQ ring,</span></span><br><span class="line"><span class="comment">	 * since the sqes are only used at submission time. This allows for</span></span><br><span class="line"><span class="comment">	 * some flexibility in overcommitting a bit.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	p-&gt;sq_entries = roundup_pow_of_two(entries);</span><br><span class="line">	p-&gt;cq_entries = <span class="number">2</span> * p-&gt;sq_entries;</span><br><span class="line"></span><br><span class="line">	user = get_uid(current_user());</span><br><span class="line">	<span class="comment">// 允许对共享内存段进行锁定</span></span><br><span class="line">	account_mem = !capable(CAP_IPC_LOCK);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (account_mem) &#123;</span><br><span class="line">		<span class="comment">// 不能对共享内存段进行锁定，就需要增加当前可以锁定的内存</span></span><br><span class="line">		ret = io_account_mem(user,</span><br><span class="line">				ring_pages(p-&gt;sq_entries, p-&gt;cq_entries));</span><br><span class="line">		<span class="keyword">if</span> (ret) &#123;</span><br><span class="line">			free_uid(user);</span><br><span class="line">			<span class="keyword">return</span> ret;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ctx = io_ring_ctx_alloc(p);</span><br><span class="line">	<span class="keyword">if</span> (!ctx) &#123;</span><br><span class="line">		<span class="keyword">if</span> (account_mem)</span><br><span class="line">			io_unaccount_mem(user, ring_pages(p-&gt;sq_entries,</span><br><span class="line">								p-&gt;cq_entries));</span><br><span class="line">		free_uid(user);</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">	&#125;</span><br><span class="line">	ctx-&gt;compat = in_compat_syscall();</span><br><span class="line">	ctx-&gt;account_mem = account_mem;</span><br><span class="line">	ctx-&gt;user = user;</span><br><span class="line"></span><br><span class="line">	ctx-&gt;creds = get_current_cred();</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;creds) &#123;</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 申请 io_rings SQEs</span></span><br><span class="line">	ret = io_allocate_scq_urings(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化 workqueue，[初始化内核线程用于进行 IO poll]</span></span><br><span class="line">	ret = io_sq_offload_start(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;sq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;sq_off));</span><br><span class="line">	p-&gt;sq_off.head = offsetof(struct io_rings, sq.head);</span><br><span class="line">	p-&gt;sq_off.tail = offsetof(struct io_rings, sq.tail);</span><br><span class="line">	p-&gt;sq_off.ring_mask = offsetof(struct io_rings, sq_ring_mask);</span><br><span class="line">	p-&gt;sq_off.ring_entries = offsetof(struct io_rings, sq_ring_entries);</span><br><span class="line">	p-&gt;sq_off.flags = offsetof(struct io_rings, sq_flags);</span><br><span class="line">	p-&gt;sq_off.dropped = offsetof(struct io_rings, sq_dropped);</span><br><span class="line">	p-&gt;sq_off.<span class="built_in">array</span> = (<span class="keyword">char</span> *)ctx-&gt;sq_array - (<span class="keyword">char</span> *)ctx-&gt;rings;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;cq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;cq_off));</span><br><span class="line">	p-&gt;cq_off.head = offsetof(struct io_rings, cq.head);</span><br><span class="line">	p-&gt;cq_off.tail = offsetof(struct io_rings, cq.tail);</span><br><span class="line">	p-&gt;cq_off.ring_mask = offsetof(struct io_rings, cq_ring_mask);</span><br><span class="line">	p-&gt;cq_off.ring_entries = offsetof(struct io_rings, cq_ring_entries);</span><br><span class="line">	p-&gt;cq_off.overflow = offsetof(struct io_rings, cq_overflow);</span><br><span class="line">	p-&gt;cq_off.cqes = offsetof(struct io_rings, cqes);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Install ring fd as the very last thing, so we don&#x27;t risk someone</span></span><br><span class="line"><span class="comment">	 * having closed it before we finish setup</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 创建 fd 便于用户态访问 ctx</span></span><br><span class="line">	ret = io_uring_get_fd(ctx);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	p-&gt;features = IORING_FEAT_SINGLE_MMAP;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">err:</span><br><span class="line">	io_ring_ctx_wait_and_kill(ctx);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<pre class="mermaid">  graph TD;
-  io_uring_setup --> io_ring_ctx_alloc;
-  io_uring_setup --> io_allocate_scq_urings;
-  io_uring_setup --> io_sq_offload_start;
-  io_uring_setup --> io_uring_get_fd;</pre>
-
-<ol>
-<li><p><code>io_ring_ctx_alloc</code> 主要用来申请空间，初始化列表头、互斥锁、自旋锁等结构</p>
-</li>
-<li><p><code>io_allocate_scq_urings</code> 来初始化整个 <code>struct io_rings *rings</code>，包括 <code>SQ</code>、<code>CQ</code> 头尾指针的初始化，以及 <code>SQE</code>、<code>CQE</code> 的初始化</p>
-<ul>
-<li>不同的是 <code>SQ</code>、<code>CQ</code> 头尾指针以及 <code>CQE</code> 都在 <code>struct io_rings *rings</code> 结构体中</li>
-<li>而 <code>SQE</code> 则是在 <code>struct io_ring_ctx *ctx</code> 结构体中</li>
-</ul>
-</li>
-<li><p><code>io_sq_offload_start</code> 会根据用户通过 <code>io_uring_setup</code> 传递的 <code>flags</code> 来配置 <code>io_uring</code> 的运行方式，后续详细展开</p>
-</li>
-<li><p><code>io_uring_get_fd</code> 将 <code>struct io_ring_ctx *ctx</code> 暴露给用户态访问</p>
-</li>
-</ol>
-<h3 id="2-3-io-sq-offload-start"><a href="#2-3-io-sq-offload-start" class="headerlink" title="2.3. io_sq_offload_start"></a>2.3. <code>io_sq_offload_start</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">io_sq_offload_start</span><span class="params">(struct io_ring_ctx *ctx,</span></span></span><br><span class="line"><span class="params"><span class="function">			       struct io_uring_params *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">	mmgrab(current-&gt;mm);</span><br><span class="line">	ctx-&gt;sqo_mm = current-&gt;mm;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) &#123;</span><br><span class="line">		<span class="comment">// IORING_SETUP_SQPOLL 将会创建一个内核线程来 poll SQ</span></span><br><span class="line">		ret = -EPERM;</span><br><span class="line">		<span class="keyword">if</span> (!capable(CAP_SYS_ADMIN))</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">		ctx-&gt;sq_thread_idle = msecs_to_jiffies(p-&gt;sq_thread_idle);</span><br><span class="line">		<span class="keyword">if</span> (!ctx-&gt;sq_thread_idle)</span><br><span class="line">			ctx-&gt;sq_thread_idle = HZ;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) &#123;</span><br><span class="line">			<span class="keyword">int</span> cpu = p-&gt;sq_thread_cpu;</span><br><span class="line"></span><br><span class="line">			ret = -EINVAL;</span><br><span class="line">			<span class="keyword">if</span> (cpu &gt;= nr_cpu_ids)</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line">			<span class="keyword">if</span> (!cpu_online(cpu))</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create_on_cpu(io_sq_thread,</span><br><span class="line">							ctx, cpu,</span><br><span class="line">							<span class="string">&quot;io_uring-sq&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create(io_sq_thread, ctx,</span><br><span class="line">							<span class="string">&quot;io_uring-sq&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (IS_ERR(ctx-&gt;sqo_thread)) &#123;</span><br><span class="line">			ret = PTR_ERR(ctx-&gt;sqo_thread);</span><br><span class="line">			ctx-&gt;sqo_thread = <span class="literal">NULL</span>;</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		&#125;</span><br><span class="line">		wake_up_process(ctx-&gt;sqo_thread);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) &#123;</span><br><span class="line">		<span class="comment">/* Can&#x27;t have SQ_AFF without SQPOLL */</span></span><br><span class="line">		ret = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Do QD, or 2 * CPUS, whatever is smallest */</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">0</span>] = alloc_workqueue(<span class="string">&quot;io_ring-wq&quot;</span>,</span><br><span class="line">			WQ_UNBOUND | WQ_FREEZABLE,</span><br><span class="line">			min(ctx-&gt;sq_entries - <span class="number">1</span>, <span class="number">2</span> * num_online_cpus()));</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">0</span>]) &#123;</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * This is for buffered writes, where we want to limit the parallelism</span></span><br><span class="line"><span class="comment">	 * due to file locking in file systems. As &quot;normal&quot; buffered writes</span></span><br><span class="line"><span class="comment">	 * should parellelize on writeout quite nicely, limit us to having 2</span></span><br><span class="line"><span class="comment">	 * pending. This avoids massive contention on the inode when doing</span></span><br><span class="line"><span class="comment">	 * buffered async writes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 对 buffer 写的 workqueue 深度进行限制，减少锁争用开销?</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">1</span>] = alloc_workqueue(<span class="string">&quot;io_ring-write-wq&quot;</span>,</span><br><span class="line">						WQ_UNBOUND | WQ_FREEZABLE, <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">1</span>]) &#123;</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">err:</span><br><span class="line">	io_finish_async(ctx);</span><br><span class="line">	mmdrop(ctx-&gt;sqo_mm);</span><br><span class="line">	ctx-&gt;sqo_mm = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当 <code>flags</code> 中配置了 <code>IORING_SETUP_SQPOLL</code> 时，将启动一个单独的内核线程 <code>io_sq_thread</code>，而当 <code>IORING_SETUP_SQ_AFF</code> 字段也配置时，将根据 <code>sq_thread_cpu</code> 字段，在指定的 CPU 上启用内核线程 <code>io_sq_thread</code></p>
-<p>同时该函数还会创建两个工作队列 <code>ctx-&gt;sqo_wq[2]</code> 分别名为 <code>io_ring-wq</code> 和 <code>io_ring-write-wq</code></p>
-<ul>
-<li><code>io_ring-wq</code> 主要处理读 IO，以及 direct 写 IO</li>
-<li><code>io_ring-write-wq</code> 主要是处理 buffer 写 IO</li>
-</ul>
-<h2 id="3-系统调用-io-uring-enter"><a href="#3-系统调用-io-uring-enter" class="headerlink" title="3. 系统调用 io_uring_enter"></a>3. 系统调用 <code>io_uring_enter</code></h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE6(io_uring_enter, <span class="keyword">unsigned</span> <span class="keyword">int</span>, fd, u32, to_submit,</span><br><span class="line">		u32, min_complete, u32, flags, <span class="keyword">const</span> <span class="keyword">sigset_t</span> __user *, sig,</span><br><span class="line">		<span class="keyword">size_t</span>, sigsz)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="keyword">long</span> ret = -EBADF;</span><br><span class="line">	<span class="keyword">int</span> submitted = <span class="number">0</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ret = -ENXIO;</span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line">	<span class="keyword">if</span> (!percpu_ref_tryget(&amp;ctx-&gt;refs))</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * For SQ polling, the thread will do all submissions and completions.</span></span><br><span class="line"><span class="comment">	 * Just return the requested submit count, and wake the thread if</span></span><br><span class="line"><span class="comment">	 * we were asked to.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) &#123;</span><br><span class="line">		<span class="keyword">if</span> (flags &amp; IORING_ENTER_SQ_WAKEUP)</span><br><span class="line">			wake_up(&amp;ctx-&gt;sqo_wait);</span><br><span class="line">		submitted = to_submit;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (to_submit) &#123;</span><br><span class="line">		to_submit = min(to_submit, ctx-&gt;sq_entries);</span><br><span class="line"></span><br><span class="line">		mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">		submitted = io_ring_submit(ctx, to_submit);</span><br><span class="line">		mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (submitted != to_submit)</span><br><span class="line">			<span class="keyword">goto</span> out;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; IORING_ENTER_GETEVENTS) &#123;</span><br><span class="line">		<span class="keyword">unsigned</span> nr_events = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		min_complete = min(min_complete, ctx-&gt;cq_entries);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) &#123;</span><br><span class="line">			ret = io_iopoll_check(ctx, &amp;nr_events, min_complete);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			ret = io_cqring_wait(ctx, min_complete, sig, sigsz);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">	percpu_ref_put(&amp;ctx-&gt;refs);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> submitted ? submitted : ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>TODO</p>
-<h2 id="4-系统调用-io-uring-register"><a href="#4-系统调用-io-uring-register" class="headerlink" title="4. 系统调用 io_uring_register"></a>4. 系统调用 <code>io_uring_register</code></h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE4(io_uring_register, <span class="keyword">unsigned</span> <span class="keyword">int</span>, fd, <span class="keyword">unsigned</span> <span class="keyword">int</span>, opcode,</span><br><span class="line">		<span class="keyword">void</span> __user *, arg, <span class="keyword">unsigned</span> <span class="keyword">int</span>, nr_args)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="keyword">long</span> ret = -EBADF;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line"></span><br><span class="line">	mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">	ret = __io_uring_register(ctx, opcode, arg, nr_args);</span><br><span class="line">	mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>TODO</p>
-<h2 id="5-内核线程-io-sq-thread"><a href="#5-内核线程-io-sq-thread" class="headerlink" title="5. 内核线程 io_sq_thread"></a>5. 内核线程 <code>io_sq_thread</code></h2><p>TODO</p>
-<h2 id="6-IOPOLL-模式"><a href="#6-IOPOLL-模式" class="headerlink" title="6. IOPOLL 模式"></a>6. <code>IOPOLL</code> 模式</h2><h3 id="6-1-启用"><a href="#6-1-启用" class="headerlink" title="6.1. 启用"></a>6.1. 启用</h3><p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了 <code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code> 模式</p>
-<h3 id="6-2-限制"><a href="#6-2-限制" class="headerlink" title="6.2. 限制"></a>6.2. 限制</h3><p>开启此选项必须保证后续只用 <code>O_DIRECT</code> 打开文件并且文件系统的 <code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO 将下发失败</p>
-<h3 id="6-3-调用栈"><a href="#6-3-调用栈" class="headerlink" title="6.3. 调用栈"></a>6.3. 调用栈</h3><p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认 IO 是否完成</p>
-<p>对 <code>f_op-&gt;iopoll</code> 函数调用关系进行了分析</p>
-<pre class="mermaid">graph TD
-  io_uring_create --> io_ring_ctx_wait_and_kill
-  io_uring_release --> io_ring_ctx_wait_and_kill
-  io_ring_ctx_wait_and_kill --> io_iopoll_reap_events
-  io_ring_ctx_wait_and_kill --> io_ring_ctx_free
-  io_ring_ctx_free --> io_iopoll_reap_events
-  io_iopoll_reap_events --> io_iopoll_getevents
-
-  syscall["SYSCALL_DEFINE6(io_uring_enter, ……)"] --> io_iopoll_check --> io_iopoll_getevents
-
-  io_sq_thread --> io_iopoll_getevents
-
-  io_iopoll_getevents --> io_do_iopoll --> iopoll["f_op->iopoll"]</pre>
-
-<p>主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了 <code>IORING_SETUP_IOPOLL</code>）：</p>
-<ol>
-<li><code>io_uring</code> 销毁时需要调用</li>
-<li>系统调用 <code>io_uring_enter</code> 将会触发，用于轮询 IO 完成情况，直到到达指定的 <code>wait_nr</code> 数量 IO 完成后才会退出轮询</li>
-<li>当初始化时同时配置了 <code>IORING_SETUP_SQPOLL</code> 时，<code>io_sq_thread</code> 内核线程触发，当存在未完成的 IO 时调用，用于更新 IO 完成情况（ <code>io_do_iopoll</code> 的参数 <code>min = 0</code>，即每次调用无论是否有新完成的 IO 都会退出轮询，不会阻塞线程）</li>
-</ol>
-]]></content>
-      <categories>
-        <category>存储</category>
-        <category>IO</category>
-      </categories>
-      <tags>
-        <tag>io_uring</tag>
-        <tag>liburing</tag>
-        <tag>异步 IO</tag>
-        <tag>内核</tag>
       </tags>
   </entry>
   <entry>
@@ -1141,67 +1141,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>strace</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 手动编译 ipk</title>
-    <url>/posts/96a1807.html</url>
-    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
-<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
-<span id="more"></span>
-<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span> 仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
-
-<p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
-
-<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
-
-<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
-<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
-<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
-<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
-<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
-</ul>
-<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
-<p>以 <code>minieap</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">github<i class="fa fa-external-link-alt"></i></span> 上有已经完成的仓库，依次可以直接拉取来编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
-
-<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
-<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-        <tag>交叉编译</tag>
-        <tag>ipk</tag>
       </tags>
   </entry>
   <entry>
@@ -1723,6 +1662,67 @@
       <tags>
         <tag>Breed</tag>
         <tag>BootLoader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 手动编译 ipk</title>
+    <url>/posts/96a1807.html</url>
+    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
+<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
+<span id="more"></span>
+<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span> 仓库就提供了一个方便使用的交叉编译环境</p>
+<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
+
+<p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
+
+<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
+<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
+<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
+<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
+<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
+</ul>
+<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
+<p>以 <code>minieap</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">github<i class="fa fa-external-link-alt"></i></span> 上有已经完成的仓库，依次可以直接拉取来编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
+
+<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
+<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
+<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+        <tag>交叉编译</tag>
+        <tag>ipk</tag>
       </tags>
   </entry>
   <entry>
