@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="当前内容基于 liburing 2.1 版本 整体流程之前在 io_uring 简介和使用 有过总结，使用 io_uring 的一般流程如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="io_uring 用户库源码分析">
@@ -168,10 +168,10 @@
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/ywang-wnlo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:ywang_wnlo@qq.com" title="E-Mail → mailto:ywang_wnlo@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
 
@@ -282,7 +282,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>当前内容基于 <a target="_blank" rel="noopener" href="https://github.com/axboe/liburing/releases/tag/liburing-2.1">liburing 2.1</a> 版本</p>
+        <p>当前内容基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5nL3JlbGVhc2VzL3RhZy9saWJ1cmluZy0yLjE=">liburing 2.1<i class="fa fa-external-link-alt"></i></span> 版本</p>
 <h2 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h2><p>之前在 <a href="/posts/c142853f.html#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B">io_uring 简介和使用</a> 有过总结，使用 io_uring 的一般流程如下：</p>
 <span id="more"></span>
 <ul>
@@ -356,8 +356,8 @@
 <h2 id="io-uring-cqe-seen"><a href="#io-uring-cqe-seen" class="headerlink" title="io_uring_cqe_seen"></a><code>io_uring_cqe_seen</code></h2><p>更新 <code>cq-&gt;khead</code>，避免当前 <code>cqe</code> 被重复获取</p>
 <h2 id="io-uring-queue-exit"><a href="#io-uring-queue-exit" class="headerlink" title="io_uring_queue_exit"></a><code>io_uring_queue_exit</code></h2><p>首先通过 <code>munmap</code> 将初始化时 <code>mmap</code> 的 <code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code> 解除映射，然后通过 <code>close</code> 关闭 <code>io_uring</code> 对应的 <code>fd</code>，<code>close</code> 会调用到该 <code>fd</code> 注册的 <code>io_uring_release</code> 来释放 <code>io_uring</code></p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">【Kernel】io_uring IOSQE_IO_LINK</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.skyzh.dev/posts/articles/2021-06-14-deep-dive-io-uring/">【个人博客】io_uring 的接口与实现</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2t5emguZGV2L3Bvc3RzL2FydGljbGVzLzIwMjEtMDYtMTQtZGVlcC1kaXZlLWlvLXVyaW5nLw==">【个人博客】io_uring 的接口与实现<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -397,7 +397,7 @@
       <a href="https://ywang-wnlo.github.io/posts/d7259d1d.html" title="io_uring 用户库源码分析">https://ywang-wnlo.github.io/posts/d7259d1d.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -465,7 +465,7 @@
       </span>
     </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
   </div>
 
     </div>

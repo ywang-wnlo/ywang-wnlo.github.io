@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="介绍Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Breed 介绍、刷入和使用">
@@ -170,10 +170,10 @@
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/ywang-wnlo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:ywang_wnlo@qq.com" title="E-Mail → mailto:ywang_wnlo@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
 
@@ -280,7 +280,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Breed 是国内个人 <a target="_blank" rel="noopener" href="https://github.com/hackpascal">hackpascal</a> 开发的闭源 Bootloader，也被称为“不死鸟”</p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Breed 是国内个人 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhY2twYXNjYWw=">hackpascal<i class="fa fa-external-link-alt"></i></span> 开发的闭源 Bootloader，也被称为“不死鸟”</p>
 <p>因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖</p>
 <span id="more"></span>
 <p>Breed 拥有以下特性：</p>
@@ -294,8 +294,8 @@
 <li>固件启动失败自动进入 Web 刷机模式</li>
 <li>可自定义位置和大小的环境变量块</li>
 </ul>
-<p>由于是闭源，无法进行二次开发，所有支持的设备均由 hackpascal 一人完成。在 2020-10-09 后已经停止版本更新，但 <a target="_blank" rel="noopener" href="https://breed.hackpascal.net/">官网</a> 目前仍然开放所有的 Breed 下载</p>
-<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><p>下表为 Breed 的文件对应的设备介绍，发布在 <a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-161906-1-1.html">恩山论坛</a> 上，在此处做一个备份</p>
+<p>由于是闭源，无法进行二次开发，所有支持的设备均由 hackpascal 一人完成。在 2020-10-09 后已经停止版本更新，但 <span class="exturl" data-url="aHR0cHM6Ly9icmVlZC5oYWNrcGFzY2FsLm5ldC8=">官网<i class="fa fa-external-link-alt"></i></span> 目前仍然开放所有的 Breed 下载</p>
+<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><p>下表为 Breed 的文件对应的设备介绍，发布在 <span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNjE5MDYtMS0xLmh0bWw=">恩山论坛<i class="fa fa-external-link-alt"></i></span> 上，在此处做一个备份</p>
 <table>
 <thead>
 <tr>
@@ -780,14 +780,14 @@
 </ol>
 <p>刷入 Breed 后，耐心等待设备重启，通常可以通过 192.168.1.1 这个地址来进入 Breed 的 Web 管理界面</p>
 <p><img data-src="/posts/53d6c2d9/Breed-WEB.png" alt="Breed 的 Web 管理界面"></p>
-<h2 id="通过-Breed-刷机"><a href="#通过-Breed-刷机" class="headerlink" title="通过 Breed 刷机"></a>通过 Breed 刷机</h2><p>通过 Breed 刷机就很方便了，直接在 <a target="_blank" rel="noopener" href="http://192.168.1.1/upgrade.html">固件更新</a> 界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可</p>
+<h2 id="通过-Breed-刷机"><a href="#通过-Breed-刷机" class="headerlink" title="通过 Breed 刷机"></a>通过 Breed 刷机</h2><p>通过 Breed 刷机就很方便了，直接在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL3VwZ3JhZGUuaHRtbA==">固件更新<i class="fa fa-external-link-alt"></i></span> 界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可</p>
 <p><img data-src="/posts/53d6c2d9/Breed-upgrade.png" alt="Breed 进行固件更新"></p>
 <h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><p>除去 Web 界面刷机，Breed 还支持一些其他的功能，包括固件备份、超频等，更多的使用方式推荐参考网上的其他资料</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-161906-1-1.html">【恩山论坛】Breed</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-154561-1-1.html">【恩山论坛】U-Boot 刷机</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-690605-1-1.html">【恩山论坛】小米路由器 MINI 刷 Breed 及 Pandavan 教程</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-257423-1-1.html">【恩山论坛】小米路由器 3G 刷 Breed 及老毛子 Padavan 固件教程</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNjE5MDYtMS0xLmh0bWw=">【恩山论坛】Breed<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNTQ1NjEtMS0xLmh0bWw=">【恩山论坛】U-Boot 刷机<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC02OTA2MDUtMS0xLmh0bWw=">【恩山论坛】小米路由器 MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0yNTc0MjMtMS0xLmh0bWw=">【恩山论坛】小米路由器 3G 刷 Breed 及老毛子 Padavan 固件教程<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -827,7 +827,7 @@
       <a href="https://ywang-wnlo.github.io/posts/53d6c2d9.html" title="Breed 介绍、刷入和使用">https://ywang-wnlo.github.io/posts/53d6c2d9.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -894,7 +894,7 @@
       </span>
     </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
   </div>
 
     </div>

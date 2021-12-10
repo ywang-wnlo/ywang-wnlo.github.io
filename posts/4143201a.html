@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="Hexo 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT 主题搭建的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 插件推荐以及使用小技巧">
@@ -167,10 +167,10 @@
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/ywang-wnlo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:ywang_wnlo@qq.com" title="E-Mail → mailto:ywang_wnlo@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
 
@@ -277,10 +277,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a> 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
+        <p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span> 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
 <span id="more"></span>
-<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell?view=powershell-7.2">PowerShell</a> 为例</p>
-<h2 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h2><h3 id="hexo-deployer-git"><a href="#hexo-deployer-git" class="headerlink" title="hexo-deployer-git"></a><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a></h3><p>Hexo 支持一键部署网站到 git 仓库上，其他的一键部署方式参考 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/one-command-deployment">官网介绍</a></p>
+<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span> 为例</p>
+<h2 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h2><h3 id="hexo-deployer-git"><a href="#hexo-deployer-git" class="headerlink" title="hexo-deployer-git"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></h3><p>Hexo 支持一键部署网站到 git 仓库上，其他的一键部署方式参考 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">官网介绍<i class="fa fa-external-link-alt"></i></span></p>
 <ul>
 <li>安装</li>
 </ul>
@@ -292,7 +292,7 @@
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;仓库链接&gt;</span> <span class="comment"># 可以是 https 链接也可以是 git 链接</span></span><br><span class="line">  <span class="attr">branch:</span> [<span class="string">分支</span>] <span class="comment"># GitHub 的网站分支为 gh-pages，其他网站可能有所不同</span></span><br><span class="line">  <span class="attr">message:</span> [<span class="string">message</span>] <span class="comment"># 默认是 Site updated: &#123;&#123; now(&#x27;YYYY-MM-DD HH:mm:ss&#x27;) &#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>默认的提交信息只有时间信息，没有过多的参考价值推荐使用自定义提交信息，具体参考 <a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF">后续小节</a></p>
-<h3 id="hexo-word-counter"><a href="#hexo-word-counter" class="headerlink" title="hexo-word-counter"></a><a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-word-counter">hexo-word-counter</a></h3><p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
+<h3 id="hexo-word-counter"><a href="#hexo-word-counter" class="headerlink" title="hexo-word-counter"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">hexo-word-counter<i class="fa fa-external-link-alt"></i></span></h3><p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
 <ul>
 <li>安装</li>
 </ul>
@@ -308,7 +308,7 @@
 <p>Note for Chinese users: because in Chinese language average word length about ~1.5 and if you at most cases write posts in Chinese (without mixed English), recommended to set awl to 2 and wpm to 300.<br>But if you usualy mix your posts with English, awl to 4 and wpm to 275 will be nice.</p>
 </blockquote>
 <p>也就是说纯中文时推荐 <code>awl</code> 设为 2，<code>wpm</code> 设为 300；而中英文混合时推荐 <code>awl</code> 设为 4，<code>wpm</code> 设为 275</p>
-<h3 id="hexo-abbrlink"><a href="#hexo-abbrlink" class="headerlink" title="hexo-abbrlink"></a><a target="_blank" rel="noopener" href="https://github.com/rozbo/hexo-abbrlink">hexo-abbrlink</a></h3><p>Hexo 默认的文章链接是以时间以及文件名命名的，如果文件名为中文时转译之后会很长，并且不美观。而该插件可以利用 hash 值替换原有的文章链接</p>
+<h3 id="hexo-abbrlink"><a href="#hexo-abbrlink" class="headerlink" title="hexo-abbrlink"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></h3><p>Hexo 默认的文章链接是以时间以及文件名命名的，如果文件名为中文时转译之后会很长，并且不美观。而该插件可以利用 hash 值替换原有的文章链接</p>
 <ul>
 <li>安装</li>
 </ul>
@@ -323,7 +323,7 @@
 <p>再增加以下配置</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># abbrlink config</span></span><br><span class="line"><span class="comment">## https://github.com/rozbo/hexo-abbrlink</span></span><br><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span> <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span> <span class="comment"># support dec(default) and hex</span></span><br><span class="line">  <span class="attr">drafts:</span> <span class="literal">true</span> <span class="comment"># (true)Process draft,(false)Do not process draft. false(default)</span></span><br><span class="line">  <span class="comment"># Generate categories from directory-tree</span></span><br><span class="line">  <span class="comment"># depth: the max_depth of directory-tree you want to generate, should &gt; 0</span></span><br><span class="line">  <span class="attr">auto_category:</span></span><br><span class="line">     <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># true(default)</span></span><br><span class="line">     <span class="attr">depth:</span> <span class="number">3</span> <span class="comment"># 3(default)</span></span><br><span class="line">     <span class="attr">over_write:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">auto_title:</span> <span class="literal">false</span> <span class="comment"># enable auto title, it can auto fill the title by path</span></span><br><span class="line">  <span class="attr">auto_date:</span> <span class="literal">false</span> <span class="comment"># enable auto date, it can auto fill the date by time today</span></span><br><span class="line">  <span class="attr">force:</span> <span class="literal">false</span> <span class="comment"># enable force mode, in this mode, the plugin will ignore the cache, and calc the abbrlink for every post even it already had abbrlink.</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="hexo-generator-sitemap"><a href="#hexo-generator-sitemap" class="headerlink" title="hexo-generator-sitemap"></a><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-generator-sitemap">hexo-generator-sitemap</a></h3><p>为了使博客能被谷歌、bing、百度收录，最好生成 <code>sitemap</code> 方便爬取，整体流程可以参考 <a href="/posts/abac0c46">这篇博文</a></p>
+<h3 id="hexo-generator-sitemap"><a href="#hexo-generator-sitemap" class="headerlink" title="hexo-generator-sitemap"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></h3><p>为了使博客能被谷歌、bing、百度收录，最好生成 <code>sitemap</code> 方便爬取，整体流程可以参考 <a href="/posts/abac0c46">这篇博文</a></p>
 <ul>
 <li>安装</li>
 </ul>
@@ -339,15 +339,15 @@
 <p>例如使用 <code>hexo</code> 仓库的提交信息来提交到 <code>deploy</code> 仓库</p>
 <figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> (git log <span class="literal">-1</span> -<span class="literal">-pretty</span>=format:%s)</span><br></pre></td></tr></table></figure>
 
-<p>如果中文乱码，可以参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43426860/article/details/83348284">这篇博客</a> 修改 UTF-8 编码</p>
+<p>如果中文乱码，可以参考 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">这篇博客<i class="fa fa-external-link-alt"></i></span> 修改 UTF-8 编码</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/one-command-deployment">【Hexo】一键部署</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">【GitHub】hexo-deployer-git</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-word-counter">【GitHub】hexo-word-counter</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/rozbo/hexo-abbrlink">【GitHub】hexo-abbrlink</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-generator-sitemap">【GitHub】hexo-generator-sitemap</a></li>
-<li><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-log#_pretty_formats">【Git】git log 自定义输出格式</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43426860/article/details/83348284">【CSDN】解决 Windows PowerShell 乱码</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">【Hexo】一键部署<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">【GitHub】hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">【GitHub】hexo-word-counter<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">【GitHub】hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">【GitHub】hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1sb2cjX3ByZXR0eV9mb3JtYXRz">【Git】git log 自定义输出格式<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">【CSDN】解决 Windows PowerShell 乱码<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -387,7 +387,7 @@
       <a href="https://ywang-wnlo.github.io/posts/4143201a.html" title="Hexo 插件推荐以及使用小技巧">https://ywang-wnlo.github.io/posts/4143201a.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -454,7 +454,7 @@
       </span>
     </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
   </div>
 
     </div>

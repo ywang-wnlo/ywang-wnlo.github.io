@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="当前内容基于 Linux Kernel v5.4.121 page cache由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="page cache 简介">
@@ -171,10 +171,10 @@
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/ywang-wnlo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:ywang_wnlo@qq.com" title="E-Mail → mailto:ywang_wnlo@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
 
@@ -285,7 +285,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>当前内容基于 Linux Kernel <a target="_blank" rel="noopener" href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121">v5.4.121</a></p>
+        <p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="page-cache"><a href="#page-cache" class="headerlink" title="page cache"></a>page cache</h2><p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
 <span id="more"></span>
 <p>经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9.html">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的 <a href="/TODO">预读机制</a> 提升了顺序读性能</p>
@@ -297,7 +297,7 @@
 </ol>
 <p>前两种就是 Linux 在 IO 栈中支持的直接 IO（direct IO）和缓存 IO（buffer IO）</p>
 <p>第三种策略虽然能非常简单保证缓存和底层设备的一致性，不过基于时间局部性原理，page cache 中的数据可能只是中间态，会被频繁修改，每次写穿会产生大量的开销</p>
-<h2 id="Linux-IO-栈"><a href="#Linux-IO-栈" class="headerlink" title="Linux IO 栈"></a>Linux IO 栈</h2><p>详细的 Linux IO 栈图如下（来源于 <a target="_blank" rel="noopener" href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">Thomas-Krenn-Wiki</a>）：</p>
+<h2 id="Linux-IO-栈"><a href="#Linux-IO-栈" class="headerlink" title="Linux IO 栈"></a>Linux IO 栈</h2><p>详细的 Linux IO 栈图如下（来源于 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGhvbWFzLWtyZW5uLmNvbS9lbi93aWtpL0xpbnV4X1N0b3JhZ2VfU3RhY2tfRGlhZ3JhbQ==">Thomas-Krenn-Wiki<i class="fa fa-external-link-alt"></i></span>）：</p>
 <p><img data-src="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png" alt="Linux-storage-stack-diagram"></p>
 <p>其实简化一下，可以分为文件系统、块层和设备驱动层这三层</p>
 <p><img data-src="/posts/9ba60726/simple_IO_stack.png" alt="simple_IO_stack"></p>
@@ -345,12 +345,12 @@
 <h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p><code>direct_IO</code> 则是负责不经过 page cache 的直接 IO 的实现</p>
 <p>需要注意的是，当需要读的数据在 page cache 中缓存的和底层存储数据不一致时，也就是 <code>page</code> 为 <code>dirty</code> 状态时，通常需要调用 <code>filemap_write_and_wait</code> 或者 <code>filemap_write_and_wait_range</code> 先将这部分脏数据写到底层设备之后，才能执行 direct read</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram">【Thomas-Krenn-Wiki】Linux Storage Stack Diagram</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/juS3Ve/article/details/82322637">【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.doc-developpement-durable.org/file/Projets-informatiques/cours-&-manuels-informatiques/Linux/Linux%20Kernel%20Development,%203rd%20Edition.pdf">【LKD】Linux Kernel Development (3rd Edition)</a></li>
-<li><a target="_blank" rel="noopener" href="https://kernel.taobao.org/2018/05/The-XArray-data-structure/">【阿里云技术博客】The Xarray Data Structure</a></li>
-<li><a target="_blank" rel="noopener" href="https://lwn.net/Articles/254856/">【LWN】Some VFS address space operations changes</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaostudy/p/10196915.html">【博客园】Page Cache 与 Page 回写</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudGhvbWFzLWtyZW5uLmNvbS9lbi93aWtpL0xpbnV4X1N0b3JhZ2VfU3RhY2tfRGlhZ3JhbQ==">【Thomas-Krenn-Wiki】Linux Storage Stack Diagram<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1UzNWZS9hcnRpY2xlL2RldGFpbHMvODIzMjI2Mzc=">【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jLWRldmVsb3BwZW1lbnQtZHVyYWJsZS5vcmcvZmlsZS9Qcm9qZXRzLWluZm9ybWF0aXF1ZXMvY291cnMtJi1tYW51ZWxzLWluZm9ybWF0aXF1ZXMvTGludXgvTGludXglMjBLZXJuZWwlMjBEZXZlbG9wbWVudCwlMjAzcmQlMjBFZGl0aW9uLnBkZg==">【LKD】Linux Kernel Development (3rd Edition)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9rZXJuZWwudGFvYmFvLm9yZy8yMDE4LzA1L1RoZS1YQXJyYXktZGF0YS1zdHJ1Y3R1cmUv">【阿里云技术博客】The Xarray Data Structure<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sd24ubmV0L0FydGljbGVzLzI1NDg1Ni8=">【LWN】Some VFS address space operations changes<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbGluaGFvc3R1ZHkvcC8xMDE5NjkxNS5odG1s">【博客园】Page Cache 与 Page 回写<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -390,7 +390,7 @@
       <a href="https://ywang-wnlo.github.io/posts/9ba60726.html" title="page cache 简介">https://ywang-wnlo.github.io/posts/9ba60726.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -458,7 +458,7 @@
       </span>
     </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
   </div>
 
     </div>

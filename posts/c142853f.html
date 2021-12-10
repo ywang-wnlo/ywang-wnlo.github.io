@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="简介io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK[1]，同时支持 buffer IO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="io_uring 简介和使用">
@@ -168,10 +168,10 @@
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/ywang-wnlo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:ywang_wnlo@qq.com" title="E-Mail → mailto:ywang_wnlo@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
 
@@ -282,13 +282,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">[1]</a>，同时支持 buffer IO</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">[1]<i class="fa fa-external-link-alt"></i></span>，同时支持 buffer IO</p>
 <span id="more"></span>
-<p>io_uring 的作者 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jens_Axboe">Jens Axboe</a> 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
+<p>io_uring 的作者 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">Jens Axboe<i class="fa fa-external-link-alt"></i></span> 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
 <p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
 <p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code> 的方式直接调用，使用起来很麻烦</p>
-<h3 id="liburing"><a href="#liburing" class="headerlink" title="liburing"></a>liburing</h3><p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库 liburing，简化了 io_uring 的使用，代码位置在 <a target="_blank" rel="noopener" href="https://github.com/axboe/liburing">github</a> 上</p>
+<h3 id="liburing"><a href="#liburing" class="headerlink" title="liburing"></a>liburing</h3><p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库 liburing，简化了 io_uring 的使用，代码位置在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5n">github<i class="fa fa-external-link-alt"></i></span> 上</p>
 <h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><p>liburing 仓库的 <code>examples/</code> 目录下提供了几个简单的样例程序：</p>
 <table>
 <thead>
@@ -311,12 +311,12 @@
 <tr>
 <td><code>link-cp.c</code></td>
 <td>复制一个文件的内容到另一个文件</td>
-<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">[2]</a></td>
+<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">[2]<i class="fa fa-external-link-alt"></i></span></td>
 </tr>
 <tr>
 <td><code>ucontext-cp.c</code></td>
 <td>复制 n 个文件的内容到另 n 个文件</td>
-<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq910894904/article/details/41911175">协程</a></td>
+<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxOTEwODk0OTA0L2FydGljbGUvZGV0YWlscy80MTkxMTE3NQ==">协程<i class="fa fa-external-link-alt"></i></span></td>
 </tr>
 </tbody></table>
 <h4 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h4><p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
@@ -355,9 +355,9 @@
 <p>而 <code>liburing</code> 库也需要编译生成，推荐直接在 <code>liburing</code> 的顶层目录直接 <code>make all</code></p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
-<li><a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/">【Kernel】io_uring 性能测试</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jens_Axboe">【维基百科】Jens Axboe</a></li>
-<li><a target="_blank" rel="noopener" href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/">【Kernel】io_uring IOSQE_IO_LINK</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">【Kernel】io_uring 性能测试<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">【维基百科】Jens Axboe<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -397,7 +397,7 @@
       <a href="https://ywang-wnlo.github.io/posts/c142853f.html" title="io_uring 简介和使用">https://ywang-wnlo.github.io/posts/c142853f.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -465,7 +465,7 @@
       </span>
     </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
   </div>
 
     </div>
