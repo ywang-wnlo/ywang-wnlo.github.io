@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc">
+  <meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义配置 RocksDB 进行 YCSB 测试">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/4bc1e607.html">
+<meta property="og:site_name" content="乐园">
+<meta property="og:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-25T16:20:25.000Z">
+<meta property="article:modified_time" content="2021-12-25T16:20:25.000Z">
+<meta property="article:author" content="Zeus">
+<meta property="article:tag" content="YCSB">
+<meta property="article:tag" content="RocksDB">
+<meta property="article:tag" content="Maven">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/4bc1e607.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/4bc1e607.html","path":"posts/4bc1e607.html","title":"自定义配置 RocksDB 进行 YCSB 测试"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>自定义配置 RocksDB 进行 YCSB 测试 | 乐园</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST75Y16TW"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-PST75Y16TW","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">乐园</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个新时代农民工的随手笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-RocksDB"><span class="nav-number">2.</span> <span class="nav-text">编译 RocksDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-YCSB"><span class="nav-number">3.</span> <span class="nav-text">编译 YCSB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8D%E6%8A%A5%E9%94%99"><span class="nav-number">4.</span> <span class="nav-text">修复报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE-RocksDB-%E8%BF%9B%E8%A1%8C-YCSB-%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">自定义配置 RocksDB 进行 YCSB 测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zeus"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zeus</p>
+  <div class="site-description" itemprop="description">我永远喜欢 Homura.jpg</div>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/4bc1e607.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zeus">
+      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐园">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自定义配置 RocksDB 进行 YCSB 测试
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-26 00:20:25" itemprop="dateCreated datePublished" datetime="2021-12-26T00:20:25+08:00">2021-12-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要记录在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQg==">YCSB<i class="fa fa-external-link-alt"></i></span> 使用配置文件测试 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> 的过程中遇到的一些问题以及相应的解决办法</p>
+<span id="more"></span>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服务进行基础测试的工具，支持目前常见的 NoSQL 数据库产品，如 HBase、MongoDB、OrientDB、Redis 等等</p>
+<p>RocksDB 是一个具有键/值接口的存储引擎，其中键和值是任意字节流。它是在 Facebook（Meta） 基于 LevelDB 开发的，并为 LevelDB API 提供向后兼容的支持</p>
+<h2 id="编译-RocksDB"><a href="#编译-RocksDB" class="headerlink" title="编译 RocksDB"></a>编译 RocksDB</h2><p>由于 YCSB 是用 Java 实现的，一般测试的数据库都需要提供 Java 版本的 <code>.jar</code> 包</p>
+<p>虽然 RocksDB 最初是 C++ 的一个库（因为是嵌入式数据库），但是后续也提供了 Java 的 API 以及可以通过源码编译出 <code>.jar</code> 包，也可以直接通过 <code>Maven</code> 获取</p>
+<p>官方在 GitHub 上给出了 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9Sb2Nrc0phdmEtQmFzaWNz">Java 版本的介绍<i class="fa fa-external-link-alt"></i></span>，编译过程也很简单</p>
+<p>首先需要保证机器上安装好了 Java 的环境，必须在 1.7+ 版本以上，例如，安装 <code>openjdk-8-jdk</code> 包即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openjdk-8-jdk</span><br></pre></td></tr></table></figure>
+
+<p>同时 RocksDB 本身还有一些环境需要安装，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">官方<i class="fa fa-external-link-alt"></i></span> 也给出来了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev</span><br></pre></td></tr></table></figure>
+
+<p>实际编译 jar 包时，需要提前配置好环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=<span class="string">&quot;/usr/lib/jvm/java-8-openjdk-amd64&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>实际编译时，有两个中版本可以选择，其中 <code>rocksdbjava</code> 是 debug 版本，而 <code>rocksdbjavastatic</code> 这是 release 版本，不过官方在 Java 版说明中没有提及，我是在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL01ha2VmaWxl">Makefile 文件<i class="fa fa-external-link-alt"></i></span> 中找到的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -j$(nproc) rocksdbjava</span><br><span class="line">make -j$(nproc) rocksdbjavastatic</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译-YCSB"><a href="#编译-YCSB" class="headerlink" title="编译 YCSB"></a>编译 YCSB</h2><p>YCSB 在 2019/10/17 的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9jb21taXQvNGE5OTAwOTlhNjY3YzkyMjZkNWMzM2RlNzk3MWY4YjdlZGU5ZmZjMA==">4a99009<i class="fa fa-external-link-alt"></i></span> 增加了对 RocksDB 配置文件的支持，然而目前官方给出的 release 版本还是 0.17.0，并且发布时间是 2019/10/6，因此我们只能选择从源码开始编译了</p>
+<p>根据 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi90cmVlL21hc3Rlci9yb2Nrc2Ri">官方给出的流程<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/brianfrankcooper/YCSB.git</span><br><span class="line"><span class="built_in">cd</span> YCSB</span><br><span class="line">mvn -pl site.ycsb:rocksdb-binding -am clean package</span><br></pre></td></tr></table></figure>
+
+<p>此时编译好的文件在 <code>./rocksdb/target/</code> 目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/YCSB$ ls rocksdb/target/*.jar</span><br><span class="line">rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+
+<p>该 <code>.jar</code> 包其实只是 YCSB 和 RocksDB 之间的中间件，实际使用的 RocksDB 的 <code>.jar</code> 包以及其他的依赖包则是在 <code>./rocksdb/target/dependency/</code> 目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/YCSB$ tree rocksdb/target/dependency/</span><br><span class="line">rocksdb/target/dependency/</span><br><span class="line">├── jcip-annotations-1.0.jar</span><br><span class="line">├── rocksdbjni-6.2.2.jar</span><br><span class="line">├── slf4j-api-1.7.25.jar</span><br><span class="line">└── slf4j-simple-1.7.25.jar</span><br></pre></td></tr></table></figure>
+
+<p>RocksDB 的包其实是由 YCSB 通过 <code>Maven</code> 下载的，具体的版本在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9jb21taXQvNGE5OTAwOTlhNjY3YzkyMjZkNWMzM2RlNzk3MWY4YjdlZGU5ZmZjMCNkaWZmLTljNWZiM2QxYjdlM2IwZjU0YmM1YzQxODI5NjVjNGZlMWY5MDIzZDQ0OTAxN2NlY2UzMDA1ZDNmOTBlOGU0ZDhMMTUw">pom.xml<i class="fa fa-external-link-alt"></i></span> 中定义了</p>
+<ul>
+<li>如果使用原本 RocksDB 则可以简单的通过修改这个版本信息，重新编译利用 <code>Maven</code> 重新下载</li>
+<li>如果使用的是自己修改过源码的 RocksDB 则需要将自行编译的 RocksDB 的 <code>.jar</code> 包移到该目录下，并且删除旧的 <code>.jar</code> 包</li>
+</ul>
+<h2 id="修复报错"><a href="#修复报错" class="headerlink" title="修复报错"></a>修复报错</h2><p>但此时如果使用 <code>./bin/ycsb.sh</code> 来进行测试，会报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">~/YCSB$ ./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">/usr/lib/jvm/java-8-openjdk-amd64/bin/java  -classpath /home/ywang/YCSB/conf:/home/ywang/YCSB/core/target/core-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/dependency/jcip-annotations-1.0.jar:/home/ywang/YCSB/rocksdb/target/dependency/rocksdbjni-6.2.2.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-api-1.7.25.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-simple-1.7.25.jar site.ycsb.Client -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">Command line: -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">YCSB Client 0.18.0-SNAPSHOT</span><br><span class="line"></span><br><span class="line">Loading workload...</span><br><span class="line">Exception <span class="keyword">in</span> thread <span class="string">&quot;main&quot;</span> java.lang.NoClassDefFoundError: org/apache/htrace/core/Tracer<span class="variable">$Builder</span></span><br><span class="line">        at site.ycsb.Client.getTracer(Client.java:458)</span><br><span class="line">        at site.ycsb.Client.main(Client.java:304)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.htrace.core.Tracer<span class="variable">$Builder</span></span><br><span class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:387)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span><br><span class="line">        at sun.misc.Launcher<span class="variable">$AppClassLoader</span>.loadClass(Launcher.java:352)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span><br><span class="line">        ... 2 more</span><br><span class="line"> (might take a few minutes <span class="keyword">for</span> large data sets)</span><br></pre></td></tr></table></figure>
+
+<p>主要是使用的 <code>./bin/ycsb.sh</code> 脚本有 bug，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">官方已经知道<i class="fa fa-external-link-alt"></i></span>，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9wdWxsLzkwOA==">并尝试修复<i class="fa fa-external-link-alt"></i></span>，不过好像仍然没有解决</p>
+<p>目前可以手动将 <code>htrace</code> 的包的依赖加入 RocksDB 中，并重新编译，利用 <code>Maven</code> 下载到 <code>./rocksdb/target/dependency/</code> 目录下</p>
+<p>可以手动将 <code>./core/pom.xml</code> 中 <code>htrace</code> 的依赖信息复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ./rocksdb/pom.xml --&gt;</span></span><br><span class="line">	……</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.rocksdb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocksdbjni<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;rocksdb.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.htrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>htrace-core4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0-incubating<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>site.ycsb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	……</span><br></pre></td></tr></table></figure>
+
+<p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
+<p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试，还会报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">~/YCSB$ ./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">/usr/lib/jvm/java-8-openjdk-amd64/bin/java  -classpath /home/ywang/YCSB/conf:/home/ywang/YCSB/core/target/core-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/dependency/htrace-core4-4.1.0-incubating.jar:/home/ywang/YCSB/rocksdb/target/dependency/jcip-annotations-1.0.jar:/home/ywang/YCSB/rocksdb/target/dependency/rocksdbjni-6.2.2.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-api-1.7.25.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-simple-1.7.25.jar site.ycsb.Client -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">Command line: -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">YCSB Client 0.18.0-SNAPSHOT</span><br><span class="line"></span><br><span class="line">Loading workload...</span><br><span class="line">Starting <span class="built_in">test</span>.</span><br><span class="line">[Thread-3] INFO site.ycsb.db.rocksdb.RocksDBClient - RocksDB data dir: tmp</span><br><span class="line">2021-12-25 16:10:30:807 0 sec: 0 operations; est completion <span class="keyword">in</span> 0 second</span><br><span class="line">DBWrapper: report latency <span class="keyword">for</span> each error is <span class="literal">false</span> and specific error codes to track <span class="keyword">for</span> latency are: []</span><br><span class="line">Exception <span class="keyword">in</span> thread <span class="string">&quot;Thread-3&quot;</span> java.lang.NoClassDefFoundError: org/HdrHistogram/EncodableHistogram</span><br><span class="line">        at site.ycsb.measurements.Measurements.constructOneMeasurement(Measurements.java:129)</span><br><span class="line">        at site.ycsb.measurements.Measurements.getOpMeasurement(Measurements.java:220)</span><br><span class="line">        at site.ycsb.measurements.Measurements.measure(Measurements.java:188)</span><br><span class="line">        at site.ycsb.DBWrapper.measure(DBWrapper.java:184)</span><br><span class="line">        at site.ycsb.DBWrapper.insert(DBWrapper.java:229)</span><br><span class="line">        at site.ycsb.workloads.CoreWorkload.doInsert(CoreWorkload.java:621)</span><br><span class="line">        at site.ycsb.ClientThread.run(ClientThread.java:135)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.HdrHistogram.EncodableHistogram</span><br><span class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:387)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span><br><span class="line">        at sun.misc.Launcher<span class="variable">$AppClassLoader</span>.loadClass(Launcher.java:352)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span><br><span class="line">        ... 8 more</span><br><span class="line">2021-12-25 16:10:30:954 0 sec: 0 operations; est completion <span class="keyword">in</span> 106751991167300 days 15 hours</span><br><span class="line">[OVERALL], RunTime(ms), 170</span><br><span class="line">[OVERALL], Throughput(ops/sec), 0.0</span><br><span class="line">[TOTAL_GCS_PS_Scavenge], Count, 0</span><br><span class="line">[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.0</span><br><span class="line">[TOTAL_GCS_PS_MarkSweep], Count, 0</span><br><span class="line">[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0</span><br><span class="line">[TOTAL_GCs], Count, 0</span><br><span class="line">[TOTAL_GC_TIME], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), 0.0</span><br></pre></td></tr></table></figure>
+
+<p>原因和之前一样，再次将 <code>HdrHistogram</code> 相关的依赖，从 <code>./core/pom.xml</code> 复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ./rocksdb/pom.xml --&gt;</span></span><br><span class="line">	……</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.rocksdb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocksdbjni<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;rocksdb.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.htrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>htrace-core4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0-incubating<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hdrhistogram<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HdrHistogram<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>site.ycsb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	……</span><br></pre></td></tr></table></figure>
+
+<p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
+<p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试就已经正常了</p>
+<h2 id="自定义配置-RocksDB-进行-YCSB-测试"><a href="#自定义配置-RocksDB-进行-YCSB-测试" class="headerlink" title="自定义配置 RocksDB 进行 YCSB 测试"></a>自定义配置 RocksDB 进行 YCSB 测试</h2><p>自定义配置 RocksDB 的方式就很简单了，在 YCSB 测试时增加 <code>rocksdb.optionsfile</code> 参数并给出配置文件的路径即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data -p workloads/ycsb-rocksdb-options.ini</span><br><span class="line">./bin/ycsb.sh run rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data -p workloads/ycsb-rocksdb-options.ini</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL2V4YW1wbGVzL3JvY2tzZGJfb3B0aW9uX2ZpbGVfZXhhbXBsZS5pbmk=">RocksDB 官方的例子<i class="fa fa-external-link-alt"></i></span> 修改</li>
+<li>也可以先不加测试文件，执行一次 <code>./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data</code>，让 YCSB 自己生成，然后根据 RocksDB 测试目录（<code>/tmp/ycsb-rocksdb-data</code>）下的 <code>OPTIONS-000009</code> 的配置文件来修改</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9Sb2Nrc0phdmEtQmFzaWNz">【GitHub】RocksJava Basics<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9ucHJvYy4xLmh0bWw=">【man】nproc(1) — Linux manual page<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">【GitHub】Cannot execute YCSB #1105<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">【GitHub】[core] Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E5OTMwOTYyODEvYXJ0aWNsZS9kZXRhaWxzLzg3ODY0MzQw">【CSDN】rocksdb 在 YCSB 中的运行教程<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>赏个鸡腿🍗</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Zeus 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Zeus 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Zeus
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ywang-wnlo.github.io/posts/4bc1e607.html" title="自定义配置 RocksDB 进行 YCSB 测试">https://ywang-wnlo.github.io/posts/4bc1e607.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/YCSB/" rel="tag"># YCSB</a>
+              <a href="/tags/RocksDB/" rel="tag"># RocksDB</a>
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/abac0c46.html" rel="prev" title="Hexo 配置主流搜索引擎收录流程记录">
+                  <i class="fa fa-chevron-left"></i> Hexo 配置主流搜索引擎收录流程记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zeus</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.4/dist/mermaid.min.js","integrity":"sha256-96rwDGMWIQYB0yKGp1sKi1yrjrLPj2oT39IpbCsIrsg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b04dc26c3a81862f3c19dc6d00c72c58"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
