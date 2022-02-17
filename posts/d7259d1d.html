@@ -319,7 +319,8 @@
 <li><p>函数调用逻辑</p>
 <pre class="mermaid">  graph TD
     io_uring_queue_init --> io_uring_queue_init_params --> __sys_io_uring_setup --> syscall -->|陷入内核|io_uring_setup
-    io_uring_queue_init_params --> io_uring_queue_mmap --> io_uring_mmap --> mmap</pre></li>
+    io_uring_queue_init_params --> io_uring_queue_mmap --> io_uring_mmap --> mmap</pre>
+</li>
 <li><p>函数功能</p>
 <p>该函数主要将队列深度以及额外的 <code>flags</code> 参数传递到内核，让内核的 <code>io_uring_setup</code> 来初始化 <code>io_uring</code> 结构体，同时使用 <code>mmap</code> 将在内核中初始化的 <code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code> 映射到用户态</p>
 <p>初始化时传递的 <code>flags</code> 将影响 <code>io_uring</code> 的运行方式：</p>
@@ -338,7 +339,8 @@
   <pre class="mermaid">    graph TD
       io_uring_submit --> __io_uring_submit_and_wait --> __io_uring_flush_sq
       __io_uring_submit_and_wait --> __io_uring_submit --> sq_ring_needs_enter
-      __io_uring_submit --> __sys_io_uring_enter --> __sys_io_uring_enter2 --> syscall -->|陷入内核|io_uring_enter</pre></li>
+      __io_uring_submit --> __sys_io_uring_enter --> __sys_io_uring_enter2 --> syscall -->|陷入内核|io_uring_enter</pre>
+</li>
 <li><p>函数功能</p>
 <ul>
 <li><p><code>__io_uring_flush_sq</code></p>

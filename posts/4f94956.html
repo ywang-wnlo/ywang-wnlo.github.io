@@ -318,7 +318,8 @@
 <ol>
 <li><p>VSCode 内部 PDF 浏览器</p>
 <p> 如果直接使用 VSCode 来浏览 PDF，不需要额外设置，可以根据需要修改 <code>latex-workshop.view.pdf.internal.synctex.keybinding</code> 来修改反向同步的快捷键即可，默认 Ctrl 加鼠标左键</p>
- <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="string">&quot;latex-workshop.view.pdf.internal.synctex.keybinding&quot;</span>: <span class="string">&quot;ctrl-click&quot;</span>,</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="string">&quot;latex-workshop.view.pdf.internal.synctex.keybinding&quot;</span>: <span class="string">&quot;ctrl-click&quot;</span>,</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>外部 PDF 浏览器</p>
 <p> <span class="exturl" data-url="aHR0cHM6Ly93d3cuc3VtYXRyYXBkZnJlYWRlci5vcmcvZnJlZS1wZGYtcmVhZGVy">SumatraPDF<i class="fa fa-external-link-alt"></i></span> 是一款流行的小巧方便的免费 PDF 浏览软件。VSCode 支持使用外部的 PDF 浏览器来查看编译后的 PDF 文件，以及反向搜索功能。主要需要如下配置：</p>
  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置为使用外部 PDF 浏览软件来浏览 PDF</span></span><br><span class="line"><span class="string">&quot;latex-workshop.view.pdf.viewer&quot;</span>: <span class="string">&quot;external&quot;</span>,</span><br><span class="line"><span class="comment">// 配置外部 PDF 浏览软件的命令行以及参数</span></span><br><span class="line"><span class="string">&quot;latex-workshop.view.pdf.external.viewer.command&quot;</span>: <span class="string">&quot;D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe&quot;</span>, <span class="comment">// 自行修改路径</span></span><br><span class="line"><span class="string">&quot;latex-workshop.view.pdf.external.viewer.args&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;%PDF%&quot;</span></span><br><span class="line">],</span><br></pre></td></tr></table></figure>
@@ -380,10 +381,10 @@
       <div class="popular-posts-title"><a href="\posts\499c5a19.html" rel="bookmark">LaTeX PPT</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\a4752f87.html" rel="bookmark">LaTeX 基础介绍</a></div>
+      <div class="popular-posts-title"><a href="\posts\2033aa70.html" rel="bookmark">LaTeX 语法</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\2033aa70.html" rel="bookmark">LaTeX 语法</a></div>
+      <div class="popular-posts-title"><a href="\posts\a4752f87.html" rel="bookmark">LaTeX 基础介绍</a></div>
     </li>
   </ul>
 

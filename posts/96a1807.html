@@ -293,10 +293,10 @@
 <p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
 <span id="more"></span>
 <p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span> 仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
+<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian &#x2F; Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
 
-<p>安装/更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
+<p>安装&#x2F;更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
 
 <p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
