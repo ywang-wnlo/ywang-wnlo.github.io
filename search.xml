@@ -343,179 +343,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
-<span id="more"></span>
-<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
-<table>
-<thead>
-<tr>
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th>换成算成 mm</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pt</td>
-<td>基本单位</td>
-<td>1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>mm</td>
-<td>毫米</td>
-<td>2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr>
-<td>cm</td>
-<td>厘米</td>
-<td>28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr>
-<td>in</td>
-<td>英寸</td>
-<td>72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>ex</td>
-<td>当前字体的 x 字母高度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>em</td>
-<td>当前字体的 m 字母宽度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自定义配置 RocksDB 进行 YCSB 测试</title>
-    <url>/posts/4bc1e607.html</url>
-    <content><![CDATA[<p>本文主要记录在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQg==">YCSB<i class="fa fa-external-link-alt"></i></span> 使用配置文件测试 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> 的过程中遇到的一些问题以及相应的解决办法</p>
-<span id="more"></span>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服务进行基础测试的工具，支持目前常见的 NoSQL 数据库产品，如 HBase、MongoDB、OrientDB、Redis 等等</p>
-<p>RocksDB 是一个具有键&#x2F;值接口的存储引擎，其中键和值是任意字节流。它是在 Facebook（Meta） 基于 LevelDB 开发的，并为 LevelDB API 提供向后兼容的支持</p>
-<h2 id="编译-RocksDB"><a href="#编译-RocksDB" class="headerlink" title="编译 RocksDB"></a>编译 RocksDB</h2><p>由于 YCSB 是用 Java 实现的，一般测试的数据库都需要提供 Java 版本的 <code>.jar</code> 包</p>
-<p>虽然 RocksDB 最初是 C++ 的一个库（因为是嵌入式数据库），但是后续也提供了 Java 的 API 以及可以通过源码编译出 <code>.jar</code> 包，也可以直接通过 <code>Maven</code> 获取</p>
-<p>官方在 GitHub 上给出了 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9Sb2Nrc0phdmEtQmFzaWNz">Java 版本的介绍<i class="fa fa-external-link-alt"></i></span>，编译过程也很简单</p>
-<p>首先需要保证机器上安装好了 Java 的环境，必须在 1.7+ 版本以上，例如，安装 <code>openjdk-8-jdk</code> 包即可</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install openjdk-8-jdk</span><br></pre></td></tr></table></figure>
-
-<p>同时 RocksDB 本身还有一些环境需要安装，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">官方<i class="fa fa-external-link-alt"></i></span> 也给出来了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev</span><br></pre></td></tr></table></figure>
-
-<p>实际编译 jar 包时，需要提前配置好环境变量</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=<span class="string">&quot;/usr/lib/jvm/java-8-openjdk-amd64&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>实际编译时，有两个中版本可以选择，其中 <code>rocksdbjava</code> 是 debug 版本，而 <code>rocksdbjavastatic</code> 这是 release 版本，不过官方在 Java 版说明中没有提及，我是在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL01ha2VmaWxl">Makefile 文件<i class="fa fa-external-link-alt"></i></span> 中找到的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make -j$(nproc) rocksdbjava</span><br><span class="line">make -j$(nproc) rocksdbjavastatic</span><br></pre></td></tr></table></figure>
-
-<h2 id="编译-YCSB"><a href="#编译-YCSB" class="headerlink" title="编译 YCSB"></a>编译 YCSB</h2><p>YCSB 在 2019&#x2F;10&#x2F;17 的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9jb21taXQvNGE5OTAwOTlhNjY3YzkyMjZkNWMzM2RlNzk3MWY4YjdlZGU5ZmZjMA==">4a99009<i class="fa fa-external-link-alt"></i></span> 增加了对 RocksDB 配置文件的支持，然而目前官方给出的 release 版本还是 0.17.0，并且发布时间是 2019&#x2F;10&#x2F;6，因此我们只能选择从源码开始编译了</p>
-<p>根据 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi90cmVlL21hc3Rlci9yb2Nrc2Ri">官方给出的流程<i class="fa fa-external-link-alt"></i></span></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/brianfrankcooper/YCSB.git</span><br><span class="line"><span class="built_in">cd</span> YCSB</span><br><span class="line">mvn -pl site.ycsb:rocksdb-binding -am clean package</span><br></pre></td></tr></table></figure>
-
-<p>此时编译好的文件在 <code>./rocksdb/target/</code> 目录下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ ls rocksdb/target/*.jar</span><br><span class="line">rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
-
-<p>该 <code>.jar</code> 包其实只是 YCSB 和 RocksDB 之间的中间件，实际使用的 RocksDB 的 <code>.jar</code> 包以及其他的依赖包则是在 <code>./rocksdb/target/dependency/</code> 目录下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ tree rocksdb/target/dependency/</span><br><span class="line">rocksdb/target/dependency/</span><br><span class="line">├── jcip-annotations-1.0.jar</span><br><span class="line">├── rocksdbjni-6.2.2.jar</span><br><span class="line">├── slf4j-api-1.7.25.jar</span><br><span class="line">└── slf4j-simple-1.7.25.jar</span><br></pre></td></tr></table></figure>
-
-<p>RocksDB 的包其实是由 YCSB 通过 <code>Maven</code> 下载的，具体的版本在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9jb21taXQvNGE5OTAwOTlhNjY3YzkyMjZkNWMzM2RlNzk3MWY4YjdlZGU5ZmZjMCNkaWZmLTljNWZiM2QxYjdlM2IwZjU0YmM1YzQxODI5NjVjNGZlMWY5MDIzZDQ0OTAxN2NlY2UzMDA1ZDNmOTBlOGU0ZDhMMTUw">pom.xml<i class="fa fa-external-link-alt"></i></span> 中定义了</p>
-<ul>
-<li>如果使用原本 RocksDB 则可以简单的通过修改这个版本信息，重新编译利用 <code>Maven</code> 重新下载</li>
-<li>如果使用的是自己修改过源码的 RocksDB 则需要将自行编译的 RocksDB 的 <code>.jar</code> 包移到该目录下，并且删除旧的 <code>.jar</code> 包</li>
-</ul>
-<h2 id="修复报错"><a href="#修复报错" class="headerlink" title="修复报错"></a>修复报错</h2><p>但此时如果使用 <code>./bin/ycsb.sh</code> 来进行测试，会报错</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ ./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">/usr/lib/jvm/java-8-openjdk-amd64/bin/java  -classpath /home/ywang/YCSB/conf:/home/ywang/YCSB/core/target/core-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/dependency/jcip-annotations-1.0.jar:/home/ywang/YCSB/rocksdb/target/dependency/rocksdbjni-6.2.2.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-api-1.7.25.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-simple-1.7.25.jar site.ycsb.Client -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">Command line: -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">YCSB Client 0.18.0-SNAPSHOT</span><br><span class="line"></span><br><span class="line">Loading workload...</span><br><span class="line">Exception <span class="keyword">in</span> thread <span class="string">&quot;main&quot;</span> java.lang.NoClassDefFoundError: org/apache/htrace/core/Tracer<span class="variable">$Builder</span></span><br><span class="line">        at site.ycsb.Client.getTracer(Client.java:458)</span><br><span class="line">        at site.ycsb.Client.main(Client.java:304)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.htrace.core.Tracer<span class="variable">$Builder</span></span><br><span class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:387)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span><br><span class="line">        at sun.misc.Launcher<span class="variable">$AppClassLoader</span>.loadClass(Launcher.java:352)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span><br><span class="line">        ... 2 more</span><br><span class="line"> (might take a few minutes <span class="keyword">for</span> large data sets)</span><br></pre></td></tr></table></figure>
-
-<p>主要是使用的 <code>./bin/ycsb.sh</code> 脚本有 bug，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">官方已经知道<i class="fa fa-external-link-alt"></i></span>，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9wdWxsLzkwOA==">并尝试修复<i class="fa fa-external-link-alt"></i></span>，不过好像仍然没有解决</p>
-<p>目前可以手动将 <code>htrace</code> 的包的依赖加入 RocksDB 中，并重新编译，利用 <code>Maven</code> 下载到 <code>./rocksdb/target/dependency/</code> 目录下</p>
-<p>可以手动将 <code>./core/pom.xml</code> 中 <code>htrace</code> 的依赖信息复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ./rocksdb/pom.xml --&gt;</span></span><br><span class="line">	……</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.rocksdb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocksdbjni<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;rocksdb.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.htrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>htrace-core4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0-incubating<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>site.ycsb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	……</span><br></pre></td></tr></table></figure>
-
-<p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
-<p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试，还会报错</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ ./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">/usr/lib/jvm/java-8-openjdk-amd64/bin/java  -classpath /home/ywang/YCSB/conf:/home/ywang/YCSB/core/target/core-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/dependency/htrace-core4-4.1.0-incubating.jar:/home/ywang/YCSB/rocksdb/target/dependency/jcip-annotations-1.0.jar:/home/ywang/YCSB/rocksdb/target/dependency/rocksdbjni-6.2.2.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-api-1.7.25.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-simple-1.7.25.jar site.ycsb.Client -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">Command line: -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">YCSB Client 0.18.0-SNAPSHOT</span><br><span class="line"></span><br><span class="line">Loading workload...</span><br><span class="line">Starting <span class="built_in">test</span>.</span><br><span class="line">[Thread-3] INFO site.ycsb.db.rocksdb.RocksDBClient - RocksDB data dir: tmp</span><br><span class="line">2021-12-25 16:10:30:807 0 sec: 0 operations; est completion <span class="keyword">in</span> 0 second</span><br><span class="line">DBWrapper: report latency <span class="keyword">for</span> each error is <span class="literal">false</span> and specific error codes to track <span class="keyword">for</span> latency are: []</span><br><span class="line">Exception <span class="keyword">in</span> thread <span class="string">&quot;Thread-3&quot;</span> java.lang.NoClassDefFoundError: org/HdrHistogram/EncodableHistogram</span><br><span class="line">        at site.ycsb.measurements.Measurements.constructOneMeasurement(Measurements.java:129)</span><br><span class="line">        at site.ycsb.measurements.Measurements.getOpMeasurement(Measurements.java:220)</span><br><span class="line">        at site.ycsb.measurements.Measurements.measure(Measurements.java:188)</span><br><span class="line">        at site.ycsb.DBWrapper.measure(DBWrapper.java:184)</span><br><span class="line">        at site.ycsb.DBWrapper.insert(DBWrapper.java:229)</span><br><span class="line">        at site.ycsb.workloads.CoreWorkload.doInsert(CoreWorkload.java:621)</span><br><span class="line">        at site.ycsb.ClientThread.run(ClientThread.java:135)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.HdrHistogram.EncodableHistogram</span><br><span class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:387)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span><br><span class="line">        at sun.misc.Launcher<span class="variable">$AppClassLoader</span>.loadClass(Launcher.java:352)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span><br><span class="line">        ... 8 more</span><br><span class="line">2021-12-25 16:10:30:954 0 sec: 0 operations; est completion <span class="keyword">in</span> 106751991167300 days 15 hours</span><br><span class="line">[OVERALL], RunTime(ms), 170</span><br><span class="line">[OVERALL], Throughput(ops/sec), 0.0</span><br><span class="line">[TOTAL_GCS_PS_Scavenge], Count, 0</span><br><span class="line">[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.0</span><br><span class="line">[TOTAL_GCS_PS_MarkSweep], Count, 0</span><br><span class="line">[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0</span><br><span class="line">[TOTAL_GCs], Count, 0</span><br><span class="line">[TOTAL_GC_TIME], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), 0.0</span><br></pre></td></tr></table></figure>
-
-<p>原因和之前一样，再次将 <code>HdrHistogram</code> 相关的依赖，从 <code>./core/pom.xml</code> 复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ./rocksdb/pom.xml --&gt;</span></span><br><span class="line">	……</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.rocksdb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocksdbjni<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;rocksdb.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.htrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>htrace-core4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0-incubating<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hdrhistogram<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HdrHistogram<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>site.ycsb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	……</span><br></pre></td></tr></table></figure>
-
-<p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
-<p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试就已经正常了</p>
-<h2 id="自定义配置-RocksDB-进行-YCSB-测试"><a href="#自定义配置-RocksDB-进行-YCSB-测试" class="headerlink" title="自定义配置 RocksDB 进行 YCSB 测试"></a>自定义配置 RocksDB 进行 YCSB 测试</h2><p>自定义配置 RocksDB 的方式就很简单了，在 YCSB 测试时增加 <code>rocksdb.optionsfile</code> 参数并给出配置文件的路径即可</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data -p workloads/ycsb-rocksdb-options.ini</span><br><span class="line">./bin/ycsb.sh run rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data -p workloads/ycsb-rocksdb-options.ini</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置文件可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL2V4YW1wbGVzL3JvY2tzZGJfb3B0aW9uX2ZpbGVfZXhhbXBsZS5pbmk=">RocksDB 官方的例子<i class="fa fa-external-link-alt"></i></span> 修改</li>
-<li>也可以先不加测试文件，执行一次 <code>./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data</code>，让 YCSB 自己生成，然后根据 RocksDB 测试目录（<code>/tmp/ycsb-rocksdb-data</code>）下的 <code>OPTIONS-000009</code> 的配置文件来修改</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9Sb2Nrc0phdmEtQmFzaWNz">【GitHub】RocksJava Basics<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9ucHJvYy4xLmh0bWw=">【man】nproc(1) — Linux manual page<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">【GitHub】Cannot execute YCSB #1105<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">【GitHub】[core] Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E5OTMwOTYyODEvYXJ0aWNsZS9kZXRhaWxzLzg3ODY0MzQw">【CSDN】rocksdb 在 YCSB 中的运行教程<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>YCSB</tag>
-        <tag>RocksDB</tag>
-        <tag>Maven</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
-    <url>/posts/29e0b18c.html</url>
-    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应</p>
-<span id="more"></span>
-<p><del>（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）</del></p>
-<p><img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser"></p>
-<h2 id="修复问题：卸载-KGChromePlugin"><a href="#修复问题：卸载-KGChromePlugin" class="headerlink" title="修复问题：卸载 KGChromePlugin"></a>修复问题：卸载 KGChromePlugin</h2><p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin 金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
-<ol>
-<li><p>可通过 chrome:&#x2F;&#x2F;version&#x2F; 查看命令行中是否含有 <code>--register-pepper-plugins=XXX</code></p>
-</li>
-<li><p>根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是 <code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序 <code>KGPMUninstall.exe</code>，双击进行卸载即可</p>
-</li>
-</ol>
-<p>卸载之后，重启一下 chrome，命令行应该就恢复正常了，此时也能在已打开 chrome 的情况下在第三方应用中顺利打开超链接了</p>
-<p><img data-src="/posts/29e0b18c/chrome_version.png" alt="chrome_version"></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome 浏览器 每次打开提示：“–no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>日常踩坑</category>
-      </categories>
-      <tags>
-        <tag>日常踩坑</tag>
-        <tag>chrome</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LaTeX 环境配置</title>
     <url>/posts/4f94956.html</url>
     <content><![CDATA[<h2 id="网页环境"><a href="#网页环境" class="headerlink" title="网页环境"></a>网页环境</h2><h3 id="Overleaf"><a href="#Overleaf" class="headerlink" title="Overleaf"></a>Overleaf</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tLw==">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX 编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑</p>
@@ -609,6 +436,151 @@
       </tags>
   </entry>
   <entry>
+    <title>自定义配置 RocksDB 进行 YCSB 测试</title>
+    <url>/posts/4bc1e607.html</url>
+    <content><![CDATA[<p>本文主要记录在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQg==">YCSB<i class="fa fa-external-link-alt"></i></span> 使用配置文件测试 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> 的过程中遇到的一些问题以及相应的解决办法</p>
+<span id="more"></span>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服务进行基础测试的工具，支持目前常见的 NoSQL 数据库产品，如 HBase、MongoDB、OrientDB、Redis 等等</p>
+<p>RocksDB 是一个具有键&#x2F;值接口的存储引擎，其中键和值是任意字节流。它是在 Facebook（Meta） 基于 LevelDB 开发的，并为 LevelDB API 提供向后兼容的支持</p>
+<h2 id="编译-RocksDB"><a href="#编译-RocksDB" class="headerlink" title="编译 RocksDB"></a>编译 RocksDB</h2><p>由于 YCSB 是用 Java 实现的，一般测试的数据库都需要提供 Java 版本的 <code>.jar</code> 包</p>
+<p>虽然 RocksDB 最初是 C++ 的一个库（因为是嵌入式数据库），但是后续也提供了 Java 的 API 以及可以通过源码编译出 <code>.jar</code> 包，也可以直接通过 <code>Maven</code> 获取</p>
+<p>官方在 GitHub 上给出了 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9Sb2Nrc0phdmEtQmFzaWNz">Java 版本的介绍<i class="fa fa-external-link-alt"></i></span>，编译过程也很简单</p>
+<p>首先需要保证机器上安装好了 Java 的环境，必须在 1.7+ 版本以上，例如，安装 <code>openjdk-8-jdk</code> 包即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install openjdk-8-jdk</span><br></pre></td></tr></table></figure>
+
+<p>同时 RocksDB 本身还有一些环境需要安装，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">官方<i class="fa fa-external-link-alt"></i></span> 也给出来了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev</span><br></pre></td></tr></table></figure>
+
+<p>实际编译 jar 包时，需要提前配置好环境变量</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=<span class="string">&quot;/usr/lib/jvm/java-8-openjdk-amd64&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>实际编译时，有两个中版本可以选择，其中 <code>rocksdbjava</code> 是 debug 版本，而 <code>rocksdbjavastatic</code> 这是 release 版本，不过官方在 Java 版说明中没有提及，我是在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL01ha2VmaWxl">Makefile 文件<i class="fa fa-external-link-alt"></i></span> 中找到的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make -j$(nproc) rocksdbjava</span><br><span class="line">make -j$(nproc) rocksdbjavastatic</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译-YCSB"><a href="#编译-YCSB" class="headerlink" title="编译 YCSB"></a>编译 YCSB</h2><p>YCSB 在 2019&#x2F;10&#x2F;17 的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9jb21taXQvNGE5OTAwOTlhNjY3YzkyMjZkNWMzM2RlNzk3MWY4YjdlZGU5ZmZjMA==">4a99009<i class="fa fa-external-link-alt"></i></span> 增加了对 RocksDB 配置文件的支持，然而目前官方给出的 release 版本还是 0.17.0，并且发布时间是 2019&#x2F;10&#x2F;6，因此我们只能选择从源码开始编译了</p>
+<p>根据 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi90cmVlL21hc3Rlci9yb2Nrc2Ri">官方给出的流程<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/brianfrankcooper/YCSB.git</span><br><span class="line"><span class="built_in">cd</span> YCSB</span><br><span class="line">mvn -pl site.ycsb:rocksdb-binding -am clean package</span><br></pre></td></tr></table></figure>
+
+<p>此时编译好的文件在 <code>./rocksdb/target/</code> 目录下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ ls rocksdb/target/*.jar</span><br><span class="line">rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+
+<p>该 <code>.jar</code> 包其实只是 YCSB 和 RocksDB 之间的中间件，实际使用的 RocksDB 的 <code>.jar</code> 包以及其他的依赖包则是在 <code>./rocksdb/target/dependency/</code> 目录下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ tree rocksdb/target/dependency/</span><br><span class="line">rocksdb/target/dependency/</span><br><span class="line">├── jcip-annotations-1.0.jar</span><br><span class="line">├── rocksdbjni-6.2.2.jar</span><br><span class="line">├── slf4j-api-1.7.25.jar</span><br><span class="line">└── slf4j-simple-1.7.25.jar</span><br></pre></td></tr></table></figure>
+
+<p>RocksDB 的包其实是由 YCSB 通过 <code>Maven</code> 下载的，具体的版本在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9jb21taXQvNGE5OTAwOTlhNjY3YzkyMjZkNWMzM2RlNzk3MWY4YjdlZGU5ZmZjMCNkaWZmLTljNWZiM2QxYjdlM2IwZjU0YmM1YzQxODI5NjVjNGZlMWY5MDIzZDQ0OTAxN2NlY2UzMDA1ZDNmOTBlOGU0ZDhMMTUw">pom.xml<i class="fa fa-external-link-alt"></i></span> 中定义了</p>
+<ul>
+<li>如果使用原本 RocksDB 则可以简单的通过修改这个版本信息，重新编译利用 <code>Maven</code> 重新下载</li>
+<li>如果使用的是自己修改过源码的 RocksDB 则需要将自行编译的 RocksDB 的 <code>.jar</code> 包移到该目录下，并且删除旧的 <code>.jar</code> 包</li>
+</ul>
+<h2 id="修复报错"><a href="#修复报错" class="headerlink" title="修复报错"></a>修复报错</h2><p>但此时如果使用 <code>./bin/ycsb.sh</code> 来进行测试，会报错</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ ./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">/usr/lib/jvm/java-8-openjdk-amd64/bin/java  -classpath /home/ywang/YCSB/conf:/home/ywang/YCSB/core/target/core-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/dependency/jcip-annotations-1.0.jar:/home/ywang/YCSB/rocksdb/target/dependency/rocksdbjni-6.2.2.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-api-1.7.25.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-simple-1.7.25.jar site.ycsb.Client -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">Command line: -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">YCSB Client 0.18.0-SNAPSHOT</span><br><span class="line"></span><br><span class="line">Loading workload...</span><br><span class="line">Exception <span class="keyword">in</span> thread <span class="string">&quot;main&quot;</span> java.lang.NoClassDefFoundError: org/apache/htrace/core/Tracer<span class="variable">$Builder</span></span><br><span class="line">        at site.ycsb.Client.getTracer(Client.java:458)</span><br><span class="line">        at site.ycsb.Client.main(Client.java:304)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.htrace.core.Tracer<span class="variable">$Builder</span></span><br><span class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:387)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span><br><span class="line">        at sun.misc.Launcher<span class="variable">$AppClassLoader</span>.loadClass(Launcher.java:352)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span><br><span class="line">        ... 2 more</span><br><span class="line"> (might take a few minutes <span class="keyword">for</span> large data sets)</span><br></pre></td></tr></table></figure>
+
+<p>主要是使用的 <code>./bin/ycsb.sh</code> 脚本有 bug，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">官方已经知道<i class="fa fa-external-link-alt"></i></span>，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9wdWxsLzkwOA==">并尝试修复<i class="fa fa-external-link-alt"></i></span>，不过好像仍然没有解决</p>
+<p>目前可以手动将 <code>htrace</code> 的包的依赖加入 RocksDB 中，并重新编译，利用 <code>Maven</code> 下载到 <code>./rocksdb/target/dependency/</code> 目录下</p>
+<p>可以手动将 <code>./core/pom.xml</code> 中 <code>htrace</code> 的依赖信息复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ./rocksdb/pom.xml --&gt;</span></span><br><span class="line">	……</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.rocksdb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocksdbjni<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;rocksdb.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.htrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>htrace-core4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0-incubating<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>site.ycsb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	……</span><br></pre></td></tr></table></figure>
+
+<p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
+<p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试，还会报错</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/YCSB$ ./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">/usr/lib/jvm/java-8-openjdk-amd64/bin/java  -classpath /home/ywang/YCSB/conf:/home/ywang/YCSB/core/target/core-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar:/home/ywang/YCSB/rocksdb/target/dependency/htrace-core4-4.1.0-incubating.jar:/home/ywang/YCSB/rocksdb/target/dependency/jcip-annotations-1.0.jar:/home/ywang/YCSB/rocksdb/target/dependency/rocksdbjni-6.2.2.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-api-1.7.25.jar:/home/ywang/YCSB/rocksdb/target/dependency/slf4j-simple-1.7.25.jar site.ycsb.Client -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">Command line: -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=tmp/</span><br><span class="line">YCSB Client 0.18.0-SNAPSHOT</span><br><span class="line"></span><br><span class="line">Loading workload...</span><br><span class="line">Starting <span class="built_in">test</span>.</span><br><span class="line">[Thread-3] INFO site.ycsb.db.rocksdb.RocksDBClient - RocksDB data dir: tmp</span><br><span class="line">2021-12-25 16:10:30:807 0 sec: 0 operations; est completion <span class="keyword">in</span> 0 second</span><br><span class="line">DBWrapper: report latency <span class="keyword">for</span> each error is <span class="literal">false</span> and specific error codes to track <span class="keyword">for</span> latency are: []</span><br><span class="line">Exception <span class="keyword">in</span> thread <span class="string">&quot;Thread-3&quot;</span> java.lang.NoClassDefFoundError: org/HdrHistogram/EncodableHistogram</span><br><span class="line">        at site.ycsb.measurements.Measurements.constructOneMeasurement(Measurements.java:129)</span><br><span class="line">        at site.ycsb.measurements.Measurements.getOpMeasurement(Measurements.java:220)</span><br><span class="line">        at site.ycsb.measurements.Measurements.measure(Measurements.java:188)</span><br><span class="line">        at site.ycsb.DBWrapper.measure(DBWrapper.java:184)</span><br><span class="line">        at site.ycsb.DBWrapper.insert(DBWrapper.java:229)</span><br><span class="line">        at site.ycsb.workloads.CoreWorkload.doInsert(CoreWorkload.java:621)</span><br><span class="line">        at site.ycsb.ClientThread.run(ClientThread.java:135)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.HdrHistogram.EncodableHistogram</span><br><span class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:387)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span><br><span class="line">        at sun.misc.Launcher<span class="variable">$AppClassLoader</span>.loadClass(Launcher.java:352)</span><br><span class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span><br><span class="line">        ... 8 more</span><br><span class="line">2021-12-25 16:10:30:954 0 sec: 0 operations; est completion <span class="keyword">in</span> 106751991167300 days 15 hours</span><br><span class="line">[OVERALL], RunTime(ms), 170</span><br><span class="line">[OVERALL], Throughput(ops/sec), 0.0</span><br><span class="line">[TOTAL_GCS_PS_Scavenge], Count, 0</span><br><span class="line">[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.0</span><br><span class="line">[TOTAL_GCS_PS_MarkSweep], Count, 0</span><br><span class="line">[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0</span><br><span class="line">[TOTAL_GCs], Count, 0</span><br><span class="line">[TOTAL_GC_TIME], Time(ms), 0</span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), 0.0</span><br></pre></td></tr></table></figure>
+
+<p>原因和之前一样，再次将 <code>HdrHistogram</code> 相关的依赖，从 <code>./core/pom.xml</code> 复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ./rocksdb/pom.xml --&gt;</span></span><br><span class="line">	……</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.rocksdb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocksdbjni<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;rocksdb.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.htrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>htrace-core4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0-incubating<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hdrhistogram<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HdrHistogram<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>site.ycsb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	……</span><br></pre></td></tr></table></figure>
+
+<p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
+<p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试就已经正常了</p>
+<h2 id="自定义配置-RocksDB-进行-YCSB-测试"><a href="#自定义配置-RocksDB-进行-YCSB-测试" class="headerlink" title="自定义配置 RocksDB 进行 YCSB 测试"></a>自定义配置 RocksDB 进行 YCSB 测试</h2><p>自定义配置 RocksDB 的方式就很简单了，在 YCSB 测试时增加 <code>rocksdb.optionsfile</code> 参数并给出配置文件的路径即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data -p workloads/ycsb-rocksdb-options.ini</span><br><span class="line">./bin/ycsb.sh run rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data -p workloads/ycsb-rocksdb-options.ini</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL2V4YW1wbGVzL3JvY2tzZGJfb3B0aW9uX2ZpbGVfZXhhbXBsZS5pbmk=">RocksDB 官方的例子<i class="fa fa-external-link-alt"></i></span> 修改</li>
+<li>也可以先不加测试文件，执行一次 <code>./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data</code>，让 YCSB 自己生成，然后根据 RocksDB 测试目录（<code>/tmp/ycsb-rocksdb-data</code>）下的 <code>OPTIONS-000009</code> 的配置文件来修改</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9Sb2Nrc0phdmEtQmFzaWNz">【GitHub】RocksJava Basics<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9ucHJvYy4xLmh0bWw=">【man】nproc(1) — Linux manual page<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">【GitHub】Cannot execute YCSB #1105<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQi9pc3N1ZXMvMTEwNQ==">【GitHub】[core] Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E5OTMwOTYyODEvYXJ0aWNsZS9kZXRhaWxzLzg3ODY0MzQw">【CSDN】rocksdb 在 YCSB 中的运行教程<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>YCSB</tag>
+        <tag>RocksDB</tag>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+<span id="more"></span>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th>换成算成 mm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pt</td>
+<td>基本单位</td>
+<td>1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>毫米</td>
+<td>2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr>
+<td>cm</td>
+<td>厘米</td>
+<td>28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr>
+<td>in</td>
+<td>英寸</td>
+<td>72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>ex</td>
+<td>当前字体的 x 字母高度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>em</td>
+<td>当前字体的 m 字母宽度</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>&#123;length&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决 pip 安装第三方包时因 SSL 报错</title>
     <url>/posts/2e7aa01a.html</url>
     <content><![CDATA[<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code> 后发现用 <code>pip</code> 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的</p>
@@ -659,6 +631,36 @@
         <tag>SSL</tag>
         <tag>日常踩坑</tag>
         <tag>pip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
+    <url>/posts/29e0b18c.html</url>
+    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应</p>
+<span id="more"></span>
+<p><del>（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）</del></p>
+<p><img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser"></p>
+<h2 id="修复问题：卸载-KGChromePlugin"><a href="#修复问题：卸载-KGChromePlugin" class="headerlink" title="修复问题：卸载 KGChromePlugin"></a>修复问题：卸载 KGChromePlugin</h2><p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin 金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
+<ol>
+<li><p>可通过 chrome:&#x2F;&#x2F;version&#x2F; 查看命令行中是否含有 <code>--register-pepper-plugins=XXX</code></p>
+<p> <img data-src="/posts/29e0b18c/chrome_version_before.png" alt="chrome_version_before"></p>
+</li>
+<li><p>根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是 <code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序 <code>KGPMUninstall.exe</code>，双击进行卸载即可</p>
+</li>
+<li><p>卸载之后，重启一下 chrome，命令行应该就恢复正常了，此时也能在已打开 chrome 的情况下在第三方应用中顺利打开超链接了</p>
+<p> <img data-src="/posts/29e0b18c/chrome_version_after.png" alt="chrome_version_after"></p>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome 浏览器 每次打开提示：“–no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>日常踩坑</tag>
+        <tag>chrome</tag>
       </tags>
   </entry>
   <entry>
@@ -1242,67 +1244,6 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenWrt 手动编译 ipk</title>
-    <url>/posts/96a1807.html</url>
-    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
-<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
-<span id="more"></span>
-<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span> 仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian &#x2F; Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
-
-<p>安装&#x2F;更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
-
-<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
-
-<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
-<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
-<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
-<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
-<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
-</ul>
-<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
-<p>以 <code>minieap</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">github<i class="fa fa-external-link-alt"></i></span> 上有已经完成的仓库，依次可以直接拉取来编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
-
-<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
-<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
-
-<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-        <tag>交叉编译</tag>
-        <tag>ipk</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>rm -r 与 rmdir 区别</title>
     <url>/posts/935ae1f0.html</url>
     <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
@@ -1377,267 +1318,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>strace</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
-<span id="more"></span>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span> 中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
-<ol>
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li>[可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li>rootfs 镜像</li>
-</ul>
-</li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 配置使用</title>
-    <url>/posts/51140c4a.html</url>
-    <content><![CDATA[<h2 id="Web-界面"><a href="#Web-界面" class="headerlink" title="Web 界面"></a>Web 界面</h2><p>一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是 <code>root</code>，无密码，直接点击登录即可进入</p>
-<span id="more"></span>
-<h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><p>默认界面是英文的，可以在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vb3BrZw==">系统-软件<i class="fa fa-external-link-alt"></i></span> 中搜索中文包安装进行汉化</p>
-<ul>
-<li>点击 <code>UPDATE LIST...</code> 耐心等待软件包的更新</li>
-<li>然后在 <code>Filter:</code> 下的输入框中输入 <code>luci-i18n-base-zh-cn</code>，在筛选出来的结果中点击 <code>INSTALL...</code>，安装勾上 <code>Overwrite files from other package(s)</code>，然后点击 <code>INSTALL</code>，耐心等待安装完成之后刷新网页（Ctrl+F5）可以看见大部分界面已经汉化了</li>
-<li>同理安装 <code>luci-i18n-opkg-zh-cn</code> 包用于 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vb3BrZw==">系统-软件<i class="fa fa-external-link-alt"></i></span> 界面的汉化</li>
-<li>同理安装 <code>luci-i18n-firewall-zh-cn</code> 包用于 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxs">网络-防火墙<i class="fa fa-external-link-alt"></i></span> 界面的汉化</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn luci-i18n-firewall-zh-cn</span><br></pre></td></tr></table></figure>
-
-<h3 id="root-密码"><a href="#root-密码" class="headerlink" title="root 密码"></a>root 密码</h3><p>进入管理界面后进入 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vYWRtaW4vcGFzc3dvcmQ=">系统-管理-密码<i class="fa fa-external-link-alt"></i></span> 界面修改路由器密码，同时也是系统的 root 账号的密码</p>
-<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vYWRtaW4vZHJvcGJlYXI=">系统-管理-ssh<i class="fa fa-external-link-alt"></i></span> 可以配置 ssh 登录，参考配置如下</p>
-<ul>
-<li>接口：不指定 → 内网以及外网都可以 ssh 登录</li>
-<li>端口：22 → ssh 默认端口，不做修改</li>
-<li>密码验证：不勾选 → 推荐使用 ssh 登录</li>
-<li>允许 root 用户凭密码登录：不勾选 → 推荐使用 ssh 登录</li>
-<li>网关端口：根据需要勾选</li>
-</ul>
-<p>按照上面配置完成后将只能通过 ssh 密钥进行登录，所以还得在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vYWRtaW4vc3Noa2V5cw==">系统-管理-ssh密钥<i class="fa fa-external-link-alt"></i></span> 添加设备的公钥</p>
-<h3 id="升级-LuCI"><a href="#升级-LuCI" class="headerlink" title="升级 LuCI"></a>升级 LuCI</h3><p>ssh 登入路由器后执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 更新软件源</span></span><br><span class="line">opkg update</span><br><span class="line"><span class="comment"># luci-compat 包有时可以帮助解决一些兼容性问题，推荐一同安装</span></span><br><span class="line">opkg install luci luci-base luci-compat</span><br></pre></td></tr></table></figure>
-
-<h3 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h3><p>原始的 <code>bootstrap</code> 主题个人不太喜欢，在空间足够的情况下我个人额外安装了 <code>material</code>，主题的切换在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vc3lzdGVt">系统-系统-语言和界面<i class="fa fa-external-link-alt"></i></span> 中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install luci-theme-material</span><br></pre></td></tr></table></figure>
-
-<h2 id="锐捷认证"><a href="#锐捷认证" class="headerlink" title="锐捷认证"></a>锐捷认证</h2><p>很多学校校园网通常采用锐捷认证，并且限制了用户账号的登陆数量，但是我们可以通过在路由器上进行锐捷认证来接入校园网，之后连接路由器的所有设备都会直接接入校园网而不需要认证了</p>
-<h3 id="MentoHUST"><a href="#MentoHUST" class="headerlink" title="MentoHUST"></a>MentoHUST</h3><p><span class="exturl" data-url="aHR0cDovL2J5aGguaHVzdC5lZHUuY24vY2dpLWJpbi9iYnNuZXd0Y29uP2JvYXJkPU5ldFJlc291cmNlJmZpbGU9TS4xMjMwNzc0MjgyLkE=">MentoHUST<i class="fa fa-external-link-alt"></i></span> 是华中科技大学的 <span class="exturl" data-url="aHR0cDovL2J5aGguaHVzdC5lZHUuY24vY2dpLWJpbi9iYnNxcnk/dXNlcmlkPUh1c3RNb29u">HustMoon<i class="fa fa-external-link-alt"></i></span> 最初在校内 BBS 白云黄鹤上发布的一款可以在 Linux 系统上进行锐捷认证的软件。不过 <span class="exturl" data-url="aHR0cHM6Ly9jb2RlLmdvb2dsZS5jb20vYXJjaGl2ZS9wL21lbnRvaHVzdC8=">原始项目<i class="fa fa-external-link-alt"></i></span> 已经归档，不在开发，GitHub 上有加入 v4 支持的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h5cmF0aGIvbWVudG9odXN0">新项目<i class="fa fa-external-link-alt"></i></span></p>
-<p>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</p>
-<ul>
-<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span> OpenWrt 项目可以生成  <code>mentohust</code> 的二进制文件</li>
-<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1tZW50b2h1c3Q=">OpenWrt&#x2F;LEDE LuCI for MentoHUST<i class="fa fa-external-link-alt"></i></span> 项目可以生成 MentoHUST 的 LuCI 控制界面</li>
-</ul>
-<p>手动编译 <code>ipk</code> 文件的过程可以参考 <a href="/posts/96a1807.html">这里</a></p>
-<h3 id="MiniEAP"><a href="#MiniEAP" class="headerlink" title="MiniEAP"></a>MiniEAP</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VwZGF0ZWluZy9taW5pZWFw">MiniEAP<i class="fa fa-external-link-alt"></i></span> 是一个实现了标准 EAP-MD5-Challenge 算法的 EAP 客户端，支持通过插件来修改标准数据包以通过特殊服务端的认证。同时含有支持锐捷 v3 (v4) 算法的插件，可以用来进行锐捷认证</p>
-<p>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</p>
-<ul>
-<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">minieap-openwrt<i class="fa fa-external-link-alt"></i></span> 项目可以生成 <code>minieap</code> 的二进制文件</li>
-<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1taW5pZWFw">OpenWrt&#x2F;LEDE LuCI for minieap<i class="fa fa-external-link-alt"></i></span> 项目可以生成 MiniEAP 的 LuCI 控制界面</li>
-</ul>
-<h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><p>防火墙规则的详细配置可以参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvZmlyZXdhbGwvZmlyZXdhbGxfY29uZmlndXJhdGlvbiNydWxlcw==">官方的介绍<i class="fa fa-external-link-alt"></i></span> 以及部分 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy96aC1jbi9kb2MvdWNpL2ZpcmV3YWxsIyVFNCVCOCVCRSVFNCVCRSU4Qg==">例子<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h3><p>以开放 80 端口，用于外网直接访问 Web 界面为例：</p>
-<ol>
-<li><p>首先要在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxsL3J1bGVz">网络-防火墙-通信规则<i class="fa fa-external-link-alt"></i></span> 点击新增，进行如下配置</p>
-<p> <img data-src="/posts/51140c4a/Allow-LuCI-WAN.png" alt="开放 80 端口"></p>
-<ul>
-<li>名称：可以随意设置</li>
-<li>协议：根据需要进行选择即可</li>
-<li>源区域：选择 WAN 表示是从外网进行访问</li>
-<li>源地址以及源端口：主要用于限制来访的设备，可以根据需要进行配置</li>
-<li>目标区域：选择 <code>设备</code> 代表这是一个入站的规则</li>
-<li>目标地址：因为是访问设备，此时不需要配置</li>
-<li>目标端口：Web 的默认端口是 80</li>
-<li>操作：开放端口，当然是选择接受</li>
-</ul>
-</li>
-<li><p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zdGF0dXMvaXB0YWJsZXM=">状态-防火墙<i class="fa fa-external-link-alt"></i></span> 根据需要对 IPv4、IPv6 防火墙进行重启即可</p>
-</li>
-</ol>
-<p>如果这时外网还是不能访问 LuCI 的 Web 界面，可以尝试路由器重启，确认路由器的 IP 是否能够 ping 通，以及确认 80 端口有没有被运营商封禁</p>
-<h3 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h3><p>以将 Windows 的远程连接的端口 3389 为例：</p>
-<ol>
-<li><p>首先要在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxsL2ZvcndhcmRz">网络-防火墙-端口转发<i class="fa fa-external-link-alt"></i></span> 点击新增，进行如下配置</p>
-<p> <img data-src="/posts/51140c4a/Win-Remote.png" alt="端口转发"></p>
-<ul>
-<li>名称：可以随意设置</li>
-<li>协议：根据需要进行选择即可</li>
-<li>源区域：选择 WAN 表示是从外网进行访问</li>
-<li>外部端口：这里配置成 13389</li>
-<li>目标区域：选择 <code>LAN</code></li>
-<li>内部 IP 地址：配置成内网需要远程连接的主机</li>
-<li>内部端口：远程连接的默认端口是 3389</li>
-</ul>
-</li>
-<li><p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zdGF0dXMvaXB0YWJsZXM=">状态-防火墙<i class="fa fa-external-link-alt"></i></span> 根据需要对 IPv4、IPv6 防火墙进行重启即可</p>
-</li>
-</ol>
-<p>后续就可以通过访问路由器 <code>WAN_IP:13389</code> 来远程连接内网的 Windows 主机了</p>
-<h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>在校园网环境下发现 WAN 口默认能自动获取到 IPv6 地址（但是 &#x2F;128 的地址），并且在路由器上测试也能正常访问 IPv6 网站，但是局域网内的设备不能正常访问 IPv6 网站，于是选择 NAT6 的方式来解决</p>
-<p>参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjYubmF0Ng==">官网的 NAT6 文档<i class="fa fa-external-link-alt"></i></span>，需要在路由器内依次进行如下配置：</p>
-<ol>
-<li><p>安装 kmod-ipt-nat6 包</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Install packages</span></span><br><span class="line">opkg update</span><br><span class="line">opkg install kmod-ipt-nat6</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置 IPv6 ULA 前缀，使得内网设备默认使用 IPv6</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Using IPv6 by default</span></span><br><span class="line">NET_ULA=<span class="string">&quot;<span class="subst">$(uci get network.globals.ula_prefix)</span>&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> network.globals.ula_prefix=<span class="string">&quot;d<span class="variable">$&#123;NET_ULA:1&#125;</span>&quot;</span></span><br><span class="line"><span class="comment"># 默认 network.lan.ip6assign 配置可能有误，需要根据 ula_prefix 重新配置</span></span><br><span class="line">IP6_ASSIGN=<span class="string">&quot;<span class="subst">$(echo $&#123;NET_ULA&#125; | grep -E &#x27;(\d+)</span>$&#x27; -o)&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> network.lan.ip6assign=<span class="string">&quot;<span class="variable">$&#123;IP6_ASSIGN&#125;</span>&quot;</span></span><br><span class="line">uci commit network</span><br><span class="line">/etc/init.d/network restart</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置默认 IPv6 路由</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Announcing default IPv6 route</span></span><br><span class="line">uci <span class="built_in">set</span> dhcp.lan.ra_default=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci commit dhcp</span><br><span class="line">/etc/init.d/odhcpd restart</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置防火墙</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">uci <span class="built_in">set</span> $(uci show firewall | sed -n -e <span class="string">&quot;/\.name=&#x27;wan&#x27;$/s//.masq6=&#x27;1&#x27;/p&quot;</span> | sed -n -e <span class="string">&quot;1p&quot;</span>)</span><br><span class="line">uci <span class="built_in">set</span> $(uci show firewall | sed -n -e <span class="string">&quot;/\.name=&#x27;Allow-ICMPv6-Forward&#x27;$/s//.enabled=&#x27;0&#x27;/p&quot;</span> | sed -n -e <span class="string">&quot;1p&quot;</span>)</span><br><span class="line">uci commit firewall</span><br></pre></td></tr></table></figure>
-
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">cat &lt;&lt; <span class="string">&quot;EOF&quot;</span> &gt; /etc/firewall.nat6</span><br><span class="line"><span class="comment"># NAT6 + masquerading firewall script</span></span><br><span class="line"><span class="comment"># https://github.com/akatrevorjay/openwrt-masq6</span></span><br><span class="line"><span class="comment"># trevorj &lt;github@trevor.joynson.io&gt;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># You can configure in /etc/config/firewall per zone:</span></span><br><span class="line"><span class="comment"># * IPv4 masquerading</span></span><br><span class="line"><span class="comment">#     option masq 1</span></span><br><span class="line"><span class="comment"># * IPv6 masquerading</span></span><br><span class="line"><span class="comment">#     option masq6 1</span></span><br><span class="line"><span class="comment"># * IPv6 privacy extensions</span></span><br><span class="line"><span class="comment">#     option masq6_privacy 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e -o pipefail</span><br><span class="line"></span><br><span class="line">. /lib/functions.sh</span><br><span class="line">. /lib/<span class="built_in">functions</span>/network.sh</span><br><span class="line">. /usr/share/libubox/jshn.sh</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">log</span></span>() &#123;</span><br><span class="line">    logger -t nat6 -s <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">get_ula_prefix</span></span>() &#123;</span><br><span class="line">    uci get network.globals.ula_prefix</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">validate_ula_prefix</span></span>() &#123;</span><br><span class="line">    <span class="built_in">local</span> ula_prefix=<span class="string">&quot;<span class="variable">$&#123;1&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">if</span> [ $(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;ula_prefix&#125;</span>&quot;</span> | grep -c -E -e <span class="string">&quot;^([0-9a-fA-F]&#123;4&#125;):([0-9a-fA-F]&#123;0,4&#125;):&quot;</span>) -ne 1 ] ; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Fatal error: IPv6 ULA ula_prefix=\&quot;<span class="variable">$&#123;ula_prefix&#125;</span>\&quot; seems invalid. Please verify that a ula_prefix is set and valid.&quot;</span></span><br><span class="line">        <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">ip6t</span></span>() &#123;</span><br><span class="line">    ip6tables <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">ip6t_add</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> ! ip6t -C <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span> &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">        ip6t -I <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">nat6_init</span></span>() &#123;</span><br><span class="line">    iptables-save -t nat \</span><br><span class="line">    | sed -e <span class="string">&quot;</span></span><br><span class="line"><span class="string">        /\sMASQUERADE$/d</span></span><br><span class="line"><span class="string">        /\s[DS]NAT\s/d</span></span><br><span class="line"><span class="string">        /\s--match-set\s\S*/s//\06/</span></span><br><span class="line"><span class="string">        /,BROADCAST\s/s// /&quot;</span> \</span><br><span class="line">    | ip6tables-restore -T nat</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">masq6_network</span></span>() &#123;</span><br><span class="line">    <span class="comment"># $&#123;config&#125; contains the ID of the current section</span></span><br><span class="line">    <span class="built_in">local</span> network_name=<span class="string">&quot;<span class="variable">$&#123;1&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> device</span><br><span class="line">    network_get_device device <span class="string">&quot;<span class="variable">$&#123;network_name&#125;</span>&quot;</span> || <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> done_net_dev</span><br><span class="line">    <span class="keyword">for</span> done_net_dev <span class="keyword">in</span> <span class="variable">$&#123;DONE_NETWORK_DEVICES&#125;</span>; <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;done_net_dev&#125;</span>&quot;</span> = <span class="string">&quot;<span class="variable">$&#123;device&#125;</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">log</span> <span class="string">&quot;Already configured device=\&quot;<span class="variable">$&#123;device&#125;</span>\&quot;, so leaving as is.&quot;</span></span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Found device=\&quot;<span class="variable">$&#123;device&#125;</span>\&quot; for network_name=\&quot;<span class="variable">$&#123;network_name&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;zone_masq6_privacy&#125;</span>&quot;</span> -eq 1 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Enabling IPv6 temporary addresses for device=\&quot;<span class="variable">$&#123;device&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Accepting router advertisements on <span class="variable">$&#123;device&#125;</span> even if forwarding is enabled (required for temporary addresses)&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> 2 &gt; <span class="string">&quot;/proc/sys/net/ipv6/conf/<span class="variable">$&#123;device&#125;</span>/accept_ra&quot;</span> \</span><br><span class="line">        || <span class="built_in">log</span> <span class="string">&quot;Error: Failed to change router advertisements accept policy on <span class="variable">$&#123;device&#125;</span> (required for temporary addresses)&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Using temporary addresses for outgoing connections on interface <span class="variable">$&#123;device&#125;</span>&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> 2 &gt; <span class="string">&quot;/proc/sys/net/ipv6/conf/<span class="variable">$&#123;device&#125;</span>/use_tempaddr&quot;</span> \</span><br><span class="line">        || <span class="built_in">log</span> <span class="string">&quot;Error: Failed to enable temporary addresses for outgoing connections on interface <span class="variable">$&#123;device&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    append DONE_NETWORK_DEVICES <span class="string">&quot;<span class="variable">$&#123;device&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">handle_zone</span></span>() &#123;</span><br><span class="line">    <span class="comment"># $&#123;config&#125; contains the ID of the current section</span></span><br><span class="line">    <span class="built_in">local</span> config=<span class="string">&quot;<span class="variable">$&#123;1&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> zone_name</span><br><span class="line">    config_get zone_name <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> name</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Enable masquerading via NAT6</span></span><br><span class="line">    <span class="built_in">local</span> zone_masq6</span><br><span class="line">    config_get_bool zone_masq6 <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> masq6 0</span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Firewall config=\&quot;<span class="variable">$&#123;config&#125;</span>\&quot; zone=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; zone_masq6=\&quot;<span class="variable">$&#123;zone_masq6&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;zone_masq6&#125;</span>&quot;</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">return</span> 0</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># IPv6 privacy extensions: Use temporary addrs for outgoing connections?</span></span><br><span class="line">    <span class="built_in">local</span> zone_masq6_privacy</span><br><span class="line">    config_get_bool zone_masq6_privacy <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> masq6_privacy 1</span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Found firewall zone_name=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; with zone_masq6=\&quot;<span class="variable">$&#123;zone_masq6&#125;</span>\&quot; zone_masq6_privacy=\&quot;<span class="variable">$&#123;zone_masq6_privacy&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Setting up masquerading nat6 for zone_name=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; with zone_masq6_privacy=\&quot;<span class="variable">$&#123;zone_masq6_privacy&#125;</span>\&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> ula_prefix=<span class="string">&quot;<span class="subst">$(get_ula_prefix)</span>&quot;</span></span><br><span class="line">    validate_ula_prefix <span class="string">&quot;<span class="variable">$&#123;ula_prefix&#125;</span>&quot;</span> || <span class="built_in">return</span> 1</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> postrouting_chain=<span class="string">&quot;zone_<span class="variable">$&#123;zone_name&#125;</span>_postrouting&quot;</span></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Ensuring ip6tables chain=\&quot;<span class="variable">$&#123;postrouting_chain&#125;</span>\&quot; contains our MASQUERADE.&quot;</span></span><br><span class="line">    ip6t_add <span class="string">&quot;<span class="variable">$&#123;postrouting_chain&#125;</span>&quot;</span> -t nat \</span><br><span class="line">        -m comment --comment <span class="string">&quot;!fw3&quot;</span> -j MASQUERADE</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> input_chain=<span class="string">&quot;zone_<span class="variable">$&#123;zone_name&#125;</span>_input&quot;</span></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Ensuring ip6tables chain=\&quot;<span class="variable">$&#123;input_chain&#125;</span>\&quot; contains our permissive DNAT rule.&quot;</span></span><br><span class="line">    ip6t_add <span class="string">&quot;<span class="variable">$&#123;input_chain&#125;</span>&quot;</span> -t filter -m conntrack --ctstate DNAT \</span><br><span class="line">        -m comment --comment <span class="string">&quot;!fw3: Accept port forwards&quot;</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> forward_chain=<span class="string">&quot;zone_<span class="variable">$&#123;zone_name&#125;</span>_forward&quot;</span></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Ensuring ip6tables chain=\&quot;<span class="variable">$&#123;forward_chain&#125;</span>\&quot; contains our permissive DNAT rule.&quot;</span></span><br><span class="line">    ip6t_add <span class="string">&quot;<span class="variable">$&#123;forward_chain&#125;</span>&quot;</span> -t filter -m conntrack --ctstate DNAT \</span><br><span class="line">        -m comment --comment <span class="string">&quot;!fw3: Accept port forwards&quot;</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> DONE_NETWORK_DEVICES=<span class="string">&quot;&quot;</span></span><br><span class="line">    config_list_foreach <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> network masq6_network</span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Done setting up nat6 for zone=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; on devices: <span class="variable">$&#123;DONE_NETWORK_DEVICES&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    nat6_init</span><br><span class="line">    config_load firewall</span><br><span class="line">    config_foreach handle_zone zone</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">EOF</span><br><span class="line">cat &lt;&lt; <span class="string">&quot;EOF&quot;</span> &gt;&gt; /etc/sysupgrade.conf</span><br><span class="line">/etc/firewall.nat6</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-<p> 经过此步骤后会生成一个 <code>/etc/firewall.nat6</code> 脚本，并且加入了 <code>/etc/sysupgrade.conf</code>，保证系统升级后也不会丢失该脚本</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">uci -q delete firewall.nat6</span><br><span class="line">uci <span class="built_in">set</span> firewall.nat6=<span class="string">&quot;include&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.nat6.path=<span class="string">&quot;/etc/firewall.nat6&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.nat6.reload=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></table></figure>
-
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[1].masq6=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[1].masq6_privacy=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="USB"><a href="#USB" class="headerlink" title="USB"></a>USB</h2><p>很多路由器有 USB 端口，通过插入 U 盘或者接入磁盘、SSD 等设备可以拓展存储空间，这样就可以安装更多的插件，或者搭建一个简单的 FTP、SMB 服务器用于共享数据</p>
-<h3 id="安装-USB-驱动"><a href="#安装-USB-驱动" class="headerlink" title="安装 USB 驱动"></a>安装 USB 驱动</h3><p>依次执行以下命令进行驱动基本包的安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-usb-core</span><br><span class="line"><span class="comment"># insmod usbcore</span></span><br><span class="line">opkg install kmod-usb-storage</span><br></pre></td></tr></table></figure>
-
-<p>如果设备是 USB 2.0</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install kmod-usb2</span><br><span class="line"><span class="comment"># insmod ehci-hcd</span></span><br></pre></td></tr></table></figure>
-
-<p>如果设备是 USB 3.0</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install kmod-usb3</span><br><span class="line"><span class="comment"># insmod xhci-hcd</span></span><br></pre></td></tr></table></figure>
-
-<p>通常移动硬盘或者移动 SSD 还需要安装 UAS&#x2F;UASP 支持</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install kmod-usb-storage-uas</span><br></pre></td></tr></table></figure>
-
-<p>然后热插拔存储设备，通常就能在 <code>/dev</code> 目录下看见 <code>sda</code> 设备了</p>
-<h3 id="自动挂载"><a href="#自动挂载" class="headerlink" title="自动挂载"></a>自动挂载</h3><ul>
-<li><p>安装块设备工具包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install block-mount</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>分区</p>
-<p>个人已经提前将存储设备划分了两个分区，一个分区较小(sda1)用于后续的 <a href="#extroot">Extroot</a>，剩余的空间(sda2)全用于存储个人数据</p>
-</li>
-<li><p>创建文件系统</p>
-<p>推荐移动磁盘用 ext4 文件系统，而移动 SSD 推荐使用 f2fs 文件系统</p>
-<p>分区和创建文件系统可以参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVzI2NyZWF0ZV9hX3BhcnRpdGlvbl9vbl90aGVfdXNiX2Rpc2s=">官网的指导<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-<li><p>配置挂载</p>
-<p>配置挂载可以通过直接在网页端的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vbW91bnRz">系统-挂载点<i class="fa fa-external-link-alt"></i></span> 进行手动配置，比较直观，如图所示：</p>
-<p><img data-src="/posts/51140c4a/Mount-sda6.png" alt="挂载设备"></p>
-<ul>
-<li>已启用：勾选</li>
-<li>UUID：推荐使用 UUID 来进行挂载</li>
-<li>挂载点：也就是挂载的位置，通常在 <code>/mnt</code> 目录下新建一个文件夹</li>
-</ul>
-</li>
-</ul>
-<h3 id="Extroot"><a href="#Extroot" class="headerlink" title="Extroot"></a>Extroot</h3><p>有时候安装太多包会导致本地空间不足，此时可以通过将包安装在 USB 设备上，也可以通过 Extroot 的方式将 USB 设备的空间直接配置成 <code>overlay</code> 分区，后者更为推荐</p>
-<ol>
-<li><p>修改 <code>fstab</code>，将原本挂载的 <code>overlay</code> 设备挂载到新的目录 <code>/rwm</code></p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DEVICE=<span class="string">&quot;<span class="subst">$(sed -n -e <span class="string">&quot;/\s\/overlay\s.*$/s///p&quot;</span> /etc/mtab)</span>&quot;</span></span><br><span class="line">uci -q delete fstab.rwm</span><br><span class="line">uci <span class="built_in">set</span> fstab.rwm=<span class="string">&quot;mount&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.rwm.device=<span class="string">&quot;<span class="variable">$&#123;DEVICE&#125;</span>&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.rwm.target=<span class="string">&quot;/rwm&quot;</span></span><br><span class="line">uci commit fstab</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改 <code>fstab</code>，配置 USB 设备挂载成 <code>overlay</code> 分区</p>
-<p> 其中部分部分操作在 <a href="#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD">上节</a> 已经执行过，可以略去</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看分区信息</span></span><br><span class="line"><span class="comment"># block info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定分区并制作文件系统</span></span><br><span class="line">DEVICE=<span class="string">&quot;/dev/sda1&quot;</span></span><br><span class="line"><span class="comment"># mkfs.ext4 $&#123;DEVICE&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span> $(block info <span class="variable">$&#123;DEVICE&#125;</span> | grep -o -e <span class="string">&quot;UUID=\S*&quot;</span>)</span><br><span class="line">uci -q delete fstab.overlay</span><br><span class="line">uci <span class="built_in">set</span> fstab.overlay=<span class="string">&quot;mount&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.overlay.uuid=<span class="string">&quot;<span class="variable">$&#123;UUID&#125;</span>&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.overlay.target=<span class="string">&quot;/overlay&quot;</span></span><br><span class="line">uci commit fstab</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将原本 <code>overlay</code> 分区数据复制到 USB 设备上，重启设备</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p /tmp/cproot</span><br><span class="line">mount --<span class="built_in">bind</span> /overlay /tmp/cproot</span><br><span class="line">mkdir -p /mnt/tmp</span><br><span class="line">mount <span class="variable">$&#123;DEVICE&#125;</span> /mnt/tmp</span><br><span class="line">tar -C /tmp/cproot -cvf - . | tar -C /mnt/tmp -xf -</span><br><span class="line">umount /tmp/cproot /mnt/tmp</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><p>配置好 USB 后，就可以配置 FTP 来共享 USB 设备</p>
-<ol>
-<li><p>首先安装 vsftpd 包</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install vsftpd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置文件 <code>/etc/vsftpd.conf</code>，这里给出个人的配置，可以参考</p>
- <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">background</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">listen</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">anonymous_enable</span>=<span class="literal">NO</span></span><br><span class="line"><span class="attr">local_enable</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">write_enable</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">local_umask</span>=<span class="number">022</span></span><br><span class="line"><span class="attr">check_shell</span>=<span class="literal">NO</span></span><br><span class="line"><span class="comment">#dirmessage_enable=YES</span></span><br><span class="line"><span class="comment">#ftpd_banner=Welcome to MINI FTP service.</span></span><br><span class="line"><span class="attr">session_support</span>=<span class="literal">NO</span></span><br><span class="line"><span class="comment">#syslog_enable=YES</span></span><br><span class="line"><span class="comment">#userlist_enable=YES</span></span><br><span class="line"><span class="comment">#userlist_deny=NO</span></span><br><span class="line"><span class="comment">#userlist_file=/etc/vsftpd/vsftpd.users</span></span><br><span class="line"><span class="comment">#xferlog_enable=YES</span></span><br><span class="line"><span class="comment">#xferlog_file=/var/log/vsftpd.log</span></span><br><span class="line"><span class="comment">#xferlog_std_format=YES</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line"><span class="comment">### TLS/SSL options</span></span><br><span class="line"><span class="comment">### example key generation: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd_privkey.pem -out /etc</span></span><br><span class="line"><span class="comment">#ssl_enable=YES</span></span><br><span class="line"><span class="comment">#allow_anon_ssl=NO</span></span><br><span class="line"><span class="comment">#force_local_data_ssl=NO</span></span><br><span class="line"><span class="comment">#force_local_logins_ssl=NO</span></span><br><span class="line"><span class="comment">#ssl_tlsv1=YES</span></span><br><span class="line"><span class="comment">#ssl_sslv2=NO</span></span><br><span class="line"><span class="comment">#ssl_sslv3=NO</span></span><br><span class="line"><span class="comment">#rsa_cert_file=/etc/vsftpd/vsftpd_cert.pem</span></span><br><span class="line"><span class="comment">#rsa_private_key_file=/etc/vsftpd/vsftpd_privkey.pem</span></span><br><span class="line"><span class="comment"># 共享的目录位置</span></span><br><span class="line"><span class="attr">local_root</span>=/mnt/ext4</span><br><span class="line"><span class="attr">pasv_enable</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">pasv_min_port</span>=<span class="number">10090</span></span><br><span class="line"><span class="attr">pasv_max_port</span>=<span class="number">10100</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后参考之前的 <a href="#%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3">开放端口</a>，打开 20、21、10090-10100 端口就可以在外网访问 FTP 服务器了</p>
-<p> <img data-src="/posts/51140c4a/Allow-FTP-WAN.png" alt="开放 FTP 端口"></p>
-</li>
-<li><p>之后重启 <code>vsftpd</code> 服务即可使用</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/init.d/vsftpd restart</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>P.S. 连接 ftp 服务器的账号密码就是路由器的 root 账号密码</p>
-<h2 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h2><p>使用 Samba 来共享的设备可以在 Windows 的文件资源管理器中挂载，使用起来和本地磁盘一样（在局域网内）</p>
-<ol>
-<li><p>安装 samba4-server 以及 LuCI 管理界面</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install samba4-server</span><br><span class="line">opkg install luci-app-samba4 luci-i18n-samba4-zh-cn</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在网页端的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zZXJ2aWNlcy9zYW1iYTQ=">服务-网络共享<i class="fa fa-external-link-alt"></i></span> 中进行配置，个人配置如下，可以参考</p>
-<p> <img data-src="/posts/51140c4a/Samba.png" alt="Samba 配置"></p>
-</li>
-<li><p>之后重启 <code>samba4</code> 服务即可使用</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/init.d/samba4 restart</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>P.S. 连接 Samba 服务器的账号密码也是路由器的 root 账号密码</p>
-<h2 id="BT-下载"><a href="#BT-下载" class="headerlink" title="BT 下载"></a>BT 下载</h2><p>transmission 是一个轻量级跨平台的 BT 下载客户端</p>
-<ol>
-<li><p>安装 transmission</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install transmission-daemon</span><br><span class="line">opkg install transmission-cli</span><br><span class="line">opkg install transmission-web   <span class="comment"># web 界面，可选</span></span><br><span class="line">opkg install transmission-remote</span><br><span class="line">opkg install luci-app-transmission luci-i18n-transmission-zh-cn</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>直接修改 <code>/etc/config/transmission</code>，或者在网页端的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zZXJ2aWNlcy90cmFuc21pc3Npb24=">服务-Transmission<i class="fa fa-external-link-alt"></i></span> 进行配置，下面给出个人配置，可以参考</p>
-<p> <img data-src="/posts/51140c4a/Transmission.png" alt="Transmission 配置"></p>
- <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">config transmission</span><br><span class="line">    option config_overwrite &#x27;1&#x27;</span><br><span class="line">    option mem_percentage &#x27;50&#x27;</span><br><span class="line">    option nice &#x27;10&#x27;</span><br><span class="line">    option alt_speed_enabled &#x27;false&#x27;</span><br><span class="line">    option alt_speed_time_enabled &#x27;false&#x27;</span><br><span class="line">    option bind_address_ipv4 &#x27;0.0.0.0&#x27;</span><br><span class="line">    option bind_address_ipv6 &#x27;::&#x27;</span><br><span class="line">    option blocklist_enabled &#x27;false&#x27;</span><br><span class="line">    option cache_size_mb &#x27;2&#x27;</span><br><span class="line">    option dht_enabled &#x27;true&#x27;</span><br><span class="line">    option download_queue_enabled &#x27;true&#x27;</span><br><span class="line">    option download_queue_size &#x27;4&#x27;</span><br><span class="line">    option encryption &#x27;1&#x27;</span><br><span class="line">    option idle_seeding_limit_enabled &#x27;false&#x27;</span><br><span class="line">    option lazy_bitfield_enabled &#x27;true&#x27;</span><br><span class="line">    option lpd_enabled &#x27;false&#x27;</span><br><span class="line">    option message_level &#x27;1&#x27;</span><br><span class="line">    option peer_limit_global &#x27;240&#x27;</span><br><span class="line">    option peer_limit_per_torrent &#x27;60&#x27;</span><br><span class="line">    option peer_port &#x27;51413&#x27;</span><br><span class="line">    option peer_port_random_on_start &#x27;false&#x27;</span><br><span class="line">    option peer_socket_tos &#x27;default&#x27;</span><br><span class="line">    option pex_enabled &#x27;true&#x27;</span><br><span class="line">    option port_forwarding_enabled &#x27;true&#x27;</span><br><span class="line">    option preallocation &#x27;1&#x27;</span><br><span class="line">    option queue_stalled_enabled &#x27;true&#x27;</span><br><span class="line">    option queue_stalled_minutes &#x27;30&#x27;</span><br><span class="line">    option ratio_limit &#x27;2.0000&#x27;</span><br><span class="line">    option rename_partial_files &#x27;true&#x27;</span><br><span class="line">    option rpc_bind_address &#x27;0.0.0.0&#x27;</span><br><span class="line">    option rpc_enabled &#x27;true&#x27;</span><br><span class="line">    option rpc_host_whitelist_enabled &#x27;false&#x27;</span><br><span class="line">    option rpc_port &#x27;9091&#x27;</span><br><span class="line">    option rpc_url &#x27;/transmission/&#x27;</span><br><span class="line">    option rpc_whitelist_enabled &#x27;false&#x27;</span><br><span class="line">    option scrape_paused_torrents_enabled &#x27;true&#x27;</span><br><span class="line">    option script_torrent_done_enabled &#x27;false&#x27;</span><br><span class="line">    option seed_queue_enabled &#x27;false&#x27;</span><br><span class="line">    option speed_limit_down_enabled &#x27;false&#x27;</span><br><span class="line">    option speed_limit_up_enabled &#x27;false&#x27;</span><br><span class="line">    option start_added_torrents &#x27;true&#x27;</span><br><span class="line">    option umask &#x27;18&#x27;</span><br><span class="line">    option utp_enabled &#x27;true&#x27;</span><br><span class="line">    option scrape_paused_torrents &#x27;true&#x27;</span><br><span class="line">    option watch_dir_enabled &#x27;false&#x27;</span><br><span class="line">    option enabled &#x27;1&#x27;</span><br><span class="line">    option user &#x27;root&#x27;</span><br><span class="line">    option group &#x27;root&#x27;</span><br><span class="line">    option upload_slots_per_torrent &#x27;10&#x27;</span><br><span class="line">    option download_dir &#x27;/mnt/ext4/transmission&#x27;</span><br><span class="line">    option incomplete_dir_enabled &#x27;true&#x27;</span><br><span class="line">    option incomplete_dir &#x27;/mnt/ext4/transmission/incomplete&#x27;</span><br><span class="line">    option trash_original_torrent_files &#x27;true&#x27;</span><br><span class="line">    option rpc_authentication_required &#x27;true&#x27;</span><br><span class="line">    option rpc_username &#x27;rpc_username&#x27;</span><br><span class="line">    option rpc_password &#x27;rpc_password&#x27;</span><br><span class="line">    option ratio_limit_enabled &#x27;true&#x27;</span><br><span class="line">    option config_dir &#x27;/etc/transmission&#x27;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>之后重启 <code>transmission</code> 服务即可使用</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/init.d/transmission restart</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>连接的账号密码为自行配置的 <code>RPC</code> 连接的账号密码</p>
-<p>默认的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xOjkwOTEvdHJhbnNtaXNzaW9uL3dlYi8=">Web 界面<i class="fa fa-external-link-alt"></i></span> 比较简陋，并且不能配置 tracker，个人推荐使用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RyYW5zbWlzc2lvbi1yZW1vdGUtZ3VpL3RyYW5zZ3Vp">transgui<i class="fa fa-external-link-alt"></i></span> 来 <code>RPC</code> 连接使用</p>
-<p>如果需要远程访问，则需要将 <code>rpc_port</code> 配置的端口开放，具体流程参考 <a href="#%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3">上文</a></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbHVjaS9sdWNpLmVzc2VudGlhbHM=">【OpenWrt】LuCI<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI3NDA5Ny9hcnRpY2xlL2RldGFpbHMvMTA3MTk3NzE3">【CSDN】luci.cbi 报错<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2t1b3J1YW4vbHVjaS1hcHAtdjJyYXkvaXNzdWVzLzQy">【GitHub】应用设置界面错误<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h5cmF0aGIvbWVudG9odXN0">【GitHub】MentoHUST 加入 v4 支持<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1tZW50b2h1c3Q=">【GitHub】OpenWrt&#x2F;LEDE LuCI for MentoHUST<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VwZGF0ZWluZy9taW5pZWFw">【GitHub】MiniEAP<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1taW5pZWFw">【GitHub】OpenWrt&#x2F;LEDE LuCI for minieap<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvZmlyZXdhbGwvZmlyZXdhbGxfY29uZmlndXJhdGlvbiNydWxlcw==">【OpenWrt】firewall rules<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy96aC1jbi9kb2MvdWNpL2ZpcmV3YWxsIyVFNCVCOCVCRSVFNCVCRSU4Qg==">【OpenWrt】防火墙配置举例<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjYubmF0Ng==">【OpenWrt】IPv6 NAT6 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjZfZXh0cmFzI3VzaW5nX2lwdjZfYnlfZGVmYXVsdA==">【OpenWrt】默认使用 IPv6<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjZfZXh0cmFzI2Fubm91bmNpbmdfZGVmYXVsdF9pcHY2X3JvdXRl">【OpenWrt】默认 IPv6 路由<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItaW5zdGFsbGluZw==">【OpenWrt】安装 USB 驱动<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVz">【OpenWrt】使用 USB 设备<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvYWRkaXRpb25hbC1zb2Z0d2FyZS9leHRyb290X2NvbmZpZ3VyYXRpb24=">【OpenWrt】Extroot 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL2Z0cC5vdmVydmlldw==">【OpenWrt】FTP<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL3NhbWJh">【OpenWrt】Samba<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvZG93bmxvYWRpbmdfYW5kX2ZpbGVzaGFyaW5nL3RyYW5zbWlzc2lvbg==">【OpenWrt】transmission<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-        <tag>锐捷</tag>
-        <tag>IPv6</tag>
-        <tag>NAS</tag>
       </tags>
   </entry>
   <entry>
@@ -2159,6 +1839,328 @@
       <tags>
         <tag>Breed</tag>
         <tag>BootLoader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 手动编译 ipk</title>
+    <url>/posts/96a1807.html</url>
+    <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
+<p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
+<span id="more"></span>
+<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span> 仓库就提供了一个方便使用的交叉编译环境</p>
+<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>以 Debian &#x2F; Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></table></figure>
+
+<p>安装&#x2F;更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt 仓库了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></table></figure>
+
+<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过 <code>--depth</code> 来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span><br><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译-ipk-文件"><a href="#编译-ipk-文件" class="headerlink" title="编译 .ipk 文件"></a>编译 <code>.ipk</code> 文件</h2><h3 id="更新-feeds"><a href="#更新-feeds" class="headerlink" title="更新 feeds"></a>更新 feeds</h3><p>进入 openwrt 仓库后，首先需要更新软件包列表 <code>feeds</code>，它是在 OpenWrt 中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置平台"><a href="#配置平台" class="headerlink" title="配置平台"></a>配置平台</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
+<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
+<p><img data-src="/posts/96a1807/Target-Config.png" alt="平台配置"></p>
+<h3 id="获取交叉编译链"><a href="#获取交叉编译链" class="headerlink" title="获取交叉编译链"></a>获取交叉编译链</h3><p>这一步就是获取对应设备交叉编译所需的编译链</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>V=s</code> 可以显示 <code>make</code> 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
+<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code> 则是根据机器的 CPU 数量来进行多线程编译</li>
+</ul>
+<h3 id="添加需要编译的第三方软件包"><a href="#添加需要编译的第三方软件包" class="headerlink" title="添加需要编译的第三方软件包"></a>添加需要编译的第三方软件包</h3><p>可以先搜索有没有已经配置好的含有 <code>Makefile</code> 的仓库，有了适配过的 <code>Makefile</code> 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
+<p>以 <code>minieap</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">github<i class="fa fa-external-link-alt"></i></span> 上有已经完成的仓库，依次可以直接拉取来编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></table></figure>
+
+<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p>对于 <code>minieap</code> 来说，在 <code>Network</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
+<p><img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置"></p>
+<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code> 为例如下所示</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | wc -l)</span><br></pre></td></tr></table></figure>
+
+<p>编译完成后，<code>.ipk</code> 文件会生成在  <code>./bin/packages/&lt;YourArchitecture&gt;/base</code> 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code> 进行安装使用了</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+        <tag>交叉编译</tag>
+        <tag>ipk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
+<span id="more"></span>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span> 中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
+<ol>
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li>[可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li>rootfs 镜像</li>
+</ul>
+</li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 配置使用</title>
+    <url>/posts/51140c4a.html</url>
+    <content><![CDATA[<h2 id="Web-界面"><a href="#Web-界面" class="headerlink" title="Web 界面"></a>Web 界面</h2><p>一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是 <code>root</code>，无密码，直接点击登录即可进入</p>
+<span id="more"></span>
+<h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><p>默认界面是英文的，可以在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vb3BrZw==">系统-软件<i class="fa fa-external-link-alt"></i></span> 中搜索中文包安装进行汉化</p>
+<ul>
+<li>点击 <code>UPDATE LIST...</code> 耐心等待软件包的更新</li>
+<li>然后在 <code>Filter:</code> 下的输入框中输入 <code>luci-i18n-base-zh-cn</code>，在筛选出来的结果中点击 <code>INSTALL...</code>，安装勾上 <code>Overwrite files from other package(s)</code>，然后点击 <code>INSTALL</code>，耐心等待安装完成之后刷新网页（Ctrl+F5）可以看见大部分界面已经汉化了</li>
+<li>同理安装 <code>luci-i18n-opkg-zh-cn</code> 包用于 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vb3BrZw==">系统-软件<i class="fa fa-external-link-alt"></i></span> 界面的汉化</li>
+<li>同理安装 <code>luci-i18n-firewall-zh-cn</code> 包用于 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxs">网络-防火墙<i class="fa fa-external-link-alt"></i></span> 界面的汉化</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn luci-i18n-firewall-zh-cn</span><br></pre></td></tr></table></figure>
+
+<h3 id="root-密码"><a href="#root-密码" class="headerlink" title="root 密码"></a>root 密码</h3><p>进入管理界面后进入 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vYWRtaW4vcGFzc3dvcmQ=">系统-管理-密码<i class="fa fa-external-link-alt"></i></span> 界面修改路由器密码，同时也是系统的 root 账号的密码</p>
+<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vYWRtaW4vZHJvcGJlYXI=">系统-管理-ssh<i class="fa fa-external-link-alt"></i></span> 可以配置 ssh 登录，参考配置如下</p>
+<ul>
+<li>接口：不指定 → 内网以及外网都可以 ssh 登录</li>
+<li>端口：22 → ssh 默认端口，不做修改</li>
+<li>密码验证：不勾选 → 推荐使用 ssh 登录</li>
+<li>允许 root 用户凭密码登录：不勾选 → 推荐使用 ssh 登录</li>
+<li>网关端口：根据需要勾选</li>
+</ul>
+<p>按照上面配置完成后将只能通过 ssh 密钥进行登录，所以还得在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vYWRtaW4vc3Noa2V5cw==">系统-管理-ssh密钥<i class="fa fa-external-link-alt"></i></span> 添加设备的公钥</p>
+<h3 id="升级-LuCI"><a href="#升级-LuCI" class="headerlink" title="升级 LuCI"></a>升级 LuCI</h3><p>ssh 登入路由器后执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 更新软件源</span></span><br><span class="line">opkg update</span><br><span class="line"><span class="comment"># luci-compat 包有时可以帮助解决一些兼容性问题，推荐一同安装</span></span><br><span class="line">opkg install luci luci-base luci-compat</span><br></pre></td></tr></table></figure>
+
+<h3 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h3><p>原始的 <code>bootstrap</code> 主题个人不太喜欢，在空间足够的情况下我个人额外安装了 <code>material</code>，主题的切换在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vc3lzdGVt">系统-系统-语言和界面<i class="fa fa-external-link-alt"></i></span> 中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install luci-theme-material</span><br></pre></td></tr></table></figure>
+
+<h2 id="锐捷认证"><a href="#锐捷认证" class="headerlink" title="锐捷认证"></a>锐捷认证</h2><p>很多学校校园网通常采用锐捷认证，并且限制了用户账号的登陆数量，但是我们可以通过在路由器上进行锐捷认证来接入校园网，之后连接路由器的所有设备都会直接接入校园网而不需要认证了</p>
+<h3 id="MentoHUST"><a href="#MentoHUST" class="headerlink" title="MentoHUST"></a>MentoHUST</h3><p><span class="exturl" data-url="aHR0cDovL2J5aGguaHVzdC5lZHUuY24vY2dpLWJpbi9iYnNuZXd0Y29uP2JvYXJkPU5ldFJlc291cmNlJmZpbGU9TS4xMjMwNzc0MjgyLkE=">MentoHUST<i class="fa fa-external-link-alt"></i></span> 是华中科技大学的 <span class="exturl" data-url="aHR0cDovL2J5aGguaHVzdC5lZHUuY24vY2dpLWJpbi9iYnNxcnk/dXNlcmlkPUh1c3RNb29u">HustMoon<i class="fa fa-external-link-alt"></i></span> 最初在校内 BBS 白云黄鹤上发布的一款可以在 Linux 系统上进行锐捷认证的软件。不过 <span class="exturl" data-url="aHR0cHM6Ly9jb2RlLmdvb2dsZS5jb20vYXJjaGl2ZS9wL21lbnRvaHVzdC8=">原始项目<i class="fa fa-external-link-alt"></i></span> 已经归档，不在开发，GitHub 上有加入 v4 支持的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h5cmF0aGIvbWVudG9odXN0">新项目<i class="fa fa-external-link-alt"></i></span></p>
+<p>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</p>
+<ul>
+<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span> OpenWrt 项目可以生成  <code>mentohust</code> 的二进制文件</li>
+<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1tZW50b2h1c3Q=">OpenWrt&#x2F;LEDE LuCI for MentoHUST<i class="fa fa-external-link-alt"></i></span> 项目可以生成 MentoHUST 的 LuCI 控制界面</li>
+</ul>
+<p>手动编译 <code>ipk</code> 文件的过程可以参考 <a href="/posts/96a1807.html">这里</a></p>
+<h3 id="MiniEAP"><a href="#MiniEAP" class="headerlink" title="MiniEAP"></a>MiniEAP</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VwZGF0ZWluZy9taW5pZWFw">MiniEAP<i class="fa fa-external-link-alt"></i></span> 是一个实现了标准 EAP-MD5-Challenge 算法的 EAP 客户端，支持通过插件来修改标准数据包以通过特殊服务端的认证。同时含有支持锐捷 v3 (v4) 算法的插件，可以用来进行锐捷认证</p>
+<p>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</p>
+<ul>
+<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">minieap-openwrt<i class="fa fa-external-link-alt"></i></span> 项目可以生成 <code>minieap</code> 的二进制文件</li>
+<li>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1taW5pZWFw">OpenWrt&#x2F;LEDE LuCI for minieap<i class="fa fa-external-link-alt"></i></span> 项目可以生成 MiniEAP 的 LuCI 控制界面</li>
+</ul>
+<h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><p>防火墙规则的详细配置可以参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvZmlyZXdhbGwvZmlyZXdhbGxfY29uZmlndXJhdGlvbiNydWxlcw==">官方的介绍<i class="fa fa-external-link-alt"></i></span> 以及部分 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy96aC1jbi9kb2MvdWNpL2ZpcmV3YWxsIyVFNCVCOCVCRSVFNCVCRSU4Qg==">例子<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h3><p>以开放 80 端口，用于外网直接访问 Web 界面为例：</p>
+<ol>
+<li><p>首先要在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxsL3J1bGVz">网络-防火墙-通信规则<i class="fa fa-external-link-alt"></i></span> 点击新增，进行如下配置</p>
+<p> <img data-src="/posts/51140c4a/Allow-LuCI-WAN.png" alt="开放 80 端口"></p>
+<ul>
+<li>名称：可以随意设置</li>
+<li>协议：根据需要进行选择即可</li>
+<li>源区域：选择 WAN 表示是从外网进行访问</li>
+<li>源地址以及源端口：主要用于限制来访的设备，可以根据需要进行配置</li>
+<li>目标区域：选择 <code>设备</code> 代表这是一个入站的规则</li>
+<li>目标地址：因为是访问设备，此时不需要配置</li>
+<li>目标端口：Web 的默认端口是 80</li>
+<li>操作：开放端口，当然是选择接受</li>
+</ul>
+</li>
+<li><p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zdGF0dXMvaXB0YWJsZXM=">状态-防火墙<i class="fa fa-external-link-alt"></i></span> 根据需要对 IPv4、IPv6 防火墙进行重启即可</p>
+</li>
+</ol>
+<p>如果这时外网还是不能访问 LuCI 的 Web 界面，可以尝试路由器重启，确认路由器的 IP 是否能够 ping 通，以及确认 80 端口有没有被运营商封禁</p>
+<h3 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h3><p>以将 Windows 的远程连接的端口 3389 为例：</p>
+<ol>
+<li><p>首先要在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxsL2ZvcndhcmRz">网络-防火墙-端口转发<i class="fa fa-external-link-alt"></i></span> 点击新增，进行如下配置</p>
+<p> <img data-src="/posts/51140c4a/Win-Remote.png" alt="端口转发"></p>
+<ul>
+<li>名称：可以随意设置</li>
+<li>协议：根据需要进行选择即可</li>
+<li>源区域：选择 WAN 表示是从外网进行访问</li>
+<li>外部端口：这里配置成 13389</li>
+<li>目标区域：选择 <code>LAN</code></li>
+<li>内部 IP 地址：配置成内网需要远程连接的主机</li>
+<li>内部端口：远程连接的默认端口是 3389</li>
+</ul>
+</li>
+<li><p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zdGF0dXMvaXB0YWJsZXM=">状态-防火墙<i class="fa fa-external-link-alt"></i></span> 根据需要对 IPv4、IPv6 防火墙进行重启即可</p>
+</li>
+</ol>
+<p>后续就可以通过访问路由器 <code>WAN_IP:13389</code> 来远程连接内网的 Windows 主机了</p>
+<h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>在校园网环境下发现 WAN 口默认能自动获取到 IPv6 地址（但是 &#x2F;128 的地址），并且在路由器上测试也能正常访问 IPv6 网站，但是局域网内的设备不能正常访问 IPv6 网站，于是选择 NAT6 的方式来解决</p>
+<p>参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjYubmF0Ng==">官网的 NAT6 文档<i class="fa fa-external-link-alt"></i></span>，需要在路由器内依次进行如下配置：</p>
+<ol>
+<li><p>安装 kmod-ipt-nat6 包</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Install packages</span></span><br><span class="line">opkg update</span><br><span class="line">opkg install kmod-ipt-nat6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置 IPv6 ULA 前缀，使得内网设备默认使用 IPv6</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Using IPv6 by default</span></span><br><span class="line">NET_ULA=<span class="string">&quot;<span class="subst">$(uci get network.globals.ula_prefix)</span>&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> network.globals.ula_prefix=<span class="string">&quot;d<span class="variable">$&#123;NET_ULA:1&#125;</span>&quot;</span></span><br><span class="line"><span class="comment"># 默认 network.lan.ip6assign 配置可能有误，需要根据 ula_prefix 重新配置</span></span><br><span class="line">IP6_ASSIGN=<span class="string">&quot;<span class="subst">$(echo $&#123;NET_ULA&#125; | grep -E &#x27;(\d+)</span>$&#x27; -o)&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> network.lan.ip6assign=<span class="string">&quot;<span class="variable">$&#123;IP6_ASSIGN&#125;</span>&quot;</span></span><br><span class="line">uci commit network</span><br><span class="line">/etc/init.d/network restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置默认 IPv6 路由</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Announcing default IPv6 route</span></span><br><span class="line">uci <span class="built_in">set</span> dhcp.lan.ra_default=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci commit dhcp</span><br><span class="line">/etc/init.d/odhcpd restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置防火墙</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">uci <span class="built_in">set</span> $(uci show firewall | sed -n -e <span class="string">&quot;/\.name=&#x27;wan&#x27;$/s//.masq6=&#x27;1&#x27;/p&quot;</span> | sed -n -e <span class="string">&quot;1p&quot;</span>)</span><br><span class="line">uci <span class="built_in">set</span> $(uci show firewall | sed -n -e <span class="string">&quot;/\.name=&#x27;Allow-ICMPv6-Forward&#x27;$/s//.enabled=&#x27;0&#x27;/p&quot;</span> | sed -n -e <span class="string">&quot;1p&quot;</span>)</span><br><span class="line">uci commit firewall</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">cat &lt;&lt; <span class="string">&quot;EOF&quot;</span> &gt; /etc/firewall.nat6</span><br><span class="line"><span class="comment"># NAT6 + masquerading firewall script</span></span><br><span class="line"><span class="comment"># https://github.com/akatrevorjay/openwrt-masq6</span></span><br><span class="line"><span class="comment"># trevorj &lt;github@trevor.joynson.io&gt;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># You can configure in /etc/config/firewall per zone:</span></span><br><span class="line"><span class="comment"># * IPv4 masquerading</span></span><br><span class="line"><span class="comment">#     option masq 1</span></span><br><span class="line"><span class="comment"># * IPv6 masquerading</span></span><br><span class="line"><span class="comment">#     option masq6 1</span></span><br><span class="line"><span class="comment"># * IPv6 privacy extensions</span></span><br><span class="line"><span class="comment">#     option masq6_privacy 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e -o pipefail</span><br><span class="line"></span><br><span class="line">. /lib/functions.sh</span><br><span class="line">. /lib/<span class="built_in">functions</span>/network.sh</span><br><span class="line">. /usr/share/libubox/jshn.sh</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">log</span></span>() &#123;</span><br><span class="line">    logger -t nat6 -s <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">get_ula_prefix</span></span>() &#123;</span><br><span class="line">    uci get network.globals.ula_prefix</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">validate_ula_prefix</span></span>() &#123;</span><br><span class="line">    <span class="built_in">local</span> ula_prefix=<span class="string">&quot;<span class="variable">$&#123;1&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">if</span> [ $(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;ula_prefix&#125;</span>&quot;</span> | grep -c -E -e <span class="string">&quot;^([0-9a-fA-F]&#123;4&#125;):([0-9a-fA-F]&#123;0,4&#125;):&quot;</span>) -ne 1 ] ; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Fatal error: IPv6 ULA ula_prefix=\&quot;<span class="variable">$&#123;ula_prefix&#125;</span>\&quot; seems invalid. Please verify that a ula_prefix is set and valid.&quot;</span></span><br><span class="line">        <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">ip6t</span></span>() &#123;</span><br><span class="line">    ip6tables <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">ip6t_add</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> ! ip6t -C <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span> &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">        ip6t -I <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">nat6_init</span></span>() &#123;</span><br><span class="line">    iptables-save -t nat \</span><br><span class="line">    | sed -e <span class="string">&quot;</span></span><br><span class="line"><span class="string">        /\sMASQUERADE$/d</span></span><br><span class="line"><span class="string">        /\s[DS]NAT\s/d</span></span><br><span class="line"><span class="string">        /\s--match-set\s\S*/s//\06/</span></span><br><span class="line"><span class="string">        /,BROADCAST\s/s// /&quot;</span> \</span><br><span class="line">    | ip6tables-restore -T nat</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">masq6_network</span></span>() &#123;</span><br><span class="line">    <span class="comment"># $&#123;config&#125; contains the ID of the current section</span></span><br><span class="line">    <span class="built_in">local</span> network_name=<span class="string">&quot;<span class="variable">$&#123;1&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> device</span><br><span class="line">    network_get_device device <span class="string">&quot;<span class="variable">$&#123;network_name&#125;</span>&quot;</span> || <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> done_net_dev</span><br><span class="line">    <span class="keyword">for</span> done_net_dev <span class="keyword">in</span> <span class="variable">$&#123;DONE_NETWORK_DEVICES&#125;</span>; <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;done_net_dev&#125;</span>&quot;</span> = <span class="string">&quot;<span class="variable">$&#123;device&#125;</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">log</span> <span class="string">&quot;Already configured device=\&quot;<span class="variable">$&#123;device&#125;</span>\&quot;, so leaving as is.&quot;</span></span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Found device=\&quot;<span class="variable">$&#123;device&#125;</span>\&quot; for network_name=\&quot;<span class="variable">$&#123;network_name&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;zone_masq6_privacy&#125;</span>&quot;</span> -eq 1 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Enabling IPv6 temporary addresses for device=\&quot;<span class="variable">$&#123;device&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Accepting router advertisements on <span class="variable">$&#123;device&#125;</span> even if forwarding is enabled (required for temporary addresses)&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> 2 &gt; <span class="string">&quot;/proc/sys/net/ipv6/conf/<span class="variable">$&#123;device&#125;</span>/accept_ra&quot;</span> \</span><br><span class="line">        || <span class="built_in">log</span> <span class="string">&quot;Error: Failed to change router advertisements accept policy on <span class="variable">$&#123;device&#125;</span> (required for temporary addresses)&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">log</span> <span class="string">&quot;Using temporary addresses for outgoing connections on interface <span class="variable">$&#123;device&#125;</span>&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> 2 &gt; <span class="string">&quot;/proc/sys/net/ipv6/conf/<span class="variable">$&#123;device&#125;</span>/use_tempaddr&quot;</span> \</span><br><span class="line">        || <span class="built_in">log</span> <span class="string">&quot;Error: Failed to enable temporary addresses for outgoing connections on interface <span class="variable">$&#123;device&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    append DONE_NETWORK_DEVICES <span class="string">&quot;<span class="variable">$&#123;device&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">handle_zone</span></span>() &#123;</span><br><span class="line">    <span class="comment"># $&#123;config&#125; contains the ID of the current section</span></span><br><span class="line">    <span class="built_in">local</span> config=<span class="string">&quot;<span class="variable">$&#123;1&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> zone_name</span><br><span class="line">    config_get zone_name <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> name</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Enable masquerading via NAT6</span></span><br><span class="line">    <span class="built_in">local</span> zone_masq6</span><br><span class="line">    config_get_bool zone_masq6 <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> masq6 0</span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Firewall config=\&quot;<span class="variable">$&#123;config&#125;</span>\&quot; zone=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; zone_masq6=\&quot;<span class="variable">$&#123;zone_masq6&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;zone_masq6&#125;</span>&quot;</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">return</span> 0</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># IPv6 privacy extensions: Use temporary addrs for outgoing connections?</span></span><br><span class="line">    <span class="built_in">local</span> zone_masq6_privacy</span><br><span class="line">    config_get_bool zone_masq6_privacy <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> masq6_privacy 1</span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Found firewall zone_name=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; with zone_masq6=\&quot;<span class="variable">$&#123;zone_masq6&#125;</span>\&quot; zone_masq6_privacy=\&quot;<span class="variable">$&#123;zone_masq6_privacy&#125;</span>\&quot;.&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Setting up masquerading nat6 for zone_name=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; with zone_masq6_privacy=\&quot;<span class="variable">$&#123;zone_masq6_privacy&#125;</span>\&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> ula_prefix=<span class="string">&quot;<span class="subst">$(get_ula_prefix)</span>&quot;</span></span><br><span class="line">    validate_ula_prefix <span class="string">&quot;<span class="variable">$&#123;ula_prefix&#125;</span>&quot;</span> || <span class="built_in">return</span> 1</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> postrouting_chain=<span class="string">&quot;zone_<span class="variable">$&#123;zone_name&#125;</span>_postrouting&quot;</span></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Ensuring ip6tables chain=\&quot;<span class="variable">$&#123;postrouting_chain&#125;</span>\&quot; contains our MASQUERADE.&quot;</span></span><br><span class="line">    ip6t_add <span class="string">&quot;<span class="variable">$&#123;postrouting_chain&#125;</span>&quot;</span> -t nat \</span><br><span class="line">        -m comment --comment <span class="string">&quot;!fw3&quot;</span> -j MASQUERADE</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> input_chain=<span class="string">&quot;zone_<span class="variable">$&#123;zone_name&#125;</span>_input&quot;</span></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Ensuring ip6tables chain=\&quot;<span class="variable">$&#123;input_chain&#125;</span>\&quot; contains our permissive DNAT rule.&quot;</span></span><br><span class="line">    ip6t_add <span class="string">&quot;<span class="variable">$&#123;input_chain&#125;</span>&quot;</span> -t filter -m conntrack --ctstate DNAT \</span><br><span class="line">        -m comment --comment <span class="string">&quot;!fw3: Accept port forwards&quot;</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> forward_chain=<span class="string">&quot;zone_<span class="variable">$&#123;zone_name&#125;</span>_forward&quot;</span></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Ensuring ip6tables chain=\&quot;<span class="variable">$&#123;forward_chain&#125;</span>\&quot; contains our permissive DNAT rule.&quot;</span></span><br><span class="line">    ip6t_add <span class="string">&quot;<span class="variable">$&#123;forward_chain&#125;</span>&quot;</span> -t filter -m conntrack --ctstate DNAT \</span><br><span class="line">        -m comment --comment <span class="string">&quot;!fw3: Accept port forwards&quot;</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line">    <span class="built_in">local</span> DONE_NETWORK_DEVICES=<span class="string">&quot;&quot;</span></span><br><span class="line">    config_list_foreach <span class="string">&quot;<span class="variable">$&#123;config&#125;</span>&quot;</span> network masq6_network</span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> <span class="string">&quot;Done setting up nat6 for zone=\&quot;<span class="variable">$&#123;zone_name&#125;</span>\&quot; on devices: <span class="variable">$&#123;DONE_NETWORK_DEVICES&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    nat6_init</span><br><span class="line">    config_load firewall</span><br><span class="line">    config_foreach handle_zone zone</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main <span class="string">&quot;<span class="variable">$&#123;@&#125;</span>&quot;</span></span><br><span class="line">EOF</span><br><span class="line">cat &lt;&lt; <span class="string">&quot;EOF&quot;</span> &gt;&gt; /etc/sysupgrade.conf</span><br><span class="line">/etc/firewall.nat6</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p> 经过此步骤后会生成一个 <code>/etc/firewall.nat6</code> 脚本，并且加入了 <code>/etc/sysupgrade.conf</code>，保证系统升级后也不会丢失该脚本</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">uci -q delete firewall.nat6</span><br><span class="line">uci <span class="built_in">set</span> firewall.nat6=<span class="string">&quot;include&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.nat6.path=<span class="string">&quot;/etc/firewall.nat6&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.nat6.reload=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure firewall</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[1].masq6=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[1].masq6_privacy=<span class="string">&quot;1&quot;</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="USB"><a href="#USB" class="headerlink" title="USB"></a>USB</h2><p>很多路由器有 USB 端口，通过插入 U 盘或者接入磁盘、SSD 等设备可以拓展存储空间，这样就可以安装更多的插件，或者搭建一个简单的 FTP、SMB 服务器用于共享数据</p>
+<h3 id="安装-USB-驱动"><a href="#安装-USB-驱动" class="headerlink" title="安装 USB 驱动"></a>安装 USB 驱动</h3><p>依次执行以下命令进行驱动基本包的安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-usb-core</span><br><span class="line"><span class="comment"># insmod usbcore</span></span><br><span class="line">opkg install kmod-usb-storage</span><br></pre></td></tr></table></figure>
+
+<p>如果设备是 USB 2.0</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install kmod-usb2</span><br><span class="line"><span class="comment"># insmod ehci-hcd</span></span><br></pre></td></tr></table></figure>
+
+<p>如果设备是 USB 3.0</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install kmod-usb3</span><br><span class="line"><span class="comment"># insmod xhci-hcd</span></span><br></pre></td></tr></table></figure>
+
+<p>通常移动硬盘或者移动 SSD 还需要安装 UAS&#x2F;UASP 支持</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install kmod-usb-storage-uas</span><br></pre></td></tr></table></figure>
+
+<p>然后热插拔存储设备，通常就能在 <code>/dev</code> 目录下看见 <code>sda</code> 设备了</p>
+<h3 id="自动挂载"><a href="#自动挂载" class="headerlink" title="自动挂载"></a>自动挂载</h3><ul>
+<li><p>安装块设备工具包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install block-mount</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分区</p>
+<p>个人已经提前将存储设备划分了两个分区，一个分区较小(sda1)用于后续的 <a href="#extroot">Extroot</a>，剩余的空间(sda2)全用于存储个人数据</p>
+</li>
+<li><p>创建文件系统</p>
+<p>推荐移动磁盘用 ext4 文件系统，而移动 SSD 推荐使用 f2fs 文件系统</p>
+<p>分区和创建文件系统可以参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVzI2NyZWF0ZV9hX3BhcnRpdGlvbl9vbl90aGVfdXNiX2Rpc2s=">官网的指导<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p>配置挂载</p>
+<p>配置挂载可以通过直接在网页端的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vbW91bnRz">系统-挂载点<i class="fa fa-external-link-alt"></i></span> 进行手动配置，比较直观，如图所示：</p>
+<p><img data-src="/posts/51140c4a/Mount-sda6.png" alt="挂载设备"></p>
+<ul>
+<li>已启用：勾选</li>
+<li>UUID：推荐使用 UUID 来进行挂载</li>
+<li>挂载点：也就是挂载的位置，通常在 <code>/mnt</code> 目录下新建一个文件夹</li>
+</ul>
+</li>
+</ul>
+<h3 id="Extroot"><a href="#Extroot" class="headerlink" title="Extroot"></a>Extroot</h3><p>有时候安装太多包会导致本地空间不足，此时可以通过将包安装在 USB 设备上，也可以通过 Extroot 的方式将 USB 设备的空间直接配置成 <code>overlay</code> 分区，后者更为推荐</p>
+<ol>
+<li><p>修改 <code>fstab</code>，将原本挂载的 <code>overlay</code> 设备挂载到新的目录 <code>/rwm</code></p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DEVICE=<span class="string">&quot;<span class="subst">$(sed -n -e <span class="string">&quot;/\s\/overlay\s.*$/s///p&quot;</span> /etc/mtab)</span>&quot;</span></span><br><span class="line">uci -q delete fstab.rwm</span><br><span class="line">uci <span class="built_in">set</span> fstab.rwm=<span class="string">&quot;mount&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.rwm.device=<span class="string">&quot;<span class="variable">$&#123;DEVICE&#125;</span>&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.rwm.target=<span class="string">&quot;/rwm&quot;</span></span><br><span class="line">uci commit fstab</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改 <code>fstab</code>，配置 USB 设备挂载成 <code>overlay</code> 分区</p>
+<p> 其中部分部分操作在 <a href="#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD">上节</a> 已经执行过，可以略去</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看分区信息</span></span><br><span class="line"><span class="comment"># block info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定分区并制作文件系统</span></span><br><span class="line">DEVICE=<span class="string">&quot;/dev/sda1&quot;</span></span><br><span class="line"><span class="comment"># mkfs.ext4 $&#123;DEVICE&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span> $(block info <span class="variable">$&#123;DEVICE&#125;</span> | grep -o -e <span class="string">&quot;UUID=\S*&quot;</span>)</span><br><span class="line">uci -q delete fstab.overlay</span><br><span class="line">uci <span class="built_in">set</span> fstab.overlay=<span class="string">&quot;mount&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.overlay.uuid=<span class="string">&quot;<span class="variable">$&#123;UUID&#125;</span>&quot;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.overlay.target=<span class="string">&quot;/overlay&quot;</span></span><br><span class="line">uci commit fstab</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将原本 <code>overlay</code> 分区数据复制到 USB 设备上，重启设备</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p /tmp/cproot</span><br><span class="line">mount --<span class="built_in">bind</span> /overlay /tmp/cproot</span><br><span class="line">mkdir -p /mnt/tmp</span><br><span class="line">mount <span class="variable">$&#123;DEVICE&#125;</span> /mnt/tmp</span><br><span class="line">tar -C /tmp/cproot -cvf - . | tar -C /mnt/tmp -xf -</span><br><span class="line">umount /tmp/cproot /mnt/tmp</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><p>配置好 USB 后，就可以配置 FTP 来共享 USB 设备</p>
+<ol>
+<li><p>首先安装 vsftpd 包</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install vsftpd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件 <code>/etc/vsftpd.conf</code>，这里给出个人的配置，可以参考</p>
+ <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">background</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">listen</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">anonymous_enable</span>=<span class="literal">NO</span></span><br><span class="line"><span class="attr">local_enable</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">write_enable</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">local_umask</span>=<span class="number">022</span></span><br><span class="line"><span class="attr">check_shell</span>=<span class="literal">NO</span></span><br><span class="line"><span class="comment">#dirmessage_enable=YES</span></span><br><span class="line"><span class="comment">#ftpd_banner=Welcome to MINI FTP service.</span></span><br><span class="line"><span class="attr">session_support</span>=<span class="literal">NO</span></span><br><span class="line"><span class="comment">#syslog_enable=YES</span></span><br><span class="line"><span class="comment">#userlist_enable=YES</span></span><br><span class="line"><span class="comment">#userlist_deny=NO</span></span><br><span class="line"><span class="comment">#userlist_file=/etc/vsftpd/vsftpd.users</span></span><br><span class="line"><span class="comment">#xferlog_enable=YES</span></span><br><span class="line"><span class="comment">#xferlog_file=/var/log/vsftpd.log</span></span><br><span class="line"><span class="comment">#xferlog_std_format=YES</span></span><br><span class="line"><span class="comment">###</span></span><br><span class="line"><span class="comment">### TLS/SSL options</span></span><br><span class="line"><span class="comment">### example key generation: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd_privkey.pem -out /etc</span></span><br><span class="line"><span class="comment">#ssl_enable=YES</span></span><br><span class="line"><span class="comment">#allow_anon_ssl=NO</span></span><br><span class="line"><span class="comment">#force_local_data_ssl=NO</span></span><br><span class="line"><span class="comment">#force_local_logins_ssl=NO</span></span><br><span class="line"><span class="comment">#ssl_tlsv1=YES</span></span><br><span class="line"><span class="comment">#ssl_sslv2=NO</span></span><br><span class="line"><span class="comment">#ssl_sslv3=NO</span></span><br><span class="line"><span class="comment">#rsa_cert_file=/etc/vsftpd/vsftpd_cert.pem</span></span><br><span class="line"><span class="comment">#rsa_private_key_file=/etc/vsftpd/vsftpd_privkey.pem</span></span><br><span class="line"><span class="comment"># 共享的目录位置</span></span><br><span class="line"><span class="attr">local_root</span>=/mnt/ext4</span><br><span class="line"><span class="attr">pasv_enable</span>=<span class="literal">YES</span></span><br><span class="line"><span class="attr">pasv_min_port</span>=<span class="number">10090</span></span><br><span class="line"><span class="attr">pasv_max_port</span>=<span class="number">10100</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后参考之前的 <a href="#%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3">开放端口</a>，打开 20、21、10090-10100 端口就可以在外网访问 FTP 服务器了</p>
+<p> <img data-src="/posts/51140c4a/Allow-FTP-WAN.png" alt="开放 FTP 端口"></p>
+</li>
+<li><p>之后重启 <code>vsftpd</code> 服务即可使用</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/init.d/vsftpd restart</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>P.S. 连接 ftp 服务器的账号密码就是路由器的 root 账号密码</p>
+<h2 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h2><p>使用 Samba 来共享的设备可以在 Windows 的文件资源管理器中挂载，使用起来和本地磁盘一样（在局域网内）</p>
+<ol>
+<li><p>安装 samba4-server 以及 LuCI 管理界面</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install samba4-server</span><br><span class="line">opkg install luci-app-samba4 luci-i18n-samba4-zh-cn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在网页端的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zZXJ2aWNlcy9zYW1iYTQ=">服务-网络共享<i class="fa fa-external-link-alt"></i></span> 中进行配置，个人配置如下，可以参考</p>
+<p> <img data-src="/posts/51140c4a/Samba.png" alt="Samba 配置"></p>
+</li>
+<li><p>之后重启 <code>samba4</code> 服务即可使用</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/init.d/samba4 restart</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>P.S. 连接 Samba 服务器的账号密码也是路由器的 root 账号密码</p>
+<h2 id="BT-下载"><a href="#BT-下载" class="headerlink" title="BT 下载"></a>BT 下载</h2><p>transmission 是一个轻量级跨平台的 BT 下载客户端</p>
+<ol>
+<li><p>安装 transmission</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg install transmission-daemon</span><br><span class="line">opkg install transmission-cli</span><br><span class="line">opkg install transmission-web   <span class="comment"># web 界面，可选</span></span><br><span class="line">opkg install transmission-remote</span><br><span class="line">opkg install luci-app-transmission luci-i18n-transmission-zh-cn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接修改 <code>/etc/config/transmission</code>，或者在网页端的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zZXJ2aWNlcy90cmFuc21pc3Npb24=">服务-Transmission<i class="fa fa-external-link-alt"></i></span> 进行配置，下面给出个人配置，可以参考</p>
+<p> <img data-src="/posts/51140c4a/Transmission.png" alt="Transmission 配置"></p>
+ <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">config transmission</span><br><span class="line">    option config_overwrite &#x27;1&#x27;</span><br><span class="line">    option mem_percentage &#x27;50&#x27;</span><br><span class="line">    option nice &#x27;10&#x27;</span><br><span class="line">    option alt_speed_enabled &#x27;false&#x27;</span><br><span class="line">    option alt_speed_time_enabled &#x27;false&#x27;</span><br><span class="line">    option bind_address_ipv4 &#x27;0.0.0.0&#x27;</span><br><span class="line">    option bind_address_ipv6 &#x27;::&#x27;</span><br><span class="line">    option blocklist_enabled &#x27;false&#x27;</span><br><span class="line">    option cache_size_mb &#x27;2&#x27;</span><br><span class="line">    option dht_enabled &#x27;true&#x27;</span><br><span class="line">    option download_queue_enabled &#x27;true&#x27;</span><br><span class="line">    option download_queue_size &#x27;4&#x27;</span><br><span class="line">    option encryption &#x27;1&#x27;</span><br><span class="line">    option idle_seeding_limit_enabled &#x27;false&#x27;</span><br><span class="line">    option lazy_bitfield_enabled &#x27;true&#x27;</span><br><span class="line">    option lpd_enabled &#x27;false&#x27;</span><br><span class="line">    option message_level &#x27;1&#x27;</span><br><span class="line">    option peer_limit_global &#x27;240&#x27;</span><br><span class="line">    option peer_limit_per_torrent &#x27;60&#x27;</span><br><span class="line">    option peer_port &#x27;51413&#x27;</span><br><span class="line">    option peer_port_random_on_start &#x27;false&#x27;</span><br><span class="line">    option peer_socket_tos &#x27;default&#x27;</span><br><span class="line">    option pex_enabled &#x27;true&#x27;</span><br><span class="line">    option port_forwarding_enabled &#x27;true&#x27;</span><br><span class="line">    option preallocation &#x27;1&#x27;</span><br><span class="line">    option queue_stalled_enabled &#x27;true&#x27;</span><br><span class="line">    option queue_stalled_minutes &#x27;30&#x27;</span><br><span class="line">    option ratio_limit &#x27;2.0000&#x27;</span><br><span class="line">    option rename_partial_files &#x27;true&#x27;</span><br><span class="line">    option rpc_bind_address &#x27;0.0.0.0&#x27;</span><br><span class="line">    option rpc_enabled &#x27;true&#x27;</span><br><span class="line">    option rpc_host_whitelist_enabled &#x27;false&#x27;</span><br><span class="line">    option rpc_port &#x27;9091&#x27;</span><br><span class="line">    option rpc_url &#x27;/transmission/&#x27;</span><br><span class="line">    option rpc_whitelist_enabled &#x27;false&#x27;</span><br><span class="line">    option scrape_paused_torrents_enabled &#x27;true&#x27;</span><br><span class="line">    option script_torrent_done_enabled &#x27;false&#x27;</span><br><span class="line">    option seed_queue_enabled &#x27;false&#x27;</span><br><span class="line">    option speed_limit_down_enabled &#x27;false&#x27;</span><br><span class="line">    option speed_limit_up_enabled &#x27;false&#x27;</span><br><span class="line">    option start_added_torrents &#x27;true&#x27;</span><br><span class="line">    option umask &#x27;18&#x27;</span><br><span class="line">    option utp_enabled &#x27;true&#x27;</span><br><span class="line">    option scrape_paused_torrents &#x27;true&#x27;</span><br><span class="line">    option watch_dir_enabled &#x27;false&#x27;</span><br><span class="line">    option enabled &#x27;1&#x27;</span><br><span class="line">    option user &#x27;root&#x27;</span><br><span class="line">    option group &#x27;root&#x27;</span><br><span class="line">    option upload_slots_per_torrent &#x27;10&#x27;</span><br><span class="line">    option download_dir &#x27;/mnt/ext4/transmission&#x27;</span><br><span class="line">    option incomplete_dir_enabled &#x27;true&#x27;</span><br><span class="line">    option incomplete_dir &#x27;/mnt/ext4/transmission/incomplete&#x27;</span><br><span class="line">    option trash_original_torrent_files &#x27;true&#x27;</span><br><span class="line">    option rpc_authentication_required &#x27;true&#x27;</span><br><span class="line">    option rpc_username &#x27;rpc_username&#x27;</span><br><span class="line">    option rpc_password &#x27;rpc_password&#x27;</span><br><span class="line">    option ratio_limit_enabled &#x27;true&#x27;</span><br><span class="line">    option config_dir &#x27;/etc/transmission&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>之后重启 <code>transmission</code> 服务即可使用</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/init.d/transmission restart</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>连接的账号密码为自行配置的 <code>RPC</code> 连接的账号密码</p>
+<p>默认的 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xOjkwOTEvdHJhbnNtaXNzaW9uL3dlYi8=">Web 界面<i class="fa fa-external-link-alt"></i></span> 比较简陋，并且不能配置 tracker，个人推荐使用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RyYW5zbWlzc2lvbi1yZW1vdGUtZ3VpL3RyYW5zZ3Vp">transgui<i class="fa fa-external-link-alt"></i></span> 来 <code>RPC</code> 连接使用</p>
+<p>如果需要远程访问，则需要将 <code>rpc_port</code> 配置的端口开放，具体流程参考 <a href="#%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3">上文</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbHVjaS9sdWNpLmVzc2VudGlhbHM=">【OpenWrt】LuCI<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI3NDA5Ny9hcnRpY2xlL2RldGFpbHMvMTA3MTk3NzE3">【CSDN】luci.cbi 报错<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2t1b3J1YW4vbHVjaS1hcHAtdjJyYXkvaXNzdWVzLzQy">【GitHub】应用设置界面错误<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h5cmF0aGIvbWVudG9odXN0">【GitHub】MentoHUST 加入 v4 支持<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1tZW50b2h1c3Q=">【GitHub】OpenWrt&#x2F;LEDE LuCI for MentoHUST<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VwZGF0ZWluZy9taW5pZWFw">【GitHub】MiniEAP<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9sdWNpLWFwcC1taW5pZWFw">【GitHub】OpenWrt&#x2F;LEDE LuCI for minieap<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvZmlyZXdhbGwvZmlyZXdhbGxfY29uZmlndXJhdGlvbiNydWxlcw==">【OpenWrt】firewall rules<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy96aC1jbi9kb2MvdWNpL2ZpcmV3YWxsIyVFNCVCOCVCRSVFNCVCRSU4Qg==">【OpenWrt】防火墙配置举例<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjYubmF0Ng==">【OpenWrt】IPv6 NAT6 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjZfZXh0cmFzI3VzaW5nX2lwdjZfYnlfZGVmYXVsdA==">【OpenWrt】默认使用 IPv6<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvbmV0d29yay9pcHY2L2lwdjZfZXh0cmFzI2Fubm91bmNpbmdfZGVmYXVsdF9pcHY2X3JvdXRl">【OpenWrt】默认 IPv6 路由<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItaW5zdGFsbGluZw==">【OpenWrt】安装 USB 驱动<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVz">【OpenWrt】使用 USB 设备<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvYWRkaXRpb25hbC1zb2Z0d2FyZS9leHRyb290X2NvbmZpZ3VyYXRpb24=">【OpenWrt】Extroot 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL2Z0cC5vdmVydmlldw==">【OpenWrt】FTP<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL3NhbWJh">【OpenWrt】Samba<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvZG93bmxvYWRpbmdfYW5kX2ZpbGVzaGFyaW5nL3RyYW5zbWlzc2lvbg==">【OpenWrt】transmission<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+        <tag>锐捷</tag>
+        <tag>IPv6</tag>
+        <tag>NAS</tag>
       </tags>
   </entry>
 </search>
