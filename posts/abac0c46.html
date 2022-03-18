@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 配置主流搜索引擎收录流程记录">
@@ -277,7 +277,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.5k</span>
+      <span>2.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -297,10 +297,10 @@
     <div class="post-body" itemprop="articleBody">
         <p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
 <span id="more"></span>
-<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
+<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
 <p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="是否已经被收录"><a href="#是否已经被收录" class="headerlink" title="是否已经被收录"></a>是否已经被收录</h2><p>为了查看网站是否已经被收录，可以在 Google 或者 Bing 以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code> 链接进行替换即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img data-src="/posts/abac0c46/google_site.png" alt="google_site"></p>
 <p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
@@ -319,10 +319,10 @@
 <p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
 <p><img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership"></p>
 <p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;google-site-verification&quot;</span> <span class="attr">content</span>=<span class="string">&quot;F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
 <h4 id="提交站点地图-1"><a href="#提交站点地图-1" class="headerlink" title="提交站点地图"></a>提交站点地图</h4><p>之前 <code>hexo-generator-sitemap</code> 插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
@@ -334,10 +334,10 @@
 <p><img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership"></p>
 <p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
 <p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;msvalidate.01&quot;</span> <span class="attr">content</span>=<span class="string">&quot;65AB321A829DD5542989CC078C3ABD9E&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
 <p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code> 即可</p>
@@ -489,7 +489,6 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
