@@ -85,133 +85,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LaTeX PPT</title>
-    <url>/posts/499c5a19.html</url>
-    <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf 上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用</p>
-<span id="more"></span>
-<p><img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer"></p>
-<!-- TODO: Beamer 介绍和额外的特性 -->
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>Beamer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 基础介绍</title>
-    <url>/posts/a4752f87.html</url>
-    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
-<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
-<span id="more"></span>
-<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
-<ul>
-<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
-<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
-<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
-</ul>
-<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
-<li>pdfTeX 的主要特性是能直接生成 pdf</li>
-<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
-<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX, XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo 配置主流搜索引擎收录流程记录</title>
-    <url>/posts/abac0c46.html</url>
-    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
-<span id="more"></span>
-<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
-<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="是否已经被收录"><a href="#是否已经被收录" class="headerlink" title="是否已经被收录"></a>是否已经被收录</h2><p>为了查看网站是否已经被收录，可以在 Google 或者 Bing 以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code> 链接进行替换即可</p>
-<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img data-src="/posts/abac0c46/google_site.png" alt="google_site"></p>
-<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
-<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
-<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用 <code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
-<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
-<h2 id="提交站点地图"><a href="#提交站点地图" class="headerlink" title="提交站点地图"></a>提交站点地图</h2><p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
-<p>（由于 GitHub 屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
-<h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
-<p>而对我们来说，主要分三个步骤：注册 Search Console，验证网站所有权，提交站点地图</p>
-<h4 id="注册-Search-Console"><a href="#注册-Search-Console" class="headerlink" title="注册 Search Console"></a>注册 Search Console</h4><p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC 官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
-<h4 id="验证网站所有权"><a href="#验证网站所有权" class="headerlink" title="验证网站所有权"></a>验证网站所有权</h4><p>登录之后，就需要添加我们的网站了</p>
-<p><img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website"></p>
-<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS 配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code> 后会有五种方式供我们选择</p>
-<p><img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership"></p>
-<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
-<p><img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership"></p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
-<h4 id="提交站点地图-1"><a href="#提交站点地图-1" class="headerlink" title="提交站点地图"></a>提交站点地图</h4><p>之前 <code>hexo-generator-sitemap</code> 插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
-<p><img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap"></p>
-<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC 的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为 <code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
-<h3 id="Bing"><a href="#Bing" class="headerlink" title="Bing"></a>Bing</h3><h4 id="从-GSC-导入"><a href="#从-GSC-导入" class="headerlink" title="从 GSC 导入"></a>从 GSC 导入</h4><p><img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website"></p>
-<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从 GSC 进行导入即可</p>
-<h4 id="手动添加网站"><a href="#手动添加网站" class="headerlink" title="手动添加网站"></a>手动添加网站</h4><p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
-<p><img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership"></p>
-<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
-<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code> 即可</p>
-<p><img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap"></p>
-<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing 给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比 Google 快不少</p>
-<h2 id="手动请求编入索引"><a href="#手动请求编入索引" class="headerlink" title="手动请求编入索引"></a>手动请求编入索引</h2><p>根据个人观察，Google 及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
-<p>具体流程为：</p>
-<ol>
-<li><p>点击 GSC 的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
-<p> <img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website"></p>
-</li>
-<li><p>等待结果返回后，点击【请求编入索引】即可</p>
-<p> <img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit"></p>
-</li>
-</ol>
-<p>个人实测，大概需要一个月左右，Google 上就能搜索到网站上的大多数页面了</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览 Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo 博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo 博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NexT 主题的配置使用记录</title>
     <url>/posts/9a0b7c3b.html</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
@@ -343,70 +216,82 @@
       </tags>
   </entry>
   <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+    <title>Hexo 配置主流搜索引擎收录流程记录</title>
+    <url>/posts/abac0c46.html</url>
+    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
 <span id="more"></span>
-<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
-<table>
-<thead>
-<tr>
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th> 换成算成 mm</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pt</td>
-<td> 基本单位</td>
-<td> 1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>mm</td>
-<td> 毫米</td>
-<td> 2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr>
-<td>cm</td>
-<td> 厘米</td>
-<td> 28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr>
-<td>in</td>
-<td> 英寸</td>
-<td> 72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>ex</td>
-<td> 当前字体的 x 字母高度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-<tr>
-<td>em</td>
-<td> 当前字体的 m 字母宽度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
+<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="是否已经被收录"><a href="#是否已经被收录" class="headerlink" title="是否已经被收录"></a>是否已经被收录</h2><p>为了查看网站是否已经被收录，可以在 Google 或者 Bing 以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code> 链接进行替换即可</p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+<p><img data-src="/posts/abac0c46/google_site.png" alt="google_site"></p>
+<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
+<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
+<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用 <code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
+<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
+<h2 id="提交站点地图"><a href="#提交站点地图" class="headerlink" title="提交站点地图"></a>提交站点地图</h2><p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
+<p>（由于 GitHub 屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
+<h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
+<p>而对我们来说，主要分三个步骤：注册 Search Console，验证网站所有权，提交站点地图</p>
+<h4 id="注册-Search-Console"><a href="#注册-Search-Console" class="headerlink" title="注册 Search Console"></a>注册 Search Console</h4><p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC 官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
+<h4 id="验证网站所有权"><a href="#验证网站所有权" class="headerlink" title="验证网站所有权"></a>验证网站所有权</h4><p>登录之后，就需要添加我们的网站了</p>
+<p><img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website"></p>
+<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS 配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code> 后会有五种方式供我们选择</p>
+<p><img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership"></p>
+<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
+<p><img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership"></p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
+<h4 id="提交站点地图-1"><a href="#提交站点地图-1" class="headerlink" title="提交站点地图"></a>提交站点地图</h4><p>之前 <code>hexo-generator-sitemap</code> 插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
+<p><img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap"></p>
+<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC 的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为 <code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
+<h3 id="Bing"><a href="#Bing" class="headerlink" title="Bing"></a>Bing</h3><h4 id="从-GSC-导入"><a href="#从-GSC-导入" class="headerlink" title="从 GSC 导入"></a>从 GSC 导入</h4><p><img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website"></p>
+<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从 GSC 进行导入即可</p>
+<h4 id="手动添加网站"><a href="#手动添加网站" class="headerlink" title="手动添加网站"></a>手动添加网站</h4><p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
+<p><img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership"></p>
+<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
+<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code> 即可</p>
+<p><img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap"></p>
+<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing 给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比 Google 快不少</p>
+<h2 id="手动请求编入索引"><a href="#手动请求编入索引" class="headerlink" title="手动请求编入索引"></a>手动请求编入索引</h2><p>根据个人观察，Google 及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
+<p>具体流程为：</p>
+<ol>
+<li><p>点击 GSC 的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
+<p> <img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website"></p>
+</li>
+<li><p>等待结果返回后，点击【请求编入索引】即可</p>
+<p> <img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit"></p>
+</li>
+</ol>
+<p>个人实测，大概需要一个月左右，Google 上就能搜索到网站上的大多数页面了</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览 Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo 博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo 博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
-        <category>LaTeX</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>LaTeX</tag>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
       </tags>
   </entry>
   <entry>
@@ -503,33 +388,118 @@
       </tags>
   </entry>
   <entry>
-    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
-    <url>/posts/29e0b18c.html</url>
-    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应</p>
+    <title>LaTeX PPT</title>
+    <url>/posts/499c5a19.html</url>
+    <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf 上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用</p>
 <span id="more"></span>
-<p><del>（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）</del></p>
-<p><img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser"></p>
-<h2 id="修复问题：卸载-KGChromePlugin"><a href="#修复问题：卸载-KGChromePlugin" class="headerlink" title="修复问题：卸载 KGChromePlugin"></a>修复问题：卸载 KGChromePlugin</h2><p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin 金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd 都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
-<ol>
-<li><p>可通过 chrome://version/ 查看命令行中是否含有 <code>--register-pepper-plugins=XXX</code></p>
-<p> <img data-src="/posts/29e0b18c/chrome_version_before.png" alt="chrome_version_before"></p>
-</li>
-<li><p>根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是 <code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序 <code>KGPMUninstall.exe</code>，双击进行卸载即可</p>
-</li>
-<li><p>卸载之后，重启一下 chrome，命令行应该就恢复正常了，此时也能在已打开 chrome 的情况下在第三方应用中顺利打开超链接了</p>
-<p> <img data-src="/posts/29e0b18c/chrome_version_after.png" alt="chrome_version_after"></p>
-</li>
-</ol>
+<p><img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer"></p>
+<!-- TODO: Beamer 介绍和额外的特性 -->
+
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome 浏览器 每次打开提示：“–no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
-        <category>日常踩坑</category>
+        <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>chrome</tag>
-        <tag>日常踩坑</tag>
+        <tag>LaTeX</tag>
+        <tag>Beamer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+<span id="more"></span>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th> 换成算成 mm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pt</td>
+<td> 基本单位</td>
+<td> 1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>mm</td>
+<td> 毫米</td>
+<td> 2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr>
+<td>cm</td>
+<td> 厘米</td>
+<td> 28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr>
+<td>in</td>
+<td> 英寸</td>
+<td> 72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>ex</td>
+<td> 当前字体的 x 字母高度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+<tr>
+<td>em</td>
+<td> 当前字体的 m 字母宽度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 基础介绍</title>
+    <url>/posts/a4752f87.html</url>
+    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
+<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
+<span id="more"></span>
+<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
+<ul>
+<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
+<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
+<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
+</ul>
+<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
+<li>pdfTeX 的主要特性是能直接生成 pdf</li>
+<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
+<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX, XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
       </tags>
   </entry>
   <entry>
@@ -611,6 +581,101 @@
       </tags>
   </entry>
   <entry>
+    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
+    <url>/posts/29e0b18c.html</url>
+    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应</p>
+<span id="more"></span>
+<p><del>（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）</del></p>
+<p><img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser"></p>
+<h2 id="修复问题：卸载-KGChromePlugin"><a href="#修复问题：卸载-KGChromePlugin" class="headerlink" title="修复问题：卸载 KGChromePlugin"></a>修复问题：卸载 KGChromePlugin</h2><p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin 金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd 都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
+<ol>
+<li><p>可通过 chrome://version/ 查看命令行中是否含有 <code>--register-pepper-plugins=XXX</code></p>
+<p> <img data-src="/posts/29e0b18c/chrome_version_before.png" alt="chrome_version_before"></p>
+</li>
+<li><p>根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是 <code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序 <code>KGPMUninstall.exe</code>，双击进行卸载即可</p>
+</li>
+<li><p>卸载之后，重启一下 chrome，命令行应该就恢复正常了，此时也能在已打开 chrome 的情况下在第三方应用中顺利打开超链接了</p>
+<p> <img data-src="/posts/29e0b18c/chrome_version_after.png" alt="chrome_version_after"></p>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome 浏览器 每次打开提示：“–no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>chrome</tag>
+        <tag>日常踩坑</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从 SSLEOFError 到正确配置 Proxy</title>
+    <url>/posts/76f6af57.html</url>
+    <content><![CDATA[<p>本文主要参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZGF2eXl5L3AvMTQzODg2MjMuaHRtbA==">Python 遭遇 ProxyError 问题记录<i class="fa fa-external-link-alt"></i></span> 重新梳理改写</p>
+<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><p>在前几天搞定 <code>pip</code> 的 SSL 认证之后，结果在利用 <code>requests</code> 库请求 HTTPS 网站又出现了 <code>SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1129)'))</code> 的 SSL 相关错误</p>
+<p>经过一系列的查询资料和测试发现，原因竟然在于 <code>python</code> 自身的 <code>urllib</code> 库没有正确配置 HTTPS 代理</p>
+<span id="more"></span>
+
+<h2 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h2><h3 id="普通的代理服务器"><a href="#普通的代理服务器" class="headerlink" title="普通的代理服务器"></a>普通的代理服务器</h3><p><img data-src="/posts/76f6af57/Proxy_Server.png" alt="Proxy_Server"></p>
+<p>上面提及的 HTTP (S) 代理，其实是通过代理服务器进行 HTTP (S) 流量的转发的意思，也是在上图中的 <em>黄线</em> 所代表的协议，文中后续用 <u>出口协议</u> 来指代</p>
+<p>而和代理服务器之间其实也需要一种协议进行通信，就是在上图中的 <em>绿线</em> 部分，文中后续用 <u>入口协议</u> 来指代</p>
+<p>而 <u>入口协议</u> <strong>通常使用较多的都是 HTTP 和 Socks4/Socks5，很少有采用 HTTPS 作为与代理服务器间的连接协议</strong>，这点也是<strong>导致之前报错的主要原因</strong></p>
+<h3 id="科学上网工具"><a href="#科学上网工具" class="headerlink" title="科学上网工具"></a>科学上网工具</h3><p>其实代理服务器和 SS、SSR、V2Ray、Clash 等科学上网代理工具都是同一种性质，主要的不同点在于与实际代理服务器之间的 <u>入口协议</u> 部分（例如 Shadowsocks、VMess、Trojan 等）。为了不被 GFW 发现，需要实现对流量的混淆加密等。而且通常为了兼容性等因素，大多数科学上网工具在与实际代理服务器之间还有一级本地的代理服务器</p>
+<p><img data-src="/posts/76f6af57/Fuck_GFW.png" alt="Fuck_GFW"></p>
+<p>科学上网工具的特殊协议只是在上图中的只有红线部分使用，而整个蓝色框的部分就是科学上网工具，用户并不需要关心这些特殊协议，只需要通过与通常代理服务器一样的 <em>绿线</em> 的 <u>入口协议</u> 来进行连接即可</p>
+<h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><p>因此 <u>入口协议</u> 和 <u>出口协议</u> 之间其实没有任何因果联系，以 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZuZHJvaWQvY2xhc2hfZm9yX3dpbmRvd3NfcGtn">Clash for Windows, CFW<i class="fa fa-external-link-alt"></i></span> 为例</p>
+<p><img data-src="/posts/76f6af57/Clash_for_Windows_Local_Proxy.png" alt="Clash_for_Windows_Local_Proxy"></p>
+<p>它的 <u>入口协议</u> 支持 http 以及 socks，而且都在同一个端口，因此正确的代理配置应该是这样的：</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 正确的配置方式</span></span><br><span class="line"><span class="attr">HTTP_PROXY</span>=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br><span class="line"><span class="attr">HTTPS_PROXY</span>=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>或者</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 正确的配置方式</span></span><br><span class="line"><span class="attr">HTTP_PROXY</span>=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br><span class="line"><span class="attr">HTTPS_PROXY</span>=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>重点：</strong></p>
+<p><code>HTTPS_PROXY</code> 也应该填写 <code>http://127.0.0.1:7890</code>，因为 <code>HTTPS_PROXY</code> 中 <code>HTTPS</code> 代表的是 <u>出口协议</u>，而 <code>http://127.0.0.1:7890</code> 代表和 <code>127.0.0.1:7890</code> 服务器之间的 <u>入口协议</u> 是 <code>HTTP</code></p>
+<h2 id="追根溯源"><a href="#追根溯源" class="headerlink" title="追根溯源"></a>追根溯源</h2><figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 错误的配置方式</span></span><br><span class="line"><span class="attr">HTTP_PROXY</span>=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br><span class="line"><span class="attr">HTTPS_PROXY</span>=https://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>而之前一直采用的上述错误配置，则会因为旧版本的 <code>python</code> 的 <code>pip</code> 内含的 <code>urllib3</code> 不支持 HTTPS 的 <u>入口协议</u> ，自动转换成了 HTTP 的 <u>入口协议</u> 进行连接了</p>
+<h3 id="urllib3"><a href="#urllib3" class="headerlink" title="urllib3"></a>urllib3</h3><p>但是在 <code>urllib3</code> 库升级到 v1.26.0 版本之后，增加了对 HTTPS 的 <u>入口协议</u> 的支持，参见 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VybGxpYjMvdXJsbGliMy9jb21taXQvOGM3YTQzYjRhNGNhMGM4ZDM2ZDU1ZjEzMmRhYTJhNDNkMDZmZTNjNA==">Add support for HTTPS connections to proxies.<i class="fa fa-external-link-alt"></i></span></p>
+<p><img data-src="/posts/76f6af57/Urllib3_Support_HTTPS.png" alt="Urllib3_Support_HTTPS"></p>
+<h3 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h3><p><code>pip</code> 内置了的 <code>requests</code> 和 <code>urllib3</code> 包，而不依赖全局的 <code>requests</code> 和 <code>urllib3</code> 包</p>
+<p>当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span> 时，内置的 <code>requests</code> 包升级到了 v2.25.0，<code>urllib3</code> 包也升级到了 v1.26.2，也就是说开始支持 HTTPS 的 <u>入口协议</u> 了，参见 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B5cGEvcGlwL2Jsb2IvYzMxYzE0OGE1YjFkODc1OTE4NjJjNzE1YWRjN2E3ZTVmMzI0MmZiYS9ORVdTLnJzdCN2ZW5kb3JlZC1saWJyYXJpZXM=">pypa/pip 20.3 (2020-11-30) NEWS.rst<i class="fa fa-external-link-alt"></i></span></p>
+<p><img data-src="/posts/76f6af57/Pip_Support_HTTPS.png" alt="Pip_Support_HTTPS"></p>
+<h3 id="万恶之源-urllib"><a href="#万恶之源-urllib" class="headerlink" title="万恶之源 urllib"></a>万恶之源 urllib</h3><p>但是其实他们都不是罪魁祸首，真正的原因其实在 python 的内置包 <code>urllib</code> 上</p>
+<p>一般 <code>CFW</code> 等科学上网软件都会通过修改 Windows 注册表的 <code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings</code> 目录下的 <code>ProxyServer</code> 来配置代理服务器地址端口以及 <code>ProxyEnable</code> 是否启用代理</p>
+<p><img data-src="/posts/76f6af57/Win11_Reg.png" alt="Win11_Reg"></p>
+<p><code>CFW</code> 在配置代理服务器时，仅仅给出了地址和端口，并没有给出 <u>入口协议</u></p>
+<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># urllib 配置代理的源码摘录：</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    <span class="keyword">if</span> proxyServer[:<span class="number">5</span>] == <span class="string">'http:'</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'https'</span>] = <span class="string">'https://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'ftp'</span>] = <span class="string">'ftp://%s'</span> % proxyServer</span><br></pre></td></tr></tbody></table></figure>
+
+<p>按照上面给出的 <code>urllib</code> 库源码逻辑，会将代理配置为</p>
+<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line">proxies = {</span><br><span class="line">    <span class="string">'http'</span>: <span class="string">'http://127.0.0.1:7890'</span>,</span><br><span class="line">    <span class="string">'https'</span>: <span class="string">'https://127.0.0.1:7890'</span>,</span><br><span class="line">    <span class="string">'ftp'</span>: <span class="string">'ftp://127.0.0.1:7890'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>因此导致了 <code>pip</code>、<code>requests</code> 等上层包，访问 HTTPS 网站时会错误的使用 <code>https://127.0.0.1:7890</code> 代理，而 <code>CFW</code> 根本不支持 HTTPS 的 <u>入口协议</u>，所以才会产生这么一系列的错误</p>
+<p>个人推荐可以根据自己常用的科学上网工具所支持的 <u>入口协议</u> 来修改 <code>urllib</code> 库源码逻辑（文件位置一般在 <code>python3.*/urllib/request.py</code>），或者简单的按照下面的方式进行修改</p>
+<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'https'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'ftp'</span>] = proxyServer</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZGF2eXl5L3AvMTQzODg2MjMuaHRtbA==">【博客园】Python 遭遇 ProxyError 问题记录<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU0JUJCJUEzJUU3JTkwJTg2JUU2JTlDJThEJUU1JThBJUExJUU1JTk5JUE4">【维基百科】代理服务器<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZuZHJvaWQvY2xhc2hfZm9yX3dpbmRvd3NfcGtnL2lzc3Vlcy8zMTI=">【GitHub】Fndroid/clash_for_windows_pkg 系统代理自动关闭或打开<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B5cGEvcGlwL2lzc3Vlcy85MjE2I2lzc3VlY29tbWVudC03NDE4MzYwNTg=">【GitHub】pypa/pip Pip 20.3+ break proxy connection<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VybGxpYjMvdXJsbGliMy9jb21taXQvOGM3YTQzYjRhNGNhMGM4ZDM2ZDU1ZjEzMmRhYTJhNDNkMDZmZTNjNA==">【GitHub】urllib3/urllib3 Add support for HTTPS connections to proxies.<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B5cGEvcGlwL2Jsb2IvYzMxYzE0OGE1YjFkODc1OTE4NjJjNzE1YWRjN2E3ZTVmMzI0MmZiYS9ORVdTLnJzdCN2ZW5kb3JlZC1saWJyYXJpZXM=">【GitHub】pypa/pip 20.3 (2020-11-30) NEWS.rst<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>日常踩坑</tag>
+        <tag>python</tag>
+        <tag>proxy</tag>
+        <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决 pip 安装第三方包时因 SSL 报错</title>
     <url>/posts/2e7aa01a.html</url>
     <content><![CDATA[<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code> 后发现用 <code>pip</code> 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的</p>
@@ -659,8 +724,8 @@
       <tags>
         <tag>日常踩坑</tag>
         <tag>python</tag>
-        <tag>pip</tag>
         <tag>SSL</tag>
+        <tag>pip</tag>
       </tags>
   </entry>
   <entry>
@@ -748,99 +813,6 @@
       </tags>
   </entry>
   <entry>
-    <title>io_uring 简介和使用</title>
-    <url>/posts/c142853f.html</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">[1]<i class="fa fa-external-link-alt"></i></span>，同时支持 buffer IO</p>
-<span id="more"></span>
-<p>io_uring 的作者 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">Jens Axboe<i class="fa fa-external-link-alt"></i></span> 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
-<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
-<p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code> 的方式直接调用，使用起来很麻烦</p>
-<h3 id="liburing"><a href="#liburing" class="headerlink" title="liburing"></a>liburing</h3><p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库 liburing，简化了 io_uring 的使用，代码位置在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5n">github<i class="fa fa-external-link-alt"></i></span> 上</p>
-<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><p>liburing 仓库的 <code>examples/</code> 目录下提供了几个简单的样例程序：</p>
-<table>
-<thead>
-<tr>
-<th>文件</th>
-<th>功能</th>
-<th>其他</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>io_uring-test.c</code></td>
-<td>读取一个文件的全部内容</td>
-<td> -</td>
-</tr>
-<tr>
-<td><code>io_uring-cp.c</code></td>
-<td>复制一个文件的内容到另一个文件</td>
-<td>使用 <code>user_data</code> 手动处理读写 IO 之间的依赖，读 IO 返回之后才下发写 IO</td>
-</tr>
-<tr>
-<td><code>link-cp.c</code></td>
-<td>复制一个文件的内容到另一个文件</td>
-<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖 <span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">[2]<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-<tr>
-<td><code>ucontext-cp.c</code></td>
-<td>复制 n 个文件的内容到另 n 个文件</td>
-<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxOTEwODk0OTA0L2FydGljbGUvZGV0YWlscy80MTkxMTE3NQ==">协程<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-</tbody></table>
-<h4 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h4><p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
-<ul>
-<li>使用 <code>open</code>、<code>fstat</code> 等函数来打开文件以及元数据查看等操作<ul>
-<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
-</ul>
-</li>
-<li>使用 <code>io_uring_queue_init</code> 初始化 <code>struct io_uring ring</code> 结构体</li>
-<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度</li>
-<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
-<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及 offset 信息<ul>
-<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code> 中进行返回）</li>
-</ul>
-</li>
-<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有 <code>sqe</code> 进行下发</li>
-<li>通过 <code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code> 来获取 <code>cqe</code><ul>
-<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个 <code>cqe</code> 返回</li>
-<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有 <code>cqe</code>，就会返回错误</li>
-<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取 <code>user_data</code></li>
-</ul>
-</li>
-<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code> 进行清除，避免被二次处理</li>
-<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</li>
-</ul>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>根据官方 <code>Makefile</code> 可以看出编译时有额外的三个条件</p>
-<ul>
-<li>定义 <code>_GNU_SOURCE</code> 宏，<code>-D</code> 宏定义</li>
-<li>指定额外的头文件目录，<code>-I</code> 指定头文件目录位置</li>
-<li>使用 <code>liburing</code> 库，<code>-L</code> 指定库位置，<code>-l</code> 指定库名</li>
-</ul>
-<p>即 <code>gcc -D_GNU_SOURCE -I../src/include/ -L../src/ -o test test.c -luring</code></p>
-<p>其中头文件目录下主要有三个头文件：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree src/include/</span><br><span class="line">src/include/</span><br><span class="line">├── liburing</span><br><span class="line">│   ├── barrier.h</span><br><span class="line">│   └── io_uring.h</span><br><span class="line">└── liburing.h</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br></pre></td></tr></tbody></table></figure>
-
-<p>而 <code>liburing</code> 库也需要编译生成，推荐直接在 <code>liburing</code> 的顶层目录直接 <code>make all</code></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">【Kernel】io_uring 性能测试<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">【维基百科】Jens Axboe<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9rZXJuZWwudGFvYmFvLm9yZy8yMDE5LzA2L2lvX3VyaW5nLWEtbmV3LWxpbnV4LWFzeW5jaHJvbm91cy1pby1BUEkv">【阿里云技术博客】Linux 异步 IO 新时代：io_uring<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpbmtlcmlzdC9ibG9nL2lzc3Vlcy8yNQ==">【GitHub】《操作系统与存储：解析 Linux 内核全新异步 IO 引擎 —— io_uring 设计与实现》<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>存储</category>
-        <category>IO</category>
-      </categories>
-      <tags>
-        <tag>io_uring</tag>
-        <tag>liburing</tag>
-        <tag>异步 IO</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>io_uring 用户库源码分析</title>
     <url>/posts/d7259d1d.html</url>
     <content><![CDATA[<p>当前内容基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5nL3JlbGVhc2VzL3RhZy9saWJ1cmluZy0yLjE=">liburing 2.1<i class="fa fa-external-link-alt"></i></span> 版本</p>
@@ -921,6 +893,99 @@
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2t5emguZGV2L3Bvc3RzL2FydGljbGVzLzIwMjEtMDYtMTQtZGVlcC1kaXZlLWlvLXVyaW5nLw==">【个人博客】io_uring 的接口与实现<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储</category>
+        <category>IO</category>
+      </categories>
+      <tags>
+        <tag>io_uring</tag>
+        <tag>liburing</tag>
+        <tag>异步 IO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>io_uring 简介和使用</title>
+    <url>/posts/c142853f.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">[1]<i class="fa fa-external-link-alt"></i></span>，同时支持 buffer IO</p>
+<span id="more"></span>
+<p>io_uring 的作者 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">Jens Axboe<i class="fa fa-external-link-alt"></i></span> 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
+<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
+<p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code> 的方式直接调用，使用起来很麻烦</p>
+<h3 id="liburing"><a href="#liburing" class="headerlink" title="liburing"></a>liburing</h3><p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库 liburing，简化了 io_uring 的使用，代码位置在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5n">github<i class="fa fa-external-link-alt"></i></span> 上</p>
+<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><p>liburing 仓库的 <code>examples/</code> 目录下提供了几个简单的样例程序：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>功能</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>io_uring-test.c</code></td>
+<td>读取一个文件的全部内容</td>
+<td> -</td>
+</tr>
+<tr>
+<td><code>io_uring-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>使用 <code>user_data</code> 手动处理读写 IO 之间的依赖，读 IO 返回之后才下发写 IO</td>
+</tr>
+<tr>
+<td><code>link-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖 <span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">[2]<i class="fa fa-external-link-alt"></i></span></td>
+</tr>
+<tr>
+<td><code>ucontext-cp.c</code></td>
+<td>复制 n 个文件的内容到另 n 个文件</td>
+<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxOTEwODk0OTA0L2FydGljbGUvZGV0YWlscy80MTkxMTE3NQ==">协程<i class="fa fa-external-link-alt"></i></span></td>
+</tr>
+</tbody></table>
+<h4 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h4><p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
+<ul>
+<li>使用 <code>open</code>、<code>fstat</code> 等函数来打开文件以及元数据查看等操作<ul>
+<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
+</ul>
+</li>
+<li>使用 <code>io_uring_queue_init</code> 初始化 <code>struct io_uring ring</code> 结构体</li>
+<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度</li>
+<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
+<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及 offset 信息<ul>
+<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code> 中进行返回）</li>
+</ul>
+</li>
+<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有 <code>sqe</code> 进行下发</li>
+<li>通过 <code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code> 来获取 <code>cqe</code><ul>
+<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个 <code>cqe</code> 返回</li>
+<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有 <code>cqe</code>，就会返回错误</li>
+<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取 <code>user_data</code></li>
+</ul>
+</li>
+<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code> 进行清除，避免被二次处理</li>
+<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</li>
+</ul>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>根据官方 <code>Makefile</code> 可以看出编译时有额外的三个条件</p>
+<ul>
+<li>定义 <code>_GNU_SOURCE</code> 宏，<code>-D</code> 宏定义</li>
+<li>指定额外的头文件目录，<code>-I</code> 指定头文件目录位置</li>
+<li>使用 <code>liburing</code> 库，<code>-L</code> 指定库位置，<code>-l</code> 指定库名</li>
+</ul>
+<p>即 <code>gcc -D_GNU_SOURCE -I../src/include/ -L../src/ -o test test.c -luring</code></p>
+<p>其中头文件目录下主要有三个头文件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree src/include/</span><br><span class="line">src/include/</span><br><span class="line">├── liburing</span><br><span class="line">│   ├── barrier.h</span><br><span class="line">│   └── io_uring.h</span><br><span class="line">└── liburing.h</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br></pre></td></tr></tbody></table></figure>
+
+<p>而 <code>liburing</code> 库也需要编译生成，推荐直接在 <code>liburing</code> 的顶层目录直接 <code>make all</code></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">【Kernel】io_uring 性能测试<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">【维基百科】Jens Axboe<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9rZXJuZWwudGFvYmFvLm9yZy8yMDE5LzA2L2lvX3VyaW5nLWEtbmV3LWxpbnV4LWFzeW5jaHJvbm91cy1pby1BUEkv">【阿里云技术博客】Linux 异步 IO 新时代：io_uring<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpbmtlcmlzdC9ibG9nL2lzc3Vlcy8yNQ==">【GitHub】《操作系统与存储：解析 Linux 内核全新异步 IO 引擎 —— io_uring 设计与实现》<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
@@ -1305,41 +1370,6 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
-<span id="more"></span>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span> 中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
-<ol>
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
-<li> [可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
-</ul>
-</li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>rm -r 与 rmdir 区别</title>
     <url>/posts/935ae1f0.html</url>
     <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
@@ -1414,6 +1444,41 @@
       <tags>
         <tag>Linux</tag>
         <tag>strace</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
+<span id="more"></span>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span> 中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
+<ol>
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
+<li> [可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul>
+</li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>

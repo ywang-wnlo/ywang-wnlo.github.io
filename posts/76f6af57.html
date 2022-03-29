@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc">
+  <meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写 踩坑在前几天搞定 pip 的 SSL 认证之后，结果在利用 requests 库请求 HTTPS 网站又出现了 SSLError(SSLEOFError(8, &#39;EOF occurred in violation of protocol (_ssl.c:1129)&#39;)) 的 SSL 相关错误 经过一系列的查询资料和测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从 SSLEOFError 到正确配置 Proxy">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/76f6af57.html">
+<meta property="og:site_name" content="乐园">
+<meta property="og:description" content="本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写 踩坑在前几天搞定 pip 的 SSL 认证之后，结果在利用 requests 库请求 HTTPS 网站又出现了 SSLError(SSLEOFError(8, &#39;EOF occurred in violation of protocol (_ssl.c:1129)&#39;)) 的 SSL 相关错误 经过一系列的查询资料和测试">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Proxy_Server.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Fuck_GFW.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Clash_for_Windows_Local_Proxy.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Urllib3_Support_HTTPS.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Pip_Support_HTTPS.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Win11_Reg.png">
+<meta property="article:published_time" content="2022-03-29T05:48:31.000Z">
+<meta property="article:modified_time" content="2022-03-29T05:48:31.000Z">
+<meta property="article:author" content="Zeus">
+<meta property="article:tag" content="日常踩坑">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="proxy">
+<meta property="article:tag" content="SSL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Proxy_Server.png">
+
+
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/76f6af57.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/76f6af57.html","path":"posts/76f6af57.html","title":"从 SSLEOFError 到正确配置 Proxy"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>从 SSLEOFError 到正确配置 Proxy | 乐园</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST75Y16TW"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-PST75Y16TW","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">乐园</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个新时代农民工的随手笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91"><span class="nav-number">1.</span> <span class="nav-text">踩坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">代理服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E7%9A%84%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">普通的代理服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">科学上网工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">代理配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">追根溯源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#urllib3"><span class="nav-number">3.1.</span> <span class="nav-text">urllib3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pip"><span class="nav-number">3.2.</span> <span class="nav-text">pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%87%E6%81%B6%E4%B9%8B%E6%BA%90-urllib"><span class="nav-number">3.3.</span> <span class="nav-text">万恶之源 urllib</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zeus"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zeus</p>
+  <div class="site-description" itemprop="description">我永远喜欢 Homura.jpg</div>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/76f6af57.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zeus">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐园">
+      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从 SSLEOFError 到正确配置 Proxy | 乐园">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从 SSLEOFError 到正确配置 Proxy
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-29 13:48:31" itemprop="dateCreated datePublished" datetime="2022-03-29T13:48:31+08:00">2022-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" itemprop="url" rel="index"><span itemprop="name">日常踩坑</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZGF2eXl5L3AvMTQzODg2MjMuaHRtbA==">Python 遭遇 ProxyError 问题记录<i class="fa fa-external-link-alt"></i></span> 重新梳理改写</p>
+<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><p>在前几天搞定 <code>pip</code> 的 SSL 认证之后，结果在利用 <code>requests</code> 库请求 HTTPS 网站又出现了 <code>SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1129)'))</code> 的 SSL 相关错误</p>
+<p>经过一系列的查询资料和测试发现，原因竟然在于 <code>python</code> 自身的 <code>urllib</code> 库没有正确配置 HTTPS 代理</p>
+<span id="more"></span>
+
+<h2 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h2><h3 id="普通的代理服务器"><a href="#普通的代理服务器" class="headerlink" title="普通的代理服务器"></a>普通的代理服务器</h3><p><img data-src="/posts/76f6af57/Proxy_Server.png" alt="Proxy_Server"></p>
+<p>上面提及的 HTTP (S) 代理，其实是通过代理服务器进行 HTTP (S) 流量的转发的意思，也是在上图中的 <em>黄线</em> 所代表的协议，文中后续用 <u>出口协议</u> 来指代</p>
+<p>而和代理服务器之间其实也需要一种协议进行通信，就是在上图中的 <em>绿线</em> 部分，文中后续用 <u>入口协议</u> 来指代</p>
+<p>而 <u>入口协议</u> <strong>通常使用较多的都是 HTTP 和 Socks4/Socks5，很少有采用 HTTPS 作为与代理服务器间的连接协议</strong>，这点也是<strong>导致之前报错的主要原因</strong></p>
+<h3 id="科学上网工具"><a href="#科学上网工具" class="headerlink" title="科学上网工具"></a>科学上网工具</h3><p>其实代理服务器和 SS、SSR、V2Ray、Clash 等科学上网代理工具都是同一种性质，主要的不同点在于与实际代理服务器之间的 <u>入口协议</u> 部分（例如 Shadowsocks、VMess、Trojan 等）。为了不被 GFW 发现，需要实现对流量的混淆加密等。而且通常为了兼容性等因素，大多数科学上网工具在与实际代理服务器之间还有一级本地的代理服务器</p>
+<p><img data-src="/posts/76f6af57/Fuck_GFW.png" alt="Fuck_GFW"></p>
+<p>科学上网工具的特殊协议只是在上图中的只有红线部分使用，而整个蓝色框的部分就是科学上网工具，用户并不需要关心这些特殊协议，只需要通过与通常代理服务器一样的 <em>绿线</em> 的 <u>入口协议</u> 来进行连接即可</p>
+<h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><p>因此 <u>入口协议</u> 和 <u>出口协议</u> 之间其实没有任何因果联系，以 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZuZHJvaWQvY2xhc2hfZm9yX3dpbmRvd3NfcGtn">Clash for Windows, CFW<i class="fa fa-external-link-alt"></i></span> 为例</p>
+<p><img data-src="/posts/76f6af57/Clash_for_Windows_Local_Proxy.png" alt="Clash_for_Windows_Local_Proxy"></p>
+<p>它的 <u>入口协议</u> 支持 http 以及 socks，而且都在同一个端口，因此正确的代理配置应该是这样的：</p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正确的配置方式</span></span><br><span class="line"><span class="attr">HTTP_PROXY</span>=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br><span class="line"><span class="attr">HTTPS_PROXY</span>=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>或者</p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正确的配置方式</span></span><br><span class="line"><span class="attr">HTTP_PROXY</span>=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br><span class="line"><span class="attr">HTTPS_PROXY</span>=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>重点：</strong></p>
+<p><code>HTTPS_PROXY</code> 也应该填写 <code>http://127.0.0.1:7890</code>，因为 <code>HTTPS_PROXY</code> 中 <code>HTTPS</code> 代表的是 <u>出口协议</u>，而 <code>http://127.0.0.1:7890</code> 代表和 <code>127.0.0.1:7890</code> 服务器之间的 <u>入口协议</u> 是 <code>HTTP</code></p>
+<h2 id="追根溯源"><a href="#追根溯源" class="headerlink" title="追根溯源"></a>追根溯源</h2><figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 错误的配置方式</span></span><br><span class="line"><span class="attr">HTTP_PROXY</span>=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br><span class="line"><span class="attr">HTTPS_PROXY</span>=https://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7890</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>而之前一直采用的上述错误配置，则会因为旧版本的 <code>python</code> 的 <code>pip</code> 内含的 <code>urllib3</code> 不支持 HTTPS 的 <u>入口协议</u> ，自动转换成了 HTTP 的 <u>入口协议</u> 进行连接了</p>
+<h3 id="urllib3"><a href="#urllib3" class="headerlink" title="urllib3"></a>urllib3</h3><p>但是在 <code>urllib3</code> 库升级到 v1.26.0 版本之后，增加了对 HTTPS 的 <u>入口协议</u> 的支持，参见 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VybGxpYjMvdXJsbGliMy9jb21taXQvOGM3YTQzYjRhNGNhMGM4ZDM2ZDU1ZjEzMmRhYTJhNDNkMDZmZTNjNA==">Add support for HTTPS connections to proxies.<i class="fa fa-external-link-alt"></i></span></p>
+<p><img data-src="/posts/76f6af57/Urllib3_Support_HTTPS.png" alt="Urllib3_Support_HTTPS"></p>
+<h3 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h3><p><code>pip</code> 内置了的 <code>requests</code> 和 <code>urllib3</code> 包，而不依赖全局的 <code>requests</code> 和 <code>urllib3</code> 包</p>
+<p>当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span> 时，内置的 <code>requests</code> 包升级到了 v2.25.0，<code>urllib3</code> 包也升级到了 v1.26.2，也就是说开始支持 HTTPS 的 <u>入口协议</u> 了，参见 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B5cGEvcGlwL2Jsb2IvYzMxYzE0OGE1YjFkODc1OTE4NjJjNzE1YWRjN2E3ZTVmMzI0MmZiYS9ORVdTLnJzdCN2ZW5kb3JlZC1saWJyYXJpZXM=">pypa/pip 20.3 (2020-11-30) NEWS.rst<i class="fa fa-external-link-alt"></i></span></p>
+<p><img data-src="/posts/76f6af57/Pip_Support_HTTPS.png" alt="Pip_Support_HTTPS"></p>
+<h3 id="万恶之源-urllib"><a href="#万恶之源-urllib" class="headerlink" title="万恶之源 urllib"></a>万恶之源 urllib</h3><p>但是其实他们都不是罪魁祸首，真正的原因其实在 python 的内置包 <code>urllib</code> 上</p>
+<p>一般 <code>CFW</code> 等科学上网软件都会通过修改 Windows 注册表的 <code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings</code> 目录下的 <code>ProxyServer</code> 来配置代理服务器地址端口以及 <code>ProxyEnable</code> 是否启用代理</p>
+<p><img data-src="/posts/76f6af57/Win11_Reg.png" alt="Win11_Reg"></p>
+<p><code>CFW</code> 在配置代理服务器时，仅仅给出了地址和端口，并没有给出 <u>入口协议</u></p>
+<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urllib 配置代理的源码摘录：</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    <span class="keyword">if</span> proxyServer[:<span class="number">5</span>] == <span class="string">'http:'</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'https'</span>] = <span class="string">'https://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'ftp'</span>] = <span class="string">'ftp://%s'</span> % proxyServer</span><br></pre></td></tr></tbody></table></figure>
+
+<p>按照上面给出的 <code>urllib</code> 库源码逻辑，会将代理配置为</p>
+<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">proxies = {</span><br><span class="line">    <span class="string">'http'</span>: <span class="string">'http://127.0.0.1:7890'</span>,</span><br><span class="line">    <span class="string">'https'</span>: <span class="string">'https://127.0.0.1:7890'</span>,</span><br><span class="line">    <span class="string">'ftp'</span>: <span class="string">'ftp://127.0.0.1:7890'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>因此导致了 <code>pip</code>、<code>requests</code> 等上层包，访问 HTTPS 网站时会错误的使用 <code>https://127.0.0.1:7890</code> 代理，而 <code>CFW</code> 根本不支持 HTTPS 的 <u>入口协议</u>，所以才会产生这么一系列的错误</p>
+<p>个人推荐可以根据自己常用的科学上网工具所支持的 <u>入口协议</u> 来修改 <code>urllib</code> 库源码逻辑（文件位置一般在 <code>python3.*/urllib/request.py</code>），或者简单的按照下面的方式进行修改</p>
+<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'https'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'ftp'</span>] = proxyServer</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZGF2eXl5L3AvMTQzODg2MjMuaHRtbA==">【博客园】Python 遭遇 ProxyError 问题记录<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU0JUJCJUEzJUU3JTkwJTg2JUU2JTlDJThEJUU1JThBJUExJUU1JTk5JUE4">【维基百科】代理服务器<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZuZHJvaWQvY2xhc2hfZm9yX3dpbmRvd3NfcGtnL2lzc3Vlcy8zMTI=">【GitHub】Fndroid/clash_for_windows_pkg 系统代理自动关闭或打开<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B5cGEvcGlwL2lzc3Vlcy85MjE2I2lzc3VlY29tbWVudC03NDE4MzYwNTg=">【GitHub】pypa/pip Pip 20.3+ break proxy connection<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VybGxpYjMvdXJsbGliMy9jb21taXQvOGM3YTQzYjRhNGNhMGM4ZDM2ZDU1ZjEzMmRhYTJhNDNkMDZmZTNjNA==">【GitHub】urllib3/urllib3 Add support for HTTPS connections to proxies.<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B5cGEvcGlwL2Jsb2IvYzMxYzE0OGE1YjFkODc1OTE4NjJjNzE1YWRjN2E3ZTVmMzI0MmZiYS9ORVdTLnJzdCN2ZW5kb3JlZC1saWJyYXJpZXM=">【GitHub】pypa/pip 20.3 (2020-11-30) NEWS.rst<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>赏个鸡腿🍗</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Zeus 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Zeus 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Zeus
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ywang-wnlo.github.io/posts/76f6af57.html" title="从 SSLEOFError 到正确配置 Proxy">https://ywang-wnlo.github.io/posts/76f6af57.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"><i class="fa fa-tag"></i> 日常踩坑</a>
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/proxy/" rel="tag"><i class="fa fa-tag"></i> proxy</a>
+              <a href="/tags/SSL/" rel="tag"><i class="fa fa-tag"></i> SSL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/29e0b18c.html" rel="prev" title="修复 chrome 打不开微信或者部分第三方应用内链接">
+                  <i class="fa fa-chevron-left"></i> 修复 chrome 打不开微信或者部分第三方应用内链接
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zeus</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"17548e4efe233afb859191c57f2f007c"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
