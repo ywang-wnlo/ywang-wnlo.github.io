@@ -23,12 +23,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写 踩坑在前几天搞定 pip 的 SSL 认证之后，结果在利用 requests 库请求 HTTPS 网站又出现了 SSLError(SSLEOFError(8, &#39;EOF occurred in violation of protocol (_ssl.c:1129)&#39;)) 的 SSL 相关错误 经过一系列的查询资料和测试">
+    <meta name="description" content="本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写 踩坑在前几天搞定 pip 的 SSL 认证之后，结果在利用 requests 库请求 HTTPS 网站又出现了 SSLError(SSLEOFError(8, &#39;EOF occurred in violation of protocol (_ssl.c:1129)&#39;)) 的 SSL 相关错误 经过一系列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从 SSLEOFError 到正确配置 Proxy">
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/76f6af57.html">
 <meta property="og:site_name" content="乐园">
-<meta property="og:description" content="本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写 踩坑在前几天搞定 pip 的 SSL 认证之后，结果在利用 requests 库请求 HTTPS 网站又出现了 SSLError(SSLEOFError(8, &#39;EOF occurred in violation of protocol (_ssl.c:1129)&#39;)) 的 SSL 相关错误 经过一系列的查询资料和测试">
+<meta property="og:description" content="本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写 踩坑在前几天搞定 pip 的 SSL 认证之后，结果在利用 requests 库请求 HTTPS 网站又出现了 SSLError(SSLEOFError(8, &#39;EOF occurred in violation of protocol (_ssl.c:1129)&#39;)) 的 SSL 相关错误 经过一系列">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Proxy_Server.png">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/76f6af57/Fuck_GFW.png">
@@ -277,14 +277,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.6k</span>
+      <span>4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 

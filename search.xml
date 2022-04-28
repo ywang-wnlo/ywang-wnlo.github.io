@@ -1,85 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo 配置主流搜索引擎收录流程记录</title>
-    <url>/posts/abac0c46.html</url>
-    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
-<span id="more"></span>
-<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
-<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="是否已经被收录"><a href="#是否已经被收录" class="headerlink" title="是否已经被收录"></a>是否已经被收录</h2><p>为了查看网站是否已经被收录，可以在 Google 或者 Bing 以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code> 链接进行替换即可</p>
-<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img data-src="/posts/abac0c46/google_site.png" alt="google_site"></p>
-<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
-<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
-<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用 <code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
-<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
-<h2 id="提交站点地图"><a href="#提交站点地图" class="headerlink" title="提交站点地图"></a>提交站点地图</h2><p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
-<p>（由于 GitHub 屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
-<h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
-<p>而对我们来说，主要分三个步骤：注册 Search Console，验证网站所有权，提交站点地图</p>
-<h4 id="注册-Search-Console"><a href="#注册-Search-Console" class="headerlink" title="注册 Search Console"></a>注册 Search Console</h4><p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC 官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
-<h4 id="验证网站所有权"><a href="#验证网站所有权" class="headerlink" title="验证网站所有权"></a>验证网站所有权</h4><p>登录之后，就需要添加我们的网站了</p>
-<p><img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website"></p>
-<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS 配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code> 后会有五种方式供我们选择</p>
-<p><img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership"></p>
-<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
-<p><img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership"></p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
-<h4 id="提交站点地图-1"><a href="#提交站点地图-1" class="headerlink" title="提交站点地图"></a>提交站点地图</h4><p>之前 <code>hexo-generator-sitemap</code> 插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
-<p><img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap"></p>
-<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC 的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为 <code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
-<h3 id="Bing"><a href="#Bing" class="headerlink" title="Bing"></a>Bing</h3><h4 id="从-GSC-导入"><a href="#从-GSC-导入" class="headerlink" title="从 GSC 导入"></a>从 GSC 导入</h4><p><img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website"></p>
-<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从 GSC 进行导入即可</p>
-<h4 id="手动添加网站"><a href="#手动添加网站" class="headerlink" title="手动添加网站"></a>手动添加网站</h4><p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
-<p><img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership"></p>
-<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
-<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code> 即可</p>
-<p><img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap"></p>
-<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing 给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比 Google 快不少</p>
-<h2 id="手动请求编入索引"><a href="#手动请求编入索引" class="headerlink" title="手动请求编入索引"></a>手动请求编入索引</h2><p>根据个人观察，Google 及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
-<p>具体流程为：</p>
-<ol>
-<li><p>点击 GSC 的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
-<p> <img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website"></p>
-</li>
-<li><p>等待结果返回后，点击【请求编入索引】即可</p>
-<p> <img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit"></p>
-</li>
-</ol>
-<p>个人实测，大概需要一个月左右，Google 上就能搜索到网站上的大多数页面了</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览 Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo 博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo 博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo 插件推荐以及使用小技巧</title>
     <url>/posts/4143201a.html</url>
     <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span> 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
@@ -97,7 +18,7 @@
 <figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;仓库链接&gt;</span> <span class="comment"># 可以是 https 链接也可以是 git 链接</span></span><br><span class="line">  <span class="attr">branch:</span> [<span class="string">分支</span>] <span class="comment"># GitHub 的网站分支为 gh-pages，其他网站可能有所不同</span></span><br><span class="line">  <span class="attr">message:</span> [<span class="string">message</span>] <span class="comment"># 默认是 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>默认的提交信息只有时间信息，没有过多的参考价值推荐使用自定义提交信息，具体参考 <a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF">后续小节</a></p>
-<h3 id="hexo-word-counter"><a href="#hexo-word-counter" class="headerlink" title="hexo-word-counter"></a><pangu> </pangu><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">hexo-word-counter<i class="fa fa-external-link-alt"></i></span></h3><p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
+<h3 id="hexo-word-counter"><a href="#hexo-word-counter" class="headerlink" title="hexo-word-counter"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">hexo-word-counter<i class="fa fa-external-link-alt"></i></span></h3><p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
 <ul>
 <li>安装 </li>
 </ul>
@@ -295,33 +216,362 @@
       </tags>
   </entry>
   <entry>
-    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
-    <url>/posts/29e0b18c.html</url>
-    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应</p>
+    <title>Hexo 配置主流搜索引擎收录流程记录</title>
+    <url>/posts/abac0c46.html</url>
+    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
 <span id="more"></span>
-<p><del>（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）</del></p>
-<p><img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser"></p>
-<h2 id="修复问题：卸载-KGChromePlugin"><a href="#修复问题：卸载-KGChromePlugin" class="headerlink" title="修复问题：卸载 KGChromePlugin"></a>修复问题：卸载 KGChromePlugin</h2><p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin 金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd 都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
+<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
+<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="是否已经被收录"><a href="#是否已经被收录" class="headerlink" title="是否已经被收录"></a>是否已经被收录</h2><p>为了查看网站是否已经被收录，可以在 Google 或者 Bing 以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code> 链接进行替换即可</p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img data-src="/posts/abac0c46/google_site.png" alt="google_site"></p>
+<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
+<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
+<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用 <code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
+<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
+<h2 id="提交站点地图"><a href="#提交站点地图" class="headerlink" title="提交站点地图"></a>提交站点地图</h2><p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
+<p>（由于 GitHub 屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
+<h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
+<p>而对我们来说，主要分三个步骤：注册 Search Console，验证网站所有权，提交站点地图</p>
+<h4 id="注册-Search-Console"><a href="#注册-Search-Console" class="headerlink" title="注册 Search Console"></a>注册 Search Console</h4><p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC 官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
+<h4 id="验证网站所有权"><a href="#验证网站所有权" class="headerlink" title="验证网站所有权"></a>验证网站所有权</h4><p>登录之后，就需要添加我们的网站了</p>
+<p><img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website"></p>
+<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS 配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code> 后会有五种方式供我们选择</p>
+<p><img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership"></p>
+<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
+<p><img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership"></p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
+<h4 id="提交站点地图-1"><a href="#提交站点地图-1" class="headerlink" title="提交站点地图"></a>提交站点地图</h4><p>之前 <code>hexo-generator-sitemap</code> 插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
+<p><img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap"></p>
+<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC 的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为 <code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
+<h3 id="Bing"><a href="#Bing" class="headerlink" title="Bing"></a>Bing</h3><h4 id="从-GSC-导入"><a href="#从-GSC-导入" class="headerlink" title="从 GSC 导入"></a>从 GSC 导入</h4><p><img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website"></p>
+<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从 GSC 进行导入即可</p>
+<h4 id="手动添加网站"><a href="#手动添加网站" class="headerlink" title="手动添加网站"></a>手动添加网站</h4><p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
+<p><img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership"></p>
+<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT 主题的配置中对其进行支持，配置起来比较简单</p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code> 配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击 <code>验证</code> 即可</p>
+<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools 的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code> 即可</p>
+<p><img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap"></p>
+<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing 给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比 Google 快不少</p>
+<h2 id="手动请求编入索引"><a href="#手动请求编入索引" class="headerlink" title="手动请求编入索引"></a>手动请求编入索引</h2><p>根据个人观察，Google 及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
+<p>具体流程为：</p>
 <ol>
-<li><p>可通过 chrome://version/ 查看命令行中是否含有 <code>--register-pepper-plugins=XXX</code></p>
-<p> <img data-src="/posts/29e0b18c/chrome_version_before.png" alt="chrome_version_before"></p>
+<li><p>点击 GSC 的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
+<p> <img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website"></p>
 </li>
-<li><p>根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是 <code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序 <code>KGPMUninstall.exe</code>，双击进行卸载即可</p>
-</li>
-<li><p>卸载之后，重启一下 chrome，命令行应该就恢复正常了，此时也能在已打开 chrome 的情况下在第三方应用中顺利打开超链接了</p>
-<p> <img data-src="/posts/29e0b18c/chrome_version_after.png" alt="chrome_version_after"></p>
+<li><p>等待结果返回后，点击【请求编入索引】即可</p>
+<p> <img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit"></p>
 </li>
 </ol>
+<p>个人实测，大概需要一个月左右，Google 上就能搜索到网站上的大多数页面了</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome 浏览器 每次打开提示：“–no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google 搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览 Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo 博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo 博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
-        <category>日常踩坑</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>chrome</tag>
-        <tag>日常踩坑</tag>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX PPT</title>
+    <url>/posts/499c5a19.html</url>
+    <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf 上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用</p>
+<span id="more"></span>
+<p><img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer"></p>
+<!-- TODO: Beamer 介绍和额外的特性 -->
+
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><h3 id="frame-与-slide"><a href="#frame-与-slide" class="headerlink" title="frame 与 slide"></a><code>frame</code> 与 <code>slide</code></h3><p>Beamer 中通常会用一对 <code>\begin{frame}</code>、<code>\end{frame}</code> 来制作一页幻灯片（slide），例如</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{标题名称}</span><br><span class="line">	主体内容</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img data-src="/posts/499c5a19/Beamer-frame.png" alt="frame"></p>
+<p>然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides</p>
+<h4 id="pause"><a href="#pause" class="headerlink" title="\pause"></a><code>\pause</code></h4><p>添加 <code>\pause</code> 会将 <code>\pause</code> 语句前面内容单独在新的一页 slide 上显示，实现了类似 PPT 动画中的点击页面出现下一段文字的效果，下面给出代码和生成的 PDF 帮助理解</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{<span class="keyword">\textbackslash</span> pause 使用}</span><br><span class="line"></span><br><span class="line">	在这组幻灯片中 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	这段文件将部分可见 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	现在所有文字都可以看见了</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img data-src="/posts/499c5a19/Beamer-pause.jpg" alt="pause"></p>
+<h4 id="itemize-中的尖括号-lt-strat-end-gt"><a href="#itemize-中的尖括号-lt-strat-end-gt" class="headerlink" title="itemize 中的尖括号 <strat-end>"></a><code>itemize</code> 中的尖括号 &lt;strat-end&gt;</h4><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line"><span class="keyword">\frametitle</span>{item 中的尖括号}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">	<span class="keyword">\item</span>&lt;1-&gt; 该文字在 1+ 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;2-3&gt; 该文字在 2-3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;3&gt; 该文字仅在第 3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;4-&gt; 该文字在 4+ 页均可见</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img data-src="/posts/499c5a19/Beamer-item.jpg" alt="item"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>Beamer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 环境配置</title>
+    <url>/posts/4f94956.html</url>
+    <content><![CDATA[<h2 id="网页环境"><a href="#网页环境" class="headerlink" title="网页环境"></a>网页环境</h2><h3 id="Overleaf"><a href="#Overleaf" class="headerlink" title="Overleaf"></a>Overleaf</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tLw==">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX 编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑</p>
+<span id="more"></span>
+<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><h3 id="TeX-Live"><a href="#TeX-Live" class="headerlink" title="TeX Live"></a>TeX Live</h3><p>TeX Live 可以利用镜像安装节省下载时间</p>
+<ul>
+<li>从 <span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL0NUQU4vc3lzdGVtcy90ZXhsaXZlL0ltYWdlcy8=">清华镜像站<i class="fa fa-external-link-alt"></i></span> 直接下载</li>
+<li>或者利用 <span class="exturl" data-url="aHR0cDovL3d3dy50dWcub3JnL3RleGxpdmUvYWNxdWlyZS1pc28uaHRtbCN0b3JyZW50">种子文件<i class="fa fa-external-link-alt"></i></span> BT 下载镜像</li>
+</ul>
+<p>可以在安装 TeX Live 时同时勾选上安装 TeXworks 前端，然后就可以使用 TeXworks 作为 IDE 来使用了</p>
+<h3 id="TeXstudio"><a href="#TeXstudio" class="headerlink" title="TeXstudio"></a>TeXstudio</h3><p>TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGV4c3R1ZGlvLm9yZy8=">官网<i class="fa fa-external-link-alt"></i></span> 下载安装，并且有中文界面</p>
+<h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>个人更喜欢 VSCode，通过安装扩展并进行相应的配置即可较好的支持 LaTeX，同时还有格式化和自动补全等功能，非常方便</p>
+<h4 id="安装-LaTeX-Workshop-扩展"><a href="#安装-LaTeX-Workshop-扩展" class="headerlink" title="安装 LaTeX Workshop 扩展"></a>安装 LaTeX Workshop 扩展</h4><p>直接在 <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPUphbWVzLVl1LmxhdGV4LXdvcmtzaG9w">VSCode 的扩展商店<i class="fa fa-external-link-alt"></i></span> 中搜索 <code>LaTeX Workshop</code> 安装即可</p>
+<h4 id="编译链配置"><a href="#编译链配置" class="headerlink" title="编译链配置"></a>编译链配置</h4><ol>
+<li><p>默认配置</p>
+<p> TeX Live 安装时会同时安装 <code>latexmk</code>, LaTeX Workshop 会默认使用 <code>latexmk</code> 来编译 <code>.tex</code>，无需手动再配置</p>
+</li>
+<li><p>手动配置 (可选)</p>
+<p> 手动配置 LaTeX Workshop，在 VSCode 的配置文件 <code>settings.json</code> 中直接手动添加如下代码:</p>
+<p> 主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">官方 recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
+ <figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+
+ <!-- TODO: 弄清编译命令和编译链当前配置的具体含义，主要是 bibtex --></li>
+</ol>
+<h4 id="正向同步"><a href="#正向同步" class="headerlink" title="正向同步"></a>正向同步</h4><p>正向同步指的是编译完成后，在 <code>.tex</code> 文件内通过快捷键，快速定位到光标位置在 <code>.tex</code> 的对应位置，方便查看 PDF 文件</p>
+<p>推荐打开文件修改后，编译完成后自动正向同步。该功能通过 <code>latex-workshop.synctex.afterBuild.enabled</code> 来控制</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="反向同步"><a href="#反向同步" class="headerlink" title="反向同步"></a>反向同步</h4><p>反向同步指的是编译完成后，在 PDF 文件内通过快捷键，快速定位点击部分在 <code>.tex</code> 的位置，方便修改 <code>.tex</code> 源码</p>
+<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">官方 synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
+<ol>
+<li><p>VSCode 内部 PDF 浏览器</p>
+<p> 如果直接使用 VSCode 来浏览 PDF，不需要额外设置，可以根据需要修改 <code>latex-workshop.view.pdf.internal.synctex.keybinding</code> 来修改反向同步的快捷键即可，默认 Ctrl 加鼠标左键</p>
+ <figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.internal.synctex.keybinding"</span><span class="punctuation">:</span> <span class="string">"ctrl-click"</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>外部 PDF 浏览器</p>
+<p> <span class="exturl" data-url="aHR0cHM6Ly93d3cuc3VtYXRyYXBkZnJlYWRlci5vcmcvZnJlZS1wZGYtcmVhZGVy">SumatraPDF<i class="fa fa-external-link-alt"></i></span> 是一款流行的小巧方便的免费 PDF 浏览软件。VSCode 支持使用外部的 PDF 浏览器来查看编译后的 PDF 文件，以及反向搜索功能。主要需要如下配置：</p>
+ <figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置为使用外部 PDF 浏览软件来浏览 PDF</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.viewer"</span><span class="punctuation">:</span> <span class="string">"external"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 配置外部 PDF 浏览软件的命令行以及参数</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.command"</span><span class="punctuation">:</span> <span class="string">"D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe"</span><span class="punctuation">,</span> <span class="comment">// 自行修改路径</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"%PDF%"</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p> 在 SumatraPDF 的设置 - 选项中设置反向搜索命令行 <code>C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe -g "%f:%l"</code>，Code 的路径应该为完整的绝对路径</p>
+</li>
+</ol>
+<h4 id="其他可选配置"><a href="#其他可选配置" class="headerlink" title="其他可选配置"></a>其他可选配置</h4><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="中文支持"><a href="#中文支持" class="headerlink" title="中文支持"></a>中文支持</h2><p>该节主要参考 <span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">Overleaf Chinese<i class="fa fa-external-link-alt"></i></span> 文档</p>
+<p><strong>推荐使用 XeLaTeX 和 LuaLaTeX 来编译含有中文字符的 <code>.tex</code> 文件</strong></p>
+<h3 id="XeLaTeX-和-LuaLaTeX"><a href="#XeLaTeX-和-LuaLaTeX" class="headerlink" title="XeLaTeX 和 LuaLaTeX"></a>XeLaTeX 和 LuaLaTeX</h3><ol>
+<li>直接使用 <code>ctexart</code> 文档类即可支持中文</li>
+<li>或者使用 <code>ctex</code> 包来支持中文</li>
+</ol>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\tableofcontents</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{abstract}</span><br><span class="line">这是简介及摘要。</span><br><span class="line"><span class="keyword">\end</span>{abstract}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>或者</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{xxx}</span><br><span class="line"><span class="keyword">\usepackage</span>{ctex}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="XeLaTeX"><a href="#XeLaTeX" class="headerlink" title="XeLaTeX"></a>XeLaTeX</h3><p>XeLaTeX 还可以使用 <code>xeCJK</code> 包来支持中文</p>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{xeCJK}</span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="pdfLaTeX"><a href="#pdfLaTeX" class="headerlink" title="pdfLaTeX"></a>pdfLaTeX</h3><p>pdfLaTeX 对中文支持不是很好，只用 pdaLaTeX 的话需要引入 <code>CJKutf8</code> 包，并且用 <code>\begin{CJK*}{UTF8}{gbsn}</code> 和 <code>\end{CJK*}</code> 包住所有的中文。</p>
+<ul>
+<li><code>gbsn</code> 和 <code>gkai</code> 是简体的字体</li>
+<li><code>bsmi</code> 和 <code>bkai</code> 是繁体的字体</li>
+</ul>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{CJKutf8}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{gbsn}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line">You can also insert Latin text in your document</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{bsmi}</span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><ol>
+<li><p>首先 <code>.tex</code> 文件名以及路径尽量不要含有空格以及中文字符</p>
+</li>
+<li><p>在使用 <code>latexmk</code> 和 VSCode 的 LaTeX Workshop 时，推荐使用第三个编译链 <code>Recipe: latexmk (lualatex)</code></p>
+<p> <img data-src="/posts/4f94956/build-chinese-latex.png" alt="编译中文 LaTeX"></p>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvSW5zdGFsbCNyZXF1aXJlbWVudHM=">【LaTeX Workshop】依赖<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">【LaTeX Workshop】recipes 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">【LaTeX Workshop】synctex 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODE3ODAxNQ==">【知乎】使用 VSCode 编写 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xNjY1MjMwNjQ=">【知乎】Visual Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">【Overleaf】Chinese<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>VSCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 基础介绍</title>
+    <url>/posts/a4752f87.html</url>
+    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
+<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
+<span id="more"></span>
+<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
+<ul>
+<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
+<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
+<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
+</ul>
+<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
+<li>pdfTeX 的主要特性是能直接生成 pdf</li>
+<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
+<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX, XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
+<span id="more"></span>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th> 换成算成 mm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pt</td>
+<td> 基本单位</td>
+<td> 1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>mm</td>
+<td> 毫米</td>
+<td> 2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr>
+<td>cm</td>
+<td> 厘米</td>
+<td> 28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr>
+<td>in</td>
+<td> 英寸</td>
+<td> 72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr>
+<td>ex</td>
+<td> 当前字体的 x 字母高度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+<tr>
+<td>em</td>
+<td> 当前字体的 m 字母宽度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">% 开启链接颜色配置，并配置为蓝色</span></span><br><span class="line"><span class="keyword">\usepackage</span>[colorlinks=true, allcolors=blue]{hyperref}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\url</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}</span><br><span class="line"><span class="keyword">\href</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}{LaTeX 语法}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><h3 id="段落中（隐式）"><a href="#段落中（隐式）" class="headerlink" title="段落中（隐式）"></a>段落中（隐式）</h3><p>三种均可，任意选择，以 E=mc<sup>2</sup> 为例</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span>E=mc<span class="built_in">^</span>2<span class="keyword">\)</span></span><br><span class="line"><span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>{math}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{math}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="单独成段（显式）"><a href="#单独成段（显式）" class="headerlink" title="单独成段（显式）"></a>单独成段（显式）</h3><p>三种均可，任意选择</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span>E=mc<span class="built_in">^</span>2<span class="keyword">\]</span></span><br><span class="line"><span class="keyword">\begin</span>{displaymath}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{displaymath}</span><br><span class="line"><span class="keyword">\begin</span>{equation}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{equation}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="居中，左对齐，右对齐"><a href="#居中，左对齐，右对齐" class="headerlink" title="居中，左对齐，右对齐"></a>居中，左对齐，右对齐</h2><h3 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h3><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{center}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{center}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="左对齐"><a href="#左对齐" class="headerlink" title="左对齐"></a>左对齐</h3><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushleft}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushleft}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="右对齐"><a href="#右对齐" class="headerlink" title="右对齐"></a>右对齐</h3><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushright}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushright}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="参考文献配置"><a href="#参考文献配置" class="headerlink" title="参考文献配置"></a>参考文献配置</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{stylename}</span><br><span class="line"><span class="keyword">\bibliography</span>{bibfile}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而 <code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
+<table>
+<thead>
+<tr>
+<th>stylename</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abbrc</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc"></td>
+</tr>
+<tr>
+<td>acm</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm"></td>
+</tr>
+<tr>
+<td>alpha</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha"></td>
+</tr>
+<tr>
+<td>apalike</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike"></td>
+</tr>
+<tr>
+<td>ieeetr</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr"></td>
+</tr>
+<tr>
+<td>plain</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain"></td>
+</tr>
+<tr>
+<td>siam</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam"></td>
+</tr>
+<tr>
+<td>unsrt</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt"></td>
+</tr>
+</tbody></table>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvSHlwZXJsaW5rcw==">【维基百科】LaTeX Hyperlinks<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L01hdGhlbWF0aWNhbF9leHByZXNzaW9ucw==">【overleaf】Mathematical expressions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JpYnRleF9iaWJsaW9ncmFwaHlfc3R5bGVz">【overleaf】Bibtex bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
       </tags>
   </entry>
   <entry>
@@ -400,6 +650,36 @@
         <tag>YCSB</tag>
         <tag>RocksDB</tag>
         <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
+    <url>/posts/29e0b18c.html</url>
+    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应</p>
+<span id="more"></span>
+<p><del>（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）</del></p>
+<p><img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser"></p>
+<h2 id="修复问题：卸载-KGChromePlugin"><a href="#修复问题：卸载-KGChromePlugin" class="headerlink" title="修复问题：卸载 KGChromePlugin"></a>修复问题：卸载 KGChromePlugin</h2><p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin 金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd 都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
+<ol>
+<li><p>可通过 chrome://version/ 查看命令行中是否含有 <code>--register-pepper-plugins=XXX</code></p>
+<p> <img data-src="/posts/29e0b18c/chrome_version_before.png" alt="chrome_version_before"></p>
+</li>
+<li><p>根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是 <code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序 <code>KGPMUninstall.exe</code>，双击进行卸载即可</p>
+</li>
+<li><p>卸载之后，重启一下 chrome，命令行应该就恢复正常了，此时也能在已打开 chrome 的情况下在第三方应用中顺利打开超链接了</p>
+<p> <img data-src="/posts/29e0b18c/chrome_version_after.png" alt="chrome_version_after"></p>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome 浏览器 每次打开提示：“–no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>chrome</tag>
+        <tag>日常踩坑</tag>
       </tags>
   </entry>
   <entry>
@@ -521,147 +801,6 @@
         <tag>python</tag>
         <tag>SSL</tag>
         <tag>proxy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX PPT</title>
-    <url>/posts/499c5a19.html</url>
-    <content><![CDATA[<h2 id="Beamer-模板"><a href="#Beamer-模板" class="headerlink" title="Beamer 模板"></a>Beamer 模板</h2><p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf 上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用</p>
-<span id="more"></span>
-<p><img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer"></p>
-<!-- TODO: Beamer 介绍和额外的特性 -->
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>Beamer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 基础介绍</title>
-    <url>/posts/a4752f87.html</url>
-    <content><![CDATA[<h2 id="TeX-和-LaTeX"><a href="#TeX-和-LaTeX" class="headerlink" title="TeX 和 LaTeX"></a>TeX 和 LaTeX</h2><p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。</p>
-<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成 <code>.dvi</code> 文件</p>
-<span id="more"></span>
-<h2 id="pdfTeX、XeTeX-和-LuaTeX"><a href="#pdfTeX、XeTeX-和-LuaTeX" class="headerlink" title="pdfTeX、XeTeX 和 LuaTeX"></a>pdfTeX、XeTeX 和 LuaTeX</h2><h3 id="三者的介绍"><a href="#三者的介绍" class="headerlink" title="三者的介绍"></a>三者的介绍</h3><p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
-<ul>
-<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
-<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
-<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
-</ul>
-<h3 id="各自的特性"><a href="#各自的特性" class="headerlink" title="各自的特性"></a>各自的特性</h3><ul>
-<li>pdfTeX 的主要特性是能直接生成 pdf</li>
-<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
-<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua 脚本</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX, XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 环境配置</title>
-    <url>/posts/4f94956.html</url>
-    <content><![CDATA[<h2 id="网页环境"><a href="#网页环境" class="headerlink" title="网页环境"></a>网页环境</h2><h3 id="Overleaf"><a href="#Overleaf" class="headerlink" title="Overleaf"></a>Overleaf</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tLw==">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX 编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑</p>
-<span id="more"></span>
-<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><h3 id="TeX-Live"><a href="#TeX-Live" class="headerlink" title="TeX Live"></a>TeX Live</h3><p>TeX Live 可以利用镜像安装节省下载时间</p>
-<ul>
-<li>从 <span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL0NUQU4vc3lzdGVtcy90ZXhsaXZlL0ltYWdlcy8=">清华镜像站<i class="fa fa-external-link-alt"></i></span> 直接下载</li>
-<li>或者利用 <span class="exturl" data-url="aHR0cDovL3d3dy50dWcub3JnL3RleGxpdmUvYWNxdWlyZS1pc28uaHRtbCN0b3JyZW50">种子文件<i class="fa fa-external-link-alt"></i></span> BT 下载镜像</li>
-</ul>
-<p>可以在安装 TeX Live 时同时勾选上安装 TeXworks 前端，然后就可以使用 TeXworks 作为 IDE 来使用了</p>
-<h3 id="TeXstudio"><a href="#TeXstudio" class="headerlink" title="TeXstudio"></a>TeXstudio</h3><p>TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGV4c3R1ZGlvLm9yZy8=">官网<i class="fa fa-external-link-alt"></i></span> 下载安装，并且有中文界面</p>
-<h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>个人更喜欢 VSCode，通过安装扩展并进行相应的配置即可较好的支持 LaTeX，同时还有格式化和自动补全等功能，非常方便</p>
-<h4 id="安装-LaTeX-Workshop-扩展"><a href="#安装-LaTeX-Workshop-扩展" class="headerlink" title="安装 LaTeX Workshop 扩展"></a>安装 LaTeX Workshop 扩展</h4><p>直接在 <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPUphbWVzLVl1LmxhdGV4LXdvcmtzaG9w">VSCode 的扩展商店<i class="fa fa-external-link-alt"></i></span> 中搜索 <code>LaTeX Workshop</code> 安装即可</p>
-<h4 id="编译链配置"><a href="#编译链配置" class="headerlink" title="编译链配置"></a>编译链配置</h4><ol>
-<li><p>默认配置</p>
-<p> TeX Live 安装时会同时安装 <code>latexmk</code>, LaTeX Workshop 会默认使用 <code>latexmk</code> 来编译 <code>.tex</code>，无需手动再配置</p>
-</li>
-<li><p>手动配置 (可选)</p>
-<p> 手动配置 LaTeX Workshop，在 VSCode 的配置文件 <code>settings.json</code> 中直接手动添加如下代码:</p>
-<p> 主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">官方 recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
- <figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-
- <!-- TODO: 弄清编译命令和编译链当前配置的具体含义，主要是 bibtex --></li>
-</ol>
-<h4 id="正向同步"><a href="#正向同步" class="headerlink" title="正向同步"></a>正向同步</h4><p>正向同步指的是编译完成后，在 <code>.tex</code> 文件内通过快捷键，快速定位到光标位置在 <code>.tex</code> 的对应位置，方便查看 PDF 文件</p>
-<p>推荐打开文件修改后，编译完成后自动正向同步。该功能通过 <code>latex-workshop.synctex.afterBuild.enabled</code> 来控制</p>
-<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h4 id="反向同步"><a href="#反向同步" class="headerlink" title="反向同步"></a>反向同步</h4><p>反向同步指的是编译完成后，在 PDF 文件内通过快捷键，快速定位点击部分在 <code>.tex</code> 的位置，方便修改 <code>.tex</code> 源码</p>
-<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">官方 synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
-<ol>
-<li><p>VSCode 内部 PDF 浏览器</p>
-<p> 如果直接使用 VSCode 来浏览 PDF，不需要额外设置，可以根据需要修改 <code>latex-workshop.view.pdf.internal.synctex.keybinding</code> 来修改反向同步的快捷键即可，默认 Ctrl 加鼠标左键</p>
- <figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.internal.synctex.keybinding"</span><span class="punctuation">:</span> <span class="string">"ctrl-click"</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li><p>外部 PDF 浏览器</p>
-<p> <span class="exturl" data-url="aHR0cHM6Ly93d3cuc3VtYXRyYXBkZnJlYWRlci5vcmcvZnJlZS1wZGYtcmVhZGVy">SumatraPDF<i class="fa fa-external-link-alt"></i></span> 是一款流行的小巧方便的免费 PDF 浏览软件。VSCode 支持使用外部的 PDF 浏览器来查看编译后的 PDF 文件，以及反向搜索功能。主要需要如下配置：</p>
- <figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置为使用外部 PDF 浏览软件来浏览 PDF</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.viewer"</span><span class="punctuation">:</span> <span class="string">"external"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 配置外部 PDF 浏览软件的命令行以及参数</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.command"</span><span class="punctuation">:</span> <span class="string">"D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe"</span><span class="punctuation">,</span> <span class="comment">// 自行修改路径</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"%PDF%"</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p> 在 SumatraPDF 的设置 - 选项中设置反向搜索命令行 <code>C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe -g "%f:%l"</code>，Code 的路径应该为完整的绝对路径</p>
-</li>
-</ol>
-<h4 id="其他可选配置"><a href="#其他可选配置" class="headerlink" title="其他可选配置"></a>其他可选配置</h4><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="中文支持"><a href="#中文支持" class="headerlink" title="中文支持"></a>中文支持</h2><p>该节主要参考 <span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">Overleaf Chinese<i class="fa fa-external-link-alt"></i></span> 文档</p>
-<p><strong>推荐使用 XeLaTeX 和 LuaLaTeX 来编译含有中文字符的 <code>.tex</code> 文件</strong></p>
-<h3 id="XeLaTeX-和-LuaLaTeX"><a href="#XeLaTeX-和-LuaLaTeX" class="headerlink" title="XeLaTeX 和 LuaLaTeX"></a>XeLaTeX 和 LuaLaTeX</h3><ol>
-<li>直接使用 <code>ctexart</code> 文档类即可支持中文</li>
-<li>或者使用 <code>ctex</code> 包来支持中文</li>
-</ol>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\tableofcontents</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{abstract}</span><br><span class="line">这是简介及摘要。</span><br><span class="line"><span class="keyword">\end</span>{abstract}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>或者</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{xxx}</span><br><span class="line"><span class="keyword">\usepackage</span>{ctex}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="XeLaTeX"><a href="#XeLaTeX" class="headerlink" title="XeLaTeX"></a>XeLaTeX</h3><p>XeLaTeX 还可以使用 <code>xeCJK</code> 包来支持中文</p>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{xeCJK}</span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="pdfLaTeX"><a href="#pdfLaTeX" class="headerlink" title="pdfLaTeX"></a>pdfLaTeX</h3><p>pdfLaTeX 对中文支持不是很好，只用 pdaLaTeX 的话需要引入 <code>CJKutf8</code> 包，并且用 <code>\begin{CJK*}{UTF8}{gbsn}</code> 和 <code>\end{CJK*}</code> 包住所有的中文。</p>
-<ul>
-<li><code>gbsn</code> 和 <code>gkai</code> 是简体的字体</li>
-<li><code>bsmi</code> 和 <code>bkai</code> 是繁体的字体</li>
-</ul>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{CJKutf8}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{gbsn}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line">You can also insert Latin text in your document</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{bsmi}</span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><ol>
-<li><p>首先 <code>.tex</code> 文件名以及路径尽量不要含有空格以及中文字符</p>
-</li>
-<li><p>在使用 <code>latexmk</code> 和 VSCode 的 LaTeX Workshop 时，推荐使用第三个编译链 <code>Recipe: latexmk (lualatex)</code></p>
-<p> <img data-src="/posts/4f94956/build-chinese-latex.png" alt="编译中文 LaTeX"></p>
-</li>
-</ol>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvSW5zdGFsbCNyZXF1aXJlbWVudHM=">【LaTeX Workshop】依赖<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">【LaTeX Workshop】recipes 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">【LaTeX Workshop】synctex 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODE3ODAxNQ==">【知乎】使用 VSCode 编写 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xNjY1MjMwNjQ=">【知乎】Visual Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">【Overleaf】Chinese<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>VSCode</tag>
       </tags>
   </entry>
   <entry>
@@ -842,133 +981,6 @@ io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
       </tags>
   </entry>
   <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">内容</a>，在这里不做重复</p>
-<span id="more"></span>
-<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>常用的长度单位</p>
-<table>
-<thead>
-<tr>
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th> 换成算成 mm</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pt</td>
-<td> 基本单位</td>
-<td> 1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>mm</td>
-<td> 毫米</td>
-<td> 2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr>
-<td>cm</td>
-<td> 厘米</td>
-<td> 28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr>
-<td>in</td>
-<td> 英寸</td>
-<td> 72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>ex</td>
-<td> 当前字体的 x 字母高度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-<tr>
-<td>em</td>
-<td> 当前字体的 m 字母宽度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">% 开启链接颜色配置，并配置为蓝色</span></span><br><span class="line"><span class="keyword">\usepackage</span>[colorlinks=true, allcolors=blue]{hyperref}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\url</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}</span><br><span class="line"><span class="keyword">\href</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}{LaTeX 语法}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><h3 id="段落中（隐式）"><a href="#段落中（隐式）" class="headerlink" title="段落中（隐式）"></a>段落中（隐式）</h3><p>三种均可，任意选择，以 E=mc<sup>2</sup> 为例</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span>E=mc<span class="built_in">^</span>2<span class="keyword">\)</span></span><br><span class="line"><span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>{math}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{math}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="单独成段（显式）"><a href="#单独成段（显式）" class="headerlink" title="单独成段（显式）"></a>单独成段（显式）</h3><p>三种均可，任意选择</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span>E=mc<span class="built_in">^</span>2<span class="keyword">\]</span></span><br><span class="line"><span class="keyword">\begin</span>{displaymath}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{displaymath}</span><br><span class="line"><span class="keyword">\begin</span>{equation}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{equation}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="居中，左对齐，右对齐"><a href="#居中，左对齐，右对齐" class="headerlink" title="居中，左对齐，右对齐"></a>居中，左对齐，右对齐</h2><h3 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h3><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{center}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{center}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="左对齐"><a href="#左对齐" class="headerlink" title="左对齐"></a>左对齐</h3><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushleft}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushleft}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="右对齐"><a href="#右对齐" class="headerlink" title="右对齐"></a>右对齐</h3><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushright}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushright}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="参考文献配置"><a href="#参考文献配置" class="headerlink" title="参考文献配置"></a>参考文献配置</h2><figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{stylename}</span><br><span class="line"><span class="keyword">\bibliography</span>{bibfile}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而 <code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
-<table>
-<thead>
-<tr>
-<th>stylename</th>
-<th>output</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>abbrc</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc"></td>
-</tr>
-<tr>
-<td>acm</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm"></td>
-</tr>
-<tr>
-<td>alpha</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha"></td>
-</tr>
-<tr>
-<td>apalike</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike"></td>
-</tr>
-<tr>
-<td>ieeetr</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr"></td>
-</tr>
-<tr>
-<td>plain</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain"></td>
-</tr>
-<tr>
-<td>siam</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam"></td>
-</tr>
-<tr>
-<td>unsrt</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt"></td>
-</tr>
-</tbody></table>
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX Lengths<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvSHlwZXJsaW5rcw==">【维基百科】LaTeX Hyperlinks<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L01hdGhlbWF0aWNhbF9leHByZXNzaW9ucw==">【overleaf】Mathematical expressions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JpYnRleF9iaWJsaW9ncmFwaHlfc3R5bGVz">【overleaf】Bibtex bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>io_uring 简介和使用</title>
     <url>/posts/c142853f.html</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">[1]<i class="fa fa-external-link-alt"></i></span>，同时支持 buffer IO</p>
@@ -1000,7 +1012,7 @@ io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
 <tr>
 <td><code>link-cp.c</code></td>
 <td>复制一个文件的内容到另一个文件</td>
-<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖 <span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">[2]<i class="fa fa-external-link-alt"></i></span></td>
+<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8="> [2]<i class="fa fa-external-link-alt"></i></span></td>
 </tr>
 <tr>
 <td><code>ucontext-cp.c</code></td>
@@ -1140,83 +1152,6 @@ io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
         <tag>page cache</tag>
         <tag>buffer IO</tag>
         <tag>writeback</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>rm -r 与 rmdir 区别</title>
-    <url>/posts/935ae1f0.html</url>
-    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
-<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和 <code>rmdir</code> 这两个命令上</p>
-<span id="more"></span>
-<h2 id="二者区别"><a href="#二者区别" class="headerlink" title="二者区别"></a>二者区别</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>主要系统调用</th>
-<th>操作对象</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>rmdir</code></td>
-<td><code>rmdir</code></td>
-<td>仅目录</td>
-</tr>
-<tr>
-<td><code>rm -r</code></td>
-<td><code>openat</code>, <code>getdents64</code>, <code>close</code>, <code>unlinkat</code></td>
-<td>目录，以及目录所有文件</td>
-</tr>
-</tbody></table>
-<h3 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><p><code>rmdir</code> 直接调用 <code>rmdir</code> 来删除目录，如果目录非空，则会删除失败</p>
-<h3 id="rm-r"><a href="#rm-r" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><ol>
-<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>再第二次加上 <code>O_CLOEXEC</code> 标记 <code>openat</code> 打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
-<li>最后通过 <code>unlinkat</code> 删除目录</li>
-</ol>
-<h3 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><p>但是如果使用的是 <code>rm -rf</code>，并且在第 3 步删除目录内文件失败时，则会跳过第 4 步，也就是说不会再对目录做任何操作</p>
-<h2 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h2><h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">touch</span> <span class="built_in">dir</span>/file</span><br><span class="line">sudo chattr +i <span class="built_in">dir</span>/file</span><br></pre></td></tr></tbody></table></figure>
-
-<p>此时目录树如下</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="rmdir-1"><a href="#rmdir-1" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o <span class="built_in">rmdir</span> <span class="built_in">rmdir</span> <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rmdir", ["rmdir", "dir/"], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir("dir/")                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rmdir: ", 7)                  = 7</span><br><span class="line">write(2, "failed to remove 'dir/'", 23) = 23</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="rm-r-1"><a href="#rm-r-1" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace <span class="built_in">rm</span> -r <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-r", "dir/"], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, "file", {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, "file", W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/'", 20)    = 20</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="rm-rf-1"><a href="#rm-rf-1" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br></pre></td></tr></tbody></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-
-<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo chattr -i <span class="built_in">dir</span>/file</span><br><span class="line">strace -o rm_rf_succ.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br></pre></td></tr></tbody></table></figure>
-
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdHkubWVsbGFub3guY29tL3MvYXJ0aWNsZS9ob3d0by1jb25maWd1cmUtbnZtZS1vdmVyLWZhYnJpY3M=">【mellanox 社区】HowTo Configure NVMe over Fabrics<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuLnRlY2gycmVhbC5jb20vaW5mb19kZXRhaWxfcGFnZT9pZD0xODQ0MQ==">【硬见】NVMe-oF 不只是 RDMA，还有 TCP<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGVkYW5jaW5nL2FydGljbGUvZGV0YWlscy8xMDM4MzUwODU=">【CSDN】Linux 防止文件和目录被意外删除或修改<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMi9vcGVuLjIuaHRtbA==">【man】open<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly91bml4LnN0YWNrZXhjaGFuZ2UuY29tL3F1ZXN0aW9ucy8xNTA5NjAvd2h5LWFyZS1ybWRpci1hbmQtdW5saW5rLXR3by1zZXBhcmF0ZS1zeXN0ZW0tY2FsbHM=">【stackexchange】Why are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>strace</tag>
       </tags>
   </entry>
   <entry>
@@ -1446,6 +1381,83 @@ new_sync_write --&gt; call_write_iter</pre>
         <tag>page cache</tag>
         <tag>buffer IO</tag>
         <tag>writeback</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>rm -r 与 rmdir 区别</title>
+    <url>/posts/935ae1f0.html</url>
+    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
+<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和 <code>rmdir</code> 这两个命令上</p>
+<span id="more"></span>
+<h2 id="二者区别"><a href="#二者区别" class="headerlink" title="二者区别"></a>二者区别</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>主要系统调用</th>
+<th>操作对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>rmdir</code></td>
+<td><code>rmdir</code></td>
+<td>仅目录</td>
+</tr>
+<tr>
+<td><code>rm -r</code></td>
+<td><code>openat</code>, <code>getdents64</code>, <code>close</code>, <code>unlinkat</code></td>
+<td>目录，以及目录所有文件</td>
+</tr>
+</tbody></table>
+<h3 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><p><code>rmdir</code> 直接调用 <code>rmdir</code> 来删除目录，如果目录非空，则会删除失败</p>
+<h3 id="rm-r"><a href="#rm-r" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><ol>
+<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>再第二次加上 <code>O_CLOEXEC</code> 标记 <code>openat</code> 打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
+<li>最后通过 <code>unlinkat</code> 删除目录</li>
+</ol>
+<h3 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><p>但是如果使用的是 <code>rm -rf</code>，并且在第 3 步删除目录内文件失败时，则会跳过第 4 步，也就是说不会再对目录做任何操作</p>
+<h2 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h2><h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">touch</span> <span class="built_in">dir</span>/file</span><br><span class="line">sudo chattr +i <span class="built_in">dir</span>/file</span><br></pre></td></tr></tbody></table></figure>
+
+<p>此时目录树如下</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="rmdir-1"><a href="#rmdir-1" class="headerlink" title="rmdir"></a><code>rmdir</code></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o <span class="built_in">rmdir</span> <span class="built_in">rmdir</span> <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rmdir", ["rmdir", "dir/"], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir("dir/")                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rmdir: ", 7)                  = 7</span><br><span class="line">write(2, "failed to remove 'dir/'", 23) = 23</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="rm-r-1"><a href="#rm-r-1" class="headerlink" title="rm -r"></a><code>rm -r</code></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace <span class="built_in">rm</span> -r <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-r", "dir/"], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, "file", {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, "file", W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/'", 20)    = 20</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="rm-rf-1"><a href="#rm-rf-1" class="headerlink" title="rm -rf"></a><code>rm -rf</code></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+
+<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo chattr -i <span class="built_in">dir</span>/file</span><br><span class="line">strace -o rm_rf_succ.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdHkubWVsbGFub3guY29tL3MvYXJ0aWNsZS9ob3d0by1jb25maWd1cmUtbnZtZS1vdmVyLWZhYnJpY3M=">【mellanox 社区】HowTo Configure NVMe over Fabrics<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuLnRlY2gycmVhbC5jb20vaW5mb19kZXRhaWxfcGFnZT9pZD0xODQ0MQ==">【硬见】NVMe-oF 不只是 RDMA，还有 TCP<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGVkYW5jaW5nL2FydGljbGUvZGV0YWlscy8xMDM4MzUwODU=">【CSDN】Linux 防止文件和目录被意外删除或修改<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMi9vcGVuLjIuaHRtbA==">【man】open<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly91bml4LnN0YWNrZXhjaGFuZ2UuY29tL3F1ZXN0aW9ucy8xNTA5NjAvd2h5LWFyZS1ybWRpci1hbmQtdW5saW5rLXR3by1zZXBhcmF0ZS1zeXN0ZW0tY2FsbHM=">【stackexchange】Why are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>strace</tag>
       </tags>
   </entry>
   <entry>
@@ -1970,6 +1982,41 @@ new_sync_write --&gt; call_write_iter</pre>
       </tags>
   </entry>
   <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
+<span id="more"></span>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span> 中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
+<ol>
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
+<li> [可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul>
+</li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenWrt 手动编译 ipk</title>
     <url>/posts/96a1807.html</url>
     <content><![CDATA[<h2 id="ipk-文件"><a href="#ipk-文件" class="headerlink" title=".ipk 文件"></a><code>.ipk</code> 文件</h2><p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
@@ -2028,41 +2075,6 @@ new_sync_write --&gt; call_write_iter</pre>
         <tag>OpenWrt</tag>
         <tag>交叉编译</tag>
         <tag>ipk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目</p>
-<span id="more"></span>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span> 中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程"><a href="#一般安装流程" class="headerlink" title="一般安装流程"></a>一般安装流程</h3><p>通常的安装步骤主要通过以下流程：</p>
-<ol>
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像<ul>
-<li> [可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
-</ul>
-</li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载"><a href="#固件搜索下载" class="headerlink" title="固件搜索下载"></a>固件搜索下载</h3><p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span> 页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
