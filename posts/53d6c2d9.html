@@ -23,12 +23,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="介绍Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为 “不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
+    <meta name="description" content="介绍 Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为 “不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Breed 介绍、刷入和使用">
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/53d6c2d9.html">
 <meta property="og:site_name" content="乐园">
-<meta property="og:description" content="介绍Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为 “不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
+<meta property="og:description" content="介绍 Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为 “不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/53d6c2d9/Breed-WEB.png">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/53d6c2d9/Breed-upgrade.png">
@@ -154,7 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">文件说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B7%E5%85%A5-Breed"><span class="nav-number">2.</span> <span class="nav-text">刷入 Breed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Breed-%E5%88%B7%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">通过 Breed 刷机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">文件说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B7%E5%85%A5-breed"><span class="nav-number">2.</span> <span class="nav-text">刷入 Breed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-breed-%E5%88%B7%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">通过 Breed 刷机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -301,10 +301,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Breed 是国内个人 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhY2twYXNjYWw=">hackpascal<i class="fa fa-external-link-alt"></i></span> 开发的闭源 Bootloader，也被称为 “不死鸟”</p>
-<p>因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖</p>
-<span id="more"></span>
-<p>Breed 拥有以下特性：</p>
+        <h2 id="介绍">介绍</h2>
+<p>Breed 是国内个人 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhY2twYXNjYWw=">hackpascal<i class="fa fa-external-link-alt"></i></span> 开发的闭源
+Bootloader，也被称为 “不死鸟”</p>
+<p>因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有
+bootloader 被覆盖。而当 Breed
+更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed
+被覆盖 <span id="more"></span> Breed 拥有以下特性：</p>
 <ul>
 <li>实时刷机进度，进度条能准确反映刷机进度</li>
 <li> Web 页面快速响应</li>
@@ -315,500 +318,583 @@
 <li>固件启动失败自动进入 Web 刷机模式</li>
 <li>可自定义位置和大小的环境变量块</li>
 </ul>
-<p>由于是闭源，无法进行二次开发，所有支持的设备均由 hackpascal 一人完成。在 2020-10-09 后已经停止版本更新，但 <span class="exturl" data-url="aHR0cHM6Ly9icmVlZC5oYWNrcGFzY2FsLm5ldC8=">官网<i class="fa fa-external-link-alt"></i></span> 目前仍然开放所有的 Breed 下载</p>
-<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><p>下表为 Breed 的文件对应的设备介绍，发布在 <span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNjE5MDYtMS0xLmh0bWw=">恩山论坛<i class="fa fa-external-link-alt"></i></span> 上，在此处做一个备份</p>
+<p>由于是闭源，无法进行二次开发，所有支持的设备均由 hackpascal
+一人完成。在 2020-10-09 后已经停止版本更新，但 <span class="exturl" data-url="aHR0cHM6Ly9icmVlZC5oYWNrcGFzY2FsLm5ldC8=">官网<i class="fa fa-external-link-alt"></i></span> 目前仍然开放所有的 Breed
+下载</p>
+<h3 id="文件说明">文件说明</h3>
+<p>下表为 Breed 的文件对应的设备介绍，发布在 <span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNjE5MDYtMS0xLmh0bWw=">恩山论坛<i class="fa fa-external-link-alt"></i></span>
+上，在此处做一个备份</p>
 <table>
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>文件名</th>
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td> BreedEnter.exe</td>
 <td>Breed 启动中断工具，实现免按复位键进入 Web 刷机模式</td>
 </tr>
-<tr>
+<tr class="even">
 <td> md5sum.txt</td>
 <td> 当前版本所有 Breed 文件的 MD5 值，用于校验文件的完整性</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> breed-mt7620-reset1.bin</td>
 <td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-reset2.bin</td>
 <td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-reset11.bin</td>
 <td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#11</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-reset12.bin</td>
 <td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-reset13.bin</td>
 <td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#13</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-reset26.bin</td>
 <td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#26</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-reset30.bin</td>
 <td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#30</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-rt-n14u.bin</td>
-<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#1，WPS 键 GPIO#2</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#1，WPS 键
+GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-whr-1166dhp.bin</td>
-<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#52，AOSS 键 GPIO#53</td>
+<td>MT7620A / MT7620N 全通用，波特率 57600，复位键 GPIO#52，AOSS 键
+GPIO#53</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-lenovo-y1.bin</td>
 <td> 联想 Y1 (newifi mini) 专用，波特率 115200，复位键 GPIO#11</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-lenovo-y1s.bin</td>
-<td> 联想 Y1S (newifi) 专用，千兆口可用，波特率 115200，复位键 GPIO#11</td>
+<td> 联想 Y1S (newifi) 专用，千兆口可用，波特率 115200，复位键
+GPIO#11</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-zte-q7.bin</td>
 <td> 中兴 ZTE Q7 专用，波特率 57600，复位键 GPIO#26</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-youku-yk1.bin</td>
 <td> 优酷路由宝专用，波特率 57600，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-xiaomi-mini.bin</td>
 <td> 小米 Mini 专用，波特率 115200，复位键 GPIO#30</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-fir302m.bin</td>
 <td> 斐讯 FIR300M/302M 专用，波特率 57600，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-phicomm-psg1208.bin</td>
-<td> 斐讯 PSG1208 (K1)/ PSG1218 (K2) 专用，波特率 57600，复位键 GPIO#1</td>
+<td> 斐讯 PSG1208 (K1)/ PSG1218 (K2) 专用，波特率 57600，复位键
+GPIO#1</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-hiwifi-hc5761.bin</td>
-<td> 极路由 极壹 S (HC5661)/ 极贰 (HC5761) 专用，波特率 115200，复位键 GPIO#12</td>
+<td> 极路由 极壹 S (HC5661)/ 极贰 (HC5761) 专用，波特率 115200，复位键
+GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-hiwifi-hc5861.bin</td>
-<td> 极路由 极叁 (HC5861) 专用，千兆 LAN 可用，波特率 115200，复位键 GPIO#12</td>
+<td> 极路由 极叁 (HC5861) 专用，千兆 LAN 可用，波特率 115200，复位键
+GPIO#12</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7620-oye-0001.bin</td>
 <td> 哦耶 Oye-0001 专用，波特率 115200，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-airmobi-iplay2.bin</td>
 <td>AirMobi iPlay2 专用，波特率 57600，复位键 GPIO#26</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7621-newifi-d1.bin</td>
-<td> 联想 Newifi D1 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#15，WPS 键 GPIO#18</td>
+<td> 联想 Newifi D1 专用，DDR3 内存适用，默认 256MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#15，WPS 键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7621-newifi-d2.bin</td>
-<td> 联想 Newifi D2 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#3，WPS 键 GPIO#7</td>
+<td> 联想 Newifi D2 专用，DDR3 内存适用，默认 512MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#3，WPS 键 GPIO#7</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7621-xunlei-timeplug.bin</td>
-<td> 迅雷时光机 (时光云) 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#4</td>
+<td> 迅雷时光机 (时光云) 专用，DDR3 内存适用，默认 256MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#4</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7621-youku-l2.bin</td>
-<td> 优酷路由宝 YK-L2 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18，WPS 键 GPIO#17</td>
+<td> 优酷路由宝 YK-L2 专用，DDR3 内存适用，默认 256MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#18，WPS 键 GPIO#17</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7621-phicomm-k2p.bin</td>
-<td> 斐讯 K2P 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 57600，复位键 GPIO#3</td>
+<td> 斐讯 K2P 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率
+57600，复位键 GPIO#3</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7621-pbr-m1.bin</td>
-<td>PandoraBox PBR-M1 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+<td>PandoraBox PBR-M1 专用，DDR3 内存适用，默认 512MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7621-totolink-a3004ns.bin</td>
-<td>TOTOLINK A3004NS 专用，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 57600，复位键 GPIO#4，WPS 键 GPIO#3</td>
+<td>TOTOLINK A3004NS 专用，DDR3 内存适用，默认 256MB DDR AC
+时序参数，波特率 57600，复位键 GPIO#4，WPS 键 GPIO#3</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7621-xiaomi-r3g.bin</td>
-<td> 小米路由器 3G 专用，NAND 启动，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+<td> 小米路由器 3G 专用，NAND 启动，DDR3 内存适用，默认 256MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7621-creativebox-v1.bin</td>
-<td>CreativeBox v1 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+<td>CreativeBox v1 专用，DDR3 内存适用，默认 512MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7621-hiwifi-hc5962.bin</td>
-<td> 极路由 4/HC5962/B70 专用，NAND 启动，DDR3 内存适用，默认 256MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+<td> 极路由 4/HC5962/B70 专用，NAND 启动，DDR3 内存适用，默认 256MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7621-r6220.bin</td>
-<td>Netgear R6220 专用，NAND 启动，DDR2 内存适用，固定 128MB DDR AC 时序参数，波特率 57600，复位键 GPIO#14，WPS 键 GPIO#7，RFKILL 键 GPIO#8</td>
+<td>Netgear R6220 专用，NAND 启动，DDR2 内存适用，固定 128MB DDR AC
+时序参数，波特率 57600，复位键 GPIO#14，WPS 键 GPIO#7，RFKILL 键
+GPIO#8</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7621-wndr3700v5.bin</td>
-<td>Netgear WNDR3700 v5 专用，DDR2 内存适用，固定 128MB DDR AC 时序参数，波特率 57600，复位键 GPIO#14，WPS 键 GPIO#7，RFKILL 键 GPIO#8</td>
+<td>Netgear WNDR3700 v5 专用，DDR2 内存适用，固定 128MB DDR AC
+时序参数，波特率 57600，复位键 GPIO#14，WPS 键 GPIO#7，RFKILL 键
+GPIO#8</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7621-gehua-ghl-r-001.bin</td>
-<td> 歌华 GHL-R-001 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 57600，复位键 GPIO#18</td>
+<td> 歌华 GHL-R-001 专用，DDR3 内存适用，默认 512MB DDR AC
+时序参数，波特率 57600，复位键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7621-jd-cloud-1.bin</td>
-<td> 京东云路由宝 RE-SP-01B 专用，DDR3 内存适用，默认 512MB DDR AC 时序参数，波特率 115200，复位键 GPIO#18</td>
+<td> 京东云路由宝 RE-SP-01B 专用，DDR3 内存适用，默认 512MB DDR AC
+时序参数，波特率 115200，复位键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7628-hiwifi-hc5661a.bin</td>
 <td> 极路由 极壹 S (HC5661A) 专用，波特率 115200，复位键 GPIO#38</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7628-oye-0006.bin</td>
 <td> 哦耶 OYE-0006 专用，波特率 115200，复位键 GPIO#38</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-mt7688-reset38.bin</td>
 <td>MT7628AN/KN 全通用，波特率 57600，复位键 GPIO#38</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7688-wrtnode2r.bin</td>
 <td>MT7628AN/KN 全通用，波特率 115200，复位键 GPIO#5</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-rt3050-buffalo-wcr-hp-gn.bin (不再更新)</td>
-<td>Buffalo WCR-HP-GN 专用，SPI 启动，波特率 57600，复位键 GPIO#10，WPS 键 GPIO#0</td>
+<td>Buffalo WCR-HP-GN 专用，SPI 启动，波特率 57600，复位键 GPIO#10，WPS
+键 GPIO#0</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-rt3050-di-524m-b1.bin (不再更新)</td>
 <td>D-LINK DI-624M B1 专用，SPI 启动，波特率 57600，复位键 GPIO#10</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-rt305x-nor-reset0.bin (不再更新)</td>
 <td>RT305X 通用，NOR 启动，波特率 57600，复位键 GPIO#0</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-rt305x-nor-reset10.bin (不再更新)</td>
 <td>RT305X 通用，NOR 启动，波特率 57600，复位键 GPIO#10</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-rt3052-dir-605-b1.bin (不再更新)</td>
-<td>D-LINK DIR-605 B1 专用，NOR 启动，波特率 57600，复位键 GPIO#10，WPS 键 GPIO#0</td>
+<td>D-LINK DIR-605 B1 专用，NOR 启动，波特率 57600，复位键 GPIO#10，WPS
+键 GPIO#0</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-rt3052-hg255d.bin (不再更新)</td>
-<td> 华为 HG255D 专用，NOR 启动，波特率 115200，复位键 GPIO#4，WPS 键 GPIO#10</td>
+<td> 华为 HG255D 专用，NOR 启动，波特率 115200，复位键 GPIO#4，WPS 键
+GPIO#10</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-rt5350-airmobi-iplay.bin (不再更新)</td>
 <td>AirMobi iPlay 专用，波特率 57600，复位键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-rt5350-hame-a5.bin (不再更新)</td>
 <td> 华美 A5 专用，波特率 57600，复位键 GPIO#0</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-rt5350-zm-10.bin (不再更新)</td>
 <td> 中沃 ZM-10 专用，波特率 57600，复位键 GPIO#10</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar7161-dir-825-b1.bin (不再更新)</td>
-<td>D-LINK DIR-825 B1 专用，波特率 115200，复位键 GPIO#3，WPS 键 GPIO#8</td>
+<td>D-LINK DIR-825 B1 专用，波特率 115200，复位键 GPIO#3，WPS 键
+GPIO#8</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar724x.bin (不再更新)</td>
-<td>AR724X 通用，百兆有线，波特率 115200，复位键 GPIO#11，QSS 键 GPIO#12</td>
+<td>AR724X 通用，百兆有线，波特率 115200，复位键 GPIO#11，QSS 键
+GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar724x-reset11.bin (不再更新)</td>
 <td>AR724X 通用，百兆有线，波特率 115200，复位键 GPIO#11</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar724x-reset12.bin (不再更新)</td>
 <td>AR724X 通用，百兆有线，波特率 115200，复位键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar7240-wnr1000v2.bin (不再更新)</td>
 <td>Netgear WNR1000 v2 专用，百兆有线，波特率 115200</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar7242-wr2543nd.bin (不再更新)</td>
-<td>TP-LINK WR2543ND 专用，波特率 115200，复位键 GPIO#11，QSS 键 GPIO#12</td>
+<td>TP-LINK WR2543ND 专用，波特率 115200，复位键 GPIO#11，QSS 键
+GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar7242-aruba-ap93.bin (不再更新)</td>
-<td>Aruba-AP93 专用，千兆有线，波特率 115200，复位键 GPIO#11，WPS 键 GPIO#12</td>
+<td>Aruba-AP93 专用，千兆有线，波特率 115200，复位键 GPIO#11，WPS 键
+GPIO#12</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar913x.bin (不再更新)</td>
-<td>AR913X 通用，百兆有线，波特率 115200，复位键 GPIO#7，WPS 键 GPIO#3</td>
+<td>AR913X 通用，百兆有线，波特率 115200，复位键 GPIO#7，WPS 键
+GPIO#3</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9132-wr1043ndv1.bin (不再更新)</td>
-<td>TP-LINK WR1043ND v1 专用，波特率 115200，复位键 GPIO#7，WPS 键 GPIO#3</td>
+<td>TP-LINK WR1043ND v1 专用，波特率 115200，复位键 GPIO#7，WPS 键
+GPIO#3</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9331.bin (不再更新)</td>
 <td>AR9331 通用，波特率 115200，复位键 GPIO#11</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9331-mr12u.bin (不再更新)</td>
 <td>TP-LINK MR12U 专用，波特率 115200，复位键 GPIO#11</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9331-pisen.bin (不再更新)</td>
-<td> 品胜云路由 (云座易充 WMM003N / 无线音乐路由 WPR001N) 专用，波特率 115200，复位键 GPIO#12</td>
+<td> 品胜云路由 (云座易充 WMM003N / 无线音乐路由 WPR001N) 专用，波特率
+115200，复位键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9331-wr710n.bin (不再更新)</td>
 <td>TP-LINK WR710N/WR720N v3 专用，波特率 115200，复位键 GPIO#11</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9331-hiwifi-hc6361.bin (不再更新)</td>
-<td> 极路由 极壹 (HC6361) 专用，仅支持 TP 类固件，波特率 115200，复位键 GPIO#11</td>
+<td> 极路由 极壹 (HC6361) 专用，仅支持 TP 类固件，波特率 115200，复位键
+GPIO#11</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9341.bin (不再更新)</td>
 <td>AR9341 通用，波特率 115200，复位键 GPIO#17</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9341-wnr2000v4.bin (不再更新)</td>
 <td>Netgear WNR2000 v4 专用，波特率 115200，复位键 GPIO#4</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9341-pisen-wmp002n.bin (不再更新)</td>
 <td> 品胜云追剧 WMP002N 专用，波特率 115200，复位键 GPIO#17</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9341-wr800n.bin (不再更新)</td>
 <td>TP-LINK WR800N 专用，波特率 115200，复位键 GPIO#18</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9342-wr1041nv2.bin (不再更新)</td>
 <td>TP-LINK WR1042N v2 专用，波特率 115200，复位键 GPIO#14</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9342-huawei-ws322.bin (不再更新)</td>
 <td> 华为 WS322 专用，波特率 115200，复位键 GPIO#0，WPS 键 GPIO#16</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9344.bin (不再更新)</td>
 <td>AR9344 百兆版，通用，波特率 115200，复位键 GPIO#16</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9344-ar8327n.bin (不再更新)</td>
 <td>AR9344 + AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9344-wdr3320v2.bin (不再更新)</td>
-<td>TP-LINK WDR3320  v2 专用，波特率 115200，复位键 GPIO#16</td>
+<td>TP-LINK WDR3320 v2 专用，波特率 115200，复位键 GPIO#16</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9344-wr941nv6.bin (不再更新)</td>
 <td>TP-LINK WR941N v6 专用，波特率 115200，复位键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9344-mw4530r.bin (不再更新)</td>
-<td> 水星 MW4530R 专用，波特率 115200，复位键 GPIO#17，QSS 键 GPIO#16</td>
+<td> 水星 MW4530R 专用，波特率 115200，复位键 GPIO#17，QSS 键
+GPIO#16</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9344-wndr4300-spi.bin (不再更新)</td>
-<td>Netgear WNDR4300/WNDR3700 v4 专用，SPI 启动，波特率 115200，复位键 GPIO#21，QSS 键 GPIO#12</td>
+<td>Netgear WNDR4300/WNDR3700 v4 专用，SPI 启动，波特率 115200，复位键
+GPIO#21，QSS 键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9344-wndr4300-spi-recovery.bin (不再更新)</td>
-<td>Netgear WNDR4300/WNDR3700 v4 专用，SPI 启动，仅用于恢复目的，波特率 115200，复位键 GPIO#21，QSS 键 GPIO#12</td>
+<td>Netgear WNDR4300/WNDR3700 v4 专用，SPI 启动，仅用于恢复目的，波特率
+115200，复位键 GPIO#21，QSS 键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-ar9344-belair20e11.bin (不再更新)</td>
-<td>BelAir20E-11 专用，波特率 115200，复位键 GPIO#17，WPS 键 GPIO#12</td>
+<td>BelAir20E-11 专用，波特率 115200，复位键 GPIO#17，WPS 键
+GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9344-sgr-w500-n85b-v2.bin</td>
-<td> 国人通信 GRENTECH SGR-W500-N85b v2 专用，波特率 115200，支持 RTL8211E，复位键 GPIO#3</td>
+<td> 国人通信 GRENTECH SGR-W500-N85b v2 专用，波特率 115200，支持
+RTL8211E，复位键 GPIO#3</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca953x.bin</td>
 <td>QCA9531/QCA9533，通用，波特率 115200，复位键 GPIO#12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca953x-letv-lba-047-ch.bin</td>
 <td> 乐视路由专用，波特率 115200，复位键 GPIO#17</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca9558-wr941nv7.bin</td>
 <td>TP-LINK WR941N v7 专用，波特率 115200，复位键 GPIO#17</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca9558-ar8236.bin</td>
 <td>QCA9558 + AR8236 百兆版，通用，波特率 115200，复位键 GPIO#16</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca9558-ar8327n.bin</td>
 <td>QCA9558 + AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca9558-wr2041nv2.bin</td>
 <td>TP-LINK WR2041N v2 专用，波特率 115200，复位键 GPIO#17</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca9558-wr1043ndv2.bin</td>
 <td>TP-LINK WR1043ND v2 专用，波特率 115200，复位键 GPIO#16</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca9558-dw33d.bin</td>
 <td> 大麦 DW33D 专用，波特率 115200，复位键 GPIO#17</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca956x-uart_rx18_tx20-reset1.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#20，复位键 GPIO#1</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX
+GPIO#20，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca956x-uart_rx18_tx20-reset2.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#20，复位键 GPIO#2</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX
+GPIO#20，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca956x-uart_rx18_tx22-reset1.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#22，复位键 GPIO#1</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX
+GPIO#22，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca956x-uart_rx18_tx22-reset2.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX GPIO#22，复位键 GPIO#2</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#18，TX
+GPIO#22，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca956x-uart_rx19_tx20-reset1.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#20，复位键 GPIO#1</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX
+GPIO#20，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca956x-uart_rx19_tx20-reset2.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#20，复位键 GPIO#2</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX
+GPIO#20，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca956x-uart_rx19_tx20-reset1.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#22，复位键 GPIO#1</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX
+GPIO#22，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca956x-uart_rx19_tx22-reset2.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX GPIO#22，复位键 GPIO#2</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#19，TX
+GPIO#22，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca956x-uart_rx20_tx22-reset1.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#20，TX GPIO#22，复位键 GPIO#1</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#20，TX
+GPIO#22，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca956x-uart_rx20_tx22-reset2.bin</td>
-<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#20，TX GPIO#22，复位键 GPIO#2</td>
+<td>QCA956X 通用，百兆 / 千兆自适应，波特率 115200，UART RX GPIO#20，TX
+GPIO#22，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca956x-reset2.bin</td>
 <td>QCA956X 百兆版，通用，波特率 115200，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca9561-wdr6500v2.bin (不再更新)</td>
 <td>TP-LINK WDR6500 v2 专用，波特率 115200，复位键 GPIO#1</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca9563-wndr4500v3.bin</td>
-<td>Netgear WNDR4500 v3 专用，波特率 115200，复位键 GPIO#2，WPS 键 GPIO#1</td>
+<td>Netgear WNDR4500 v3 专用，波特率 115200，复位键 GPIO#2，WPS 键
+GPIO#1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca9563-phicomm-k2t.bin</td>
 <td> 斐讯 K2T 专用，波特率 115200，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca9563-rosinson-wr818.bin</td>
 <td>ROSINSON WR818 专用，波特率 115200，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-qca9563-jhr-848q.bin</td>
 <td>JHR-848Q 专用，波特率 115200，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>breed-qca9563-dir-859-a.bin</td>
 <td>D-Link DIR-859 A1/A2 专用，波特率 115200，复位键 GPIO#2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-tp9343.bin</td>
 <td>TP9343，通用，波特率 115200，复位键 GPIO#1，WPS 键 GPIO#1</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>注：专用版能够点亮所有 LED</p>
 <p>以下是可以支持自定义复位键 GPIO 的特别版</p>
 <table>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>文件名</th>
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td> breed-ar7161-blank.bin (不再更新)</td>
 <td>AR7161 专用，支持 AR8035 IP1001 MV88E1116 BCM5481 千兆 PHY</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar913x-blank.bin (不再更新)</td>
 <td>AR913X 专用，仅支持 88E6060 百兆交换机</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> breed-ar724x-blank.bin (不再更新)</td>
 <td>AR724X 专用，支持内置百兆交换机和 AR8021 千兆 PHY</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-ar9331-blank.bin (不再更新)</td>
 <td>AR9331 专用，仅支持内置百兆交换机</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> breed-ar934x-blank.bin (不再更新)</td>
-<td>AR934X 专用，支持内置百兆交换机和  AR8327 (N) 千兆交换机、AR8035 RTL8211E 千兆 PHY、RTL8201 百兆 PHY</td>
+<td>AR934X 专用，支持内置百兆交换机和 AR8327 (N) 千兆交换机、AR8035
+RTL8211E 千兆 PHY、RTL8201 百兆 PHY</td>
 </tr>
-<tr>
+<tr class="even">
 <td>breed-mt7620-blank.bin</td>
 <td>MT7620 专用，仅支持内置百兆交换机</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> breed-mt76x8-blank.bin</td>
 <td>MT7628/MT7688 专用，仅支持内置百兆交换机</td>
 </tr>
-<tr>
+<tr class="even">
 <td> breed-rt305x-nor-blank.bin (不再更新)</td>
 <td>RT305X 专用，从 NOR 闪存启动，仅支持内置百兆交换机</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> breed-rt305x-spi-blank.bin (不再更新)</td>
 <td>RT305X 专用，从 SPI 闪存启动，仅支持内置百兆交换机</td>
 </tr>
-<tr>
+<tr class="even">
 <td> breed-rt5350-blank.bin (不再更新)</td>
 <td>RT5350 专用，仅支持内置百兆交换机</td>
 </tr>
-</tbody></table>
-<h2 id="刷入-Breed"><a href="#刷入-Breed" class="headerlink" title="刷入 Breed"></a>刷入 Breed</h2><p>Breed 的刷入和固件刷入流程基本一致：</p>
-<ol>
+</tbody>
+</table>
+<h2 id="刷入-breed">刷入 Breed</h2>
+<p>Breed 的刷入和固件刷入流程基本一致：</p>
+<ol type="1">
 <li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
 <li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
 <li> [可选] 备份原有的所有 ROM 分区数据，主要目的是为了恢复原厂固件</li>
-<li>利用 <code>mtd</code> 等命令直接对 Bootloader 所在的 ROM 区域进行写入镜像</li>
+<li>利用 <code>mtd</code> 等命令直接对 Bootloader 所在的 ROM
+区域进行写入镜像</li>
 <li>重启设备</li>
 </ol>
-<p>刷入 Breed 后，耐心等待设备重启，通常可以通过 192.168.1.1 这个地址来进入 Breed 的 Web 管理界面</p>
-<p><img data-src="/posts/53d6c2d9/Breed-WEB.png" alt="Breed 的 Web 管理界面"></p>
-<h2 id="通过-Breed-刷机"><a href="#通过-Breed-刷机" class="headerlink" title="通过 Breed 刷机"></a>通过 Breed 刷机</h2><p>通过 Breed 刷机就很方便了，直接在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL3VwZ3JhZGUuaHRtbA==">固件更新<i class="fa fa-external-link-alt"></i></span> 界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可</p>
-<p><img data-src="/posts/53d6c2d9/Breed-upgrade.png" alt="Breed 进行固件更新"></p>
-<h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><p>除去 Web 界面刷机，Breed 还支持一些其他的功能，包括固件备份、超频等，更多的使用方式推荐参考网上的其他资料</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<p>刷入 Breed 后，耐心等待设备重启，通常可以通过 192.168.1.1
+这个地址来进入 Breed 的 Web 管理界面</p>
+<figure>
+<img data-src="/posts/53d6c2d9/Breed-WEB.png" alt="Breed 的 Web 管理界面">
+<figcaption aria-hidden="true">Breed 的 Web 管理界面</figcaption>
+</figure>
+<h2 id="通过-breed-刷机">通过 Breed 刷机</h2>
+<p>通过 Breed 刷机就很方便了，直接在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL3VwZ3JhZGUuaHRtbA==">固件更新<i class="fa fa-external-link-alt"></i></span>
+界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可</p>
+<figure>
+<img data-src="/posts/53d6c2d9/Breed-upgrade.png" alt="Breed 进行固件更新">
+<figcaption aria-hidden="true">Breed 进行固件更新</figcaption>
+</figure>
+<h2 id="其他功能">其他功能</h2>
+<p>除去 Web 界面刷机，Breed
+还支持一些其他的功能，包括固件备份、超频等，更多的使用方式推荐参考网上的其他资料</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNjE5MDYtMS0xLmh0bWw=">【恩山论坛】Breed<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNTQ1NjEtMS0xLmh0bWw=">【恩山论坛】U-Boot 刷机<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC02OTA2MDUtMS0xLmh0bWw=">【恩山论坛】小米路由器 MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0yNTc0MjMtMS0xLmh0bWw=">【恩山论坛】小米路由器 3G 刷 Breed 及老毛子 Padavan 固件教程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0xNTQ1NjEtMS0xLmh0bWw=">【恩山论坛】U-Boot
+刷机<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC02OTA2MDUtMS0xLmh0bWw=">【恩山论坛】小米路由器
+MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC0yNTc0MjMtMS0xLmh0bWw=">【恩山论坛】小米路由器
+3G 刷 Breed 及老毛子 Padavan 固件教程<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -943,6 +1029,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.1/es5/tex-mml-chtml.js","integrity":"sha256-hlC2uSQYTmPsrzGZTEQEg9PZ1a/+SV6VBCTclohf2og="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
