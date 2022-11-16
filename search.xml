@@ -6,8 +6,8 @@
     <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span>
 是一个快速、简洁且高效的博客框架，个人只需用 Markdown
 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT
-主题搭建的 <span id="more"></span> 因为笔者个人在 Windows
-环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
+主题搭建的 <span id="more"></span></p>
+<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
 为例</p>
 <h2 id="插件推荐">插件推荐</h2>
 <h3 id="hexo-deployer-git"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></h3>
@@ -105,7 +105,8 @@ Windows PowerShell 乱码<i class="fa fa-external-link-alt"></i></span></li>
     <content><![CDATA[<h2 id="简介">简介</h2>
 <p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star
 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT
-主题搭建的 <span id="more"></span> ### 版本</p>
+主题搭建的 <span id="more"></span></p>
+<h3 id="版本">版本</h3>
 <p>在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy80">【必读】更新说明及常见问题<i class="fa fa-external-link-alt"></i></span>
 中有相关说明，NexT 一共有三个不同的仓库：</p>
 <table>
@@ -279,8 +280,8 @@ Web Applications<i class="fa fa-external-link-alt"></i></span></li>
     <title>Hexo 配置主流搜索引擎收录流程记录</title>
     <url>/posts/abac0c46.html</url>
     <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置
-Hexo 并被主流的搜索引擎（Google、Bing）收录 <span id="more"></span>
-搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取
+Hexo 并被主流的搜索引擎（Google、Bing）收录 <span id="more"></span></p>
+<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取
 +
 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
 <p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google
@@ -427,7 +428,11 @@ Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-al
     <url>/posts/499c5a19.html</url>
     <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
 <p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf
-上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span> <img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer"></p>
+上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span></p>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer">
+<figcaption aria-hidden="true">Beamer</figcaption>
+</figure>
 <!-- TODO: Beamer 介绍和额外的特性 -->
 <h2 id="特性">特性</h2>
 <h3 id="frame-与-slide"><code>frame</code> 与 <code>slide</code></h3>
@@ -478,7 +483,8 @@ Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-al
 LaTeX 通过对 TeX 进行封装，使用 TeX
 作为它的格式化引擎，使得排版文字变得更加方便。</p>
 <p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成
-<code>.dvi</code> 文件 <span id="more"></span> ## pdfTeX、XeTeX 和 LuaTeX</p>
+<code>.dvi</code> 文件 <span id="more"></span></p>
+<h2 id="pdftexxetex-和-luatex">pdfTeX、XeTeX 和 LuaTeX</h2>
 <h3 id="三者的介绍">三者的介绍</h3>
 <p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX
 引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
@@ -514,7 +520,8 @@ XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
 <h3 id="overleaf">Overleaf</h3>
 <p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29t">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX
 编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑
-<span id="more"></span> ## 本地环境</p>
+<span id="more"></span></p>
+<h2 id="本地环境">本地环境</h2>
 <h3 id="tex-live">TeX Live</h3>
 <p>TeX Live 可以利用镜像安装节省下载时间</p>
 <ul>
@@ -553,7 +560,7 @@ recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
 的对应位置，方便查看 PDF 文件</p>
 <p>推荐打开文件修改后，编译完成后自动正向同步。该功能通过
 <code>latex-workshop.synctex.afterBuild.enabled</code> 来控制</p>
-<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
 <h4 id="反向同步">反向同步</h4>
 <p>反向同步指的是编译完成后，在 PDF 文件内通过快捷键，快速定位点击部分在
 <code>.tex</code> 的位置，方便修改 <code>.tex</code> 源码</p>
@@ -575,7 +582,7 @@ synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
 的路径应该为完整的绝对路径</p></li>
 </ol>
 <h4 id="其他可选配置">其他可选配置</h4>
-<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
 <h2 id="中文支持">中文支持</h2>
 <p>该节主要参考 <span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">Overleaf Chinese<i class="fa fa-external-link-alt"></i></span>
 文档</p>
@@ -642,7 +649,8 @@ Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
     <title>LaTeX 语法</title>
     <url>/posts/2033aa70.html</url>
     <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#中文支持">内容</a>，在这里不做重复
-<span id="more"></span> ## 长度</p>
+<span id="more"></span></p>
+<h2 id="长度">长度</h2>
 <p>常用的长度单位</p>
 <table>
 <thead>
@@ -787,7 +795,8 @@ bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
     <url>/posts/4bc1e607.html</url>
     <content><![CDATA[<p>本文主要记录在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQg==">YCSB<i class="fa fa-external-link-alt"></i></span>
 使用配置文件测试 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span>
-的过程中遇到的一些问题以及相应的解决办法 <span id="more"></span> ## 简介</p>
+的过程中遇到的一些问题以及相应的解决办法 <span id="more"></span></p>
+<h2 id="简介">简介</h2>
 <p>YCSB 的全程是 Yahoo! Cloud Serving
 Benchmark，是雅虎开发的用来对云服务进行基础测试的工具，支持目前常见的
 NoSQL 数据库产品，如 HBase、MongoDB、OrientDB、Redis 等等</p>
@@ -899,86 +908,13 @@ Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-
       </tags>
   </entry>
   <entry>
-    <title>解决 pip 安装第三方包时因 SSL 报错</title>
-    <url>/posts/2e7aa01a.html</url>
-    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
-<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
-后发现用 <code>pip</code>
-安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
-SSL 认证失败导致的 <span id="more"></span> 1. check_hostname requires
-server_hostname</p>
-<pre><code>&gt; `raise ValueError("check_hostname requires server_hostname")`
-&gt; `ValueError: check_hostname requires server_hostname`</code></pre>
-<ol start="2" type="1">
-<li><p>EOF occurred in violation of protocol</p>
-<blockquote>
-<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
-</blockquote></li>
-</ol>
-<h2 id="什么是-ssl">什么是 SSL ？</h2>
-<p>传输层安全性协议（英语：Transport Layer
-Security，TLS）及其前身安全套接层（英语：Secure Sockets
-Layer，SSL）是现在的 HTTPS
-协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
-<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
-以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
-包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
-<h2 id="为什么会报错">为什么会报错</h2>
-<p>根据报错信息可以发现错误的根源就在于
-SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
-或者网络抓包等软件的导致的</p>
-<h2 id="解决办法">解决办法</h2>
-<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
-或者网络抓包等软件</h3>
-<p>最推荐的办法是临时关闭代理、VPN
-或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
-<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
-源来避免 SSL 认证问题</h3>
-<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
-的镜像站来进行安装下载</p>
-<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
-协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
-协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
-<p>安装时第三方包时可以参考如下命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
-<p>修改文件内容如下</p>
-<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
-<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
-后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
-或者 <code>20.3b1</code> 等较低版本即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
-镜像<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
-pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
-pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>日常踩坑</category>
-      </categories>
-      <tags>
-        <tag>日常踩坑</tag>
-        <tag>pip</tag>
-        <tag>python</tag>
-        <tag>SSL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
     <url>/posts/29e0b18c.html</url>
     <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome
 时，并且 chrome
 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应
-<span id="more"></span> <del>（如果 chrome 没有打开时，则会正常跳出 chrome
-以及相应的网页，好气哦）</del></p>
+<del>（如果 chrome 没有打开时，则会正常跳出 chrome
+以及相应的网页，好气哦）</del> <span id="more"></span></p>
 <figure>
 <img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser">
 <figcaption aria-hidden="true">wechat_default_browser</figcaption>
@@ -1114,7 +1050,7 @@ support for HTTPS connections to proxies.<i class="fa fa-external-link-alt"></i>
 </figure>
 <p><code>CFW</code> 在配置代理服务器时，仅仅给出了地址和端口，并没有给出
 <u>入口协议</u></p>
-<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># urllib 配置代理的源码摘录：</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    <span class="keyword">if</span> proxyServer[:<span class="number">5</span>] == <span class="string">'http:'</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'https'</span>] = <span class="string">'https://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'ftp'</span>] = <span class="string">'ftp://%s'</span> % proxyServer</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># urllib 配置代理的源码摘录：</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.<span class="keyword">match</span>(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    <span class="keyword">if</span> proxyServer[:<span class="number">5</span>] == <span class="string">'http:'</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        proxies[<span class="string">'http'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'https'</span>] = <span class="string">'https://%s'</span> % proxyServer</span><br><span class="line">        proxies[<span class="string">'ftp'</span>] = <span class="string">'ftp://%s'</span> % proxyServer</span><br></pre></td></tr></tbody></table></figure>
 <p>按照上面给出的 <code>urllib</code> 库源码逻辑，会将代理配置为</p>
 <figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line">proxies = {</span><br><span class="line">    <span class="string">'http'</span>: <span class="string">'http://127.0.0.1:7890'</span>,</span><br><span class="line">    <span class="string">'https'</span>: <span class="string">'https://127.0.0.1:7890'</span>,</span><br><span class="line">    <span class="string">'ftp'</span>: <span class="string">'ftp://127.0.0.1:7890'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>因此导致了 <code>pip</code>、<code>requests</code> 等上层包，访问
@@ -1125,9 +1061,9 @@ HTTPS 网站时会错误的使用 <code>https://127.0.0.1:7890</code> 代理，�
 <code>urllib</code> 库源码逻辑（文件位置一般在
 <code>***/python3.*/urllib/request.py</code> 或者
 <code>***/anaconda3/Lib/urllib/request.py</code>）</p>
-<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    proxies[<span class="string">'http'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">    proxies[<span class="string">'https'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">    proxies[<span class="string">'ftp'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.<span class="keyword">match</span>(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    proxies[<span class="string">'http'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">    proxies[<span class="string">'https'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br><span class="line">    proxies[<span class="string">'ftp'</span>] = <span class="string">'http://%s'</span> % proxyServer</span><br></pre></td></tr></tbody></table></figure>
 <p>或者简单的按照下面的方式进行修改（并不一定适用所有情况）</p>
-<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'https'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'ftp'</span>] = proxyServer</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight py"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> proxyServer:</span><br><span class="line">    <span class="comment"># Per-protocol settings</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> proxyServer.split(<span class="string">';'</span>):</span><br><span class="line">        protocol, address = p.split(<span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># See if address has a type:// prefix</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.<span class="keyword">match</span>(<span class="string">'(?:[^/:]+)://'</span>, address):</span><br><span class="line">            address = <span class="string">'%s://%s'</span> % (protocol, address)</span><br><span class="line">        proxies[protocol] = address</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Use one setting for all protocols</span></span><br><span class="line">    proxies[<span class="string">'http'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'https'</span>] = proxyServer</span><br><span class="line">    proxies[<span class="string">'ftp'</span>] = proxyServer</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZGF2eXl5L3AvMTQzODg2MjMuaHRtbA==">【博客园】Python
@@ -1148,159 +1084,84 @@ Add support for HTTPS connections to proxies.<i class="fa fa-external-link-alt">
       </categories>
       <tags>
         <tag>日常踩坑</tag>
+        <tag>proxy</tag>
         <tag>python</tag>
         <tag>SSL</tag>
-        <tag>proxy</tag>
       </tags>
   </entry>
   <entry>
-    <title>io_uring 用户库源码分析</title>
-    <url>/posts/d7259d1d.html</url>
-    <content><![CDATA[<p>当前内容基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5nL3JlbGVhc2VzL3RhZy9saWJ1cmluZy0yLjE=">liburing
-2.1<i class="fa fa-external-link-alt"></i></span> 版本</p>
-<h2 id="整体流程">整体流程</h2>
-<p>之前在 <a href="/posts/c142853f.html#代码流程">io_uring
-简介和使用</a> 有过总结，使用 io_uring 的一般流程如下： <span id="more"></span> -
-使用 <code>open</code>、<code>fstat</code>
-等函数来打开文件以及元数据查看等操作 - 因为 io_uring
-替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由
-<code>open</code> 函数执行返回的） - 使用
-<code>io_uring_queue_init</code> 初始化
-<code>struct io_uring ring</code> 结构体 - 初始化
-<code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度
-- 通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code> - 通过
-<code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及
-offset 信息 - 【可选】 通过 <code>io_uring_sqe_set_data</code> 对
-<code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在
-<code>cqe</code> 中进行返回） - 通过 <code>io_uring_submit</code> 对整个
-<code>ring</code> 的所有 <code>sqe</code> 进行下发 - 通过
-<code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code>
-来获取 <code>cqe</code> - <code>io_uring_wait_cqe</code>
-会阻塞当前线程直到有一个 <code>cqe</code> 返回 -
-<code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有
-<code>cqe</code>，就会返回错误 - <code>io_uring_cqe_get_data</code>
-可以从 <code>cqe</code> 中获取 <code>user_data</code> - 通过
-<code>io_uring_cqe_seen</code> 对当前 <code>cqe</code>
-进行清除，避免被二次处理 - 所有 IO 完成后，通过
-<code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</p>
-<h2 id="io_uring_queue_init"><code>io_uring_queue_init</code></h2>
-<ul>
-<li><p>函数调用逻辑</p>
-<pre class="mermaid">  graph TD
-io_uring_queue_init --&gt; io_uring_queue_init_params --&gt; __sys_io_uring_setup --&gt; syscall --&gt;|陷入内核|io_uring_setup
-io_uring_queue_init_params --&gt; io_uring_queue_mmap --&gt; io_uring_mmap --&gt; mmap</pre></li>
-<li><p>函数功能</p>
-<p>该函数主要将队列深度以及额外的 <code>flags</code>
-参数传递到内核，让内核的 <code>io_uring_setup</code> 来初始化
-<code>io_uring</code> 结构体，同时使用 <code>mmap</code>
-将在内核中初始化的 <code>SQ</code>、<code>CQ</code> 以及
-<code>SQEs</code> 映射到用户态</p>
-<p>初始化时传递的 <code>flags</code> 将影响 <code>io_uring</code>
-的运行方式：</p>
-<ul>
-<li><code>IORING_SETUP_IOPOLL</code>：开启此选项必须保证后续只用
-<code>O_DIRECT</code> 打开文件并且文件系统的
-<code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO
-将下发失败。开启后内核将调用注册的 <code>iopoll</code>
-函数来主动轮询设备驱动确认 IO
-是否完成<!-- ，`iopoll` 的触发时机可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></li>
-<li><code>IORING_SETUP_SQPOLL</code>：将启动一个单独的内核线程
-<code>io_sq_thread</code>，内核将主动轮询 SQ，然后将 IO
-下发至驱动设备，能大大减少提交 IO 时的系统调用开销（内核线程工作时，提交
-IO
-将无需系统调用；但是该线程可能会休眠，休眠时需要系统调用来唤醒该线程）</li>
-<li><code>IORING_SETUP_SQ_AFF</code>：当
-<code>IORING_SETUP_SQPOLL</code> 已经配置后，启用
-<code>sq_thread_cpu</code> 字段，用于配置内核线程
-<code>io_sq_thread</code> 的跑在哪个 CPU 上</li>
-</ul></li>
-</ul>
-<h2 id="io_uring_get_sqe"><code>io_uring_get_sqe</code></h2>
-<p>由于 SQ 已经通过 <code>mmap</code> 映射到用户态，该函数只需在读取
-<code>sq-&gt;khead</code> 时通过 <code>io_uring_smp_load_acquire</code>
-保证一致性，而 <code>sq-&gt;sqe_tail</code>
-只用于用户态，直接读取即可，根据 <code>sq-&gt;khead</code> 以及
-<code>sq-&gt;sqe_tail</code> 判断 SQ 是否已满，未满则给出
-<code>sq-&gt;sqe_tail</code> 处的 <code>sqe</code> 即可，然后更新
-<code>sq-&gt;sqe_tail</code></p>
-<h2 id="io_uring_prep_op"><code>io_uring_prep_#OP</code></h2>
-<p>通过调用 <code>io_uring_prep_rw</code> 对 <code>sqe</code> 填充命令
-OP、<code>fd</code>、buffer 指针以及 offset 信息等</p>
-<h2 id="io_uring_sqe_set_data"><code>io_uring_sqe_set_data</code></h2>
-<p>直接对 <code>sqe-&gt;user_data</code> 进行赋值</p>
-<h2 id="io_uring_submit"><code>io_uring_submit</code></h2>
-<ul>
-<li><p>函数调用逻辑</p>
-<pre class="mermaid">    graph TD
-  io_uring_submit --&gt; __io_uring_submit_and_wait --&gt; __io_uring_flush_sq
-  __io_uring_submit_and_wait --&gt; __io_uring_submit --&gt; sq_ring_needs_enter
-  __io_uring_submit --&gt; __sys_io_uring_enter --&gt; __sys_io_uring_enter2 --&gt; syscall --&gt;|陷入内核|io_uring_enter</pre></li>
-<li><p>函数功能</p>
-<ul>
-<li><p><code>__io_uring_flush_sq</code></p>
-<p>根据 <code>sq-&gt;sqe_tail</code>、<code>sq-&gt;sqe_head</code>
-差值依次填充 <code>sq-&gt;array</code>，然后一次性更新
-<code>sq-&gt;ktail</code>，并返回内核中仍未处理 <code>sqe</code>
-数量（<code>sq-&gt;ktail - sq-&gt;khead</code>）</p></li>
-<li><p><code>sq_ring_needs_enter</code></p>
-<p>判断内核线程 <code>io_sq_thread</code>
-是否启用以及正常工作（没有休眠）:</p>
-<ul>
-<li>首先要判断用户态 <code>ring-&gt;flags</code> 是否配置了
-<code>IORING_SETUP_SQPOLL</code> 标志位，判断是否启用了内核线程
-<code>io_sq_thread</code></li>
-<li>然后再判断内核态 <code>ring-&gt;sq.kflags</code> 是否配置了
-<code>IORING_SQ_NEED_WAKEUP</code> 标志位，判断内核线程
-<code>io_sq_thread</code> 是否需要唤醒</li>
-</ul>
-<p>当内核线程 <code>io_sq_thread</code> 启用并且正常工作时，则整个
-<code>io_uring_submit</code> 到此结束，无需后续的
-<code>__sys_io_uring_enter</code> 系统调用，减少了 IO
-下发的系统调用的开销</p></li>
-<li><p><code>__sys_io_uring_enter</code></p>
-<p>系统调用陷入内核态，将参数传递给内核的 <code>io_uring_setup</code>
-函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的
-<code>ring-&gt;flags</code>
-相关<!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></p></li>
-</ul></li>
-</ul>
-<h2 id="io_uring_wait_cqe"><code>io_uring_wait_cqe</code></h2>
-<p>在用户态轮询判断是否有一个新的
-<code>cqe</code>，无需系统调用陷入内核，但是会阻塞当前线程直到有一个新的
-<code>cqe</code> 或者出错</p>
-<h2 id="io_uring_peek_cqe"><code>io_uring_peek_cqe</code></h2>
-<p>仅在用户态判断一次是否有新的
-<code>cqe</code>，无需系统调用陷入内核，如果没有新的
-<code>cqe</code>，会返回失败信息 <code>-errno</code></p>
-<h2 id="io_uring_cqe_get_data"><code>io_uring_cqe_get_data</code></h2>
-<p><code>cqe-&gt;user_data</code> 会在 IO 完成后，从 <code>sqe</code>
-复制到对应的 <code>cqe</code> 中，该函数只用直接对
-<code>cqe-&gt;user_data</code> 进行读取</p>
-<h2 id="io_uring_cqe_seen"><code>io_uring_cqe_seen</code></h2>
-<p>更新 <code>cq-&gt;khead</code>，避免当前 <code>cqe</code>
-被重复获取</p>
-<h2 id="io_uring_queue_exit"><code>io_uring_queue_exit</code></h2>
-<p>首先通过 <code>munmap</code> 将初始化时 <code>mmap</code> 的
-<code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code>
-解除映射，然后通过 <code>close</code> 关闭 <code>io_uring</code> 对应的
-<code>fd</code>，<code>close</code> 会调用到该 <code>fd</code> 注册的
-<code>io_uring_release</code> 来释放 <code>io_uring</code></p>
+    <title>解决 pip 安装第三方包时因 SSL 报错</title>
+    <url>/posts/2e7aa01a.html</url>
+    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
+<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
+后发现用 <code>pip</code>
+安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
+SSL 认证失败导致的 <span id="more"></span></p>
+<ol type="1">
+<li><p>check_hostname requires server_hostname</p>
+<blockquote>
+<p><code>raise ValueError("check_hostname requires server_hostname")</code>
+<code>ValueError: check_hostname requires server_hostname</code></p>
+</blockquote></li>
+<li><p>EOF occurred in violation of protocol</p>
+<blockquote>
+<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
+</blockquote></li>
+</ol>
+<h2 id="什么是-ssl">什么是 SSL ？</h2>
+<p>传输层安全性协议（英语：Transport Layer
+Security，TLS）及其前身安全套接层（英语：Secure Sockets
+Layer，SSL）是现在的 HTTPS
+协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
+<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
+以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
+包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
+<h2 id="为什么会报错">为什么会报错</h2>
+<p>根据报错信息可以发现错误的根源就在于
+SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
+或者网络抓包等软件的导致的</p>
+<h2 id="解决办法">解决办法</h2>
+<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
+或者网络抓包等软件</h3>
+<p>最推荐的办法是临时关闭代理、VPN
+或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
+<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
+源来避免 SSL 认证问题</h3>
+<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
+的镜像站来进行安装下载</p>
+<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
+协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
+协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
+<p>安装时第三方包时可以参考如下命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
+<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>修改文件内容如下</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
+<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
+后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
+或者 <code>20.3b1</code> 等较低版本即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring
-IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2t5emguZGV2L3Bvc3RzL2FydGljbGVzLzIwMjEtMDYtMTQtZGVlcC1kaXZlLWlvLXVyaW5nLw==">【个人博客】io_uring
-的接口与实现<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
+镜像<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
+pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
+pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
-        <category>存储</category>
-        <category>IO</category>
+        <category>日常踩坑</category>
       </categories>
       <tags>
-        <tag>异步 IO</tag>
-        <tag>liburing</tag>
-        <tag>io_uring</tag>
+        <tag>日常踩坑</tag>
+        <tag>python</tag>
+        <tag>SSL</tag>
+        <tag>pip</tag>
       </tags>
   </entry>
   <entry>
@@ -1313,8 +1174,9 @@ IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和
 <code>io_uring_register</code></p>
 <p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code>
-文件中，下面将逐个分析 <span id="more"></span> ## 2. 系统调用
-<code>io_uring_setup</code></p>
+文件中，下面将逐个分析 <span id="more"></span></p>
+<h2 id="系统调用-io_uring_setup">2. 系统调用
+<code>io_uring_setup</code></h2>
 <p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d.html#io-uring-queue-init">用户库源码分析</a>
 中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
 <h3 id="io_uring_setup">2.1. <code>io_uring_setup</code></h3>
@@ -1417,9 +1279,9 @@ io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
       </categories>
       <tags>
         <tag>异步 IO</tag>
+        <tag>kernel</tag>
         <tag>liburing</tag>
         <tag>io_uring</tag>
-        <tag>kernel</tag>
       </tags>
   </entry>
   <entry>
@@ -1428,7 +1290,8 @@ io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
     <content><![CDATA[<h2 id="简介">简介</h2>
 <p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux
 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">[1]<i class="fa fa-external-link-alt"></i></span>，同时支持
-buffer IO <span id="more"></span> io_uring 的作者 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">Jens Axboe<i class="fa fa-external-link-alt"></i></span> 是 Linux
+buffer IO <span id="more"></span></p>
+<p>io_uring 的作者 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">Jens Axboe<i class="fa fa-external-link-alt"></i></span> 是 Linux
 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline
 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
 <h2 id="使用">使用</h2>
@@ -1560,6 +1423,171 @@ Linux 内核全新异步 IO 引擎 —— io_uring 设计与实现》<i class="f
       </tags>
   </entry>
   <entry>
+    <title>io_uring 用户库源码分析</title>
+    <url>/posts/d7259d1d.html</url>
+    <content><![CDATA[<p>当前内容基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5nL3JlbGVhc2VzL3RhZy9saWJ1cmluZy0yLjE=">liburing
+2.1<i class="fa fa-external-link-alt"></i></span> 版本</p>
+<h2 id="整体流程">整体流程</h2>
+<p>之前在 <a href="/posts/c142853f.html#代码流程">io_uring
+简介和使用</a> 有过总结，使用 io_uring 的一般流程如下：
+<span id="more"></span></p>
+<ul>
+<li>使用 <code>open</code>、<code>fstat</code>
+等函数来打开文件以及元数据查看等操作
+<ul>
+<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是
+<code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
+</ul></li>
+<li>使用 <code>io_uring_queue_init</code> 初始化
+<code>struct io_uring ring</code> 结构体</li>
+<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer
+指针和长度</li>
+<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
+<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code>
+填充命令，buffer 以及 offset 信息
+<ul>
+<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code>
+附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code>
+中进行返回）</li>
+</ul></li>
+<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有
+<code>sqe</code> 进行下发</li>
+<li>通过 <code>io_uring_wait_cqe</code> 或者
+<code>io_uring_peek_cqe</code> 来获取 <code>cqe</code>
+<ul>
+<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个
+<code>cqe</code> 返回</li>
+<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有
+<code>cqe</code>，就会返回错误</li>
+<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取
+<code>user_data</code></li>
+</ul></li>
+<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code>
+进行清除，避免被二次处理</li>
+<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将
+<code>ring</code> 销毁</li>
+</ul>
+<h2 id="io_uring_queue_init"><code>io_uring_queue_init</code></h2>
+<ul>
+<li><p>函数调用逻辑</p>
+<pre class="mermaid">  graph TD
+io_uring_queue_init --&gt; io_uring_queue_init_params --&gt; __sys_io_uring_setup --&gt; syscall --&gt;|陷入内核|io_uring_setup
+io_uring_queue_init_params --&gt; io_uring_queue_mmap --&gt; io_uring_mmap --&gt; mmap</pre></li>
+<li><p>函数功能</p>
+<p>该函数主要将队列深度以及额外的 <code>flags</code>
+参数传递到内核，让内核的 <code>io_uring_setup</code> 来初始化
+<code>io_uring</code> 结构体，同时使用 <code>mmap</code>
+将在内核中初始化的 <code>SQ</code>、<code>CQ</code> 以及
+<code>SQEs</code> 映射到用户态</p>
+<p>初始化时传递的 <code>flags</code> 将影响 <code>io_uring</code>
+的运行方式：</p>
+<ul>
+<li><code>IORING_SETUP_IOPOLL</code>：开启此选项必须保证后续只用
+<code>O_DIRECT</code> 打开文件并且文件系统的
+<code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO
+将下发失败。开启后内核将调用注册的 <code>iopoll</code>
+函数来主动轮询设备驱动确认 IO
+是否完成<!-- ，`iopoll` 的触发时机可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></li>
+<li><code>IORING_SETUP_SQPOLL</code>：将启动一个单独的内核线程
+<code>io_sq_thread</code>，内核将主动轮询 SQ，然后将 IO
+下发至驱动设备，能大大减少提交 IO 时的系统调用开销（内核线程工作时，提交
+IO
+将无需系统调用；但是该线程可能会休眠，休眠时需要系统调用来唤醒该线程）</li>
+<li><code>IORING_SETUP_SQ_AFF</code>：当
+<code>IORING_SETUP_SQPOLL</code> 已经配置后，启用
+<code>sq_thread_cpu</code> 字段，用于配置内核线程
+<code>io_sq_thread</code> 的跑在哪个 CPU 上</li>
+</ul></li>
+</ul>
+<h2 id="io_uring_get_sqe"><code>io_uring_get_sqe</code></h2>
+<p>由于 SQ 已经通过 <code>mmap</code> 映射到用户态，该函数只需在读取
+<code>sq-&gt;khead</code> 时通过 <code>io_uring_smp_load_acquire</code>
+保证一致性，而 <code>sq-&gt;sqe_tail</code>
+只用于用户态，直接读取即可，根据 <code>sq-&gt;khead</code> 以及
+<code>sq-&gt;sqe_tail</code> 判断 SQ 是否已满，未满则给出
+<code>sq-&gt;sqe_tail</code> 处的 <code>sqe</code> 即可，然后更新
+<code>sq-&gt;sqe_tail</code></p>
+<h2 id="io_uring_prep_op"><code>io_uring_prep_#OP</code></h2>
+<p>通过调用 <code>io_uring_prep_rw</code> 对 <code>sqe</code> 填充命令
+OP、<code>fd</code>、buffer 指针以及 offset 信息等</p>
+<h2 id="io_uring_sqe_set_data"><code>io_uring_sqe_set_data</code></h2>
+<p>直接对 <code>sqe-&gt;user_data</code> 进行赋值</p>
+<h2 id="io_uring_submit"><code>io_uring_submit</code></h2>
+<ul>
+<li><p>函数调用逻辑</p>
+<pre class="mermaid">    graph TD
+  io_uring_submit --&gt; __io_uring_submit_and_wait --&gt; __io_uring_flush_sq
+  __io_uring_submit_and_wait --&gt; __io_uring_submit --&gt; sq_ring_needs_enter
+  __io_uring_submit --&gt; __sys_io_uring_enter --&gt; __sys_io_uring_enter2 --&gt; syscall --&gt;|陷入内核|io_uring_enter</pre></li>
+<li><p>函数功能</p>
+<ul>
+<li><p><code>__io_uring_flush_sq</code></p>
+<p>根据 <code>sq-&gt;sqe_tail</code>、<code>sq-&gt;sqe_head</code>
+差值依次填充 <code>sq-&gt;array</code>，然后一次性更新
+<code>sq-&gt;ktail</code>，并返回内核中仍未处理 <code>sqe</code>
+数量（<code>sq-&gt;ktail - sq-&gt;khead</code>）</p></li>
+<li><p><code>sq_ring_needs_enter</code></p>
+<p>判断内核线程 <code>io_sq_thread</code>
+是否启用以及正常工作（没有休眠）:</p>
+<ul>
+<li>首先要判断用户态 <code>ring-&gt;flags</code> 是否配置了
+<code>IORING_SETUP_SQPOLL</code> 标志位，判断是否启用了内核线程
+<code>io_sq_thread</code></li>
+<li>然后再判断内核态 <code>ring-&gt;sq.kflags</code> 是否配置了
+<code>IORING_SQ_NEED_WAKEUP</code> 标志位，判断内核线程
+<code>io_sq_thread</code> 是否需要唤醒</li>
+</ul>
+<p>当内核线程 <code>io_sq_thread</code> 启用并且正常工作时，则整个
+<code>io_uring_submit</code> 到此结束，无需后续的
+<code>__sys_io_uring_enter</code> 系统调用，减少了 IO
+下发的系统调用的开销</p></li>
+<li><p><code>__sys_io_uring_enter</code></p>
+<p>系统调用陷入内核态，将参数传递给内核的 <code>io_uring_setup</code>
+函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的
+<code>ring-&gt;flags</code>
+相关<!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --></p></li>
+</ul></li>
+</ul>
+<h2 id="io_uring_wait_cqe"><code>io_uring_wait_cqe</code></h2>
+<p>在用户态轮询判断是否有一个新的
+<code>cqe</code>，无需系统调用陷入内核，但是会阻塞当前线程直到有一个新的
+<code>cqe</code> 或者出错</p>
+<h2 id="io_uring_peek_cqe"><code>io_uring_peek_cqe</code></h2>
+<p>仅在用户态判断一次是否有新的
+<code>cqe</code>，无需系统调用陷入内核，如果没有新的
+<code>cqe</code>，会返回失败信息 <code>-errno</code></p>
+<h2 id="io_uring_cqe_get_data"><code>io_uring_cqe_get_data</code></h2>
+<p><code>cqe-&gt;user_data</code> 会在 IO 完成后，从 <code>sqe</code>
+复制到对应的 <code>cqe</code> 中，该函数只用直接对
+<code>cqe-&gt;user_data</code> 进行读取</p>
+<h2 id="io_uring_cqe_seen"><code>io_uring_cqe_seen</code></h2>
+<p>更新 <code>cq-&gt;khead</code>，避免当前 <code>cqe</code>
+被重复获取</p>
+<h2 id="io_uring_queue_exit"><code>io_uring_queue_exit</code></h2>
+<p>首先通过 <code>munmap</code> 将初始化时 <code>mmap</code> 的
+<code>SQ</code>、<code>CQ</code> 以及 <code>SQEs</code>
+解除映射，然后通过 <code>close</code> 关闭 <code>io_uring</code> 对应的
+<code>fd</code>，<code>close</code> 会调用到该 <code>fd</code> 注册的
+<code>io_uring_release</code> 来释放 <code>io_uring</code></p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring
+IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2t5emguZGV2L3Bvc3RzL2FydGljbGVzLzIwMjEtMDYtMTQtZGVlcC1kaXZlLWlvLXVyaW5nLw==">【个人博客】io_uring
+的接口与实现<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储</category>
+        <category>IO</category>
+      </categories>
+      <tags>
+        <tag>异步 IO</tag>
+        <tag>liburing</tag>
+        <tag>io_uring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>page cache 简介</title>
     <url>/posts/9ba60726.html</url>
     <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
@@ -1568,8 +1596,8 @@ Linux 内核全新异步 IO 引擎 —— io_uring 设计与实现》<i class="f
 DRAM
 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux
 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page
-cache，中文一般称为页（面）缓存 <span id="more"></span> 经过这层 page cache
-的作用，IO 的性能得到了显著的提升。不过由于 DRAM
+cache，中文一般称为页（面）缓存 <span id="more"></span></p>
+<p>经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM
 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9.html">回写机制</a> 定时将 page cache
 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache
 中实现了巧妙的 <a href="/TODO">预读机制</a> 提升了顺序读性能</p>
@@ -1712,8 +1740,8 @@ Cache 与 Page 回写<i class="fa fa-external-link-alt"></i></span></li>
 进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能</p>
 <p>写入到 page cache
 的数据不会立刻写入后端设备，而是标记为 “脏”，并被加入到脏页链表，后续由内核中的回写进程周期性的将脏页写回到底层存储设备</p>
-<p>下面主要分析 page cache 回写机制的策略和实现 <span id="more"></span> ##
-相关结构体</p>
+<p>下面主要分析 page cache 回写机制的策略和实现 <span id="more"></span></p>
+<h2 id="相关结构体">相关结构体</h2>
 <h3 id="底层设备信息">底层设备信息</h3>
 <p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了
 <code>backing_dev_info</code> 结构体，主要用与记录底层的设备信息</p>
@@ -2055,7 +2083,8 @@ new_sync_write --&gt; call_write_iter</pre>
 <p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code>
 驱动，显示使用中</p>
 <p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和
-<code>rmdir</code> 这两个命令上 <span id="more"></span> ## 二者区别</p>
+<code>rmdir</code> 这两个命令上 <span id="more"></span></p>
+<h2 id="二者区别">二者区别</h2>
 <table>
 <colgroup>
 <col style="width: 9%">
@@ -2154,7 +2183,8 @@ Bootloader，也被称为 “不死鸟”</p>
 <p>因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有
 bootloader 被覆盖。而当 Breed
 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed
-被覆盖 <span id="more"></span> Breed 拥有以下特性：</p>
+被覆盖 <span id="more"></span></p>
+<p>Breed 拥有以下特性：</p>
 <ul>
 <li>实时刷机进度，进度条能准确反映刷机进度</li>
 <li> Web 页面快速响应</li>
@@ -2753,6 +2783,53 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
       </tags>
   </entry>
   <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<h3 id="来源">来源</h3>
+<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
+系统。迫于 Linux 的开源协议要求，Linksys
+开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
+<span id="more"></span></p>
+<h3 id="介绍">介绍</h3>
+<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
+操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装">安装</h2>
+<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
+中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程">一般安装流程</h3>
+<p>通常的安装步骤主要通过以下流程：</p>
+<ol type="1">
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
+<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul></li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载">固件搜索下载</h3>
+<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
+页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenWrt 手动编译 ipk</title>
     <url>/posts/96a1807.html</url>
     <content><![CDATA[<h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
@@ -2762,7 +2839,8 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
 <p>但是由于路由器平台通常与常用的服务器或者个人 PC
 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成
-<code>.ipk</code> 文件，因此需要交叉编译来实现 <span id="more"></span> 而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span>
+<code>.ipk</code> 文件，因此需要交叉编译来实现 <span id="more"></span></p>
+<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span>
 仓库就提供了一个方便使用的交叉编译环境</p>
 <h2 id="编译准备">编译准备</h2>
 <p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
@@ -2833,55 +2911,9 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
         <category>路由器</category>
       </categories>
       <tags>
+        <tag>OpenWrt</tag>
         <tag>交叉编译</tag>
         <tag>ipk</tag>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<h3 id="来源">来源</h3>
-<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
-系统。迫于 Linux 的开源协议要求，Linksys
-开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
-<span id="more"></span> ### 介绍</p>
-<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
-操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装">安装</h2>
-<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
-中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程">一般安装流程</h3>
-<p>通常的安装步骤主要通过以下流程：</p>
-<ol type="1">
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
-<ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
-</ul></li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载">固件搜索下载</h3>
-<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
-页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
@@ -2890,8 +2922,8 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
     <content><![CDATA[<h2 id="web-界面">Web 界面</h2>
 <p>一般 OpenWrt 安装好之后会已经默启用了 Web
 管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是
-<code>root</code>，无密码，直接点击登录即可进入 <span id="more"></span> ###
-汉化</p>
+<code>root</code>，无密码，直接点击登录即可进入 <span id="more"></span></p>
+<h3 id="汉化">汉化</h3>
 <p>默认界面是英文的，可以在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9zeXN0ZW0vb3BrZw==">系统 - 软件<i class="fa fa-external-link-alt"></i></span>
 中搜索中文包安装进行汉化</p>
 <ul>
