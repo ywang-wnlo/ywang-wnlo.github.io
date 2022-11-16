@@ -91,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">32</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">22</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -201,6 +201,133 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/f2cdf8a6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zeus">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐园">
+      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 乐园">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/f2cdf8a6.html" class="post-title-link" itemprop="url">美化 Shell 之 Linux Zsh 篇</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-16 11:04:47" itemprop="dateCreated datePublished" datetime="2022-11-16T11:04:47+08:00">2022-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tags"></i>
+      </span>
+      <span class="post-meta-item-text">标签：</span>
+      <span class="post-tags">
+        <a href="/tags/Linux/" rel="tag"># Linux</a>
+        <a href="/tags/Zsh/" rel="tag"># Zsh</a>
+      </span>
+    </span>
+
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>705</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="简介">简介</h2>
+<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
+<code>Zsh</code> 对 Linux 默认的
+<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
+<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
+并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
+改为 <code>Zsh</code></p>
+<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
+应运而生。 <code>Oh My Zsh</code>
+是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
+<code>Zsh</code> 配置提供了很大的便利</p>
+<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/f2cdf8a6.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/76f6af57.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -258,9 +385,9 @@
       <span class="post-meta-item-text">标签：</span>
       <span class="post-tags">
         <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"># 日常踩坑</a>
-        <a href="/tags/proxy/" rel="tag"># proxy</a>
         <a href="/tags/python/" rel="tag"># python</a>
         <a href="/tags/SSL/" rel="tag"># SSL</a>
+        <a href="/tags/proxy/" rel="tag"># proxy</a>
       </span>
     </span>
 
@@ -510,9 +637,9 @@ ProxyError 问题记录<i class="fa fa-external-link-alt"></i></span> 重新梳�
       <span class="post-meta-item-text">标签：</span>
       <span class="post-tags">
         <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"># 日常踩坑</a>
+        <a href="/tags/pip/" rel="tag"># pip</a>
         <a href="/tags/python/" rel="tag"># python</a>
         <a href="/tags/SSL/" rel="tag"># SSL</a>
-        <a href="/tags/pip/" rel="tag"># pip</a>
       </span>
     </span>
 
@@ -1292,138 +1419,6 @@ cache，中文一般称为页（面）缓存
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/4143201a.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/646202b9.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zeus">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乐园">
-      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 乐园">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/646202b9.html" class="post-title-link" itemprop="url">page cache 回写机制</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-11-19 16:24:30" itemprop="dateCreated datePublished" datetime="2021-11-19T16:24:30+08:00">2021-11-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-16 10:33:39" itemprop="dateModified" datetime="2022-11-16T10:33:39+08:00">2022-11-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%98%E5%82%A8/IO/" itemprop="url" rel="index"><span itemprop="name">IO</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tags"></i>
-      </span>
-      <span class="post-meta-item-text">标签：</span>
-      <span class="post-tags">
-        <a href="/tags/kernel/" rel="tag"># kernel</a>
-        <a href="/tags/buffer-IO/" rel="tag"># buffer IO</a>
-        <a href="/tags/page-cache/" rel="tag"># page cache</a>
-        <a href="/tags/writeback/" rel="tag"># writeback</a>
-      </span>
-    </span>
-
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>6.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>22 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="writeback-回写">writeback 回写</h2>
-<p>在 <a href="/posts/9ba60726">page cache 简介</a> 有过介绍</p>
-<p>buffer IO 通过 page cache
-进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能</p>
-<p>写入到 page cache
-的数据不会立刻写入后端设备，而是标记为 “脏”，并被加入到脏页链表，后续由内核中的回写进程周期性的将脏页写回到底层存储设备</p>
-<p>下面主要分析 page cache 回写机制的策略和实现
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/646202b9.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

@@ -23,37 +23,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="中文支持参考环境配置中的 内容，在这里不做重复">
+    <meta name="description" content="简介 Z shell（Zsh）是一款可用作互动式登入的 shell 及指令码编写的命令直译器。 Zsh 对 Linux 默认的 Bourne shell（sh）做出了大量改进，同时加入了 Bash、ksh 及 tcsh 的某些功能。 并且自 2019 年起，macOS 的预设 Shell 已从 Bash 改为 Zsh 为了美化以及快速配置 Zsh，Oh My Zsh 应运而生。 Oh My Zsh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LaTeX 语法">
-<meta property="og:url" content="https://ywang-wnlo.github.io/posts/2033aa70.html">
+<meta property="og:title" content="美化 Shell 之 Linux Zsh 篇">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/f2cdf8a6.html">
 <meta property="og:site_name" content="乐园">
-<meta property="og:description" content="中文支持参考环境配置中的 内容，在这里不做重复">
+<meta property="og:description" content="简介 Z shell（Zsh）是一款可用作互动式登入的 shell 及指令码编写的命令直译器。 Zsh 对 Linux 默认的 Bourne shell（sh）做出了大量改进，同时加入了 Bash、ksh 及 tcsh 的某些功能。 并且自 2019 年起，macOS 的预设 Shell 已从 Bash 改为 Zsh 为了美化以及快速配置 Zsh，Oh My Zsh 应运而生。 Oh My Zsh">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesAbbrc.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesAcm.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesAlpha.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesApalike.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesIeeetr.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesPlain.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesSiam.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesUnsrt.png">
-<meta property="article:published_time" content="2021-10-19T02:08:41.000Z">
-<meta property="article:modified_time" content="2022-11-16T02:33:39.000Z">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/f2cdf8a6/candy.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/f2cdf8a6/zsh-syntax-highlighting.png">
+<meta property="article:published_time" content="2022-11-16T03:04:47.000Z">
+<meta property="article:modified_time" content="2022-11-16T03:04:47.000Z">
 <meta property="article:author" content="Zeus">
-<meta property="article:tag" content="LaTeX">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Zsh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ywang-wnlo.github.io/posts/2033aa70/BibtexStylesAbbrc.png">
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/posts/f2cdf8a6/candy.png">
 
 
-<link rel="canonical" href="https://ywang-wnlo.github.io/posts/2033aa70.html">
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/f2cdf8a6.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/2033aa70.html","path":"posts/2033aa70.html","title":"LaTeX 语法"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/f2cdf8a6.html","path":"posts/f2cdf8a6.html","title":"美化 Shell 之 Linux Zsh 篇"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>LaTeX 语法 | 乐园</title>
+<title>美化 Shell 之 Linux Zsh 篇 | 乐园</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST75Y16TW"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-PST75Y16TW","only_pageview":false}</script>
@@ -159,7 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6"><span class="nav-number">1.</span> <span class="nav-text">长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">空行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC"><span class="nav-number">3.</span> <span class="nav-text">空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">超链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">数学公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AE%B5%E8%90%BD%E4%B8%AD%E9%9A%90%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">段落中（隐式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%8B%AC%E6%88%90%E6%AE%B5%E6%98%BE%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">单独成段（显式）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%85%E4%B8%AD%E5%B7%A6%E5%AF%B9%E9%BD%90%E5%8F%B3%E5%AF%B9%E9%BD%90"><span class="nav-number">6.</span> <span class="nav-text">居中，左对齐，右对齐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%85%E4%B8%AD"><span class="nav-number">6.1.</span> <span class="nav-text">居中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%AF%B9%E9%BD%90"><span class="nav-number">6.2.</span> <span class="nav-text">左对齐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E5%AF%B9%E9%BD%90"><span class="nav-number">6.3.</span> <span class="nav-text">右对齐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">参考文献配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#todo"><span class="nav-number">8.</span> <span class="nav-text">TODO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">9.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-zsh"><span class="nav-number">2.</span> <span class="nav-text">安装 Zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-oh-my-zsh"><span class="nav-number">3.</span> <span class="nav-text">安装 Oh My Zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">主题配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">插件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh-autosuggestions"><span class="nav-number">5.1.</span> <span class="nav-text">zsh-autosuggestions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh-syntax-highlighting"><span class="nav-number">5.2.</span> <span class="nav-text">zsh-syntax-highlighting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,7 +209,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/2033aa70.html">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/f2cdf8a6.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -227,12 +222,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="LaTeX 语法 | 乐园">
+      <meta itemprop="name" content="美化 Shell 之 Linux Zsh 篇 | 乐园">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          LaTeX 语法
+          美化 Shell 之 Linux Zsh 篇
         </h1>
 
         <div class="post-meta-container">
@@ -243,14 +238,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-10-19 10:08:41" itemprop="dateCreated datePublished" datetime="2021-10-19T10:08:41+08:00">2021-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-16 10:33:39" itemprop="dateModified" datetime="2022-11-16T10:33:39+08:00">2022-11-16</time>
+      <time title="创建时间：2022-11-16 11:04:47" itemprop="dateCreated datePublished" datetime="2022-11-16T11:04:47+08:00">2022-11-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -258,7 +246,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LaTeX/" itemprop="url" rel="index"><span itemprop="name">LaTeX</span></a>
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
         </span>
     </span>
 
@@ -277,7 +269,8 @@
       </span>
       <span class="post-meta-item-text">标签：</span>
       <span class="post-tags">
-        <a href="/tags/LaTeX/" rel="tag"># LaTeX</a>
+        <a href="/tags/Linux/" rel="tag"># Linux</a>
+        <a href="/tags/Zsh/" rel="tag"># Zsh</a>
       </span>
     </span>
 
@@ -287,14 +280,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>330</span>
+      <span>705</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -305,139 +298,83 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#中文支持">内容</a>，在这里不做重复
+        <h2 id="简介">简介</h2>
+<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
+<code>Zsh</code> 对 Linux 默认的
+<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
+<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
+并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
+改为 <code>Zsh</code></p>
+<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
+应运而生。 <code>Oh My Zsh</code>
+是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
+<code>Zsh</code> 配置提供了很大的便利</p>
+<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
 <span id="more"></span></p>
-<h2 id="长度">长度</h2>
-<p>常用的长度单位</p>
-<table>
-<thead>
-<tr class="header">
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th> 换成算成 mm</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>pt</td>
-<td> 基本单位</td>
-<td> 1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr class="even">
-<td>mm</td>
-<td> 毫米</td>
-<td> 2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr class="odd">
-<td>cm</td>
-<td> 厘米</td>
-<td> 28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr class="even">
-<td>in</td>
-<td> 英寸</td>
-<td> 72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr class="odd">
-<td>ex</td>
-<td> 当前字体的 x 字母高度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>em</td>
-<td> 当前字体的 m 字母宽度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<h2 id="空行">空行</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="空格">空格</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="超链接">超链接</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 开启链接颜色配置，并配置为蓝色</span></span><br><span class="line"><span class="keyword">\usepackage</span>[colorlinks=true, allcolors=blue]{hyperref}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\url</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}</span><br><span class="line"><span class="keyword">\href</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}{LaTeX 语法}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="数学公式">数学公式</h2>
-<h3 id="段落中隐式">段落中（隐式）</h3>
-<p>三种均可，任意选择，以 E=mc<sup>2</sup> 为例</p>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\(</span>E=mc<span class="built_in">^</span>2<span class="keyword">\)</span></span><br><span class="line"><span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>{math}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{math}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="单独成段显式">单独成段（显式）</h3>
-<p>三种均可，任意选择</p>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\[</span>E=mc<span class="built_in">^</span>2<span class="keyword">\]</span></span><br><span class="line"><span class="keyword">\begin</span>{displaymath}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{displaymath}</span><br><span class="line"><span class="keyword">\begin</span>{equation}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{equation}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="居中左对齐右对齐">居中，左对齐，右对齐</h2>
-<h3 id="居中">居中</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{center}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{center}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="左对齐">左对齐</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushleft}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushleft}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="右对齐">右对齐</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushright}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushright}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考文献配置">参考文献配置</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{stylename}</span><br><span class="line"><span class="keyword">\bibliography</span>{bibfile}</span><br></pre></td></tr></tbody></table></figure>
-<p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而
-<code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
-<table>
-<colgroup>
-<col style="width: 57%">
-<col style="width: 42%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>stylename</th>
-<th>output</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>abbrc</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc"></td>
-</tr>
-<tr class="even">
-<td>acm</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm"></td>
-</tr>
-<tr class="odd">
-<td>alpha</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha"></td>
-</tr>
-<tr class="even">
-<td>apalike</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike"></td>
-</tr>
-<tr class="odd">
-<td>ieeetr</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr"></td>
-</tr>
-<tr class="even">
-<td>plain</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain"></td>
-</tr>
-<tr class="odd">
-<td>siam</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam"></td>
-</tr>
-<tr class="even">
-<td>unsrt</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt"></td>
-</tr>
-</tbody>
-</table>
-<h2 id="todo">TODO</h2>
+<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
+<p>如果没有安装 Zsh 则需要手动安装一下，以 Ubuntu 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
+<p>配置 Zsh 为默认 Shell</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
+<p>一键安装 <code>Oh My Zsh</code></p>
+<p>通过 <code>curl</code> 或者 <code>wget</code>
+下载安装脚本一键安装即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
+命名规则类似，<code>Zsh</code> 的配置文件是
+<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
+<h2 id="主题配置">主题配置</h2>
+<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
+给出了内置的所有主题的预览图</p>
+<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
+字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+支持</p>
+<p>于是选用了 <code>candy</code> 主题，修改主题只需在
+<code>~/.zshrc</code> 文件中对 <code>ZSH_THEME</code>
+变量进行赋值即可，例如
+<code>ZSH_THEME="candy"</code>，配置完成后需要重启终端～</p>
+<figure>
+<img data-src="/posts/f2cdf8a6/candy.png" alt="candy">
+<figcaption aria-hidden="true">candy</figcaption>
+</figure>
+<h2 id="插件安装">插件安装</h2>
+<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
+插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
+<code>zsh-syntax-highlighting</code> 插件</p>
+<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
+<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
+会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
+<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-autosuggestions</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
+<p><code>zsh-syntax-highlighting</code>
+开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错</p>
+<figure>
+<img data-src="/posts/f2cdf8a6/zsh-syntax-highlighting.png" alt="zsh-syntax-highlighting">
+<figcaption aria-hidden="true">zsh-syntax-highlighting</figcaption>
+</figure>
+<p>安装过程类似</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-syntax-highlighting</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX
-Lengths<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvSHlwZXJsaW5rcw==">【维基百科】LaTeX
-Hyperlinks<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L01hdGhlbWF0aWNhbF9leHByZXNzaW9ucw==">【overleaf】Mathematical
-expressions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JpYnRleF9iaWJsaW9ncmFwaHlfc3R5bGVz">【overleaf】Bibtex
-bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
+shell<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
+仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
+ZSH<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -474,7 +411,7 @@ bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://ywang-wnlo.github.io/posts/2033aa70.html" title="LaTeX 语法">https://ywang-wnlo.github.io/posts/2033aa70.html</a>
+      <a href="https://ywang-wnlo.github.io/posts/f2cdf8a6.html" title="美化 Shell 之 Linux Zsh 篇">https://ywang-wnlo.github.io/posts/f2cdf8a6.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -483,21 +420,19 @@ bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
 </div>
 
           <div class="post-tags">
-              <a href="/tags/LaTeX/" rel="tag"><i class="fa fa-tag"></i> LaTeX</a>
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+              <a href="/tags/Zsh/" rel="tag"><i class="fa fa-tag"></i> Zsh</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/499c5a19.html" rel="prev" title="LaTeX PPT">
-                  <i class="fa fa-chevron-left"></i> LaTeX PPT
+                <a href="/posts/76f6af57.html" rel="prev" title="从 SSLEOFError 到正确配置 Proxy">
+                  <i class="fa fa-chevron-left"></i> 从 SSLEOFError 到正确配置 Proxy
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/8507aaa1.html" rel="next" title="OpenWrt 简介和安装">
-                  OpenWrt 简介和安装 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -581,7 +516,7 @@ bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"6f0d7295b1d56375e98ee51a10dffdb6"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"3677bde0010722da217cc05b18362aad"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
