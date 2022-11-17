@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc">
+  <meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.font.im/css?family=Noto+Sans+SC:300,300italic,400,400italic,700,700italic%7CUbuntu+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要来源于 VCB-Studio 官网的 科普教程，个人重新梳理进行备份">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/3b7ae835.html">
+<meta property="og:site_name" content="乐园">
+<meta property="og:description" content="本文主要来源于 VCB-Studio 官网的 科普教程，个人重新梳理进行备份">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E6%98%BE%E7%A4%BA%E5%99%A8%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E6%9C%80%E7%BB%88%E7%9B%AE%E6%A0%87.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E5%85%B3%E9%97%AD%E5%86%85%E7%BD%AE%E6%BB%A4%E9%95%9C.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E6%B7%BB%E5%8A%A0%20LAV%20%E6%BB%A4%E9%95%9C%E3%80%81%E8%A7%A3%E7%A0%81%E5%99%A8-1.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E6%B7%BB%E5%8A%A0%20LAV%20%E6%BB%A4%E9%95%9C%E3%80%81%E8%A7%A3%E7%A0%81%E5%99%A8-2.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB%E5%99%A8.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E9%85%8D%E7%BD%AE%E8%A7%86%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E9%85%8D%E7%BD%AE%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93%E5%99%A8.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E9%85%8D%E7%BD%AE%E9%9F%B3%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E9%85%8D%E7%BD%AE%E9%9F%B3%E9%A2%91%E6%B8%B2%E6%9F%93%E5%99%A8.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E8%B0%83%E6%95%99%E8%BF%9B%E5%BA%A6%E6%9D%A1.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E5%85%B3%E9%97%AD%E9%9F%B3%E9%A2%91%E8%A7%84%E6%A0%BC%E5%8C%96.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E6%B7%BB%E5%8A%A0%E5%AD%97%E5%B9%95%E6%BB%A4%E9%95%9C-1.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E6%B7%BB%E5%8A%A0%E5%AD%97%E5%B9%95%E6%BB%A4%E9%95%9C-2.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E9%85%8D%E7%BD%AE%E5%AD%97%E5%B9%95%E6%BB%A4%E9%95%9C.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E5%B1%9E%E6%80%A7%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/LAV%20%E8%A7%86%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/LAV%20%E9%9F%B3%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8.png">
+<meta property="article:published_time" content="2022-11-16T15:03:35.000Z">
+<meta property="article:modified_time" content="2022-11-16T15:03:35.000Z">
+<meta property="article:author" content="Zeus">
+<meta property="article:tag" content="Potplayer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/posts/3b7ae835/%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4.png">
+
+
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/3b7ae835.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/3b7ae835.html","path":"posts/3b7ae835.html","title":"Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter | 乐园</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST75Y16TW"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-PST75Y16TW","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">乐园</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个新时代农民工的随手笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">安装程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">显卡驱动配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-potplayer"><span class="nav-number">3.</span> <span class="nav-text">配置 Potplayer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD-potplayer-%E5%86%85%E7%BD%AE%E6%BB%A4%E9%95%9C"><span class="nav-number">3.1.</span> <span class="nav-text">关闭 Potplayer 内置滤镜</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-lav-%E6%BB%A4%E9%95%9C%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">添加 LAV 滤镜 &#x2F; 解码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">分离器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">视频解码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93%E5%99%A8"><span class="nav-number">3.5.</span> <span class="nav-text">视频渲染器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">3.6.</span> <span class="nav-text">音频解码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91%E6%B8%B2%E6%9F%93%E5%99%A8"><span class="nav-number">3.7.</span> <span class="nav-text">音频渲染器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.8.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E6%95%99%E8%BF%9B%E5%BA%A6%E6%9D%A1"><span class="nav-number">3.8.1.</span> <span class="nav-text">调教进度条</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%9F%B3%E9%A2%91%E8%A7%84%E6%A0%BC%E5%8C%96"><span class="nav-number">3.8.2.</span> <span class="nav-text">关闭音频规格化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8-xy-subfilter"><span class="nav-number">3.8.3.</span> <span class="nav-text">启用 xy-SubFilter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-lav-filters"><span class="nav-number">4.</span> <span class="nav-text">配置 LAV Filters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lav-%E8%A7%86%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">LAV 视频解码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lav-%E9%9F%B3%E9%A2%91%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">4.2.</span> <span class="nav-text">LAV 音频解码器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-madvr"><span class="nav-number">5.</span> <span class="nav-text">配置 madVR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-xy-subfilter"><span class="nav-number">6.</span> <span class="nav-text">使用 xy-SubFilter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%8D%E6%95%B0%E6%92%AD%E6%94%BE%E5%AD%97%E5%B9%95%E5%BC%82%E5%B8%B8"><span class="nav-number">7.1.</span> <span class="nav-text">倍数播放字幕异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zeus"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zeus</p>
+  <div class="site-description" itemprop="description">我永远喜欢 Homura.jpg</div>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/3b7ae835.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zeus">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐园">
+      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter | 乐园">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-16 23:03:35" itemprop="dateCreated datePublished" datetime="2022-11-16T23:03:35+08:00">2022-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">软件配置</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tags"></i>
+      </span>
+      <span class="post-meta-item-text">标签：</span>
+      <span class="post-tags">
+        <a href="/tags/Potplayer/" rel="tag"># Potplayer</a>
+      </span>
+    </span>
+
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要来源于 VCB-Studio 官网的 <span class="exturl" data-url="aHR0cHM6Ly92Y2Itcy5jb20vYXJjaGl2ZXMvNzIyOA==">科普教程<i class="fa fa-external-link-alt"></i></span>，个人重新梳理进行备份
+<span id="more"></span></p>
+<h2 id="安装程序">安装程序</h2>
+<p>1、安装 <span class="exturl" data-url="aHR0cHM6Ly9wb3RwbGF5ZXIuZGF1bS5uZXQv">PotPlayer<i class="fa fa-external-link-alt"></i></span> 和 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05ldmNhaXJpZWwvTEFWRmlsdGVycy9yZWxlYXNlcw==">LAV
+Filters<i class="fa fa-external-link-alt"></i></span></p>
+<p>二者都是普通的 <code>exe</code>
+安装包，双击启动安装即可，安装过程中可以全默认</p>
+<p>2、安装 <span class="exturl" data-url="aHR0cDovL21hZHZyLmNvbS8=">madVR<i class="fa fa-external-link-alt"></i></span> 和 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0N5YmVyYmVpbmcveHktVlNGaWx0ZXIvcmVsZWFzZXM=">xy-SubFilter<i class="fa fa-external-link-alt"></i></span></p>
+<p>二者都是插件，推荐将其解压到单独的文件夹中，然后移动至 Potplayer
+目录下，最后以管理员权限运行其中的安装脚本 <code>install.bat</code></p>
+<h2 id="显卡驱动配置">显卡驱动配置</h2>
+<p>首先解锁显卡驱动上的色彩管理范围和显示器输出配置，打开【NVIDIA
+控制面板】，参考下图进行配置</p>
+<figure>
+<img data-src="/posts/3b7ae835/动态范围.png" alt="动态范围">
+<figcaption aria-hidden="true">动态范围</figcaption>
+</figure>
+<figure>
+<img data-src="/posts/3b7ae835/显示器设置.png" alt="显示器设置">
+<figcaption aria-hidden="true">显示器设置</figcaption>
+</figure>
+<p>其他显卡配置类似，这里略去</p>
+<h2 id="配置-potplayer">配置 Potplayer</h2>
+<p>首先我们来看一下最终目标，用 PotPlayer 随便打开一个视频，按一下 Tab
+键，即可调出 Potplayer 自带的 OSD
+菜单，红框中的内容是配置完成后的最佳配置</p>
+<figure>
+<img data-src="/posts/3b7ae835/最终目标.png" alt="最终目标">
+<figcaption aria-hidden="true">最终目标</figcaption>
+</figure>
+<p>下面我们一步一步进行配置</p>
+<h3 id="关闭-potplayer-内置滤镜">关闭 Potplayer 内置滤镜</h3>
+<p>在播放视频（暂停也可以）时 <code>右键-选项</code>，或者直接
+<code>F5</code> 快捷键，进入 <code>选项</code> 菜单</p>
+<p>切至 <code>滤镜</code> 选项卡，关闭 Pot 内置滤镜</p>
+<figure>
+<img data-src="/posts/3b7ae835/关闭内置滤镜.png" alt="关闭内置滤镜">
+<figcaption aria-hidden="true">关闭内置滤镜</figcaption>
+</figure>
+<h3 id="添加-lav-滤镜解码器">添加 LAV 滤镜 / 解码器</h3>
+<p>切至 <code>滤镜-源滤镜/分离器</code> 选项卡，点击
+<code>滤镜/解码器管理</code></p>
+<figure>
+<img data-src="/posts/3b7ae835/添加%20LAV%20滤镜、解码器-1.png" alt="添加 LAV 滤镜、解码器-1">
+<figcaption aria-hidden="true">添加 LAV 滤镜、解码器 - 1</figcaption>
+</figure>
+<p>在新窗口中，点击 <code>搜索后添加</code> 后确认 LAV
+的相关滤镜、解码器已被勾选，然后点击 <code>确定</code></p>
+<figure>
+<img data-src="/posts/3b7ae835/添加%20LAV%20滤镜、解码器-2.png" alt="添加 LAV 滤镜、解码器-2">
+<figcaption aria-hidden="true">添加 LAV 滤镜、解码器 - 2</figcaption>
+</figure>
+<h3 id="分离器">分离器</h3>
+<p>切至 <code>滤镜-源滤镜/分离器</code> 选项卡 ，将右侧的所有选项都换成
+LAV Splitter Source，无法切换的就保持原状，列表较长，记得滚轮翻页</p>
+<figure>
+<img data-src="/posts/3b7ae835/配置分离器.png" alt="配置分离器">
+<figcaption aria-hidden="true">配置分离器</figcaption>
+</figure>
+<h3 id="视频解码器">视频解码器</h3>
+<p>切至 <code>滤镜-视频解码器</code> 选项卡，将右侧的所有选项都换成 LAV
+Video Decoder，无法切换为 LAV 的就保持原状，列表较长，记得滚轮翻页</p>
+<figure>
+<img data-src="/posts/3b7ae835/配置视频解码器.png" alt="配置视频解码器">
+<figcaption aria-hidden="true">配置视频解码器</figcaption>
+</figure>
+<h3 id="视频渲染器">视频渲染器</h3>
+<p>切至 <code>视频</code> 选项卡，设置视频渲染方式，选择
+<code>Madshi 视频渲染</code>，也就是 madVR</p>
+<figure>
+<img data-src="/posts/3b7ae835/配置视频渲染器.png" alt="配置视频渲染器">
+<figcaption aria-hidden="true">配置视频渲染器</figcaption>
+</figure>
+<h3 id="音频解码器">音频解码器</h3>
+<p>切至 <code>滤镜-音频解码器</code> 选项卡 ，将右侧的所有选项都换成 LAV
+Audio Decoder，无法切换的就保持原状，列表较长，记得滚轮翻页</p>
+<figure>
+<img data-src="/posts/3b7ae835/配置音频解码器.png" alt="配置音频解码器">
+<figcaption aria-hidden="true">配置音频解码器</figcaption>
+</figure>
+<h3 id="音频渲染器">音频渲染器</h3>
+<p>切至 <code>声音</code> 选项卡，设置音频渲染方式，选择
+<code>内置 WSAPI 音频渲染器</code></p>
+<figure>
+<img data-src="/posts/3b7ae835/配置音频渲染器.png" alt="配置音频渲染器">
+<figcaption aria-hidden="true">配置音频渲染器</figcaption>
+</figure>
+<h3 id="其他">其他</h3>
+<h4 id="调教进度条">调教进度条</h4>
+<p>切至 <code>播放</code>
+选项卡，开始调教进度条，将进度条的相关配置全开启</p>
+<figure>
+<img data-src="/posts/3b7ae835/调教进度条.png" alt="调教进度条">
+<figcaption aria-hidden="true">调教进度条</figcaption>
+</figure>
+<h4 id="关闭音频规格化">关闭音频规格化</h4>
+<p>切至 <code>声音-规格化/混响</code> 选项卡，关闭音频规格化，避免
+potplayer 乱改音量</p>
+<figure>
+<img data-src="/posts/3b7ae835/关闭音频规格化.png" alt="关闭音频规格化">
+<figcaption aria-hidden="true">关闭音频规格化</figcaption>
+</figure>
+<h4 id="启用-xy-subfilter">启用 xy-SubFilter</h4>
+<p>切至 <code>滤镜-个人滤镜优先权</code> 选项卡，点击
+<code>添加系统滤镜</code></p>
+<figure>
+<img data-src="/posts/3b7ae835/添加字幕滤镜-1.png" alt="添加字幕滤镜-1">
+<figcaption aria-hidden="true">添加字幕滤镜 - 1</figcaption>
+</figure>
+<p>在新窗口中，选中 xy-SubFilter 的相关滤镜，然后点击
+<code>确定</code></p>
+<figure>
+<img data-src="/posts/3b7ae835/添加字幕滤镜-2.png" alt="添加字幕滤镜-2">
+<figcaption aria-hidden="true">添加字幕滤镜 - 2</figcaption>
+</figure>
+<p>优先级设置上，将 XySubFilterAutoLoader 设为强制使用，负责外挂字幕；
+XySubFilter 设为按优先级使用，负责内挂字幕</p>
+<figure>
+<img data-src="/posts/3b7ae835/配置字幕滤镜.png" alt="配置字幕滤镜">
+<figcaption aria-hidden="true">配置字幕滤镜</figcaption>
+</figure>
+<p>所有配置完成后记得点击 <code>应用</code> 和 <code>确定</code>
+按钮保存当前配置</p>
+<h2 id="配置-lav-filters">配置 LAV Filters</h2>
+<p>在播放视频（暂停也可以）时 <code>右键-属性</code>，或者直接
+<code>Ctrl+F1</code> 快捷键，进入 <code>属性</code> 菜单</p>
+<p>点击红色框就能进入视频 / 音频解码器设置界面</p>
+<figure>
+<img data-src="/posts/3b7ae835/属性界面.png" alt="属性界面">
+<figcaption aria-hidden="true">属性界面</figcaption>
+</figure>
+<h3 id="lav-视频解码器">LAV 视频解码器</h3>
+<p>视频解码器保持 LAV 默认设置即可，也就是勾选除了 <code>AYUV</code>
+以外的所有选项；<code>RGB Output Level</code> 选
+<code>PC</code>；<code>Dither Mode</code> 选
+<code>Random</code>；<code>Hardware Decoder to use</code> 选
+<code>None</code></p>
+<figure>
+<img data-src="/posts/3b7ae835/LAV%20视频解码器.png" alt="LAV 视频解码器">
+<figcaption aria-hidden="true">LAV 视频解码器</figcaption>
+</figure>
+<h3 id="lav-音频解码器">LAV 音频解码器</h3>
+<p>在音频解码器中，切换至 <code>Mixing</code> 标签，勾上
+<code>Enable Mixing</code> 即可</p>
+<figure>
+<img data-src="/posts/3b7ae835/LAV%20音频解码器.png" alt="LAV 音频解码器">
+<figcaption aria-hidden="true">LAV 音频解码器</figcaption>
+</figure>
+<h2 id="配置-madvr">配置 madVR</h2>
+<p>madVR 个人没有折腾，直接用默认配置</p>
+<h2 id="使用-xy-subfilter">使用 xy-SubFilter</h2>
+<p>由于 Potplayer 内置了字幕插件，加上我们选择 xy-SubFilter
+来处理字幕，所以需要关闭 Potplayer
+内置字幕插件，否则就会出现两行字幕</p>
+<p>可以通过快捷键 <code>ALt+H</code> 快速开关内置字幕</p>
+<p>而 xy-SubFilter
+的字幕选择和开关则需要要在桌面右下角小图标右键进行切换</p>
+<h2 id="其他问题">其他问题</h2>
+<h3 id="倍数播放字幕异常">倍数播放字幕异常</h3>
+<p>通过 <code>x</code>、<code>c</code>
+快捷键调整倍数播放之后发现，字幕显示速度没变，经过一番搜索在 Anime
+字幕论坛的 <span class="exturl" data-url="aHR0cHM6Ly9iYnMuYWNncmlwLmNvbS90aHJlYWQtNTg0Mi0yLTEuaHRtbA==">一篇帖子<i class="fa fa-external-link-alt"></i></span>
+里面找到了解决办法：直接 <code>Shift+X</code> 开关声音处理滤镜即可</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wb3RwbGF5ZXIuZGF1bS5uZXQv">【PotPlayer 官网】<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05ldmNhaXJpZWwvTEFWRmlsdGVycy9yZWxlYXNlcw==">【GitHub】LAV
+Filters<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL21hZHZyLmNvbS8=">【madVR 官网】<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0N5YmVyYmVpbmcveHktVlNGaWx0ZXIvcmVsZWFzZXM=">【GitHub】xy-SubFilter<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly92Y2Itcy5jb20vYXJjaGl2ZXMvNzIyOA==">【VCB-Studio
+官网】科普教程 2.2—— 基于 PotPlayer 和 madVR 的播放器教程（已更新
+XySubFilter）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9iYnMuYWNncmlwLmNvbS90aHJlYWQtNTg0Mi0yLTEuaHRtbA==">【Anime
+字幕论坛】倍速播放<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hY2VjbGVlLmFydC9hcmNoaXZlcy8zMzE=">【个人博客】视频播放器使用教程<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>赏个鸡腿🍗</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Zeus 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Zeus 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Zeus
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ywang-wnlo.github.io/posts/3b7ae835.html" title="Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter">https://ywang-wnlo.github.io/posts/3b7ae835.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Potplayer/" rel="tag"><i class="fa fa-tag"></i> Potplayer</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/8ad4716e.html" rel="prev" title="美化 Shell 之 Windows/Linux PowerShell 篇">
+                  <i class="fa fa-chevron-left"></i> 美化 Shell 之 Windows/Linux PowerShell 篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zeus</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.1.7/dist/mermaid.min.js","integrity":"sha256-G58AID1YoX5YaEtWfXSI0VLrZ6N4kvNvwg0BI8zUFxE="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"d3343fa72d84bc1ba208c948da6804f0"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
