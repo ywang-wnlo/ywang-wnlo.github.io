@@ -100,153 +100,6 @@ Windows PowerShell 乱码<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
-    <title>Hexo 配置主流搜索引擎收录流程记录</title>
-    <url>/posts/abac0c46.html</url>
-    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置
-Hexo 并被主流的搜索引擎（Google、Bing）收录 <span id="more"></span></p>
-<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取
-+
-插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
-<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google
-搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="是否已经被收录">是否已经被收录</h2>
-<p>为了查看网站是否已经被收录，可以在 Google 或者 Bing
-以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code>
-链接进行替换即可</p>
-<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/abac0c46/google_site.png" alt="google_site">
-<figcaption aria-hidden="true">google_site</figcaption>
-</figure>
-<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
-<h2 id="生成站点地图">生成站点地图</h2>
-<p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
-<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用
-<code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
-<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
-<h2 id="提交站点地图">提交站点地图</h2>
-<p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
-<p>（由于 GitHub
-屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
-<h3 id="google">Google</h3>
-<p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
-<p>而对我们来说，主要分三个步骤：注册 Search
-Console，验证网站所有权，提交站点地图</p>
-<h4 id="注册-search-console">注册 Search Console</h4>
-<p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC
-官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
-<h4 id="验证网站所有权">验证网站所有权</h4>
-<p>登录之后，就需要添加我们的网站了</p>
-<figure>
-<img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website">
-<figcaption aria-hidden="true">google_add_website</figcaption>
-</figure>
-<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS
-配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code>
-后会有五种方式供我们选择</p>
-<figure>
-<img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership">
-<figcaption aria-hidden="true">google_verify_ownership</figcaption>
-</figure>
-<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT
-主题的配置中对其进行支持，配置起来比较简单</p>
-<figure>
-<img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership">
-<figcaption aria-hidden="true">google_verify_ownership</figcaption>
-</figure>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
-配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
-<code>验证</code> 即可</p>
-<h4 id="提交站点地图-1">提交站点地图</h4>
-<p>之前 <code>hexo-generator-sitemap</code>
-插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC
-的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
-<figure>
-<img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap">
-<figcaption aria-hidden="true">google_add_sitemap</figcaption>
-</figure>
-<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC
-的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为
-<code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
-<h3 id="bing">Bing</h3>
-<h4 id="从-gsc-导入">从 GSC 导入</h4>
-<figure>
-<img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website">
-<figcaption aria-hidden="true">bing_add_website</figcaption>
-</figure>
-<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从
-GSC 进行导入即可</p>
-<h4 id="手动添加网站">手动添加网站</h4>
-<p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
-<figure>
-<img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership">
-<figcaption aria-hidden="true">bing_verify_ownership</figcaption>
-</figure>
-<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT
-主题的配置中对其进行支持，配置起来比较简单</p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
-配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
-<code>验证</code> 即可</p>
-<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools
-的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code>
-即可</p>
-<figure>
-<img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap">
-<figcaption aria-hidden="true">bing_add_sitemap</figcaption>
-</figure>
-<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing
-给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比
-Google 快不少</p>
-<h2 id="手动请求编入索引">手动请求编入索引</h2>
-<p>根据个人观察，Google
-及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
-<p>具体流程为：</p>
-<ol type="1">
-<li><p>点击 GSC
-的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
-<figure>
-<img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website">
-<figcaption aria-hidden="true">google_check_website</figcaption>
-</figure></li>
-<li><p> 等待结果返回后，点击【请求编入索引】即可</p>
-<figure>
-<img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit">
-<figcaption aria-hidden="true">google_manual_submit</figcaption>
-</figure></li>
-</ol>
-<p>个人实测，大概需要一个月左右，Google
-上就能搜索到网站上的大多数页面了</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google
-搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览
-Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo
-博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo
-博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NexT 主题的配置使用记录</title>
     <url>/posts/9a0b7c3b.html</url>
     <content><![CDATA[<h2 id="简介">简介</h2>
@@ -424,6 +277,153 @@ Web Applications<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
+    <title>Hexo 配置主流搜索引擎收录流程记录</title>
+    <url>/posts/abac0c46.html</url>
+    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置
+Hexo 并被主流的搜索引擎（Google、Bing）收录 <span id="more"></span></p>
+<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取
++
+插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
+<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google
+搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="是否已经被收录">是否已经被收录</h2>
+<p>为了查看网站是否已经被收录，可以在 Google 或者 Bing
+以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code>
+链接进行替换即可</p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/abac0c46/google_site.png" alt="google_site">
+<figcaption aria-hidden="true">google_site</figcaption>
+</figure>
+<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
+<h2 id="生成站点地图">生成站点地图</h2>
+<p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
+<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用
+<code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
+<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
+<h2 id="提交站点地图">提交站点地图</h2>
+<p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
+<p>（由于 GitHub
+屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
+<h3 id="google">Google</h3>
+<p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
+<p>而对我们来说，主要分三个步骤：注册 Search
+Console，验证网站所有权，提交站点地图</p>
+<h4 id="注册-search-console">注册 Search Console</h4>
+<p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC
+官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
+<h4 id="验证网站所有权">验证网站所有权</h4>
+<p>登录之后，就需要添加我们的网站了</p>
+<figure>
+<img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website">
+<figcaption aria-hidden="true">google_add_website</figcaption>
+</figure>
+<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS
+配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code>
+后会有五种方式供我们选择</p>
+<figure>
+<img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership">
+<figcaption aria-hidden="true">google_verify_ownership</figcaption>
+</figure>
+<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT
+主题的配置中对其进行支持，配置起来比较简单</p>
+<figure>
+<img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership">
+<figcaption aria-hidden="true">google_verify_ownership</figcaption>
+</figure>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
+配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
+<code>验证</code> 即可</p>
+<h4 id="提交站点地图-1">提交站点地图</h4>
+<p>之前 <code>hexo-generator-sitemap</code>
+插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC
+的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
+<figure>
+<img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap">
+<figcaption aria-hidden="true">google_add_sitemap</figcaption>
+</figure>
+<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC
+的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为
+<code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
+<h3 id="bing">Bing</h3>
+<h4 id="从-gsc-导入">从 GSC 导入</h4>
+<figure>
+<img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website">
+<figcaption aria-hidden="true">bing_add_website</figcaption>
+</figure>
+<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从
+GSC 进行导入即可</p>
+<h4 id="手动添加网站">手动添加网站</h4>
+<p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
+<figure>
+<img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership">
+<figcaption aria-hidden="true">bing_verify_ownership</figcaption>
+</figure>
+<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT
+主题的配置中对其进行支持，配置起来比较简单</p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
+配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
+<code>验证</code> 即可</p>
+<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools
+的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code>
+即可</p>
+<figure>
+<img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap">
+<figcaption aria-hidden="true">bing_add_sitemap</figcaption>
+</figure>
+<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing
+给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比
+Google 快不少</p>
+<h2 id="手动请求编入索引">手动请求编入索引</h2>
+<p>根据个人观察，Google
+及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
+<p>具体流程为：</p>
+<ol type="1">
+<li><p>点击 GSC
+的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
+<figure>
+<img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website">
+<figcaption aria-hidden="true">google_check_website</figcaption>
+</figure></li>
+<li><p> 等待结果返回后，点击【请求编入索引】即可</p>
+<figure>
+<img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit">
+<figcaption aria-hidden="true">google_manual_submit</figcaption>
+</figure></li>
+</ol>
+<p>个人实测，大概需要一个月左右，Google
+上就能搜索到网站上的大多数页面了</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google
+搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览
+Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo
+博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo
+博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LaTeX PPT</title>
     <url>/posts/499c5a19.html</url>
     <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
@@ -473,6 +473,7 @@ Web Applications<i class="fa fa-external-link-alt"></i></span></li>
       <tags>
         <tag>Beamer</tag>
         <tag>LaTeX</tag>
+        <tag>todo</tag>
       </tags>
   </entry>
   <entry>
@@ -642,6 +643,7 @@ Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
       </categories>
       <tags>
         <tag>LaTeX</tag>
+        <tag>todo</tag>
         <tag>VSCode</tag>
       </tags>
   </entry>
@@ -788,6 +790,7 @@ bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
       </categories>
       <tags>
         <tag>LaTeX</tag>
+        <tag>todo</tag>
       </tags>
   </entry>
   <entry>
@@ -1466,6 +1469,7 @@ io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
         <category>IO</category>
       </categories>
       <tags>
+        <tag>todo</tag>
         <tag>异步 IO</tag>
         <tag>kernel</tag>
         <tag>liburing</tag>
@@ -1915,10 +1919,172 @@ Cache 与 Page 回写<i class="fa fa-external-link-alt"></i></span></li>
         <category>IO</category>
       </categories>
       <tags>
+        <tag>todo</tag>
         <tag>kernel</tag>
         <tag>buffer IO</tag>
         <tag>page cache</tag>
         <tag>writeback</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+    <url>/posts/8ad4716e.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
+GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
+用户会选择 <code>PowerShell</code></p>
+<p>为了美化 <code>PowerShell</code>，个人选择了
+<code>Oh My Posh</code>。<code>Oh My Posh</code>
+是一个开源的主体的框架，支持
+<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
+等多种 <code>Shell</code></p>
+<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
+<span id="more"></span></p>
+<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
+<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
+<code>winget</code> 安装最新的版本</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
+<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
+所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
+字体</p>
+<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
+或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
+的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
+文件安装即可</p>
+<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
+<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
+Windows Terminal 应用中单独配置，这里不做介绍</p>
+<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
+<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
+直接打开配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>如果打开报错，则需要首先创建配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
+就会自动启用 <code>Oh My Posh</code> 了</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="选择主题">选择主题</h2>
+<p><code>Oh My Posh</code>
+支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
+预览</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
+<p>个人选择了 <code>powerlevel10k_rainbow</code>
+主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
+My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
+PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>PowerShell</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>美化 Shell 之 Linux Zsh 篇</title>
+    <url>/posts/f2cdf8a6.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
+<code>Zsh</code> 对 Linux 默认的
+<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
+<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
+并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
+改为 <code>Zsh</code></p>
+<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
+应运而生。 <code>Oh My Zsh</code>
+是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
+<code>Zsh</code> 配置提供了很大的便利</p>
+<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
+<span id="more"></span></p>
+<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
+<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
+为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
+<p>配置 Zsh 为默认 Shell</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
+<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
+<code>Oh My Zsh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
+命名规则类似，<code>Zsh</code> 的配置文件是
+<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
+<h2 id="主题配置">主题配置</h2>
+<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
+给出了内置的所有主题的预览图</p>
+<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
+字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
+字体</a></p>
+<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
+中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
+也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
+<code>powerlevel10k</code> 主题</p>
+<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重启终端后，<code>powerlevel10k</code>
+会进入引导流程，可以自行微调风格</p>
+<h2 id="插件安装">插件安装</h2>
+<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
+插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
+<code>zsh-syntax-highlighting</code> 插件</p>
+<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
+<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
+会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
+<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-autosuggestions</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
+<p><code>zsh-syntax-highlighting</code>
+开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-syntax-highlighting</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
+shell<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
+仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
+ZSH<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Zsh</tag>
       </tags>
   </entry>
   <entry>
@@ -2265,6 +2431,191 @@ new_sync_write --&gt; call_write_iter</pre>
         <tag>buffer IO</tag>
         <tag>page cache</tag>
         <tag>writeback</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>rm -r 与 rmdir 区别</title>
+    <url>/posts/935ae1f0.html</url>
+    <content><![CDATA[<h2 id="背景">背景</h2>
+<p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code>
+驱动，显示使用中</p>
+<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和
+<code>rmdir</code> 这两个命令上 <span id="more"></span></p>
+<h2 id="二者区别">二者区别</h2>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 59%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>主要系统调用</th>
+<th>操作对象</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>rmdir</code></td>
+<td><code>rmdir</code></td>
+<td>仅目录</td>
+</tr>
+<tr class="even">
+<td><code>rm -r</code></td>
+<td><code>openat</code>, <code>getdents64</code>, <code>close</code>,
+<code>unlinkat</code></td>
+<td>目录，以及目录所有文件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rmdir"><code>rmdir</code></h3>
+<p><code>rmdir</code> 直接调用 <code>rmdir</code>
+来删除目录，如果目录非空，则会删除失败</p>
+<h3 id="rm--r"><code>rm -r</code></h3>
+<ol type="1">
+<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code>
+获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>再第二次加上 <code>O_CLOEXEC</code> 标记 <code>openat</code>
+打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code>
+获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
+<li>最后通过 <code>unlinkat</code> 删除目录</li>
+</ol>
+<h3 id="rm--rf"><code>rm -rf</code></h3>
+<p>但是如果使用的是 <code>rm -rf</code>，并且在第 3
+步删除目录内文件失败时，则会跳过第 4
+步，也就是说不会再对目录做任何操作</p>
+<h2 id="测试过程">测试过程</h2>
+<h3 id="配置环境">配置环境</h3>
+<p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">touch</span> <span class="built_in">dir</span>/file</span><br><span class="line">sudo chattr +i <span class="built_in">dir</span>/file</span><br></pre></td></tr></tbody></table></figure>
+<p>此时目录树如下</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="rmdir-1"><code>rmdir</code></h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o <span class="built_in">rmdir</span> <span class="built_in">rmdir</span> <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rmdir", ["rmdir", "dir/"], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir("dir/")                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rmdir: ", 7)                  = 7</span><br><span class="line">write(2, "failed to remove 'dir/'", 23) = 23</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="rm--r-1"><code>rm -r</code></h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace <span class="built_in">rm</span> -r <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96
+行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-r", "dir/"], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, "file", {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, "file", W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/'", 20)    = 20</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="rm--rf-1"><code>rm -rf</code></h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo chattr -i <span class="built_in">dir</span>/file</span><br><span class="line">strace -o rm_rf_succ.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdHkubWVsbGFub3guY29tL3MvYXJ0aWNsZS9ob3d0by1jb25maWd1cmUtbnZtZS1vdmVyLWZhYnJpY3M=">【mellanox
+社区】HowTo Configure NVMe over Fabrics<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuLnRlY2gycmVhbC5jb20vaW5mb19kZXRhaWxfcGFnZT9pZD0xODQ0MQ==">【硬见】NVMe-oF
+不只是 RDMA，还有 TCP<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGVkYW5jaW5nL2FydGljbGUvZGV0YWlscy8xMDM4MzUwODU=">【CSDN】Linux
+防止文件和目录被意外删除或修改<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMi9vcGVuLjIuaHRtbA==">【man】open<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly91bml4LnN0YWNrZXhjaGFuZ2UuY29tL3F1ZXN0aW9ucy8xNTA5NjAvd2h5LWFyZS1ybWRpci1hbmQtdW5saW5rLXR3by1zZXBhcmF0ZS1zeXN0ZW0tY2FsbHM=">【stackexchange】Why
+are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>strace</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 手动编译 ipk</title>
+    <url>/posts/96a1807.html</url>
+    <content><![CDATA[<h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
+<p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件
+<code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与
+<code>apt</code>
+的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
+<p>但是由于路由器平台通常与常用的服务器或者个人 PC
+的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成
+<code>.ipk</code> 文件，因此需要交叉编译来实现 <span id="more"></span></p>
+<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span>
+仓库就提供了一个方便使用的交叉编译环境</p>
+<h2 id="编译准备">编译准备</h2>
+<p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></tbody></table></figure>
+<p>安装 / 更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt
+仓库了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></tbody></table></figure>
+<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过
+<code>--depth</code>
+来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line"><span class="comment"># cnpmjs.org 已经不能使用，请自行寻找其他镜像站</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="编译-.ipk-文件">编译 <code>.ipk</code> 文件</h2>
+<h3 id="更新-feeds">更新 feeds</h3>
+<p>进入 openwrt 仓库后，首先需要更新软件包列表
+<code>feeds</code>，它是在 OpenWrt
+中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="配置平台">配置平台</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
+<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
+<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
+<figure>
+<img data-src="/posts/96a1807/Target-Config.png" alt="平台配置">
+<figcaption aria-hidden="true">平台配置</figcaption>
+</figure>
+<h3 id="获取交叉编译链">获取交叉编译链</h3>
+<p>这一步就是获取对应设备交叉编译所需的编译链</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><code>V=s</code> 可以显示 <code>make</code>
+过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
+<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code>
+则是根据机器的 CPU 数量来进行多线程编译</li>
+</ul>
+<h3 id="添加需要编译的第三方软件包">添加需要编译的第三方软件包</h3>
+<p>可以先搜索有没有已经配置好的含有 <code>Makefile</code>
+的仓库，有了适配过的 <code>Makefile</code>
+文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
+<p>以 <code>minieap</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">github<i class="fa fa-external-link-alt"></i></span>
+上有已经完成的仓库，依次可以直接拉取来编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></tbody></table></figure>
+<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成
+<code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
+<p>对于 <code>minieap</code> 来说，在 <code>Network</code>
+找到对应选项并配置成 <code>M</code> 即可，如下图</p>
+<figure>
+<img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置">
+<figcaption aria-hidden="true">MiniEAP 配置</figcaption>
+</figure>
+<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code>
+为例如下所示</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br></pre></td></tr></tbody></table></figure>
+<p>编译完成后，<code>.ipk</code> 文件会生成在
+<code>./bin/packages/&lt;YourArchitecture&gt;/base</code>
+目录下，将其拷贝到路由器上就可以通过 <code>opkg</code>
+进行安装使用了</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>交叉编译</tag>
+        <tag>ipk</tag>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
@@ -2873,352 +3224,6 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
       <tags>
         <tag>Breed</tag>
         <tag>BootLoader</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>美化 Shell 之 Linux Zsh 篇</title>
-    <url>/posts/f2cdf8a6.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
-<code>Zsh</code> 对 Linux 默认的
-<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
-<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
-并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
-改为 <code>Zsh</code></p>
-<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
-应运而生。 <code>Oh My Zsh</code>
-是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
-<code>Zsh</code> 配置提供了很大的便利</p>
-<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
-<span id="more"></span></p>
-<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
-<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
-为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
-<p>配置 Zsh 为默认 Shell</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
-<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
-<code>Oh My Zsh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
-命名规则类似，<code>Zsh</code> 的配置文件是
-<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
-<h2 id="主题配置">主题配置</h2>
-<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
-给出了内置的所有主题的预览图</p>
-<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
-字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
-字体</a></p>
-<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
-中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
-也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
-<code>powerlevel10k</code> 主题</p>
-<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重启终端后，<code>powerlevel10k</code>
-会进入引导流程，可以自行微调风格</p>
-<h2 id="插件安装">插件安装</h2>
-<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
-插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
-<code>zsh-syntax-highlighting</code> 插件</p>
-<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
-<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
-会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
-<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-autosuggestions</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
-<p><code>zsh-syntax-highlighting</code>
-开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-syntax-highlighting</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
-shell<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
-仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
-ZSH<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Zsh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-    <url>/posts/8ad4716e.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
-GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
-用户会选择 <code>PowerShell</code></p>
-<p>为了美化 <code>PowerShell</code>，个人选择了
-<code>Oh My Posh</code>。<code>Oh My Posh</code>
-是一个开源的主体的框架，支持
-<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
-等多种 <code>Shell</code></p>
-<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
-<span id="more"></span></p>
-<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
-<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
-<code>winget</code> 安装最新的版本</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
-<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
-所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
-字体</p>
-<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
-或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
-的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
-文件安装即可</p>
-<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
-<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
-Windows Terminal 应用中单独配置，这里不做介绍</p>
-<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
-<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
-直接打开配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>如果打开报错，则需要首先创建配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
-<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
-就会自动启用 <code>Oh My Posh</code> 了</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="选择主题">选择主题</h2>
-<p><code>Oh My Posh</code>
-支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
-预览</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
-<p>个人选择了 <code>powerlevel10k_rainbow</code>
-主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
-My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
-PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>PowerShell</tag>
-        <tag>Windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>rm -r 与 rmdir 区别</title>
-    <url>/posts/935ae1f0.html</url>
-    <content><![CDATA[<h2 id="背景">背景</h2>
-<p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code>
-驱动，显示使用中</p>
-<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和
-<code>rmdir</code> 这两个命令上 <span id="more"></span></p>
-<h2 id="二者区别">二者区别</h2>
-<table>
-<colgroup>
-<col style="width: 9%">
-<col style="width: 59%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>命令</th>
-<th>主要系统调用</th>
-<th>操作对象</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>rmdir</code></td>
-<td><code>rmdir</code></td>
-<td>仅目录</td>
-</tr>
-<tr class="even">
-<td><code>rm -r</code></td>
-<td><code>openat</code>, <code>getdents64</code>, <code>close</code>,
-<code>unlinkat</code></td>
-<td>目录，以及目录所有文件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="rmdir"><code>rmdir</code></h3>
-<p><code>rmdir</code> 直接调用 <code>rmdir</code>
-来删除目录，如果目录非空，则会删除失败</p>
-<h3 id="rm--r"><code>rm -r</code></h3>
-<ol type="1">
-<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code>
-获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>再第二次加上 <code>O_CLOEXEC</code> 标记 <code>openat</code>
-打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code>
-获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
-<li>最后通过 <code>unlinkat</code> 删除目录</li>
-</ol>
-<h3 id="rm--rf"><code>rm -rf</code></h3>
-<p>但是如果使用的是 <code>rm -rf</code>，并且在第 3
-步删除目录内文件失败时，则会跳过第 4
-步，也就是说不会再对目录做任何操作</p>
-<h2 id="测试过程">测试过程</h2>
-<h3 id="配置环境">配置环境</h3>
-<p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">touch</span> <span class="built_in">dir</span>/file</span><br><span class="line">sudo chattr +i <span class="built_in">dir</span>/file</span><br></pre></td></tr></tbody></table></figure>
-<p>此时目录树如下</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="rmdir-1"><code>rmdir</code></h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o <span class="built_in">rmdir</span> <span class="built_in">rmdir</span> <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rmdir", ["rmdir", "dir/"], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir("dir/")                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rmdir: ", 7)                  = 7</span><br><span class="line">write(2, "failed to remove 'dir/'", 23) = 23</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="rm--r-1"><code>rm -r</code></h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace <span class="built_in">rm</span> -r <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96
-行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-r", "dir/"], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, "file", {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, "file", W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/'", 20)    = 20</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="rm--rf-1"><code>rm -rf</code></h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo chattr -i <span class="built_in">dir</span>/file</span><br><span class="line">strace -o rm_rf_succ.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdHkubWVsbGFub3guY29tL3MvYXJ0aWNsZS9ob3d0by1jb25maWd1cmUtbnZtZS1vdmVyLWZhYnJpY3M=">【mellanox
-社区】HowTo Configure NVMe over Fabrics<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuLnRlY2gycmVhbC5jb20vaW5mb19kZXRhaWxfcGFnZT9pZD0xODQ0MQ==">【硬见】NVMe-oF
-不只是 RDMA，还有 TCP<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGVkYW5jaW5nL2FydGljbGUvZGV0YWlscy8xMDM4MzUwODU=">【CSDN】Linux
-防止文件和目录被意外删除或修改<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMi9vcGVuLjIuaHRtbA==">【man】open<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly91bml4LnN0YWNrZXhjaGFuZ2UuY29tL3F1ZXN0aW9ucy8xNTA5NjAvd2h5LWFyZS1ybWRpci1hbmQtdW5saW5rLXR3by1zZXBhcmF0ZS1zeXN0ZW0tY2FsbHM=">【stackexchange】Why
-are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>strace</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 手动编译 ipk</title>
-    <url>/posts/96a1807.html</url>
-    <content><![CDATA[<h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
-<p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件
-<code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与
-<code>apt</code>
-的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
-<p>但是由于路由器平台通常与常用的服务器或者个人 PC
-的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成
-<code>.ipk</code> 文件，因此需要交叉编译来实现 <span id="more"></span></p>
-<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span>
-仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备">编译准备</h2>
-<p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></tbody></table></figure>
-<p>安装 / 更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt
-仓库了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></tbody></table></figure>
-<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过
-<code>--depth</code>
-来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line"><span class="comment"># cnpmjs.org 已经不能使用，请自行寻找其他镜像站</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="编译-.ipk-文件">编译 <code>.ipk</code> 文件</h2>
-<h3 id="更新-feeds">更新 feeds</h3>
-<p>进入 openwrt 仓库后，首先需要更新软件包列表
-<code>feeds</code>，它是在 OpenWrt
-中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="配置平台">配置平台</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
-<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
-<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
-<figure>
-<img data-src="/posts/96a1807/Target-Config.png" alt="平台配置">
-<figcaption aria-hidden="true">平台配置</figcaption>
-</figure>
-<h3 id="获取交叉编译链">获取交叉编译链</h3>
-<p>这一步就是获取对应设备交叉编译所需的编译链</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li><code>V=s</code> 可以显示 <code>make</code>
-过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
-<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code>
-则是根据机器的 CPU 数量来进行多线程编译</li>
-</ul>
-<h3 id="添加需要编译的第三方软件包">添加需要编译的第三方软件包</h3>
-<p>可以先搜索有没有已经配置好的含有 <code>Makefile</code>
-的仓库，有了适配过的 <code>Makefile</code>
-文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
-<p>以 <code>minieap</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">github<i class="fa fa-external-link-alt"></i></span>
-上有已经完成的仓库，依次可以直接拉取来编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></tbody></table></figure>
-<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成
-<code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
-<p>对于 <code>minieap</code> 来说，在 <code>Network</code>
-找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<figure>
-<img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置">
-<figcaption aria-hidden="true">MiniEAP 配置</figcaption>
-</figure>
-<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code>
-为例如下所示</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br></pre></td></tr></tbody></table></figure>
-<p>编译完成后，<code>.ipk</code> 文件会生成在
-<code>./bin/packages/&lt;YourArchitecture&gt;/base</code>
-目录下，将其拷贝到路由器上就可以通过 <code>opkg</code>
-进行安装使用了</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>交叉编译</tag>
-        <tag>ipk</tag>
-        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
