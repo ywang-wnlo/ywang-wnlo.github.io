@@ -1927,82 +1927,67 @@ Cache 与 Page 回写<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
-    <title>美化 Shell 之 Linux Zsh 篇</title>
-    <url>/posts/f2cdf8a6.html</url>
+    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+    <url>/posts/8ad4716e.html</url>
     <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
-<code>Zsh</code> 对 Linux 默认的
-<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
-<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
-并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
-改为 <code>Zsh</code></p>
-<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
-应运而生。 <code>Oh My Zsh</code>
-是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
-<code>Zsh</code> 配置提供了很大的便利</p>
-<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
+<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
+GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
+用户会选择 <code>PowerShell</code></p>
+<p>为了美化 <code>PowerShell</code>，个人选择了
+<code>Oh My Posh</code>。<code>Oh My Posh</code>
+是一个开源的主体的框架，支持
+<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
+等多种 <code>Shell</code></p>
+<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
 <span id="more"></span></p>
-<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
-<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
-为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
-<p>配置 Zsh 为默认 Shell</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
-<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
-<code>Oh My Zsh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
-命名规则类似，<code>Zsh</code> 的配置文件是
-<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
-<h2 id="主题配置">主题配置</h2>
-<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
-给出了内置的所有主题的预览图</p>
-<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
-字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
-字体</a></p>
-<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
-中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
-也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
-<code>powerlevel10k</code> 主题</p>
-<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重启终端后，<code>powerlevel10k</code>
-会进入引导流程，可以自行微调风格</p>
-<h2 id="插件安装">插件安装</h2>
-<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
-插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
-<code>zsh-syntax-highlighting</code> 插件</p>
-<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
-<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
-会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
-<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-autosuggestions</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
-<p><code>zsh-syntax-highlighting</code>
-开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-syntax-highlighting</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
+<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
+<code>winget</code> 安装最新的版本</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
+<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
+所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
+字体</p>
+<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
+或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
+的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
+文件安装即可</p>
+<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
+<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
+Windows Terminal 应用中单独配置，这里不做介绍</p>
+<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
+<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
+直接打开配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>如果打开报错，则需要首先创建配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
+就会自动启用 <code>Oh My Posh</code> 了</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="选择主题">选择主题</h2>
+<p><code>Oh My Posh</code>
+支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
+预览</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
+<p>个人选择了 <code>powerlevel10k_rainbow</code>
+主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
-shell<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
-仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
-ZSH<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
+My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
+PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
@@ -2010,8 +1995,8 @@ ZSH<i class="fa fa-external-link-alt"></i></span></li>
         <category>Shell</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
-        <tag>Zsh</tag>
+        <tag>PowerShell</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -2361,67 +2346,82 @@ new_sync_write --&gt; call_write_iter</pre>
       </tags>
   </entry>
   <entry>
-    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-    <url>/posts/8ad4716e.html</url>
+    <title>美化 Shell 之 Linux Zsh 篇</title>
+    <url>/posts/f2cdf8a6.html</url>
     <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
-GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
-用户会选择 <code>PowerShell</code></p>
-<p>为了美化 <code>PowerShell</code>，个人选择了
-<code>Oh My Posh</code>。<code>Oh My Posh</code>
-是一个开源的主体的框架，支持
-<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
-等多种 <code>Shell</code></p>
-<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
+<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
+<code>Zsh</code> 对 Linux 默认的
+<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
+<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
+并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
+改为 <code>Zsh</code></p>
+<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
+应运而生。 <code>Oh My Zsh</code>
+是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
+<code>Zsh</code> 配置提供了很大的便利</p>
+<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
 <span id="more"></span></p>
-<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
-<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
-<code>winget</code> 安装最新的版本</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
-<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
-所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
-字体</p>
-<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
-或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
-的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
-文件安装即可</p>
-<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
-<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
-Windows Terminal 应用中单独配置，这里不做介绍</p>
-<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
-<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
-直接打开配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>如果打开报错，则需要首先创建配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
-<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
-就会自动启用 <code>Oh My Posh</code> 了</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="选择主题">选择主题</h2>
-<p><code>Oh My Posh</code>
-支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
-预览</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
-<p>个人选择了 <code>powerlevel10k_rainbow</code>
-主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
+<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
+为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
+<p>配置 Zsh 为默认 Shell</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
+<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
+<code>Oh My Zsh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
+命名规则类似，<code>Zsh</code> 的配置文件是
+<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
+<h2 id="主题配置">主题配置</h2>
+<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
+给出了内置的所有主题的预览图</p>
+<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
+字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
+字体</a></p>
+<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
+中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
+也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
+<code>powerlevel10k</code> 主题</p>
+<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重启终端后，<code>powerlevel10k</code>
+会进入引导流程，可以自行微调风格</p>
+<h2 id="插件安装">插件安装</h2>
+<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
+插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
+<code>zsh-syntax-highlighting</code> 插件</p>
+<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
+<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
+会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
+<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-autosuggestions</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
+<p><code>zsh-syntax-highlighting</code>
+开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-syntax-highlighting</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
-My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
-PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
+shell<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
+仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
+ZSH<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
@@ -2429,8 +2429,8 @@ PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
         <category>Shell</category>
       </categories>
       <tags>
-        <tag>PowerShell</tag>
-        <tag>Windows</tag>
+        <tag>Linux</tag>
+        <tag>Zsh</tag>
       </tags>
   </entry>
   <entry>
@@ -3488,6 +3488,49 @@ NAT6 文档<i class="fa fa-external-link-alt"></i></span>，需要在路由器�
 默认网关，如果要立即生效可以手动执行</p></li>
 <li><p>重启路由器</p></li>
 </ol>
+<h2 id="zerotier">ZeroTier</h2>
+<p>为了异地内网互访，ZeroTier 可以算是一个 “神器” 了，虽然不如 frp
+稳定，但是胜在免费，无需公网 VPS</p>
+<ol type="1">
+<li><p>首先安装 zerotier 包</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install zerotier</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>直接修改配置文件</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim /etc/config/zerotier</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>默认文件类似下面这样</p>
+<p></p><figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">config zerotier sample_config</span><br><span class="line">    option enabled 0</span><br><span class="line"></span><br><span class="line">    # persistent configuration folder (for ZT controller mode)</span><br><span class="line">    #option config_path '/etc/zerotier'</span><br><span class="line"></span><br><span class="line">    #option port '9993'</span><br><span class="line"></span><br><span class="line">    # Generate secret on first start</span><br><span class="line">    option secret ''</span><br><span class="line"></span><br><span class="line">    # Join a public network called Earth</span><br><span class="line">    list join '8056c2e21c000001'</span><br><span class="line">    #list join '&lt;other_network&gt;'</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>修改其中的 <code>enabled</code> 为 1，开启服务，并且
+<code>list join</code> 后的网络 ID 改为自己申请的网络 ID 即可</p>
+<p>也可以新建一个配置，填上自己的网络 ID，如下</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">uci <span class="built_in">set</span> zerotier.openwrt_network=zerotier</span><br><span class="line">uci add_list zerotier.openwrt_network.join=<span class="string">'xxxxxxxxxxxxxxxx'</span></span><br><span class="line">uci <span class="built_in">set</span> zerotier.openwrt_network.enabled=<span class="string">'1'</span></span><br><span class="line">uci commit zerotier</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>重启路由器</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>配置防火墙</p>
+<p>开启外网 udp 到 9993 端口的访问权限</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">uci add firewall rule</span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].name=<span class="string">'Allow-ZeroTier-Inbound'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].src=<span class="string">'*'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].target=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].proto=<span class="string">'udp'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].dest_port=<span class="string">'9993'</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>配置 ZeroTier 的路由</p>
+<p>在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL25ldHdvcms=">网络 - 接口<i class="fa fa-external-link-alt"></i></span>
+界面新建一个接口，ztXXXXXXXX 根据实际情况替换，后续类似不再重复</p>
+<p></p><figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">名称：ZeroTier</span><br><span class="line">协议：不配置协议</span><br><span class="line">设备：ztXXXXXXXX</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>命令行也可以</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">uci <span class="built_in">set</span> network.ZeroTier=interface</span><br><span class="line">uci <span class="built_in">set</span> network.ZeroTier.proto=<span class="string">'none'</span></span><br><span class="line">uci <span class="built_in">set</span> network.ZeroTier.device=<span class="string">'ztXXXXXXXX'</span></span><br><span class="line">uci commit network</span><br><span class="line">/etc/init.d/network restart</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxs">网络 - 防火墙<i class="fa fa-external-link-alt"></i></span>
+界面新建一个防火墙区域</p>
+<p></p><figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">名称: zerotier</span><br><span class="line">入站数据：接受</span><br><span class="line">出站数据：接受</span><br><span class="line">转发：拒绝</span><br><span class="line">IP 动态伪装: [√]</span><br><span class="line">MSS 钳制: [ ]</span><br><span class="line">涵盖的网络: [√] ZeroTier</span><br><span class="line">允许转发到目标区域：[√] lan</span><br><span class="line">                [√] wan wan6</span><br><span class="line">允许来自源区域的转发：[√] lan</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>命令行也可以，仅供参考</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">uci add firewall zone</span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].name=<span class="string">'zerotier'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].input=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].output=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].forward=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].masq=<span class="string">'1'</span></span><br><span class="line">uci add_list firewall.@zone[-1].network=<span class="string">'ZeroTier'</span></span><br><span class="line">uci add firewall forwarding</span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].src=<span class="string">'zerotier'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].dest=<span class="string">'lan'</span></span><br><span class="line">uci add firewall forwarding</span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].src=<span class="string">'zerotier'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].dest=<span class="string">'wan'</span></span><br><span class="line">uci add firewall forwarding</span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].src=<span class="string">'lan'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].dest=<span class="string">'zerotier'</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>至此路由器本身的配置就完了，然后需要去 <span class="exturl" data-url="aHR0cHM6Ly9teS56ZXJvdGllci5jb20vbmV0d29yaw==">zerotier 官网<i class="fa fa-external-link-alt"></i></span>
+配置一下路由</p>
+<figure>
+<img data-src="/posts/51140c4a/ZeroTier-Routes.png" alt="ZeroTier 路由管理">
+<figcaption aria-hidden="true">ZeroTier 路由管理</figcaption>
+</figure>
+<p>例如我的局域网段选的
+<code>192.168.192.*</code>，两个路由器实际的内网的 LAN 口配置依次为
+<code>192.168.22.0/24</code> 和 <code>192.168.33.0/24</code>
+对应左边的红框，路由器自身的 ZeroTier 的虚拟 IP 为
+<code>192.168.192.22</code> 和 <code>192.168.192.33</code>
+则对应着右边红框，这里不详细展开，可以参考 <span class="exturl" data-url="aHR0cHM6Ly9zdHJheS5sb3ZlL2ppYW8tY2hlbmcvemVyb3RpZXItemhvbmctamllLWppYW8tY2hlbmc=">这篇博文<i class="fa fa-external-link-alt"></i></span></p></li>
+</ol>
 <h2 id="ftp">FTP</h2>
 <p>配置好 USB 后，就可以配置 FTP 来共享 USB 设备</p>
 <ol type="1">
@@ -3549,6 +3592,12 @@ NAT6 文档<i class="fa fa-external-link-alt"></i></span>，需要在路由器�
 <li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI3NDA5Ny9hcnRpY2xlL2RldGFpbHMvMTA3MTk3NzE3">【CSDN】luci.cbi
 报错<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2t1b3J1YW4vbHVjaS1hcHAtdjJyYXkvaXNzdWVzLzQy">【GitHub】应用设置界面错误<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItaW5zdGFsbGluZw==">【OpenWrt】安装
+USB 驱动<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVz">【OpenWrt】使用
+USB 设备<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvYWRkaXRpb25hbC1zb2Z0d2FyZS9leHRyb290X2NvbmZpZ3VyYXRpb24=">【OpenWrt】Extroot
+配置<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h5cmF0aGIvbWVudG9odXN0">【GitHub】MentoHUST
 加入 v4 支持<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
@@ -3573,12 +3622,10 @@ IPv6 路由<i class="fa fa-external-link-alt"></i></span></li>
 竟然也可以开 NAT｜OpenWRT IPv6 NAT 手把手教学<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNDY2MDY4NTY=">【Zhihu】如何开启
 NAT6<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItaW5zdGFsbGluZw==">【OpenWrt】安装
-USB 驱动<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVz">【OpenWrt】使用
-USB 设备<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvYWRkaXRpb25hbC1zb2Z0d2FyZS9leHRyb290X2NvbmZpZ3VyYXRpb24=">【OpenWrt】Extroot
-配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL213YXJuaW5nL3plcm90aWVyLW9wZW53cnQvd2lraQ==">【GitHub】ZeroTier
+setup on OpenWRT<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdHJheS5sb3ZlL2ppYW8tY2hlbmcvemVyb3RpZXItemhvbmctamllLWppYW8tY2hlbmc=">【个人博客】ZeroTier
+中阶教程<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL2Z0cC5vdmVydmlldw==">【OpenWrt】FTP<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL3NhbWJh">【OpenWrt】Samba<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvZG93bmxvYWRpbmdfYW5kX2ZpbGVzaGFyaW5nL3RyYW5zbWlzc2lvbg==">【OpenWrt】transmission<i class="fa fa-external-link-alt"></i></span></li>

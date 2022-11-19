@@ -32,11 +32,12 @@
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/51140c4a/Mount-sda6.png">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/51140c4a/Allow-LuCI-WAN.png">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/51140c4a/Win-Remote.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/51140c4a/ZeroTier-Routes.png">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/51140c4a/Allow-FTP-WAN.png">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/51140c4a/Samba.png">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/51140c4a/Transmission.png">
 <meta property="article:published_time" content="2021-10-28T08:17:24.000Z">
-<meta property="article:modified_time" content="2022-11-19T03:39:15.000Z">
+<meta property="article:modified_time" content="2022-11-19T07:30:47.000Z">
 <meta property="article:author" content="Zeus">
 <meta property="article:tag" content="OpenWrt">
 <meta property="article:tag" content="锐捷">
@@ -160,7 +161,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#web-%E7%95%8C%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">Web 界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%89%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">汉化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#root-%E5%AF%86%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">root 密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">1.3.</span> <span class="nav-text">ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7-luci"><span class="nav-number">1.4.</span> <span class="nav-text">升级 LuCI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usb"><span class="nav-number">2.</span> <span class="nav-text">USB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-usb-%E9%A9%B1%E5%8A%A8"><span class="nav-number">2.1.</span> <span class="nav-text">安装 USB 驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="nav-number">2.2.</span> <span class="nav-text">自动挂载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extroot"><span class="nav-number">2.3.</span> <span class="nav-text">Extroot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%90%E6%8D%B7%E8%AE%A4%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">锐捷认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mentohust"><span class="nav-number">3.1.</span> <span class="nav-text">MentoHUST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#minieap"><span class="nav-number">3.2.</span> <span class="nav-text">MiniEAP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">4.</span> <span class="nav-text">防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.1.</span> <span class="nav-text">开放端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-number">4.2.</span> <span class="nav-text">端口转发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ipv6"><span class="nav-number">5.</span> <span class="nav-text">IPv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ftp"><span class="nav-number">6.</span> <span class="nav-text">FTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smb"><span class="nav-number">7.</span> <span class="nav-text">SMB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bt-%E4%B8%8B%E8%BD%BD"><span class="nav-number">8.</span> <span class="nav-text">BT 下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">9.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#web-%E7%95%8C%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">Web 界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%89%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">汉化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#root-%E5%AF%86%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">root 密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">1.3.</span> <span class="nav-text">ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7-luci"><span class="nav-number">1.4.</span> <span class="nav-text">升级 LuCI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usb"><span class="nav-number">2.</span> <span class="nav-text">USB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-usb-%E9%A9%B1%E5%8A%A8"><span class="nav-number">2.1.</span> <span class="nav-text">安装 USB 驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="nav-number">2.2.</span> <span class="nav-text">自动挂载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extroot"><span class="nav-number">2.3.</span> <span class="nav-text">Extroot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%90%E6%8D%B7%E8%AE%A4%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">锐捷认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mentohust"><span class="nav-number">3.1.</span> <span class="nav-text">MentoHUST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#minieap"><span class="nav-number">3.2.</span> <span class="nav-text">MiniEAP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">4.</span> <span class="nav-text">防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.1.</span> <span class="nav-text">开放端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-number">4.2.</span> <span class="nav-text">端口转发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ipv6"><span class="nav-number">5.</span> <span class="nav-text">IPv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zerotier"><span class="nav-number">6.</span> <span class="nav-text">ZeroTier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ftp"><span class="nav-number">7.</span> <span class="nav-text">FTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smb"><span class="nav-number">8.</span> <span class="nav-text">SMB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bt-%E4%B8%8B%E8%BD%BD"><span class="nav-number">9.</span> <span class="nav-text">BT 下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -251,7 +252,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-19 11:39:15" itemprop="dateModified" datetime="2022-11-19T11:39:15+08:00">2022-11-19</time>
+      <time title="修改时间：2022-11-19 15:30:47" itemprop="dateModified" datetime="2022-11-19T15:30:47+08:00">2022-11-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -291,14 +292,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -521,6 +522,49 @@ NAT6 文档<i class="fa fa-external-link-alt"></i></span>，需要在路由器�
 默认网关，如果要立即生效可以手动执行</p></li>
 <li><p>重启路由器</p></li>
 </ol>
+<h2 id="zerotier">ZeroTier</h2>
+<p>为了异地内网互访，ZeroTier 可以算是一个 “神器” 了，虽然不如 frp
+稳定，但是胜在免费，无需公网 VPS</p>
+<ol type="1">
+<li><p>首先安装 zerotier 包</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install zerotier</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>直接修改配置文件</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/config/zerotier</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>默认文件类似下面这样</p>
+<p></p><figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">config zerotier sample_config</span><br><span class="line">    option enabled 0</span><br><span class="line"></span><br><span class="line">    # persistent configuration folder (for ZT controller mode)</span><br><span class="line">    #option config_path '/etc/zerotier'</span><br><span class="line"></span><br><span class="line">    #option port '9993'</span><br><span class="line"></span><br><span class="line">    # Generate secret on first start</span><br><span class="line">    option secret ''</span><br><span class="line"></span><br><span class="line">    # Join a public network called Earth</span><br><span class="line">    list join '8056c2e21c000001'</span><br><span class="line">    #list join '&lt;other_network&gt;'</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>修改其中的 <code>enabled</code> 为 1，开启服务，并且
+<code>list join</code> 后的网络 ID 改为自己申请的网络 ID 即可</p>
+<p>也可以新建一个配置，填上自己的网络 ID，如下</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uci <span class="built_in">set</span> zerotier.openwrt_network=zerotier</span><br><span class="line">uci add_list zerotier.openwrt_network.join=<span class="string">'xxxxxxxxxxxxxxxx'</span></span><br><span class="line">uci <span class="built_in">set</span> zerotier.openwrt_network.enabled=<span class="string">'1'</span></span><br><span class="line">uci commit zerotier</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>重启路由器</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>配置防火墙</p>
+<p>开启外网 udp 到 9993 端口的访问权限</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">uci add firewall rule</span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].name=<span class="string">'Allow-ZeroTier-Inbound'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].src=<span class="string">'*'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].target=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].proto=<span class="string">'udp'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@rule[-1].dest_port=<span class="string">'9993'</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>配置 ZeroTier 的路由</p>
+<p>在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL25ldHdvcms=">网络 - 接口<i class="fa fa-external-link-alt"></i></span>
+界面新建一个接口，ztXXXXXXXX 根据实际情况替换，后续类似不再重复</p>
+<p></p><figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">名称：ZeroTier</span><br><span class="line">协议：不配置协议</span><br><span class="line">设备：ztXXXXXXXX</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>命令行也可以</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uci <span class="built_in">set</span> network.ZeroTier=interface</span><br><span class="line">uci <span class="built_in">set</span> network.ZeroTier.proto=<span class="string">'none'</span></span><br><span class="line">uci <span class="built_in">set</span> network.ZeroTier.device=<span class="string">'ztXXXXXXXX'</span></span><br><span class="line">uci commit network</span><br><span class="line">/etc/init.d/network restart</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>然后在 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xL2NnaS1iaW4vbHVjaS9hZG1pbi9uZXR3b3JrL2ZpcmV3YWxs">网络 - 防火墙<i class="fa fa-external-link-alt"></i></span>
+界面新建一个防火墙区域</p>
+<p></p><figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">名称: zerotier</span><br><span class="line">入站数据：接受</span><br><span class="line">出站数据：接受</span><br><span class="line">转发：拒绝</span><br><span class="line">IP 动态伪装: [√]</span><br><span class="line">MSS 钳制: [ ]</span><br><span class="line">涵盖的网络: [√] ZeroTier</span><br><span class="line">允许转发到目标区域：[√] lan</span><br><span class="line">                [√] wan wan6</span><br><span class="line">允许来自源区域的转发：[√] lan</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>命令行也可以，仅供参考</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">uci add firewall zone</span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].name=<span class="string">'zerotier'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].input=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].output=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].forward=<span class="string">'ACCEPT'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@zone[-1].masq=<span class="string">'1'</span></span><br><span class="line">uci add_list firewall.@zone[-1].network=<span class="string">'ZeroTier'</span></span><br><span class="line">uci add firewall forwarding</span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].src=<span class="string">'zerotier'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].dest=<span class="string">'lan'</span></span><br><span class="line">uci add firewall forwarding</span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].src=<span class="string">'zerotier'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].dest=<span class="string">'wan'</span></span><br><span class="line">uci add firewall forwarding</span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].src=<span class="string">'lan'</span></span><br><span class="line">uci <span class="built_in">set</span> firewall.@forwarding[-1].dest=<span class="string">'zerotier'</span></span><br><span class="line">uci commit firewall</span><br><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>至此路由器本身的配置就完了，然后需要去 <span class="exturl" data-url="aHR0cHM6Ly9teS56ZXJvdGllci5jb20vbmV0d29yaw==">zerotier 官网<i class="fa fa-external-link-alt"></i></span>
+配置一下路由</p>
+<figure>
+<img data-src="/posts/51140c4a/ZeroTier-Routes.png" alt="ZeroTier 路由管理">
+<figcaption aria-hidden="true">ZeroTier 路由管理</figcaption>
+</figure>
+<p>例如我的局域网段选的
+<code>192.168.192.*</code>，两个路由器实际的内网的 LAN 口配置依次为
+<code>192.168.22.0/24</code> 和 <code>192.168.33.0/24</code>
+对应左边的红框，路由器自身的 ZeroTier 的虚拟 IP 为
+<code>192.168.192.22</code> 和 <code>192.168.192.33</code>
+则对应着右边红框，这里不详细展开，可以参考 <span class="exturl" data-url="aHR0cHM6Ly9zdHJheS5sb3ZlL2ppYW8tY2hlbmcvemVyb3RpZXItemhvbmctamllLWppYW8tY2hlbmc=">这篇博文<i class="fa fa-external-link-alt"></i></span></p></li>
+</ol>
 <h2 id="ftp">FTP</h2>
 <p>配置好 USB 后，就可以配置 FTP 来共享 USB 设备</p>
 <ol type="1">
@@ -582,6 +626,12 @@ NAT6 文档<i class="fa fa-external-link-alt"></i></span>，需要在路由器�
 <li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI3NDA5Ny9hcnRpY2xlL2RldGFpbHMvMTA3MTk3NzE3">【CSDN】luci.cbi
 报错<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2t1b3J1YW4vbHVjaS1hcHAtdjJyYXkvaXNzdWVzLzQy">【GitHub】应用设置界面错误<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItaW5zdGFsbGluZw==">【OpenWrt】安装
+USB 驱动<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVz">【OpenWrt】使用
+USB 设备<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvYWRkaXRpb25hbC1zb2Z0d2FyZS9leHRyb290X2NvbmZpZ3VyYXRpb24=">【OpenWrt】Extroot
+配置<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h5cmF0aGIvbWVudG9odXN0">【GitHub】MentoHUST
 加入 v4 支持<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
@@ -606,12 +656,10 @@ IPv6 路由<i class="fa fa-external-link-alt"></i></span></li>
 竟然也可以开 NAT｜OpenWRT IPv6 NAT 手把手教学<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNDY2MDY4NTY=">【Zhihu】如何开启
 NAT6<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItaW5zdGFsbGluZw==">【OpenWrt】安装
-USB 驱动<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc3RvcmFnZS91c2ItZHJpdmVz">【OpenWrt】使用
-USB 设备<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvYWRkaXRpb25hbC1zb2Z0d2FyZS9leHRyb290X2NvbmZpZ3VyYXRpb24=">【OpenWrt】Extroot
-配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL213YXJuaW5nL3plcm90aWVyLW9wZW53cnQvd2lraQ==">【GitHub】ZeroTier
+setup on OpenWRT<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdHJheS5sb3ZlL2ppYW8tY2hlbmcvemVyb3RpZXItemhvbmctamllLWppYW8tY2hlbmc=">【个人博客】ZeroTier
+中阶教程<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL2Z0cC5vdmVydmlldw==">【OpenWrt】FTP<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvbmFzL3NhbWJh">【OpenWrt】Samba<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLXVzZXIvc2VydmljZXMvZG93bmxvYWRpbmdfYW5kX2ZpbGVzaGFyaW5nL3RyYW5zbWlzc2lvbg==">【OpenWrt】transmission<i class="fa fa-external-link-alt"></i></span></li>
