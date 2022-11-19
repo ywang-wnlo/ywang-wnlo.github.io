@@ -30,9 +30,9 @@
 <meta property="og:description" content=".ipk 文件 .ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等 但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 .ipk 文件，因此需要交叉编译">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ywang-wnlo.github.io/posts/96a1807/Target-Config.png">
-<meta property="og:image" content="https://ywang-wnlo.github.io/posts/96a1807/MiniEAP-Config.png">
+<meta property="og:image" content="https://ywang-wnlo.github.io/posts/96a1807/MentoHUST-Config.png">
 <meta property="article:published_time" content="2021-11-01T03:08:42.000Z">
-<meta property="article:modified_time" content="2022-11-16T02:33:39.000Z">
+<meta property="article:modified_time" content="2022-11-19T03:39:15.000Z">
 <meta property="article:author" content="Zeus">
 <meta property="article:tag" content="交叉编译">
 <meta property="article:tag" content="ipk">
@@ -246,7 +246,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-16 10:33:39" itemprop="dateModified" datetime="2022-11-16T10:33:39+08:00">2022-11-16</time>
+      <time title="修改时间：2022-11-19 11:39:15" itemprop="dateModified" datetime="2022-11-19T11:39:15+08:00">2022-11-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,7 +285,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>929</span>
+      <span>930</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -332,7 +332,7 @@
 <h3 id="配置平台">配置平台</h3>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
 <p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
-<p>以小米 mini 路由器为例，应该将他们配置成如下图所示</p>
+<p>以小米 R3G 路由器为例，应该将他们配置成如下图所示</p>
 <figure>
 <img data-src="/posts/96a1807/Target-Config.png" alt="平台配置">
 <figcaption aria-hidden="true">平台配置</figcaption>
@@ -345,26 +345,27 @@
 过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
 <li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code>
 则是根据机器的 CPU 数量来进行多线程编译</li>
+<li>直接 <code>-j</code> 也可以</li>
 </ul>
 <h3 id="添加需要编译的第三方软件包">添加需要编译的第三方软件包</h3>
 <p>可以先搜索有没有已经配置好的含有 <code>Makefile</code>
 的仓库，有了适配过的 <code>Makefile</code>
 文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
-<p>以 <code>minieap</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">github<i class="fa fa-external-link-alt"></i></span>
+<p>以 <code>MentoHUST</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">github<i class="fa fa-external-link-alt"></i></span>
 上有已经完成的仓库，依次可以直接拉取来编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/BoringCat/minieap-openwrt.git package/minieap</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk.git package/minieap</span><br></pre></td></tr></tbody></table></figure>
 <p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成
 <code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
-<p>对于 <code>minieap</code> 来说，在 <code>Network</code>
-找到对应选项并配置成 <code>M</code> 即可，如下图</p>
+<p>对于 <code>MentoHUST</code> 来说，在 <code>Network</code> 中的
+<code>Ruijie</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
 <figure>
-<img data-src="/posts/96a1807/MiniEAP-Config.png" alt="MiniEAP 配置">
-<figcaption aria-hidden="true">MiniEAP 配置</figcaption>
+<img data-src="/posts/96a1807/MentoHUST-Config.png" alt="MentoHUST 配置">
+<figcaption aria-hidden="true">MentoHUST 配置</figcaption>
 </figure>
-<p>配置完成后就可以进行编译了，编译命令也很简单，以 <code>minieap</code>
-为例如下所示</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make package/minieap/compile V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br></pre></td></tr></tbody></table></figure>
+<p>配置完成后就可以进行编译了，编译命令也很简单，以
+<code>MentoHUST</code> 为例如下所示</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make package/mentohust/compile V=s -j</span><br></pre></td></tr></tbody></table></figure>
 <p>编译完成后，<code>.ipk</code> 文件会生成在
 <code>./bin/packages/&lt;YourArchitecture&gt;/base</code>
 目录下，将其拷贝到路由器上就可以通过 <code>opkg</code>
@@ -375,7 +376,6 @@
 <li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JvcmluZ0NhdC9taW5pZWFwLW9wZW53cnQ=">【GitHub】minieap-openwrt<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
