@@ -1,6 +1,376 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>LaTeX PPT</title>
+    <url>/posts/499c5a19.html</url>
+    <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
+<p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf
+上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span></p>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer">
+<figcaption aria-hidden="true">Beamer</figcaption>
+</figure>
+<!-- TODO: Beamer 介绍和额外的特性 -->
+<h2 id="特性">特性</h2>
+<h3 id="frame-与-slide"><code>frame</code> 与 <code>slide</code></h3>
+<p>Beamer 中通常会用一对
+<code>\begin{frame}</code>、<code>\end{frame}</code>
+来制作一页幻灯片（slide），例如</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{标题名称}</span><br><span class="line">	主体内容</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-frame.png" alt="frame">
+<figcaption aria-hidden="true">frame</figcaption>
+</figure>
+<p>然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides</p>
+<h4 id="pause"><code>\pause</code></h4>
+<p>添加 <code>\pause</code> 会将 <code>\pause</code>
+语句前面内容单独在新的一页 slide 上显示，实现了类似 PPT
+动画中的点击页面出现下一段文字的效果，下面给出代码和生成的 PDF
+帮助理解</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{<span class="keyword">\textbackslash</span> pause 使用}</span><br><span class="line"></span><br><span class="line">	在这组幻灯片中 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	这段文件将部分可见 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	现在所有文字都可以看见了</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-pause.jpg" alt="pause">
+<figcaption aria-hidden="true">pause</figcaption>
+</figure>
+<h4 id="itemize-中的尖括号-strat-end"><code>itemize</code> 中的尖括号
+&lt;strat-end&gt;</h4>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line"><span class="keyword">\frametitle</span>{item 中的尖括号}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">	<span class="keyword">\item</span>&lt;1-&gt; 该文字在 1+ 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;2-3&gt; 该文字在 2-3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;3&gt; 该文字仅在第 3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;4-&gt; 该文字在 4+ 页均可见</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-item.jpg" alt="item">
+<figcaption aria-hidden="true">item</figcaption>
+</figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>Beamer</tag>
+        <tag>LaTeX</tag>
+        <tag>todo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 基础介绍</title>
+    <url>/posts/a4752f87.html</url>
+    <content><![CDATA[<h2 id="tex-和-latex">TeX 和 LaTeX</h2>
+<p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成
+LaTeX 通过对 TeX 进行封装，使用 TeX
+作为它的格式化引擎，使得排版文字变得更加方便。</p>
+<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成
+<code>.dvi</code> 文件 <span id="more"></span></p>
+<h2 id="pdftexxetex-和-luatex">pdfTeX、XeTeX 和 LuaTeX</h2>
+<h3 id="三者的介绍">三者的介绍</h3>
+<p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX
+引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
+<ul>
+<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
+<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
+<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
+</ul>
+<h3 id="各自的特性">各自的特性</h3>
+<ul>
+<li>pdfTeX 的主要特性是能直接生成 pdf</li>
+<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
+<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua
+脚本</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX,
+XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 环境配置</title>
+    <url>/posts/4f94956.html</url>
+    <content><![CDATA[<h2 id="网页环境">网页环境</h2>
+<h3 id="overleaf">Overleaf</h3>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29t">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX
+编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑
+<span id="more"></span></p>
+<h2 id="本地环境">本地环境</h2>
+<h3 id="tex-live">TeX Live</h3>
+<p>TeX Live 可以利用镜像安装节省下载时间</p>
+<ul>
+<li>从 <span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL0NUQU4vc3lzdGVtcy90ZXhsaXZlL0ltYWdlcy8=">清华镜像站<i class="fa fa-external-link-alt"></i></span>
+直接下载</li>
+<li>或者利用 <span class="exturl" data-url="aHR0cDovL3d3dy50dWcub3JnL3RleGxpdmUvYWNxdWlyZS1pc28uaHRtbCN0b3JyZW50">种子文件<i class="fa fa-external-link-alt"></i></span>
+BT 下载镜像</li>
+</ul>
+<p>可以在安装 TeX Live 时同时勾选上安装 TeXworks 前端，然后就可以使用
+TeXworks 作为 IDE 来使用了</p>
+<h3 id="texstudio">TeXstudio</h3>
+<p>TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGV4c3R1ZGlvLm9yZy8=">官网<i class="fa fa-external-link-alt"></i></span> 下载安装，并且有中文界面</p>
+<h3 id="vscode">VSCode</h3>
+<p>个人更喜欢 VSCode，通过安装扩展并进行相应的配置即可较好的支持
+LaTeX，同时还有格式化和自动补全等功能，非常方便</p>
+<h4 id="安装-latex-workshop-扩展">安装 LaTeX Workshop 扩展</h4>
+<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPUphbWVzLVl1LmxhdGV4LXdvcmtzaG9w">VSCode
+的扩展商店<i class="fa fa-external-link-alt"></i></span> 中搜索 <code>LaTeX Workshop</code> 安装即可</p>
+<h4 id="编译链配置">编译链配置</h4>
+<ol type="1">
+<li><p>默认配置</p>
+<p>TeX Live 安装时会同时安装 <code>latexmk</code>, LaTeX Workshop
+会默认使用 <code>latexmk</code> 来编译
+<code>.tex</code>，无需手动再配置</p></li>
+<li><p>手动配置 (可选)</p>
+<p>手动配置 LaTeX Workshop，在 VSCode 的配置文件
+<code>settings.json</code> 中直接手动添加如下代码:</p>
+<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">官方
+recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
+<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><!-- TODO: 弄清编译命令和编译链当前配置的具体含义，主要是 bibtex --></p></li>
+</ol>
+<h4 id="正向同步">正向同步</h4>
+<p>正向同步指的是编译完成后，在 <code>.tex</code>
+文件内通过快捷键，快速定位到光标位置在 <code>.tex</code>
+的对应位置，方便查看 PDF 文件</p>
+<p>推荐打开文件修改后，编译完成后自动正向同步。该功能通过
+<code>latex-workshop.synctex.afterBuild.enabled</code> 来控制</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="反向同步">反向同步</h4>
+<p>反向同步指的是编译完成后，在 PDF 文件内通过快捷键，快速定位点击部分在
+<code>.tex</code> 的位置，方便修改 <code>.tex</code> 源码</p>
+<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">官方
+synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
+<ol type="1">
+<li><p>VSCode 内部 PDF 浏览器</p>
+<p>如果直接使用 VSCode 来浏览 PDF，不需要额外设置，可以根据需要修改
+<code>latex-workshop.view.pdf.internal.synctex.keybinding</code>
+来修改反向同步的快捷键即可，默认 Ctrl 加鼠标左键</p>
+<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.internal.synctex.keybinding"</span><span class="punctuation">:</span> <span class="string">"ctrl-click"</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>外部 PDF 浏览器</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3VtYXRyYXBkZnJlYWRlci5vcmcvZnJlZS1wZGYtcmVhZGVy">SumatraPDF<i class="fa fa-external-link-alt"></i></span>
+是一款流行的小巧方便的免费 PDF 浏览软件。VSCode 支持使用外部的 PDF
+浏览器来查看编译后的 PDF 文件，以及反向搜索功能。主要需要如下配置：</p>
+<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置为使用外部 PDF 浏览软件来浏览 PDF</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.viewer"</span><span class="punctuation">:</span> <span class="string">"external"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 配置外部 PDF 浏览软件的命令行以及参数</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.command"</span><span class="punctuation">:</span> <span class="string">"D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe"</span><span class="punctuation">,</span> <span class="comment">// 自行修改路径</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"%PDF%"</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>在 SumatraPDF 的设置 - 选项中设置反向搜索命令行
+<code>C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe -g "%f:%l"</code>，Code
+的路径应该为完整的绝对路径</p></li>
+</ol>
+<h4 id="其他可选配置">其他可选配置</h4>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="中文支持">中文支持</h2>
+<p>该节主要参考 <span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">Overleaf Chinese<i class="fa fa-external-link-alt"></i></span>
+文档</p>
+<p><strong>推荐使用 XeLaTeX 和 LuaLaTeX 来编译含有中文字符的
+<code>.tex</code> 文件</strong></p>
+<h3 id="xelatex-和-lualatex">XeLaTeX 和 LuaLaTeX</h3>
+<ol type="1">
+<li>直接使用 <code>ctexart</code> 文档类即可支持中文</li>
+<li>或者使用 <code>ctex</code> 包来支持中文</li>
+</ol>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\tableofcontents</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{abstract}</span><br><span class="line">这是简介及摘要。</span><br><span class="line"><span class="keyword">\end</span>{abstract}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+<p>或者</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{xxx}</span><br><span class="line"><span class="keyword">\usepackage</span>{ctex}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="xelatex">XeLaTeX</h3>
+<p>XeLaTeX 还可以使用 <code>xeCJK</code> 包来支持中文</p>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{xeCJK}</span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="pdflatex">pdfLaTeX</h3>
+<p>pdfLaTeX 对中文支持不是很好，只用 pdaLaTeX 的话需要引入
+<code>CJKutf8</code> 包，并且用 <code>\begin{CJK*}{UTF8}{gbsn}</code> 和
+<code>\end{CJK*}</code> 包住所有的中文。</p>
+<ul>
+<li><code>gbsn</code> 和 <code>gkai</code> 是简体的字体</li>
+<li><code>bsmi</code> 和 <code>bkai</code> 是繁体的字体</li>
+</ul>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{CJKutf8}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{gbsn}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line">You can also insert Latin text in your document</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{bsmi}</span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="编译">编译</h3>
+<ol type="1">
+<li><p>首先 <code>.tex</code>
+文件名以及路径尽量不要含有空格以及中文字符</p></li>
+<li><p>在使用 <code>latexmk</code> 和 VSCode 的 LaTeX Workshop
+时，推荐使用第三个编译链 <code>Recipe: latexmk (lualatex)</code></p>
+<figure>
+<img data-src="/posts/4f94956/build-chinese-latex.png" alt="编译中文 LaTeX">
+<figcaption aria-hidden="true">编译中文 LaTeX</figcaption>
+</figure></li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvSW5zdGFsbCNyZXF1aXJlbWVudHM=">【LaTeX
+Workshop】依赖<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">【LaTeX
+Workshop】recipes 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">【LaTeX
+Workshop】synctex 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODE3ODAxNQ==">【知乎】使用 VSCode
+编写 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xNjY1MjMwNjQ=">【知乎】Visual
+Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">【Overleaf】Chinese<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>todo</tag>
+        <tag>VSCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#中文支持">内容</a>，在这里不做重复
+<span id="more"></span></p>
+<h2 id="长度">长度</h2>
+<p>常用的长度单位</p>
+<table>
+<thead>
+<tr class="header">
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th> 换成算成 mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pt</td>
+<td> 基本单位</td>
+<td> 1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr class="even">
+<td>mm</td>
+<td> 毫米</td>
+<td> 2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr class="odd">
+<td>cm</td>
+<td> 厘米</td>
+<td> 28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr class="even">
+<td>in</td>
+<td> 英寸</td>
+<td> 72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr class="odd">
+<td>ex</td>
+<td> 当前字体的 x 字母高度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>em</td>
+<td> 当前字体的 m 字母宽度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="空行">空行</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="空格">空格</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="超链接">超链接</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">% 开启链接颜色配置，并配置为蓝色</span></span><br><span class="line"><span class="keyword">\usepackage</span>[colorlinks=true, allcolors=blue]{hyperref}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\url</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}</span><br><span class="line"><span class="keyword">\href</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}{LaTeX 语法}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="数学公式">数学公式</h2>
+<h3 id="段落中隐式">段落中（隐式）</h3>
+<p>三种均可，任意选择，以 E=mc<sup>2</sup> 为例</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span>E=mc<span class="built_in">^</span>2<span class="keyword">\)</span></span><br><span class="line"><span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>{math}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{math}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="单独成段显式">单独成段（显式）</h3>
+<p>三种均可，任意选择</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span>E=mc<span class="built_in">^</span>2<span class="keyword">\]</span></span><br><span class="line"><span class="keyword">\begin</span>{displaymath}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{displaymath}</span><br><span class="line"><span class="keyword">\begin</span>{equation}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{equation}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="居中左对齐右对齐">居中，左对齐，右对齐</h2>
+<h3 id="居中">居中</h3>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{center}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{center}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="左对齐">左对齐</h3>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushleft}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushleft}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="右对齐">右对齐</h3>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushright}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushright}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考文献配置">参考文献配置</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{stylename}</span><br><span class="line"><span class="keyword">\bibliography</span>{bibfile}</span><br></pre></td></tr></tbody></table></figure>
+<p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而
+<code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
+<table>
+<colgroup>
+<col style="width: 57%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>stylename</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>abbrc</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc"></td>
+</tr>
+<tr class="even">
+<td>acm</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm"></td>
+</tr>
+<tr class="odd">
+<td>alpha</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha"></td>
+</tr>
+<tr class="even">
+<td>apalike</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike"></td>
+</tr>
+<tr class="odd">
+<td>ieeetr</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr"></td>
+</tr>
+<tr class="even">
+<td>plain</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain"></td>
+</tr>
+<tr class="odd">
+<td>siam</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam"></td>
+</tr>
+<tr class="even">
+<td>unsrt</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="todo">TODO</h2>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX
+Lengths<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvSHlwZXJsaW5rcw==">【维基百科】LaTeX
+Hyperlinks<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L01hdGhlbWF0aWNhbF9leHByZXNzaW9ucw==">【overleaf】Mathematical
+expressions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JpYnRleF9iaWJsaW9ncmFwaHlfc3R5bGVz">【overleaf】Bibtex
+bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>todo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo 插件推荐以及使用小技巧</title>
     <url>/posts/4143201a.html</url>
     <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span>
@@ -424,462 +794,6 @@ Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-al
       </tags>
   </entry>
   <entry>
-    <title>LaTeX PPT</title>
-    <url>/posts/499c5a19.html</url>
-    <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
-<p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf
-上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span></p>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer">
-<figcaption aria-hidden="true">Beamer</figcaption>
-</figure>
-<!-- TODO: Beamer 介绍和额外的特性 -->
-<h2 id="特性">特性</h2>
-<h3 id="frame-与-slide"><code>frame</code> 与 <code>slide</code></h3>
-<p>Beamer 中通常会用一对
-<code>\begin{frame}</code>、<code>\end{frame}</code>
-来制作一页幻灯片（slide），例如</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{标题名称}</span><br><span class="line">	主体内容</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-frame.png" alt="frame">
-<figcaption aria-hidden="true">frame</figcaption>
-</figure>
-<p>然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides</p>
-<h4 id="pause"><code>\pause</code></h4>
-<p>添加 <code>\pause</code> 会将 <code>\pause</code>
-语句前面内容单独在新的一页 slide 上显示，实现了类似 PPT
-动画中的点击页面出现下一段文字的效果，下面给出代码和生成的 PDF
-帮助理解</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{<span class="keyword">\textbackslash</span> pause 使用}</span><br><span class="line"></span><br><span class="line">	在这组幻灯片中 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	这段文件将部分可见 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	现在所有文字都可以看见了</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-pause.jpg" alt="pause">
-<figcaption aria-hidden="true">pause</figcaption>
-</figure>
-<h4 id="itemize-中的尖括号-strat-end"><code>itemize</code> 中的尖括号
-&lt;strat-end&gt;</h4>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line"><span class="keyword">\frametitle</span>{item 中的尖括号}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">	<span class="keyword">\item</span>&lt;1-&gt; 该文字在 1+ 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;2-3&gt; 该文字在 2-3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;3&gt; 该文字仅在第 3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;4-&gt; 该文字在 4+ 页均可见</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-item.jpg" alt="item">
-<figcaption aria-hidden="true">item</figcaption>
-</figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>Beamer</tag>
-        <tag>LaTeX</tag>
-        <tag>todo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 基础介绍</title>
-    <url>/posts/a4752f87.html</url>
-    <content><![CDATA[<h2 id="tex-和-latex">TeX 和 LaTeX</h2>
-<p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成
-LaTeX 通过对 TeX 进行封装，使用 TeX
-作为它的格式化引擎，使得排版文字变得更加方便。</p>
-<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成
-<code>.dvi</code> 文件 <span id="more"></span></p>
-<h2 id="pdftexxetex-和-luatex">pdfTeX、XeTeX 和 LuaTeX</h2>
-<h3 id="三者的介绍">三者的介绍</h3>
-<p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX
-引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
-<ul>
-<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
-<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
-<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
-</ul>
-<h3 id="各自的特性">各自的特性</h3>
-<ul>
-<li>pdfTeX 的主要特性是能直接生成 pdf</li>
-<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
-<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua
-脚本</li>
-</ul>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX,
-XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 环境配置</title>
-    <url>/posts/4f94956.html</url>
-    <content><![CDATA[<h2 id="网页环境">网页环境</h2>
-<h3 id="overleaf">Overleaf</h3>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29t">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX
-编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑
-<span id="more"></span></p>
-<h2 id="本地环境">本地环境</h2>
-<h3 id="tex-live">TeX Live</h3>
-<p>TeX Live 可以利用镜像安装节省下载时间</p>
-<ul>
-<li>从 <span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL0NUQU4vc3lzdGVtcy90ZXhsaXZlL0ltYWdlcy8=">清华镜像站<i class="fa fa-external-link-alt"></i></span>
-直接下载</li>
-<li>或者利用 <span class="exturl" data-url="aHR0cDovL3d3dy50dWcub3JnL3RleGxpdmUvYWNxdWlyZS1pc28uaHRtbCN0b3JyZW50">种子文件<i class="fa fa-external-link-alt"></i></span>
-BT 下载镜像</li>
-</ul>
-<p>可以在安装 TeX Live 时同时勾选上安装 TeXworks 前端，然后就可以使用
-TeXworks 作为 IDE 来使用了</p>
-<h3 id="texstudio">TeXstudio</h3>
-<p>TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGV4c3R1ZGlvLm9yZy8=">官网<i class="fa fa-external-link-alt"></i></span> 下载安装，并且有中文界面</p>
-<h3 id="vscode">VSCode</h3>
-<p>个人更喜欢 VSCode，通过安装扩展并进行相应的配置即可较好的支持
-LaTeX，同时还有格式化和自动补全等功能，非常方便</p>
-<h4 id="安装-latex-workshop-扩展">安装 LaTeX Workshop 扩展</h4>
-<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPUphbWVzLVl1LmxhdGV4LXdvcmtzaG9w">VSCode
-的扩展商店<i class="fa fa-external-link-alt"></i></span> 中搜索 <code>LaTeX Workshop</code> 安装即可</p>
-<h4 id="编译链配置">编译链配置</h4>
-<ol type="1">
-<li><p>默认配置</p>
-<p>TeX Live 安装时会同时安装 <code>latexmk</code>, LaTeX Workshop
-会默认使用 <code>latexmk</code> 来编译
-<code>.tex</code>，无需手动再配置</p></li>
-<li><p>手动配置 (可选)</p>
-<p>手动配置 LaTeX Workshop，在 VSCode 的配置文件
-<code>settings.json</code> 中直接手动添加如下代码:</p>
-<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">官方
-recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
-<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><!-- TODO: 弄清编译命令和编译链当前配置的具体含义，主要是 bibtex --></p></li>
-</ol>
-<h4 id="正向同步">正向同步</h4>
-<p>正向同步指的是编译完成后，在 <code>.tex</code>
-文件内通过快捷键，快速定位到光标位置在 <code>.tex</code>
-的对应位置，方便查看 PDF 文件</p>
-<p>推荐打开文件修改后，编译完成后自动正向同步。该功能通过
-<code>latex-workshop.synctex.afterBuild.enabled</code> 来控制</p>
-<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-<h4 id="反向同步">反向同步</h4>
-<p>反向同步指的是编译完成后，在 PDF 文件内通过快捷键，快速定位点击部分在
-<code>.tex</code> 的位置，方便修改 <code>.tex</code> 源码</p>
-<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">官方
-synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
-<ol type="1">
-<li><p>VSCode 内部 PDF 浏览器</p>
-<p>如果直接使用 VSCode 来浏览 PDF，不需要额外设置，可以根据需要修改
-<code>latex-workshop.view.pdf.internal.synctex.keybinding</code>
-来修改反向同步的快捷键即可，默认 Ctrl 加鼠标左键</p>
-<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.internal.synctex.keybinding"</span><span class="punctuation">:</span> <span class="string">"ctrl-click"</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>外部 PDF 浏览器</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3VtYXRyYXBkZnJlYWRlci5vcmcvZnJlZS1wZGYtcmVhZGVy">SumatraPDF<i class="fa fa-external-link-alt"></i></span>
-是一款流行的小巧方便的免费 PDF 浏览软件。VSCode 支持使用外部的 PDF
-浏览器来查看编译后的 PDF 文件，以及反向搜索功能。主要需要如下配置：</p>
-<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置为使用外部 PDF 浏览软件来浏览 PDF</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.viewer"</span><span class="punctuation">:</span> <span class="string">"external"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 配置外部 PDF 浏览软件的命令行以及参数</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.command"</span><span class="punctuation">:</span> <span class="string">"D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe"</span><span class="punctuation">,</span> <span class="comment">// 自行修改路径</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"%PDF%"</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>在 SumatraPDF 的设置 - 选项中设置反向搜索命令行
-<code>C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe -g "%f:%l"</code>，Code
-的路径应该为完整的绝对路径</p></li>
-</ol>
-<h4 id="其他可选配置">其他可选配置</h4>
-<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="中文支持">中文支持</h2>
-<p>该节主要参考 <span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">Overleaf Chinese<i class="fa fa-external-link-alt"></i></span>
-文档</p>
-<p><strong>推荐使用 XeLaTeX 和 LuaLaTeX 来编译含有中文字符的
-<code>.tex</code> 文件</strong></p>
-<h3 id="xelatex-和-lualatex">XeLaTeX 和 LuaLaTeX</h3>
-<ol type="1">
-<li>直接使用 <code>ctexart</code> 文档类即可支持中文</li>
-<li>或者使用 <code>ctex</code> 包来支持中文</li>
-</ol>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\tableofcontents</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{abstract}</span><br><span class="line">这是简介及摘要。</span><br><span class="line"><span class="keyword">\end</span>{abstract}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-<p>或者</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{xxx}</span><br><span class="line"><span class="keyword">\usepackage</span>{ctex}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="xelatex">XeLaTeX</h3>
-<p>XeLaTeX 还可以使用 <code>xeCJK</code> 包来支持中文</p>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{xeCJK}</span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="pdflatex">pdfLaTeX</h3>
-<p>pdfLaTeX 对中文支持不是很好，只用 pdaLaTeX 的话需要引入
-<code>CJKutf8</code> 包，并且用 <code>\begin{CJK*}{UTF8}{gbsn}</code> 和
-<code>\end{CJK*}</code> 包住所有的中文。</p>
-<ul>
-<li><code>gbsn</code> 和 <code>gkai</code> 是简体的字体</li>
-<li><code>bsmi</code> 和 <code>bkai</code> 是繁体的字体</li>
-</ul>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{CJKutf8}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{gbsn}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line">You can also insert Latin text in your document</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{bsmi}</span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="编译">编译</h3>
-<ol type="1">
-<li><p>首先 <code>.tex</code>
-文件名以及路径尽量不要含有空格以及中文字符</p></li>
-<li><p>在使用 <code>latexmk</code> 和 VSCode 的 LaTeX Workshop
-时，推荐使用第三个编译链 <code>Recipe: latexmk (lualatex)</code></p>
-<figure>
-<img data-src="/posts/4f94956/build-chinese-latex.png" alt="编译中文 LaTeX">
-<figcaption aria-hidden="true">编译中文 LaTeX</figcaption>
-</figure></li>
-</ol>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvSW5zdGFsbCNyZXF1aXJlbWVudHM=">【LaTeX
-Workshop】依赖<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">【LaTeX
-Workshop】recipes 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">【LaTeX
-Workshop】synctex 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODE3ODAxNQ==">【知乎】使用 VSCode
-编写 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xNjY1MjMwNjQ=">【知乎】Visual
-Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">【Overleaf】Chinese<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>todo</tag>
-        <tag>VSCode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#中文支持">内容</a>，在这里不做重复
-<span id="more"></span></p>
-<h2 id="长度">长度</h2>
-<p>常用的长度单位</p>
-<table>
-<thead>
-<tr class="header">
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th> 换成算成 mm</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>pt</td>
-<td> 基本单位</td>
-<td> 1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr class="even">
-<td>mm</td>
-<td> 毫米</td>
-<td> 2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr class="odd">
-<td>cm</td>
-<td> 厘米</td>
-<td> 28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr class="even">
-<td>in</td>
-<td> 英寸</td>
-<td> 72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr class="odd">
-<td>ex</td>
-<td> 当前字体的 x 字母高度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>em</td>
-<td> 当前字体的 m 字母宽度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<h2 id="空行">空行</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="空格">空格</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="超链接">超链接</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">% 开启链接颜色配置，并配置为蓝色</span></span><br><span class="line"><span class="keyword">\usepackage</span>[colorlinks=true, allcolors=blue]{hyperref}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\url</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}</span><br><span class="line"><span class="keyword">\href</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}{LaTeX 语法}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="数学公式">数学公式</h2>
-<h3 id="段落中隐式">段落中（隐式）</h3>
-<p>三种均可，任意选择，以 E=mc<sup>2</sup> 为例</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span>E=mc<span class="built_in">^</span>2<span class="keyword">\)</span></span><br><span class="line"><span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>{math}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{math}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="单独成段显式">单独成段（显式）</h3>
-<p>三种均可，任意选择</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span>E=mc<span class="built_in">^</span>2<span class="keyword">\]</span></span><br><span class="line"><span class="keyword">\begin</span>{displaymath}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{displaymath}</span><br><span class="line"><span class="keyword">\begin</span>{equation}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{equation}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="居中左对齐右对齐">居中，左对齐，右对齐</h2>
-<h3 id="居中">居中</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{center}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{center}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="左对齐">左对齐</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushleft}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushleft}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="右对齐">右对齐</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushright}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushright}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考文献配置">参考文献配置</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{stylename}</span><br><span class="line"><span class="keyword">\bibliography</span>{bibfile}</span><br></pre></td></tr></tbody></table></figure>
-<p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而
-<code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
-<table>
-<colgroup>
-<col style="width: 57%">
-<col style="width: 42%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>stylename</th>
-<th>output</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>abbrc</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc"></td>
-</tr>
-<tr class="even">
-<td>acm</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm"></td>
-</tr>
-<tr class="odd">
-<td>alpha</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha"></td>
-</tr>
-<tr class="even">
-<td>apalike</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike"></td>
-</tr>
-<tr class="odd">
-<td>ieeetr</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr"></td>
-</tr>
-<tr class="even">
-<td>plain</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain"></td>
-</tr>
-<tr class="odd">
-<td>siam</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam"></td>
-</tr>
-<tr class="even">
-<td>unsrt</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt"></td>
-</tr>
-</tbody>
-</table>
-<h2 id="todo">TODO</h2>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX
-Lengths<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvSHlwZXJsaW5rcw==">【维基百科】LaTeX
-Hyperlinks<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L01hdGhlbWF0aWNhbF9leHByZXNzaW9ucw==">【overleaf】Mathematical
-expressions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JpYnRleF9iaWJsaW9ncmFwaHlfc3R5bGVz">【overleaf】Bibtex
-bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>todo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用</title>
-    <url>/posts/b8506868.html</url>
-    <content><![CDATA[<p>本文主要记录自己在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> + <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">ZenFS<i class="fa fa-external-link-alt"></i></span> 测试
-<span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">ZNS<i class="fa fa-external-link-alt"></i></span>
-过程中遇到的一些问题以及相应的解决办法 <span id="more"></span></p>
-<h2 id="配置-zns-环境">配置 ZNS 环境</h2>
-<p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS
-设备类型是基于闪存的 SSD。但是 ZNS SSD
-目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
-<p>官网给了 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiN6b25lZC1ibG9jay1kZXZpY2UtZW11bGF0aW9uLXdpdGgtbnVsbF9ibGs=">null_blk<i class="fa fa-external-link-alt"></i></span>
-以及 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiNudm1lLXpvbmVkLW5hbWVzcGFjZS1kZXZpY2UtZW11bGF0aW9uLXdpdGgtcWVtdQ==">QEMU<i class="fa fa-external-link-alt"></i></span>
-的配置方法，但是个人对 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">FEMU<i class="fa fa-external-link-alt"></i></span>
-比较熟悉，于是采用模拟 FEMU 模拟 ZNS 搭建环境</p>
-<p>FEMU 的环境搭建比较简单，参考其 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVUjaW5zdGFsbGF0aW9u">官方仓库 README<i class="fa fa-external-link-alt"></i></span>
-操作即可</p>
-<p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
-内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
-22.04 LTS 或者手动更新内核</p>
-<h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
-官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
-<h3 id="环境以及依赖安装">环境以及依赖安装</h3>
-<p>以 Ubuntu 为例：</p>
-<p><strong>容易踩坑：</strong>一定要记得按照顺序来，先安装好所有依赖再编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
-<p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
-<p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考
-<a href="/posts/4bc1e607.html">这篇博文</a></p>
-<p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code>
-即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>容易踩坑：</strong>如果 <code>-j</code>
-会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考
-<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">这篇博客<i class="fa fa-external-link-alt"></i></span>
-利用 swap “增加” 可用内存大小，或者限制下编译的并发度，例如
-<code>-j8</code></p>
-<p>利用 <code>db_bench</code> 测试可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9QZXJmb3JtYW5jZS1CZW5jaG1hcmtz">官方测试<i class="fa fa-external-link-alt"></i></span>
-的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"><code>benchmark.sh</code></a>
-来测试，当然也可以直接运行 <code>db_bench</code></p>
-<h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnMvYmxvYi9tYXN0ZXIvUkVBRE1FLm1k">ZenFS
-官方仓库<i class="fa fa-external-link-alt"></i></span>其实给了相应的指导，这里重新梳理下</p>
-<h3 id="安装-libzbd">安装 libzbd</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
-<p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
-<p>至此所有测试需要的环境已经基本搭建好了</p>
-<h2 id="测试-demo">测试 demo</h2>
-<p>接下来介绍了测试过程，假设 ZNS 固态盘的设备名为
-<code>nvme1n1</code></p>
-<p>首先配置底层 IO 调度器为 <code>mq-deadline</code>
-用户保持有序性（因为 ZNS 只支持追加写</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> mq-deadline | sudo <span class="built_in">tee</span> /sys/block/nvme1n1/queue/scheduler</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>容易踩坑：</strong>利用 <code>zenfs</code> 创建 ZenFS
-文件系统，其中 <strong><code>zbd</code>
-后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定
-<code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS
-设备上，并且使用<strong>绝对路径</strong></p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> zenfs-aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/util/zenfs mkfs --zbd=nvme1n1 --aux-path=/home/femu/zenfs-aux</span><br></pre></td></tr></tbody></table></figure>
-<p>然后就可以用 <code>db_bench</code> 进行测试了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direct_io_for_flush_and_compaction</span><br></pre></td></tr></tbody></table></figure>
-<p>demo 的测试结果</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Set seed to 1669128699187109 because --seed was 0</span><br><span class="line">Initializing RocksDB Options from the specified file</span><br><span class="line">Initializing RocksDB Options from command-line flags</span><br><span class="line">Integrated BlobDB: blob cache disabled</span><br><span class="line">RocksDB:    version 7.7.3</span><br><span class="line">Date:       Tue Nov 22 14:51:39 2022</span><br><span class="line">CPU:        16 * Intel(R) Xeon(R) Platinum P-8124 CPU @ 3.00GHz</span><br><span class="line">CPUCache:   16384 KB</span><br><span class="line">Keys:       16 bytes each (+ 0 bytes user-defined timestamp)</span><br><span class="line">Values:     100 bytes each (50 bytes after compression)</span><br><span class="line">Entries:    1000000</span><br><span class="line">Prefix:    0 bytes</span><br><span class="line">Keys per prefix:    0</span><br><span class="line">RawSize:    110.6 MB (estimated)</span><br><span class="line">FileSize:   62.9 MB (estimated)</span><br><span class="line">Write rate: 0 bytes/second</span><br><span class="line">Read rate: 0 ops/second</span><br><span class="line">Compression: Snappy</span><br><span class="line">Compression sampling rate: 0</span><br><span class="line">Memtablerep: SkipListFactory</span><br><span class="line">Perf Level: 1</span><br><span class="line">------------------------------------------------</span><br><span class="line">Initializing RocksDB Options from the specified file</span><br><span class="line">Initializing RocksDB Options from command-line flags</span><br><span class="line">Integrated BlobDB: blob cache disabled</span><br><span class="line">DB path: [rocksdbtest/dbbench]</span><br><span class="line">fillrandom   :       2.523 micros/op 396351 ops/sec 2.523 seconds 1000000 operations;   43.8 MB/s</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">【GitHub】RocksDB<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">【GitHub】ZenFS<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">【zonedstorage】ZNS<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">【GitHub】FEMU<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">【CSDN】问题解决
-C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vbGliemJk">【GitHub】libzbd<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>日常踩坑</tag>
-        <tag>RocksDB</tag>
-        <tag>ZNS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>自定义配置 RocksDB 进行 YCSB 测试</title>
     <url>/posts/4bc1e607.html</url>
     <content><![CDATA[<p>本文主要记录在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQg==">YCSB<i class="fa fa-external-link-alt"></i></span>
@@ -991,9 +905,104 @@ Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-
         <category>测试</category>
       </categories>
       <tags>
-        <tag>RocksDB</tag>
         <tag>Maven</tag>
+        <tag>RocksDB</tag>
         <tag>YCSB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用</title>
+    <url>/posts/b8506868.html</url>
+    <content><![CDATA[<p>本文主要记录自己在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> + <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">ZenFS<i class="fa fa-external-link-alt"></i></span> 测试
+<span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">ZNS<i class="fa fa-external-link-alt"></i></span>
+过程中遇到的一些问题以及相应的解决办法 <span id="more"></span></p>
+<h2 id="配置-zns-环境">配置 ZNS 环境</h2>
+<p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS
+设备类型是基于闪存的 SSD。但是 ZNS SSD
+目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
+<p>官网给了 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiN6b25lZC1ibG9jay1kZXZpY2UtZW11bGF0aW9uLXdpdGgtbnVsbF9ibGs=">null_blk<i class="fa fa-external-link-alt"></i></span>
+以及 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiNudm1lLXpvbmVkLW5hbWVzcGFjZS1kZXZpY2UtZW11bGF0aW9uLXdpdGgtcWVtdQ==">QEMU<i class="fa fa-external-link-alt"></i></span>
+的配置方法，但是个人对 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">FEMU<i class="fa fa-external-link-alt"></i></span>
+比较熟悉，于是采用模拟 FEMU 模拟 ZNS 搭建环境</p>
+<p>FEMU 的环境搭建比较简单，参考其 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVUjaW5zdGFsbGF0aW9u">官方仓库 README<i class="fa fa-external-link-alt"></i></span>
+操作即可</p>
+<p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
+内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
+22.04 LTS。
+不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
+安装内核用户头文件过程中）可能会出问题</p>
+<h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
+官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
+<h3 id="环境以及依赖安装">环境以及依赖安装</h3>
+<p>以 Ubuntu 为例：</p>
+<p><strong>容易踩坑：</strong>一定要记得按照顺序来，先安装好所有依赖再编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"><span class="comment"># sudo apt install pkg-config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
+<p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
+<p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考
+<a href="/posts/4bc1e607.html">这篇博文</a></p>
+<p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code>
+即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>容易踩坑：</strong>如果 <code>-j</code>
+会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考
+<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">这篇博客<i class="fa fa-external-link-alt"></i></span>
+利用 swap “增加” 可用内存大小，或者限制下编译的并发度，例如
+<code>-j8</code></p>
+<p>利用 <code>db_bench</code> 测试可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9QZXJmb3JtYW5jZS1CZW5jaG1hcmtz">官方测试<i class="fa fa-external-link-alt"></i></span>
+的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"><code>benchmark.sh</code></a>
+来测试，当然也可以直接运行 <code>db_bench</code></p>
+<h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnMvYmxvYi9tYXN0ZXIvUkVBRE1FLm1k">ZenFS
+官方仓库<i class="fa fa-external-link-alt"></i></span>其实给了相应的指导，这里重新梳理下</p>
+<h3 id="安装-libzbd">安装 libzbd</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/libzbd.git</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
+<p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="comment"># git clone git@github.com:facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
+<p>至此所有测试需要的环境已经基本搭建好了</p>
+<h2 id="测试">测试</h2>
+<p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为
+<code>nvme1n1</code></p>
+<h3 id="利用-zenfs-的测试脚本测试">利用 zenfs 的测试脚本测试</h3>
+<p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO
+调度器，制作文件系统以及自动配置 RocksDB
+参数，但是参数配置的不够合理，需要自行修改</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span><br></pre></td></tr></tbody></table></figure>
+<p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value
+大小，运行时间较长，最后的测试结果汇总在
+<code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
+<h3 id="直接-db_bench-测试">直接 db_bench 测试</h3>
+<p>首先配置底层 IO 调度器为 <code>mq-deadline</code>
+用户保持有序性（因为 ZNS 只支持追加写</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> mq-deadline | sudo <span class="built_in">tee</span> /sys/block/nvme1n1/queue/scheduler</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>容易踩坑：</strong>利用 <code>zenfs</code> 创建 ZenFS
+文件系统，其中 <strong><code>zbd</code>
+后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定
+<code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS
+设备上，并且使用<strong>绝对路径</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> zenfs-aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/util/zenfs mkfs --zbd=nvme1n1 --aux-path=/home/femu/zenfs-aux</span><br></pre></td></tr></tbody></table></figure>
+<p>制作好文件系统后，就可以用 <code>db_bench</code> 进行测试了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direct_io_for_flush_and_compaction</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">【GitHub】RocksDB<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">【GitHub】ZenFS<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">【zonedstorage】ZNS<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">【GitHub】FEMU<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">【CSDN】问题解决
+C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vbGliemJk">【GitHub】libzbd<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>RocksDB</tag>
+        <tag>日常踩坑</tag>
+        <tag>ZNS</tag>
       </tags>
   </entry>
   <entry>
@@ -2705,6 +2714,53 @@ are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt
       </tags>
   </entry>
   <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<h3 id="来源">来源</h3>
+<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
+系统。迫于 Linux 的开源协议要求，Linksys
+开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
+<span id="more"></span></p>
+<h3 id="介绍">介绍</h3>
+<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
+操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装">安装</h2>
+<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
+中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程">一般安装流程</h3>
+<p>通常的安装步骤主要通过以下流程：</p>
+<ol type="1">
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
+<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul></li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载">固件搜索下载</h3>
+<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
+页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Breed 介绍、刷入和使用</title>
     <url>/posts/53d6c2d9.html</url>
     <content><![CDATA[<h2 id="介绍">介绍</h2>
@@ -3310,53 +3366,6 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
       <tags>
         <tag>Breed</tag>
         <tag>BootLoader</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<h3 id="来源">来源</h3>
-<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
-系统。迫于 Linux 的开源协议要求，Linksys
-开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
-<span id="more"></span></p>
-<h3 id="介绍">介绍</h3>
-<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
-操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装">安装</h2>
-<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
-中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程">一般安装流程</h3>
-<p>通常的安装步骤主要通过以下流程：</p>
-<ol type="1">
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
-<ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
-</ul></li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载">固件搜索下载</h3>
-<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
-页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>

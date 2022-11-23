@@ -438,7 +438,6 @@ kbd {
   white-space: nowrap;
 }
 figure.highlight {
-  overflow: auto;
   position: relative;
 }
 figure.highlight pre {

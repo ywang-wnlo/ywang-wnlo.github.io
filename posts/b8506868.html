@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -16,11 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.font.im/css?family=Noto+Sans+SC:300,300italic,400,400italic,700,700italic%7CUbuntu+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":"fadeInDown"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法">
 <meta property="og:type" content="article">
@@ -30,10 +31,10 @@
 <meta property="og:description" content="本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-22T14:54:45.000Z">
-<meta property="article:modified_time" content="2022-11-22T14:54:45.000Z">
+<meta property="article:modified_time" content="2022-11-23T09:56:59.000Z">
 <meta property="article:author" content="Zeus">
-<meta property="article:tag" content="日常踩坑">
 <meta property="article:tag" content="RocksDB">
+<meta property="article:tag" content="日常踩坑">
 <meta property="article:tag" content="ZNS">
 <meta name="twitter:card" content="summary">
 
@@ -50,7 +51,6 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST75Y16TW"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-PST75Y16TW","only_pageview":false}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
-
 
 
 
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zns-%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">配置 ZNS 环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-rocksdb-%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">配置 RocksDB 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">环境以及依赖安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-rocksdb-%E5%BA%93%E4%BB%A5%E5%8F%8A%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">编译 RocksDB 库以及测试工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zenfs-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">配置 ZenFS 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-libzbd"><span class="nav-number">3.1.</span> <span class="nav-text">安装 libzbd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zenfs-%E6%8F%92%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-number">3.2.</span> <span class="nav-text">ZenFS 插件编译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-demo"><span class="nav-number">4.</span> <span class="nav-text">测试 demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zns-%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">配置 ZNS 环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-rocksdb-%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">配置 RocksDB 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">环境以及依赖安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-rocksdb-%E5%BA%93%E4%BB%A5%E5%8F%8A%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">编译 RocksDB 库以及测试工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zenfs-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">配置 ZenFS 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-libzbd"><span class="nav-number">3.1.</span> <span class="nav-text">安装 libzbd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zenfs-%E6%8F%92%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-number">3.2.</span> <span class="nav-text">ZenFS 插件编译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-zenfs-%E7%9A%84%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E6%B5%8B%E8%AF%95"><span class="nav-number">4.1.</span> <span class="nav-text">利用 zenfs 的测试脚本测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5-db_bench-%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.</span> <span class="nav-text">直接 db_bench 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -240,6 +240,13 @@
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-23 17:56:59" itemprop="dateModified" datetime="2022-11-23T17:56:59+08:00">2022-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
@@ -263,8 +270,8 @@
       </span>
       <span class="post-meta-item-text">标签：</span>
       <span class="post-tags">
-        <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"># 日常踩坑</a>
         <a href="/tags/RocksDB/" rel="tag"># RocksDB</a>
+        <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"># 日常踩坑</a>
         <a href="/tags/ZNS/" rel="tag"># ZNS</a>
       </span>
     </span>
@@ -308,14 +315,16 @@
 操作即可</p>
 <p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
 内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
-22.04 LTS 或者手动更新内核</p>
+22.04 LTS。
+不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
+安装内核用户头文件过程中）可能会出问题</p>
 <h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
 官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
 <h3 id="环境以及依赖安装">环境以及依赖安装</h3>
 <p>以 Ubuntu 为例：</p>
 <p><strong>容易踩坑：</strong>一定要记得按照顺序来，先安装好所有依赖再编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"><span class="comment"># sudo apt install pkg-config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
 <h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
 <p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
 <p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考
@@ -335,14 +344,23 @@
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnMvYmxvYi9tYXN0ZXIvUkVBRE1FLm1k">ZenFS
 官方仓库<i class="fa fa-external-link-alt"></i></span>其实给了相应的指导，这里重新梳理下</p>
 <h3 id="安装-libzbd">安装 libzbd</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/libzbd.git</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
 <p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="comment"># git clone git@github.com:facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
 <p>至此所有测试需要的环境已经基本搭建好了</p>
-<h2 id="测试-demo">测试 demo</h2>
-<p>接下来介绍了测试过程，假设 ZNS 固态盘的设备名为
+<h2 id="测试">测试</h2>
+<p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为
 <code>nvme1n1</code></p>
+<h3 id="利用-zenfs-的测试脚本测试">利用 zenfs 的测试脚本测试</h3>
+<p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO
+调度器，制作文件系统以及自动配置 RocksDB
+参数，但是参数配置的不够合理，需要自行修改</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span><br></pre></td></tr></tbody></table></figure>
+<p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value
+大小，运行时间较长，最后的测试结果汇总在
+<code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
+<h3 id="直接-db_bench-测试">直接 db_bench 测试</h3>
 <p>首先配置底层 IO 调度器为 <code>mq-deadline</code>
 用户保持有序性（因为 ZNS 只支持追加写</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> mq-deadline | sudo <span class="built_in">tee</span> /sys/block/nvme1n1/queue/scheduler</span><br></pre></td></tr></tbody></table></figure>
@@ -352,10 +370,8 @@
 <code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS
 设备上，并且使用<strong>绝对路径</strong></p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> zenfs-aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/util/zenfs mkfs --zbd=nvme1n1 --aux-path=/home/femu/zenfs-aux</span><br></pre></td></tr></tbody></table></figure>
-<p>然后就可以用 <code>db_bench</code> 进行测试了</p>
+<p>制作好文件系统后，就可以用 <code>db_bench</code> 进行测试了</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direct_io_for_flush_and_compaction</span><br></pre></td></tr></tbody></table></figure>
-<p>demo 的测试结果</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Set seed to 1669128699187109 because --seed was 0</span><br><span class="line">Initializing RocksDB Options from the specified file</span><br><span class="line">Initializing RocksDB Options from command-line flags</span><br><span class="line">Integrated BlobDB: blob cache disabled</span><br><span class="line">RocksDB:    version 7.7.3</span><br><span class="line">Date:       Tue Nov 22 14:51:39 2022</span><br><span class="line">CPU:        16 * Intel(R) Xeon(R) Platinum P-8124 CPU @ 3.00GHz</span><br><span class="line">CPUCache:   16384 KB</span><br><span class="line">Keys:       16 bytes each (+ 0 bytes user-defined timestamp)</span><br><span class="line">Values:     100 bytes each (50 bytes after compression)</span><br><span class="line">Entries:    1000000</span><br><span class="line">Prefix:    0 bytes</span><br><span class="line">Keys per prefix:    0</span><br><span class="line">RawSize:    110.6 MB (estimated)</span><br><span class="line">FileSize:   62.9 MB (estimated)</span><br><span class="line">Write rate: 0 bytes/second</span><br><span class="line">Read rate: 0 ops/second</span><br><span class="line">Compression: Snappy</span><br><span class="line">Compression sampling rate: 0</span><br><span class="line">Memtablerep: SkipListFactory</span><br><span class="line">Perf Level: 1</span><br><span class="line">------------------------------------------------</span><br><span class="line">Initializing RocksDB Options from the specified file</span><br><span class="line">Initializing RocksDB Options from command-line flags</span><br><span class="line">Integrated BlobDB: blob cache disabled</span><br><span class="line">DB path: [rocksdbtest/dbbench]</span><br><span class="line">fillrandom   :       2.523 micros/op 396351 ops/sec 2.523 seconds 1000000 operations;   43.8 MB/s</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">【GitHub】RocksDB<i class="fa fa-external-link-alt"></i></span></li>
@@ -410,8 +426,8 @@ C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-extern
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"><i class="fa fa-tag"></i> 日常踩坑</a>
               <a href="/tags/RocksDB/" rel="tag"><i class="fa fa-tag"></i> RocksDB</a>
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"><i class="fa fa-tag"></i> 日常踩坑</a>
               <a href="/tags/ZNS/" rel="tag"><i class="fa fa-tag"></i> ZNS</a>
           </div>
 
@@ -477,17 +493,17 @@ C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-extern
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.1.7/dist/mermaid.min.js","integrity":"sha256-G58AID1YoX5YaEtWfXSI0VLrZ6N4kvNvwg0BI8zUFxE="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.1.1/dist/mermaid.min.js","integrity":"sha256-8L3O8tirFUa8Va4NSTAyIbHJeLd6OnlcxgupV9F77e0="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
 
   <script src="/js/third-party/fancybox.js"></script>
@@ -501,13 +517,13 @@ C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-extern
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.1/es5/tex-mml-chtml.js","integrity":"sha256-hlC2uSQYTmPsrzGZTEQEg9PZ1a/+SV6VBCTclohf2og="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f31d5d7226408b605abb993f987c3149"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"f31d5d7226408b605abb993f987c3149"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
