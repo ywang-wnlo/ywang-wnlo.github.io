@@ -1,6 +1,467 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo 插件推荐以及使用小技巧</title>
+    <url>/posts/4143201a.html</url>
+    <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span>
+是一个快速、简洁且高效的博客框架，个人只需用 Markdown
+来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT
+主题搭建的 <span id="more"></span></p>
+<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
+为例</p>
+<h2 id="插件推荐">插件推荐</h2>
+<h3 id="hexo-deployer-git"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></h3>
+<p>Hexo 支持一键部署网站到 git 仓库上，其他的一键部署方式参考 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">官网介绍<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-deployer-git</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置 </li>
+</ul>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;仓库链接&gt;</span> <span class="comment"># 可以是 https 链接也可以是 git 链接</span></span><br><span class="line">  <span class="attr">branch:</span> [<span class="string">分支</span>] <span class="comment"># GitHub 的网站分支为 gh-pages，其他网站可能有所不同</span></span><br><span class="line">  <span class="attr">message:</span> [<span class="string">message</span>] <span class="comment"># 默认是 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}</span></span><br></pre></td></tr></tbody></table></figure>
+<p>默认的提交信息只有时间信息，没有过多的参考价值推荐使用自定义提交信息，具体参考
+<a href="#自定义提交信息">后续小节</a></p>
+<h3 id="hexo-word-counter"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">hexo-word-counter<i class="fa fa-external-link-alt"></i></span></h3>
+<p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-word-counter</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置 </li>
+</ul>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-word-counter</span></span><br><span class="line"><span class="comment">## https://github.com/next-theme/hexo-word-counter</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">awl:</span> <span class="number">4</span></span><br><span class="line">  <span class="attr">wpm:</span> <span class="number">275</span></span><br><span class="line">  <span class="attr">suffix:</span> <span class="string">"mins."</span></span><br></pre></td></tr></tbody></table></figure>
+<p>具体配置可以参考官方给出的说明：</p>
+<blockquote>
+<p>Note for Chinese users: because in Chinese language average word
+length about ~1.5 and if you at most cases write posts in Chinese
+(without mixed English), recommended to set awl to 2 and wpm to 300. But
+if you usualy mix your posts with English, awl to 4 and wpm to 275 will
+be nice.</p>
+</blockquote>
+<p>也就是说纯中文时推荐 <code>awl</code> 设为 2，<code>wpm</code> 设为
+300；而中英文混合时推荐 <code>awl</code> 设为 4，<code>wpm</code> 设为
+275</p>
+<h3 id="hexo-abbrlink"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></h3>
+<p>Hexo
+默认的文章链接是以时间以及文件名命名的，如果文件名为中文时转译之后会很长，并且不美观。而该插件可以利用
+hash 值替换原有的文章链接</p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-abbrlink</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置</li>
+</ul>
+<p>首先修改 <code>_config.yml</code> 文件中的 <code>permalink</code>
+的配置</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">posts/:abbrlink.html</span></span><br></pre></td></tr></tbody></table></figure>
+<p>再增加以下配置</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># abbrlink config</span></span><br><span class="line"><span class="comment">## https://github.com/rozbo/hexo-abbrlink</span></span><br><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span> <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span> <span class="comment"># support dec(default) and hex</span></span><br><span class="line">  <span class="attr">drafts:</span> <span class="literal">true</span> <span class="comment"># (true)Process draft,(false)Do not process draft. false(default)</span></span><br><span class="line">  <span class="comment"># Generate categories from directory-tree</span></span><br><span class="line">  <span class="comment"># depth: the max_depth of directory-tree you want to generate, should &gt; 0</span></span><br><span class="line">  <span class="attr">auto_category:</span></span><br><span class="line">     <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># true(default)</span></span><br><span class="line">     <span class="attr">depth:</span> <span class="number">3</span> <span class="comment"># 3(default)</span></span><br><span class="line">     <span class="attr">over_write:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">auto_title:</span> <span class="literal">false</span> <span class="comment"># enable auto title, it can auto fill the title by path</span></span><br><span class="line">  <span class="attr">auto_date:</span> <span class="literal">false</span> <span class="comment"># enable auto date, it can auto fill the date by time today</span></span><br><span class="line">  <span class="attr">force:</span> <span class="literal">false</span> <span class="comment"># enable force mode, in this mode, the plugin will ignore the cache, and calc the abbrlink for every post even it already had abbrlink.</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="hexo-generator-sitemap"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></h3>
+<p>为了使博客能被谷歌、bing、百度收录，最好生成 <code>sitemap</code>
+方便爬取，整体流程可以参考 <a href="/posts/abac0c46">这篇博文</a></p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator-sitemap</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置 </li>
+</ul>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-generator-sitemap</span></span><br><span class="line"><span class="comment">## https://github.com/hexojs/hexo-generator-sitemap</span></span><br><span class="line"><span class="attr">sitemap:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">sitemap.xml</span></span><br><span class="line">  <span class="comment"># template: ./sitemap_template.xml</span></span><br><span class="line">  <span class="attr">rel:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="小技巧">小技巧</h2>
+<h3 id="自定义提交信息">自定义提交信息</h3>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> <span class="string">"自定义提交信息"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>例如使用 <code>hexo</code> 仓库的提交信息来提交到 <code>deploy</code>
+仓库</p>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> (git log <span class="literal">-1</span> <span class="literal">--pretty</span>=format:%s)</span><br></pre></td></tr></tbody></table></figure>
+<p>如果中文乱码，可以参考 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">这篇博客<i class="fa fa-external-link-alt"></i></span>
+修改 UTF-8 编码</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">【Hexo】一键部署<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">【GitHub】hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">【GitHub】hexo-word-counter<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">【GitHub】hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">【GitHub】hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1sb2cjX3ByZXR0eV9mb3JtYXRz">【Git】git log
+自定义输出格式<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">【CSDN】解决
+Windows PowerShell 乱码<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NexT 主题的配置使用记录</title>
+    <url>/posts/9a0b7c3b.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star
+最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT
+主题搭建的 <span id="more"></span></p>
+<h3 id="版本">版本</h3>
+<p>在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy80">【必读】更新说明及常见问题<i class="fa fa-external-link-alt"></i></span>
+中有相关说明，NexT 一共有三个不同的仓库：</p>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>版本</th>
+<th>年份</th>
+<th>仓库</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td> v5.1.4 或更低</td>
+<td> 2014 ~ 2017</td>
+<td><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></td>
+</tr>
+<tr class="even">
+<td>v6.0.0 ~ v7.8.0</td>
+<td>2018 ~ 2019</td>
+<td><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></td>
+</tr>
+<tr class="odd">
+<td>v8.0.0 或更高</td>
+<td> 2020</td>
+<td><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0">next-theme/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></td>
+</tr>
+</tbody>
+</table>
+<p>旧的仓库基本上已经不再更新，因此推荐选择最新的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0">next-theme/hexo-theme-next<i class="fa fa-external-link-alt"></i></span>
+仓库的 NexT 主题</p>
+<h2 id="安装">安装</h2>
+<p>推荐使用 GitHub 进行安装，可以随时更新</p>
+<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
+为例</p>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;hexo<span class="literal">-dir</span>&gt;</span><br><span class="line"><span class="comment"># git clone https://github.com/next-theme/hexo-theme-next.git .\themes\next\</span></span><br><span class="line">git clone git@github.com:next<span class="literal">-theme</span>/hexo<span class="literal">-theme-next</span>.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> .\themes\next\_config.yml .\_config.next.yml</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置记录">配置记录</h2>
+<p>对 NexT 主题的配置可以直接在 <code>hexo</code> 仓库下的配置文件
+<code>_config.next.yml</code>
+中进行修改即可，该文件的修改会在生成页面时覆盖主题目录下的配置文件
+<code>.\themes\next\_config.yml</code></p>
+<p>衍生拓展：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3MvY29uZmlndXJhdGlvbiMlRTQlQkQlQkYlRTclOTQlQTglRTQlQkIlQTMlRTYlOUIlQkYlRTQlQjglQkIlRTklQTIlOTglRTklODUlOEQlRTclQkQlQUUlRTYlOTYlODclRTQlQkIlQjY=">【Hexo】配置文件优先级<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="风格主题">风格 / 主题</h3>
+<p>NexT 主题包含了 4 个风格，个人喜欢
+Gemini，类似卡片的风格，边界比较明显</p>
+<figure>
+<img data-src="/posts/9a0b7c3b/NexT_Schemes.png" alt="NexT_Schemes">
+<figcaption aria-hidden="true">NexT_Schemes</figcaption>
+</figure>
+<p>修改 <code>_config.next.yml</code> 之后，用
+<code>hexo clean; hexo g; hexo s</code> 重新生成一下，就可以在 <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo0MDAw">本地<i class="fa fa-external-link-alt"></i></span>
+预览了（后续流程如果没有特殊说明则基本一致）</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line"><span class="comment"># scheme: Mist</span></span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="网页图标">网页图标</h3>
+<p>在各类网站上下载合适图标，按照配置文件中的文件名命名，并放在
+<code>images</code> 下即可</p>
+<p>衍生阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2xpYnJhcnkvYXJjaGl2ZS9kb2N1bWVudGF0aW9uL0FwcGxlQXBwbGljYXRpb25zL1JlZmVyZW5jZS9TYWZhcmlXZWJDb250ZW50L0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zL0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zLmh0bWw=">【Apple】Configuring
+Web Applications<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/favicon-32x32-next.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br><span class="line">  <span class="comment">#android_manifest: /manifest.json</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="菜单栏">菜单栏</h3>
+<p>菜单栏配置默认没有开启，个人开启了
+<code>首页</code>、<code>标签</code>、<code>分类</code>、<code>归档</code>
+四个子项目，并开启了图标和数量的气泡显示</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-sensitive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="comment">#about: /about/ || fa fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable / Disable menu icons / item badges.</span></span><br><span class="line"><span class="attr">menu_settings:</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">badges:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="侧边栏">侧边栏</h3>
+<p>默认头像会开启旋转功能，花里胡哨的而且旋转有点快，个人选择了关闭</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/avatar.gif</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be displayed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+<p>在单独的文章页面时侧边栏会默认显示为目录，并且
+<code>标签</code>、<code>分类</code>、<code>归档</code>
+已经在菜单栏开启了，所以个人选择了关闭</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Posts / Categories / Tags in sidebar.</span></span><br><span class="line"><span class="attr">site_state:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+<p>其他社交网站的主页的配置起来也很简单，简单替换一下链接，并且取消注释即可</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Social Links</span></span><br><span class="line"><span class="comment"># Usage: `Key: permalink || icon`</span></span><br><span class="line"><span class="comment"># Key is the link label showing to end users.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/ywang-wnlo</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:ywang_wnlo@qq.com</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br><span class="line">  <span class="comment">#Weibo: https://weibo.com/yourname || fab fa-weibo</span></span><br><span class="line">  <span class="comment">#Google: https://plus.google.com/yourname || fab fa-google</span></span><br><span class="line">  <span class="comment">#Twitter: https://twitter.com/yourname || fab fa-twitter</span></span><br><span class="line">  <span class="comment">#FB Page: https://www.facebook.com/yourname || fab fa-facebook</span></span><br><span class="line">  <span class="comment">#StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span></span><br><span class="line">  <span class="comment">#YouTube: https://youtube.com/yourname || fab fa-youtube</span></span><br><span class="line">  <span class="comment">#Instagram: https://instagram.com/yourname || fab fa-instagram</span></span><br><span class="line">  <span class="comment">#Skype: skype:yourname?call|chat || fab fa-skype</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="本地搜索">本地搜索</h3>
+<p>本地搜索可以快速的检索所有的文章，有时候还是很有用的</p>
+<p>配置本地搜索之前，首先要在 <code>hexo</code> 下安装插件</p>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator-searchdb</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后在配置中开启即可</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">-1</span></span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  <span class="attr">unescape:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  <span class="attr">preload:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="代码块">代码块</h3>
+<p>代码块的高亮有很多种配色可以选，并且可以开启一键复制功能</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># All available themes: https://theme-next.js.org/highlight/</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">vs</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">vs2015</span></span><br><span class="line">  <span class="attr">prism:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">prism</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">prism-dark</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">default</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="动画效果">动画效果</h3>
+<p>NexT 默认开启了动画效果，但是感觉比较慢，感觉有些影响阅读，推荐开启
+<code>async</code>，并且适当的修改动画效果</p>
+<p>P.S. 菜单栏的动画不可以关闭和调整，应该是个 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy80MTI=">bug<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Use Animate.css to animate everything.</span></span><br><span class="line"><span class="comment"># For more information: https://animate.style</span></span><br><span class="line"><span class="attr">motion:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">async:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">transition:</span></span><br><span class="line">    <span class="comment"># All available transition variants: https://theme-next.js.org/animate/</span></span><br><span class="line">    <span class="attr">post_block:</span> <span class="string">fadeIn</span></span><br><span class="line">    <span class="attr">post_header:</span></span><br><span class="line">    <span class="attr">post_body:</span></span><br><span class="line">    <span class="attr">coll_header:</span></span><br><span class="line">    <span class="comment"># Only for Pisces | Gemini.</span></span><br><span class="line">    <span class="attr">sidebar:</span> <span class="string">fadeInDown</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="阅读进度">阅读进度</h3>
+<p>阅读进度有两种展示方式，一个在回到首页的按钮上直接显示百分比，另一个可以配置在首位部增加进度条，个人两个都开启了</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Back to top in sidebar.</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Scroll percent label in b2t button.</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Reading progress bar</span></span><br><span class="line"><span class="attr">reading_progress:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available values: left | right</span></span><br><span class="line">  <span class="attr">start_at:</span> <span class="string">left</span></span><br><span class="line">  <span class="comment"># Available values: top | bottom</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">bottom</span></span><br><span class="line">  <span class="attr">reversed:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#37c6c0"</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">5px</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="书签">书签</h3>
+<p>NexT 的书签功能可以保存当前的阅读进度，下次打开是会在续接该进度</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Customize the color of the bookmark.</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#222"</span></span><br><span class="line">  <span class="comment"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span></span><br><span class="line">  <span class="comment"># If manual, only save it by clicking the bookmark-icon.</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="mermaid">Mermaid</h3>
+<p><span class="exturl" data-url="aHR0cHM6Ly9tZXJtYWlkLWpzLmdpdGh1Yi5pby9tZXJtYWlkLyMv">Mermaid<i class="fa fa-external-link-alt"></i></span>
+可以快速的用代码生成简单的流程图、时序图、甘特图等</p>
+<p>NexT 中开启 Mermaid 支持很方便，同时还有不同的风格可以选</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">neutral</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">dark</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="lazyload">lazyload</h3>
+<p>lazyload
+是网站常用的技术，通过按需加载，避免一次性加载过多内容导致的打开缓慢</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Vanilla JavaScript plugin for lazyloading images.</span></span><br><span class="line"><span class="comment"># For more information: https://apoorv.pro/lozad.js/demo/</span></span><br><span class="line"><span class="attr">lazyload:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="fancybox">fancybox</h3>
+<p>fancybox
+可以在点击图片时放大该图片，并且可以快速浏览当前文章的所有图片</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.</span></span><br><span class="line"><span class="comment"># For more information: https://fancyapps.com/fancybox/</span></span><br><span class="line"><span class="attr">fancybox:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="pangu">pangu</h3>
+<p>对于强迫症来说，中英文混排时加上空格能很大程度改善阅读体验，但是有时候会不小心打漏部分空格，而
+<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZpbnRhL3Bhbmd1Lmpz">pangu<i class="fa fa-external-link-alt"></i></span>
+这个项目就可以帮你在展示时自动加上空格</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Pangu Support</span></span><br><span class="line"><span class="comment"># For more information: https://github.com/vinta/pangu.js</span></span><br><span class="line"><span class="comment"># Server-side plugin: https://github.com/next-theme/hexo-pangu</span></span><br><span class="line"><span class="attr">pangu:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="捐赠">捐赠</h3>
+<p>文章末尾还可以求打赏，需要配置好相应的二维码图片，并且可以修改提示语句</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Donate (Sponsor) settings</span></span><br><span class="line"><span class="comment"># Front-matter variable (nonsupport animation).</span></span><br><span class="line"><span class="attr">reward_settings:</span></span><br><span class="line">  <span class="comment"># If true, a donate button will be displayed in every article by default.</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">animation:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">comment:</span> <span class="string">赏个鸡腿🍗</span></span><br><span class="line"></span><br><span class="line"><span class="attr">reward:</span></span><br><span class="line">  <span class="attr">wechatpay:</span> <span class="string">/images/wechatpay.png</span></span><br><span class="line">  <span class="attr">alipay:</span> <span class="string">/images/alipay.jpg</span></span><br><span class="line">  <span class="comment">#paypal: /images/paypal.png</span></span><br><span class="line">  <span class="comment">#bitcoin: /images/bitcoin.png</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="版权声明">版权声明</h3>
+<p>NexT 内置了文章末尾增加版权声明，只需手动开启即可</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/about/cclicenses/</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="comment"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="comment"># Available values: big | small</span></span><br><span class="line">  <span class="attr">size:</span> <span class="string">small</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line">  <span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="不蒜子">不蒜子</h3>
+<p><span class="exturl" data-url="aHR0cHM6Ly9idXN1YW56aS5pYnJ1Y2UuaW5mby8=">不蒜子<i class="fa fa-external-link-alt"></i></span>
+是一个极简的网页计数器，NexT 已经内置，只需打开即可</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Show Views / Visitors of the website / page with busuanzi.</span></span><br><span class="line"><span class="comment"># For more information: http://ibruce.info/2015/04/04/busuanzi/</span></span><br><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">fa</span> <span class="string">fa-eye</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">far</span> <span class="string">fa-eye</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="gitalk">gitalk</h3>
+<p>评论系统也是一个博客必不可少的，由于本博客搭在 GitHub Pages
+上，所以评论系统就采用利用 GitHub Issues 实现的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGFsay9naXRhbGs=">gitalk<i class="fa fa-external-link-alt"></i></span></p>
+<p>NexT 已经内置的 gitalk 的 <code>js</code> 和
+<code>css</code>，在配置文件中开启并进行配置即可</p>
+<p>在修改配置文件之前需要先在 GitHub 上申请一个 OAuth
+Application，入口在 <code>【Settings】</code> -&gt;
+<code>【Developer settings】</code> -&gt; <code>【OAuth Apps】</code>
+-&gt; <code>【New OAuth App】</code>，或者直接使用这个 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NldHRpbmdzL2FwcGxpY2F0aW9ucy9uZXc=">链接<i class="fa fa-external-link-alt"></i></span></p>
+<figure>
+<img data-src="/posts/9a0b7c3b/OAuth_APP_Register.png" alt="OAuth_APP_Register">
+<figcaption aria-hidden="true">OAuth_APP_Register</figcaption>
+</figure>
+<p>填写好之后，记录下应用 id
+以及密钥，如果没有显示密钥需要手动生成一下</p>
+<figure>
+<img data-src="/posts/9a0b7c3b/OAuth_APP_ID_Secrets.png" alt="OAuth_APP_ID_Secrets">
+<figcaption aria-hidden="true">OAuth_APP_ID_Secrets</figcaption>
+</figure>
+<p>然后首先选用 gitalk 作为评论系统</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Multiple Comment System Support</span></span><br><span class="line"><span class="attr">comments:</span></span><br><span class="line">  <span class="comment"># Available values: tabs | buttons</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">tabs</span></span><br><span class="line">  <span class="comment"># Choose a comment system to be displayed by default.</span></span><br><span class="line">  <span class="comment"># Available values: disqus | disqusjs | changyan | livere | gitalk | utterances</span></span><br><span class="line">  <span class="attr">active:</span> <span class="string">gitalk</span></span><br><span class="line">  <span class="comment"># Setting `true` means remembering the comment system selected by the visitor.</span></span><br><span class="line">  <span class="attr">storage:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Lazyload all comment systems.</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Modify texts or order for any naves, here are some examples.</span></span><br><span class="line">  <span class="attr">nav:</span></span><br><span class="line">    <span class="comment">#disqus:</span></span><br><span class="line">    <span class="comment">#  text: Load Disqus</span></span><br><span class="line">    <span class="comment">#  order: -1</span></span><br><span class="line">    <span class="comment">#gitalk:</span></span><br><span class="line">    <span class="comment">#  order: -2</span></span><br></pre></td></tr></tbody></table></figure>
+<p>在 gitalk 配置中填上相应的内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;.github.io</span> <span class="comment"># Repository name to store issues</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">&lt;应用</span> <span class="string">id&gt;</span> <span class="comment"># GitHub Application Client ID</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">&lt;应用密钥&gt;</span> <span class="comment"># GitHub Application Client Secret</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner and collaborators, only these guys can initialize gitHub issues</span></span><br><span class="line">  <span class="attr">distraction_free_mode:</span> <span class="literal">true</span> <span class="comment"># Facebook-like distraction free mode</span></span><br><span class="line">  <span class="comment"># When the official proxy is not available, you can change it to your own proxy address</span></span><br><span class="line">  <span class="attr">proxy:</span> <span class="string">https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</span> <span class="comment"># This is official proxy address</span></span><br><span class="line">  <span class="comment"># Gitalk's display language depends on user's browser or system environment</span></span><br><span class="line">  <span class="comment"># If you want everyone visiting your site to see a uniform language, you can set a force language value</span></span><br><span class="line">  <span class="comment"># Available values: en | es-ES | fr | ru | zh-CN | zh-TW</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">【NexT】v8.0.0+ 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy80">【必读】更新说明及常见问题<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3MvY29uZmlndXJhdGlvbiMlRTQlQkQlQkYlRTclOTQlQTglRTQlQkIlQTMlRTYlOUIlQkYlRTQlQjglQkIlRTklQTIlOTglRTklODUlOEQlRTclQkQlQUUlRTYlOTYlODclRTQlQkIlQjY=">【Hexo】配置文件优先级<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2xpYnJhcnkvYXJjaGl2ZS9kb2N1bWVudGF0aW9uL0FwcGxlQXBwbGljYXRpb25zL1JlZmVyZW5jZS9TYWZhcmlXZWJDb250ZW50L0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zL0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zLmh0bWw=">【Apple】Configuring
+Web Applications<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZXJtYWlkLWpzLmdpdGh1Yi5pby9tZXJtYWlkLyMv">【Mermaid】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZpbnRhL3Bhbmd1Lmpz">【GitHub】pangu<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9idXN1YW56aS5pYnJ1Y2UuaW5mbw==">【不蒜子】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGFsay9naXRhbGs=">【GitHub】Gitalk<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 基础介绍</title>
+    <url>/posts/a4752f87.html</url>
+    <content><![CDATA[<h2 id="tex-和-latex">TeX 和 LaTeX</h2>
+<p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成
+LaTeX 通过对 TeX 进行封装，使用 TeX
+作为它的格式化引擎，使得排版文字变得更加方便。</p>
+<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成
+<code>.dvi</code> 文件 <span id="more"></span></p>
+<h2 id="pdftexxetex-和-luatex">pdfTeX、XeTeX 和 LuaTeX</h2>
+<h3 id="三者的介绍">三者的介绍</h3>
+<p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX
+引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
+<ul>
+<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
+<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
+<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
+</ul>
+<h3 id="各自的特性">各自的特性</h3>
+<ul>
+<li>pdfTeX 的主要特性是能直接生成 pdf</li>
+<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
+<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua
+脚本</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX,
+XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 配置主流搜索引擎收录流程记录</title>
+    <url>/posts/abac0c46.html</url>
+    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置
+Hexo 并被主流的搜索引擎（Google、Bing）收录 <span id="more"></span></p>
+<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取
++
+插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
+<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google
+搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="是否已经被收录">是否已经被收录</h2>
+<p>为了查看网站是否已经被收录，可以在 Google 或者 Bing
+以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code>
+链接进行替换即可</p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/abac0c46/google_site.png" alt="google_site">
+<figcaption aria-hidden="true">google_site</figcaption>
+</figure>
+<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
+<h2 id="生成站点地图">生成站点地图</h2>
+<p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
+<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用
+<code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
+<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
+<h2 id="提交站点地图">提交站点地图</h2>
+<p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
+<p>（由于 GitHub
+屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
+<h3 id="google">Google</h3>
+<p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
+<p>而对我们来说，主要分三个步骤：注册 Search
+Console，验证网站所有权，提交站点地图</p>
+<h4 id="注册-search-console">注册 Search Console</h4>
+<p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC
+官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
+<h4 id="验证网站所有权">验证网站所有权</h4>
+<p>登录之后，就需要添加我们的网站了</p>
+<figure>
+<img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website">
+<figcaption aria-hidden="true">google_add_website</figcaption>
+</figure>
+<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS
+配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code>
+后会有五种方式供我们选择</p>
+<figure>
+<img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership">
+<figcaption aria-hidden="true">google_verify_ownership</figcaption>
+</figure>
+<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT
+主题的配置中对其进行支持，配置起来比较简单</p>
+<figure>
+<img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership">
+<figcaption aria-hidden="true">google_verify_ownership</figcaption>
+</figure>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
+配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
+<code>验证</code> 即可</p>
+<h4 id="提交站点地图-1">提交站点地图</h4>
+<p>之前 <code>hexo-generator-sitemap</code>
+插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC
+的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
+<figure>
+<img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap">
+<figcaption aria-hidden="true">google_add_sitemap</figcaption>
+</figure>
+<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC
+的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为
+<code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
+<h3 id="bing">Bing</h3>
+<h4 id="从-gsc-导入">从 GSC 导入</h4>
+<figure>
+<img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website">
+<figcaption aria-hidden="true">bing_add_website</figcaption>
+</figure>
+<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从
+GSC 进行导入即可</p>
+<h4 id="手动添加网站">手动添加网站</h4>
+<p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
+<figure>
+<img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership">
+<figcaption aria-hidden="true">bing_verify_ownership</figcaption>
+</figure>
+<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT
+主题的配置中对其进行支持，配置起来比较简单</p>
+<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
+配置如下内容</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
+<code>验证</code> 即可</p>
+<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools
+的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code>
+即可</p>
+<figure>
+<img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap">
+<figcaption aria-hidden="true">bing_add_sitemap</figcaption>
+</figure>
+<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing
+给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比
+Google 快不少</p>
+<h2 id="手动请求编入索引">手动请求编入索引</h2>
+<p>根据个人观察，Google
+及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
+<p>具体流程为：</p>
+<ol type="1">
+<li><p>点击 GSC
+的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
+<figure>
+<img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website">
+<figcaption aria-hidden="true">google_check_website</figcaption>
+</figure></li>
+<li><p> 等待结果返回后，点击【请求编入索引】即可</p>
+<figure>
+<img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit">
+<figcaption aria-hidden="true">google_manual_submit</figcaption>
+</figure></li>
+</ol>
+<p>个人实测，大概需要一个月左右，Google
+上就能搜索到网站上的大多数页面了</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google
+搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览
+Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo
+博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo
+博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LaTeX PPT</title>
     <url>/posts/499c5a19.html</url>
     <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
@@ -48,47 +509,9 @@
         <category>LaTeX</category>
       </categories>
       <tags>
+        <tag>LaTeX</tag>
         <tag>Beamer</tag>
-        <tag>LaTeX</tag>
         <tag>todo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 基础介绍</title>
-    <url>/posts/a4752f87.html</url>
-    <content><![CDATA[<h2 id="tex-和-latex">TeX 和 LaTeX</h2>
-<p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成
-LaTeX 通过对 TeX 进行封装，使用 TeX
-作为它的格式化引擎，使得排版文字变得更加方便。</p>
-<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成
-<code>.dvi</code> 文件 <span id="more"></span></p>
-<h2 id="pdftexxetex-和-luatex">pdfTeX、XeTeX 和 LuaTeX</h2>
-<h3 id="三者的介绍">三者的介绍</h3>
-<p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX
-引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
-<ul>
-<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
-<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
-<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
-</ul>
-<h3 id="各自的特性">各自的特性</h3>
-<ul>
-<li>pdfTeX 的主要特性是能直接生成 pdf</li>
-<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
-<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua
-脚本</li>
-</ul>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX,
-XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
       </tags>
   </entry>
   <entry>
@@ -371,426 +794,121 @@ bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
-    <title>Hexo 插件推荐以及使用小技巧</title>
-    <url>/posts/4143201a.html</url>
-    <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span>
-是一个快速、简洁且高效的博客框架，个人只需用 Markdown
-来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT
-主题搭建的 <span id="more"></span></p>
-<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
-为例</p>
-<h2 id="插件推荐">插件推荐</h2>
-<h3 id="hexo-deployer-git"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></h3>
-<p>Hexo 支持一键部署网站到 git 仓库上，其他的一键部署方式参考 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">官网介绍<i class="fa fa-external-link-alt"></i></span></p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-deployer-git</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置 </li>
-</ul>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;仓库链接&gt;</span> <span class="comment"># 可以是 https 链接也可以是 git 链接</span></span><br><span class="line">  <span class="attr">branch:</span> [<span class="string">分支</span>] <span class="comment"># GitHub 的网站分支为 gh-pages，其他网站可能有所不同</span></span><br><span class="line">  <span class="attr">message:</span> [<span class="string">message</span>] <span class="comment"># 默认是 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}</span></span><br></pre></td></tr></tbody></table></figure>
-<p>默认的提交信息只有时间信息，没有过多的参考价值推荐使用自定义提交信息，具体参考
-<a href="#自定义提交信息">后续小节</a></p>
-<h3 id="hexo-word-counter"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">hexo-word-counter<i class="fa fa-external-link-alt"></i></span></h3>
-<p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-word-counter</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置 </li>
-</ul>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-word-counter</span></span><br><span class="line"><span class="comment">## https://github.com/next-theme/hexo-word-counter</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">awl:</span> <span class="number">4</span></span><br><span class="line">  <span class="attr">wpm:</span> <span class="number">275</span></span><br><span class="line">  <span class="attr">suffix:</span> <span class="string">"mins."</span></span><br></pre></td></tr></tbody></table></figure>
-<p>具体配置可以参考官方给出的说明：</p>
-<blockquote>
-<p>Note for Chinese users: because in Chinese language average word
-length about ~1.5 and if you at most cases write posts in Chinese
-(without mixed English), recommended to set awl to 2 and wpm to 300. But
-if you usualy mix your posts with English, awl to 4 and wpm to 275 will
-be nice.</p>
-</blockquote>
-<p>也就是说纯中文时推荐 <code>awl</code> 设为 2，<code>wpm</code> 设为
-300；而中英文混合时推荐 <code>awl</code> 设为 4，<code>wpm</code> 设为
-275</p>
-<h3 id="hexo-abbrlink"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></h3>
-<p>Hexo
-默认的文章链接是以时间以及文件名命名的，如果文件名为中文时转译之后会很长，并且不美观。而该插件可以利用
-hash 值替换原有的文章链接</p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-abbrlink</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置</li>
-</ul>
-<p>首先修改 <code>_config.yml</code> 文件中的 <code>permalink</code>
-的配置</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">posts/:abbrlink.html</span></span><br></pre></td></tr></tbody></table></figure>
-<p>再增加以下配置</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># abbrlink config</span></span><br><span class="line"><span class="comment">## https://github.com/rozbo/hexo-abbrlink</span></span><br><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span> <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span> <span class="comment"># support dec(default) and hex</span></span><br><span class="line">  <span class="attr">drafts:</span> <span class="literal">true</span> <span class="comment"># (true)Process draft,(false)Do not process draft. false(default)</span></span><br><span class="line">  <span class="comment"># Generate categories from directory-tree</span></span><br><span class="line">  <span class="comment"># depth: the max_depth of directory-tree you want to generate, should &gt; 0</span></span><br><span class="line">  <span class="attr">auto_category:</span></span><br><span class="line">     <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># true(default)</span></span><br><span class="line">     <span class="attr">depth:</span> <span class="number">3</span> <span class="comment"># 3(default)</span></span><br><span class="line">     <span class="attr">over_write:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">auto_title:</span> <span class="literal">false</span> <span class="comment"># enable auto title, it can auto fill the title by path</span></span><br><span class="line">  <span class="attr">auto_date:</span> <span class="literal">false</span> <span class="comment"># enable auto date, it can auto fill the date by time today</span></span><br><span class="line">  <span class="attr">force:</span> <span class="literal">false</span> <span class="comment"># enable force mode, in this mode, the plugin will ignore the cache, and calc the abbrlink for every post even it already had abbrlink.</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="hexo-generator-sitemap"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></h3>
-<p>为了使博客能被谷歌、bing、百度收录，最好生成 <code>sitemap</code>
-方便爬取，整体流程可以参考 <a href="/posts/abac0c46">这篇博文</a></p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator-sitemap</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置 </li>
-</ul>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-generator-sitemap</span></span><br><span class="line"><span class="comment">## https://github.com/hexojs/hexo-generator-sitemap</span></span><br><span class="line"><span class="attr">sitemap:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">sitemap.xml</span></span><br><span class="line">  <span class="comment"># template: ./sitemap_template.xml</span></span><br><span class="line">  <span class="attr">rel:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="小技巧">小技巧</h2>
-<h3 id="自定义提交信息">自定义提交信息</h3>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> <span class="string">"自定义提交信息"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>例如使用 <code>hexo</code> 仓库的提交信息来提交到 <code>deploy</code>
-仓库</p>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> (git log <span class="literal">-1</span> <span class="literal">--pretty</span>=format:%s)</span><br></pre></td></tr></tbody></table></figure>
-<p>如果中文乱码，可以参考 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">这篇博客<i class="fa fa-external-link-alt"></i></span>
-修改 UTF-8 编码</p>
+    <title>利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用</title>
+    <url>/posts/b8506868.html</url>
+    <content><![CDATA[<p>本文主要记录自己在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> + <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">ZenFS<i class="fa fa-external-link-alt"></i></span> 测试
+<span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">ZNS<i class="fa fa-external-link-alt"></i></span>
+过程中遇到的一些问题以及相应的解决办法 <span id="more"></span></p>
+<h2 id="配置-zns-环境">配置 ZNS 环境</h2>
+<p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS
+设备类型是基于闪存的 SSD。但是 ZNS SSD
+目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
+<h3 id="配置-femu">配置 FEMU</h3>
+<p>官网给了 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiN6b25lZC1ibG9jay1kZXZpY2UtZW11bGF0aW9uLXdpdGgtbnVsbF9ibGs=">null_blk<i class="fa fa-external-link-alt"></i></span>
+以及 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiNudm1lLXpvbmVkLW5hbWVzcGFjZS1kZXZpY2UtZW11bGF0aW9uLXdpdGgtcWVtdQ==">QEMU<i class="fa fa-external-link-alt"></i></span>
+的配置方法，但是个人对 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">FEMU<i class="fa fa-external-link-alt"></i></span>
+比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用
+FEMU 模拟 ZNS 搭建环境</p>
+<p>FEMU 的环境搭建比较简单，参考其 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVUjaW5zdGFsbGF0aW9u">官方仓库 README<i class="fa fa-external-link-alt"></i></span>
+操作即可</p>
+<p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
+内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
+22.04 LTS。
+不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
+安装内核用户头文件过程中）可能会出问题</p>
+<h3 id="qemu-制作和安装系统镜像">QEMU 制作和安装系统镜像</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 下载 Ubuntu 镜像</span></span><br><span class="line">wget https://releases.ubuntu.com/22.04.1/ubuntu-22.04.1-live-server-amd64.iso</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制作磁盘镜像</span></span><br><span class="line">qemu-img create -f qcow2 u22s.qcow2 80G</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 镜像挂在 cdrom 上启动</span></span><br><span class="line"><span class="comment"># 安装过程需要通过 vnc 连接操作，端口号 5901</span></span><br><span class="line">qemu-system-x86_64 -m 2G -cdrom ubuntu-22.04.1-live-server-amd64.iso -hda u22s.qcow2 -boot d -vnc :1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完成后重启，再 vnc 连接一次，修改内核启动参数</span></span><br><span class="line">qemu-system-x86_64 -m 2G -hda u22s.qcow2 -vnc :1</span><br></pre></td></tr></tbody></table></figure>
+<p>然后在虚拟内将内核启动时输出改为打印到串口</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 在虚拟机内</span></span><br><span class="line">sudo vim /etc/default/grub</span><br></pre></td></tr></tbody></table></figure>
+<p>保证按照下面的配置</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 用于保证 grub 界面能输出到屏幕</span></span><br><span class="line"><span class="comment">#GRUB_TIMEOUT_STYLE=hidden</span></span><br><span class="line"><span class="attr">GRUB_TIMEOUT</span>=<span class="number">3</span></span><br><span class="line"><span class="attr">GRUB_TERMINAL</span>=serial</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于保证内核启动时能输出到屏幕</span></span><br><span class="line"><span class="attr">GRUB_CMDLINE_LINUX</span>=<span class="string">"ip=dhcp console=ttyS0,115200"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># (可选)屏蔽子菜单和 recovery 内核，方便快速切换内核</span></span><br><span class="line"><span class="attr">GRUB_DISABLE_SUBMENU</span>=y</span><br><span class="line"><span class="attr">GRUB_DISABLE_RECOVERY</span>=<span class="string">"true"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后更新重启即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 更新 grub</span></span><br><span class="line">sudo update-grub</span><br><span class="line"><span class="comment"># sudo update-grub2</span></span><br><span class="line">sudo poweroff</span><br></pre></td></tr></tbody></table></figure>
+<p>之后就可以不需要 vnc 连接了，可以加上 <code>-nographic</code>
+使用了，例如</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 举例</span></span><br><span class="line">qemu-system-x86_64 -enable-kvm -cpu host -smp=16 -m 4G -hda u22s.qcow2 -nographic</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
+官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
+<h3 id="环境以及依赖安装">环境以及依赖安装</h3>
+<p>以 Ubuntu 为例：</p>
+<p><strong>容易踩坑：</strong>一定要记得按照顺序来，先安装好所有依赖再编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"><span class="comment"># sudo apt install pkg-config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
+<p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
+<p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考
+<a href="/posts/4bc1e607.html">这篇博文</a></p>
+<p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code>
+即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>容易踩坑：</strong>如果 <code>-j</code>
+会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考
+<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">这篇博客<i class="fa fa-external-link-alt"></i></span>
+利用 swap “增加” 可用内存大小，或者限制下编译的并发度，例如
+<code>-j8</code></p>
+<p>利用 <code>db_bench</code> 测试可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9QZXJmb3JtYW5jZS1CZW5jaG1hcmtz">官方测试<i class="fa fa-external-link-alt"></i></span>
+的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"><code>benchmark.sh</code></a>
+来测试，当然也可以直接运行 <code>db_bench</code></p>
+<h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnMvYmxvYi9tYXN0ZXIvUkVBRE1FLm1k">ZenFS
+官方仓库<i class="fa fa-external-link-alt"></i></span>其实给了相应的指导，这里重新梳理下</p>
+<h3 id="安装-libzbd">安装 libzbd</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/libzbd.git</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
+<p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="comment"># git clone git@github.com:facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
+<p>至此所有测试需要的环境已经基本搭建好了</p>
+<h2 id="测试">测试</h2>
+<p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为
+<code>nvme1n1</code></p>
+<h3 id="利用-zenfs-的测试脚本测试">利用 zenfs 的测试脚本测试</h3>
+<p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO
+调度器，制作文件系统以及自动配置 RocksDB
+参数，但是参数配置的不够合理，需要自行修改</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span><br></pre></td></tr></tbody></table></figure>
+<p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value
+大小，运行时间较长，最后的测试结果汇总在
+<code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
+<h3 id="直接-db_bench-测试">直接 db_bench 测试</h3>
+<p>首先配置底层 IO 调度器为 <code>mq-deadline</code>
+用户保持有序性（因为 ZNS 只支持追加写</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> mq-deadline | sudo <span class="built_in">tee</span> /sys/block/nvme1n1/queue/scheduler</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>容易踩坑：</strong>利用 <code>zenfs</code> 创建 ZenFS
+文件系统，其中 <strong><code>zbd</code>
+后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定
+<code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS
+设备上，并且使用<strong>绝对路径</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> zenfs-aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/util/zenfs mkfs --zbd=nvme1n1 --aux-path=/home/femu/zenfs-aux</span><br></pre></td></tr></tbody></table></figure>
+<p>制作好文件系统后，就可以用 <code>db_bench</code> 进行测试了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direct_io_for_flush_and_compaction</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">【Hexo】一键部署<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">【GitHub】hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">【GitHub】hexo-word-counter<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">【GitHub】hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">【GitHub】hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1sb2cjX3ByZXR0eV9mb3JtYXRz">【Git】git log
-自定义输出格式<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">【CSDN】解决
-Windows PowerShell 乱码<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">【GitHub】RocksDB<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">【GitHub】ZenFS<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">【zonedstorage】ZNS<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">【GitHub】FEMU<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL3FlbXUtbWFucGFnZS5odG1s">【QEMU】QEMU
+User Documentation<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvUUVNVS9JbWFnZXMjQ3JlYXRpbmdfYW5faW1hZ2U=">【Wikibooks】QEMU/Images<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL2xpbnV4Ym9vdC5odG1s">【QEMU】Direct
+Linux Boot<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy85MjQ5MTMvaG93LXRvLWdldC10by10aGUtZ3J1Yi1tZW51LWF0LWJvb3QtdGltZS11c2luZy1zZXJpYWwtY29uc29sZQ==">【ask
+ubuntu】How to get to the GRUB menu at boot-time using serial
+console?<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">【CSDN】问题解决
+C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vbGliemJk">【GitHub】libzbd<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>测试</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NexT 主题的配置使用记录</title>
-    <url>/posts/9a0b7c3b.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star
-最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT
-主题搭建的 <span id="more"></span></p>
-<h3 id="版本">版本</h3>
-<p>在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy80">【必读】更新说明及常见问题<i class="fa fa-external-link-alt"></i></span>
-中有相关说明，NexT 一共有三个不同的仓库：</p>
-<table>
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>版本</th>
-<th>年份</th>
-<th>仓库</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td> v5.1.4 或更低</td>
-<td> 2014 ~ 2017</td>
-<td><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-<tr class="even">
-<td>v6.0.0 ~ v7.8.0</td>
-<td>2018 ~ 2019</td>
-<td><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-<tr class="odd">
-<td>v8.0.0 或更高</td>
-<td> 2020</td>
-<td><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0">next-theme/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-</tbody>
-</table>
-<p>旧的仓库基本上已经不再更新，因此推荐选择最新的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0">next-theme/hexo-theme-next<i class="fa fa-external-link-alt"></i></span>
-仓库的 NexT 主题</p>
-<h2 id="安装">安装</h2>
-<p>推荐使用 GitHub 进行安装，可以随时更新</p>
-<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
-为例</p>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;hexo<span class="literal">-dir</span>&gt;</span><br><span class="line"><span class="comment"># git clone https://github.com/next-theme/hexo-theme-next.git .\themes\next\</span></span><br><span class="line">git clone git@github.com:next<span class="literal">-theme</span>/hexo<span class="literal">-theme-next</span>.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> .\themes\next\_config.yml .\_config.next.yml</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="配置记录">配置记录</h2>
-<p>对 NexT 主题的配置可以直接在 <code>hexo</code> 仓库下的配置文件
-<code>_config.next.yml</code>
-中进行修改即可，该文件的修改会在生成页面时覆盖主题目录下的配置文件
-<code>.\themes\next\_config.yml</code></p>
-<p>衍生拓展：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3MvY29uZmlndXJhdGlvbiMlRTQlQkQlQkYlRTclOTQlQTglRTQlQkIlQTMlRTYlOUIlQkYlRTQlQjglQkIlRTklQTIlOTglRTklODUlOEQlRTclQkQlQUUlRTYlOTYlODclRTQlQkIlQjY=">【Hexo】配置文件优先级<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="风格主题">风格 / 主题</h3>
-<p>NexT 主题包含了 4 个风格，个人喜欢
-Gemini，类似卡片的风格，边界比较明显</p>
-<figure>
-<img data-src="/posts/9a0b7c3b/NexT_Schemes.png" alt="NexT_Schemes">
-<figcaption aria-hidden="true">NexT_Schemes</figcaption>
-</figure>
-<p>修改 <code>_config.next.yml</code> 之后，用
-<code>hexo clean; hexo g; hexo s</code> 重新生成一下，就可以在 <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo0MDAw">本地<i class="fa fa-external-link-alt"></i></span>
-预览了（后续流程如果没有特殊说明则基本一致）</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line"><span class="comment"># scheme: Mist</span></span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="网页图标">网页图标</h3>
-<p>在各类网站上下载合适图标，按照配置文件中的文件名命名，并放在
-<code>images</code> 下即可</p>
-<p>衍生阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2xpYnJhcnkvYXJjaGl2ZS9kb2N1bWVudGF0aW9uL0FwcGxlQXBwbGljYXRpb25zL1JlZmVyZW5jZS9TYWZhcmlXZWJDb250ZW50L0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zL0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zLmh0bWw=">【Apple】Configuring
-Web Applications<i class="fa fa-external-link-alt"></i></span></p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/favicon-32x32-next.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br><span class="line">  <span class="comment">#android_manifest: /manifest.json</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="菜单栏">菜单栏</h3>
-<p>菜单栏配置默认没有开启，个人开启了
-<code>首页</code>、<code>标签</code>、<code>分类</code>、<code>归档</code>
-四个子项目，并开启了图标和数量的气泡显示</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-sensitive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="comment">#about: /about/ || fa fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable / Disable menu icons / item badges.</span></span><br><span class="line"><span class="attr">menu_settings:</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">badges:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="侧边栏">侧边栏</h3>
-<p>默认头像会开启旋转功能，花里胡哨的而且旋转有点快，个人选择了关闭</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/avatar.gif</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be displayed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
-<p>在单独的文章页面时侧边栏会默认显示为目录，并且
-<code>标签</code>、<code>分类</code>、<code>归档</code>
-已经在菜单栏开启了，所以个人选择了关闭</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Posts / Categories / Tags in sidebar.</span></span><br><span class="line"><span class="attr">site_state:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
-<p>其他社交网站的主页的配置起来也很简单，简单替换一下链接，并且取消注释即可</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Social Links</span></span><br><span class="line"><span class="comment"># Usage: `Key: permalink || icon`</span></span><br><span class="line"><span class="comment"># Key is the link label showing to end users.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/ywang-wnlo</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:ywang_wnlo@qq.com</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br><span class="line">  <span class="comment">#Weibo: https://weibo.com/yourname || fab fa-weibo</span></span><br><span class="line">  <span class="comment">#Google: https://plus.google.com/yourname || fab fa-google</span></span><br><span class="line">  <span class="comment">#Twitter: https://twitter.com/yourname || fab fa-twitter</span></span><br><span class="line">  <span class="comment">#FB Page: https://www.facebook.com/yourname || fab fa-facebook</span></span><br><span class="line">  <span class="comment">#StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span></span><br><span class="line">  <span class="comment">#YouTube: https://youtube.com/yourname || fab fa-youtube</span></span><br><span class="line">  <span class="comment">#Instagram: https://instagram.com/yourname || fab fa-instagram</span></span><br><span class="line">  <span class="comment">#Skype: skype:yourname?call|chat || fab fa-skype</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="本地搜索">本地搜索</h3>
-<p>本地搜索可以快速的检索所有的文章，有时候还是很有用的</p>
-<p>配置本地搜索之前，首先要在 <code>hexo</code> 下安装插件</p>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator-searchdb</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<p>然后在配置中开启即可</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">-1</span></span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  <span class="attr">unescape:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  <span class="attr">preload:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="代码块">代码块</h3>
-<p>代码块的高亮有很多种配色可以选，并且可以开启一键复制功能</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># All available themes: https://theme-next.js.org/highlight/</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">vs</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">vs2015</span></span><br><span class="line">  <span class="attr">prism:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">prism</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">prism-dark</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">default</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="动画效果">动画效果</h3>
-<p>NexT 默认开启了动画效果，但是感觉比较慢，感觉有些影响阅读，推荐开启
-<code>async</code>，并且适当的修改动画效果</p>
-<p>P.S. 菜单栏的动画不可以关闭和调整，应该是个 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy80MTI=">bug<i class="fa fa-external-link-alt"></i></span></p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Use Animate.css to animate everything.</span></span><br><span class="line"><span class="comment"># For more information: https://animate.style</span></span><br><span class="line"><span class="attr">motion:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">async:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">transition:</span></span><br><span class="line">    <span class="comment"># All available transition variants: https://theme-next.js.org/animate/</span></span><br><span class="line">    <span class="attr">post_block:</span> <span class="string">fadeIn</span></span><br><span class="line">    <span class="attr">post_header:</span></span><br><span class="line">    <span class="attr">post_body:</span></span><br><span class="line">    <span class="attr">coll_header:</span></span><br><span class="line">    <span class="comment"># Only for Pisces | Gemini.</span></span><br><span class="line">    <span class="attr">sidebar:</span> <span class="string">fadeInDown</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="阅读进度">阅读进度</h3>
-<p>阅读进度有两种展示方式，一个在回到首页的按钮上直接显示百分比，另一个可以配置在首位部增加进度条，个人两个都开启了</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Back to top in sidebar.</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Scroll percent label in b2t button.</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Reading progress bar</span></span><br><span class="line"><span class="attr">reading_progress:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available values: left | right</span></span><br><span class="line">  <span class="attr">start_at:</span> <span class="string">left</span></span><br><span class="line">  <span class="comment"># Available values: top | bottom</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">bottom</span></span><br><span class="line">  <span class="attr">reversed:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#37c6c0"</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">5px</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="书签">书签</h3>
-<p>NexT 的书签功能可以保存当前的阅读进度，下次打开是会在续接该进度</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Customize the color of the bookmark.</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#222"</span></span><br><span class="line">  <span class="comment"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span></span><br><span class="line">  <span class="comment"># If manual, only save it by clicking the bookmark-icon.</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="mermaid">Mermaid</h3>
-<p><span class="exturl" data-url="aHR0cHM6Ly9tZXJtYWlkLWpzLmdpdGh1Yi5pby9tZXJtYWlkLyMv">Mermaid<i class="fa fa-external-link-alt"></i></span>
-可以快速的用代码生成简单的流程图、时序图、甘特图等</p>
-<p>NexT 中开启 Mermaid 支持很方便，同时还有不同的风格可以选</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Mermaid tag</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available themes: default | dark | forest | neutral</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">neutral</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">dark</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="lazyload">lazyload</h3>
-<p>lazyload
-是网站常用的技术，通过按需加载，避免一次性加载过多内容导致的打开缓慢</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Vanilla JavaScript plugin for lazyloading images.</span></span><br><span class="line"><span class="comment"># For more information: https://apoorv.pro/lozad.js/demo/</span></span><br><span class="line"><span class="attr">lazyload:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="fancybox">fancybox</h3>
-<p>fancybox
-可以在点击图片时放大该图片，并且可以快速浏览当前文章的所有图片</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.</span></span><br><span class="line"><span class="comment"># For more information: https://fancyapps.com/fancybox/</span></span><br><span class="line"><span class="attr">fancybox:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="pangu">pangu</h3>
-<p>对于强迫症来说，中英文混排时加上空格能很大程度改善阅读体验，但是有时候会不小心打漏部分空格，而
-<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZpbnRhL3Bhbmd1Lmpz">pangu<i class="fa fa-external-link-alt"></i></span>
-这个项目就可以帮你在展示时自动加上空格</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Pangu Support</span></span><br><span class="line"><span class="comment"># For more information: https://github.com/vinta/pangu.js</span></span><br><span class="line"><span class="comment"># Server-side plugin: https://github.com/next-theme/hexo-pangu</span></span><br><span class="line"><span class="attr">pangu:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="捐赠">捐赠</h3>
-<p>文章末尾还可以求打赏，需要配置好相应的二维码图片，并且可以修改提示语句</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Donate (Sponsor) settings</span></span><br><span class="line"><span class="comment"># Front-matter variable (nonsupport animation).</span></span><br><span class="line"><span class="attr">reward_settings:</span></span><br><span class="line">  <span class="comment"># If true, a donate button will be displayed in every article by default.</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">animation:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">comment:</span> <span class="string">赏个鸡腿🍗</span></span><br><span class="line"></span><br><span class="line"><span class="attr">reward:</span></span><br><span class="line">  <span class="attr">wechatpay:</span> <span class="string">/images/wechatpay.png</span></span><br><span class="line">  <span class="attr">alipay:</span> <span class="string">/images/alipay.jpg</span></span><br><span class="line">  <span class="comment">#paypal: /images/paypal.png</span></span><br><span class="line">  <span class="comment">#bitcoin: /images/bitcoin.png</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="版权声明">版权声明</h3>
-<p>NexT 内置了文章末尾增加版权声明，只需手动开启即可</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/about/cclicenses/</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="comment"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="comment"># Available values: big | small</span></span><br><span class="line">  <span class="attr">size:</span> <span class="string">small</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line">  <span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="不蒜子">不蒜子</h3>
-<p><span class="exturl" data-url="aHR0cHM6Ly9idXN1YW56aS5pYnJ1Y2UuaW5mby8=">不蒜子<i class="fa fa-external-link-alt"></i></span>
-是一个极简的网页计数器，NexT 已经内置，只需打开即可</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Show Views / Visitors of the website / page with busuanzi.</span></span><br><span class="line"><span class="comment"># For more information: http://ibruce.info/2015/04/04/busuanzi/</span></span><br><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">fa</span> <span class="string">fa-eye</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">far</span> <span class="string">fa-eye</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="gitalk">gitalk</h3>
-<p>评论系统也是一个博客必不可少的，由于本博客搭在 GitHub Pages
-上，所以评论系统就采用利用 GitHub Issues 实现的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGFsay9naXRhbGs=">gitalk<i class="fa fa-external-link-alt"></i></span></p>
-<p>NexT 已经内置的 gitalk 的 <code>js</code> 和
-<code>css</code>，在配置文件中开启并进行配置即可</p>
-<p>在修改配置文件之前需要先在 GitHub 上申请一个 OAuth
-Application，入口在 <code>【Settings】</code> -&gt;
-<code>【Developer settings】</code> -&gt; <code>【OAuth Apps】</code>
--&gt; <code>【New OAuth App】</code>，或者直接使用这个 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NldHRpbmdzL2FwcGxpY2F0aW9ucy9uZXc=">链接<i class="fa fa-external-link-alt"></i></span></p>
-<figure>
-<img data-src="/posts/9a0b7c3b/OAuth_APP_Register.png" alt="OAuth_APP_Register">
-<figcaption aria-hidden="true">OAuth_APP_Register</figcaption>
-</figure>
-<p>填写好之后，记录下应用 id
-以及密钥，如果没有显示密钥需要手动生成一下</p>
-<figure>
-<img data-src="/posts/9a0b7c3b/OAuth_APP_ID_Secrets.png" alt="OAuth_APP_ID_Secrets">
-<figcaption aria-hidden="true">OAuth_APP_ID_Secrets</figcaption>
-</figure>
-<p>然后首先选用 gitalk 作为评论系统</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Multiple Comment System Support</span></span><br><span class="line"><span class="attr">comments:</span></span><br><span class="line">  <span class="comment"># Available values: tabs | buttons</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">tabs</span></span><br><span class="line">  <span class="comment"># Choose a comment system to be displayed by default.</span></span><br><span class="line">  <span class="comment"># Available values: disqus | disqusjs | changyan | livere | gitalk | utterances</span></span><br><span class="line">  <span class="attr">active:</span> <span class="string">gitalk</span></span><br><span class="line">  <span class="comment"># Setting `true` means remembering the comment system selected by the visitor.</span></span><br><span class="line">  <span class="attr">storage:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Lazyload all comment systems.</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Modify texts or order for any naves, here are some examples.</span></span><br><span class="line">  <span class="attr">nav:</span></span><br><span class="line">    <span class="comment">#disqus:</span></span><br><span class="line">    <span class="comment">#  text: Load Disqus</span></span><br><span class="line">    <span class="comment">#  order: -1</span></span><br><span class="line">    <span class="comment">#gitalk:</span></span><br><span class="line">    <span class="comment">#  order: -2</span></span><br></pre></td></tr></tbody></table></figure>
-<p>在 gitalk 配置中填上相应的内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;.github.io</span> <span class="comment"># Repository name to store issues</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">&lt;应用</span> <span class="string">id&gt;</span> <span class="comment"># GitHub Application Client ID</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">&lt;应用密钥&gt;</span> <span class="comment"># GitHub Application Client Secret</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">&lt;GitHub</span> <span class="string">id&gt;</span> <span class="comment"># GitHub repo owner and collaborators, only these guys can initialize gitHub issues</span></span><br><span class="line">  <span class="attr">distraction_free_mode:</span> <span class="literal">true</span> <span class="comment"># Facebook-like distraction free mode</span></span><br><span class="line">  <span class="comment"># When the official proxy is not available, you can change it to your own proxy address</span></span><br><span class="line">  <span class="attr">proxy:</span> <span class="string">https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</span> <span class="comment"># This is official proxy address</span></span><br><span class="line">  <span class="comment"># Gitalk's display language depends on user's browser or system environment</span></span><br><span class="line">  <span class="comment"># If you want everyone visiting your site to see a uniform language, you can set a force language value</span></span><br><span class="line">  <span class="comment"># Available values: en | es-ES | fr | ru | zh-CN | zh-TW</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">【NexT】v8.0.0+ 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy80">【必读】更新说明及常见问题<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3MvY29uZmlndXJhdGlvbiMlRTQlQkQlQkYlRTclOTQlQTglRTQlQkIlQTMlRTYlOUIlQkYlRTQlQjglQkIlRTklQTIlOTglRTklODUlOEQlRTclQkQlQUUlRTYlOTYlODclRTQlQkIlQjY=">【Hexo】配置文件优先级<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2xpYnJhcnkvYXJjaGl2ZS9kb2N1bWVudGF0aW9uL0FwcGxlQXBwbGljYXRpb25zL1JlZmVyZW5jZS9TYWZhcmlXZWJDb250ZW50L0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zL0NvbmZpZ3VyaW5nV2ViQXBwbGljYXRpb25zLmh0bWw=">【Apple】Configuring
-Web Applications<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tZXJtYWlkLWpzLmdpdGh1Yi5pby9tZXJtYWlkLyMv">【Mermaid】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZpbnRhL3Bhbmd1Lmpz">【GitHub】pangu<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9idXN1YW56aS5pYnJ1Y2UuaW5mbw==">【不蒜子】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGFsay9naXRhbGs=">【GitHub】Gitalk<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo 配置主流搜索引擎收录流程记录</title>
-    <url>/posts/abac0c46.html</url>
-    <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置
-Hexo 并被主流的搜索引擎（Google、Bing）收录 <span id="more"></span></p>
-<p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取
-+
-插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址 hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
-<p>延伸阅读：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">Google
-搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="是否已经被收录">是否已经被收录</h2>
-<p>为了查看网站是否已经被收录，可以在 Google 或者 Bing
-以下查询格式搜索，根据自己网站的地址对后面的 <code>http(s)</code>
-链接进行替换即可</p>
-<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">site:https://ywang-wnlo.github.io/</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/abac0c46/google_site.png" alt="google_site">
-<figcaption aria-hidden="true">google_site</figcaption>
-</figure>
-<p>如果能搜索到内容，那么恭喜网站已经被搜索引擎收录。不过为了更好的被收录网站中的内容，还是推荐生成站点地图并提交，来告诉搜索引擎网站中有哪些链接需要被爬取</p>
-<h2 id="生成站点地图">生成站点地图</h2>
-<p>站点地图是一种文件，您以在其中提供与网站中的网页、视频或其他文件有关的信息，还可以说明这些内容之间的关系。搜索引擎会读取此文件，以便更高效地抓取您的网站。站点地图会告诉搜索引擎您认为网站中的哪些网页和文件比较重要，还会提供与这些文件有关的重要信息。例如，网页上次更新的时间和网页是否有任何备用的语言版本</p>
-<p>Hexo 配置站点地图 <code>sitemap</code> 可以利用
-<code>hexo-generator-sitemap</code> 插件，具体的配置过程参见 <a href="/posts/4143201a.html#hexo-generator-sitemap">这里</a></p>
-<p>仅仅生成站点地图还不够，为了更早被收录站点地图中的链接，还需要主动将站点地图提交给搜索引擎</p>
-<h2 id="提交站点地图">提交站点地图</h2>
-<p>下面手把手教你如何给 Google 和 Bing 提交站点地图</p>
-<p>（由于 GitHub
-屏蔽了百度的爬虫，所以在这里不做百度搜索引擎的流程介绍，不过以下内容可以参考）</p>
-<h3 id="google">Google</h3>
-<p>Google 官网给了详细的文档，可以看这篇 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">新手入门指南<i class="fa fa-external-link-alt"></i></span></p>
-<p>而对我们来说，主要分三个步骤：注册 Search
-Console，验证网站所有权，提交站点地图</p>
-<h4 id="注册-search-console">注册 Search Console</h4>
-<p>注册的过程非常简单，进入 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZQ==">GSC
-官网<i class="fa fa-external-link-alt"></i></span>，用谷歌账号登录即可</p>
-<h4 id="验证网站所有权">验证网站所有权</h4>
-<p>登录之后，就需要添加我们的网站了</p>
-<figure>
-<img data-src="/posts/abac0c46/google_add_website.png" alt="google_add_website">
-<figcaption aria-hidden="true">google_add_website</figcaption>
-</figure>
-<p>由于该博客是利用 GitHub Pages 搭建，并没有 DNS
-配置的相关权限，因此我们使用第二种方式进行配置，点击 <code>继续</code>
-后会有五种方式供我们选择</p>
-<figure>
-<img data-src="/posts/abac0c46/google_verify_ownership_1.png" alt="google_verify_ownership">
-<figcaption aria-hidden="true">google_verify_ownership</figcaption>
-</figure>
-<p>个人推荐使用第二种，也就是 HTML 标记的方式，因为 NexT
-主题的配置中对其进行支持，配置起来比较简单</p>
-<figure>
-<img data-src="/posts/abac0c46/google_verify_ownership_2.png" alt="google_verify_ownership">
-<figcaption aria-hidden="true">google_verify_ownership</figcaption>
-</figure>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
-配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://developers.google.com/search</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
-<code>验证</code> 即可</p>
-<h4 id="提交站点地图-1">提交站点地图</h4>
-<p>之前 <code>hexo-generator-sitemap</code>
-插件生成的站点地图，会默认放在在根目录下，只需在 <span class="exturl" data-url="aHR0cHM6Ly9zZWFyY2guZ29vZ2xlLmNvbS9zZWFyY2gtY29uc29sZS9zaXRlbWFwcw==">GSC
-的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击提交即可</p>
-<figure>
-<img data-src="/posts/abac0c46/google_add_sitemap.png" alt="google_add_sitemap">
-<figcaption aria-hidden="true">google_add_sitemap</figcaption>
-</figure>
-<p>不过和 Bing 不同，Google 的站点地图爬取需要一定的时间，并且由于 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vd2VibWFzdGVycy90aHJlYWQvMzEwNTkxNi9zaXRlbWFwLWNvdWxkLW5vdC1iZS1yZWFkLWluLW5ldy1nc2M=">GSC
-的 bug<i class="fa fa-external-link-alt"></i></span>，会将 <code>等待中</code> 错误的显示为
-<code>无法获取</code>，一般需要几天的时间，此时只能耐心等待</p>
-<h3 id="bing">Bing</h3>
-<h4 id="从-gsc-导入">从 GSC 导入</h4>
-<figure>
-<img data-src="/posts/abac0c46/bing_add_website.png" alt="bing_add_website">
-<figcaption aria-hidden="true">bing_add_website</figcaption>
-</figure>
-<p>Bing 的流程和前面类似，不过由于已经配置好了 GSC，我们可以选择直接从
-GSC 进行导入即可</p>
-<h4 id="手动添加网站">手动添加网站</h4>
-<p>如果需要手动添加的话，其实步骤和 Google 也很类似</p>
-<figure>
-<img data-src="/posts/abac0c46/bing_verify_ownership.png" alt="bing_verify_ownership">
-<figcaption aria-hidden="true">bing_verify_ownership</figcaption>
-</figure>
-<p>这里一样推荐使用第二种，也就是 HTML Meta 标记的方式，因为 NexT
-主题的配置中对其进行支持，配置起来比较简单</p>
-<p>点击复制，记录下其中的标记信息，例如我们这里复制的原始内容是</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"65AB321A829DD5542989CC078C3ABD9E"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>所以在 Next 的配置文件中 <code>_config.next.yml</code>
-配置如下内容</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Bing Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.bing.com/webmasters</span></span><br><span class="line"><span class="attr">bing_site_verification:</span> <span class="string">65AB321A829DD5542989CC078C3ABD9E</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重新生成网站，并推送到 GitHub，等待 GitHub Pages 生成完毕后，点击
-<code>验证</code> 即可</p>
-<p>提交站点地图也，只需在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmluZy5jb20vd2VibWFzdGVycy9zaXRlbWFwcw==">Bing Webmasters tools
-的站点地图页面<i class="fa fa-external-link-alt"></i></span> 填好站点地图的位置，然后点击 <code>提交</code>
-即可</p>
-<figure>
-<img data-src="/posts/abac0c46/bing_add_sitemap.png" alt="bing_add_sitemap">
-<figcaption aria-hidden="true">bing_add_sitemap</figcaption>
-</figure>
-<p>Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待 Bing
-给我们网站建立索引即可，一般来说一两天就可以完成整个网站的爬取，这点要比
-Google 快不少</p>
-<h2 id="手动请求编入索引">手动请求编入索引</h2>
-<p>根据个人观察，Google
-及时获取到站点地图后似乎不会立刻根据站点地图爬取网站，因此推荐再自行进行一次手动请求编入索引</p>
-<p>具体流程为：</p>
-<ol type="1">
-<li><p>点击 GSC
-的【网址检查】或者直接在顶部输入栏输入网站的根地址（也可以是其他子页面地址）</p>
-<figure>
-<img data-src="/posts/abac0c46/google_check_website.png" alt="google_check_website">
-<figcaption aria-hidden="true">google_check_website</figcaption>
-</figure></li>
-<li><p> 等待结果返回后，点击【请求编入索引】即可</p>
-<figure>
-<img data-src="/posts/abac0c46/google_manual_submit.png" alt="google_manual_submit">
-<figcaption aria-hidden="true">google_manual_submit</figcaption>
-</figure></li>
-</ol>
-<p>个人实测，大概需要一个月左右，Google
-上就能搜索到网站上的大多数页面了</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmFzaWNzL2hvdy1zZWFyY2gtd29ya3M/aGw9emgtQ04=">【Google】Google
-搜索运作方式的基础知识<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3M/aGw9emgtQ04=">【Google】浏览
-Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYWR2YW5jZWQvc2l0ZW1hcHMvb3ZlcnZpZXc/aGw9emgtQ04=">【Google】了解站点地图<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vc2VhcmNoL2RvY3MvYmVnaW5uZXIvZ2V0LXN0YXJ0ZWQ/aGw9emgtQ04=">【Google】新手入门指南<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9taXplcmkuZ2l0aHViLmlvLzIwMjEvMDQvMTgvaGV4by1zaXRlbWFwLWdvb2dsZS8=">【个人博客】Hexo
-博客站点地图配置（Google）<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9CbG9nLVNlYXJjaC1FbmdpbmUtSW5kZXgv">【个人博客】Hexo
-博客主流搜索引擎收录详细指南<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
+        <tag>日常踩坑</tag>
+        <tag>RocksDB</tag>
+        <tag>ZNS</tag>
+        <tag>QEMU</tag>
+        <tag>grub</tag>
       </tags>
   </entry>
   <entry>
@@ -905,104 +1023,9 @@ Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-
         <category>测试</category>
       </categories>
       <tags>
+        <tag>RocksDB</tag>
         <tag>Maven</tag>
-        <tag>RocksDB</tag>
         <tag>YCSB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用</title>
-    <url>/posts/b8506868.html</url>
-    <content><![CDATA[<p>本文主要记录自己在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> + <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">ZenFS<i class="fa fa-external-link-alt"></i></span> 测试
-<span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">ZNS<i class="fa fa-external-link-alt"></i></span>
-过程中遇到的一些问题以及相应的解决办法 <span id="more"></span></p>
-<h2 id="配置-zns-环境">配置 ZNS 环境</h2>
-<p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS
-设备类型是基于闪存的 SSD。但是 ZNS SSD
-目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
-<p>官网给了 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiN6b25lZC1ibG9jay1kZXZpY2UtZW11bGF0aW9uLXdpdGgtbnVsbF9ibGs=">null_blk<i class="fa fa-external-link-alt"></i></span>
-以及 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiNudm1lLXpvbmVkLW5hbWVzcGFjZS1kZXZpY2UtZW11bGF0aW9uLXdpdGgtcWVtdQ==">QEMU<i class="fa fa-external-link-alt"></i></span>
-的配置方法，但是个人对 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">FEMU<i class="fa fa-external-link-alt"></i></span>
-比较熟悉，于是采用模拟 FEMU 模拟 ZNS 搭建环境</p>
-<p>FEMU 的环境搭建比较简单，参考其 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVUjaW5zdGFsbGF0aW9u">官方仓库 README<i class="fa fa-external-link-alt"></i></span>
-操作即可</p>
-<p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
-内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
-22.04 LTS。
-不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
-安装内核用户头文件过程中）可能会出问题</p>
-<h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
-官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
-<h3 id="环境以及依赖安装">环境以及依赖安装</h3>
-<p>以 Ubuntu 为例：</p>
-<p><strong>容易踩坑：</strong>一定要记得按照顺序来，先安装好所有依赖再编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"><span class="comment"># sudo apt install pkg-config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
-<p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
-<p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考
-<a href="/posts/4bc1e607.html">这篇博文</a></p>
-<p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code>
-即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>容易踩坑：</strong>如果 <code>-j</code>
-会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考
-<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">这篇博客<i class="fa fa-external-link-alt"></i></span>
-利用 swap “增加” 可用内存大小，或者限制下编译的并发度，例如
-<code>-j8</code></p>
-<p>利用 <code>db_bench</code> 测试可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9QZXJmb3JtYW5jZS1CZW5jaG1hcmtz">官方测试<i class="fa fa-external-link-alt"></i></span>
-的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"><code>benchmark.sh</code></a>
-来测试，当然也可以直接运行 <code>db_bench</code></p>
-<h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnMvYmxvYi9tYXN0ZXIvUkVBRE1FLm1k">ZenFS
-官方仓库<i class="fa fa-external-link-alt"></i></span>其实给了相应的指导，这里重新梳理下</p>
-<h3 id="安装-libzbd">安装 libzbd</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/libzbd.git</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
-<p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="comment"># git clone git@github.com:facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
-<p>至此所有测试需要的环境已经基本搭建好了</p>
-<h2 id="测试">测试</h2>
-<p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为
-<code>nvme1n1</code></p>
-<h3 id="利用-zenfs-的测试脚本测试">利用 zenfs 的测试脚本测试</h3>
-<p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO
-调度器，制作文件系统以及自动配置 RocksDB
-参数，但是参数配置的不够合理，需要自行修改</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span><br></pre></td></tr></tbody></table></figure>
-<p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value
-大小，运行时间较长，最后的测试结果汇总在
-<code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
-<h3 id="直接-db_bench-测试">直接 db_bench 测试</h3>
-<p>首先配置底层 IO 调度器为 <code>mq-deadline</code>
-用户保持有序性（因为 ZNS 只支持追加写</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> mq-deadline | sudo <span class="built_in">tee</span> /sys/block/nvme1n1/queue/scheduler</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>容易踩坑：</strong>利用 <code>zenfs</code> 创建 ZenFS
-文件系统，其中 <strong><code>zbd</code>
-后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定
-<code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS
-设备上，并且使用<strong>绝对路径</strong></p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> zenfs-aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/util/zenfs mkfs --zbd=nvme1n1 --aux-path=/home/femu/zenfs-aux</span><br></pre></td></tr></tbody></table></figure>
-<p>制作好文件系统后，就可以用 <code>db_bench</code> 进行测试了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direct_io_for_flush_and_compaction</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">【GitHub】RocksDB<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">【GitHub】ZenFS<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">【zonedstorage】ZNS<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">【GitHub】FEMU<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">【CSDN】问题解决
-C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vbGliemJk">【GitHub】libzbd<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>RocksDB</tag>
-        <tag>日常踩坑</tag>
-        <tag>ZNS</tag>
       </tags>
   </entry>
   <entry>
@@ -1051,81 +1074,6 @@ chrome，命令行应该就恢复正常了，此时也能在已打开 chrome
       <tags>
         <tag>日常踩坑</tag>
         <tag>chrome</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决 pip 安装第三方包时因 SSL 报错</title>
-    <url>/posts/2e7aa01a.html</url>
-    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
-<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
-后发现用 <code>pip</code>
-安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
-SSL 认证失败导致的 <span id="more"></span></p>
-<ol type="1">
-<li><p>check_hostname requires server_hostname</p>
-<blockquote>
-<p><code>raise ValueError("check_hostname requires server_hostname")</code>
-<code>ValueError: check_hostname requires server_hostname</code></p>
-</blockquote></li>
-<li><p>EOF occurred in violation of protocol</p>
-<blockquote>
-<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
-</blockquote></li>
-</ol>
-<h2 id="什么是-ssl">什么是 SSL ？</h2>
-<p>传输层安全性协议（英语：Transport Layer
-Security，TLS）及其前身安全套接层（英语：Secure Sockets
-Layer，SSL）是现在的 HTTPS
-协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
-<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
-以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
-包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
-<h2 id="为什么会报错">为什么会报错</h2>
-<p>根据报错信息可以发现错误的根源就在于
-SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
-或者网络抓包等软件的导致的</p>
-<h2 id="解决办法">解决办法</h2>
-<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
-或者网络抓包等软件</h3>
-<p>最推荐的办法是临时关闭代理、VPN
-或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
-<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
-源来避免 SSL 认证问题</h3>
-<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
-的镜像站来进行安装下载</p>
-<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
-协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
-协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
-<p>安装时第三方包时可以参考如下命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
-<p>修改文件内容如下</p>
-<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
-<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
-后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
-或者 <code>20.3b1</code> 等较低版本即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
-镜像<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
-pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
-pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>日常踩坑</category>
-      </categories>
-      <tags>
-        <tag>日常踩坑</tag>
-        <tag>pip</tag>
-        <tag>python</tag>
-        <tag>SSL</tag>
       </tags>
   </entry>
   <entry>
@@ -1314,6 +1262,81 @@ XySubFilter）<i class="fa fa-external-link-alt"></i></span></li>
       </categories>
       <tags>
         <tag>Potplayer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决 pip 安装第三方包时因 SSL 报错</title>
+    <url>/posts/2e7aa01a.html</url>
+    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
+<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
+后发现用 <code>pip</code>
+安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
+SSL 认证失败导致的 <span id="more"></span></p>
+<ol type="1">
+<li><p>check_hostname requires server_hostname</p>
+<blockquote>
+<p><code>raise ValueError("check_hostname requires server_hostname")</code>
+<code>ValueError: check_hostname requires server_hostname</code></p>
+</blockquote></li>
+<li><p>EOF occurred in violation of protocol</p>
+<blockquote>
+<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
+</blockquote></li>
+</ol>
+<h2 id="什么是-ssl">什么是 SSL ？</h2>
+<p>传输层安全性协议（英语：Transport Layer
+Security，TLS）及其前身安全套接层（英语：Secure Sockets
+Layer，SSL）是现在的 HTTPS
+协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
+<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
+以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
+包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
+<h2 id="为什么会报错">为什么会报错</h2>
+<p>根据报错信息可以发现错误的根源就在于
+SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
+或者网络抓包等软件的导致的</p>
+<h2 id="解决办法">解决办法</h2>
+<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
+或者网络抓包等软件</h3>
+<p>最推荐的办法是临时关闭代理、VPN
+或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
+<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
+源来避免 SSL 认证问题</h3>
+<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
+的镜像站来进行安装下载</p>
+<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
+协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
+协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
+<p>安装时第三方包时可以参考如下命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
+<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>修改文件内容如下</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
+<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
+后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
+或者 <code>20.3b1</code> 等较低版本即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
+镜像<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
+pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
+pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>日常踩坑</tag>
+        <tag>pip</tag>
+        <tag>python</tag>
+        <tag>SSL</tag>
       </tags>
   </entry>
   <entry>
@@ -2022,79 +2045,6 @@ Cache 与 Page 回写<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
-    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-    <url>/posts/8ad4716e.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
-GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
-用户会选择 <code>PowerShell</code></p>
-<p>为了美化 <code>PowerShell</code>，个人选择了
-<code>Oh My Posh</code>。<code>Oh My Posh</code>
-是一个开源的主体的框架，支持
-<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
-等多种 <code>Shell</code></p>
-<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
-<span id="more"></span></p>
-<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
-<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
-<code>winget</code> 安装最新的版本</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
-<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
-所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
-字体</p>
-<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
-或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
-的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
-文件安装即可</p>
-<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
-<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
-Windows Terminal 应用中单独配置，这里不做介绍</p>
-<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
-<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
-直接打开配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>如果打开报错，则需要首先创建配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
-<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
-就会自动启用 <code>Oh My Posh</code> 了</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="选择主题">选择主题</h2>
-<p><code>Oh My Posh</code>
-支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
-预览</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
-<p>个人选择了 <code>powerlevel10k_rainbow</code>
-主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
-My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
-PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>PowerShell</tag>
-        <tag>Windows</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>page cache 回写机制</title>
     <url>/posts/646202b9.html</url>
     <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
@@ -2441,6 +2391,79 @@ new_sync_write --&gt; call_write_iter</pre>
       </tags>
   </entry>
   <entry>
+    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+    <url>/posts/8ad4716e.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
+GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
+用户会选择 <code>PowerShell</code></p>
+<p>为了美化 <code>PowerShell</code>，个人选择了
+<code>Oh My Posh</code>。<code>Oh My Posh</code>
+是一个开源的主体的框架，支持
+<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
+等多种 <code>Shell</code></p>
+<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
+<span id="more"></span></p>
+<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
+<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
+<code>winget</code> 安装最新的版本</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
+<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
+所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
+字体</p>
+<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
+或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
+的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
+文件安装即可</p>
+<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
+<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
+Windows Terminal 应用中单独配置，这里不做介绍</p>
+<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
+<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
+直接打开配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>如果打开报错，则需要首先创建配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
+就会自动启用 <code>Oh My Posh</code> 了</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="选择主题">选择主题</h2>
+<p><code>Oh My Posh</code>
+支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
+预览</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
+<p>个人选择了 <code>powerlevel10k_rainbow</code>
+主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
+My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
+PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>PowerShell</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>美化 Shell 之 Linux Zsh 篇</title>
     <url>/posts/f2cdf8a6.html</url>
     <content><![CDATA[<h2 id="简介">简介</h2>
@@ -2710,53 +2733,6 @@ are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt
       <tags>
         <tag>交叉编译</tag>
         <tag>ipk</tag>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<h3 id="来源">来源</h3>
-<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
-系统。迫于 Linux 的开源协议要求，Linksys
-开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
-<span id="more"></span></p>
-<h3 id="介绍">介绍</h3>
-<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
-操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装">安装</h2>
-<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
-中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程">一般安装流程</h3>
-<p>通常的安装步骤主要通过以下流程：</p>
-<ol type="1">
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
-<ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
-</ul></li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载">固件搜索下载</h3>
-<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
-页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
         <tag>OpenWrt</tag>
       </tags>
   </entry>
@@ -3366,6 +3342,53 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
       <tags>
         <tag>Breed</tag>
         <tag>BootLoader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<h3 id="来源">来源</h3>
+<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
+系统。迫于 Linux 的开源协议要求，Linksys
+开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
+<span id="more"></span></p>
+<h3 id="介绍">介绍</h3>
+<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
+操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装">安装</h2>
+<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
+中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程">一般安装流程</h3>
+<p>通常的安装步骤主要通过以下流程：</p>
+<ol type="1">
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
+<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul></li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载">固件搜索下载</h3>
+<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
+页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>

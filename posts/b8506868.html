@@ -31,11 +31,13 @@
 <meta property="og:description" content="本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-22T14:54:45.000Z">
-<meta property="article:modified_time" content="2022-11-23T09:56:59.000Z">
+<meta property="article:modified_time" content="2022-11-24T04:01:14.000Z">
 <meta property="article:author" content="Zeus">
-<meta property="article:tag" content="RocksDB">
 <meta property="article:tag" content="日常踩坑">
+<meta property="article:tag" content="RocksDB">
 <meta property="article:tag" content="ZNS">
+<meta property="article:tag" content="QEMU">
+<meta property="article:tag" content="grub">
 <meta name="twitter:card" content="summary">
 
 
@@ -95,7 +97,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">37</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">39</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -152,7 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zns-%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">配置 ZNS 环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-rocksdb-%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">配置 RocksDB 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">环境以及依赖安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-rocksdb-%E5%BA%93%E4%BB%A5%E5%8F%8A%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">编译 RocksDB 库以及测试工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zenfs-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">配置 ZenFS 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-libzbd"><span class="nav-number">3.1.</span> <span class="nav-text">安装 libzbd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zenfs-%E6%8F%92%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-number">3.2.</span> <span class="nav-text">ZenFS 插件编译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-zenfs-%E7%9A%84%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E6%B5%8B%E8%AF%95"><span class="nav-number">4.1.</span> <span class="nav-text">利用 zenfs 的测试脚本测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5-db_bench-%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.</span> <span class="nav-text">直接 db_bench 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zns-%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">配置 ZNS 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-femu"><span class="nav-number">1.1.</span> <span class="nav-text">配置 FEMU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qemu-%E5%88%B6%E4%BD%9C%E5%92%8C%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F"><span class="nav-number">1.2.</span> <span class="nav-text">QEMU 制作和安装系统镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-rocksdb-%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">配置 RocksDB 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">环境以及依赖安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-rocksdb-%E5%BA%93%E4%BB%A5%E5%8F%8A%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">编译 RocksDB 库以及测试工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-zenfs-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">配置 ZenFS 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-libzbd"><span class="nav-number">3.1.</span> <span class="nav-text">安装 libzbd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zenfs-%E6%8F%92%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-number">3.2.</span> <span class="nav-text">ZenFS 插件编译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-zenfs-%E7%9A%84%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E6%B5%8B%E8%AF%95"><span class="nav-number">4.1.</span> <span class="nav-text">利用 zenfs 的测试脚本测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5-db_bench-%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.</span> <span class="nav-text">直接 db_bench 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +245,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-23 17:56:59" itemprop="dateModified" datetime="2022-11-23T17:56:59+08:00">2022-11-23</time>
+      <time title="修改时间：2022-11-24 12:01:14" itemprop="dateModified" datetime="2022-11-24T12:01:14+08:00">2022-11-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,9 +272,11 @@
       </span>
       <span class="post-meta-item-text">标签：</span>
       <span class="post-tags">
-        <a href="/tags/RocksDB/" rel="tag"># RocksDB</a>
         <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"># 日常踩坑</a>
+        <a href="/tags/RocksDB/" rel="tag"># RocksDB</a>
         <a href="/tags/ZNS/" rel="tag"># ZNS</a>
+        <a href="/tags/QEMU/" rel="tag"># QEMU</a>
+        <a href="/tags/grub/" rel="tag"># grub</a>
       </span>
     </span>
 
@@ -282,14 +286,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -307,10 +311,12 @@
 <p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS
 设备类型是基于闪存的 SSD。但是 ZNS SSD
 目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
+<h3 id="配置-femu">配置 FEMU</h3>
 <p>官网给了 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiN6b25lZC1ibG9jay1kZXZpY2UtZW11bGF0aW9uLXdpdGgtbnVsbF9ibGs=">null_blk<i class="fa fa-external-link-alt"></i></span>
 以及 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiNudm1lLXpvbmVkLW5hbWVzcGFjZS1kZXZpY2UtZW11bGF0aW9uLXdpdGgtcWVtdQ==">QEMU<i class="fa fa-external-link-alt"></i></span>
 的配置方法，但是个人对 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">FEMU<i class="fa fa-external-link-alt"></i></span>
-比较熟悉，于是采用模拟 FEMU 模拟 ZNS 搭建环境</p>
+比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用
+FEMU 模拟 ZNS 搭建环境</p>
 <p>FEMU 的环境搭建比较简单，参考其 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVUjaW5zdGFsbGF0aW9u">官方仓库 README<i class="fa fa-external-link-alt"></i></span>
 操作即可</p>
 <p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
@@ -318,6 +324,17 @@
 22.04 LTS。
 不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
 安装内核用户头文件过程中）可能会出问题</p>
+<h3 id="qemu-制作和安装系统镜像">QEMU 制作和安装系统镜像</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载 Ubuntu 镜像</span></span><br><span class="line">wget https://releases.ubuntu.com/22.04.1/ubuntu-22.04.1-live-server-amd64.iso</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制作磁盘镜像</span></span><br><span class="line">qemu-img create -f qcow2 u22s.qcow2 80G</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 镜像挂在 cdrom 上启动</span></span><br><span class="line"><span class="comment"># 安装过程需要通过 vnc 连接操作，端口号 5901</span></span><br><span class="line">qemu-system-x86_64 -m 2G -cdrom ubuntu-22.04.1-live-server-amd64.iso -hda u22s.qcow2 -boot d -vnc :1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完成后重启，再 vnc 连接一次，修改内核启动参数</span></span><br><span class="line">qemu-system-x86_64 -m 2G -hda u22s.qcow2 -vnc :1</span><br></pre></td></tr></tbody></table></figure>
+<p>然后在虚拟内将内核启动时输出改为打印到串口</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在虚拟机内</span></span><br><span class="line">sudo vim /etc/default/grub</span><br></pre></td></tr></tbody></table></figure>
+<p>保证按照下面的配置</p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用于保证 grub 界面能输出到屏幕</span></span><br><span class="line"><span class="comment">#GRUB_TIMEOUT_STYLE=hidden</span></span><br><span class="line"><span class="attr">GRUB_TIMEOUT</span>=<span class="number">3</span></span><br><span class="line"><span class="attr">GRUB_TERMINAL</span>=serial</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于保证内核启动时能输出到屏幕</span></span><br><span class="line"><span class="attr">GRUB_CMDLINE_LINUX</span>=<span class="string">"ip=dhcp console=ttyS0,115200"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># (可选)屏蔽子菜单和 recovery 内核，方便快速切换内核</span></span><br><span class="line"><span class="attr">GRUB_DISABLE_SUBMENU</span>=y</span><br><span class="line"><span class="attr">GRUB_DISABLE_RECOVERY</span>=<span class="string">"true"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后更新重启即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新 grub</span></span><br><span class="line">sudo update-grub</span><br><span class="line"><span class="comment"># sudo update-grub2</span></span><br><span class="line">sudo poweroff</span><br></pre></td></tr></tbody></table></figure>
+<p>之后就可以不需要 vnc 连接了，可以加上 <code>-nographic</code>
+使用了，例如</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 举例</span></span><br><span class="line">qemu-system-x86_64 -enable-kvm -cpu host -smp=16 -m 4G -hda u22s.qcow2 -nographic</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
 官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
@@ -378,6 +395,14 @@
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">【GitHub】ZenFS<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">【zonedstorage】ZNS<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">【GitHub】FEMU<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL3FlbXUtbWFucGFnZS5odG1s">【QEMU】QEMU
+User Documentation<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvUUVNVS9JbWFnZXMjQ3JlYXRpbmdfYW5faW1hZ2U=">【Wikibooks】QEMU/Images<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL2xpbnV4Ym9vdC5odG1s">【QEMU】Direct
+Linux Boot<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy85MjQ5MTMvaG93LXRvLWdldC10by10aGUtZ3J1Yi1tZW51LWF0LWJvb3QtdGltZS11c2luZy1zZXJpYWwtY29uc29sZQ==">【ask
+ubuntu】How to get to the GRUB menu at boot-time using serial
+console?<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">【CSDN】问题解决
 C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vbGliemJk">【GitHub】libzbd<i class="fa fa-external-link-alt"></i></span></li>
@@ -426,9 +451,11 @@ C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-extern
 </div>
 
           <div class="post-tags">
-              <a href="/tags/RocksDB/" rel="tag"><i class="fa fa-tag"></i> RocksDB</a>
               <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"><i class="fa fa-tag"></i> 日常踩坑</a>
+              <a href="/tags/RocksDB/" rel="tag"><i class="fa fa-tag"></i> RocksDB</a>
               <a href="/tags/ZNS/" rel="tag"><i class="fa fa-tag"></i> ZNS</a>
+              <a href="/tags/QEMU/" rel="tag"><i class="fa fa-tag"></i> QEMU</a>
+              <a href="/tags/grub/" rel="tag"><i class="fa fa-tag"></i> grub</a>
           </div>
 
         
