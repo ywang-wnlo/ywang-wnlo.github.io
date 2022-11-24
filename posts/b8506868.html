@@ -31,7 +31,7 @@
 <meta property="og:description" content="本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-22T14:54:45.000Z">
-<meta property="article:modified_time" content="2022-11-24T04:01:14.000Z">
+<meta property="article:modified_time" content="2022-11-24T09:16:00.000Z">
 <meta property="article:author" content="Zeus">
 <meta property="article:tag" content="日常踩坑">
 <meta property="article:tag" content="RocksDB">
@@ -97,7 +97,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">39</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">43</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -245,7 +245,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-24 12:01:14" itemprop="dateModified" datetime="2022-11-24T12:01:14+08:00">2022-11-24</time>
+      <time title="修改时间：2022-11-24 17:16:00" itemprop="dateModified" datetime="2022-11-24T17:16:00+08:00">2022-11-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -323,7 +323,7 @@ FEMU 模拟 ZNS 搭建环境</p>
 内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
 22.04 LTS。
 不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
-安装内核用户头文件过程中）可能会出问题</p>
+安装内核用户头文件过程中）存在一定的风险性</p>
 <h3 id="qemu-制作和安装系统镜像">QEMU 制作和安装系统镜像</h3>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载 Ubuntu 镜像</span></span><br><span class="line">wget https://releases.ubuntu.com/22.04.1/ubuntu-22.04.1-live-server-amd64.iso</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制作磁盘镜像</span></span><br><span class="line">qemu-img create -f qcow2 u22s.qcow2 80G</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 镜像挂在 cdrom 上启动</span></span><br><span class="line"><span class="comment"># 安装过程需要通过 vnc 连接操作，端口号 5901</span></span><br><span class="line">qemu-system-x86_64 -m 2G -cdrom ubuntu-22.04.1-live-server-amd64.iso -hda u22s.qcow2 -boot d -vnc :1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完成后重启，再 vnc 连接一次，修改内核启动参数</span></span><br><span class="line">qemu-system-x86_64 -m 2G -hda u22s.qcow2 -vnc :1</span><br></pre></td></tr></tbody></table></figure>
 <p>然后在虚拟内将内核启动时输出改为打印到串口</p>
@@ -467,6 +467,9 @@ C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-extern
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/posts/72a4cdfd.html" rel="next" title="Ubuntu 环境配置大合集">
+                  Ubuntu 环境配置大合集 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

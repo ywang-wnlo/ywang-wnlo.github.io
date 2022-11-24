@@ -91,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">39</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">43</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -192,6 +192,138 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/9ba60726.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zeus">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐园">
+      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 乐园">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/9ba60726.html" class="post-title-link" itemprop="url">page cache 简介</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-05 22:22:08" itemprop="dateCreated datePublished" datetime="2021-12-05T22:22:08+08:00">2021-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-16 10:33:39" itemprop="dateModified" datetime="2022-11-16T10:33:39+08:00">2022-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8/IO/" itemprop="url" rel="index"><span itemprop="name">IO</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tags"></i>
+      </span>
+      <span class="post-meta-item-text">标签：</span>
+      <span class="post-tags">
+        <a href="/tags/todo/" rel="tag"># todo</a>
+        <a href="/tags/kernel/" rel="tag"># kernel</a>
+        <a href="/tags/buffer-IO/" rel="tag"># buffer IO</a>
+        <a href="/tags/page-cache/" rel="tag"># page cache</a>
+        <a href="/tags/writeback/" rel="tag"># writeback</a>
+      </span>
+    </span>
+
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="page-cache">page cache</h2>
+<p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存
+DRAM
+的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux
+在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page
+cache，中文一般称为页（面）缓存
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/9ba60726.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1018,9 +1150,9 @@ bootloader 被覆盖。而当 Breed
       <span class="post-tags">
         <a href="/tags/todo/" rel="tag"># todo</a>
         <a href="/tags/%E5%BC%82%E6%AD%A5-IO/" rel="tag"># 异步 IO</a>
-        <a href="/tags/kernel/" rel="tag"># kernel</a>
         <a href="/tags/liburing/" rel="tag"># liburing</a>
         <a href="/tags/io-uring/" rel="tag"># io_uring</a>
+        <a href="/tags/kernel/" rel="tag"># kernel</a>
       </span>
     </span>
 
@@ -1314,130 +1446,6 @@ buffer IO
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/c142853f.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/51140c4a.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zeus">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乐园">
-      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 乐园">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/51140c4a.html" class="post-title-link" itemprop="url">OpenWrt 配置使用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-28 16:17:24" itemprop="dateCreated datePublished" datetime="2021-10-28T16:17:24+08:00">2021-10-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-19 15:30:47" itemprop="dateModified" datetime="2022-11-19T15:30:47+08:00">2022-11-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">路由器</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tags"></i>
-      </span>
-      <span class="post-meta-item-text">标签：</span>
-      <span class="post-tags">
-        <a href="/tags/OpenWrt/" rel="tag"># OpenWrt</a>
-        <a href="/tags/%E9%94%90%E6%8D%B7/" rel="tag"># 锐捷</a>
-        <a href="/tags/IPv6/" rel="tag"># IPv6</a>
-        <a href="/tags/NAS/" rel="tag"># NAS</a>
-      </span>
-    </span>
-
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>15 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="web-界面">Web 界面</h2>
-<p>一般 OpenWrt 安装好之后会已经默启用了 Web
-管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是
-<code>root</code>，无密码，直接点击登录即可进入
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/51140c4a.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
