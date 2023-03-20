@@ -424,6 +424,376 @@ Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-al
       </tags>
   </entry>
   <entry>
+    <title>LaTeX PPT</title>
+    <url>/posts/499c5a19.html</url>
+    <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
+<p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf
+上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span></p>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer">
+<figcaption aria-hidden="true">Beamer</figcaption>
+</figure>
+<!-- TODO: Beamer 介绍和额外的特性 -->
+<h2 id="特性">特性</h2>
+<h3 id="frame-与-slide"><code>frame</code> 与 <code>slide</code></h3>
+<p>Beamer 中通常会用一对
+<code>\begin{frame}</code>、<code>\end{frame}</code>
+来制作一页幻灯片（slide），例如</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{标题名称}</span><br><span class="line">	主体内容</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-frame.png" alt="frame">
+<figcaption aria-hidden="true">frame</figcaption>
+</figure>
+<p>然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides</p>
+<h4 id="pause"><code>\pause</code></h4>
+<p>添加 <code>\pause</code> 会将 <code>\pause</code>
+语句前面内容单独在新的一页 slide 上显示，实现了类似 PPT
+动画中的点击页面出现下一段文字的效果，下面给出代码和生成的 PDF
+帮助理解</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{<span class="keyword">\textbackslash</span> pause 使用}</span><br><span class="line"></span><br><span class="line">	在这组幻灯片中 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	这段文件将部分可见 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	现在所有文字都可以看见了</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-pause.jpg" alt="pause">
+<figcaption aria-hidden="true">pause</figcaption>
+</figure>
+<h4 id="itemize-中的尖括号-strat-end"><code>itemize</code> 中的尖括号
+&lt;strat-end&gt;</h4>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line"><span class="keyword">\frametitle</span>{item 中的尖括号}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">	<span class="keyword">\item</span>&lt;1-&gt; 该文字在 1+ 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;2-3&gt; 该文字在 2-3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;3&gt; 该文字仅在第 3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;4-&gt; 该文字在 4+ 页均可见</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-item.jpg" alt="item">
+<figcaption aria-hidden="true">item</figcaption>
+</figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>Beamer</tag>
+        <tag>LaTeX</tag>
+        <tag>todo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 基础介绍</title>
+    <url>/posts/a4752f87.html</url>
+    <content><![CDATA[<h2 id="tex-和-latex">TeX 和 LaTeX</h2>
+<p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成
+LaTeX 通过对 TeX 进行封装，使用 TeX
+作为它的格式化引擎，使得排版文字变得更加方便。</p>
+<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成
+<code>.dvi</code> 文件 <span id="more"></span></p>
+<h2 id="pdftexxetex-和-luatex">pdfTeX、XeTeX 和 LuaTeX</h2>
+<h3 id="三者的介绍">三者的介绍</h3>
+<p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX
+引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
+<ul>
+<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
+<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
+<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
+</ul>
+<h3 id="各自的特性">各自的特性</h3>
+<ul>
+<li>pdfTeX 的主要特性是能直接生成 pdf</li>
+<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
+<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua
+脚本</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX,
+XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 环境配置</title>
+    <url>/posts/4f94956.html</url>
+    <content><![CDATA[<h2 id="网页环境">网页环境</h2>
+<h3 id="overleaf">Overleaf</h3>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29t">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX
+编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑
+<span id="more"></span></p>
+<h2 id="本地环境">本地环境</h2>
+<h3 id="tex-live">TeX Live</h3>
+<p>TeX Live 可以利用镜像安装节省下载时间</p>
+<ul>
+<li>从 <span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL0NUQU4vc3lzdGVtcy90ZXhsaXZlL0ltYWdlcy8=">清华镜像站<i class="fa fa-external-link-alt"></i></span>
+直接下载</li>
+<li>或者利用 <span class="exturl" data-url="aHR0cDovL3d3dy50dWcub3JnL3RleGxpdmUvYWNxdWlyZS1pc28uaHRtbCN0b3JyZW50">种子文件<i class="fa fa-external-link-alt"></i></span>
+BT 下载镜像</li>
+</ul>
+<p>可以在安装 TeX Live 时同时勾选上安装 TeXworks 前端，然后就可以使用
+TeXworks 作为 IDE 来使用了</p>
+<h3 id="texstudio">TeXstudio</h3>
+<p>TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGV4c3R1ZGlvLm9yZy8=">官网<i class="fa fa-external-link-alt"></i></span> 下载安装，并且有中文界面</p>
+<h3 id="vscode">VSCode</h3>
+<p>个人更喜欢 VSCode，通过安装扩展并进行相应的配置即可较好的支持
+LaTeX，同时还有格式化和自动补全等功能，非常方便</p>
+<h4 id="安装-latex-workshop-扩展">安装 LaTeX Workshop 扩展</h4>
+<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPUphbWVzLVl1LmxhdGV4LXdvcmtzaG9w">VSCode
+的扩展商店<i class="fa fa-external-link-alt"></i></span> 中搜索 <code>LaTeX Workshop</code> 安装即可</p>
+<h4 id="编译链配置">编译链配置</h4>
+<ol type="1">
+<li><p>默认配置</p>
+<p>TeX Live 安装时会同时安装 <code>latexmk</code>, LaTeX Workshop
+会默认使用 <code>latexmk</code> 来编译
+<code>.tex</code>，无需手动再配置</p></li>
+<li><p>手动配置 (可选)</p>
+<p>手动配置 LaTeX Workshop，在 VSCode 的配置文件
+<code>settings.json</code> 中直接手动添加如下代码:</p>
+<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">官方
+recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
+<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><!-- TODO: 弄清编译命令和编译链当前配置的具体含义，主要是 bibtex --></p></li>
+</ol>
+<h4 id="正向同步">正向同步</h4>
+<p>正向同步指的是编译完成后，在 <code>.tex</code>
+文件内通过快捷键，快速定位到光标位置在 <code>.tex</code>
+的对应位置，方便查看 PDF 文件</p>
+<p>推荐打开文件修改后，编译完成后自动正向同步。该功能通过
+<code>latex-workshop.synctex.afterBuild.enabled</code> 来控制</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="反向同步">反向同步</h4>
+<p>反向同步指的是编译完成后，在 PDF 文件内通过快捷键，快速定位点击部分在
+<code>.tex</code> 的位置，方便修改 <code>.tex</code> 源码</p>
+<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">官方
+synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
+<ol type="1">
+<li><p>VSCode 内部 PDF 浏览器</p>
+<p>如果直接使用 VSCode 来浏览 PDF，不需要额外设置，可以根据需要修改
+<code>latex-workshop.view.pdf.internal.synctex.keybinding</code>
+来修改反向同步的快捷键即可，默认 Ctrl 加鼠标左键</p>
+<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.internal.synctex.keybinding"</span><span class="punctuation">:</span> <span class="string">"ctrl-click"</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>外部 PDF 浏览器</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3VtYXRyYXBkZnJlYWRlci5vcmcvZnJlZS1wZGYtcmVhZGVy">SumatraPDF<i class="fa fa-external-link-alt"></i></span>
+是一款流行的小巧方便的免费 PDF 浏览软件。VSCode 支持使用外部的 PDF
+浏览器来查看编译后的 PDF 文件，以及反向搜索功能。主要需要如下配置：</p>
+<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置为使用外部 PDF 浏览软件来浏览 PDF</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.viewer"</span><span class="punctuation">:</span> <span class="string">"external"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 配置外部 PDF 浏览软件的命令行以及参数</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.command"</span><span class="punctuation">:</span> <span class="string">"D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe"</span><span class="punctuation">,</span> <span class="comment">// 自行修改路径</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"%PDF%"</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>在 SumatraPDF 的设置 - 选项中设置反向搜索命令行
+<code>C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe -g "%f:%l"</code>，Code
+的路径应该为完整的绝对路径</p></li>
+</ol>
+<h4 id="其他可选配置">其他可选配置</h4>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="中文支持">中文支持</h2>
+<p>该节主要参考 <span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">Overleaf Chinese<i class="fa fa-external-link-alt"></i></span>
+文档</p>
+<p><strong>推荐使用 XeLaTeX 和 LuaLaTeX 来编译含有中文字符的
+<code>.tex</code> 文件</strong></p>
+<h3 id="xelatex-和-lualatex">XeLaTeX 和 LuaLaTeX</h3>
+<ol type="1">
+<li>直接使用 <code>ctexart</code> 文档类即可支持中文</li>
+<li>或者使用 <code>ctex</code> 包来支持中文</li>
+</ol>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\tableofcontents</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{abstract}</span><br><span class="line">这是简介及摘要。</span><br><span class="line"><span class="keyword">\end</span>{abstract}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+<p>或者</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{xxx}</span><br><span class="line"><span class="keyword">\usepackage</span>{ctex}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="xelatex">XeLaTeX</h3>
+<p>XeLaTeX 还可以使用 <code>xeCJK</code> 包来支持中文</p>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{xeCJK}</span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="pdflatex">pdfLaTeX</h3>
+<p>pdfLaTeX 对中文支持不是很好，只用 pdaLaTeX 的话需要引入
+<code>CJKutf8</code> 包，并且用 <code>\begin{CJK*}{UTF8}{gbsn}</code> 和
+<code>\end{CJK*}</code> 包住所有的中文。</p>
+<ul>
+<li><code>gbsn</code> 和 <code>gkai</code> 是简体的字体</li>
+<li><code>bsmi</code> 和 <code>bkai</code> 是繁体的字体</li>
+</ul>
+<p>参考代码如下：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{CJKutf8}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{gbsn}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line">You can also insert Latin text in your document</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{bsmi}</span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="编译">编译</h3>
+<ol type="1">
+<li><p>首先 <code>.tex</code>
+文件名以及路径尽量不要含有空格以及中文字符</p></li>
+<li><p>在使用 <code>latexmk</code> 和 VSCode 的 LaTeX Workshop
+时，推荐使用第三个编译链 <code>Recipe: latexmk (lualatex)</code></p>
+<figure>
+<img data-src="/posts/4f94956/build-chinese-latex.png" alt="编译中文 LaTeX">
+<figcaption aria-hidden="true">编译中文 LaTeX</figcaption>
+</figure></li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvSW5zdGFsbCNyZXF1aXJlbWVudHM=">【LaTeX
+Workshop】依赖<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">【LaTeX
+Workshop】recipes 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">【LaTeX
+Workshop】synctex 配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODE3ODAxNQ==">【知乎】使用 VSCode
+编写 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xNjY1MjMwNjQ=">【知乎】Visual
+Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">【Overleaf】Chinese<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>todo</tag>
+        <tag>VSCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX 语法</title>
+    <url>/posts/2033aa70.html</url>
+    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#中文支持">内容</a>，在这里不做重复
+<span id="more"></span></p>
+<h2 id="长度">长度</h2>
+<p>常用的长度单位</p>
+<table>
+<thead>
+<tr class="header">
+<th>单位</th>
+<th>含义</th>
+<th>换算成 pt</th>
+<th> 换成算成 mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pt</td>
+<td> 基本单位</td>
+<td> 1 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr class="even">
+<td>mm</td>
+<td> 毫米</td>
+<td> 2.84 pt</td>
+<td>1 mm</td>
+</tr>
+<tr class="odd">
+<td>cm</td>
+<td> 厘米</td>
+<td> 28.4 pt</td>
+<td>10 mm</td>
+</tr>
+<tr class="even">
+<td>in</td>
+<td> 英寸</td>
+<td> 72.27 pt</td>
+<td>0.35146 mm</td>
+</tr>
+<tr class="odd">
+<td>ex</td>
+<td> 当前字体的 x 字母高度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>em</td>
+<td> 当前字体的 m 字母宽度</td>
+<td> -</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="空行">空行</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="空格">空格</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="超链接">超链接</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">% 开启链接颜色配置，并配置为蓝色</span></span><br><span class="line"><span class="keyword">\usepackage</span>[colorlinks=true, allcolors=blue]{hyperref}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\url</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}</span><br><span class="line"><span class="keyword">\href</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}{LaTeX 语法}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="数学公式">数学公式</h2>
+<h3 id="段落中隐式">段落中（隐式）</h3>
+<p>三种均可，任意选择，以 E=mc<sup>2</sup> 为例</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span>E=mc<span class="built_in">^</span>2<span class="keyword">\)</span></span><br><span class="line"><span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>{math}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{math}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="单独成段显式">单独成段（显式）</h3>
+<p>三种均可，任意选择</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span>E=mc<span class="built_in">^</span>2<span class="keyword">\]</span></span><br><span class="line"><span class="keyword">\begin</span>{displaymath}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{displaymath}</span><br><span class="line"><span class="keyword">\begin</span>{equation}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{equation}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="居中左对齐右对齐">居中，左对齐，右对齐</h2>
+<h3 id="居中">居中</h3>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{center}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{center}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="左对齐">左对齐</h3>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushleft}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushleft}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="右对齐">右对齐</h3>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushright}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushright}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考文献配置">参考文献配置</h2>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{stylename}</span><br><span class="line"><span class="keyword">\bibliography</span>{bibfile}</span><br></pre></td></tr></tbody></table></figure>
+<p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而
+<code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
+<table>
+<colgroup>
+<col style="width: 57%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>stylename</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>abbrc</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc"></td>
+</tr>
+<tr class="even">
+<td>acm</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm"></td>
+</tr>
+<tr class="odd">
+<td>alpha</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha"></td>
+</tr>
+<tr class="even">
+<td>apalike</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike"></td>
+</tr>
+<tr class="odd">
+<td>ieeetr</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr"></td>
+</tr>
+<tr class="even">
+<td>plain</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain"></td>
+</tr>
+<tr class="odd">
+<td>siam</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam"></td>
+</tr>
+<tr class="even">
+<td>unsrt</td>
+<td><img data-src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="todo">TODO</h2>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX
+Lengths<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvSHlwZXJsaW5rcw==">【维基百科】LaTeX
+Hyperlinks<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L01hdGhlbWF0aWNhbF9leHByZXNzaW9ucw==">【overleaf】Mathematical
+expressions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JpYnRleF9iaWJsaW9ncmFwaHlfc3R5bGVz">【overleaf】Bibtex
+bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>todo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu 环境配置大合集</title>
     <url>/posts/72a4cdfd.html</url>
     <content><![CDATA[<p>本文主要记录个人使用 Ubuntu
@@ -442,12 +812,24 @@ warning: Setting locale failed</h2>
 <h2 id="配置时区">配置时区</h2>
 <p>Ubuntu 默认时间是 UTC 时间，可以通过修改时区来显示本地的时间</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 查看当前时区</span></span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不知道时区名可以通过 tzselect 获取</span></span><br><span class="line">tzselect</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置当前时区为 Asia/Shanghai</span></span><br><span class="line">sudo timedatectl set-timezone Asia/Shanghai</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="远程-vnc">远程 VNC</h2>
+<ul>
+<li>服务器 </li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">sudo apt install tigervnc-standalone-server tigervnc-common</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初次启动并配置</span></span><br><span class="line">vncserver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭已开启的第一个实例</span></span><br><span class="line">vncserver -<span class="built_in">kill</span> :1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可能需要开启相应端口</span></span><br><span class="line">sudo ufw allow 5901</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消只能本地连接的限制</span></span><br><span class="line">vncserver -localhost no</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>客户端</li>
+</ul>
+<p>在 Windows 直接下载 <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVhbHZuYy5jb20vZW4vY29ubmVjdC9kb3dubG9hZC92aWV3ZXIv">VNC
+Viewer<i class="fa fa-external-link-alt"></i></span> 配置好相应的 IP 以及端口即可</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS91cGRhdGUtYWx0ZXJuYXRpdmVzLjEuaHRtbA==">【man】update-alternatives<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjQ5OTc5NC9ob3ctdG8tZml4LWEtbG9jYWxlLXNldHRpbmctd2FybmluZy1mcm9tLXBlcmw=">【stackoverflow】How
 to fix a locale setting warning from Perl<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9saW51eGhpbnQuY29tL2hvdy10by11c2UtdGltZWRhdGVjdGwtdWJ1bnR1Lw==">【linuxhint】timedatectl<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubXlmcmVheC5jb20vaG93LXRvLWluc3RhbGwtYW5kLWNvbmZpZ3VyZS12bmMtb24tdWJ1bnR1LTIyLTA0Lw==">【myfreax】如何在
+Ubuntu 22.04 安装 VNC<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
@@ -458,6 +840,7 @@ to fix a locale setting warning from Perl<i class="fa fa-external-link-alt"></i>
         <tag>vim</tag>
         <tag>perl</tag>
         <tag>timedatectl</tag>
+        <tag>VNC</tag>
       </tags>
   </entry>
   <entry>
@@ -1141,373 +1524,265 @@ Add support for HTTPS connections to proxies.<i class="fa fa-external-link-alt">
       </tags>
   </entry>
   <entry>
-    <title>LaTeX PPT</title>
-    <url>/posts/499c5a19.html</url>
-    <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
-<p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf
-上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span></p>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer">
-<figcaption aria-hidden="true">Beamer</figcaption>
-</figure>
-<!-- TODO: Beamer 介绍和额外的特性 -->
-<h2 id="特性">特性</h2>
-<h3 id="frame-与-slide"><code>frame</code> 与 <code>slide</code></h3>
-<p>Beamer 中通常会用一对
-<code>\begin{frame}</code>、<code>\end{frame}</code>
-来制作一页幻灯片（slide），例如</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{标题名称}</span><br><span class="line">	主体内容</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-frame.png" alt="frame">
-<figcaption aria-hidden="true">frame</figcaption>
-</figure>
-<p>然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides</p>
-<h4 id="pause"><code>\pause</code></h4>
-<p>添加 <code>\pause</code> 会将 <code>\pause</code>
-语句前面内容单独在新的一页 slide 上显示，实现了类似 PPT
-动画中的点击页面出现下一段文字的效果，下面给出代码和生成的 PDF
-帮助理解</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{<span class="keyword">\textbackslash</span> pause 使用}</span><br><span class="line"></span><br><span class="line">	在这组幻灯片中 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	这段文件将部分可见 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	现在所有文字都可以看见了</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-pause.jpg" alt="pause">
-<figcaption aria-hidden="true">pause</figcaption>
-</figure>
-<h4 id="itemize-中的尖括号-strat-end"><code>itemize</code> 中的尖括号
-&lt;strat-end&gt;</h4>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line"><span class="keyword">\frametitle</span>{item 中的尖括号}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">	<span class="keyword">\item</span>&lt;1-&gt; 该文字在 1+ 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;2-3&gt; 该文字在 2-3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;3&gt; 该文字仅在第 3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;4-&gt; 该文字在 4+ 页均可见</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-item.jpg" alt="item">
-<figcaption aria-hidden="true">item</figcaption>
-</figure>
-<h2 id="参考资料">参考资料</h2>
+    <title>io_uring 内核源码分析</title>
+    <url>/posts/4f0d345c.html</url>
+    <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="io_uring">1. <code>io_uring</code></h2>
+<p><a href="/posts/c142853f.html#系统调用">之前</a> 介绍过 io_uring
+只增加了三个 Linux 系统调用分别是
+<code>io_uring_setup</code>，<code>io_uring_enter</code> 和
+<code>io_uring_register</code></p>
+<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code>
+文件中，下面将逐个分析 <span id="more"></span></p>
+<h2 id="系统调用-io_uring_setup">2. 系统调用
+<code>io_uring_setup</code></h2>
+<p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d.html#io-uring-queue-init">用户库源码分析</a>
+中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
+<h3 id="io_uring_setup">2.1. <code>io_uring_setup</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Sets up an aio uring context, and returns the fd. Applications asks for a</span></span><br><span class="line"><span class="comment"> * ring size, we return the actual sq/cq ring sizes (among other things) in the</span></span><br><span class="line"><span class="comment"> * params structure passed in.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> <span class="type">long</span> <span class="title function_">io_uring_setup</span><span class="params">(u32 entries, <span class="keyword">struct</span> io_uring_params __user *params)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_uring_params</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="type">long</span> ret;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用户态拷贝到内核态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(&amp;p, params, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	<span class="comment">// 确认保留区域没有被赋值</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ARRAY_SIZE(p.resv); i++) {</span><br><span class="line">		<span class="keyword">if</span> (p.resv[i])</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查 flags 参数</span></span><br><span class="line">	<span class="keyword">if</span> (p.flags &amp; ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |</span><br><span class="line">			IORING_SETUP_SQ_AFF))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分配内存空间，创建 workqueue，创建 fd 等</span></span><br><span class="line">	ret = io_uring_create(entries, &amp;p);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 内核态拷贝回用户态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_to_user(params, &amp;p, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">SYSCALL_DEFINE2(io_uring_setup, u32, entries,</span><br><span class="line">		<span class="keyword">struct</span> io_uring_params __user *, params)</span><br><span class="line">{</span><br><span class="line">	<span class="keyword">return</span> io_uring_setup(entries, params);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到 <code>io_uring_setup</code> 的核心函数是
+<code>io_uring_create</code></p>
+<h3 id="io_uring_create">2.2. <code>io_uring_create</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_uring_create</span><span class="params">(<span class="type">unsigned</span> entries, <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">user_struct</span> *<span class="title">user</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">bool</span> account_mem;</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!entries || entries &gt; IORING_MAX_ENTRIES)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Use twice as many entries for the CQ ring. It's possible for the</span></span><br><span class="line"><span class="comment">	 * application to drive a higher depth than the size of the SQ ring,</span></span><br><span class="line"><span class="comment">	 * since the sqes are only used at submission time. This allows for</span></span><br><span class="line"><span class="comment">	 * some flexibility in overcommitting a bit.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	p-&gt;sq_entries = roundup_pow_of_two(entries);</span><br><span class="line">	p-&gt;cq_entries = <span class="number">2</span> * p-&gt;sq_entries;</span><br><span class="line"></span><br><span class="line">	user = get_uid(current_user());</span><br><span class="line">	<span class="comment">// 允许对共享内存段进行锁定</span></span><br><span class="line">	account_mem = !capable(CAP_IPC_LOCK);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (account_mem) {</span><br><span class="line">		<span class="comment">// 不能对共享内存段进行锁定，就需要增加当前可以锁定的内存</span></span><br><span class="line">		ret = io_account_mem(user,</span><br><span class="line">				ring_pages(p-&gt;sq_entries, p-&gt;cq_entries));</span><br><span class="line">		<span class="keyword">if</span> (ret) {</span><br><span class="line">			free_uid(user);</span><br><span class="line">			<span class="keyword">return</span> ret;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	ctx = io_ring_ctx_alloc(p);</span><br><span class="line">	<span class="keyword">if</span> (!ctx) {</span><br><span class="line">		<span class="keyword">if</span> (account_mem)</span><br><span class="line">			io_unaccount_mem(user, ring_pages(p-&gt;sq_entries,</span><br><span class="line">								p-&gt;cq_entries));</span><br><span class="line">		free_uid(user);</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">	}</span><br><span class="line">	ctx-&gt;compat = in_compat_syscall();</span><br><span class="line">	ctx-&gt;account_mem = account_mem;</span><br><span class="line">	ctx-&gt;user = user;</span><br><span class="line"></span><br><span class="line">	ctx-&gt;creds = get_current_cred();</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;creds) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 申请 io_rings SQEs</span></span><br><span class="line">	ret = io_allocate_scq_urings(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化 workqueue，[初始化内核线程用于进行 IO poll]</span></span><br><span class="line">	ret = io_sq_offload_start(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;sq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;sq_off));</span><br><span class="line">	p-&gt;sq_off.head = offsetof(<span class="keyword">struct</span> io_rings, sq.head);</span><br><span class="line">	p-&gt;sq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, sq.tail);</span><br><span class="line">	p-&gt;sq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_mask);</span><br><span class="line">	p-&gt;sq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_entries);</span><br><span class="line">	p-&gt;sq_off.flags = offsetof(<span class="keyword">struct</span> io_rings, sq_flags);</span><br><span class="line">	p-&gt;sq_off.dropped = offsetof(<span class="keyword">struct</span> io_rings, sq_dropped);</span><br><span class="line">	p-&gt;sq_off.<span class="built_in">array</span> = (<span class="type">char</span> *)ctx-&gt;sq_array - (<span class="type">char</span> *)ctx-&gt;rings;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;cq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;cq_off));</span><br><span class="line">	p-&gt;cq_off.head = offsetof(<span class="keyword">struct</span> io_rings, cq.head);</span><br><span class="line">	p-&gt;cq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, cq.tail);</span><br><span class="line">	p-&gt;cq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_mask);</span><br><span class="line">	p-&gt;cq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_entries);</span><br><span class="line">	p-&gt;cq_off.overflow = offsetof(<span class="keyword">struct</span> io_rings, cq_overflow);</span><br><span class="line">	p-&gt;cq_off.cqes = offsetof(<span class="keyword">struct</span> io_rings, cqes);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Install ring fd as the very last thing, so we don't risk someone</span></span><br><span class="line"><span class="comment">	 * having closed it before we finish setup</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 创建 fd 便于用户态访问 ctx</span></span><br><span class="line">	ret = io_uring_get_fd(ctx);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	p-&gt;features = IORING_FEAT_SINGLE_MMAP;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">err:</span><br><span class="line">	io_ring_ctx_wait_and_kill(ctx);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="mermaid">graph TD
+io_uring_setup --&gt; io_ring_ctx_alloc
+io_uring_setup --&gt; io_allocate_scq_urings
+io_uring_setup --&gt; io_sq_offload_start
+io_uring_setup --&gt; io_uring_get_fd</pre>
+<ol type="1">
+<li><p><code>io_ring_ctx_alloc</code>
+主要用来申请空间，初始化列表头、互斥锁、自旋锁等结构</p></li>
+<li><p><code>io_allocate_scq_urings</code> 来初始化整个
+<code>struct io_rings *rings</code>，包括
+<code>SQ</code>、<code>CQ</code> 头尾指针的初始化，以及
+<code>SQE</code>、<code>CQE</code> 的初始化</p>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
+<li>不同的是 <code>SQ</code>、<code>CQ</code> 头尾指针以及
+<code>CQE</code> 都在 <code>struct io_rings *rings</code> 结构体中</li>
+<li>而 <code>SQE</code> 则是在 <code>struct io_ring_ctx *ctx</code>
+结构体中</li>
+</ul></li>
+<li><p><code>io_sq_offload_start</code> 会根据用户通过
+<code>io_uring_setup</code> 传递的 <code>flags</code> 来配置
+<code>io_uring</code> 的运行方式，后续详细展开</p></li>
+<li><p><code>io_uring_get_fd</code> 将
+<code>struct io_ring_ctx *ctx</code> 暴露给用户态访问</p></li>
+</ol>
+<h3 id="io_sq_offload_start">2.3. <code>io_sq_offload_start</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_sq_offload_start</span><span class="params">(<span class="keyword">struct</span> io_ring_ctx *ctx,</span></span><br><span class="line"><span class="params">			       <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	mmgrab(current-&gt;mm);</span><br><span class="line">	ctx-&gt;sqo_mm = current-&gt;mm;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="comment">// IORING_SETUP_SQPOLL 将会创建一个内核线程来 poll SQ</span></span><br><span class="line">		ret = -EPERM;</span><br><span class="line">		<span class="keyword">if</span> (!capable(CAP_SYS_ADMIN))</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">		ctx-&gt;sq_thread_idle = msecs_to_jiffies(p-&gt;sq_thread_idle);</span><br><span class="line">		<span class="keyword">if</span> (!ctx-&gt;sq_thread_idle)</span><br><span class="line">			ctx-&gt;sq_thread_idle = HZ;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">			<span class="type">int</span> cpu = p-&gt;sq_thread_cpu;</span><br><span class="line"></span><br><span class="line">			ret = -EINVAL;</span><br><span class="line">			<span class="keyword">if</span> (cpu &gt;= nr_cpu_ids)</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line">			<span class="keyword">if</span> (!cpu_online(cpu))</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create_on_cpu(io_sq_thread,</span><br><span class="line">							ctx, cpu,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create(io_sq_thread, ctx,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (IS_ERR(ctx-&gt;sqo_thread)) {</span><br><span class="line">			ret = PTR_ERR(ctx-&gt;sqo_thread);</span><br><span class="line">			ctx-&gt;sqo_thread = <span class="literal">NULL</span>;</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		}</span><br><span class="line">		wake_up_process(ctx-&gt;sqo_thread);</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">		<span class="comment">/* Can't have SQ_AFF without SQPOLL */</span></span><br><span class="line">		ret = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Do QD, or 2 * CPUS, whatever is smallest */</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">0</span>] = alloc_workqueue(<span class="string">"io_ring-wq"</span>,</span><br><span class="line">			WQ_UNBOUND | WQ_FREEZABLE,</span><br><span class="line">			min(ctx-&gt;sq_entries - <span class="number">1</span>, <span class="number">2</span> * num_online_cpus()));</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">0</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * This is for buffered writes, where we want to limit the parallelism</span></span><br><span class="line"><span class="comment">	 * due to file locking in file systems. As "normal" buffered writes</span></span><br><span class="line"><span class="comment">	 * should parellelize on writeout quite nicely, limit us to having 2</span></span><br><span class="line"><span class="comment">	 * pending. This avoids massive contention on the inode when doing</span></span><br><span class="line"><span class="comment">	 * buffered async writes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 对 buffer 写的 workqueue 深度进行限制，减少锁争用开销?</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">1</span>] = alloc_workqueue(<span class="string">"io_ring-write-wq"</span>,</span><br><span class="line">						WQ_UNBOUND | WQ_FREEZABLE, <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">1</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">err:</span><br><span class="line">	io_finish_async(ctx);</span><br><span class="line">	mmdrop(ctx-&gt;sqo_mm);</span><br><span class="line">	ctx-&gt;sqo_mm = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>当 <code>flags</code> 中配置了 <code>IORING_SETUP_SQPOLL</code>
+时，将启动一个单独的内核线程 <code>io_sq_thread</code>，而当
+<code>IORING_SETUP_SQ_AFF</code> 字段也配置时，将根据
+<code>sq_thread_cpu</code> 字段，在指定的 CPU 上启用内核线程
+<code>io_sq_thread</code></p>
+<p>同时该函数还会创建两个工作队列 <code>ctx-&gt;sqo_wq[2]</code>
+分别名为 <code>io_ring-wq</code> 和 <code>io_ring-write-wq</code></p>
+<ul>
+<li><code>io_ring-wq</code> 主要处理读 IO，以及 direct 写 IO</li>
+<li><code>io_ring-write-wq</code> 主要是处理 buffer 写 IO</li>
 </ul>
+<h2 id="系统调用-io_uring_enter">3. 系统调用
+<code>io_uring_enter</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE6(io_uring_enter, <span class="type">unsigned</span> <span class="type">int</span>, fd, u32, to_submit,</span><br><span class="line">		u32, min_complete, u32, flags, <span class="type">const</span> <span class="type">sigset_t</span> __user *, sig,</span><br><span class="line">		<span class="type">size_t</span>, sigsz)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="type">int</span> submitted = <span class="number">0</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ret = -ENXIO;</span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line">	<span class="keyword">if</span> (!percpu_ref_tryget(&amp;ctx-&gt;refs))</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * For SQ polling, the thread will do all submissions and completions.</span></span><br><span class="line"><span class="comment">	 * Just return the requested submit count, and wake the thread if</span></span><br><span class="line"><span class="comment">	 * we were asked to.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="keyword">if</span> (flags &amp; IORING_ENTER_SQ_WAKEUP)</span><br><span class="line">			wake_up(&amp;ctx-&gt;sqo_wait);</span><br><span class="line">		submitted = to_submit;</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (to_submit) {</span><br><span class="line">		to_submit = min(to_submit, ctx-&gt;sq_entries);</span><br><span class="line"></span><br><span class="line">		mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">		submitted = io_ring_submit(ctx, to_submit);</span><br><span class="line">		mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (submitted != to_submit)</span><br><span class="line">			<span class="keyword">goto</span> out;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; IORING_ENTER_GETEVENTS) {</span><br><span class="line">		<span class="type">unsigned</span> nr_events = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		min_complete = min(min_complete, ctx-&gt;cq_entries);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) {</span><br><span class="line">			ret = io_iopoll_check(ctx, &amp;nr_events, min_complete);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ret = io_cqring_wait(ctx, min_complete, sig, sigsz);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">	percpu_ref_put(&amp;ctx-&gt;refs);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> submitted ? submitted : ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>TODO</p>
+<h2 id="系统调用-io_uring_register">4. 系统调用
+<code>io_uring_register</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE4(io_uring_register, <span class="type">unsigned</span> <span class="type">int</span>, fd, <span class="type">unsigned</span> <span class="type">int</span>, opcode,</span><br><span class="line">		<span class="type">void</span> __user *, arg, <span class="type">unsigned</span> <span class="type">int</span>, nr_args)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line"></span><br><span class="line">	mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">	ret = __io_uring_register(ctx, opcode, arg, nr_args);</span><br><span class="line">	mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>TODO</p>
+<h2 id="内核线程-io_sq_thread">5. 内核线程
+<code>io_sq_thread</code></h2>
+<p>TODO</p>
+<h2 id="iopoll-模式">6. <code>IOPOLL</code> 模式</h2>
+<h3 id="启用">6.1. 启用</h3>
+<p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了
+<code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code>
+模式</p>
+<h3 id="限制">6.2. 限制</h3>
+<p>开启此选项必须保证后续只用 <code>O_DIRECT</code>
+打开文件并且文件系统的 <code>file_operations</code> 中注册了
+<code>iopoll</code> 函数，否则 IO 将下发失败</p>
+<h3 id="调用栈">6.3. 调用栈</h3>
+<p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认
+IO 是否完成</p>
+<p>对 <code>f_op-&gt;iopoll</code> 函数调用关系进行了分析</p>
+<pre class="mermaid">graph TD
+io_uring_create --&gt; io_ring_ctx_wait_and_kill
+io_uring_release --&gt; io_ring_ctx_wait_and_kill
+io_ring_ctx_wait_and_kill --&gt; io_iopoll_reap_events
+io_ring_ctx_wait_and_kill --&gt; io_ring_ctx_free
+io_ring_ctx_free --&gt; io_iopoll_reap_events
+io_iopoll_reap_events --&gt; io_iopoll_getevents
+
+syscall["SYSCALL_DEFINE6(io_uring_enter, ……)"] --&gt; io_iopoll_check --&gt; io_iopoll_getevents
+
+io_sq_thread --&gt; io_iopoll_getevents
+
+io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
+<p>主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了
+<code>IORING_SETUP_IOPOLL</code>）：</p>
+<ol type="1">
+<li><code>io_uring</code> 销毁时需要调用</li>
+<li>系统调用 <code>io_uring_enter</code> 将会触发，用于轮询 IO
+完成情况，直到到达指定的 <code>wait_nr</code> 数量 IO
+完成后才会退出轮询</li>
+<li>当初始化时同时配置了 <code>IORING_SETUP_SQPOLL</code>
+时，<code>io_sq_thread</code> 内核线程触发，当存在未完成的 IO
+时调用，用于更新 IO 完成情况（ <code>io_do_iopoll</code> 的参数
+<code>min = 0</code>，即每次调用无论是否有新完成的 IO
+都会退出轮询，不会阻塞线程）</li>
+</ol>
 ]]></content>
       <categories>
-        <category>LaTeX</category>
+        <category>存储</category>
+        <category>IO</category>
       </categories>
       <tags>
-        <tag>Beamer</tag>
-        <tag>LaTeX</tag>
         <tag>todo</tag>
+        <tag>异步 IO</tag>
+        <tag>kernel</tag>
+        <tag>liburing</tag>
+        <tag>io_uring</tag>
       </tags>
   </entry>
   <entry>
-    <title>LaTeX 基础介绍</title>
-    <url>/posts/a4752f87.html</url>
-    <content><![CDATA[<h2 id="tex-和-latex">TeX 和 LaTeX</h2>
-<p>Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成
-LaTeX 通过对 TeX 进行封装，使用 TeX
-作为它的格式化引擎，使得排版文字变得更加方便。</p>
-<p>LaTeX 利用 TeX 对 <code>.tex</code> 后缀的文件进行编译，生成
-<code>.dvi</code> 文件 <span id="more"></span></p>
-<h2 id="pdftexxetex-和-luatex">pdfTeX、XeTeX 和 LuaTeX</h2>
-<h3 id="三者的介绍">三者的介绍</h3>
-<p>pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增强的 TeX
-引擎，提供一些额外的附加功能，例如可以直接输出成 pdf 文件等。</p>
-<ul>
-<li>pdfLaTeX 表示将 LaTeX 宏包与 pdfTeX 引擎一起使用</li>
-<li> XeLaTeX 表示将 LaTeX 宏包与 XeTeX 引擎一起使用</li>
-<li> LuaLaTeX 表示将 LaTeX 宏包与 LuaTeX 引擎一起使用</li>
-</ul>
-<h3 id="各自的特性">各自的特性</h3>
-<ul>
-<li>pdfTeX 的主要特性是能直接生成 pdf</li>
-<li>XeLaTeX 的主要特性是支持 UTF-8 编码，因此理论上原生支持中文字符</li>
-<li> LuaLaTeX 的主要特性除了支持 UTF-8 编外之外，主要是增加了 Lua
-脚本</li>
-</ul>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0FydGljbGVzL1doYXQlMjdzX2luX2FfTmFtZSUzQV9BX0d1aWRlX3RvX3RoZV9NYW55X0ZsYXZvdXJzX29mX1RlWCNBbmRfZmluYWxseTpfZnJvbV9UZVhfdG9fcGRmVGVYLjJDX1hlVGVYX2FuZF9MdWFUZVg=">【Overleaf】pdfTeX,
-XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 环境配置</title>
-    <url>/posts/4f94956.html</url>
-    <content><![CDATA[<h2 id="网页环境">网页环境</h2>
-<h3 id="overleaf">Overleaf</h3>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29t">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX
-编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑
-<span id="more"></span></p>
-<h2 id="本地环境">本地环境</h2>
-<h3 id="tex-live">TeX Live</h3>
-<p>TeX Live 可以利用镜像安装节省下载时间</p>
-<ul>
-<li>从 <span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL0NUQU4vc3lzdGVtcy90ZXhsaXZlL0ltYWdlcy8=">清华镜像站<i class="fa fa-external-link-alt"></i></span>
-直接下载</li>
-<li>或者利用 <span class="exturl" data-url="aHR0cDovL3d3dy50dWcub3JnL3RleGxpdmUvYWNxdWlyZS1pc28uaHRtbCN0b3JyZW50">种子文件<i class="fa fa-external-link-alt"></i></span>
-BT 下载镜像</li>
-</ul>
-<p>可以在安装 TeX Live 时同时勾选上安装 TeXworks 前端，然后就可以使用
-TeXworks 作为 IDE 来使用了</p>
-<h3 id="texstudio">TeXstudio</h3>
-<p>TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGV4c3R1ZGlvLm9yZy8=">官网<i class="fa fa-external-link-alt"></i></span> 下载安装，并且有中文界面</p>
-<h3 id="vscode">VSCode</h3>
-<p>个人更喜欢 VSCode，通过安装扩展并进行相应的配置即可较好的支持
-LaTeX，同时还有格式化和自动补全等功能，非常方便</p>
-<h4 id="安装-latex-workshop-扩展">安装 LaTeX Workshop 扩展</h4>
-<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPUphbWVzLVl1LmxhdGV4LXdvcmtzaG9w">VSCode
-的扩展商店<i class="fa fa-external-link-alt"></i></span> 中搜索 <code>LaTeX Workshop</code> 安装即可</p>
-<h4 id="编译链配置">编译链配置</h4>
-<ol type="1">
-<li><p>默认配置</p>
-<p>TeX Live 安装时会同时安装 <code>latexmk</code>, LaTeX Workshop
-会默认使用 <code>latexmk</code> 来编译
-<code>.tex</code>，无需手动再配置</p></li>
-<li><p>手动配置 (可选)</p>
-<p>手动配置 LaTeX Workshop，在 VSCode 的配置文件
-<code>settings.json</code> 中直接手动添加如下代码:</p>
-<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">官方
-recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
-<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><!-- TODO: 弄清编译命令和编译链当前配置的具体含义，主要是 bibtex --></p></li>
-</ol>
-<h4 id="正向同步">正向同步</h4>
-<p>正向同步指的是编译完成后，在 <code>.tex</code>
-文件内通过快捷键，快速定位到光标位置在 <code>.tex</code>
-的对应位置，方便查看 PDF 文件</p>
-<p>推荐打开文件修改后，编译完成后自动正向同步。该功能通过
-<code>latex-workshop.synctex.afterBuild.enabled</code> 来控制</p>
-<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">"latex-workshop.synctex.afterBuild.enabled"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-<h4 id="反向同步">反向同步</h4>
-<p>反向同步指的是编译完成后，在 PDF 文件内通过快捷键，快速定位点击部分在
-<code>.tex</code> 的位置，方便修改 <code>.tex</code> 源码</p>
-<p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">官方
-synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
-<ol type="1">
-<li><p>VSCode 内部 PDF 浏览器</p>
-<p>如果直接使用 VSCode 来浏览 PDF，不需要额外设置，可以根据需要修改
-<code>latex-workshop.view.pdf.internal.synctex.keybinding</code>
-来修改反向同步的快捷键即可，默认 Ctrl 加鼠标左键</p>
-<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 默认 Ctrl 加鼠标左键</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.internal.synctex.keybinding"</span><span class="punctuation">:</span> <span class="string">"ctrl-click"</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>外部 PDF 浏览器</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3VtYXRyYXBkZnJlYWRlci5vcmcvZnJlZS1wZGYtcmVhZGVy">SumatraPDF<i class="fa fa-external-link-alt"></i></span>
-是一款流行的小巧方便的免费 PDF 浏览软件。VSCode 支持使用外部的 PDF
-浏览器来查看编译后的 PDF 文件，以及反向搜索功能。主要需要如下配置：</p>
-<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置为使用外部 PDF 浏览软件来浏览 PDF</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.viewer"</span><span class="punctuation">:</span> <span class="string">"external"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 配置外部 PDF 浏览软件的命令行以及参数</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.command"</span><span class="punctuation">:</span> <span class="string">"D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe"</span><span class="punctuation">,</span> <span class="comment">// 自行修改路径</span></span><br><span class="line"><span class="attr">"latex-workshop.view.pdf.external.viewer.args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"%PDF%"</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>在 SumatraPDF 的设置 - 选项中设置反向搜索命令行
-<code>C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe -g "%f:%l"</code>，Code
-的路径应该为完整的绝对路径</p></li>
-</ol>
-<h4 id="其他可选配置">其他可选配置</h4>
-<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 关闭自动编译</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.autoBuild.run"</span><span class="punctuation">:</span> <span class="string">"never"</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 默认选择上次编译链</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipe.default"</span><span class="punctuation">:</span> <span class="string">"lastUsed"</span></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="attr">"latex-workshop.showContextMenu"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 关闭编译出错的弹窗</span></span><br><span class="line"><span class="attr">"latex-workshop.message.error.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"latex-workshop.message.warning.show"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="中文支持">中文支持</h2>
-<p>该节主要参考 <span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">Overleaf Chinese<i class="fa fa-external-link-alt"></i></span>
-文档</p>
-<p><strong>推荐使用 XeLaTeX 和 LuaLaTeX 来编译含有中文字符的
-<code>.tex</code> 文件</strong></p>
-<h3 id="xelatex-和-lualatex">XeLaTeX 和 LuaLaTeX</h3>
-<ol type="1">
-<li>直接使用 <code>ctexart</code> 文档类即可支持中文</li>
-<li>或者使用 <code>ctex</code> 包来支持中文</li>
-</ol>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\tableofcontents</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{abstract}</span><br><span class="line">这是简介及摘要。</span><br><span class="line"><span class="keyword">\end</span>{abstract}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-<p>或者</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{xxx}</span><br><span class="line"><span class="keyword">\usepackage</span>{ctex}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="xelatex">XeLaTeX</h3>
-<p>XeLaTeX 还可以使用 <code>xeCJK</code> 包来支持中文</p>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{xeCJK}</span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="pdflatex">pdfLaTeX</h3>
-<p>pdfLaTeX 对中文支持不是很好，只用 pdaLaTeX 的话需要引入
-<code>CJKutf8</code> 包，并且用 <code>\begin{CJK*}{UTF8}{gbsn}</code> 和
-<code>\end{CJK*}</code> 包住所有的中文。</p>
-<ul>
-<li><code>gbsn</code> 和 <code>gkai</code> 是简体的字体</li>
-<li><code>bsmi</code> 和 <code>bkai</code> 是繁体的字体</li>
-</ul>
-<p>参考代码如下：</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>{CJKutf8}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{gbsn}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{前言}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{关于数学部分}</span><br><span class="line">数学、中英文皆可以混排。You can intersperse math, Chinese and English (Latin script) without adding extra environments.</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line">You can also insert Latin text in your document</span><br><span class="line"></span><br><span class="line"><span class="keyword">\bigskip</span>  <span class="comment">%% Just some white space</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{CJK*}{UTF8}{bsmi}</span><br><span class="line">這是繁體中文。</span><br><span class="line"><span class="keyword">\end</span>{CJK*}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="编译">编译</h3>
-<ol type="1">
-<li><p>首先 <code>.tex</code>
-文件名以及路径尽量不要含有空格以及中文字符</p></li>
-<li><p>在使用 <code>latexmk</code> 和 VSCode 的 LaTeX Workshop
-时，推荐使用第三个编译链 <code>Recipe: latexmk (lualatex)</code></p>
-<figure>
-<img data-src="/posts/4f94956/build-chinese-latex.png" alt="编译中文 LaTeX">
-<figcaption aria-hidden="true">编译中文 LaTeX</figcaption>
-</figure></li>
-</ol>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvSW5zdGFsbCNyZXF1aXJlbWVudHM=">【LaTeX
-Workshop】依赖<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">【LaTeX
-Workshop】recipes 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvVmlldyNzeW5jdGV4">【LaTeX
-Workshop】synctex 配置<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zODE3ODAxNQ==">【知乎】使用 VSCode
-编写 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xNjY1MjMwNjQ=">【知乎】Visual
-Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jbi5vdmVybGVhZi5jb20vbGVhcm4vbGF0ZXgvQ2hpbmVzZQ==">【Overleaf】Chinese<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>todo</tag>
-        <tag>VSCode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LaTeX 语法</title>
-    <url>/posts/2033aa70.html</url>
-    <content><![CDATA[<p>中文支持参考环境配置中的 <a href="/posts/4f94956.html#中文支持">内容</a>，在这里不做重复
-<span id="more"></span></p>
-<h2 id="长度">长度</h2>
-<p>常用的长度单位</p>
-<table>
-<thead>
-<tr class="header">
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th> 换成算成 mm</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>pt</td>
-<td> 基本单位</td>
-<td> 1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr class="even">
-<td>mm</td>
-<td> 毫米</td>
-<td> 2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr class="odd">
-<td>cm</td>
-<td> 厘米</td>
-<td> 28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr class="even">
-<td>in</td>
-<td> 英寸</td>
-<td> 72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr class="odd">
-<td>ex</td>
-<td> 当前字体的 x 字母高度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>em</td>
-<td> 当前字体的 m 字母宽度</td>
-<td> -</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<h2 id="空行">空行</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\vspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="空格">空格</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\hspace</span>{length}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="超链接">超链接</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">% 开启链接颜色配置，并配置为蓝色</span></span><br><span class="line"><span class="keyword">\usepackage</span>[colorlinks=true, allcolors=blue]{hyperref}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\url</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}</span><br><span class="line"><span class="keyword">\href</span>{<span class="link">https://ywang-wnlo.github.io/posts/2033aa70.html</span>}{LaTeX 语法}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="数学公式">数学公式</h2>
-<h3 id="段落中隐式">段落中（隐式）</h3>
-<p>三种均可，任意选择，以 E=mc<sup>2</sup> 为例</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span>E=mc<span class="built_in">^</span>2<span class="keyword">\)</span></span><br><span class="line"><span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>{math}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{math}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="单独成段显式">单独成段（显式）</h3>
-<p>三种均可，任意选择</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span>E=mc<span class="built_in">^</span>2<span class="keyword">\]</span></span><br><span class="line"><span class="keyword">\begin</span>{displaymath}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{displaymath}</span><br><span class="line"><span class="keyword">\begin</span>{equation}E=mc<span class="built_in">^</span>2<span class="keyword">\end</span>{equation}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="居中左对齐右对齐">居中，左对齐，右对齐</h2>
-<h3 id="居中">居中</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{center}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{center}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="左对齐">左对齐</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushleft}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushleft}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="右对齐">右对齐</h3>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{flushright}</span><br><span class="line">  balabala</span><br><span class="line"><span class="keyword">\end</span>{flushright}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考文献配置">参考文献配置</h2>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{stylename}</span><br><span class="line"><span class="keyword">\bibliography</span>{bibfile}</span><br></pre></td></tr></tbody></table></figure>
-<p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而
-<code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
+    <title>io_uring 简介和使用</title>
+    <url>/posts/c142853f.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux
+在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">[1]<i class="fa fa-external-link-alt"></i></span>，同时支持
+buffer IO <span id="more"></span></p>
+<p>io_uring 的作者 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">Jens Axboe<i class="fa fa-external-link-alt"></i></span> 是 Linux
+内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline
+调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
+<h2 id="使用">使用</h2>
+<h3 id="系统调用">系统调用</h3>
+<p>io_uring 只增加了三个 Linux 系统调用分别是
+<code>io_uring_setup</code>，<code>io_uring_enter</code> 和
+<code>io_uring_register</code></p>
+<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
+<p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code>
+的方式直接调用，使用起来很麻烦</p>
+<h3 id="liburing">liburing</h3>
+<p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库
+liburing，简化了 io_uring 的使用，代码位置在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5n">github<i class="fa fa-external-link-alt"></i></span> 上</p>
+<h4 id="样例">样例</h4>
+<p>liburing 仓库的 <code>examples/</code>
+目录下提供了几个简单的样例程序：</p>
 <table>
 <colgroup>
-<col style="width: 57%">
-<col style="width: 42%">
+<col style="width: 9%">
+<col style="width: 17%">
+<col style="width: 73%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>stylename</th>
-<th>output</th>
+<th>文件</th>
+<th>功能</th>
+<th>其他</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>abbrc</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc"></td>
+<td><code>io_uring-test.c</code></td>
+<td>读取一个文件的全部内容</td>
+<td> -</td>
 </tr>
 <tr class="even">
-<td>acm</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm"></td>
+<td><code>io_uring-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>使用 <code>user_data</code> 手动处理读写 IO 之间的依赖，读 IO
+返回之后才下发写 IO</td>
 </tr>
 <tr class="odd">
-<td>alpha</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha"></td>
+<td><code>link-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8="> [2]<i class="fa fa-external-link-alt"></i></span></td>
 </tr>
 <tr class="even">
-<td>apalike</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike"></td>
-</tr>
-<tr class="odd">
-<td>ieeetr</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr"></td>
-</tr>
-<tr class="even">
-<td>plain</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain"></td>
-</tr>
-<tr class="odd">
-<td>siam</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam"></td>
-</tr>
-<tr class="even">
-<td>unsrt</td>
-<td><img data-src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt"></td>
+<td><code>ucontext-cp.c</code></td>
+<td>复制 n 个文件的内容到另 n 个文件</td>
+<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxOTEwODk0OTA0L2FydGljbGUvZGV0YWlscy80MTkxMTE3NQ==">协程<i class="fa fa-external-link-alt"></i></span></td>
 </tr>
 </tbody>
 </table>
-<h2 id="todo">TODO</h2>
+<h4 id="代码流程">代码流程</h4>
+<p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
+<ul>
+<li>使用 <code>open</code>、<code>fstat</code>
+等函数来打开文件以及元数据查看等操作
+<ul>
+<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是
+<code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
+</ul></li>
+<li>使用 <code>io_uring_queue_init</code> 初始化
+<code>struct io_uring ring</code> 结构体</li>
+<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer
+指针和长度</li>
+<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
+<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code>
+填充命令，buffer 以及 offset 信息
+<ul>
+<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code>
+附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code>
+中进行返回）</li>
+</ul></li>
+<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有
+<code>sqe</code> 进行下发</li>
+<li>通过 <code>io_uring_wait_cqe</code> 或者
+<code>io_uring_peek_cqe</code> 来获取 <code>cqe</code>
+<ul>
+<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个
+<code>cqe</code> 返回</li>
+<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有
+<code>cqe</code>，就会返回错误</li>
+<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取
+<code>user_data</code></li>
+</ul></li>
+<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code>
+进行清除，避免被二次处理</li>
+<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将
+<code>ring</code> 销毁</li>
+</ul>
+<h2 id="编译">编译</h2>
+<p>根据官方 <code>Makefile</code> 可以看出编译时有额外的三个条件</p>
+<ul>
+<li>定义 <code>_GNU_SOURCE</code> 宏，<code>-D</code> 宏定义</li>
+<li>指定额外的头文件目录，<code>-I</code> 指定头文件目录位置</li>
+<li>使用 <code>liburing</code> 库，<code>-L</code>
+指定库位置，<code>-l</code> 指定库名</li>
+</ul>
+<p>即
+<code>gcc -D_GNU_SOURCE -I../src/include/ -L../src/ -o test test.c -luring</code></p>
+<p>其中头文件目录下主要有三个头文件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree src/include/</span><br><span class="line">src/include/</span><br><span class="line">├── liburing</span><br><span class="line">│   ├── barrier.h</span><br><span class="line">│   └── io_uring.h</span><br><span class="line">└── liburing.h</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br></pre></td></tr></tbody></table></figure>
+<p>而 <code>liburing</code> 库也需要编译生成，推荐直接在
+<code>liburing</code> 的顶层目录直接 <code>make all</code></p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvTGVuZ3Rocw==">【维基百科】LaTeX
-Lengths<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvTGFUZVgvSHlwZXJsaW5rcw==">【维基百科】LaTeX
-Hyperlinks<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L01hdGhlbWF0aWNhbF9leHByZXNzaW9ucw==">【overleaf】Mathematical
-expressions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JpYnRleF9iaWJsaW9ncmFwaHlfc3R5bGVz">【overleaf】Bibtex
-bibliography styles<i class="fa fa-external-link-alt"></i></span></li>
+<li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">【Kernel】io_uring
+性能测试<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">【维基百科】Jens
+Axboe<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring
+IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9rZXJuZWwudGFvYmFvLm9yZy8yMDE5LzA2L2lvX3VyaW5nLWEtbmV3LWxpbnV4LWFzeW5jaHJvbm91cy1pby1BUEkv">【阿里云技术博客】Linux
+异步 IO 新时代：io_uring<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpbmtlcmlzdC9ibG9nL2lzc3Vlcy8yNQ==">【GitHub】《操作系统与存储：解析
+Linux 内核全新异步 IO 引擎 —— io_uring 设计与实现》<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnRodXJjaGlhby5hcnQvYmxvZy9pbnRyby10by1pby11cmluZy16aC8=">【个人博客】[译]
+Linux 异步 I/O 框架
+io_uring：基本原理、程序示例与性能压测（2020）<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
-        <category>LaTeX</category>
+        <category>存储</category>
+        <category>IO</category>
       </categories>
       <tags>
-        <tag>LaTeX</tag>
-        <tag>todo</tag>
+        <tag>异步 IO</tag>
+        <tag>liburing</tag>
+        <tag>io_uring</tag>
       </tags>
   </entry>
   <entry>
@@ -1676,268 +1951,6 @@ IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
-    <title>io_uring 简介和使用</title>
-    <url>/posts/c142853f.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux
-在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">[1]<i class="fa fa-external-link-alt"></i></span>，同时支持
-buffer IO <span id="more"></span></p>
-<p>io_uring 的作者 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">Jens Axboe<i class="fa fa-external-link-alt"></i></span> 是 Linux
-内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline
-调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
-<h2 id="使用">使用</h2>
-<h3 id="系统调用">系统调用</h3>
-<p>io_uring 只增加了三个 Linux 系统调用分别是
-<code>io_uring_setup</code>，<code>io_uring_enter</code> 和
-<code>io_uring_register</code></p>
-<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
-<p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code>
-的方式直接调用，使用起来很麻烦</p>
-<h3 id="liburing">liburing</h3>
-<p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库
-liburing，简化了 io_uring 的使用，代码位置在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5n">github<i class="fa fa-external-link-alt"></i></span> 上</p>
-<h4 id="样例">样例</h4>
-<p>liburing 仓库的 <code>examples/</code>
-目录下提供了几个简单的样例程序：</p>
-<table>
-<colgroup>
-<col style="width: 9%">
-<col style="width: 17%">
-<col style="width: 73%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>文件</th>
-<th>功能</th>
-<th>其他</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>io_uring-test.c</code></td>
-<td>读取一个文件的全部内容</td>
-<td> -</td>
-</tr>
-<tr class="even">
-<td><code>io_uring-cp.c</code></td>
-<td>复制一个文件的内容到另一个文件</td>
-<td>使用 <code>user_data</code> 手动处理读写 IO 之间的依赖，读 IO
-返回之后才下发写 IO</td>
-</tr>
-<tr class="odd">
-<td><code>link-cp.c</code></td>
-<td>复制一个文件的内容到另一个文件</td>
-<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8="> [2]<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-<tr class="even">
-<td><code>ucontext-cp.c</code></td>
-<td>复制 n 个文件的内容到另 n 个文件</td>
-<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxOTEwODk0OTA0L2FydGljbGUvZGV0YWlscy80MTkxMTE3NQ==">协程<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-</tbody>
-</table>
-<h4 id="代码流程">代码流程</h4>
-<p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
-<ul>
-<li>使用 <code>open</code>、<code>fstat</code>
-等函数来打开文件以及元数据查看等操作
-<ul>
-<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是
-<code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
-</ul></li>
-<li>使用 <code>io_uring_queue_init</code> 初始化
-<code>struct io_uring ring</code> 结构体</li>
-<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer
-指针和长度</li>
-<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
-<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code>
-填充命令，buffer 以及 offset 信息
-<ul>
-<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code>
-附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code>
-中进行返回）</li>
-</ul></li>
-<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有
-<code>sqe</code> 进行下发</li>
-<li>通过 <code>io_uring_wait_cqe</code> 或者
-<code>io_uring_peek_cqe</code> 来获取 <code>cqe</code>
-<ul>
-<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个
-<code>cqe</code> 返回</li>
-<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有
-<code>cqe</code>，就会返回错误</li>
-<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取
-<code>user_data</code></li>
-</ul></li>
-<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code>
-进行清除，避免被二次处理</li>
-<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将
-<code>ring</code> 销毁</li>
-</ul>
-<h2 id="编译">编译</h2>
-<p>根据官方 <code>Makefile</code> 可以看出编译时有额外的三个条件</p>
-<ul>
-<li>定义 <code>_GNU_SOURCE</code> 宏，<code>-D</code> 宏定义</li>
-<li>指定额外的头文件目录，<code>-I</code> 指定头文件目录位置</li>
-<li>使用 <code>liburing</code> 库，<code>-L</code>
-指定库位置，<code>-l</code> 指定库名</li>
-</ul>
-<p>即
-<code>gcc -D_GNU_SOURCE -I../src/include/ -L../src/ -o test test.c -luring</code></p>
-<p>其中头文件目录下主要有三个头文件：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree src/include/</span><br><span class="line">src/include/</span><br><span class="line">├── liburing</span><br><span class="line">│   ├── barrier.h</span><br><span class="line">│   └── io_uring.h</span><br><span class="line">└── liburing.h</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br></pre></td></tr></tbody></table></figure>
-<p>而 <code>liburing</code> 库也需要编译生成，推荐直接在
-<code>liburing</code> 的顶层目录直接 <code>make all</code></p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><a href="/posts/c142853f/io_uring.pdf">【PDF】官方 pdf</a></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTAxMTYxNzUwMDMuMTc4ODAtMS1heGJvZUBrZXJuZWwuZGsv">【Kernel】io_uring
-性能测试<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVuc19BeGJvZQ==">【维基百科】Jens
-Axboe<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtYmxvY2svMjAxOTA1MTcyMTQxMzEuNTkyNS0xLWF4Ym9lQGtlcm5lbC5kay8=">【Kernel】io_uring
-IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9rZXJuZWwudGFvYmFvLm9yZy8yMDE5LzA2L2lvX3VyaW5nLWEtbmV3LWxpbnV4LWFzeW5jaHJvbm91cy1pby1BUEkv">【阿里云技术博客】Linux
-异步 IO 新时代：io_uring<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpbmtlcmlzdC9ibG9nL2lzc3Vlcy8yNQ==">【GitHub】《操作系统与存储：解析
-Linux 内核全新异步 IO 引擎 —— io_uring 设计与实现》<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnRodXJjaGlhby5hcnQvYmxvZy9pbnRyby10by1pby11cmluZy16aC8=">【个人博客】[译]
-Linux 异步 I/O 框架
-io_uring：基本原理、程序示例与性能压测（2020）<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>存储</category>
-        <category>IO</category>
-      </categories>
-      <tags>
-        <tag>异步 IO</tag>
-        <tag>liburing</tag>
-        <tag>io_uring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>io_uring 内核源码分析</title>
-    <url>/posts/4f0d345c.html</url>
-    <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="io_uring">1. <code>io_uring</code></h2>
-<p><a href="/posts/c142853f.html#系统调用">之前</a> 介绍过 io_uring
-只增加了三个 Linux 系统调用分别是
-<code>io_uring_setup</code>，<code>io_uring_enter</code> 和
-<code>io_uring_register</code></p>
-<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code>
-文件中，下面将逐个分析 <span id="more"></span></p>
-<h2 id="系统调用-io_uring_setup">2. 系统调用
-<code>io_uring_setup</code></h2>
-<p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d.html#io-uring-queue-init">用户库源码分析</a>
-中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
-<h3 id="io_uring_setup">2.1. <code>io_uring_setup</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Sets up an aio uring context, and returns the fd. Applications asks for a</span></span><br><span class="line"><span class="comment"> * ring size, we return the actual sq/cq ring sizes (among other things) in the</span></span><br><span class="line"><span class="comment"> * params structure passed in.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> <span class="type">long</span> <span class="title function_">io_uring_setup</span><span class="params">(u32 entries, <span class="keyword">struct</span> io_uring_params __user *params)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_uring_params</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="type">long</span> ret;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用户态拷贝到内核态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(&amp;p, params, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	<span class="comment">// 确认保留区域没有被赋值</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ARRAY_SIZE(p.resv); i++) {</span><br><span class="line">		<span class="keyword">if</span> (p.resv[i])</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查 flags 参数</span></span><br><span class="line">	<span class="keyword">if</span> (p.flags &amp; ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |</span><br><span class="line">			IORING_SETUP_SQ_AFF))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分配内存空间，创建 workqueue，创建 fd 等</span></span><br><span class="line">	ret = io_uring_create(entries, &amp;p);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 内核态拷贝回用户态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_to_user(params, &amp;p, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">SYSCALL_DEFINE2(io_uring_setup, u32, entries,</span><br><span class="line">		<span class="keyword">struct</span> io_uring_params __user *, params)</span><br><span class="line">{</span><br><span class="line">	<span class="keyword">return</span> io_uring_setup(entries, params);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>可以看到 <code>io_uring_setup</code> 的核心函数是
-<code>io_uring_create</code></p>
-<h3 id="io_uring_create">2.2. <code>io_uring_create</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_uring_create</span><span class="params">(<span class="type">unsigned</span> entries, <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">user_struct</span> *<span class="title">user</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">bool</span> account_mem;</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!entries || entries &gt; IORING_MAX_ENTRIES)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Use twice as many entries for the CQ ring. It's possible for the</span></span><br><span class="line"><span class="comment">	 * application to drive a higher depth than the size of the SQ ring,</span></span><br><span class="line"><span class="comment">	 * since the sqes are only used at submission time. This allows for</span></span><br><span class="line"><span class="comment">	 * some flexibility in overcommitting a bit.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	p-&gt;sq_entries = roundup_pow_of_two(entries);</span><br><span class="line">	p-&gt;cq_entries = <span class="number">2</span> * p-&gt;sq_entries;</span><br><span class="line"></span><br><span class="line">	user = get_uid(current_user());</span><br><span class="line">	<span class="comment">// 允许对共享内存段进行锁定</span></span><br><span class="line">	account_mem = !capable(CAP_IPC_LOCK);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (account_mem) {</span><br><span class="line">		<span class="comment">// 不能对共享内存段进行锁定，就需要增加当前可以锁定的内存</span></span><br><span class="line">		ret = io_account_mem(user,</span><br><span class="line">				ring_pages(p-&gt;sq_entries, p-&gt;cq_entries));</span><br><span class="line">		<span class="keyword">if</span> (ret) {</span><br><span class="line">			free_uid(user);</span><br><span class="line">			<span class="keyword">return</span> ret;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	ctx = io_ring_ctx_alloc(p);</span><br><span class="line">	<span class="keyword">if</span> (!ctx) {</span><br><span class="line">		<span class="keyword">if</span> (account_mem)</span><br><span class="line">			io_unaccount_mem(user, ring_pages(p-&gt;sq_entries,</span><br><span class="line">								p-&gt;cq_entries));</span><br><span class="line">		free_uid(user);</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">	}</span><br><span class="line">	ctx-&gt;compat = in_compat_syscall();</span><br><span class="line">	ctx-&gt;account_mem = account_mem;</span><br><span class="line">	ctx-&gt;user = user;</span><br><span class="line"></span><br><span class="line">	ctx-&gt;creds = get_current_cred();</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;creds) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 申请 io_rings SQEs</span></span><br><span class="line">	ret = io_allocate_scq_urings(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化 workqueue，[初始化内核线程用于进行 IO poll]</span></span><br><span class="line">	ret = io_sq_offload_start(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;sq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;sq_off));</span><br><span class="line">	p-&gt;sq_off.head = offsetof(<span class="keyword">struct</span> io_rings, sq.head);</span><br><span class="line">	p-&gt;sq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, sq.tail);</span><br><span class="line">	p-&gt;sq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_mask);</span><br><span class="line">	p-&gt;sq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_entries);</span><br><span class="line">	p-&gt;sq_off.flags = offsetof(<span class="keyword">struct</span> io_rings, sq_flags);</span><br><span class="line">	p-&gt;sq_off.dropped = offsetof(<span class="keyword">struct</span> io_rings, sq_dropped);</span><br><span class="line">	p-&gt;sq_off.<span class="built_in">array</span> = (<span class="type">char</span> *)ctx-&gt;sq_array - (<span class="type">char</span> *)ctx-&gt;rings;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;cq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;cq_off));</span><br><span class="line">	p-&gt;cq_off.head = offsetof(<span class="keyword">struct</span> io_rings, cq.head);</span><br><span class="line">	p-&gt;cq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, cq.tail);</span><br><span class="line">	p-&gt;cq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_mask);</span><br><span class="line">	p-&gt;cq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_entries);</span><br><span class="line">	p-&gt;cq_off.overflow = offsetof(<span class="keyword">struct</span> io_rings, cq_overflow);</span><br><span class="line">	p-&gt;cq_off.cqes = offsetof(<span class="keyword">struct</span> io_rings, cqes);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Install ring fd as the very last thing, so we don't risk someone</span></span><br><span class="line"><span class="comment">	 * having closed it before we finish setup</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 创建 fd 便于用户态访问 ctx</span></span><br><span class="line">	ret = io_uring_get_fd(ctx);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	p-&gt;features = IORING_FEAT_SINGLE_MMAP;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">err:</span><br><span class="line">	io_ring_ctx_wait_and_kill(ctx);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<pre class="mermaid">graph TD
-io_uring_setup --&gt; io_ring_ctx_alloc
-io_uring_setup --&gt; io_allocate_scq_urings
-io_uring_setup --&gt; io_sq_offload_start
-io_uring_setup --&gt; io_uring_get_fd</pre>
-<ol type="1">
-<li><p><code>io_ring_ctx_alloc</code>
-主要用来申请空间，初始化列表头、互斥锁、自旋锁等结构</p></li>
-<li><p><code>io_allocate_scq_urings</code> 来初始化整个
-<code>struct io_rings *rings</code>，包括
-<code>SQ</code>、<code>CQ</code> 头尾指针的初始化，以及
-<code>SQE</code>、<code>CQE</code> 的初始化</p>
-<ul>
-<li>不同的是 <code>SQ</code>、<code>CQ</code> 头尾指针以及
-<code>CQE</code> 都在 <code>struct io_rings *rings</code> 结构体中</li>
-<li>而 <code>SQE</code> 则是在 <code>struct io_ring_ctx *ctx</code>
-结构体中</li>
-</ul></li>
-<li><p><code>io_sq_offload_start</code> 会根据用户通过
-<code>io_uring_setup</code> 传递的 <code>flags</code> 来配置
-<code>io_uring</code> 的运行方式，后续详细展开</p></li>
-<li><p><code>io_uring_get_fd</code> 将
-<code>struct io_ring_ctx *ctx</code> 暴露给用户态访问</p></li>
-</ol>
-<h3 id="io_sq_offload_start">2.3. <code>io_sq_offload_start</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_sq_offload_start</span><span class="params">(<span class="keyword">struct</span> io_ring_ctx *ctx,</span></span><br><span class="line"><span class="params">			       <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	mmgrab(current-&gt;mm);</span><br><span class="line">	ctx-&gt;sqo_mm = current-&gt;mm;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="comment">// IORING_SETUP_SQPOLL 将会创建一个内核线程来 poll SQ</span></span><br><span class="line">		ret = -EPERM;</span><br><span class="line">		<span class="keyword">if</span> (!capable(CAP_SYS_ADMIN))</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">		ctx-&gt;sq_thread_idle = msecs_to_jiffies(p-&gt;sq_thread_idle);</span><br><span class="line">		<span class="keyword">if</span> (!ctx-&gt;sq_thread_idle)</span><br><span class="line">			ctx-&gt;sq_thread_idle = HZ;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">			<span class="type">int</span> cpu = p-&gt;sq_thread_cpu;</span><br><span class="line"></span><br><span class="line">			ret = -EINVAL;</span><br><span class="line">			<span class="keyword">if</span> (cpu &gt;= nr_cpu_ids)</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line">			<span class="keyword">if</span> (!cpu_online(cpu))</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create_on_cpu(io_sq_thread,</span><br><span class="line">							ctx, cpu,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create(io_sq_thread, ctx,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (IS_ERR(ctx-&gt;sqo_thread)) {</span><br><span class="line">			ret = PTR_ERR(ctx-&gt;sqo_thread);</span><br><span class="line">			ctx-&gt;sqo_thread = <span class="literal">NULL</span>;</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		}</span><br><span class="line">		wake_up_process(ctx-&gt;sqo_thread);</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">		<span class="comment">/* Can't have SQ_AFF without SQPOLL */</span></span><br><span class="line">		ret = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Do QD, or 2 * CPUS, whatever is smallest */</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">0</span>] = alloc_workqueue(<span class="string">"io_ring-wq"</span>,</span><br><span class="line">			WQ_UNBOUND | WQ_FREEZABLE,</span><br><span class="line">			min(ctx-&gt;sq_entries - <span class="number">1</span>, <span class="number">2</span> * num_online_cpus()));</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">0</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * This is for buffered writes, where we want to limit the parallelism</span></span><br><span class="line"><span class="comment">	 * due to file locking in file systems. As "normal" buffered writes</span></span><br><span class="line"><span class="comment">	 * should parellelize on writeout quite nicely, limit us to having 2</span></span><br><span class="line"><span class="comment">	 * pending. This avoids massive contention on the inode when doing</span></span><br><span class="line"><span class="comment">	 * buffered async writes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 对 buffer 写的 workqueue 深度进行限制，减少锁争用开销?</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">1</span>] = alloc_workqueue(<span class="string">"io_ring-write-wq"</span>,</span><br><span class="line">						WQ_UNBOUND | WQ_FREEZABLE, <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">1</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">err:</span><br><span class="line">	io_finish_async(ctx);</span><br><span class="line">	mmdrop(ctx-&gt;sqo_mm);</span><br><span class="line">	ctx-&gt;sqo_mm = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>当 <code>flags</code> 中配置了 <code>IORING_SETUP_SQPOLL</code>
-时，将启动一个单独的内核线程 <code>io_sq_thread</code>，而当
-<code>IORING_SETUP_SQ_AFF</code> 字段也配置时，将根据
-<code>sq_thread_cpu</code> 字段，在指定的 CPU 上启用内核线程
-<code>io_sq_thread</code></p>
-<p>同时该函数还会创建两个工作队列 <code>ctx-&gt;sqo_wq[2]</code>
-分别名为 <code>io_ring-wq</code> 和 <code>io_ring-write-wq</code></p>
-<ul>
-<li><code>io_ring-wq</code> 主要处理读 IO，以及 direct 写 IO</li>
-<li><code>io_ring-write-wq</code> 主要是处理 buffer 写 IO</li>
-</ul>
-<h2 id="系统调用-io_uring_enter">3. 系统调用
-<code>io_uring_enter</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE6(io_uring_enter, <span class="type">unsigned</span> <span class="type">int</span>, fd, u32, to_submit,</span><br><span class="line">		u32, min_complete, u32, flags, <span class="type">const</span> <span class="type">sigset_t</span> __user *, sig,</span><br><span class="line">		<span class="type">size_t</span>, sigsz)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="type">int</span> submitted = <span class="number">0</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ret = -ENXIO;</span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line">	<span class="keyword">if</span> (!percpu_ref_tryget(&amp;ctx-&gt;refs))</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * For SQ polling, the thread will do all submissions and completions.</span></span><br><span class="line"><span class="comment">	 * Just return the requested submit count, and wake the thread if</span></span><br><span class="line"><span class="comment">	 * we were asked to.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="keyword">if</span> (flags &amp; IORING_ENTER_SQ_WAKEUP)</span><br><span class="line">			wake_up(&amp;ctx-&gt;sqo_wait);</span><br><span class="line">		submitted = to_submit;</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (to_submit) {</span><br><span class="line">		to_submit = min(to_submit, ctx-&gt;sq_entries);</span><br><span class="line"></span><br><span class="line">		mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">		submitted = io_ring_submit(ctx, to_submit);</span><br><span class="line">		mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (submitted != to_submit)</span><br><span class="line">			<span class="keyword">goto</span> out;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; IORING_ENTER_GETEVENTS) {</span><br><span class="line">		<span class="type">unsigned</span> nr_events = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		min_complete = min(min_complete, ctx-&gt;cq_entries);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) {</span><br><span class="line">			ret = io_iopoll_check(ctx, &amp;nr_events, min_complete);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ret = io_cqring_wait(ctx, min_complete, sig, sigsz);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">	percpu_ref_put(&amp;ctx-&gt;refs);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> submitted ? submitted : ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>TODO</p>
-<h2 id="系统调用-io_uring_register">4. 系统调用
-<code>io_uring_register</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE4(io_uring_register, <span class="type">unsigned</span> <span class="type">int</span>, fd, <span class="type">unsigned</span> <span class="type">int</span>, opcode,</span><br><span class="line">		<span class="type">void</span> __user *, arg, <span class="type">unsigned</span> <span class="type">int</span>, nr_args)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line"></span><br><span class="line">	mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">	ret = __io_uring_register(ctx, opcode, arg, nr_args);</span><br><span class="line">	mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>TODO</p>
-<h2 id="内核线程-io_sq_thread">5. 内核线程
-<code>io_sq_thread</code></h2>
-<p>TODO</p>
-<h2 id="iopoll-模式">6. <code>IOPOLL</code> 模式</h2>
-<h3 id="启用">6.1. 启用</h3>
-<p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了
-<code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code>
-模式</p>
-<h3 id="限制">6.2. 限制</h3>
-<p>开启此选项必须保证后续只用 <code>O_DIRECT</code>
-打开文件并且文件系统的 <code>file_operations</code> 中注册了
-<code>iopoll</code> 函数，否则 IO 将下发失败</p>
-<h3 id="调用栈">6.3. 调用栈</h3>
-<p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认
-IO 是否完成</p>
-<p>对 <code>f_op-&gt;iopoll</code> 函数调用关系进行了分析</p>
-<pre class="mermaid">graph TD
-io_uring_create --&gt; io_ring_ctx_wait_and_kill
-io_uring_release --&gt; io_ring_ctx_wait_and_kill
-io_ring_ctx_wait_and_kill --&gt; io_iopoll_reap_events
-io_ring_ctx_wait_and_kill --&gt; io_ring_ctx_free
-io_ring_ctx_free --&gt; io_iopoll_reap_events
-io_iopoll_reap_events --&gt; io_iopoll_getevents
-
-syscall["SYSCALL_DEFINE6(io_uring_enter, ……)"] --&gt; io_iopoll_check --&gt; io_iopoll_getevents
-
-io_sq_thread --&gt; io_iopoll_getevents
-
-io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
-<p>主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了
-<code>IORING_SETUP_IOPOLL</code>）：</p>
-<ol type="1">
-<li><code>io_uring</code> 销毁时需要调用</li>
-<li>系统调用 <code>io_uring_enter</code> 将会触发，用于轮询 IO
-完成情况，直到到达指定的 <code>wait_nr</code> 数量 IO
-完成后才会退出轮询</li>
-<li>当初始化时同时配置了 <code>IORING_SETUP_SQPOLL</code>
-时，<code>io_sq_thread</code> 内核线程触发，当存在未完成的 IO
-时调用，用于更新 IO 完成情况（ <code>io_do_iopoll</code> 的参数
-<code>min = 0</code>，即每次调用无论是否有新完成的 IO
-都会退出轮询，不会阻塞线程）</li>
-</ol>
-]]></content>
-      <categories>
-        <category>存储</category>
-        <category>IO</category>
-      </categories>
-      <tags>
-        <tag>todo</tag>
-        <tag>异步 IO</tag>
-        <tag>liburing</tag>
-        <tag>io_uring</tag>
-        <tag>kernel</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>page cache 简介</title>
     <url>/posts/9ba60726.html</url>
     <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
@@ -2079,79 +2092,6 @@ Cache 与 Page 回写<i class="fa fa-external-link-alt"></i></span></li>
         <tag>buffer IO</tag>
         <tag>page cache</tag>
         <tag>writeback</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-    <url>/posts/8ad4716e.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
-GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
-用户会选择 <code>PowerShell</code></p>
-<p>为了美化 <code>PowerShell</code>，个人选择了
-<code>Oh My Posh</code>。<code>Oh My Posh</code>
-是一个开源的主体的框架，支持
-<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
-等多种 <code>Shell</code></p>
-<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
-<span id="more"></span></p>
-<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
-<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
-<code>winget</code> 安装最新的版本</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
-<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
-所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
-字体</p>
-<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
-或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
-的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
-文件安装即可</p>
-<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
-<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
-Windows Terminal 应用中单独配置，这里不做介绍</p>
-<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
-<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
-直接打开配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>如果打开报错，则需要首先创建配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
-<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
-就会自动启用 <code>Oh My Posh</code> 了</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="选择主题">选择主题</h2>
-<p><code>Oh My Posh</code>
-支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
-预览</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
-<p>个人选择了 <code>powerlevel10k_rainbow</code>
-主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
-My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
-PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>PowerShell</tag>
-        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -2501,6 +2441,79 @@ new_sync_write --&gt; call_write_iter</pre>
       </tags>
   </entry>
   <entry>
+    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+    <url>/posts/8ad4716e.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
+GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
+用户会选择 <code>PowerShell</code></p>
+<p>为了美化 <code>PowerShell</code>，个人选择了
+<code>Oh My Posh</code>。<code>Oh My Posh</code>
+是一个开源的主体的框架，支持
+<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
+等多种 <code>Shell</code></p>
+<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
+<span id="more"></span></p>
+<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
+<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
+<code>winget</code> 安装最新的版本</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
+<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
+所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
+字体</p>
+<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
+或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
+的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
+文件安装即可</p>
+<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
+<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
+Windows Terminal 应用中单独配置，这里不做介绍</p>
+<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
+<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
+直接打开配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>如果打开报错，则需要首先创建配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
+就会自动启用 <code>Oh My Posh</code> 了</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="选择主题">选择主题</h2>
+<p><code>Oh My Posh</code>
+支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
+预览</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
+<p>个人选择了 <code>powerlevel10k_rainbow</code>
+主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
+My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
+PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>PowerShell</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>美化 Shell 之 Linux Zsh 篇</title>
     <url>/posts/f2cdf8a6.html</url>
     <content><![CDATA[<h2 id="简介">简介</h2>
@@ -2684,93 +2697,6 @@ are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt
       <tags>
         <tag>Linux</tag>
         <tag>strace</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 手动编译 ipk</title>
-    <url>/posts/96a1807.html</url>
-    <content><![CDATA[<h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
-<p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件
-<code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与
-<code>apt</code>
-的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
-<p>但是由于路由器平台通常与常用的服务器或者个人 PC
-的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成
-<code>.ipk</code> 文件，因此需要交叉编译来实现 <span id="more"></span></p>
-<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span>
-仓库就提供了一个方便使用的交叉编译环境</p>
-<h2 id="编译准备">编译准备</h2>
-<p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></tbody></table></figure>
-<p>安装 / 更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt
-仓库了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></tbody></table></figure>
-<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过
-<code>--depth</code>
-来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line"><span class="comment"># cnpmjs.org 已经不能使用，请自行寻找其他镜像站</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="编译-.ipk-文件">编译 <code>.ipk</code> 文件</h2>
-<h3 id="更新-feeds">更新 feeds</h3>
-<p>进入 openwrt 仓库后，首先需要更新软件包列表
-<code>feeds</code>，它是在 OpenWrt
-中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="配置平台">配置平台</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
-<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
-<p>以小米 R3G 路由器为例，应该将他们配置成如下图所示</p>
-<figure>
-<img data-src="/posts/96a1807/Target-Config.png" alt="平台配置">
-<figcaption aria-hidden="true">平台配置</figcaption>
-</figure>
-<h3 id="获取交叉编译链">获取交叉编译链</h3>
-<p>这一步就是获取对应设备交叉编译所需的编译链</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li><code>V=s</code> 可以显示 <code>make</code>
-过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
-<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code>
-则是根据机器的 CPU 数量来进行多线程编译</li>
-<li>直接 <code>-j</code> 也可以</li>
-</ul>
-<h3 id="添加需要编译的第三方软件包">添加需要编译的第三方软件包</h3>
-<p>可以先搜索有没有已经配置好的含有 <code>Makefile</code>
-的仓库，有了适配过的 <code>Makefile</code>
-文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
-<p>以 <code>MentoHUST</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">github<i class="fa fa-external-link-alt"></i></span>
-上有已经完成的仓库，依次可以直接拉取来编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk.git package/minieap</span><br></pre></td></tr></tbody></table></figure>
-<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成
-<code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
-<p>对于 <code>MentoHUST</code> 来说，在 <code>Network</code> 中的
-<code>Ruijie</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
-<figure>
-<img data-src="/posts/96a1807/MentoHUST-Config.png" alt="MentoHUST 配置">
-<figcaption aria-hidden="true">MentoHUST 配置</figcaption>
-</figure>
-<p>配置完成后就可以进行编译了，编译命令也很简单，以
-<code>MentoHUST</code> 为例如下所示</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make package/mentohust/compile V=s -j</span><br></pre></td></tr></tbody></table></figure>
-<p>编译完成后，<code>.ipk</code> 文件会生成在
-<code>./bin/packages/&lt;YourArchitecture&gt;/base</code>
-目录下，将其拷贝到路由器上就可以通过 <code>opkg</code>
-进行安装使用了</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>交叉编译</tag>
-        <tag>ipk</tag>
-        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
@@ -3379,6 +3305,93 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
       <tags>
         <tag>Breed</tag>
         <tag>BootLoader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 手动编译 ipk</title>
+    <url>/posts/96a1807.html</url>
+    <content><![CDATA[<h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
+<p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件
+<code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与
+<code>apt</code>
+的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
+<p>但是由于路由器平台通常与常用的服务器或者个人 PC
+的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成
+<code>.ipk</code> 文件，因此需要交叉编译来实现 <span id="more"></span></p>
+<p>而官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">OpenWrt<i class="fa fa-external-link-alt"></i></span>
+仓库就提供了一个方便使用的交叉编译环境</p>
+<h2 id="编译准备">编译准备</h2>
+<p>以 Debian / Ubuntu 为例，参考 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">官网给出的要求<i class="fa fa-external-link-alt"></i></span>，可以通过下面命令来进行安装依赖包</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install build-essential ccache ecj fastjar file g++ gawk \</span><br><span class="line">gettext git java-propose-classpath libelf-dev libncurses5-dev \</span><br><span class="line">libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \</span><br><span class="line">python3-distutils python3-setuptools python3-dev rsync subversion \</span><br><span class="line">swig time xsltproc zlib1g-dev</span><br></pre></td></tr></tbody></table></figure>
+<p>安装 / 更新好这些依赖之后，就可以通过 <code>git</code> 拉取 OpenWrt
+仓库了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git</span><br></pre></td></tr></tbody></table></figure>
+<p>通常由于仓库较大以及网速问题，可能会需要很久，其实可以通过
+<code>--depth</code>
+来限制拉取的仓库深度，或者通过镜像站来加速拉取，当然也可以两者同时采用</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.openwrt.org/openwrt/openwrt.git --depth=1</span><br><span class="line"><span class="comment"># cnpmjs.org 已经不能使用，请自行寻找其他镜像站</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git</span></span><br><span class="line"><span class="comment"># git clone https://git.openwrt.org.cnpmjs.org/openwrt/openwrt.git --depth=1</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="编译-.ipk-文件">编译 <code>.ipk</code> 文件</h2>
+<h3 id="更新-feeds">更新 feeds</h3>
+<p>进入 openwrt 仓库后，首先需要更新软件包列表
+<code>feeds</code>，它是在 OpenWrt
+中共用位置的包的集合。运行以下命令即可更新内置软件包列表并链接到编译工具中：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> openwrt/</span><br><span class="line">./scripts/feeds update</span><br><span class="line">./scripts/feeds install</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="配置平台">配置平台</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
+<p>通常使用图形化菜单界面来进行配置编译选项，依次配置处理器架构、具体的处理器型号以及设备</p>
+<p>以小米 R3G 路由器为例，应该将他们配置成如下图所示</p>
+<figure>
+<img data-src="/posts/96a1807/Target-Config.png" alt="平台配置">
+<figcaption aria-hidden="true">平台配置</figcaption>
+</figure>
+<h3 id="获取交叉编译链">获取交叉编译链</h3>
+<p>这一步就是获取对应设备交叉编译所需的编译链</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make tools/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br><span class="line">make toolchain/install V=s -j$(grep processor /proc/cpuinfo | <span class="built_in">wc</span> -l)</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><code>V=s</code> 可以显示 <code>make</code>
+过程中的所有输出，方便定位当前是否卡在了某一步骤上</li>
+<li><code>-j$(grep processor /proc/cpuinfo | wc -l)</code>
+则是根据机器的 CPU 数量来进行多线程编译</li>
+<li>直接 <code>-j</code> 也可以</li>
+</ul>
+<h3 id="添加需要编译的第三方软件包">添加需要编译的第三方软件包</h3>
+<p>可以先搜索有没有已经配置好的含有 <code>Makefile</code>
+的仓库，有了适配过的 <code>Makefile</code>
+文件就可以很方便的来编译源码生成 <code>.ipk</code> 文件了</p>
+<p>以 <code>MentoHUST</code> 为例，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">github<i class="fa fa-external-link-alt"></i></span>
+上有已经完成的仓库，依次可以直接拉取来编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk.git package/minieap</span><br></pre></td></tr></tbody></table></figure>
+<p>在拉取完成仓库后，就可以再次配置编译选项，将需要编译成
+<code>.ipk</code> 的功能配置成模块编译，也就是标记成 <code>M</code></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
+<p>对于 <code>MentoHUST</code> 来说，在 <code>Network</code> 中的
+<code>Ruijie</code> 找到对应选项并配置成 <code>M</code> 即可，如下图</p>
+<figure>
+<img data-src="/posts/96a1807/MentoHUST-Config.png" alt="MentoHUST 配置">
+<figcaption aria-hidden="true">MentoHUST 配置</figcaption>
+</figure>
+<p>配置完成后就可以进行编译了，编译命令也很简单，以
+<code>MentoHUST</code> 为例如下所示</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">make package/mentohust/compile V=s -j</span><br></pre></td></tr></tbody></table></figure>
+<p>编译完成后，<code>.ipk</code> 文件会生成在
+<code>./bin/packages/&lt;YourArchitecture&gt;/base</code>
+目录下，将其拷贝到路由器上就可以通过 <code>opkg</code>
+进行安装使用了</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy9kb2NzL2d1aWRlLWRldmVsb3Blci90b29sY2hhaW4vaW5zdGFsbC1idWlsZHN5c3RlbQ==">【OpenWrt】编译系统准备<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0LW5jdHUuZ2l0Ym9vay5pby9wcm9qZWN0L29wZW53cnQtY29tcGlsZS1lbnYvb3BlbndydC1zZGstYW5kLWlway1mb3JtYXQ=">【Gitbook】建立编译环境<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW53cnQvb3BlbndydA==">【GitHub】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0t5bGVSaWNhcmRvL01lbnRvSFVTVC1PcGVuV3J0LWlwaw==">【GitHub】MentoHUST-OpenWrt-ipk<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>交叉编译</tag>
+        <tag>ipk</tag>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
