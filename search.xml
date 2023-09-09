@@ -277,59 +277,6 @@ Web Applications<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
-    <title>LaTeX PPT</title>
-    <url>/posts/499c5a19.html</url>
-    <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
-<p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf
-上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span></p>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer">
-<figcaption aria-hidden="true">Beamer</figcaption>
-</figure>
-<!-- TODO: Beamer 介绍和额外的特性 -->
-<h2 id="特性">特性</h2>
-<h3 id="frame-与-slide"><code>frame</code> 与 <code>slide</code></h3>
-<p>Beamer 中通常会用一对
-<code>\begin{frame}</code>、<code>\end{frame}</code>
-来制作一页幻灯片（slide），例如</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{标题名称}</span><br><span class="line">	主体内容</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-frame.png" alt="frame">
-<figcaption aria-hidden="true">frame</figcaption>
-</figure>
-<p>然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides</p>
-<h4 id="pause"><code>\pause</code></h4>
-<p>添加 <code>\pause</code> 会将 <code>\pause</code>
-语句前面内容单独在新的一页 slide 上显示，实现了类似 PPT
-动画中的点击页面出现下一段文字的效果，下面给出代码和生成的 PDF
-帮助理解</p>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{<span class="keyword">\textbackslash</span> pause 使用}</span><br><span class="line"></span><br><span class="line">	在这组幻灯片中 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	这段文件将部分可见 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	现在所有文字都可以看见了</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-pause.jpg" alt="pause">
-<figcaption aria-hidden="true">pause</figcaption>
-</figure>
-<h4 id="itemize-中的尖括号-strat-end"><code>itemize</code> 中的尖括号
-&lt;strat-end&gt;</h4>
-<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line"><span class="keyword">\frametitle</span>{item 中的尖括号}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">	<span class="keyword">\item</span>&lt;1-&gt; 该文字在 1+ 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;2-3&gt; 该文字在 2-3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;3&gt; 该文字仅在第 3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;4-&gt; 该文字在 4+ 页均可见</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
-<figure>
-<img data-src="/posts/499c5a19/Beamer-item.jpg" alt="item">
-<figcaption aria-hidden="true">item</figcaption>
-</figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>Beamer</tag>
-        <tag>LaTeX</tag>
-        <tag>todo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo 配置主流搜索引擎收录流程记录</title>
     <url>/posts/abac0c46.html</url>
     <content><![CDATA[<p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置
@@ -474,6 +421,59 @@ Google 搜索文档，改善网站的 SEO 过程<i class="fa fa-external-link-al
       <tags>
         <tag>Hexo</tag>
         <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTeX PPT</title>
+    <url>/posts/499c5a19.html</url>
+    <content><![CDATA[<h2 id="beamer-模板">Beamer 模板</h2>
+<p>PPT 推荐用 Beamer 模板来做，可以参考 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">Overleaf
+上相关介绍<i class="fa fa-external-link-alt"></i></span> 来使用 <span id="more"></span></p>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-overview.png" alt="Beamer">
+<figcaption aria-hidden="true">Beamer</figcaption>
+</figure>
+<!-- TODO: Beamer 介绍和额外的特性 -->
+<h2 id="特性">特性</h2>
+<h3 id="frame-与-slide"><code>frame</code> 与 <code>slide</code></h3>
+<p>Beamer 中通常会用一对
+<code>\begin{frame}</code>、<code>\end{frame}</code>
+来制作一页幻灯片（slide），例如</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{标题名称}</span><br><span class="line">	主体内容</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-frame.png" alt="frame">
+<figcaption aria-hidden="true">frame</figcaption>
+</figure>
+<p>然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides</p>
+<h4 id="pause"><code>\pause</code></h4>
+<p>添加 <code>\pause</code> 会将 <code>\pause</code>
+语句前面内容单独在新的一页 slide 上显示，实现了类似 PPT
+动画中的点击页面出现下一段文字的效果，下面给出代码和生成的 PDF
+帮助理解</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line">	<span class="keyword">\frametitle</span>{<span class="keyword">\textbackslash</span> pause 使用}</span><br><span class="line"></span><br><span class="line">	在这组幻灯片中 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	这段文件将部分可见 <span class="keyword">\pause</span></span><br><span class="line">	</span><br><span class="line">	现在所有文字都可以看见了</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-pause.jpg" alt="pause">
+<figcaption aria-hidden="true">pause</figcaption>
+</figure>
+<h4 id="itemize-中的尖括号-strat-end"><code>itemize</code> 中的尖括号
+&lt;strat-end&gt;</h4>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{frame}</span><br><span class="line"><span class="keyword">\frametitle</span>{item 中的尖括号}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">	<span class="keyword">\item</span>&lt;1-&gt; 该文字在 1+ 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;2-3&gt; 该文字在 2-3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;3&gt; 该文字仅在第 3 页均可见</span><br><span class="line">	<span class="keyword">\item</span>&lt;4-&gt; 该文字在 4+ 页均可见</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"><span class="keyword">\end</span>{frame}</span><br></pre></td></tr></tbody></table></figure>
+<figure>
+<img data-src="/posts/499c5a19/Beamer-item.jpg" alt="item">
+<figcaption aria-hidden="true">item</figcaption>
+</figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2xhdGV4L0JlYW1lcg==">【Overleaf】Beamer<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>Beamer</tag>
+        <tag>LaTeX</tag>
+        <tag>todo</tag>
       </tags>
   </entry>
   <entry>
@@ -844,6 +844,124 @@ Ubuntu 22.04 安装 VNC<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
+    <title>利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用</title>
+    <url>/posts/b8506868.html</url>
+    <content><![CDATA[<p>本文主要记录自己在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> + <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">ZenFS<i class="fa fa-external-link-alt"></i></span> 测试
+<span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">ZNS<i class="fa fa-external-link-alt"></i></span>
+过程中遇到的一些问题以及相应的解决办法 <span id="more"></span></p>
+<h2 id="配置-zns-环境">配置 ZNS 环境</h2>
+<p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS
+设备类型是基于闪存的 SSD。但是 ZNS SSD
+目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
+<h3 id="配置-femu">配置 FEMU</h3>
+<p>官网给了 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiN6b25lZC1ibG9jay1kZXZpY2UtZW11bGF0aW9uLXdpdGgtbnVsbF9ibGs=">null_blk<i class="fa fa-external-link-alt"></i></span>
+以及 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiNudm1lLXpvbmVkLW5hbWVzcGFjZS1kZXZpY2UtZW11bGF0aW9uLXdpdGgtcWVtdQ==">QEMU<i class="fa fa-external-link-alt"></i></span>
+的配置方法，但是个人对 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">FEMU<i class="fa fa-external-link-alt"></i></span>
+比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用
+FEMU 模拟 ZNS 搭建环境</p>
+<p>FEMU 的环境搭建比较简单，参考其 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVUjaW5zdGFsbGF0aW9u">官方仓库 README<i class="fa fa-external-link-alt"></i></span>
+操作即可</p>
+<p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
+内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
+22.04 LTS。
+不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
+安装内核用户头文件过程中）存在一定的风险性</p>
+<h3 id="qemu-制作和安装系统镜像">QEMU 制作和安装系统镜像</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 下载 Ubuntu 镜像</span></span><br><span class="line">wget https://releases.ubuntu.com/22.04.1/ubuntu-22.04.1-live-server-amd64.iso</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制作磁盘镜像</span></span><br><span class="line">qemu-img create -f qcow2 u22s.qcow2 80G</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 镜像挂在 cdrom 上启动</span></span><br><span class="line"><span class="comment"># 安装过程需要通过 vnc 连接操作，端口号 5901</span></span><br><span class="line">qemu-system-x86_64 -m 2G -cdrom ubuntu-22.04.1-live-server-amd64.iso -hda u22s.qcow2 -boot d -vnc :1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完成后重启，再 vnc 连接一次，修改内核启动参数</span></span><br><span class="line">qemu-system-x86_64 -m 2G -hda u22s.qcow2 -vnc :1</span><br></pre></td></tr></tbody></table></figure>
+<p>然后在虚拟内将内核启动时输出改为打印到串口</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 在虚拟机内</span></span><br><span class="line">sudo vim /etc/default/grub</span><br></pre></td></tr></tbody></table></figure>
+<p>保证按照下面的配置</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 用于保证 grub 界面能输出到屏幕</span></span><br><span class="line"><span class="comment">#GRUB_TIMEOUT_STYLE=hidden</span></span><br><span class="line"><span class="attr">GRUB_TIMEOUT</span>=<span class="number">3</span></span><br><span class="line"><span class="attr">GRUB_TERMINAL</span>=serial</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于保证内核启动时能输出到屏幕</span></span><br><span class="line"><span class="attr">GRUB_CMDLINE_LINUX</span>=<span class="string">"ip=dhcp console=ttyS0,115200"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># (可选)屏蔽子菜单和 recovery 内核，方便快速切换内核</span></span><br><span class="line"><span class="attr">GRUB_DISABLE_SUBMENU</span>=y</span><br><span class="line"><span class="attr">GRUB_DISABLE_RECOVERY</span>=<span class="string">"true"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后更新重启即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 更新 grub</span></span><br><span class="line">sudo update-grub</span><br><span class="line"><span class="comment"># sudo update-grub2</span></span><br><span class="line">sudo poweroff</span><br></pre></td></tr></tbody></table></figure>
+<p>之后就可以不需要 vnc 连接了，可以加上 <code>-nographic</code>
+使用了，例如</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 举例</span></span><br><span class="line">qemu-system-x86_64 -enable-kvm -cpu host -smp=16 -m 4G -hda u22s.qcow2 -nographic</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
+官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
+<h3 id="环境以及依赖安装">环境以及依赖安装</h3>
+<p>以 Ubuntu 为例：</p>
+<p><strong>容易踩坑：</strong>一定要记得按照顺序来，先安装好所有依赖再编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"><span class="comment"># sudo apt install pkg-config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
+<p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
+<p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考
+<a href="/posts/4bc1e607.html">这篇博文</a></p>
+<p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code>
+即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>容易踩坑：</strong>如果 <code>-j</code>
+会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考
+<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">这篇博客<i class="fa fa-external-link-alt"></i></span>
+利用 swap “增加” 可用内存大小，或者限制下编译的并发度，例如
+<code>-j8</code></p>
+<p>利用 <code>db_bench</code> 测试可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9QZXJmb3JtYW5jZS1CZW5jaG1hcmtz">官方测试<i class="fa fa-external-link-alt"></i></span>
+的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"><code>benchmark.sh</code></a>
+来测试，当然也可以直接运行 <code>db_bench</code></p>
+<h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnMvYmxvYi9tYXN0ZXIvUkVBRE1FLm1k">ZenFS
+官方仓库<i class="fa fa-external-link-alt"></i></span>其实给了相应的指导，这里重新梳理下</p>
+<h3 id="安装-libzbd">安装 libzbd</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/libzbd.git</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
+<p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="comment"># git clone git@github.com:facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
+<p>至此所有测试需要的环境已经基本搭建好了</p>
+<h2 id="测试">测试</h2>
+<p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为
+<code>nvme1n1</code></p>
+<h3 id="利用-zenfs-的测试脚本测试">利用 zenfs 的测试脚本测试</h3>
+<p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO
+调度器，制作文件系统以及自动配置 RocksDB
+参数，但是参数配置的不够合理，需要自行修改</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span><br></pre></td></tr></tbody></table></figure>
+<p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value
+大小，运行时间较长，最后的测试结果汇总在
+<code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
+<h3 id="直接-db_bench-测试">直接 db_bench 测试</h3>
+<p>首先配置底层 IO 调度器为 <code>mq-deadline</code>
+用户保持有序性（因为 ZNS 只支持追加写</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> mq-deadline | sudo <span class="built_in">tee</span> /sys/block/nvme1n1/queue/scheduler</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>容易踩坑：</strong>利用 <code>zenfs</code> 创建 ZenFS
+文件系统，其中 <strong><code>zbd</code>
+后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定
+<code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS
+设备上，并且使用<strong>绝对路径</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> zenfs-aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/util/zenfs mkfs --zbd=nvme1n1 --aux-path=/home/femu/zenfs-aux</span><br></pre></td></tr></tbody></table></figure>
+<p>制作好文件系统后，就可以用 <code>db_bench</code> 进行测试了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direct_io_for_flush_and_compaction</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">【GitHub】RocksDB<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">【GitHub】ZenFS<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">【zonedstorage】ZNS<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">【GitHub】FEMU<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL3FlbXUtbWFucGFnZS5odG1s">【QEMU】QEMU
+User Documentation<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvUUVNVS9JbWFnZXMjQ3JlYXRpbmdfYW5faW1hZ2U=">【Wikibooks】QEMU/Images<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL2xpbnV4Ym9vdC5odG1s">【QEMU】Direct
+Linux Boot<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy85MjQ5MTMvaG93LXRvLWdldC10by10aGUtZ3J1Yi1tZW51LWF0LWJvb3QtdGltZS11c2luZy1zZXJpYWwtY29uc29sZQ==">【ask
+ubuntu】How to get to the GRUB menu at boot-time using serial
+console?<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">【CSDN】问题解决
+C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vbGliemJk">【GitHub】libzbd<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>日常踩坑</tag>
+        <tag>RocksDB</tag>
+        <tag>ZNS</tag>
+        <tag>QEMU</tag>
+        <tag>grub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>自定义配置 RocksDB 进行 YCSB 测试</title>
     <url>/posts/4bc1e607.html</url>
     <content><![CDATA[<p>本文主要记录在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQg==">YCSB<i class="fa fa-external-link-alt"></i></span>
@@ -955,127 +1073,9 @@ Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-
         <category>测试</category>
       </categories>
       <tags>
+        <tag>RocksDB</tag>
         <tag>Maven</tag>
-        <tag>RocksDB</tag>
         <tag>YCSB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用</title>
-    <url>/posts/b8506868.html</url>
-    <content><![CDATA[<p>本文主要记录自己在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">RocksDB<i class="fa fa-external-link-alt"></i></span> + <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">ZenFS<i class="fa fa-external-link-alt"></i></span> 测试
-<span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">ZNS<i class="fa fa-external-link-alt"></i></span>
-过程中遇到的一些问题以及相应的解决办法 <span id="more"></span></p>
-<h2 id="配置-zns-环境">配置 ZNS 环境</h2>
-<p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS
-设备类型是基于闪存的 SSD。但是 ZNS SSD
-目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
-<h3 id="配置-femu">配置 FEMU</h3>
-<p>官网给了 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiN6b25lZC1ibG9jay1kZXZpY2UtZW11bGF0aW9uLXdpdGgtbnVsbF9ibGs=">null_blk<i class="fa fa-external-link-alt"></i></span>
-以及 <span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9nZXR0aW5nLXN0YXJ0ZWQvemJkLWVtdWxhdGlvbiNudm1lLXpvbmVkLW5hbWVzcGFjZS1kZXZpY2UtZW11bGF0aW9uLXdpdGgtcWVtdQ==">QEMU<i class="fa fa-external-link-alt"></i></span>
-的配置方法，但是个人对 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">FEMU<i class="fa fa-external-link-alt"></i></span>
-比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用
-FEMU 模拟 ZNS 搭建环境</p>
-<p>FEMU 的环境搭建比较简单，参考其 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVUjaW5zdGFsbGF0aW9u">官方仓库 README<i class="fa fa-external-link-alt"></i></span>
-操作即可</p>
-<p><strong>容易踩坑：</strong>但是需要注意 ZNS 对 Linux
-内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu
-22.04 LTS。
-不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code>
-安装内核用户头文件过程中）存在一定的风险性</p>
-<h3 id="qemu-制作和安装系统镜像">QEMU 制作和安装系统镜像</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 下载 Ubuntu 镜像</span></span><br><span class="line">wget https://releases.ubuntu.com/22.04.1/ubuntu-22.04.1-live-server-amd64.iso</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制作磁盘镜像</span></span><br><span class="line">qemu-img create -f qcow2 u22s.qcow2 80G</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 镜像挂在 cdrom 上启动</span></span><br><span class="line"><span class="comment"># 安装过程需要通过 vnc 连接操作，端口号 5901</span></span><br><span class="line">qemu-system-x86_64 -m 2G -cdrom ubuntu-22.04.1-live-server-amd64.iso -hda u22s.qcow2 -boot d -vnc :1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完成后重启，再 vnc 连接一次，修改内核启动参数</span></span><br><span class="line">qemu-system-x86_64 -m 2G -hda u22s.qcow2 -vnc :1</span><br></pre></td></tr></tbody></table></figure>
-<p>然后在虚拟内将内核启动时输出改为打印到串口</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 在虚拟机内</span></span><br><span class="line">sudo vim /etc/default/grub</span><br></pre></td></tr></tbody></table></figure>
-<p>保证按照下面的配置</p>
-<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 用于保证 grub 界面能输出到屏幕</span></span><br><span class="line"><span class="comment">#GRUB_TIMEOUT_STYLE=hidden</span></span><br><span class="line"><span class="attr">GRUB_TIMEOUT</span>=<span class="number">3</span></span><br><span class="line"><span class="attr">GRUB_TERMINAL</span>=serial</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于保证内核启动时能输出到屏幕</span></span><br><span class="line"><span class="attr">GRUB_CMDLINE_LINUX</span>=<span class="string">"ip=dhcp console=ttyS0,115200"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># (可选)屏蔽子菜单和 recovery 内核，方便快速切换内核</span></span><br><span class="line"><span class="attr">GRUB_DISABLE_SUBMENU</span>=y</span><br><span class="line"><span class="attr">GRUB_DISABLE_RECOVERY</span>=<span class="string">"true"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>然后更新重启即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 更新 grub</span></span><br><span class="line">sudo update-grub</span><br><span class="line"><span class="comment"># sudo update-grub2</span></span><br><span class="line">sudo poweroff</span><br></pre></td></tr></tbody></table></figure>
-<p>之后就可以不需要 vnc 连接了，可以加上 <code>-nographic</code>
-使用了，例如</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 举例</span></span><br><span class="line">qemu-system-x86_64 -enable-kvm -cpu host -smp=16 -m 4G -hda u22s.qcow2 -nographic</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvYmxvYi9tYWluL0lOU1RBTEwubWQ=">RocksDB
-官方仓库的 Wiki<i class="fa fa-external-link-alt"></i></span> 有较为详细的安装指导</p>
-<h3 id="环境以及依赖安装">环境以及依赖安装</h3>
-<p>以 Ubuntu 为例：</p>
-<p><strong>容易踩坑：</strong>一定要记得按照顺序来，先安装好所有依赖再编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 基本的编译工具等不过多介绍</span></span><br><span class="line"><span class="comment"># sudo apt install build-essential</span></span><br><span class="line"><span class="comment"># sudo apt install pkg-config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># gflags</span></span><br><span class="line">sudo apt install libgflags-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩库，选一个就行</span></span><br><span class="line">sudo apt install libsnappy-dev</span><br><span class="line"><span class="comment"># sudo apt install zlib1g-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libbz2-dev</span></span><br><span class="line"><span class="comment"># sudo apt install liblz4-dev</span></span><br><span class="line"><span class="comment"># sudo apt install libzstd-dev</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
-<p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
-<p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考
-<a href="/posts/4bc1e607.html">这篇博文</a></p>
-<p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code>
-即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>容易踩坑：</strong>如果 <code>-j</code>
-会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考
-<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">这篇博客<i class="fa fa-external-link-alt"></i></span>
-利用 swap “增加” 可用内存大小，或者限制下编译的并发度，例如
-<code>-j8</code></p>
-<p>利用 <code>db_bench</code> 测试可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGIvd2lraS9QZXJmb3JtYW5jZS1CZW5jaG1hcmtz">官方测试<i class="fa fa-external-link-alt"></i></span>
-的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"><code>benchmark.sh</code></a>
-来测试，当然也可以直接运行 <code>db_bench</code></p>
-<h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnMvYmxvYi9tYXN0ZXIvUkVBRE1FLm1k">ZenFS
-官方仓库<i class="fa fa-external-link-alt"></i></span>其实给了相应的指导，这里重新梳理下</p>
-<h3 id="安装-libzbd">安装 libzbd</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 安装编译工具</span></span><br><span class="line">sudo apt install m4</span><br><span class="line">sudo apt install autoconf</span><br><span class="line">sudo apt install automake</span><br><span class="line">sudo apt install libtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/libzbd.git</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/libzbd.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="built_in">cd</span> libzbd</span><br><span class="line">sh ./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
-<p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取源码</span></span><br><span class="line"><span class="comment"># git clone https://github.com/facebook/rocksdb.git</span></span><br><span class="line"><span class="comment"># git clone git@github.com:facebook/rocksdb.git</span></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line"><span class="comment"># git clone https://github.com/westerndigitalcorporation/zenfs plugin/zenfs</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:westerndigitalcorporation/zenfs plugin/zenfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译测试工具</span></span><br><span class="line">DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装编译好的 RocksDB 库</span></span><br><span class="line">sudo DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译必要的 ZenFS 工具</span></span><br><span class="line"><span class="built_in">cd</span> plugin/zenfs/util</span><br><span class="line">make -j</span><br></pre></td></tr></tbody></table></figure>
-<p>至此所有测试需要的环境已经基本搭建好了</p>
-<h2 id="测试">测试</h2>
-<p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为
-<code>nvme1n1</code></p>
-<h3 id="利用-zenfs-的测试脚本测试">利用 zenfs 的测试脚本测试</h3>
-<p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO
-调度器，制作文件系统以及自动配置 RocksDB
-参数，但是参数配置的不够合理，需要自行修改</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span><br></pre></td></tr></tbody></table></figure>
-<p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value
-大小，运行时间较长，最后的测试结果汇总在
-<code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
-<h3 id="直接-db_bench-测试">直接 db_bench 测试</h3>
-<p>首先配置底层 IO 调度器为 <code>mq-deadline</code>
-用户保持有序性（因为 ZNS 只支持追加写</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> mq-deadline | sudo <span class="built_in">tee</span> /sys/block/nvme1n1/queue/scheduler</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>容易踩坑：</strong>利用 <code>zenfs</code> 创建 ZenFS
-文件系统，其中 <strong><code>zbd</code>
-后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定
-<code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS
-设备上，并且使用<strong>绝对路径</strong></p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> zenfs-aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./plugin/zenfs/util/zenfs mkfs --zbd=nvme1n1 --aux-path=/home/femu/zenfs-aux</span><br></pre></td></tr></tbody></table></figure>
-<p>制作好文件系统后，就可以用 <code>db_bench</code> 进行测试了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> rocksdb</span><br><span class="line">sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direct_io_for_flush_and_compaction</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JvY2tzZGI=">【GitHub】RocksDB<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vemVuZnM=">【GitHub】ZenFS<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96b25lZHN0b3JhZ2UuaW8vZG9jcy9pbnRyb2R1Y3Rpb24vem5z">【zonedstorage】ZNS<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z0ZXNzL0ZFTVU=">【GitHub】FEMU<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL3FlbXUtbWFucGFnZS5odG1s">【QEMU】QEMU
-User Documentation<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpYm9va3Mub3JnL3dpa2kvUUVNVS9JbWFnZXMjQ3JlYXRpbmdfYW5faW1hZ2U=">【Wikibooks】QEMU/Images<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWVtdS5vcmcvZG9jcy9tYXN0ZXIvc3lzdGVtL2xpbnV4Ym9vdC5odG1s">【QEMU】Direct
-Linux Boot<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy85MjQ5MTMvaG93LXRvLWdldC10by10aGUtZ3J1Yi1tZW51LWF0LWJvb3QtdGltZS11c2luZy1zZXJpYWwtY29uc29sZQ==">【ask
-ubuntu】How to get to the GRUB menu at boot-time using serial
-console?<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5NjY3MC9hcnRpY2xlL2RldGFpbHMvMTIxMjM0NDQ2">【CSDN】问题解决
-C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlc3Rlcm5kaWdpdGFsY29ycG9yYXRpb24vbGliemJk">【GitHub】libzbd<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>RocksDB</tag>
-        <tag>日常踩坑</tag>
-        <tag>ZNS</tag>
-        <tag>QEMU</tag>
-        <tag>grub</tag>
       </tags>
   </entry>
   <entry>
@@ -1124,6 +1124,148 @@ chrome，命令行应该就恢复正常了，此时也能在已打开 chrome
       <tags>
         <tag>日常踩坑</tag>
         <tag>chrome</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Debug 从入门到入土</title>
+    <url>/posts/89f2ed7d.html</url>
+    <content><![CDATA[<p>写代码难免遇到 bug，调试解决 bug
+的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以
+C/C++ 的 segment fault 为例） <span id="more"></span></p>
+<h2 id="分类">分类</h2>
+<p>根据调试时机与 bug
+产生的时间的前后关系，主要分为 “事后”、“事中”、“事先” 三类：</p>
+<ul>
+<li>“事后” 主要是通过 addr2line 或者 objdump
+等工具，定位报错时的程序运行位置</li>
+<li> “事中” 主要是通过 GDB 来观察程序运行时的状态，实时的捕捉 bug</li>
+<li>“事先”
+主要是通过在源代码中插入打印语句，来观察程序运行时各个变量的状态</li>
+</ul>
+<h2 id="事后">事后</h2>
+<p>通常为了快速的定位
+bug，会根据出错时的程序输出，来判断重新出错的位置</p>
+<p>然而一般的程序输出可能不足以提供足够信息的情况，此时可以根据
+<code>segmentation fault (core dumped)</code>
+信息并且借助一些工具来定位出错的位置</p>
+<h3 id="addr2line"><code>addr2line</code></h3>
+<p><code>addr2line</code> 在程序<strong>含有 debug
+信息</strong>时可以快速的将地址转换为文件名和行号</p>
+<p>具体的使用方法可以通过 <code>man addr2line</code>
+查看，这里简单介绍一下常用的用法</p>
+<p>以下面的代码为例：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    *p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 编译时加上 -g 选项，生成 debug 信息</span></span><br><span class="line"><span class="comment"># -no-pie 选项是为了避免 ASLR 的影响（高版本的 gcc 默认开启 ASLR）</span></span><br><span class="line">$ gcc -g -no-pie test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序，会出现 segmentation fault</span></span><br><span class="line">$ ./test</span><br><span class="line">[1]    7533 segmentation fault (core dumped)  ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># dmesg 查看内核日志，可以看到 segmentation fault 的详细信息</span></span><br><span class="line">$ dmesg | <span class="built_in">tail</span> -n 2</span><br><span class="line">[46592.916853] <span class="built_in">test</span>[7533]: segfault at 0 ip 000000000040111a sp 00007ffce6095a70 error 6 <span class="keyword">in</span> <span class="built_in">test</span>[401000+1000]</span><br><span class="line">[46592.916875] Code: c3 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 f3 0f 1e fa eb 8a f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 b8 00 00 00 00 5d c3 66 0f 1f 84 00 00 00 00 00</span><br></pre></td></tr></tbody></table></figure>
+<p>此时可以根据 <code>ip 000000000040111a</code>
+来定位出错的位置，<code>ip</code> 后面跟着的数字就是 IP
+寄存器的值，也就是出错时的程序运行位置，可以通过 <code>addr2line</code>
+来将其转换为文件名和行号</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 将地址转换为文件名和行号</span></span><br><span class="line"><span class="comment"># -f 选项表示输出函数名</span></span><br><span class="line"><span class="comment"># -e 选项表示指定可执行文件</span></span><br><span class="line">$ addr2line -f -e ./test 0x000000000040111a</span><br><span class="line">main</span><br><span class="line">/home/ywang/test.c:5</span><br></pre></td></tr></tbody></table></figure>
+<p>然而 <code>addr2line</code> 也有两个较为明显的局限：</p>
+<ul>
+<li>需要提前在编译时加上 <code>-g</code> 选项，生成 debug 信息</li>
+<li>对于高版本的 gcc，需要加上 <code>-no-pie</code> 选项，避免 ASLR
+的影响</li>
+</ul>
+<h3 id="objdump-反汇编"><code>objdump</code> 反汇编</h3>
+<p>通过 <code>objdump</code> 进行反汇编也是一种比较常用的定位
+segmentation fault
+的方法，这种方法能够精确的定位到执行的汇编指令，并且没有
+<code>addr2line</code>
+的上述限制，但是需要一定的汇编基础，否则看不懂汇编指令也是没用的</p>
+<p>汇编指令的快速查询可以直接 Google 或者在<a href="/TODO">一些工具站</a>上进行速查</p>
+<p>以下面的代码为例：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func_bug</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    *p = <span class="number">2</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    func_bug();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 无需任何选项，直接编译</span></span><br><span class="line">$ gcc test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序，会出现 segmentation fault</span></span><br><span class="line">$ ./test</span><br><span class="line">[1]    8173 segmentation fault (core dumped)  ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># dmesg 查看内核日志，可以看到 segmentation fault 的详细信息</span></span><br><span class="line">$ dmesg | <span class="built_in">tail</span> -n 2</span><br><span class="line">[49630.541707] <span class="built_in">test</span>[8173]: segfault at 0 ip 000055bce6f6c13d sp 00007fffad5149b0 error 6 <span class="keyword">in</span> <span class="built_in">test</span>[55bce6f6c000+1000]</span><br><span class="line">[49630.541732] Code: 5d c3 0f 1f 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa e9 77 ff ff ff f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 90 5d c3 f3 0f 1e fa 55 48 89 e5 48 83 ec 10 c7 </span><br></pre></td></tr></tbody></table></figure>
+<p>由于没有关闭 ASLR，所以每次运行程序时，<code>ip</code>
+的值都会不一样，但是可以简单的换算获取到实际偏移量</p>
+<p>例如上面的
+<code>ip 000055bce6f6c13d …… in test[55bce6f6c000+1000]</code>，可以通过
+<code>0x55bce6f6c13d - 0x55bce6f6c000 + 0x1000= 0x113d</code>
+来获取实际偏移量 <code>0x113d</code></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 反汇编原程序</span></span><br><span class="line">$ objdump -d ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .init:</span><br><span class="line"></span><br><span class="line">0000000000001000 &lt;_init&gt;:</span><br><span class="line">    1000:       f3 0f 1e fa             endbr64</span><br><span class="line">    1004:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    1008:       48 8b 05 d9 2f 00 00    mov    0x2fd9(%rip),%rax        <span class="comment"># 3fe8 &lt;__gmon_start__&gt;</span></span><br><span class="line">    100f:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    1012:       74 02                   je     1016 &lt;_init+0x16&gt;</span><br><span class="line">    1014:       ff d0                   callq  *%rax</span><br><span class="line">    1016:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    101a:       c3                      retq</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt:</span><br><span class="line"></span><br><span class="line">0000000000001020 &lt;.plt&gt;:</span><br><span class="line">    1020:       ff 35 a2 2f 00 00       pushq  0x2fa2(%rip)        <span class="comment"># 3fc8 &lt;_GLOBAL_OFFSET_TABLE_+0x8&gt;</span></span><br><span class="line">    1026:       f2 ff 25 a3 2f 00 00    bnd jmpq *0x2fa3(%rip)        <span class="comment"># 3fd0 &lt;_GLOBAL_OFFSET_TABLE_+0x10&gt;</span></span><br><span class="line">    102d:       0f 1f 00                nopl   (%rax)</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt.got:</span><br><span class="line"></span><br><span class="line">0000000000001030 &lt;__cxa_finalize@plt&gt;:</span><br><span class="line">    1030:       f3 0f 1e fa             endbr64</span><br><span class="line">    1034:       f2 ff 25 bd 2f 00 00    bnd jmpq *0x2fbd(%rip)        <span class="comment"># 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;</span></span><br><span class="line">    103b:       0f 1f 44 00 00          nopl   0x0(%rax,%rax,1)</span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001040 &lt;_start&gt;:</span><br><span class="line">    1040:       f3 0f 1e fa             endbr64</span><br><span class="line">    1044:       31 ed                   xor    %ebp,%ebp</span><br><span class="line">    1046:       49 89 d1                mov    %rdx,%r9</span><br><span class="line">    1049:       5e                      pop    %rsi</span><br><span class="line">    104a:       48 89 e2                mov    %rsp,%rdx</span><br><span class="line">    104d:       48 83 e4 f0             and    <span class="variable">$0xfffffffffffffff0</span>,%rsp</span><br><span class="line">    1051:       50                      push   %rax</span><br><span class="line">    1052:       54                      push   %rsp</span><br><span class="line">    1053:       4c 8d 05 86 01 00 00    lea    0x186(%rip),%r8        <span class="comment"># 11e0 &lt;__libc_csu_fini&gt;</span></span><br><span class="line">    105a:       48 8d 0d 0f 01 00 00    lea    0x10f(%rip),%rcx        <span class="comment"># 1170 &lt;__libc_csu_init&gt;</span></span><br><span class="line">    1061:       48 8d 3d de 00 00 00    lea    0xde(%rip),%rdi        <span class="comment"># 1146 &lt;main&gt;</span></span><br><span class="line">    1068:       ff 15 72 2f 00 00       callq  *0x2f72(%rip)        <span class="comment"># 3fe0 &lt;__libc_start_main@GLIBC_2.2.5&gt;</span></span><br><span class="line">    106e:       f4                      hlt</span><br><span class="line">    106f:       90                      nop</span><br><span class="line"></span><br><span class="line">0000000000001070 &lt;deregister_tm_clones&gt;:</span><br><span class="line">    1070:       48 8d 3d 99 2f 00 00    lea    0x2f99(%rip),%rdi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    1077:       48 8d 05 92 2f 00 00    lea    0x2f92(%rip),%rax        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    107e:       48 39 f8                cmp    %rdi,%rax</span><br><span class="line">    1081:       74 15                   je     1098 &lt;deregister_tm_clones+0x28&gt;</span><br><span class="line">    1083:       48 8b 05 4e 2f 00 00    mov    0x2f4e(%rip),%rax        <span class="comment"># 3fd8 &lt;_ITM_deregisterTMCloneTable&gt;</span></span><br><span class="line">    108a:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    108d:       74 09                   je     1098 &lt;deregister_tm_clones+0x28&gt;</span><br><span class="line">    108f:       ff e0                   jmpq   *%rax</span><br><span class="line">    1091:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line">    1098:       c3                      retq</span><br><span class="line">    1099:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">00000000000010a0 &lt;register_tm_clones&gt;:</span><br><span class="line">    10a0:       48 8d 3d 69 2f 00 00    lea    0x2f69(%rip),%rdi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10a7:       48 8d 35 62 2f 00 00    lea    0x2f62(%rip),%rsi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10ae:       48 29 fe                sub    %rdi,%rsi</span><br><span class="line">    10b1:       48 89 f0                mov    %rsi,%rax</span><br><span class="line">    10b4:       48 c1 ee 3f             shr    <span class="variable">$0x3f</span>,%rsi</span><br><span class="line">    10b8:       48 c1 f8 03             sar    <span class="variable">$0x3</span>,%rax</span><br><span class="line">    10bc:       48 01 c6                add    %rax,%rsi</span><br><span class="line">    10bf:       48 d1 fe                sar    %rsi</span><br><span class="line">    10c2:       74 14                   je     10d8 &lt;register_tm_clones+0x38&gt;</span><br><span class="line">    10c4:       48 8b 05 25 2f 00 00    mov    0x2f25(%rip),%rax        <span class="comment"># 3ff0 &lt;_ITM_registerTMCloneTable&gt;</span></span><br><span class="line">    10cb:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    10ce:       74 08                   je     10d8 &lt;register_tm_clones+0x38&gt;</span><br><span class="line">    10d0:       ff e0                   jmpq   *%rax</span><br><span class="line">    10d2:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)</span><br><span class="line">    10d8:       c3                      retq</span><br><span class="line">    10d9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">00000000000010e0 &lt;__do_global_dtors_aux&gt;:</span><br><span class="line">    10e0:       f3 0f 1e fa             endbr64</span><br><span class="line">    10e4:       80 3d 25 2f 00 00 00    cmpb   <span class="variable">$0x0</span>,0x2f25(%rip)        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10eb:       75 2b                   jne    1118 &lt;__do_global_dtors_aux+0x38&gt;</span><br><span class="line">    10ed:       55                      push   %rbp</span><br><span class="line">    10ee:       48 83 3d 02 2f 00 00    cmpq   <span class="variable">$0x0</span>,0x2f02(%rip)        <span class="comment"># 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;</span></span><br><span class="line">    10f5:       00</span><br><span class="line">    10f6:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    10f9:       74 0c                   je     1107 &lt;__do_global_dtors_aux+0x27&gt;</span><br><span class="line">    10fb:       48 8b 3d 06 2f 00 00    mov    0x2f06(%rip),%rdi        <span class="comment"># 4008 &lt;__dso_handle&gt;</span></span><br><span class="line">    1102:       e8 29 ff ff ff          callq  1030 &lt;__cxa_finalize@plt&gt;</span><br><span class="line">    1107:       e8 64 ff ff ff          callq  1070 &lt;deregister_tm_clones&gt;</span><br><span class="line">    110c:       c6 05 fd 2e 00 00 01    movb   <span class="variable">$0x1</span>,0x2efd(%rip)        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    1113:       5d                      pop    %rbp</span><br><span class="line">    1114:       c3                      retq</span><br><span class="line">    1115:       0f 1f 00                nopl   (%rax)</span><br><span class="line">    1118:       c3                      retq</span><br><span class="line">    1119:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">0000000000001120 &lt;frame_dummy&gt;:</span><br><span class="line">    1120:       f3 0f 1e fa             endbr64</span><br><span class="line">    1124:       e9 77 ff ff ff          jmpq   10a0 &lt;register_tm_clones&gt;</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br><span class="line"></span><br><span class="line">0000000000001146 &lt;main&gt;:</span><br><span class="line">    1146:       f3 0f 1e fa             endbr64</span><br><span class="line">    114a:       55                      push   %rbp</span><br><span class="line">    114b:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    114e:       48 83 ec 10             sub    <span class="variable">$0x10</span>,%rsp</span><br><span class="line">    1152:       c7 45 <span class="built_in">fc</span> 01 00 00 00    movl   <span class="variable">$0x1</span>,-0x4(%rbp)</span><br><span class="line">    1159:       b8 00 00 00 00          mov    <span class="variable">$0x0</span>,%eax</span><br><span class="line">    115e:       e8 c6 ff ff ff          callq  1129 &lt;func_bug&gt;</span><br><span class="line">    1163:       b8 00 00 00 00          mov    <span class="variable">$0x0</span>,%eax</span><br><span class="line">    1168:       c9                      leaveq</span><br><span class="line">    1169:       c3                      retq</span><br><span class="line">    116a:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)</span><br><span class="line"></span><br><span class="line">0000000000001170 &lt;__libc_csu_init&gt;:</span><br><span class="line">    1170:       f3 0f 1e fa             endbr64</span><br><span class="line">    1174:       41 57                   push   %r15</span><br><span class="line">    1176:       4c 8d 3d 73 2c 00 00    lea    0x2c73(%rip),%r15        <span class="comment"># 3df0 &lt;__frame_dummy_init_array_entry&gt;</span></span><br><span class="line">    117d:       41 56                   push   %r14</span><br><span class="line">    117f:       49 89 d6                mov    %rdx,%r14</span><br><span class="line">    1182:       41 55                   push   %r13</span><br><span class="line">    1184:       49 89 f5                mov    %rsi,%r13</span><br><span class="line">    1187:       41 54                   push   %r12</span><br><span class="line">    1189:       41 89 <span class="built_in">fc</span>                mov    %edi,%r12d</span><br><span class="line">    118c:       55                      push   %rbp</span><br><span class="line">    118d:       48 8d 2d 64 2c 00 00    lea    0x2c64(%rip),%rbp        <span class="comment"># 3df8 &lt;__do_global_dtors_aux_fini_array_entry&gt;</span></span><br><span class="line">    1194:       53                      push   %rbx</span><br><span class="line">    1195:       4c 29 fd                sub    %r15,%rbp</span><br><span class="line">    1198:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    119c:       e8 5f fe ff ff          callq  1000 &lt;_init&gt;</span><br><span class="line">    11a1:       48 c1 fd 03             sar    <span class="variable">$0x3</span>,%rbp</span><br><span class="line">    11a5:       74 1f                   je     11c6 &lt;__libc_csu_init+0x56&gt;</span><br><span class="line">    11a7:       31 db                   xor    %ebx,%ebx</span><br><span class="line">    11a9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line">    11b0:       4c 89 f2                mov    %r14,%rdx</span><br><span class="line">    11b3:       4c 89 ee                mov    %r13,%rsi</span><br><span class="line">    11b6:       44 89 e7                mov    %r12d,%edi</span><br><span class="line">    11b9:       41 ff 14 <span class="built_in">df</span>             callq  *(%r15,%rbx,8)</span><br><span class="line">    11bd:       48 83 c3 01             add    <span class="variable">$0x1</span>,%rbx</span><br><span class="line">    11c1:       48 39 <span class="built_in">dd</span>                cmp    %rbx,%rbp</span><br><span class="line">    11c4:       75 ea                   jne    11b0 &lt;__libc_csu_init+0x40&gt;</span><br><span class="line">    11c6:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11ca:       5b                      pop    %rbx</span><br><span class="line">    11cb:       5d                      pop    %rbp</span><br><span class="line">    11cc:       41 5c                   pop    %r12</span><br><span class="line">    11ce:       41 5d                   pop    %r13</span><br><span class="line">    11d0:       41 5e                   pop    %r14</span><br><span class="line">    11d2:       41 5f                   pop    %r15</span><br><span class="line">    11d4:       c3                      retq</span><br><span class="line">    11d5:       66 66 2e 0f 1f 84 00    data16 nopw %cs:0x0(%rax,%rax,1)</span><br><span class="line">    11dc:       00 00 00 00</span><br><span class="line"></span><br><span class="line">00000000000011e0 &lt;__libc_csu_fini&gt;:</span><br><span class="line">    11e0:       f3 0f 1e fa             endbr64</span><br><span class="line">    11e4:       c3                      retq</span><br><span class="line"></span><br><span class="line">Disassembly of section .fini:</span><br><span class="line"></span><br><span class="line">00000000000011e8 &lt;_fini&gt;:</span><br><span class="line">    11e8:       f3 0f 1e fa             endbr64</span><br><span class="line">    11ec:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11f0:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11f4:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<p>查看 <code>0x113d</code> 附近的代码段</p>
+<figure class="highlight x86asm"><table><tbody><tr><td class="code"><pre><span class="line"><span class="number">0000000000001129</span> &lt;func_bug&gt;:</span><br><span class="line">    <span class="number">1129</span>:       f3 0f 1e fa             endbr64</span><br><span class="line">    <span class="number">112d</span>:       <span class="number">55</span>                      <span class="keyword">push</span>   %rbp</span><br><span class="line">    112e:       <span class="number">48</span> <span class="number">89</span> e5                <span class="keyword">mov</span>    %rsp,%rbp</span><br><span class="line">    <span class="number">1131</span>:       <span class="number">48</span> c7 <span class="number">45</span> f8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    <span class="keyword">movq</span>   <span class="number">$0</span>x0,-<span class="number">0x8</span>(%rbp)</span><br><span class="line">    <span class="number">1138</span>:       <span class="number">00</span></span><br><span class="line">    <span class="number">1139</span>:       <span class="number">48</span> 8b <span class="number">45</span> f8             <span class="keyword">mov</span>    -<span class="number">0x8</span>(%rbp),%rax</span><br><span class="line">    <span class="number">113d</span>:       c7 <span class="number">00</span> <span class="number">02</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       movl   <span class="number">$0</span>x2,(%rax)</span><br><span class="line">    <span class="number">1143</span>:       <span class="number">90</span>                      <span class="keyword">nop</span></span><br><span class="line">    <span class="number">1144</span>:       <span class="number">5d</span>                      <span class="keyword">pop</span>    %rbp</span><br><span class="line">    <span class="number">1145</span>:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<p>结合源码以及汇编的前后内容不难分析出 <code>movl $0x2,(%rax)</code>
+与源代码 <code>*p = 2;</code> 对应 而 <code>movq $0x0,-0x8(%rbp)</code>
+以及 <code>mov -0x8(%rbp),%rax</code> 与源代码中的
+<code>int *p = NULL;</code> 对应</p>
+<p>因此不难判断出实际的出错原因为对空指针的进行了写操作</p>
+<h4 id="优化">优化</h4>
+<ul>
+<li>起始地址</li>
+</ul>
+<p>通常出错的程序可能会比较大，反汇编整个程序会非常耗时，此时可以通过
+<code>objdump</code> 的
+<code>--start-address=xxx --stop-address=xxx</code>
+选项来指定反汇编的开始地址和结束地址</p>
+<p>例如：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ objdump -d --start-address=0x1129 --stop-address=0x1146 ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>源代码参照</li>
+</ul>
+<p>如果编译时指定的 <code>-g</code> 也就是有 debug 信息的话，可以通过
+<code>objdump</code> 的 <code>-S -l</code>
+选项来将汇编指令与源代码进行对照</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ gcc -g test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -S 隐含 -d</span></span><br><span class="line">$ objdump -S -l --start-address=0x1129 --stop-address=0x1146 ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">func_bug():</span><br><span class="line">/home/wangyu/test.c:3</span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">func_bug</span></span>() {</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">/home/wangyu/test.c:4</span><br><span class="line">    int *p = NULL;</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">/home/wangyu/test.c:5</span><br><span class="line">    *p = 2;</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">/home/wangyu/test.c:6</span><br><span class="line">}</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="事中">事中</h2>
+<h3 id="最强工具-gdb">最强工具 GDB</h3>
+<p>TODO</p>
+<h2 id="事先">事先</h2>
+<h3 id="printf"><code>printf</code></h3>
+<p>虽然 <code>printf</code>
+是最简单的调试方法，但是也是最常用的调试方法，基本上没有
+<code>printf</code> 调试不出来的 bug</p>
+<p><strong>一般流程如下：</strong></p>
+<ol type="1">
+<li>通常对于一般的
+bug，可以先根据出错时的程序输出，大致估计出错的位置</li>
+<li>然后在源代码中插入打印语句，重新编译，再次运行程序</li>
+<li>继续观察打印的输出，一步步的缩小出错的范围，最终定位到出错的位置</li>
+<li>然后就可以打印出错位置的相应变量的值，进而分析出错原因</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<p>但是然而 <code>printf</code>
+本身会造成程序的运行效率降低，有时会出现<strong>加了 <code>printf</code>
+之后 bug 复现不了，去掉 <code>printf</code> 之后 bug
+又复现了</strong>的情况</p>
+<p>这种情况下就需要优化 <code>printf</code> 的方式，例如<strong>改用
+<code>sprintf</code> 将内容输出到内存中，然后通过单独的线程
+<code>fprintf</code>
+转储到文件中</strong>，这样就会减少对程序的运行效率的影响</p>
+<p>当然也可以换用后续的其他的调试方法</p>
+<h3 id="assert"><code>assert</code></h3>
+<p><code>assert</code> 是 C/C++
+中的一个宏，用于判断一个表达式是否为真，如果为假，则输出错误信息，并终止程序的运行</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    assert(a == <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>例如上述代码会输出如下错误信息，并终止程序的运行：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">test</span>: test.c:5: main: Assertion `a == 2<span class="string">' failed.</span></span><br><span class="line"><span class="string">[1]    3563773 abort (core dumped)  ./test</span></span><br></pre></td></tr></tbody></table></figure>
+<p>因此我们可以提前在一些可能出错的地方插入 <code>assert</code>
+语句，当程序运行到这里时，如果 <code>assert</code>
+语句不成立，则会输出错误信息，并终止程序的运行，从而快速定位到出错的原因</p>
+<p><strong>缺点：</strong></p>
+<p>与 <code>printf</code> 一样，<code>assert</code>
+也会造成程序的运行效率稍微降低，但是一般不会影响到 bug 的复现</p>
+<p>但是为了程序的运行效率，程序 <code>release</code> 版本的时候应该将
+<code>assert</code> 语句去掉，或者利用宏定义，在 <code>release</code>
+的时候将 <code>assert</code> 语句替换成空语句</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// #define DEBUG</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ASSERT(x) assert(x)</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ASSERT(x)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9hZGRyMmxpbmUuMS5odG1s">【man】addr2line<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9vYmpkdW1wLjEuaHRtbA==">【man】objdump<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>todo</tag>
+        <tag>日常踩坑</tag>
+        <tag>Debug</tag>
+        <tag>GDB</tag>
+        <tag>反汇编</tag>
       </tags>
   </entry>
   <entry>
@@ -3430,53 +3572,6 @@ WebUI 中将 layout 配置为
       </tags>
   </entry>
   <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<h3 id="来源">来源</h3>
-<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
-系统。迫于 Linux 的开源协议要求，Linksys
-开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
-<span id="more"></span></p>
-<h3 id="介绍">介绍</h3>
-<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
-操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装">安装</h2>
-<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
-中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程">一般安装流程</h3>
-<p>通常的安装步骤主要通过以下流程：</p>
-<ol type="1">
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
-<ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
-</ul></li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载">固件搜索下载</h3>
-<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
-页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OpenWrt 手动编译 ipk</title>
     <url>/posts/96a1807.html</url>
     <content><![CDATA[<h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
@@ -3561,6 +3656,53 @@ WebUI 中将 layout 配置为
         <tag>OpenWrt</tag>
         <tag>交叉编译</tag>
         <tag>ipk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<h3 id="来源">来源</h3>
+<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
+系统。迫于 Linux 的开源协议要求，Linksys
+开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
+<span id="more"></span></p>
+<h3 id="介绍">介绍</h3>
+<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
+操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装">安装</h2>
+<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
+中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程">一般安装流程</h3>
+<p>通常的安装步骤主要通过以下流程：</p>
+<ol type="1">
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
+<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul></li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载">固件搜索下载</h3>
+<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
+页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc">
+  <meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.font.im/css?family=Noto+Sans+SC:300,300italic,400,400italic,700,700italic%7CUbuntu+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":null}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C&#x2F;C++ 的 segment fault 为例）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Debug 从入门到入土">
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/89f2ed7d.html">
+<meta property="og:site_name" content="乐园">
+<meta property="og:description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C&#x2F;C++ 的 segment fault 为例）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-09T15:35:41.000Z">
+<meta property="article:modified_time" content="2023-09-09T15:35:41.000Z">
+<meta property="article:author" content="Zeus">
+<meta property="article:tag" content="todo">
+<meta property="article:tag" content="日常踩坑">
+<meta property="article:tag" content="Debug">
+<meta property="article:tag" content="GDB">
+<meta property="article:tag" content="反汇编">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ywang-wnlo.github.io/posts/89f2ed7d.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ywang-wnlo.github.io/posts/89f2ed7d.html","path":"posts/89f2ed7d.html","title":"Debug 从入门到入土"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Debug 从入门到入土 | 乐园</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PST75Y16TW"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-PST75Y16TW","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">乐园</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个新时代农民工的随手笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">48</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E"><span class="nav-number">2.</span> <span class="nav-text">事后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addr2line"><span class="nav-number">2.1.</span> <span class="nav-text">addr2line</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objdump-%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="nav-number">2.2.</span> <span class="nav-text">objdump 反汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.1.</span> <span class="nav-text">优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%B8%AD"><span class="nav-number">3.</span> <span class="nav-text">事中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%BC%BA%E5%B7%A5%E5%85%B7-gdb"><span class="nav-number">3.1.</span> <span class="nav-text">最强工具 GDB</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%85%88"><span class="nav-number">4.</span> <span class="nav-text">事先</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#printf"><span class="nav-number">4.1.</span> <span class="nav-text">printf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#assert"><span class="nav-number">4.2.</span> <span class="nav-text">assert</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zeus"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zeus</p>
+  <div class="site-description" itemprop="description">我永远喜欢 Homura.jpg</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l3YW5nLXdubG8=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ywang-wnlo"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnl3YW5nX3dubG9AcXEuY29t" title="E-Mail → mailto:ywang_wnlo@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ywang-wnlo.github.io/posts/89f2ed7d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zeus">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐园">
+      <meta itemprop="description" content="我永远喜欢 Homura.jpg">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Debug 从入门到入土 | 乐园">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Debug 从入门到入土
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-09 23:35:41" itemprop="dateCreated datePublished" datetime="2023-09-09T23:35:41+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" itemprop="url" rel="index"><span itemprop="name">日常踩坑</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tags"></i>
+      </span>
+      <span class="post-meta-item-text">标签：</span>
+      <span class="post-tags">
+        <a href="/tags/todo/" rel="tag"># todo</a>
+        <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"># 日常踩坑</a>
+        <a href="/tags/Debug/" rel="tag"># Debug</a>
+        <a href="/tags/GDB/" rel="tag"># GDB</a>
+        <a href="/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/" rel="tag"># 反汇编</a>
+      </span>
+    </span>
+
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>写代码难免遇到 bug，调试解决 bug
+的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以
+C/C++ 的 segment fault 为例） <span id="more"></span></p>
+<h2 id="分类">分类</h2>
+<p>根据调试时机与 bug
+产生的时间的前后关系，主要分为 “事后”、“事中”、“事先” 三类：</p>
+<ul>
+<li>“事后” 主要是通过 addr2line 或者 objdump
+等工具，定位报错时的程序运行位置</li>
+<li> “事中” 主要是通过 GDB 来观察程序运行时的状态，实时的捕捉 bug</li>
+<li>“事先”
+主要是通过在源代码中插入打印语句，来观察程序运行时各个变量的状态</li>
+</ul>
+<h2 id="事后">事后</h2>
+<p>通常为了快速的定位
+bug，会根据出错时的程序输出，来判断重新出错的位置</p>
+<p>然而一般的程序输出可能不足以提供足够信息的情况，此时可以根据
+<code>segmentation fault (core dumped)</code>
+信息并且借助一些工具来定位出错的位置</p>
+<h3 id="addr2line"><code>addr2line</code></h3>
+<p><code>addr2line</code> 在程序<strong>含有 debug
+信息</strong>时可以快速的将地址转换为文件名和行号</p>
+<p>具体的使用方法可以通过 <code>man addr2line</code>
+查看，这里简单介绍一下常用的用法</p>
+<p>以下面的代码为例：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    *p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译时加上 -g 选项，生成 debug 信息</span></span><br><span class="line"><span class="comment"># -no-pie 选项是为了避免 ASLR 的影响（高版本的 gcc 默认开启 ASLR）</span></span><br><span class="line">$ gcc -g -no-pie test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序，会出现 segmentation fault</span></span><br><span class="line">$ ./test</span><br><span class="line">[1]    7533 segmentation fault (core dumped)  ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># dmesg 查看内核日志，可以看到 segmentation fault 的详细信息</span></span><br><span class="line">$ dmesg | <span class="built_in">tail</span> -n 2</span><br><span class="line">[46592.916853] <span class="built_in">test</span>[7533]: segfault at 0 ip 000000000040111a sp 00007ffce6095a70 error 6 <span class="keyword">in</span> <span class="built_in">test</span>[401000+1000]</span><br><span class="line">[46592.916875] Code: c3 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 f3 0f 1e fa eb 8a f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 b8 00 00 00 00 5d c3 66 0f 1f 84 00 00 00 00 00</span><br></pre></td></tr></tbody></table></figure>
+<p>此时可以根据 <code>ip 000000000040111a</code>
+来定位出错的位置，<code>ip</code> 后面跟着的数字就是 IP
+寄存器的值，也就是出错时的程序运行位置，可以通过 <code>addr2line</code>
+来将其转换为文件名和行号</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将地址转换为文件名和行号</span></span><br><span class="line"><span class="comment"># -f 选项表示输出函数名</span></span><br><span class="line"><span class="comment"># -e 选项表示指定可执行文件</span></span><br><span class="line">$ addr2line -f -e ./test 0x000000000040111a</span><br><span class="line">main</span><br><span class="line">/home/ywang/test.c:5</span><br></pre></td></tr></tbody></table></figure>
+<p>然而 <code>addr2line</code> 也有两个较为明显的局限：</p>
+<ul>
+<li>需要提前在编译时加上 <code>-g</code> 选项，生成 debug 信息</li>
+<li>对于高版本的 gcc，需要加上 <code>-no-pie</code> 选项，避免 ASLR
+的影响</li>
+</ul>
+<h3 id="objdump-反汇编"><code>objdump</code> 反汇编</h3>
+<p>通过 <code>objdump</code> 进行反汇编也是一种比较常用的定位
+segmentation fault
+的方法，这种方法能够精确的定位到执行的汇编指令，并且没有
+<code>addr2line</code>
+的上述限制，但是需要一定的汇编基础，否则看不懂汇编指令也是没用的</p>
+<p>汇编指令的快速查询可以直接 Google 或者在<a href="/TODO">一些工具站</a>上进行速查</p>
+<p>以下面的代码为例：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func_bug</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    *p = <span class="number">2</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    func_bug();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无需任何选项，直接编译</span></span><br><span class="line">$ gcc test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序，会出现 segmentation fault</span></span><br><span class="line">$ ./test</span><br><span class="line">[1]    8173 segmentation fault (core dumped)  ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># dmesg 查看内核日志，可以看到 segmentation fault 的详细信息</span></span><br><span class="line">$ dmesg | <span class="built_in">tail</span> -n 2</span><br><span class="line">[49630.541707] <span class="built_in">test</span>[8173]: segfault at 0 ip 000055bce6f6c13d sp 00007fffad5149b0 error 6 <span class="keyword">in</span> <span class="built_in">test</span>[55bce6f6c000+1000]</span><br><span class="line">[49630.541732] Code: 5d c3 0f 1f 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa e9 77 ff ff ff f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 90 5d c3 f3 0f 1e fa 55 48 89 e5 48 83 ec 10 c7 </span><br></pre></td></tr></tbody></table></figure>
+<p>由于没有关闭 ASLR，所以每次运行程序时，<code>ip</code>
+的值都会不一样，但是可以简单的换算获取到实际偏移量</p>
+<p>例如上面的
+<code>ip 000055bce6f6c13d …… in test[55bce6f6c000+1000]</code>，可以通过
+<code>0x55bce6f6c13d - 0x55bce6f6c000 + 0x1000= 0x113d</code>
+来获取实际偏移量 <code>0x113d</code></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 反汇编原程序</span></span><br><span class="line">$ objdump -d ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .init:</span><br><span class="line"></span><br><span class="line">0000000000001000 &lt;_init&gt;:</span><br><span class="line">    1000:       f3 0f 1e fa             endbr64</span><br><span class="line">    1004:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    1008:       48 8b 05 d9 2f 00 00    mov    0x2fd9(%rip),%rax        <span class="comment"># 3fe8 &lt;__gmon_start__&gt;</span></span><br><span class="line">    100f:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    1012:       74 02                   je     1016 &lt;_init+0x16&gt;</span><br><span class="line">    1014:       ff d0                   callq  *%rax</span><br><span class="line">    1016:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    101a:       c3                      retq</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt:</span><br><span class="line"></span><br><span class="line">0000000000001020 &lt;.plt&gt;:</span><br><span class="line">    1020:       ff 35 a2 2f 00 00       pushq  0x2fa2(%rip)        <span class="comment"># 3fc8 &lt;_GLOBAL_OFFSET_TABLE_+0x8&gt;</span></span><br><span class="line">    1026:       f2 ff 25 a3 2f 00 00    bnd jmpq *0x2fa3(%rip)        <span class="comment"># 3fd0 &lt;_GLOBAL_OFFSET_TABLE_+0x10&gt;</span></span><br><span class="line">    102d:       0f 1f 00                nopl   (%rax)</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt.got:</span><br><span class="line"></span><br><span class="line">0000000000001030 &lt;__cxa_finalize@plt&gt;:</span><br><span class="line">    1030:       f3 0f 1e fa             endbr64</span><br><span class="line">    1034:       f2 ff 25 bd 2f 00 00    bnd jmpq *0x2fbd(%rip)        <span class="comment"># 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;</span></span><br><span class="line">    103b:       0f 1f 44 00 00          nopl   0x0(%rax,%rax,1)</span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001040 &lt;_start&gt;:</span><br><span class="line">    1040:       f3 0f 1e fa             endbr64</span><br><span class="line">    1044:       31 ed                   xor    %ebp,%ebp</span><br><span class="line">    1046:       49 89 d1                mov    %rdx,%r9</span><br><span class="line">    1049:       5e                      pop    %rsi</span><br><span class="line">    104a:       48 89 e2                mov    %rsp,%rdx</span><br><span class="line">    104d:       48 83 e4 f0             and    <span class="variable">$0xfffffffffffffff0</span>,%rsp</span><br><span class="line">    1051:       50                      push   %rax</span><br><span class="line">    1052:       54                      push   %rsp</span><br><span class="line">    1053:       4c 8d 05 86 01 00 00    lea    0x186(%rip),%r8        <span class="comment"># 11e0 &lt;__libc_csu_fini&gt;</span></span><br><span class="line">    105a:       48 8d 0d 0f 01 00 00    lea    0x10f(%rip),%rcx        <span class="comment"># 1170 &lt;__libc_csu_init&gt;</span></span><br><span class="line">    1061:       48 8d 3d de 00 00 00    lea    0xde(%rip),%rdi        <span class="comment"># 1146 &lt;main&gt;</span></span><br><span class="line">    1068:       ff 15 72 2f 00 00       callq  *0x2f72(%rip)        <span class="comment"># 3fe0 &lt;__libc_start_main@GLIBC_2.2.5&gt;</span></span><br><span class="line">    106e:       f4                      hlt</span><br><span class="line">    106f:       90                      nop</span><br><span class="line"></span><br><span class="line">0000000000001070 &lt;deregister_tm_clones&gt;:</span><br><span class="line">    1070:       48 8d 3d 99 2f 00 00    lea    0x2f99(%rip),%rdi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    1077:       48 8d 05 92 2f 00 00    lea    0x2f92(%rip),%rax        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    107e:       48 39 f8                cmp    %rdi,%rax</span><br><span class="line">    1081:       74 15                   je     1098 &lt;deregister_tm_clones+0x28&gt;</span><br><span class="line">    1083:       48 8b 05 4e 2f 00 00    mov    0x2f4e(%rip),%rax        <span class="comment"># 3fd8 &lt;_ITM_deregisterTMCloneTable&gt;</span></span><br><span class="line">    108a:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    108d:       74 09                   je     1098 &lt;deregister_tm_clones+0x28&gt;</span><br><span class="line">    108f:       ff e0                   jmpq   *%rax</span><br><span class="line">    1091:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line">    1098:       c3                      retq</span><br><span class="line">    1099:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">00000000000010a0 &lt;register_tm_clones&gt;:</span><br><span class="line">    10a0:       48 8d 3d 69 2f 00 00    lea    0x2f69(%rip),%rdi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10a7:       48 8d 35 62 2f 00 00    lea    0x2f62(%rip),%rsi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10ae:       48 29 fe                sub    %rdi,%rsi</span><br><span class="line">    10b1:       48 89 f0                mov    %rsi,%rax</span><br><span class="line">    10b4:       48 c1 ee 3f             shr    <span class="variable">$0x3f</span>,%rsi</span><br><span class="line">    10b8:       48 c1 f8 03             sar    <span class="variable">$0x3</span>,%rax</span><br><span class="line">    10bc:       48 01 c6                add    %rax,%rsi</span><br><span class="line">    10bf:       48 d1 fe                sar    %rsi</span><br><span class="line">    10c2:       74 14                   je     10d8 &lt;register_tm_clones+0x38&gt;</span><br><span class="line">    10c4:       48 8b 05 25 2f 00 00    mov    0x2f25(%rip),%rax        <span class="comment"># 3ff0 &lt;_ITM_registerTMCloneTable&gt;</span></span><br><span class="line">    10cb:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    10ce:       74 08                   je     10d8 &lt;register_tm_clones+0x38&gt;</span><br><span class="line">    10d0:       ff e0                   jmpq   *%rax</span><br><span class="line">    10d2:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)</span><br><span class="line">    10d8:       c3                      retq</span><br><span class="line">    10d9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">00000000000010e0 &lt;__do_global_dtors_aux&gt;:</span><br><span class="line">    10e0:       f3 0f 1e fa             endbr64</span><br><span class="line">    10e4:       80 3d 25 2f 00 00 00    cmpb   <span class="variable">$0x0</span>,0x2f25(%rip)        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10eb:       75 2b                   jne    1118 &lt;__do_global_dtors_aux+0x38&gt;</span><br><span class="line">    10ed:       55                      push   %rbp</span><br><span class="line">    10ee:       48 83 3d 02 2f 00 00    cmpq   <span class="variable">$0x0</span>,0x2f02(%rip)        <span class="comment"># 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;</span></span><br><span class="line">    10f5:       00</span><br><span class="line">    10f6:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    10f9:       74 0c                   je     1107 &lt;__do_global_dtors_aux+0x27&gt;</span><br><span class="line">    10fb:       48 8b 3d 06 2f 00 00    mov    0x2f06(%rip),%rdi        <span class="comment"># 4008 &lt;__dso_handle&gt;</span></span><br><span class="line">    1102:       e8 29 ff ff ff          callq  1030 &lt;__cxa_finalize@plt&gt;</span><br><span class="line">    1107:       e8 64 ff ff ff          callq  1070 &lt;deregister_tm_clones&gt;</span><br><span class="line">    110c:       c6 05 fd 2e 00 00 01    movb   <span class="variable">$0x1</span>,0x2efd(%rip)        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    1113:       5d                      pop    %rbp</span><br><span class="line">    1114:       c3                      retq</span><br><span class="line">    1115:       0f 1f 00                nopl   (%rax)</span><br><span class="line">    1118:       c3                      retq</span><br><span class="line">    1119:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">0000000000001120 &lt;frame_dummy&gt;:</span><br><span class="line">    1120:       f3 0f 1e fa             endbr64</span><br><span class="line">    1124:       e9 77 ff ff ff          jmpq   10a0 &lt;register_tm_clones&gt;</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br><span class="line"></span><br><span class="line">0000000000001146 &lt;main&gt;:</span><br><span class="line">    1146:       f3 0f 1e fa             endbr64</span><br><span class="line">    114a:       55                      push   %rbp</span><br><span class="line">    114b:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    114e:       48 83 ec 10             sub    <span class="variable">$0x10</span>,%rsp</span><br><span class="line">    1152:       c7 45 <span class="built_in">fc</span> 01 00 00 00    movl   <span class="variable">$0x1</span>,-0x4(%rbp)</span><br><span class="line">    1159:       b8 00 00 00 00          mov    <span class="variable">$0x0</span>,%eax</span><br><span class="line">    115e:       e8 c6 ff ff ff          callq  1129 &lt;func_bug&gt;</span><br><span class="line">    1163:       b8 00 00 00 00          mov    <span class="variable">$0x0</span>,%eax</span><br><span class="line">    1168:       c9                      leaveq</span><br><span class="line">    1169:       c3                      retq</span><br><span class="line">    116a:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)</span><br><span class="line"></span><br><span class="line">0000000000001170 &lt;__libc_csu_init&gt;:</span><br><span class="line">    1170:       f3 0f 1e fa             endbr64</span><br><span class="line">    1174:       41 57                   push   %r15</span><br><span class="line">    1176:       4c 8d 3d 73 2c 00 00    lea    0x2c73(%rip),%r15        <span class="comment"># 3df0 &lt;__frame_dummy_init_array_entry&gt;</span></span><br><span class="line">    117d:       41 56                   push   %r14</span><br><span class="line">    117f:       49 89 d6                mov    %rdx,%r14</span><br><span class="line">    1182:       41 55                   push   %r13</span><br><span class="line">    1184:       49 89 f5                mov    %rsi,%r13</span><br><span class="line">    1187:       41 54                   push   %r12</span><br><span class="line">    1189:       41 89 <span class="built_in">fc</span>                mov    %edi,%r12d</span><br><span class="line">    118c:       55                      push   %rbp</span><br><span class="line">    118d:       48 8d 2d 64 2c 00 00    lea    0x2c64(%rip),%rbp        <span class="comment"># 3df8 &lt;__do_global_dtors_aux_fini_array_entry&gt;</span></span><br><span class="line">    1194:       53                      push   %rbx</span><br><span class="line">    1195:       4c 29 fd                sub    %r15,%rbp</span><br><span class="line">    1198:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    119c:       e8 5f fe ff ff          callq  1000 &lt;_init&gt;</span><br><span class="line">    11a1:       48 c1 fd 03             sar    <span class="variable">$0x3</span>,%rbp</span><br><span class="line">    11a5:       74 1f                   je     11c6 &lt;__libc_csu_init+0x56&gt;</span><br><span class="line">    11a7:       31 db                   xor    %ebx,%ebx</span><br><span class="line">    11a9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line">    11b0:       4c 89 f2                mov    %r14,%rdx</span><br><span class="line">    11b3:       4c 89 ee                mov    %r13,%rsi</span><br><span class="line">    11b6:       44 89 e7                mov    %r12d,%edi</span><br><span class="line">    11b9:       41 ff 14 <span class="built_in">df</span>             callq  *(%r15,%rbx,8)</span><br><span class="line">    11bd:       48 83 c3 01             add    <span class="variable">$0x1</span>,%rbx</span><br><span class="line">    11c1:       48 39 <span class="built_in">dd</span>                cmp    %rbx,%rbp</span><br><span class="line">    11c4:       75 ea                   jne    11b0 &lt;__libc_csu_init+0x40&gt;</span><br><span class="line">    11c6:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11ca:       5b                      pop    %rbx</span><br><span class="line">    11cb:       5d                      pop    %rbp</span><br><span class="line">    11cc:       41 5c                   pop    %r12</span><br><span class="line">    11ce:       41 5d                   pop    %r13</span><br><span class="line">    11d0:       41 5e                   pop    %r14</span><br><span class="line">    11d2:       41 5f                   pop    %r15</span><br><span class="line">    11d4:       c3                      retq</span><br><span class="line">    11d5:       66 66 2e 0f 1f 84 00    data16 nopw %cs:0x0(%rax,%rax,1)</span><br><span class="line">    11dc:       00 00 00 00</span><br><span class="line"></span><br><span class="line">00000000000011e0 &lt;__libc_csu_fini&gt;:</span><br><span class="line">    11e0:       f3 0f 1e fa             endbr64</span><br><span class="line">    11e4:       c3                      retq</span><br><span class="line"></span><br><span class="line">Disassembly of section .fini:</span><br><span class="line"></span><br><span class="line">00000000000011e8 &lt;_fini&gt;:</span><br><span class="line">    11e8:       f3 0f 1e fa             endbr64</span><br><span class="line">    11ec:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11f0:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11f4:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<p>查看 <code>0x113d</code> 附近的代码段</p>
+<figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000000000001129</span> &lt;func_bug&gt;:</span><br><span class="line">    <span class="number">1129</span>:       f3 0f 1e fa             endbr64</span><br><span class="line">    <span class="number">112d</span>:       <span class="number">55</span>                      <span class="keyword">push</span>   %rbp</span><br><span class="line">    112e:       <span class="number">48</span> <span class="number">89</span> e5                <span class="keyword">mov</span>    %rsp,%rbp</span><br><span class="line">    <span class="number">1131</span>:       <span class="number">48</span> c7 <span class="number">45</span> f8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    <span class="keyword">movq</span>   <span class="number">$0</span>x0,-<span class="number">0x8</span>(%rbp)</span><br><span class="line">    <span class="number">1138</span>:       <span class="number">00</span></span><br><span class="line">    <span class="number">1139</span>:       <span class="number">48</span> 8b <span class="number">45</span> f8             <span class="keyword">mov</span>    -<span class="number">0x8</span>(%rbp),%rax</span><br><span class="line">    <span class="number">113d</span>:       c7 <span class="number">00</span> <span class="number">02</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       movl   <span class="number">$0</span>x2,(%rax)</span><br><span class="line">    <span class="number">1143</span>:       <span class="number">90</span>                      <span class="keyword">nop</span></span><br><span class="line">    <span class="number">1144</span>:       <span class="number">5d</span>                      <span class="keyword">pop</span>    %rbp</span><br><span class="line">    <span class="number">1145</span>:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<p>结合源码以及汇编的前后内容不难分析出 <code>movl $0x2,(%rax)</code>
+与源代码 <code>*p = 2;</code> 对应 而 <code>movq $0x0,-0x8(%rbp)</code>
+以及 <code>mov -0x8(%rbp),%rax</code> 与源代码中的
+<code>int *p = NULL;</code> 对应</p>
+<p>因此不难判断出实际的出错原因为对空指针的进行了写操作</p>
+<h4 id="优化">优化</h4>
+<ul>
+<li>起始地址</li>
+</ul>
+<p>通常出错的程序可能会比较大，反汇编整个程序会非常耗时，此时可以通过
+<code>objdump</code> 的
+<code>--start-address=xxx --stop-address=xxx</code>
+选项来指定反汇编的开始地址和结束地址</p>
+<p>例如：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ objdump -d --start-address=0x1129 --stop-address=0x1146 ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>源代码参照</li>
+</ul>
+<p>如果编译时指定的 <code>-g</code> 也就是有 debug 信息的话，可以通过
+<code>objdump</code> 的 <code>-S -l</code>
+选项来将汇编指令与源代码进行对照</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -S 隐含 -d</span></span><br><span class="line">$ objdump -S -l --start-address=0x1129 --stop-address=0x1146 ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">func_bug():</span><br><span class="line">/home/wangyu/test.c:3</span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">func_bug</span></span>() {</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">/home/wangyu/test.c:4</span><br><span class="line">    int *p = NULL;</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">/home/wangyu/test.c:5</span><br><span class="line">    *p = 2;</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">/home/wangyu/test.c:6</span><br><span class="line">}</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="事中">事中</h2>
+<h3 id="最强工具-gdb">最强工具 GDB</h3>
+<p>TODO</p>
+<h2 id="事先">事先</h2>
+<h3 id="printf"><code>printf</code></h3>
+<p>虽然 <code>printf</code>
+是最简单的调试方法，但是也是最常用的调试方法，基本上没有
+<code>printf</code> 调试不出来的 bug</p>
+<p><strong>一般流程如下：</strong></p>
+<ol type="1">
+<li>通常对于一般的
+bug，可以先根据出错时的程序输出，大致估计出错的位置</li>
+<li>然后在源代码中插入打印语句，重新编译，再次运行程序</li>
+<li>继续观察打印的输出，一步步的缩小出错的范围，最终定位到出错的位置</li>
+<li>然后就可以打印出错位置的相应变量的值，进而分析出错原因</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<p>但是然而 <code>printf</code>
+本身会造成程序的运行效率降低，有时会出现<strong>加了 <code>printf</code>
+之后 bug 复现不了，去掉 <code>printf</code> 之后 bug
+又复现了</strong>的情况</p>
+<p>这种情况下就需要优化 <code>printf</code> 的方式，例如<strong>改用
+<code>sprintf</code> 将内容输出到内存中，然后通过单独的线程
+<code>fprintf</code>
+转储到文件中</strong>，这样就会减少对程序的运行效率的影响</p>
+<p>当然也可以换用后续的其他的调试方法</p>
+<h3 id="assert"><code>assert</code></h3>
+<p><code>assert</code> 是 C/C++
+中的一个宏，用于判断一个表达式是否为真，如果为假，则输出错误信息，并终止程序的运行</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    assert(a == <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>例如上述代码会输出如下错误信息，并终止程序的运行：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span>: test.c:5: main: Assertion `a == 2<span class="string">' failed.</span></span><br><span class="line"><span class="string">[1]    3563773 abort (core dumped)  ./test</span></span><br></pre></td></tr></tbody></table></figure>
+<p>因此我们可以提前在一些可能出错的地方插入 <code>assert</code>
+语句，当程序运行到这里时，如果 <code>assert</code>
+语句不成立，则会输出错误信息，并终止程序的运行，从而快速定位到出错的原因</p>
+<p><strong>缺点：</strong></p>
+<p>与 <code>printf</code> 一样，<code>assert</code>
+也会造成程序的运行效率稍微降低，但是一般不会影响到 bug 的复现</p>
+<p>但是为了程序的运行效率，程序 <code>release</code> 版本的时候应该将
+<code>assert</code> 语句去掉，或者利用宏定义，在 <code>release</code>
+的时候将 <code>assert</code> 语句替换成空语句</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// #define DEBUG</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ASSERT(x) assert(x)</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ASSERT(x)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9hZGRyMmxpbmUuMS5odG1s">【man】addr2line<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9vYmpkdW1wLjEuaHRtbA==">【man】objdump<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Zeus 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Zeus 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Zeus
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://ywang-wnlo.github.io/posts/89f2ed7d.html" title="Debug 从入门到入土">https://ywang-wnlo.github.io/posts/89f2ed7d.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/todo/" rel="tag"><i class="fa fa-tag"></i> todo</a>
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"><i class="fa fa-tag"></i> 日常踩坑</a>
+              <a href="/tags/Debug/" rel="tag"><i class="fa fa-tag"></i> Debug</a>
+              <a href="/tags/GDB/" rel="tag"><i class="fa fa-tag"></i> GDB</a>
+              <a href="/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/" rel="tag"><i class="fa fa-tag"></i> 反汇编</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/e6410576.html" rel="prev" title="小米 WR30U 解锁并刷机">
+                  <i class="fa fa-angle-left"></i> 小米 WR30U 解锁并刷机
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zeus</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@10.3.0/dist/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"ywang-wnlo","repo":"ywang-wnlo.github.io","client_id":"c8fce49e429f332025b8","client_secret":"08ad73ba0da32f47646c81f2f80fab63d3341564","admin_user":"ywang-wnlo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"267e69e6c1e1738f848a15d0be432e6a"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
