@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":{"utterances":{"text":"utterances (GitHub 登录即可)","order":1},"disqus":{"text":"disqus (需要科学上网)","order":2}},"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":null}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ywang-wnlo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":{"utterances":{"text":"Utterances (GitHub 登录即可)","order":1},"disqus":{"text":"Disqus (需要科学上网)","order":2}},"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":null,"post_body":null,"coll_header":null,"sidebar":null}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C&#x2F;C++ 的 segment fault 为例）">
 <meta property="og:type" content="article">
@@ -30,12 +30,14 @@
 <meta property="og:description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C&#x2F;C++ 的 segment fault 为例）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-09T15:35:41.000Z">
-<meta property="article:modified_time" content="2023-09-09T15:35:41.000Z">
+<meta property="article:modified_time" content="2023-09-10T14:59:19.000Z">
 <meta property="article:author" content="Zeus">
-<meta property="article:tag" content="todo">
 <meta property="article:tag" content="日常踩坑">
 <meta property="article:tag" content="Debug">
-<meta property="article:tag" content="GDB">
+<meta property="article:tag" content="addr2line">
+<meta property="article:tag" content="gdb">
+<meta property="article:tag" content="objdump">
+<meta property="article:tag" content="assert">
 <meta property="article:tag" content="反汇编">
 <meta name="twitter:card" content="summary">
 
@@ -99,7 +101,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">48</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -150,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E"><span class="nav-number">2.</span> <span class="nav-text">事后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addr2line"><span class="nav-number">2.1.</span> <span class="nav-text">addr2line</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objdump-%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="nav-number">2.2.</span> <span class="nav-text">objdump 反汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.1.</span> <span class="nav-text">优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%B8%AD"><span class="nav-number">3.</span> <span class="nav-text">事中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%BC%BA%E5%B7%A5%E5%85%B7-gdb"><span class="nav-number">3.1.</span> <span class="nav-text">最强工具 GDB</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%85%88"><span class="nav-number">4.</span> <span class="nav-text">事先</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#printf"><span class="nav-number">4.1.</span> <span class="nav-text">printf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#assert"><span class="nav-number">4.2.</span> <span class="nav-text">assert</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E"><span class="nav-number">2.</span> <span class="nav-text">事后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addr2line"><span class="nav-number">2.1.</span> <span class="nav-text">addr2line</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objdump-%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="nav-number">2.2.</span> <span class="nav-text">objdump 反汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.1.</span> <span class="nav-text">优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%B8%AD"><span class="nav-number">3.</span> <span class="nav-text">事中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%BC%BA%E5%B7%A5%E5%85%B7-gdb"><span class="nav-number">3.1.</span> <span class="nav-text">最强工具 gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">3.1.1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">3.1.2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.3.</span> <span class="nav-text">查看变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%A0%86%E6%A0%88"><span class="nav-number">3.1.4.</span> <span class="nav-text">查看堆栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%AD%E7%82%B9"><span class="nav-number">3.1.5.</span> <span class="nav-text">配置断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%AD%E7%82%B9"><span class="nav-number">3.1.6.</span> <span class="nav-text">查看断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%AD%E7%82%B9"><span class="nav-number">3.1.7.</span> <span class="nav-text">删除断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E6%89%A7%E8%A1%8C"><span class="nav-number">3.1.8.</span> <span class="nav-text">单步执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C"><span class="nav-number">3.1.9.</span> <span class="nav-text">继续执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.10.</span> <span class="nav-text">打印源代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%85%88"><span class="nav-number">4.</span> <span class="nav-text">事先</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#printf"><span class="nav-number">4.1.</span> <span class="nav-text">printf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#assert"><span class="nav-number">4.2.</span> <span class="nav-text">assert</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E8%8A%82"><span class="nav-number">5.</span> <span class="nav-text">小节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -224,6 +226,13 @@
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-10 22:59:19" itemprop="dateModified" datetime="2023-09-10T22:59:19+08:00">2023-09-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
@@ -247,10 +256,12 @@
       </span>
       <span class="post-meta-item-text">标签：</span>
       <span class="post-tags">
-        <a href="/tags/todo/" rel="tag"># todo</a>
         <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"># 日常踩坑</a>
         <a href="/tags/Debug/" rel="tag"># Debug</a>
-        <a href="/tags/GDB/" rel="tag"># GDB</a>
+        <a href="/tags/addr2line/" rel="tag"># addr2line</a>
+        <a href="/tags/gdb/" rel="tag"># gdb</a>
+        <a href="/tags/objdump/" rel="tag"># objdump</a>
+        <a href="/tags/assert/" rel="tag"># assert</a>
         <a href="/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/" rel="tag"># 反汇编</a>
       </span>
     </span>
@@ -261,14 +272,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.1k</span>
+      <span>4.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>11 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -322,10 +333,11 @@ segmentation fault
 的方法，这种方法能够精确的定位到执行的汇编指令，并且没有
 <code>addr2line</code>
 的上述限制，但是需要一定的汇编基础，否则看不懂汇编指令也是没用的</p>
-<p>汇编指令的快速查询可以直接 Google 或者在<a href="/TODO">一些工具站</a>上进行速查</p>
+<p>汇编指令的快速查询可以直接 Google 或者在一些工具站，例如 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmVsaXhjbG91dGllci5jb20veDg2Lw==">【felixcloutier】<i class="fa fa-external-link-alt"></i></span> 或者 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3MudmlyZ2luaWEuZWR1L35ldmFucy9jczIxNi9ndWlkZXMveDg2Lmh0bWwjaW5zdHJ1Y3Rpb25z">【University
+of Virginia Computer Science】x86 Assembly Guide<i class="fa fa-external-link-alt"></i></span> 上进行速查</p>
 <p>以下面的代码为例：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func_bug</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    *p = <span class="number">2</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    func_bug();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无需任何选项，直接编译</span></span><br><span class="line">$ gcc test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序，会出现 segmentation fault</span></span><br><span class="line">$ ./test</span><br><span class="line">[1]    8173 segmentation fault (core dumped)  ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># dmesg 查看内核日志，可以看到 segmentation fault 的详细信息</span></span><br><span class="line">$ dmesg | <span class="built_in">tail</span> -n 2</span><br><span class="line">[49630.541707] <span class="built_in">test</span>[8173]: segfault at 0 ip 000055bce6f6c13d sp 00007fffad5149b0 error 6 <span class="keyword">in</span> <span class="built_in">test</span>[55bce6f6c000+1000]</span><br><span class="line">[49630.541732] Code: 5d c3 0f 1f 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa e9 77 ff ff ff f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 90 5d c3 f3 0f 1e fa 55 48 89 e5 48 83 ec 10 c7 </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无需任何选项，直接编译</span></span><br><span class="line">$ gcc test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序，会出现 segmentation fault</span></span><br><span class="line">$ ./test</span><br><span class="line">[1]    8173 segmentation fault (core dumped)  ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># dmesg 查看内核日志，可以看到 segmentation fault 的详细信息</span></span><br><span class="line">$ dmesg | <span class="built_in">tail</span> -n 2</span><br><span class="line">[49630.541707] <span class="built_in">test</span>[8173]: segfault at 0 ip 000055bce6f6c13d sp 00007fffad5149b0 error 6 <span class="keyword">in</span> <span class="built_in">test</span>[55bce6f6c000+1000]</span><br><span class="line">[49630.541732] Code: 5d c3 0f 1f 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa e9 77 ff ff ff f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 90 5d c3 f3 0f 1e fa 55 48 89 e5 48 83 ec 10 c7</span><br></pre></td></tr></tbody></table></figure>
 <p>由于没有关闭 ASLR，所以每次运行程序时，<code>ip</code>
 的值都会不一样，但是可以简单的换算获取到实际偏移量</p>
 <p>例如上面的
@@ -358,8 +370,60 @@ segmentation fault
 选项来将汇编指令与源代码进行对照</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -S 隐含 -d</span></span><br><span class="line">$ objdump -S -l --start-address=0x1129 --stop-address=0x1146 ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">func_bug():</span><br><span class="line">/home/wangyu/test.c:3</span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">func_bug</span></span>() {</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">/home/wangyu/test.c:4</span><br><span class="line">    int *p = NULL;</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">/home/wangyu/test.c:5</span><br><span class="line">    *p = 2;</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">/home/wangyu/test.c:6</span><br><span class="line">}</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="事中">事中</h2>
-<h3 id="最强工具-gdb">最强工具 GDB</h3>
-<p>TODO</p>
+<p>为了更好的查看出错时的程序的各个变量值，可以借助最强工具
+<code>gdb</code> 来进行调试运行</p>
+<h3 id="最强工具-gdb">最强工具 <code>gdb</code></h3>
+<p><code>gdb</code> 是 GNU
+出品的一个强大的调试工具，可以用来调试多种语言的程序，例如
+C/C++、Go、Rust 等</p>
+<p><code>gdb</code>
+的使用方法非常多，这里只介绍一些常用的用法，更多的用法可以通过
+<code>man gdb</code> 查看</p>
+<p>同样需要在编译时加上 <code>-g</code> 选项，生成 debug 信息</p>
+<p>以下面的代码为例：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func_bug</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    *p = <span class="number">2</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> {</span><br><span class="line">    <span class="keyword">if</span> (argc == <span class="number">1</span>) {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"usage: %s arg1\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">    func_bug();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="启动">启动</h4>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过 gdb 启动程序，只需将程序名作为参数传入即可</span></span><br><span class="line">$ gdb ./test</span><br><span class="line">GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2</span><br><span class="line">Copyright (C) 2020 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.</span><br><span class="line">Type <span class="string">"show copying"</span> and <span class="string">"show warranty"</span> <span class="keyword">for</span> details.</span><br><span class="line">This GDB was configured as <span class="string">"x86_64-linux-gnu"</span>.</span><br><span class="line">Type <span class="string">"show configuration"</span> <span class="keyword">for</span> configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line"></span><br><span class="line">For <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">"help"</span>.</span><br><span class="line">Type <span class="string">"apropos word"</span> to search <span class="keyword">for</span> commands related to <span class="string">"word"</span>...</span><br><span class="line">Reading symbols from ./test...</span><br><span class="line">(gdb)</span><br></pre></td></tr></tbody></table></figure>
+<p>此时就成功通过 <code>gdb</code>
+启动了程序，如果被调试的程序需要参数，可以通过 <code>set args</code>
+命令来设置参数，用法如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置参数</span></span><br><span class="line">(gdb) <span class="built_in">set</span> args arg1 arg2 ...</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="运行">运行</h4>
+<p><code>gdb</code> 启动程序后，并不会直接运行程序，而是需要手动输入
+<code>run</code> 命令来运行程序</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置参数后运行程序</span></span><br><span class="line">(gdb) <span class="built_in">set</span> args a1 b2 c3</span><br><span class="line">(gdb) run</span><br><span class="line">Starting program: /home/wangyu/test a1 b2 c3</span><br><span class="line"></span><br><span class="line">Program received signal SIGSEGV, Segmentation fault.</span><br><span class="line">0x000055555555515d <span class="keyword">in</span> func_bug () at test.c:5</span><br><span class="line">5           *p = 2;</span><br><span class="line">(gdb)</span><br></pre></td></tr></tbody></table></figure>
+<p>这时能非常清晰的看出出错的位置</p>
+<h4 id="查看变量">查看变量</h4>
+<p><code>print</code> 命令来查看变量的值，用法如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看变量</span></span><br><span class="line">(gdb) <span class="built_in">print</span> p</span><br><span class="line"><span class="variable">$1</span> = (int *) 0x0</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="查看堆栈">查看堆栈</h4>
+<p><code>bt</code> 命令来查看堆栈，用法如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看堆栈</span></span><br><span class="line">(gdb) bt</span><br><span class="line"><span class="comment">#0  0x000055555555515d in func_bug () at test.c:5</span></span><br><span class="line"><span class="comment">#1  0x00005555555551ab in main (argc=4, argv=0x7fffffffe388) at test.c:13</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="配置断点">配置断点</h4>
+<p><code>break</code> 或者 <code>b</code> 命令来配置断点，用法如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置断点</span></span><br><span class="line">(gdb) <span class="built_in">break</span> func_bug</span><br><span class="line">Breakpoint 1 at 0x555555555149: file test.c, line 3.</span><br><span class="line">(gdb) <span class="built_in">break</span> test.c:5</span><br><span class="line">Breakpoint 2 at 0x555555555159: file test.c, line 5.</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="查看断点">查看断点</h4>
+<p><code>info breakpoints</code> 或者 <code>info b</code>
+命令来查看断点，用法如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看断点</span></span><br><span class="line">(gdb) info b</span><br><span class="line">Num     Type           Disp Enb Address            What</span><br><span class="line">1       breakpoint     keep y   0x0000555555555149 <span class="keyword">in</span> func_bug at test.c:3</span><br><span class="line">2       breakpoint     keep y   0x0000555555555159 <span class="keyword">in</span> func_bug at test.c:5</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="删除断点">删除断点</h4>
+<p><code>delete</code> 或者 <code>d</code>
+命令来删除断点，用法如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除断点</span></span><br><span class="line">(gdb) d 2</span><br><span class="line">(gdb) info b</span><br><span class="line">Num     Type           Disp Enb Address            What</span><br><span class="line">1       breakpoint     keep y   0x0000555555555149 <span class="keyword">in</span> func_bug at test.c:3</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="单步执行">单步执行</h4>
+<p><code>next</code> 或者 <code>n</code>
+命令来单步执行，如果遇到函数调用，则不会进入函数内部</p>
+<p><code>step</code> 或者 <code>s</code>
+命令来单步执行，如果遇到函数调用，则会进入函数内部</p>
+<h4 id="继续执行">继续执行</h4>
+<p><code>continue</code> 或者 <code>c</code>
+命令来继续执行，直到遇到断点或者程序结束</p>
+<h4 id="打印源代码">打印源代码</h4>
+<p><code>list</code> 或者 <code>l</code>
+命令来打印源代码，用法如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印源代码</span></span><br><span class="line">(gdb) l</span><br><span class="line">1       <span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line">2</span><br><span class="line">3       void <span class="function"><span class="title">func_bug</span></span>() {</span><br><span class="line">4           int *p = NULL;</span><br><span class="line">5           *p = 2;</span><br><span class="line">6       }</span><br><span class="line">7</span><br><span class="line">8       int main(int argc, char *argv[]) {</span><br><span class="line">9           <span class="keyword">if</span> (argc == 1) {</span><br><span class="line">10              <span class="built_in">printf</span>(<span class="string">"usage: %s arg1\n"</span>, argv[0]);</span><br></pre></td></tr></tbody></table></figure>
+<p>直接输入 <code>l</code> 命令会打印出当前断点所在的代码，也可以通过
+<code>l xxx</code> 来打印指定的代码，xxx 可以是行号，也可以是函数名</p>
 <h2 id="事先">事先</h2>
 <h3 id="printf"><code>printf</code></h3>
 <p>虽然 <code>printf</code>
@@ -400,10 +464,25 @@ bug，可以先根据出错时的程序输出，大致估计出错的位置</li>
 的时候将 <code>assert</code> 语句替换成空语句</p>
 <p>例如：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// #define DEBUG</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ASSERT(x) assert(x)</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ASSERT(x)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="小节">小节</h2>
+<p>通常情况下，我个人会在出错后根据程序的编译耗时来进行选择 debug
+的方式</p>
+<ul>
+<li>当程序编译耗时较短时，我会优先选择 <code>printf</code>
+的方式来进行调试</li>
+<li>而当程序编译耗时较长时，我会优先选择 <code>objdump</code>
+的方式来进行判断，如果 <code>objdump</code>
+无法快速定位到出错的位置，我会再选择 <code>gdb</code>
+的方式来进行调试</li>
+</ul>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9hZGRyMmxpbmUuMS5odG1s">【man】addr2line<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMS9vYmpkdW1wLjEuaHRtbA==">【man】objdump<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZmVsaXhjbG91dGllci5jb20veDg2Lw==">【felixcloutier】<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3MudmlyZ2luaWEuZWR1L35ldmFucy9jczIxNi9ndWlkZXMveDg2Lmh0bWwjaW5zdHJ1Y3Rpb25z">【University
+of Virginia Computer Science】x86 Assembly Guide<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueWFuYmluZ2h1LmNvbS8yMDE5LzA0LzIwLzQxMjgzLmh0bWw=">【个人博客】GDB 调试指南<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -449,10 +528,12 @@ bug，可以先根据出错时的程序输出，大致估计出错的位置</li>
 </div>
 
           <div class="post-tags">
-              <a href="/tags/todo/" rel="tag"><i class="fa fa-tag"></i> todo</a>
               <a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" rel="tag"><i class="fa fa-tag"></i> 日常踩坑</a>
               <a href="/tags/Debug/" rel="tag"><i class="fa fa-tag"></i> Debug</a>
-              <a href="/tags/GDB/" rel="tag"><i class="fa fa-tag"></i> GDB</a>
+              <a href="/tags/addr2line/" rel="tag"><i class="fa fa-tag"></i> addr2line</a>
+              <a href="/tags/gdb/" rel="tag"><i class="fa fa-tag"></i> gdb</a>
+              <a href="/tags/objdump/" rel="tag"><i class="fa fa-tag"></i> objdump</a>
+              <a href="/tags/assert/" rel="tag"><i class="fa fa-tag"></i> assert</a>
               <a href="/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/" rel="tag"><i class="fa fa-tag"></i> 反汇编</a>
           </div>
 
@@ -478,8 +559,8 @@ bug，可以先根据出错时的程序输出，大致估计出错的位置</li>
 
       <div class="tabs tabs-comment">
         <ul class="nav-tabs">
-            <li class="tab"><a href="#comment-utterances">utterances (GitHub 登录即可)</a></li>
-            <li class="tab"><a href="#comment-disqus">disqus (需要科学上网)</a></li>
+            <li class="tab"><a href="#comment-utterances">Utterances (GitHub 登录即可)</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus (需要科学上网)</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane utterances" id="comment-utterances">
