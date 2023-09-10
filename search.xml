@@ -1127,81 +1127,6 @@ chrome，命令行应该就恢复正常了，此时也能在已打开 chrome
       </tags>
   </entry>
   <entry>
-    <title>解决 pip 安装第三方包时因 SSL 报错</title>
-    <url>/posts/2e7aa01a.html</url>
-    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
-<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
-后发现用 <code>pip</code>
-安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
-SSL 认证失败导致的 <span id="more"></span></p>
-<ol type="1">
-<li><p>check_hostname requires server_hostname</p>
-<blockquote>
-<p><code>raise ValueError("check_hostname requires server_hostname")</code>
-<code>ValueError: check_hostname requires server_hostname</code></p>
-</blockquote></li>
-<li><p>EOF occurred in violation of protocol</p>
-<blockquote>
-<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
-</blockquote></li>
-</ol>
-<h2 id="什么是-ssl">什么是 SSL ？</h2>
-<p>传输层安全性协议（英语：Transport Layer
-Security，TLS）及其前身安全套接层（英语：Secure Sockets
-Layer，SSL）是现在的 HTTPS
-协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
-<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
-以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
-包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
-<h2 id="为什么会报错">为什么会报错</h2>
-<p>根据报错信息可以发现错误的根源就在于
-SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
-或者网络抓包等软件的导致的</p>
-<h2 id="解决办法">解决办法</h2>
-<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
-或者网络抓包等软件</h3>
-<p>最推荐的办法是临时关闭代理、VPN
-或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
-<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
-源来避免 SSL 认证问题</h3>
-<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
-的镜像站来进行安装下载</p>
-<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
-协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
-协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
-<p>安装时第三方包时可以参考如下命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
-<p>修改文件内容如下</p>
-<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
-<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
-后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
-或者 <code>20.3b1</code> 等较低版本即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
-镜像<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
-pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
-pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>日常踩坑</category>
-      </categories>
-      <tags>
-        <tag>日常踩坑</tag>
-        <tag>pip</tag>
-        <tag>python</tag>
-        <tag>SSL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Debug 从入门到入土</title>
     <url>/posts/89f2ed7d.html</url>
     <content><![CDATA[<p>写代码难免遇到 bug，调试解决 bug
@@ -1341,6 +1266,81 @@ bug，可以先根据出错时的程序输出，大致估计出错的位置</li>
         <tag>Debug</tag>
         <tag>GDB</tag>
         <tag>反汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决 pip 安装第三方包时因 SSL 报错</title>
+    <url>/posts/2e7aa01a.html</url>
+    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
+<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
+后发现用 <code>pip</code>
+安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
+SSL 认证失败导致的 <span id="more"></span></p>
+<ol type="1">
+<li><p>check_hostname requires server_hostname</p>
+<blockquote>
+<p><code>raise ValueError("check_hostname requires server_hostname")</code>
+<code>ValueError: check_hostname requires server_hostname</code></p>
+</blockquote></li>
+<li><p>EOF occurred in violation of protocol</p>
+<blockquote>
+<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
+</blockquote></li>
+</ol>
+<h2 id="什么是-ssl">什么是 SSL ？</h2>
+<p>传输层安全性协议（英语：Transport Layer
+Security，TLS）及其前身安全套接层（英语：Secure Sockets
+Layer，SSL）是现在的 HTTPS
+协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
+<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
+以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
+包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
+<h2 id="为什么会报错">为什么会报错</h2>
+<p>根据报错信息可以发现错误的根源就在于
+SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
+或者网络抓包等软件的导致的</p>
+<h2 id="解决办法">解决办法</h2>
+<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
+或者网络抓包等软件</h3>
+<p>最推荐的办法是临时关闭代理、VPN
+或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
+<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
+源来避免 SSL 认证问题</h3>
+<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
+的镜像站来进行安装下载</p>
+<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
+协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
+协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
+<p>安装时第三方包时可以参考如下命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
+<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>修改文件内容如下</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
+<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
+后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
+或者 <code>20.3b1</code> 等较低版本即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
+镜像<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
+pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
+pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>日常踩坑</tag>
+        <tag>pip</tag>
+        <tag>python</tag>
+        <tag>SSL</tag>
       </tags>
   </entry>
   <entry>
@@ -2310,6 +2310,192 @@ PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
+    <title>美化 Shell 之 Linux Zsh 篇</title>
+    <url>/posts/f2cdf8a6.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
+<code>Zsh</code> 对 Linux 默认的
+<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
+<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
+并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
+改为 <code>Zsh</code></p>
+<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
+应运而生。 <code>Oh My Zsh</code>
+是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
+<code>Zsh</code> 配置提供了很大的便利</p>
+<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
+<span id="more"></span></p>
+<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
+<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
+为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
+<p>配置 Zsh 为默认 Shell</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
+<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
+<code>Oh My Zsh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
+命名规则类似，<code>Zsh</code> 的配置文件是
+<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
+<h2 id="主题配置">主题配置</h2>
+<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
+给出了内置的所有主题的预览图</p>
+<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
+字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
+字体</a></p>
+<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
+中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
+也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
+<code>powerlevel10k</code> 主题</p>
+<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重启终端后，<code>powerlevel10k</code>
+会进入引导流程，可以自行微调风格</p>
+<h2 id="插件安装">插件安装</h2>
+<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
+插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
+<code>zsh-syntax-highlighting</code> 插件</p>
+<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
+<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
+会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
+<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-autosuggestions</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
+<p><code>zsh-syntax-highlighting</code>
+开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-syntax-highlighting</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
+shell<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
+仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
+ZSH<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Zsh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>rm -r 与 rmdir 区别</title>
+    <url>/posts/935ae1f0.html</url>
+    <content><![CDATA[<h2 id="背景">背景</h2>
+<p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code>
+驱动，显示使用中</p>
+<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和
+<code>rmdir</code> 这两个命令上 <span id="more"></span></p>
+<h2 id="二者区别">二者区别</h2>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 59%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>主要系统调用</th>
+<th>操作对象</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>rmdir</code></td>
+<td><code>rmdir</code></td>
+<td>仅目录</td>
+</tr>
+<tr class="even">
+<td><code>rm -r</code></td>
+<td><code>openat</code>, <code>getdents64</code>, <code>close</code>,
+<code>unlinkat</code></td>
+<td>目录，以及目录所有文件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rmdir"><code>rmdir</code></h3>
+<p><code>rmdir</code> 直接调用 <code>rmdir</code>
+来删除目录，如果目录非空，则会删除失败</p>
+<h3 id="rm--r"><code>rm -r</code></h3>
+<ol type="1">
+<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code>
+获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>再第二次加上 <code>O_CLOEXEC</code> 标记 <code>openat</code>
+打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code>
+获取目录中的内容，然后 <code>close</code> 目录</li>
+<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
+<li>最后通过 <code>unlinkat</code> 删除目录</li>
+</ol>
+<h3 id="rm--rf"><code>rm -rf</code></h3>
+<p>但是如果使用的是 <code>rm -rf</code>，并且在第 3
+步删除目录内文件失败时，则会跳过第 4
+步，也就是说不会再对目录做任何操作</p>
+<h2 id="测试过程">测试过程</h2>
+<h3 id="配置环境">配置环境</h3>
+<p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">touch</span> <span class="built_in">dir</span>/file</span><br><span class="line">sudo chattr +i <span class="built_in">dir</span>/file</span><br></pre></td></tr></tbody></table></figure>
+<p>此时目录树如下</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="rmdir-1"><code>rmdir</code></h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o <span class="built_in">rmdir</span> <span class="built_in">rmdir</span> <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rmdir", ["rmdir", "dir/"], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir("dir/")                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rmdir: ", 7)                  = 7</span><br><span class="line">write(2, "failed to remove 'dir/'", 23) = 23</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="rm--r-1"><code>rm -r</code></h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace <span class="built_in">rm</span> -r <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96
+行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-r", "dir/"], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, "file", {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, "file", W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/'", 20)    = 20</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="rm--rf-1"><code>rm -rf</code></h3>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
+<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo chattr -i <span class="built_in">dir</span>/file</span><br><span class="line">strace -o rm_rf_succ.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br></pre></td></tr></tbody></table></figure>
+<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdHkubWVsbGFub3guY29tL3MvYXJ0aWNsZS9ob3d0by1jb25maWd1cmUtbnZtZS1vdmVyLWZhYnJpY3M=">【mellanox
+社区】HowTo Configure NVMe over Fabrics<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuLnRlY2gycmVhbC5jb20vaW5mb19kZXRhaWxfcGFnZT9pZD0xODQ0MQ==">【硬见】NVMe-oF
+不只是 RDMA，还有 TCP<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGVkYW5jaW5nL2FydGljbGUvZGV0YWlscy8xMDM4MzUwODU=">【CSDN】Linux
+防止文件和目录被意外删除或修改<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMi9vcGVuLjIuaHRtbA==">【man】open<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly91bml4LnN0YWNrZXhjaGFuZ2UuY29tL3F1ZXN0aW9ucy8xNTA5NjAvd2h5LWFyZS1ybWRpci1hbmQtdW5saW5rLXR3by1zZXBhcmF0ZS1zeXN0ZW0tY2FsbHM=">【stackexchange】Why
+are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>strace</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>page cache 回写机制</title>
     <url>/posts/646202b9.html</url>
     <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
@@ -2653,314 +2839,6 @@ new_sync_write --&gt; call_write_iter</pre>
         <tag>buffer IO</tag>
         <tag>page cache</tag>
         <tag>writeback</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>美化 Shell 之 Linux Zsh 篇</title>
-    <url>/posts/f2cdf8a6.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
-<code>Zsh</code> 对 Linux 默认的
-<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
-<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
-并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
-改为 <code>Zsh</code></p>
-<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
-应运而生。 <code>Oh My Zsh</code>
-是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
-<code>Zsh</code> 配置提供了很大的便利</p>
-<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
-<span id="more"></span></p>
-<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
-<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
-为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
-<p>配置 Zsh 为默认 Shell</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
-<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
-<code>Oh My Zsh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
-命名规则类似，<code>Zsh</code> 的配置文件是
-<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
-<h2 id="主题配置">主题配置</h2>
-<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
-给出了内置的所有主题的预览图</p>
-<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
-字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
-字体</a></p>
-<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
-中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
-也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
-<code>powerlevel10k</code> 主题</p>
-<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重启终端后，<code>powerlevel10k</code>
-会进入引导流程，可以自行微调风格</p>
-<h2 id="插件安装">插件安装</h2>
-<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
-插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
-<code>zsh-syntax-highlighting</code> 插件</p>
-<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
-<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
-会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
-<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-autosuggestions</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
-<p><code>zsh-syntax-highlighting</code>
-开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-syntax-highlighting</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
-shell<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
-仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
-ZSH<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Zsh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>rm -r 与 rmdir 区别</title>
-    <url>/posts/935ae1f0.html</url>
-    <content><![CDATA[<h2 id="背景">背景</h2>
-<p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code>
-驱动，显示使用中</p>
-<p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和
-<code>rmdir</code> 这两个命令上 <span id="more"></span></p>
-<h2 id="二者区别">二者区别</h2>
-<table>
-<colgroup>
-<col style="width: 9%">
-<col style="width: 59%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>命令</th>
-<th>主要系统调用</th>
-<th>操作对象</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>rmdir</code></td>
-<td><code>rmdir</code></td>
-<td>仅目录</td>
-</tr>
-<tr class="even">
-<td><code>rm -r</code></td>
-<td><code>openat</code>, <code>getdents64</code>, <code>close</code>,
-<code>unlinkat</code></td>
-<td>目录，以及目录所有文件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="rmdir"><code>rmdir</code></h3>
-<p><code>rmdir</code> 直接调用 <code>rmdir</code>
-来删除目录，如果目录非空，则会删除失败</p>
-<h3 id="rm--r"><code>rm -r</code></h3>
-<ol type="1">
-<li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code>
-获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>再第二次加上 <code>O_CLOEXEC</code> 标记 <code>openat</code>
-打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code>
-获取目录中的内容，然后 <code>close</code> 目录</li>
-<li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
-<li>最后通过 <code>unlinkat</code> 删除目录</li>
-</ol>
-<h3 id="rm--rf"><code>rm -rf</code></h3>
-<p>但是如果使用的是 <code>rm -rf</code>，并且在第 3
-步删除目录内文件失败时，则会跳过第 4
-步，也就是说不会再对目录做任何操作</p>
-<h2 id="测试过程">测试过程</h2>
-<h3 id="配置环境">配置环境</h3>
-<p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">touch</span> <span class="built_in">dir</span>/file</span><br><span class="line">sudo chattr +i <span class="built_in">dir</span>/file</span><br></pre></td></tr></tbody></table></figure>
-<p>此时目录树如下</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ tree <span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line">└── file</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="rmdir-1"><code>rmdir</code></h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o <span class="built_in">rmdir</span> <span class="built_in">rmdir</span> <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 37 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rmdir", ["rmdir", "dir/"], 0x7ffe38ddae38 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000</span><br><span class="line">mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000</span><br><span class="line">mmap(0x7f51af7b5000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f51af7b5000</span><br><span class="line">mmap(0x7f51af800000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f51af800000</span><br><span class="line">mmap(0x7f51af806000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f51af806000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f51af80b580) = 0</span><br><span class="line">mprotect(0x7f51af800000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x561e91688000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f51af845000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f51af80c000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x561e92b83000</span><br><span class="line">brk(0x561e92ba4000)                     = 0x561e92ba4000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">rmdir("dir/")                           = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rmdir: ", 7)                  = 7</span><br><span class="line">write(2, "failed to remove 'dir/'", 23) = 23</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="rm--r-1"><code>rm -r</code></h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_r_fail.strace <span class="built_in">rm</span> -r <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/'</span>: Directory not empty</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-59 以及 94-96
-行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-r", "dir/"], 0x7ffc2c0fb640 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000</span><br><span class="line">mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000</span><br><span class="line">mmap(0x7f65c43c6000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f65c43c6000</span><br><span class="line">mmap(0x7f65c4411000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f65c4411000</span><br><span class="line">mmap(0x7f65c4417000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f65c4417000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f65c441c580) = 0</span><br><span class="line">mprotect(0x7f65c4411000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x560827bb0000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f65c4456000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f65c441d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x56082871e000</span><br><span class="line">brk(0x56082873f000)                     = 0x56082873f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">geteuid()                               = 1000</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">newfstatat(4, "file", {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(4, "file", W_OK)              = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">faccessat(AT_FDCWD, "dir/", W_OK)       = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/'", 20)    = 20</span><br><span class="line">write(2, ": Directory not empty", 21)   = 21</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="rm--rf-1"><code>rm -rf</code></h3>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ strace -o rm_fail.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">'dir/file'</span>: Operation not permitted</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-55 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7fff7bc99c20 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000</span><br><span class="line">mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000</span><br><span class="line">mmap(0x7fcb89d30000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7fcb89d30000</span><br><span class="line">mmap(0x7fcb89d7b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fcb89d7b000</span><br><span class="line">mmap(0x7fcb89d81000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d81000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fcb89d86580) = 0</span><br><span class="line">mprotect(0x7fcb89d7b000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x5566566dd000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fcb89d87000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x5566570fe000</span><br><span class="line">brk(0x55665711f000)                     = 0x55665711f000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993067, f_bavail=14940434, f_files=5242880, f_ffree=5074130, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = -1 EPERM (Operation not permitted)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0</span><br><span class="line">read(3, "# Locale name alias data base.\n#"..., 4096) = 2996</span><br><span class="line">read(3, "", 4096)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, "rm: ", 4)                     = 4</span><br><span class="line">write(2, "cannot remove 'dir/file'", 24) = 24</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)</span><br><span class="line">write(2, ": Operation not permitted", 25) = 25</span><br><span class="line">write(2, "\n", 1)                       = 1</span><br><span class="line">close(4)                                = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(1)                           = ?</span><br><span class="line">+++ exited with 1 +++</span><br></pre></td></tr></tbody></table></figure>
-<p>最后取消文件的权限，看一下 <code>rm -rf</code> 成功时的系统调用</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo chattr -i <span class="built_in">dir</span>/file</span><br><span class="line">strace -o rm_rf_succ.strace <span class="built_in">rm</span> -rf <span class="built_in">dir</span>/</span><br></pre></td></tr></tbody></table></figure>
-<p><code>strace</code> 抓到的内容如下，主要内容在第 39-57 行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7ffee56569a0 /* 26 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)</span><br><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0</span><br><span class="line">mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000</span><br><span class="line">pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784</span><br><span class="line">pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32</span><br><span class="line">pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263"..., 68, 880) = 68</span><br><span class="line">mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000</span><br><span class="line">mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0</span><br><span class="line">mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000</span><br><span class="line">mmap(0x7f771df46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f771df46000</span><br><span class="line">mmap(0x7f771df91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f771df91000</span><br><span class="line">mmap(0x7f771df97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f771df97000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7f771df9c580) = 0</span><br><span class="line">mprotect(0x7f771df91000, 12288, PROT_READ) = 0</span><br><span class="line">mprotect(0x55cc9ec06000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7f771df9d000, 46019)           = 0</span><br><span class="line">brk(NULL)                               = 0x55cc9fc1d000</span><br><span class="line">brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000</span><br><span class="line">openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0</span><br><span class="line">mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0</span><br><span class="line">lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0</span><br><span class="line">newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">close(3)                                = 0</span><br><span class="line">openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3</span><br><span class="line">fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0</span><br><span class="line">fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)</span><br><span class="line">fcntl(3, F_SETFD, FD_CLOEXEC)           = 0</span><br><span class="line">fstatfs(3, {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=20510566, f_bfree=15993064, f_bavail=14940431, f_files=5242880, f_ffree=5074129, f_fsid={val=[3258576323, 2412010735]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0</span><br><span class="line">fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4</span><br><span class="line">getdents64(3, /* 3 entries */, 32768)   = 72</span><br><span class="line">getdents64(3, /* 0 entries */, 32768)   = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">unlinkat(4, "file", 0)                  = 0</span><br><span class="line">close(4)                                = 0</span><br><span class="line">unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = 0</span><br><span class="line">lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)</span><br><span class="line">close(0)                                = 0</span><br><span class="line">close(1)                                = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdHkubWVsbGFub3guY29tL3MvYXJ0aWNsZS9ob3d0by1jb25maWd1cmUtbnZtZS1vdmVyLWZhYnJpY3M=">【mellanox
-社区】HowTo Configure NVMe over Fabrics<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuLnRlY2gycmVhbC5jb20vaW5mb19kZXRhaWxfcGFnZT9pZD0xODQ0MQ==">【硬见】NVMe-oF
-不只是 RDMA，还有 TCP<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGVkYW5jaW5nL2FydGljbGUvZGV0YWlscy8xMDM4MzUwODU=">【CSDN】Linux
-防止文件和目录被意外删除或修改<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMi9vcGVuLjIuaHRtbA==">【man】open<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly91bml4LnN0YWNrZXhjaGFuZ2UuY29tL3F1ZXN0aW9ucy8xNTA5NjAvd2h5LWFyZS1ybWRpci1hbmQtdW5saW5rLXR3by1zZXBhcmF0ZS1zeXN0ZW0tY2FsbHM=">【stackexchange】Why
-are rmdir and unlink two separate system calls?<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>strace</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>小米 WR30U 解锁并刷机</title>
-    <url>/posts/e6410576.html</url>
-    <content><![CDATA[<p>本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，整体步骤与 <a href="/posts/8507aaa1.html#一般安装流程">一般安装流程</a> 类似，但是由于
-WR30U 的解锁 <code>ssh</code>
-和刷机的过程中有一些细节需要注意，因此记录一下 <span id="more"></span></p>
-<h2 id="解锁-ssh">解锁 ssh</h2>
-<h3 id="环境准备">环境准备</h3>
-<p>需要一台<strong>同时具有 WiFi
-和有线网络</strong>的电脑，以及一根网线</p>
-<p>然后需要配置 <code>python</code> 环境，并且安装
-<code>pycryptodome</code> 依赖</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">conda create -n wr30u</span><br><span class="line">conda activate wr30u</span><br><span class="line">conda install pycryptodome</span><br></pre></td></tr></tbody></table></figure>
-<p>然后是解锁脚本，可以直接从 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BhdHJpY2lhTGVlMy93cjMwdV9zc2gvYmxvYi9tYWluL3NlcnZlcl9lbXVsYXRvci5weQ==">PatriciaLee3<i class="fa fa-external-link-alt"></i></span>
-的仓库中下载</p>
-<h3 id="解锁过程">解锁过程</h3>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BhdHJpY2lhTGVlMy93cjMwdV9zc2gvYmxvYi9tYWluL1JFQURNRS5tZA==">PatriciaLee3<i class="fa fa-external-link-alt"></i></span>
-的仓库中已经给出了详细的解锁过程，这里只是简单记录一下</p>
-<ol type="1">
-<li><p>电脑连接原厂固件的路由器，进入 192.168.31.1
-的管理后台，在常用设置 - 上网设置里分别设置：</p>
-<ul>
-<li>上网设置 DHCP，自动配置 DNS</li>
-<li> 启动与智能网关无线配置同步（会重启）</li>
-<li>固定 WAN 口为 1（会重启）</li>
-</ul></li>
-<li><p>电脑连接有正常网络的 WiFi，然后将网线连接到路由器的 WAN
-口</p></li>
-<li><p>打开
-<code>控制面板 - 网络和 Internet - 网络和共享中心 - 更改适配器设置 - 选择 WLAN - 右键属性 - 共享</code>，勾选第一个并确认，这个时候
-WR30U 会通过有线连接共享电脑的网络，并且网络指示灯会变成蓝色</p>
-<figure>
-<img data-src="/posts/e6410576/共享网络.png" alt="共享网络">
-<figcaption aria-hidden="true">共享网络</figcaption>
-</figure></li>
-<li><p>打开
-<code>控制面板 - 系统和安全 - Windows Defender 防火墙 - 启动或关闭 Windows Defender 防火墙</code>，关闭
-Windows Defender 防火墙</p>
-<figure>
-<img data-src="/posts/e6410576/关闭防火墙.png" alt="关闭防火墙">
-<figcaption aria-hidden="true">关闭防火墙</figcaption>
-</figure></li>
-<li><p>运行解锁脚本，并按照脚本提示操作</p>
-<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">conda activate wr30u</span><br><span class="line">python server_emulator.py</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>解锁完成后，路由器的账号密码为 <code>root</code> 和
-<code>admin</code>，之后记得重新开启防火墙，并且关闭共享网络</p></li>
-</ol>
-<h2 id="刷入-mt798x-uboot">刷入 mt798x uboot</h2>
-<h3 id="简介">简介</h3>
-<p>这里首先推荐刷入 hanwckf 的 <span class="exturl" data-url="aHR0cHM6Ly9jbWkuaGFud2NrZi50b3AvcC9tdDc5OHgtdWJvb3QtdXNhZ2U=">mt798x
-uboot<i class="fa fa-external-link-alt"></i></span>，这个 uboot 有很多功能，其中以下两点非常实用：</p>
-<ul>
-<li>【使用方便】自带 MTK 原厂开发的简易 WebUI 恢复界面，可以通过 WebUI
-直接刷入固件或者更新 uboot</li>
-<li>【兼容性好】支持多种 Flash 分区布局切换功能（仅支持
-spi-nand），可以在 WebUI 中切换不同的分区布局，完美兼容小米原厂固件</li>
-</ul>
-<h3 id="刷入流程">刷入流程</h3>
-<ol type="1">
-<li><p>电脑接入正常网络，然后去 hanwckf 的仓库 release 页面下载对应的
-uboot 文件：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhbndja2YvYmwtbXQ3OTh4L3JlbGVhc2Vz">mt7981_wr30u-fip-fixed-parts-multi-layout.bin<i class="fa fa-external-link-alt"></i></span></p></li>
-<li><p>电脑接入路由器网络，通过 <code>scp</code> 将 uboot
-传到路由器上</p>
-<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">scp mt7981_wr30u-fip-fixed-parts-multi-layout.bin root@192.168.31.1:/tmp</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>通过 <code>ssh</code> 登录路由器，查看布局</p>
-<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># on PC</span></span><br><span class="line">ssh root@192.168.31.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># on Router</span></span><br><span class="line"><span class="comment"># 查看当前分区布局</span></span><br><span class="line"><span class="built_in">cat</span> /proc/mtd</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>默认布局如下:</p>
-<p></p><figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">dev:    size   erasesize  name</span><br><span class="line">mtd0: 08000000 00020000 "spi0.0"</span><br><span class="line">mtd1: 00100000 00020000 "BL2"</span><br><span class="line">mtd2: 00040000 00020000 "Nvram"</span><br><span class="line">mtd3: 00040000 00020000 "Bdata"</span><br><span class="line">mtd4: 00200000 00020000 "Factory"</span><br><span class="line">mtd5: 00200000 00020000 "FIP"</span><br><span class="line">mtd6: 00040000 00020000 "crash"</span><br><span class="line">mtd7: 00040000 00020000 "crash_log"</span><br><span class="line">mtd8: 02200000 00020000 "ubi"</span><br><span class="line">mtd9: 02200000 00020000 "ubi1"</span><br><span class="line">mtd10: 02000000 00020000 "overlay"</span><br><span class="line">mtd11: 00c00000 00020000 "data"</span><br><span class="line">mtd12: 00040000 00020000 "KF"</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>如果需要备份，可以通过 <code>nanddump</code> 命令备份，之后通过
-<code>scp</code> 将备份的文件传到电脑上</p>
-<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># on Router</span></span><br><span class="line">nanddump -f /tmp/BL2.bin /dev/mtd1</span><br><span class="line">nanddump -f /tmp/Nvram.bin /dev/mtd2</span><br><span class="line">nanddump -f /tmp/Bdata.bin /dev/mtd3</span><br><span class="line">nanddump -f /tmp/Factory.bin /dev/mtd4</span><br><span class="line">nanddump -f /tmp/FIP.bin /dev/mtd5</span><br><span class="line">nanddump -f /tmp/ubi.bin /dev/mtd8</span><br><span class="line">nanddump -f /tmp/KF.bin /dev/mtd12</span><br><span class="line"></span><br><span class="line"><span class="comment"># on PC</span></span><br><span class="line">scp root@192.168.31.1:/tmp/*.bin .</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>然后将 uboot 刷入 FIP 分区，之后关机</p>
-<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># on Router</span></span><br><span class="line">mtd write /tmp/mt7981_wr30u-fip-fixed-parts-multi-layout.bin FIP</span><br><span class="line"></span><br><span class="line">poweroff</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-</ol>
-<h2 id="刷入-immortalwrt">刷入 ImmortalWrt</h2>
-<h3 id="简介-1">简介</h3>
-<p>ImmortalWrt 是 OpenWrt 的一个分支，相比于 OpenWrt
-有更多的软件包以及设备支持，并且对中国大陆用户有特殊优化</p>
-<h3 id="刷入流程-1">刷入流程</h3>
-<ol type="1">
-<li><p>电脑连接正常网络，去官网下载 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5pbW1vcnRhbHdydC5vcmcvP3ZlcnNpb249MjMuMDUtU05BUFNIT1QmdGFyZ2V0PW1lZGlhdGVrJTJGZmlsb2dpYyZpZD14aWFvbWlfbWktcm91dGVyLXdyMzB1LTExMm0tbm1ibQ==">Sysupgrade
-固件<i class="fa fa-external-link-alt"></i></span></p>
-<p>这里选择了 custom U-Boot layout 的固件，也就是 112M UBI layout
-的固件，这样可以有更多的空间用于安装软件包，固件名格式为
-<code>immortalwrt-xxxxxx-mediatek-filogic-xiaomi_mi-router-wr30u-112m-nmbm-squashfs-sysupgrade.bin</code></p></li>
-<li><p>针按住 reset 不放，再接上电源，等待 10s
-左右松开，路由器的系统灯变蓝后就是成功进入 uboot 了</p></li>
-<li><p>因 uboot 不支持 DHCP 功能，需要把电脑的 IP 地址设置成固定
-IP：</p>
-<p>电脑通过网线连接路由器，然后在网络设置里将以太网设置为静态，IP 地址：192.168.31.100，子网掩码：255.255.255.0，网关：192.168.31.1，首选
-DNS：192.168.31.1，最后保存</p></li>
-<li><p>直接访问 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMzEuMQ==">WebUI<i class="fa fa-external-link-alt"></i></span> 进行刷固件，将
-layout 选为
-<code>immortalwrt-112m</code>，然后上传前面下载的固件，点击刷机即可</p>
-<figure>
-<img data-src="/posts/e6410576/layout%20选择.png" alt="layout 选择">
-<figcaption aria-hidden="true">layout 选择</figcaption>
-</figure></li>
-</ol>
-<h2 id="刷为原厂固件">刷为原厂固件</h2>
-<p>刷回原厂固件的过程与刷入 ImmortalWrt 类似，只是需要下载<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhbndja2YveGlhb21pLXJvdXRlci1zdG9jay11YmktYmlu">原厂固件<i class="fa fa-external-link-alt"></i></span>，然后在
-WebUI 中将 layout 配置为
-<code>default</code>，之后上传原厂固件刷机即可</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnF1c3QubWUvd3IzMHU=">【个人博客】酱紫表 - 小米 WR30U
-解锁 SSH 刷 openwrt，最有性价比的百元路由器<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BhdHJpY2lhTGVlMy93cjMwdV9zc2g=">【GitHub】wr30u_ssh<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jbWkuaGFud2NrZi50b3AvcC9tdDc5OHgtdWJvb3QtdXNhZ2U=">【个人博客】hanwckf
-- mt798x uboot 功能介绍<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5pbW1vcnRhbHdydC5vcmcv">【ImmortalWrt】固件下载<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
-        <tag>BootLoader</tag>
-        <tag>ImmortalWrt</tag>
       </tags>
   </entry>
   <entry>
@@ -3567,55 +3445,130 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
         <category>路由器</category>
       </categories>
       <tags>
-        <tag>BootLoader</tag>
         <tag>Breed</tag>
+        <tag>BootLoader</tag>
       </tags>
   </entry>
   <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<h3 id="来源">来源</h3>
-<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
-系统。迫于 Linux 的开源协议要求，Linksys
-开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
-<span id="more"></span></p>
-<h3 id="介绍">介绍</h3>
-<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
-操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装">安装</h2>
-<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
-中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程">一般安装流程</h3>
-<p>通常的安装步骤主要通过以下流程：</p>
+    <title>小米 WR30U 解锁并刷机</title>
+    <url>/posts/e6410576.html</url>
+    <content><![CDATA[<p>本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，整体步骤与 <a href="/posts/8507aaa1.html#一般安装流程">一般安装流程</a> 类似，但是由于
+WR30U 的解锁 <code>ssh</code>
+和刷机的过程中有一些细节需要注意，因此记录一下 <span id="more"></span></p>
+<h2 id="解锁-ssh">解锁 ssh</h2>
+<h3 id="环境准备">环境准备</h3>
+<p>需要一台<strong>同时具有 WiFi
+和有线网络</strong>的电脑，以及一根网线</p>
+<p>然后需要配置 <code>python</code> 环境，并且安装
+<code>pycryptodome</code> 依赖</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">conda create -n wr30u</span><br><span class="line">conda activate wr30u</span><br><span class="line">conda install pycryptodome</span><br></pre></td></tr></tbody></table></figure>
+<p>然后是解锁脚本，可以直接从 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BhdHJpY2lhTGVlMy93cjMwdV9zc2gvYmxvYi9tYWluL3NlcnZlcl9lbXVsYXRvci5weQ==">PatriciaLee3<i class="fa fa-external-link-alt"></i></span>
+的仓库中下载</p>
+<h3 id="解锁过程">解锁过程</h3>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BhdHJpY2lhTGVlMy93cjMwdV9zc2gvYmxvYi9tYWluL1JFQURNRS5tZA==">PatriciaLee3<i class="fa fa-external-link-alt"></i></span>
+的仓库中已经给出了详细的解锁过程，这里只是简单记录一下</p>
 <ol type="1">
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
+<li><p>电脑连接原厂固件的路由器，进入 192.168.31.1
+的管理后台，在常用设置 - 上网设置里分别设置：</p>
 <ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
+<li>上网设置 DHCP，自动配置 DNS</li>
+<li> 启动与智能网关无线配置同步（会重启）</li>
+<li>固定 WAN 口为 1（会重启）</li>
 </ul></li>
-<li>重启设备</li>
+<li><p>电脑连接有正常网络的 WiFi，然后将网线连接到路由器的 WAN
+口</p></li>
+<li><p>打开
+<code>控制面板 - 网络和 Internet - 网络和共享中心 - 更改适配器设置 - 选择 WLAN - 右键属性 - 共享</code>，勾选第一个并确认，这个时候
+WR30U 会通过有线连接共享电脑的网络，并且网络指示灯会变成蓝色</p>
+<figure>
+<img data-src="/posts/e6410576/共享网络.png" alt="共享网络">
+<figcaption aria-hidden="true">共享网络</figcaption>
+</figure></li>
+<li><p>打开
+<code>控制面板 - 系统和安全 - Windows Defender 防火墙 - 启动或关闭 Windows Defender 防火墙</code>，关闭
+Windows Defender 防火墙</p>
+<figure>
+<img data-src="/posts/e6410576/关闭防火墙.png" alt="关闭防火墙">
+<figcaption aria-hidden="true">关闭防火墙</figcaption>
+</figure></li>
+<li><p>运行解锁脚本，并按照脚本提示操作</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">conda activate wr30u</span><br><span class="line">python server_emulator.py</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>解锁完成后，路由器的账号密码为 <code>root</code> 和
+<code>admin</code>，之后记得重新开启防火墙，并且关闭共享网络</p></li>
 </ol>
-<h3 id="固件搜索下载">固件搜索下载</h3>
-<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
-页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="刷入-mt798x-uboot">刷入 mt798x uboot</h2>
+<h3 id="简介">简介</h3>
+<p>这里首先推荐刷入 hanwckf 的 <span class="exturl" data-url="aHR0cHM6Ly9jbWkuaGFud2NrZi50b3AvcC9tdDc5OHgtdWJvb3QtdXNhZ2U=">mt798x
+uboot<i class="fa fa-external-link-alt"></i></span>，这个 uboot 有很多功能，其中以下两点非常实用：</p>
+<ul>
+<li>【使用方便】自带 MTK 原厂开发的简易 WebUI 恢复界面，可以通过 WebUI
+直接刷入固件或者更新 uboot</li>
+<li>【兼容性好】支持多种 Flash 分区布局切换功能（仅支持
+spi-nand），可以在 WebUI 中切换不同的分区布局，完美兼容小米原厂固件</li>
+</ul>
+<h3 id="刷入流程">刷入流程</h3>
+<ol type="1">
+<li><p>电脑接入正常网络，然后去 hanwckf 的仓库 release 页面下载对应的
+uboot 文件：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhbndja2YvYmwtbXQ3OTh4L3JlbGVhc2Vz">mt7981_wr30u-fip-fixed-parts-multi-layout.bin<i class="fa fa-external-link-alt"></i></span></p></li>
+<li><p>电脑接入路由器网络，通过 <code>scp</code> 将 uboot
+传到路由器上</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">scp mt7981_wr30u-fip-fixed-parts-multi-layout.bin root@192.168.31.1:/tmp</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>通过 <code>ssh</code> 登录路由器，查看布局</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># on PC</span></span><br><span class="line">ssh root@192.168.31.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># on Router</span></span><br><span class="line"><span class="comment"># 查看当前分区布局</span></span><br><span class="line"><span class="built_in">cat</span> /proc/mtd</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>默认布局如下:</p>
+<p></p><figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">dev:    size   erasesize  name</span><br><span class="line">mtd0: 08000000 00020000 "spi0.0"</span><br><span class="line">mtd1: 00100000 00020000 "BL2"</span><br><span class="line">mtd2: 00040000 00020000 "Nvram"</span><br><span class="line">mtd3: 00040000 00020000 "Bdata"</span><br><span class="line">mtd4: 00200000 00020000 "Factory"</span><br><span class="line">mtd5: 00200000 00020000 "FIP"</span><br><span class="line">mtd6: 00040000 00020000 "crash"</span><br><span class="line">mtd7: 00040000 00020000 "crash_log"</span><br><span class="line">mtd8: 02200000 00020000 "ubi"</span><br><span class="line">mtd9: 02200000 00020000 "ubi1"</span><br><span class="line">mtd10: 02000000 00020000 "overlay"</span><br><span class="line">mtd11: 00c00000 00020000 "data"</span><br><span class="line">mtd12: 00040000 00020000 "KF"</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>如果需要备份，可以通过 <code>nanddump</code> 命令备份，之后通过
+<code>scp</code> 将备份的文件传到电脑上</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># on Router</span></span><br><span class="line">nanddump -f /tmp/BL2.bin /dev/mtd1</span><br><span class="line">nanddump -f /tmp/Nvram.bin /dev/mtd2</span><br><span class="line">nanddump -f /tmp/Bdata.bin /dev/mtd3</span><br><span class="line">nanddump -f /tmp/Factory.bin /dev/mtd4</span><br><span class="line">nanddump -f /tmp/FIP.bin /dev/mtd5</span><br><span class="line">nanddump -f /tmp/ubi.bin /dev/mtd8</span><br><span class="line">nanddump -f /tmp/KF.bin /dev/mtd12</span><br><span class="line"></span><br><span class="line"><span class="comment"># on PC</span></span><br><span class="line">scp root@192.168.31.1:/tmp/*.bin .</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>然后将 uboot 刷入 FIP 分区，之后关机</p>
+<p></p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># on Router</span></span><br><span class="line">mtd write /tmp/mt7981_wr30u-fip-fixed-parts-multi-layout.bin FIP</span><br><span class="line"></span><br><span class="line">poweroff</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+</ol>
+<h2 id="刷入-immortalwrt">刷入 ImmortalWrt</h2>
+<h3 id="简介-1">简介</h3>
+<p>ImmortalWrt 是 OpenWrt 的一个分支，相比于 OpenWrt
+有更多的软件包以及设备支持，并且对中国大陆用户有特殊优化</p>
+<h3 id="刷入流程-1">刷入流程</h3>
+<ol type="1">
+<li><p>电脑连接正常网络，去官网下载 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5pbW1vcnRhbHdydC5vcmcvP3ZlcnNpb249MjMuMDUtU05BUFNIT1QmdGFyZ2V0PW1lZGlhdGVrJTJGZmlsb2dpYyZpZD14aWFvbWlfbWktcm91dGVyLXdyMzB1LTExMm0tbm1ibQ==">Sysupgrade
+固件<i class="fa fa-external-link-alt"></i></span></p>
+<p>这里选择了 custom U-Boot layout 的固件，也就是 112M UBI layout
+的固件，这样可以有更多的空间用于安装软件包，固件名格式为
+<code>immortalwrt-xxxxxx-mediatek-filogic-xiaomi_mi-router-wr30u-112m-nmbm-squashfs-sysupgrade.bin</code></p></li>
+<li><p>针按住 reset 不放，再接上电源，等待 10s
+左右松开，路由器的系统灯变蓝后就是成功进入 uboot 了</p></li>
+<li><p>因 uboot 不支持 DHCP 功能，需要把电脑的 IP 地址设置成固定
+IP：</p>
+<p>电脑通过网线连接路由器，然后在网络设置里将以太网设置为静态，IP 地址：192.168.31.100，子网掩码：255.255.255.0，网关：192.168.31.1，首选
+DNS：192.168.31.1，最后保存</p></li>
+<li><p>直接访问 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMzEuMQ==">WebUI<i class="fa fa-external-link-alt"></i></span> 进行刷固件，将
+layout 选为
+<code>immortalwrt-112m</code>，然后上传前面下载的固件，点击刷机即可</p>
+<figure>
+<img data-src="/posts/e6410576/layout%20选择.png" alt="layout 选择">
+<figcaption aria-hidden="true">layout 选择</figcaption>
+</figure></li>
+</ol>
+<h2 id="刷为原厂固件">刷为原厂固件</h2>
+<p>刷回原厂固件的过程与刷入 ImmortalWrt 类似，只是需要下载<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhbndja2YveGlhb21pLXJvdXRlci1zdG9jay11YmktYmlu">原厂固件<i class="fa fa-external-link-alt"></i></span>，然后在
+WebUI 中将 layout 配置为
+<code>default</code>，之后上传原厂固件刷机即可</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnF1c3QubWUvd3IzMHU=">【个人博客】酱紫表 - 小米 WR30U
+解锁 SSH 刷 openwrt，最有性价比的百元路由器<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BhdHJpY2lhTGVlMy93cjMwdV9zc2g=">【GitHub】wr30u_ssh<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jbWkuaGFud2NrZi50b3AvcC9tdDc5OHgtdWJvb3QtdXNhZ2U=">【个人博客】hanwckf
+- mt798x uboot 功能介绍<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5pbW1vcnRhbHdydC5vcmcv">【ImmortalWrt】固件下载<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
         <category>路由器</category>
       </categories>
       <tags>
+        <tag>BootLoader</tag>
         <tag>OpenWrt</tag>
+        <tag>ImmortalWrt</tag>
       </tags>
   </entry>
   <entry>
@@ -3703,6 +3656,53 @@ MINI 刷 Breed 及 Pandavan 教程<i class="fa fa-external-link-alt"></i></span>
         <tag>OpenWrt</tag>
         <tag>交叉编译</tag>
         <tag>ipk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<h3 id="来源">来源</h3>
+<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
+系统。迫于 Linux 的开源协议要求，Linksys
+开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
+<span id="more"></span></p>
+<h3 id="介绍">介绍</h3>
+<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
+操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装">安装</h2>
+<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
+中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程">一般安装流程</h3>
+<p>通常的安装步骤主要通过以下流程：</p>
+<ol type="1">
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
+<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul></li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载">固件搜索下载</h3>
+<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
+页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
