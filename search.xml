@@ -1127,6 +1127,81 @@ chrome，命令行应该就恢复正常了，此时也能在已打开 chrome
       </tags>
   </entry>
   <entry>
+    <title>解决 pip 安装第三方包时因 SSL 报错</title>
+    <url>/posts/2e7aa01a.html</url>
+    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
+<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
+后发现用 <code>pip</code>
+安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
+SSL 认证失败导致的 <span id="more"></span></p>
+<ol type="1">
+<li><p>check_hostname requires server_hostname</p>
+<blockquote>
+<p><code>raise ValueError("check_hostname requires server_hostname")</code>
+<code>ValueError: check_hostname requires server_hostname</code></p>
+</blockquote></li>
+<li><p>EOF occurred in violation of protocol</p>
+<blockquote>
+<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
+</blockquote></li>
+</ol>
+<h2 id="什么是-ssl">什么是 SSL ？</h2>
+<p>传输层安全性协议（英语：Transport Layer
+Security，TLS）及其前身安全套接层（英语：Secure Sockets
+Layer，SSL）是现在的 HTTPS
+协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
+<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
+以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
+包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
+<h2 id="为什么会报错">为什么会报错</h2>
+<p>根据报错信息可以发现错误的根源就在于
+SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
+或者网络抓包等软件的导致的</p>
+<h2 id="解决办法">解决办法</h2>
+<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
+或者网络抓包等软件</h3>
+<p>最推荐的办法是临时关闭代理、VPN
+或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
+<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
+源来避免 SSL 认证问题</h3>
+<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
+的镜像站来进行安装下载</p>
+<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
+协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
+协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
+<p>安装时第三方包时可以参考如下命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
+<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>修改文件内容如下</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
+<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
+后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
+或者 <code>20.3b1</code> 等较低版本即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
+镜像<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
+pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
+pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>日常踩坑</tag>
+        <tag>pip</tag>
+        <tag>python</tag>
+        <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Debug 从入门到入土</title>
     <url>/posts/89f2ed7d.html</url>
     <content><![CDATA[<p>写代码难免遇到 bug，调试解决 bug
@@ -1180,10 +1255,19 @@ of Virginia Computer Science】x86 Assembly Guide<i class="fa fa-external-link-a
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 无需任何选项，直接编译</span></span><br><span class="line">$ gcc test.c -o <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序，会出现 segmentation fault</span></span><br><span class="line">$ ./test</span><br><span class="line">[1]    8173 segmentation fault (core dumped)  ./test</span><br><span class="line"></span><br><span class="line"><span class="comment"># dmesg 查看内核日志，可以看到 segmentation fault 的详细信息</span></span><br><span class="line">$ dmesg | <span class="built_in">tail</span> -n 2</span><br><span class="line">[49630.541707] <span class="built_in">test</span>[8173]: segfault at 0 ip 000055bce6f6c13d sp 00007fffad5149b0 error 6 <span class="keyword">in</span> <span class="built_in">test</span>[55bce6f6c000+1000]</span><br><span class="line">[49630.541732] Code: 5d c3 0f 1f 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa e9 77 ff ff ff f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 90 5d c3 f3 0f 1e fa 55 48 89 e5 48 83 ec 10 c7</span><br></pre></td></tr></tbody></table></figure>
 <p>由于没有关闭 ASLR，所以每次运行程序时，<code>ip</code>
 的值都会不一样，但是可以简单的换算获取到实际偏移量</p>
-<p>例如上面的
-<code>ip 000055bce6f6c13d …… in test[55bce6f6c000+1000]</code>，可以通过
-<code>0x55bce6f6c13d - 0x55bce6f6c000 + 0x1000= 0x113d</code>
-来获取实际偏移量 <code>0x113d</code></p>
+<p>首先需要通过 <code>objdump</code> 获取 <code>.init</code>
+段的起始地址，如下所示：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 获取 init 段的起始地址</span></span><br><span class="line">$ objdump -h ./test -j .init</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line">Sections:</span><br><span class="line">Idx Name          Size      VMA               LMA               File off  Algn</span><br><span class="line"> 10 .init         0000001b  0000000000001000  0000000000001000  00001000  2**2</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</span><br></pre></td></tr></tbody></table></figure>
+<p>我们查看 <code>VMA</code> 列，可以看到 <code>.init</code>
+段的起始地址为 <code>0x1000</code>（个人经验，如果不对，欢迎 dalao
+指正）</p>
+<h4 id="计算偏移量">计算偏移量</h4>
+<p>然后根据 <code>dmesg</code> 中的 <code>ip</code> 以及程序被映射的
+<code>VMA</code> 首地址计算代码偏移量，也就是
+<code>ip 000055bce6f6c13d …… in test[55bce6f6c000+xxx]</code>，计算出
+<code>0x55bce6f6c13d - 0x55bce6f6c000 = 0x13d</code>，然后在加上
+<code>.init</code> 段的起始地址
+<code>0x1000</code>，就可以得到实际的偏移量 <code>0x113d</code></p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 反汇编原程序</span></span><br><span class="line">$ objdump -d ./test</span><br><span class="line"></span><br><span class="line">./test:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .init:</span><br><span class="line"></span><br><span class="line">0000000000001000 &lt;_init&gt;:</span><br><span class="line">    1000:       f3 0f 1e fa             endbr64</span><br><span class="line">    1004:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    1008:       48 8b 05 d9 2f 00 00    mov    0x2fd9(%rip),%rax        <span class="comment"># 3fe8 &lt;__gmon_start__&gt;</span></span><br><span class="line">    100f:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    1012:       74 02                   je     1016 &lt;_init+0x16&gt;</span><br><span class="line">    1014:       ff d0                   callq  *%rax</span><br><span class="line">    1016:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    101a:       c3                      retq</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt:</span><br><span class="line"></span><br><span class="line">0000000000001020 &lt;.plt&gt;:</span><br><span class="line">    1020:       ff 35 a2 2f 00 00       pushq  0x2fa2(%rip)        <span class="comment"># 3fc8 &lt;_GLOBAL_OFFSET_TABLE_+0x8&gt;</span></span><br><span class="line">    1026:       f2 ff 25 a3 2f 00 00    bnd jmpq *0x2fa3(%rip)        <span class="comment"># 3fd0 &lt;_GLOBAL_OFFSET_TABLE_+0x10&gt;</span></span><br><span class="line">    102d:       0f 1f 00                nopl   (%rax)</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt.got:</span><br><span class="line"></span><br><span class="line">0000000000001030 &lt;__cxa_finalize@plt&gt;:</span><br><span class="line">    1030:       f3 0f 1e fa             endbr64</span><br><span class="line">    1034:       f2 ff 25 bd 2f 00 00    bnd jmpq *0x2fbd(%rip)        <span class="comment"># 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;</span></span><br><span class="line">    103b:       0f 1f 44 00 00          nopl   0x0(%rax,%rax,1)</span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000000001040 &lt;_start&gt;:</span><br><span class="line">    1040:       f3 0f 1e fa             endbr64</span><br><span class="line">    1044:       31 ed                   xor    %ebp,%ebp</span><br><span class="line">    1046:       49 89 d1                mov    %rdx,%r9</span><br><span class="line">    1049:       5e                      pop    %rsi</span><br><span class="line">    104a:       48 89 e2                mov    %rsp,%rdx</span><br><span class="line">    104d:       48 83 e4 f0             and    <span class="variable">$0xfffffffffffffff0</span>,%rsp</span><br><span class="line">    1051:       50                      push   %rax</span><br><span class="line">    1052:       54                      push   %rsp</span><br><span class="line">    1053:       4c 8d 05 86 01 00 00    lea    0x186(%rip),%r8        <span class="comment"># 11e0 &lt;__libc_csu_fini&gt;</span></span><br><span class="line">    105a:       48 8d 0d 0f 01 00 00    lea    0x10f(%rip),%rcx        <span class="comment"># 1170 &lt;__libc_csu_init&gt;</span></span><br><span class="line">    1061:       48 8d 3d de 00 00 00    lea    0xde(%rip),%rdi        <span class="comment"># 1146 &lt;main&gt;</span></span><br><span class="line">    1068:       ff 15 72 2f 00 00       callq  *0x2f72(%rip)        <span class="comment"># 3fe0 &lt;__libc_start_main@GLIBC_2.2.5&gt;</span></span><br><span class="line">    106e:       f4                      hlt</span><br><span class="line">    106f:       90                      nop</span><br><span class="line"></span><br><span class="line">0000000000001070 &lt;deregister_tm_clones&gt;:</span><br><span class="line">    1070:       48 8d 3d 99 2f 00 00    lea    0x2f99(%rip),%rdi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    1077:       48 8d 05 92 2f 00 00    lea    0x2f92(%rip),%rax        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    107e:       48 39 f8                cmp    %rdi,%rax</span><br><span class="line">    1081:       74 15                   je     1098 &lt;deregister_tm_clones+0x28&gt;</span><br><span class="line">    1083:       48 8b 05 4e 2f 00 00    mov    0x2f4e(%rip),%rax        <span class="comment"># 3fd8 &lt;_ITM_deregisterTMCloneTable&gt;</span></span><br><span class="line">    108a:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    108d:       74 09                   je     1098 &lt;deregister_tm_clones+0x28&gt;</span><br><span class="line">    108f:       ff e0                   jmpq   *%rax</span><br><span class="line">    1091:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line">    1098:       c3                      retq</span><br><span class="line">    1099:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">00000000000010a0 &lt;register_tm_clones&gt;:</span><br><span class="line">    10a0:       48 8d 3d 69 2f 00 00    lea    0x2f69(%rip),%rdi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10a7:       48 8d 35 62 2f 00 00    lea    0x2f62(%rip),%rsi        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10ae:       48 29 fe                sub    %rdi,%rsi</span><br><span class="line">    10b1:       48 89 f0                mov    %rsi,%rax</span><br><span class="line">    10b4:       48 c1 ee 3f             shr    <span class="variable">$0x3f</span>,%rsi</span><br><span class="line">    10b8:       48 c1 f8 03             sar    <span class="variable">$0x3</span>,%rax</span><br><span class="line">    10bc:       48 01 c6                add    %rax,%rsi</span><br><span class="line">    10bf:       48 d1 fe                sar    %rsi</span><br><span class="line">    10c2:       74 14                   je     10d8 &lt;register_tm_clones+0x38&gt;</span><br><span class="line">    10c4:       48 8b 05 25 2f 00 00    mov    0x2f25(%rip),%rax        <span class="comment"># 3ff0 &lt;_ITM_registerTMCloneTable&gt;</span></span><br><span class="line">    10cb:       48 85 c0                <span class="built_in">test</span>   %rax,%rax</span><br><span class="line">    10ce:       74 08                   je     10d8 &lt;register_tm_clones+0x38&gt;</span><br><span class="line">    10d0:       ff e0                   jmpq   *%rax</span><br><span class="line">    10d2:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)</span><br><span class="line">    10d8:       c3                      retq</span><br><span class="line">    10d9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">00000000000010e0 &lt;__do_global_dtors_aux&gt;:</span><br><span class="line">    10e0:       f3 0f 1e fa             endbr64</span><br><span class="line">    10e4:       80 3d 25 2f 00 00 00    cmpb   <span class="variable">$0x0</span>,0x2f25(%rip)        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    10eb:       75 2b                   jne    1118 &lt;__do_global_dtors_aux+0x38&gt;</span><br><span class="line">    10ed:       55                      push   %rbp</span><br><span class="line">    10ee:       48 83 3d 02 2f 00 00    cmpq   <span class="variable">$0x0</span>,0x2f02(%rip)        <span class="comment"># 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;</span></span><br><span class="line">    10f5:       00</span><br><span class="line">    10f6:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    10f9:       74 0c                   je     1107 &lt;__do_global_dtors_aux+0x27&gt;</span><br><span class="line">    10fb:       48 8b 3d 06 2f 00 00    mov    0x2f06(%rip),%rdi        <span class="comment"># 4008 &lt;__dso_handle&gt;</span></span><br><span class="line">    1102:       e8 29 ff ff ff          callq  1030 &lt;__cxa_finalize@plt&gt;</span><br><span class="line">    1107:       e8 64 ff ff ff          callq  1070 &lt;deregister_tm_clones&gt;</span><br><span class="line">    110c:       c6 05 fd 2e 00 00 01    movb   <span class="variable">$0x1</span>,0x2efd(%rip)        <span class="comment"># 4010 &lt;__TMC_END__&gt;</span></span><br><span class="line">    1113:       5d                      pop    %rbp</span><br><span class="line">    1114:       c3                      retq</span><br><span class="line">    1115:       0f 1f 00                nopl   (%rax)</span><br><span class="line">    1118:       c3                      retq</span><br><span class="line">    1119:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">0000000000001120 &lt;frame_dummy&gt;:</span><br><span class="line">    1120:       f3 0f 1e fa             endbr64</span><br><span class="line">    1124:       e9 77 ff ff ff          jmpq   10a0 &lt;register_tm_clones&gt;</span><br><span class="line"></span><br><span class="line">0000000000001129 &lt;func_bug&gt;:</span><br><span class="line">    1129:       f3 0f 1e fa             endbr64</span><br><span class="line">    112d:       55                      push   %rbp</span><br><span class="line">    112e:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    1131:       48 c7 45 f8 00 00 00    movq   <span class="variable">$0x0</span>,-0x8(%rbp)</span><br><span class="line">    1138:       00</span><br><span class="line">    1139:       48 8b 45 f8             mov    -0x8(%rbp),%rax</span><br><span class="line">    113d:       c7 00 02 00 00 00       movl   <span class="variable">$0x2</span>,(%rax)</span><br><span class="line">    1143:       90                      nop</span><br><span class="line">    1144:       5d                      pop    %rbp</span><br><span class="line">    1145:       c3                      retq</span><br><span class="line"></span><br><span class="line">0000000000001146 &lt;main&gt;:</span><br><span class="line">    1146:       f3 0f 1e fa             endbr64</span><br><span class="line">    114a:       55                      push   %rbp</span><br><span class="line">    114b:       48 89 e5                mov    %rsp,%rbp</span><br><span class="line">    114e:       48 83 ec 10             sub    <span class="variable">$0x10</span>,%rsp</span><br><span class="line">    1152:       c7 45 <span class="built_in">fc</span> 01 00 00 00    movl   <span class="variable">$0x1</span>,-0x4(%rbp)</span><br><span class="line">    1159:       b8 00 00 00 00          mov    <span class="variable">$0x0</span>,%eax</span><br><span class="line">    115e:       e8 c6 ff ff ff          callq  1129 &lt;func_bug&gt;</span><br><span class="line">    1163:       b8 00 00 00 00          mov    <span class="variable">$0x0</span>,%eax</span><br><span class="line">    1168:       c9                      leaveq</span><br><span class="line">    1169:       c3                      retq</span><br><span class="line">    116a:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)</span><br><span class="line"></span><br><span class="line">0000000000001170 &lt;__libc_csu_init&gt;:</span><br><span class="line">    1170:       f3 0f 1e fa             endbr64</span><br><span class="line">    1174:       41 57                   push   %r15</span><br><span class="line">    1176:       4c 8d 3d 73 2c 00 00    lea    0x2c73(%rip),%r15        <span class="comment"># 3df0 &lt;__frame_dummy_init_array_entry&gt;</span></span><br><span class="line">    117d:       41 56                   push   %r14</span><br><span class="line">    117f:       49 89 d6                mov    %rdx,%r14</span><br><span class="line">    1182:       41 55                   push   %r13</span><br><span class="line">    1184:       49 89 f5                mov    %rsi,%r13</span><br><span class="line">    1187:       41 54                   push   %r12</span><br><span class="line">    1189:       41 89 <span class="built_in">fc</span>                mov    %edi,%r12d</span><br><span class="line">    118c:       55                      push   %rbp</span><br><span class="line">    118d:       48 8d 2d 64 2c 00 00    lea    0x2c64(%rip),%rbp        <span class="comment"># 3df8 &lt;__do_global_dtors_aux_fini_array_entry&gt;</span></span><br><span class="line">    1194:       53                      push   %rbx</span><br><span class="line">    1195:       4c 29 fd                sub    %r15,%rbp</span><br><span class="line">    1198:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    119c:       e8 5f fe ff ff          callq  1000 &lt;_init&gt;</span><br><span class="line">    11a1:       48 c1 fd 03             sar    <span class="variable">$0x3</span>,%rbp</span><br><span class="line">    11a5:       74 1f                   je     11c6 &lt;__libc_csu_init+0x56&gt;</span><br><span class="line">    11a7:       31 db                   xor    %ebx,%ebx</span><br><span class="line">    11a9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)</span><br><span class="line">    11b0:       4c 89 f2                mov    %r14,%rdx</span><br><span class="line">    11b3:       4c 89 ee                mov    %r13,%rsi</span><br><span class="line">    11b6:       44 89 e7                mov    %r12d,%edi</span><br><span class="line">    11b9:       41 ff 14 <span class="built_in">df</span>             callq  *(%r15,%rbx,8)</span><br><span class="line">    11bd:       48 83 c3 01             add    <span class="variable">$0x1</span>,%rbx</span><br><span class="line">    11c1:       48 39 <span class="built_in">dd</span>                cmp    %rbx,%rbp</span><br><span class="line">    11c4:       75 ea                   jne    11b0 &lt;__libc_csu_init+0x40&gt;</span><br><span class="line">    11c6:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11ca:       5b                      pop    %rbx</span><br><span class="line">    11cb:       5d                      pop    %rbp</span><br><span class="line">    11cc:       41 5c                   pop    %r12</span><br><span class="line">    11ce:       41 5d                   pop    %r13</span><br><span class="line">    11d0:       41 5e                   pop    %r14</span><br><span class="line">    11d2:       41 5f                   pop    %r15</span><br><span class="line">    11d4:       c3                      retq</span><br><span class="line">    11d5:       66 66 2e 0f 1f 84 00    data16 nopw %cs:0x0(%rax,%rax,1)</span><br><span class="line">    11dc:       00 00 00 00</span><br><span class="line"></span><br><span class="line">00000000000011e0 &lt;__libc_csu_fini&gt;:</span><br><span class="line">    11e0:       f3 0f 1e fa             endbr64</span><br><span class="line">    11e4:       c3                      retq</span><br><span class="line"></span><br><span class="line">Disassembly of section .fini:</span><br><span class="line"></span><br><span class="line">00000000000011e8 &lt;_fini&gt;:</span><br><span class="line">    11e8:       f3 0f 1e fa             endbr64</span><br><span class="line">    11ec:       48 83 ec 08             sub    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11f0:       48 83 c4 08             add    <span class="variable">$0x8</span>,%rsp</span><br><span class="line">    11f4:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
 <p>查看 <code>0x113d</code> 附近的代码段</p>
 <figure class="highlight x86asm"><table><tbody><tr><td class="code"><pre><span class="line"><span class="number">0000000000001129</span> &lt;func_bug&gt;:</span><br><span class="line">    <span class="number">1129</span>:       f3 0f 1e fa             endbr64</span><br><span class="line">    <span class="number">112d</span>:       <span class="number">55</span>                      <span class="keyword">push</span>   %rbp</span><br><span class="line">    112e:       <span class="number">48</span> <span class="number">89</span> e5                <span class="keyword">mov</span>    %rsp,%rbp</span><br><span class="line">    <span class="number">1131</span>:       <span class="number">48</span> c7 <span class="number">45</span> f8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    <span class="keyword">movq</span>   <span class="number">$0</span>x0,-<span class="number">0x8</span>(%rbp)</span><br><span class="line">    <span class="number">1138</span>:       <span class="number">00</span></span><br><span class="line">    <span class="number">1139</span>:       <span class="number">48</span> 8b <span class="number">45</span> f8             <span class="keyword">mov</span>    -<span class="number">0x8</span>(%rbp),%rax</span><br><span class="line">    <span class="number">113d</span>:       c7 <span class="number">00</span> <span class="number">02</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       movl   <span class="number">$0</span>x2,(%rax)</span><br><span class="line">    <span class="number">1143</span>:       <span class="number">90</span>                      <span class="keyword">nop</span></span><br><span class="line">    <span class="number">1144</span>:       <span class="number">5d</span>                      <span class="keyword">pop</span>    %rbp</span><br><span class="line">    <span class="number">1145</span>:       c3                      retq</span><br></pre></td></tr></tbody></table></figure>
@@ -1336,81 +1420,6 @@ of Virginia Computer Science】x86 Assembly Guide<i class="fa fa-external-link-a
         <tag>objdump</tag>
         <tag>assert</tag>
         <tag>反汇编</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决 pip 安装第三方包时因 SSL 报错</title>
-    <url>/posts/2e7aa01a.html</url>
-    <content><![CDATA[<h2 id="踩坑">踩坑</h2>
-<p>好久没用 <code>python</code>，最近重新下载安装好 <code>python</code>
-后发现用 <code>pip</code>
-安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时
-SSL 认证失败导致的 <span id="more"></span></p>
-<ol type="1">
-<li><p>check_hostname requires server_hostname</p>
-<blockquote>
-<p><code>raise ValueError("check_hostname requires server_hostname")</code>
-<code>ValueError: check_hostname requires server_hostname</code></p>
-</blockquote></li>
-<li><p>EOF occurred in violation of protocol</p>
-<blockquote>
-<p><code>Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping</code></p>
-</blockquote></li>
-</ol>
-<h2 id="什么是-ssl">什么是 SSL ？</h2>
-<p>传输层安全性协议（英语：Transport Layer
-Security，TLS）及其前身安全套接层（英语：Secure Sockets
-Layer，SSL）是现在的 HTTPS
-协议中的一种安全协议，目的是为互联网通信提供安全及数据完整性保障</p>
-<p>而较新版本的 <code>python</code> 内置的 <code>pip</code>
-以及用于网络请求的 <code>requests</code>、<code>urllib3</code>
-包也较新，并且会使用 HTTPS 协议来下载新的软件包</p>
-<h2 id="为什么会报错">为什么会报错</h2>
-<p>根据报错信息可以发现错误的根源就在于
-SSL，也就是没有通过该安全协议的认证，通常是由于开启了网络代理、VPN
-或者网络抓包等软件的导致的</p>
-<h2 id="解决办法">解决办法</h2>
-<h3 id="临时关闭代理vpn-或者网络抓包等软件">1. 临时关闭代理、VPN
-或者网络抓包等软件</h3>
-<p>最推荐的办法是临时关闭代理、VPN
-或者网络抓包等软件，但是如果关闭后下载速度过慢可以尝试后面两种解决办法</p>
-<h3 id="通过镜像的-http-源来避免-ssl-认证问题">2. 通过镜像的 HTTP
-源来避免 SSL 认证问题</h3>
-<p>由于是 SSL 是 HTTPS 协议需要的，因此我们可以切换至 HTTP
-的镜像站来进行安装下载</p>
-<p>HTTPS 现在已经比较普及，有不少镜像源也早已经切换至 HTTPS
-协议，但部分镜像源在支持 HTTPS 协议的而同时也还支持 HTTP
-协议，下面简单罗列几个 <code>pip</code> 镜像源</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 清华，仅支持 HTTPS</span></span><br><span class="line">https://pypi.tuna.tsinghua.edu.cn/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 豆瓣，HTTP 和 HTTPS 均支持</span></span><br><span class="line">http://pypi.doubanio.com/simple/</span><br><span class="line">https://pypi.doubanio.com/simple/</span><br></pre></td></tr></tbody></table></figure>
-<p>安装时第三方包时可以参考如下命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">pip install xxx-package -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">pip install xxx-package -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<p>如果想永久使用镜像站，则需要修改配置文件，以 Linux 为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
-<p>修改文件内容如下</p>
-<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = http://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="切换至低版本-pip">3. 切换至低版本 <code>pip</code></h3>
-<p>经过测试，当 <code>pip</code> 版本高于 <span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8yMC4zLyNoaXN0b3J5">20.3<i class="fa fa-external-link-alt"></i></span>
-后才会出现此错误，因此我们可以手动将 pip 版本降级至 <code>20.2.4</code>
-或者 <code>20.3b1</code> 等较低版本即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">python -m pip install pip==20.2.4 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br><span class="line">python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9taXJyb3IvcHlwaQ==">【阿里云】PyPI
-镜像<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R6X3pzL2FydGljbGUvZGV0YWlscy84NzkzOTk3Nw==">【CSDN】python
-pip 的安装、更新、卸载、降级、和使用 pip 管理包<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lrdW4wODkvYXJ0aWNsZS9kZXRhaWxzLzEwNjA1Nzk1Mg==">【CSDN】修改
-pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>日常踩坑</category>
-      </categories>
-      <tags>
-        <tag>日常踩坑</tag>
-        <tag>pip</tag>
-        <tag>python</tag>
-        <tag>SSL</tag>
       </tags>
   </entry>
   <entry>
@@ -1736,6 +1745,127 @@ Add support for HTTPS connections to proxies.<i class="fa fa-external-link-alt">
       </tags>
   </entry>
   <entry>
+    <title>io_uring 内核源码分析</title>
+    <url>/posts/4f0d345c.html</url>
+    <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="io_uring">1. <code>io_uring</code></h2>
+<p><a href="/posts/c142853f.html#系统调用">之前</a> 介绍过 io_uring
+只增加了三个 Linux 系统调用分别是
+<code>io_uring_setup</code>，<code>io_uring_enter</code> 和
+<code>io_uring_register</code></p>
+<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code>
+文件中，下面将逐个分析 <span id="more"></span></p>
+<h2 id="系统调用-io_uring_setup">2. 系统调用
+<code>io_uring_setup</code></h2>
+<p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d.html#io-uring-queue-init">用户库源码分析</a>
+中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
+<h3 id="io_uring_setup">2.1. <code>io_uring_setup</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Sets up an aio uring context, and returns the fd. Applications asks for a</span></span><br><span class="line"><span class="comment"> * ring size, we return the actual sq/cq ring sizes (among other things) in the</span></span><br><span class="line"><span class="comment"> * params structure passed in.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> <span class="type">long</span> <span class="title function_">io_uring_setup</span><span class="params">(u32 entries, <span class="keyword">struct</span> io_uring_params __user *params)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_uring_params</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="type">long</span> ret;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用户态拷贝到内核态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(&amp;p, params, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	<span class="comment">// 确认保留区域没有被赋值</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ARRAY_SIZE(p.resv); i++) {</span><br><span class="line">		<span class="keyword">if</span> (p.resv[i])</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查 flags 参数</span></span><br><span class="line">	<span class="keyword">if</span> (p.flags &amp; ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |</span><br><span class="line">			IORING_SETUP_SQ_AFF))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分配内存空间，创建 workqueue，创建 fd 等</span></span><br><span class="line">	ret = io_uring_create(entries, &amp;p);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 内核态拷贝回用户态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_to_user(params, &amp;p, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">SYSCALL_DEFINE2(io_uring_setup, u32, entries,</span><br><span class="line">		<span class="keyword">struct</span> io_uring_params __user *, params)</span><br><span class="line">{</span><br><span class="line">	<span class="keyword">return</span> io_uring_setup(entries, params);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到 <code>io_uring_setup</code> 的核心函数是
+<code>io_uring_create</code></p>
+<h3 id="io_uring_create">2.2. <code>io_uring_create</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_uring_create</span><span class="params">(<span class="type">unsigned</span> entries, <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">user_struct</span> *<span class="title">user</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">bool</span> account_mem;</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!entries || entries &gt; IORING_MAX_ENTRIES)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Use twice as many entries for the CQ ring. It's possible for the</span></span><br><span class="line"><span class="comment">	 * application to drive a higher depth than the size of the SQ ring,</span></span><br><span class="line"><span class="comment">	 * since the sqes are only used at submission time. This allows for</span></span><br><span class="line"><span class="comment">	 * some flexibility in overcommitting a bit.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	p-&gt;sq_entries = roundup_pow_of_two(entries);</span><br><span class="line">	p-&gt;cq_entries = <span class="number">2</span> * p-&gt;sq_entries;</span><br><span class="line"></span><br><span class="line">	user = get_uid(current_user());</span><br><span class="line">	<span class="comment">// 允许对共享内存段进行锁定</span></span><br><span class="line">	account_mem = !capable(CAP_IPC_LOCK);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (account_mem) {</span><br><span class="line">		<span class="comment">// 不能对共享内存段进行锁定，就需要增加当前可以锁定的内存</span></span><br><span class="line">		ret = io_account_mem(user,</span><br><span class="line">				ring_pages(p-&gt;sq_entries, p-&gt;cq_entries));</span><br><span class="line">		<span class="keyword">if</span> (ret) {</span><br><span class="line">			free_uid(user);</span><br><span class="line">			<span class="keyword">return</span> ret;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	ctx = io_ring_ctx_alloc(p);</span><br><span class="line">	<span class="keyword">if</span> (!ctx) {</span><br><span class="line">		<span class="keyword">if</span> (account_mem)</span><br><span class="line">			io_unaccount_mem(user, ring_pages(p-&gt;sq_entries,</span><br><span class="line">								p-&gt;cq_entries));</span><br><span class="line">		free_uid(user);</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">	}</span><br><span class="line">	ctx-&gt;compat = in_compat_syscall();</span><br><span class="line">	ctx-&gt;account_mem = account_mem;</span><br><span class="line">	ctx-&gt;user = user;</span><br><span class="line"></span><br><span class="line">	ctx-&gt;creds = get_current_cred();</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;creds) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 申请 io_rings SQEs</span></span><br><span class="line">	ret = io_allocate_scq_urings(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化 workqueue，[初始化内核线程用于进行 IO poll]</span></span><br><span class="line">	ret = io_sq_offload_start(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;sq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;sq_off));</span><br><span class="line">	p-&gt;sq_off.head = offsetof(<span class="keyword">struct</span> io_rings, sq.head);</span><br><span class="line">	p-&gt;sq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, sq.tail);</span><br><span class="line">	p-&gt;sq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_mask);</span><br><span class="line">	p-&gt;sq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_entries);</span><br><span class="line">	p-&gt;sq_off.flags = offsetof(<span class="keyword">struct</span> io_rings, sq_flags);</span><br><span class="line">	p-&gt;sq_off.dropped = offsetof(<span class="keyword">struct</span> io_rings, sq_dropped);</span><br><span class="line">	p-&gt;sq_off.<span class="built_in">array</span> = (<span class="type">char</span> *)ctx-&gt;sq_array - (<span class="type">char</span> *)ctx-&gt;rings;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;cq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;cq_off));</span><br><span class="line">	p-&gt;cq_off.head = offsetof(<span class="keyword">struct</span> io_rings, cq.head);</span><br><span class="line">	p-&gt;cq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, cq.tail);</span><br><span class="line">	p-&gt;cq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_mask);</span><br><span class="line">	p-&gt;cq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_entries);</span><br><span class="line">	p-&gt;cq_off.overflow = offsetof(<span class="keyword">struct</span> io_rings, cq_overflow);</span><br><span class="line">	p-&gt;cq_off.cqes = offsetof(<span class="keyword">struct</span> io_rings, cqes);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Install ring fd as the very last thing, so we don't risk someone</span></span><br><span class="line"><span class="comment">	 * having closed it before we finish setup</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 创建 fd 便于用户态访问 ctx</span></span><br><span class="line">	ret = io_uring_get_fd(ctx);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	p-&gt;features = IORING_FEAT_SINGLE_MMAP;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">err:</span><br><span class="line">	io_ring_ctx_wait_and_kill(ctx);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="mermaid">graph TD
+io_uring_setup --&gt; io_ring_ctx_alloc
+io_uring_setup --&gt; io_allocate_scq_urings
+io_uring_setup --&gt; io_sq_offload_start
+io_uring_setup --&gt; io_uring_get_fd</pre>
+<ol type="1">
+<li><p><code>io_ring_ctx_alloc</code>
+主要用来申请空间，初始化列表头、互斥锁、自旋锁等结构</p></li>
+<li><p><code>io_allocate_scq_urings</code> 来初始化整个
+<code>struct io_rings *rings</code>，包括
+<code>SQ</code>、<code>CQ</code> 头尾指针的初始化，以及
+<code>SQE</code>、<code>CQE</code> 的初始化</p>
+<ul>
+<li>不同的是 <code>SQ</code>、<code>CQ</code> 头尾指针以及
+<code>CQE</code> 都在 <code>struct io_rings *rings</code> 结构体中</li>
+<li>而 <code>SQE</code> 则是在 <code>struct io_ring_ctx *ctx</code>
+结构体中</li>
+</ul></li>
+<li><p><code>io_sq_offload_start</code> 会根据用户通过
+<code>io_uring_setup</code> 传递的 <code>flags</code> 来配置
+<code>io_uring</code> 的运行方式，后续详细展开</p></li>
+<li><p><code>io_uring_get_fd</code> 将
+<code>struct io_ring_ctx *ctx</code> 暴露给用户态访问</p></li>
+</ol>
+<h3 id="io_sq_offload_start">2.3. <code>io_sq_offload_start</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_sq_offload_start</span><span class="params">(<span class="keyword">struct</span> io_ring_ctx *ctx,</span></span><br><span class="line"><span class="params">			       <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	mmgrab(current-&gt;mm);</span><br><span class="line">	ctx-&gt;sqo_mm = current-&gt;mm;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="comment">// IORING_SETUP_SQPOLL 将会创建一个内核线程来 poll SQ</span></span><br><span class="line">		ret = -EPERM;</span><br><span class="line">		<span class="keyword">if</span> (!capable(CAP_SYS_ADMIN))</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">		ctx-&gt;sq_thread_idle = msecs_to_jiffies(p-&gt;sq_thread_idle);</span><br><span class="line">		<span class="keyword">if</span> (!ctx-&gt;sq_thread_idle)</span><br><span class="line">			ctx-&gt;sq_thread_idle = HZ;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">			<span class="type">int</span> cpu = p-&gt;sq_thread_cpu;</span><br><span class="line"></span><br><span class="line">			ret = -EINVAL;</span><br><span class="line">			<span class="keyword">if</span> (cpu &gt;= nr_cpu_ids)</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line">			<span class="keyword">if</span> (!cpu_online(cpu))</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create_on_cpu(io_sq_thread,</span><br><span class="line">							ctx, cpu,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create(io_sq_thread, ctx,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (IS_ERR(ctx-&gt;sqo_thread)) {</span><br><span class="line">			ret = PTR_ERR(ctx-&gt;sqo_thread);</span><br><span class="line">			ctx-&gt;sqo_thread = <span class="literal">NULL</span>;</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		}</span><br><span class="line">		wake_up_process(ctx-&gt;sqo_thread);</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">		<span class="comment">/* Can't have SQ_AFF without SQPOLL */</span></span><br><span class="line">		ret = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Do QD, or 2 * CPUS, whatever is smallest */</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">0</span>] = alloc_workqueue(<span class="string">"io_ring-wq"</span>,</span><br><span class="line">			WQ_UNBOUND | WQ_FREEZABLE,</span><br><span class="line">			min(ctx-&gt;sq_entries - <span class="number">1</span>, <span class="number">2</span> * num_online_cpus()));</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">0</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * This is for buffered writes, where we want to limit the parallelism</span></span><br><span class="line"><span class="comment">	 * due to file locking in file systems. As "normal" buffered writes</span></span><br><span class="line"><span class="comment">	 * should parellelize on writeout quite nicely, limit us to having 2</span></span><br><span class="line"><span class="comment">	 * pending. This avoids massive contention on the inode when doing</span></span><br><span class="line"><span class="comment">	 * buffered async writes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 对 buffer 写的 workqueue 深度进行限制，减少锁争用开销?</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">1</span>] = alloc_workqueue(<span class="string">"io_ring-write-wq"</span>,</span><br><span class="line">						WQ_UNBOUND | WQ_FREEZABLE, <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">1</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">err:</span><br><span class="line">	io_finish_async(ctx);</span><br><span class="line">	mmdrop(ctx-&gt;sqo_mm);</span><br><span class="line">	ctx-&gt;sqo_mm = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>当 <code>flags</code> 中配置了 <code>IORING_SETUP_SQPOLL</code>
+时，将启动一个单独的内核线程 <code>io_sq_thread</code>，而当
+<code>IORING_SETUP_SQ_AFF</code> 字段也配置时，将根据
+<code>sq_thread_cpu</code> 字段，在指定的 CPU 上启用内核线程
+<code>io_sq_thread</code></p>
+<p>同时该函数还会创建两个工作队列 <code>ctx-&gt;sqo_wq[2]</code>
+分别名为 <code>io_ring-wq</code> 和 <code>io_ring-write-wq</code></p>
+<ul>
+<li><code>io_ring-wq</code> 主要处理读 IO，以及 direct 写 IO</li>
+<li><code>io_ring-write-wq</code> 主要是处理 buffer 写 IO</li>
+</ul>
+<h2 id="系统调用-io_uring_enter">3. 系统调用
+<code>io_uring_enter</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE6(io_uring_enter, <span class="type">unsigned</span> <span class="type">int</span>, fd, u32, to_submit,</span><br><span class="line">		u32, min_complete, u32, flags, <span class="type">const</span> <span class="type">sigset_t</span> __user *, sig,</span><br><span class="line">		<span class="type">size_t</span>, sigsz)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="type">int</span> submitted = <span class="number">0</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ret = -ENXIO;</span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line">	<span class="keyword">if</span> (!percpu_ref_tryget(&amp;ctx-&gt;refs))</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * For SQ polling, the thread will do all submissions and completions.</span></span><br><span class="line"><span class="comment">	 * Just return the requested submit count, and wake the thread if</span></span><br><span class="line"><span class="comment">	 * we were asked to.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="keyword">if</span> (flags &amp; IORING_ENTER_SQ_WAKEUP)</span><br><span class="line">			wake_up(&amp;ctx-&gt;sqo_wait);</span><br><span class="line">		submitted = to_submit;</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (to_submit) {</span><br><span class="line">		to_submit = min(to_submit, ctx-&gt;sq_entries);</span><br><span class="line"></span><br><span class="line">		mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">		submitted = io_ring_submit(ctx, to_submit);</span><br><span class="line">		mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (submitted != to_submit)</span><br><span class="line">			<span class="keyword">goto</span> out;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; IORING_ENTER_GETEVENTS) {</span><br><span class="line">		<span class="type">unsigned</span> nr_events = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		min_complete = min(min_complete, ctx-&gt;cq_entries);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) {</span><br><span class="line">			ret = io_iopoll_check(ctx, &amp;nr_events, min_complete);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ret = io_cqring_wait(ctx, min_complete, sig, sigsz);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">	percpu_ref_put(&amp;ctx-&gt;refs);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> submitted ? submitted : ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>TODO</p>
+<h2 id="系统调用-io_uring_register">4. 系统调用
+<code>io_uring_register</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE4(io_uring_register, <span class="type">unsigned</span> <span class="type">int</span>, fd, <span class="type">unsigned</span> <span class="type">int</span>, opcode,</span><br><span class="line">		<span class="type">void</span> __user *, arg, <span class="type">unsigned</span> <span class="type">int</span>, nr_args)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line"></span><br><span class="line">	mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">	ret = __io_uring_register(ctx, opcode, arg, nr_args);</span><br><span class="line">	mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>TODO</p>
+<h2 id="内核线程-io_sq_thread">5. 内核线程
+<code>io_sq_thread</code></h2>
+<p>TODO</p>
+<h2 id="iopoll-模式">6. <code>IOPOLL</code> 模式</h2>
+<h3 id="启用">6.1. 启用</h3>
+<p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了
+<code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code>
+模式</p>
+<h3 id="限制">6.2. 限制</h3>
+<p>开启此选项必须保证后续只用 <code>O_DIRECT</code>
+打开文件并且文件系统的 <code>file_operations</code> 中注册了
+<code>iopoll</code> 函数，否则 IO 将下发失败</p>
+<h3 id="调用栈">6.3. 调用栈</h3>
+<p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认
+IO 是否完成</p>
+<p>对 <code>f_op-&gt;iopoll</code> 函数调用关系进行了分析</p>
+<pre class="mermaid">graph TD
+io_uring_create --&gt; io_ring_ctx_wait_and_kill
+io_uring_release --&gt; io_ring_ctx_wait_and_kill
+io_ring_ctx_wait_and_kill --&gt; io_iopoll_reap_events
+io_ring_ctx_wait_and_kill --&gt; io_ring_ctx_free
+io_ring_ctx_free --&gt; io_iopoll_reap_events
+io_iopoll_reap_events --&gt; io_iopoll_getevents
+
+syscall["SYSCALL_DEFINE6(io_uring_enter, ……)"] --&gt; io_iopoll_check --&gt; io_iopoll_getevents
+
+io_sq_thread --&gt; io_iopoll_getevents
+
+io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
+<p>主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了
+<code>IORING_SETUP_IOPOLL</code>）：</p>
+<ol type="1">
+<li><code>io_uring</code> 销毁时需要调用</li>
+<li>系统调用 <code>io_uring_enter</code> 将会触发，用于轮询 IO
+完成情况，直到到达指定的 <code>wait_nr</code> 数量 IO
+完成后才会退出轮询</li>
+<li>当初始化时同时配置了 <code>IORING_SETUP_SQPOLL</code>
+时，<code>io_sq_thread</code> 内核线程触发，当存在未完成的 IO
+时调用，用于更新 IO 完成情况（ <code>io_do_iopoll</code> 的参数
+<code>min = 0</code>，即每次调用无论是否有新完成的 IO
+都会退出轮询，不会阻塞线程）</li>
+</ol>
+]]></content>
+      <categories>
+        <category>存储</category>
+        <category>IO</category>
+      </categories>
+      <tags>
+        <tag>todo</tag>
+        <tag>异步 IO</tag>
+        <tag>kernel</tag>
+        <tag>liburing</tag>
+        <tag>io_uring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>io_uring 用户库源码分析</title>
     <url>/posts/d7259d1d.html</url>
     <content><![CDATA[<p>当前内容基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F4Ym9lL2xpYnVyaW5nL3JlbGVhc2VzL3RhZy9saWJ1cmluZy0yLjE=">liburing
@@ -1898,127 +2028,6 @@ IOSQE_IO_LINK<i class="fa fa-external-link-alt"></i></span></li>
         <tag>异步 IO</tag>
         <tag>liburing</tag>
         <tag>io_uring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>io_uring 内核源码分析</title>
-    <url>/posts/4f0d345c.html</url>
-    <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="io_uring">1. <code>io_uring</code></h2>
-<p><a href="/posts/c142853f.html#系统调用">之前</a> 介绍过 io_uring
-只增加了三个 Linux 系统调用分别是
-<code>io_uring_setup</code>，<code>io_uring_enter</code> 和
-<code>io_uring_register</code></p>
-<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code>
-文件中，下面将逐个分析 <span id="more"></span></p>
-<h2 id="系统调用-io_uring_setup">2. 系统调用
-<code>io_uring_setup</code></h2>
-<p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d.html#io-uring-queue-init">用户库源码分析</a>
-中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
-<h3 id="io_uring_setup">2.1. <code>io_uring_setup</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Sets up an aio uring context, and returns the fd. Applications asks for a</span></span><br><span class="line"><span class="comment"> * ring size, we return the actual sq/cq ring sizes (among other things) in the</span></span><br><span class="line"><span class="comment"> * params structure passed in.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> <span class="type">long</span> <span class="title function_">io_uring_setup</span><span class="params">(u32 entries, <span class="keyword">struct</span> io_uring_params __user *params)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_uring_params</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="type">long</span> ret;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用户态拷贝到内核态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(&amp;p, params, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	<span class="comment">// 确认保留区域没有被赋值</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ARRAY_SIZE(p.resv); i++) {</span><br><span class="line">		<span class="keyword">if</span> (p.resv[i])</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查 flags 参数</span></span><br><span class="line">	<span class="keyword">if</span> (p.flags &amp; ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |</span><br><span class="line">			IORING_SETUP_SQ_AFF))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分配内存空间，创建 workqueue，创建 fd 等</span></span><br><span class="line">	ret = io_uring_create(entries, &amp;p);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 内核态拷贝回用户态</span></span><br><span class="line">	<span class="keyword">if</span> (copy_to_user(params, &amp;p, <span class="keyword">sizeof</span>(p)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">SYSCALL_DEFINE2(io_uring_setup, u32, entries,</span><br><span class="line">		<span class="keyword">struct</span> io_uring_params __user *, params)</span><br><span class="line">{</span><br><span class="line">	<span class="keyword">return</span> io_uring_setup(entries, params);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>可以看到 <code>io_uring_setup</code> 的核心函数是
-<code>io_uring_create</code></p>
-<h3 id="io_uring_create">2.2. <code>io_uring_create</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_uring_create</span><span class="params">(<span class="type">unsigned</span> entries, <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">user_struct</span> *<span class="title">user</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">bool</span> account_mem;</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!entries || entries &gt; IORING_MAX_ENTRIES)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Use twice as many entries for the CQ ring. It's possible for the</span></span><br><span class="line"><span class="comment">	 * application to drive a higher depth than the size of the SQ ring,</span></span><br><span class="line"><span class="comment">	 * since the sqes are only used at submission time. This allows for</span></span><br><span class="line"><span class="comment">	 * some flexibility in overcommitting a bit.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	p-&gt;sq_entries = roundup_pow_of_two(entries);</span><br><span class="line">	p-&gt;cq_entries = <span class="number">2</span> * p-&gt;sq_entries;</span><br><span class="line"></span><br><span class="line">	user = get_uid(current_user());</span><br><span class="line">	<span class="comment">// 允许对共享内存段进行锁定</span></span><br><span class="line">	account_mem = !capable(CAP_IPC_LOCK);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (account_mem) {</span><br><span class="line">		<span class="comment">// 不能对共享内存段进行锁定，就需要增加当前可以锁定的内存</span></span><br><span class="line">		ret = io_account_mem(user,</span><br><span class="line">				ring_pages(p-&gt;sq_entries, p-&gt;cq_entries));</span><br><span class="line">		<span class="keyword">if</span> (ret) {</span><br><span class="line">			free_uid(user);</span><br><span class="line">			<span class="keyword">return</span> ret;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	ctx = io_ring_ctx_alloc(p);</span><br><span class="line">	<span class="keyword">if</span> (!ctx) {</span><br><span class="line">		<span class="keyword">if</span> (account_mem)</span><br><span class="line">			io_unaccount_mem(user, ring_pages(p-&gt;sq_entries,</span><br><span class="line">								p-&gt;cq_entries));</span><br><span class="line">		free_uid(user);</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">	}</span><br><span class="line">	ctx-&gt;compat = in_compat_syscall();</span><br><span class="line">	ctx-&gt;account_mem = account_mem;</span><br><span class="line">	ctx-&gt;user = user;</span><br><span class="line"></span><br><span class="line">	ctx-&gt;creds = get_current_cred();</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;creds) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 申请 io_rings SQEs</span></span><br><span class="line">	ret = io_allocate_scq_urings(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化 workqueue，[初始化内核线程用于进行 IO poll]</span></span><br><span class="line">	ret = io_sq_offload_start(ctx, p);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;sq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;sq_off));</span><br><span class="line">	p-&gt;sq_off.head = offsetof(<span class="keyword">struct</span> io_rings, sq.head);</span><br><span class="line">	p-&gt;sq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, sq.tail);</span><br><span class="line">	p-&gt;sq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_mask);</span><br><span class="line">	p-&gt;sq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, sq_ring_entries);</span><br><span class="line">	p-&gt;sq_off.flags = offsetof(<span class="keyword">struct</span> io_rings, sq_flags);</span><br><span class="line">	p-&gt;sq_off.dropped = offsetof(<span class="keyword">struct</span> io_rings, sq_dropped);</span><br><span class="line">	p-&gt;sq_off.<span class="built_in">array</span> = (<span class="type">char</span> *)ctx-&gt;sq_array - (<span class="type">char</span> *)ctx-&gt;rings;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(&amp;p-&gt;cq_off, <span class="number">0</span>, <span class="keyword">sizeof</span>(p-&gt;cq_off));</span><br><span class="line">	p-&gt;cq_off.head = offsetof(<span class="keyword">struct</span> io_rings, cq.head);</span><br><span class="line">	p-&gt;cq_off.tail = offsetof(<span class="keyword">struct</span> io_rings, cq.tail);</span><br><span class="line">	p-&gt;cq_off.ring_mask = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_mask);</span><br><span class="line">	p-&gt;cq_off.ring_entries = offsetof(<span class="keyword">struct</span> io_rings, cq_ring_entries);</span><br><span class="line">	p-&gt;cq_off.overflow = offsetof(<span class="keyword">struct</span> io_rings, cq_overflow);</span><br><span class="line">	p-&gt;cq_off.cqes = offsetof(<span class="keyword">struct</span> io_rings, cqes);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Install ring fd as the very last thing, so we don't risk someone</span></span><br><span class="line"><span class="comment">	 * having closed it before we finish setup</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 创建 fd 便于用户态访问 ctx</span></span><br><span class="line">	ret = io_uring_get_fd(ctx);</span><br><span class="line">	<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">	p-&gt;features = IORING_FEAT_SINGLE_MMAP;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">err:</span><br><span class="line">	io_ring_ctx_wait_and_kill(ctx);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<pre class="mermaid">graph TD
-io_uring_setup --&gt; io_ring_ctx_alloc
-io_uring_setup --&gt; io_allocate_scq_urings
-io_uring_setup --&gt; io_sq_offload_start
-io_uring_setup --&gt; io_uring_get_fd</pre>
-<ol type="1">
-<li><p><code>io_ring_ctx_alloc</code>
-主要用来申请空间，初始化列表头、互斥锁、自旋锁等结构</p></li>
-<li><p><code>io_allocate_scq_urings</code> 来初始化整个
-<code>struct io_rings *rings</code>，包括
-<code>SQ</code>、<code>CQ</code> 头尾指针的初始化，以及
-<code>SQE</code>、<code>CQE</code> 的初始化</p>
-<ul>
-<li>不同的是 <code>SQ</code>、<code>CQ</code> 头尾指针以及
-<code>CQE</code> 都在 <code>struct io_rings *rings</code> 结构体中</li>
-<li>而 <code>SQE</code> 则是在 <code>struct io_ring_ctx *ctx</code>
-结构体中</li>
-</ul></li>
-<li><p><code>io_sq_offload_start</code> 会根据用户通过
-<code>io_uring_setup</code> 传递的 <code>flags</code> 来配置
-<code>io_uring</code> 的运行方式，后续详细展开</p></li>
-<li><p><code>io_uring_get_fd</code> 将
-<code>struct io_ring_ctx *ctx</code> 暴露给用户态访问</p></li>
-</ol>
-<h3 id="io_sq_offload_start">2.3. <code>io_sq_offload_start</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">io_sq_offload_start</span><span class="params">(<span class="keyword">struct</span> io_ring_ctx *ctx,</span></span><br><span class="line"><span class="params">			       <span class="keyword">struct</span> io_uring_params *p)</span></span><br><span class="line">{</span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">	mmgrab(current-&gt;mm);</span><br><span class="line">	ctx-&gt;sqo_mm = current-&gt;mm;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="comment">// IORING_SETUP_SQPOLL 将会创建一个内核线程来 poll SQ</span></span><br><span class="line">		ret = -EPERM;</span><br><span class="line">		<span class="keyword">if</span> (!capable(CAP_SYS_ADMIN))</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">		ctx-&gt;sq_thread_idle = msecs_to_jiffies(p-&gt;sq_thread_idle);</span><br><span class="line">		<span class="keyword">if</span> (!ctx-&gt;sq_thread_idle)</span><br><span class="line">			ctx-&gt;sq_thread_idle = HZ;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">			<span class="type">int</span> cpu = p-&gt;sq_thread_cpu;</span><br><span class="line"></span><br><span class="line">			ret = -EINVAL;</span><br><span class="line">			<span class="keyword">if</span> (cpu &gt;= nr_cpu_ids)</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line">			<span class="keyword">if</span> (!cpu_online(cpu))</span><br><span class="line">				<span class="keyword">goto</span> err;</span><br><span class="line"></span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create_on_cpu(io_sq_thread,</span><br><span class="line">							ctx, cpu,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ctx-&gt;sqo_thread = kthread_create(io_sq_thread, ctx,</span><br><span class="line">							<span class="string">"io_uring-sq"</span>);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (IS_ERR(ctx-&gt;sqo_thread)) {</span><br><span class="line">			ret = PTR_ERR(ctx-&gt;sqo_thread);</span><br><span class="line">			ctx-&gt;sqo_thread = <span class="literal">NULL</span>;</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		}</span><br><span class="line">		wake_up_process(ctx-&gt;sqo_thread);</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {</span><br><span class="line">		<span class="comment">/* Can't have SQ_AFF without SQPOLL */</span></span><br><span class="line">		ret = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Do QD, or 2 * CPUS, whatever is smallest */</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">0</span>] = alloc_workqueue(<span class="string">"io_ring-wq"</span>,</span><br><span class="line">			WQ_UNBOUND | WQ_FREEZABLE,</span><br><span class="line">			min(ctx-&gt;sq_entries - <span class="number">1</span>, <span class="number">2</span> * num_online_cpus()));</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">0</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * This is for buffered writes, where we want to limit the parallelism</span></span><br><span class="line"><span class="comment">	 * due to file locking in file systems. As "normal" buffered writes</span></span><br><span class="line"><span class="comment">	 * should parellelize on writeout quite nicely, limit us to having 2</span></span><br><span class="line"><span class="comment">	 * pending. This avoids massive contention on the inode when doing</span></span><br><span class="line"><span class="comment">	 * buffered async writes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">// 对 buffer 写的 workqueue 深度进行限制，减少锁争用开销?</span></span><br><span class="line">	ctx-&gt;sqo_wq[<span class="number">1</span>] = alloc_workqueue(<span class="string">"io_ring-write-wq"</span>,</span><br><span class="line">						WQ_UNBOUND | WQ_FREEZABLE, <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span> (!ctx-&gt;sqo_wq[<span class="number">1</span>]) {</span><br><span class="line">		ret = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">err:</span><br><span class="line">	io_finish_async(ctx);</span><br><span class="line">	mmdrop(ctx-&gt;sqo_mm);</span><br><span class="line">	ctx-&gt;sqo_mm = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>当 <code>flags</code> 中配置了 <code>IORING_SETUP_SQPOLL</code>
-时，将启动一个单独的内核线程 <code>io_sq_thread</code>，而当
-<code>IORING_SETUP_SQ_AFF</code> 字段也配置时，将根据
-<code>sq_thread_cpu</code> 字段，在指定的 CPU 上启用内核线程
-<code>io_sq_thread</code></p>
-<p>同时该函数还会创建两个工作队列 <code>ctx-&gt;sqo_wq[2]</code>
-分别名为 <code>io_ring-wq</code> 和 <code>io_ring-write-wq</code></p>
-<ul>
-<li><code>io_ring-wq</code> 主要处理读 IO，以及 direct 写 IO</li>
-<li><code>io_ring-write-wq</code> 主要是处理 buffer 写 IO</li>
-</ul>
-<h2 id="系统调用-io_uring_enter">3. 系统调用
-<code>io_uring_enter</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE6(io_uring_enter, <span class="type">unsigned</span> <span class="type">int</span>, fd, u32, to_submit,</span><br><span class="line">		u32, min_complete, u32, flags, <span class="type">const</span> <span class="type">sigset_t</span> __user *, sig,</span><br><span class="line">		<span class="type">size_t</span>, sigsz)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="type">int</span> submitted = <span class="number">0</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ret = -ENXIO;</span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line">	<span class="keyword">if</span> (!percpu_ref_tryget(&amp;ctx-&gt;refs))</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * For SQ polling, the thread will do all submissions and completions.</span></span><br><span class="line"><span class="comment">	 * Just return the requested submit count, and wake the thread if</span></span><br><span class="line"><span class="comment">	 * we were asked to.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {</span><br><span class="line">		<span class="keyword">if</span> (flags &amp; IORING_ENTER_SQ_WAKEUP)</span><br><span class="line">			wake_up(&amp;ctx-&gt;sqo_wait);</span><br><span class="line">		submitted = to_submit;</span><br><span class="line">	} <span class="keyword">else</span> <span class="keyword">if</span> (to_submit) {</span><br><span class="line">		to_submit = min(to_submit, ctx-&gt;sq_entries);</span><br><span class="line"></span><br><span class="line">		mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">		submitted = io_ring_submit(ctx, to_submit);</span><br><span class="line">		mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (submitted != to_submit)</span><br><span class="line">			<span class="keyword">goto</span> out;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; IORING_ENTER_GETEVENTS) {</span><br><span class="line">		<span class="type">unsigned</span> nr_events = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		min_complete = min(min_complete, ctx-&gt;cq_entries);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) {</span><br><span class="line">			ret = io_iopoll_check(ctx, &amp;nr_events, min_complete);</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			ret = io_cqring_wait(ctx, min_complete, sig, sigsz);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">	percpu_ref_put(&amp;ctx-&gt;refs);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> submitted ? submitted : ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>TODO</p>
-<h2 id="系统调用-io_uring_register">4. 系统调用
-<code>io_uring_register</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">SYSCALL_DEFINE4(io_uring_register, <span class="type">unsigned</span> <span class="type">int</span>, fd, <span class="type">unsigned</span> <span class="type">int</span>, opcode,</span><br><span class="line">		<span class="type">void</span> __user *, arg, <span class="type">unsigned</span> <span class="type">int</span>, nr_args)</span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_ring_ctx</span> *<span class="title">ctx</span>;</span></span><br><span class="line">	<span class="type">long</span> ret = -EBADF;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span>;</span></span><br><span class="line"></span><br><span class="line">	f = fdget(fd);</span><br><span class="line">	<span class="keyword">if</span> (!f.file)</span><br><span class="line">		<span class="keyword">return</span> -EBADF;</span><br><span class="line"></span><br><span class="line">	ret = -EOPNOTSUPP;</span><br><span class="line">	<span class="keyword">if</span> (f.file-&gt;f_op != &amp;io_uring_fops)</span><br><span class="line">		<span class="keyword">goto</span> out_fput;</span><br><span class="line"></span><br><span class="line">	ctx = f.file-&gt;private_data;</span><br><span class="line"></span><br><span class="line">	mutex_lock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">	ret = __io_uring_register(ctx, opcode, arg, nr_args);</span><br><span class="line">	mutex_unlock(&amp;ctx-&gt;uring_lock);</span><br><span class="line">out_fput:</span><br><span class="line">	fdput(f);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>TODO</p>
-<h2 id="内核线程-io_sq_thread">5. 内核线程
-<code>io_sq_thread</code></h2>
-<p>TODO</p>
-<h2 id="iopoll-模式">6. <code>IOPOLL</code> 模式</h2>
-<h3 id="启用">6.1. 启用</h3>
-<p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了
-<code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code>
-模式</p>
-<h3 id="限制">6.2. 限制</h3>
-<p>开启此选项必须保证后续只用 <code>O_DIRECT</code>
-打开文件并且文件系统的 <code>file_operations</code> 中注册了
-<code>iopoll</code> 函数，否则 IO 将下发失败</p>
-<h3 id="调用栈">6.3. 调用栈</h3>
-<p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认
-IO 是否完成</p>
-<p>对 <code>f_op-&gt;iopoll</code> 函数调用关系进行了分析</p>
-<pre class="mermaid">graph TD
-io_uring_create --&gt; io_ring_ctx_wait_and_kill
-io_uring_release --&gt; io_ring_ctx_wait_and_kill
-io_ring_ctx_wait_and_kill --&gt; io_iopoll_reap_events
-io_ring_ctx_wait_and_kill --&gt; io_ring_ctx_free
-io_ring_ctx_free --&gt; io_iopoll_reap_events
-io_iopoll_reap_events --&gt; io_iopoll_getevents
-
-syscall["SYSCALL_DEFINE6(io_uring_enter, ……)"] --&gt; io_iopoll_check --&gt; io_iopoll_getevents
-
-io_sq_thread --&gt; io_iopoll_getevents
-
-io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll["f_op-&gt;iopoll"]</pre>
-<p>主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了
-<code>IORING_SETUP_IOPOLL</code>）：</p>
-<ol type="1">
-<li><code>io_uring</code> 销毁时需要调用</li>
-<li>系统调用 <code>io_uring_enter</code> 将会触发，用于轮询 IO
-完成情况，直到到达指定的 <code>wait_nr</code> 数量 IO
-完成后才会退出轮询</li>
-<li>当初始化时同时配置了 <code>IORING_SETUP_SQPOLL</code>
-时，<code>io_sq_thread</code> 内核线程触发，当存在未完成的 IO
-时调用，用于更新 IO 完成情况（ <code>io_do_iopoll</code> 的参数
-<code>min = 0</code>，即每次调用无论是否有新完成的 IO
-都会退出轮询，不会阻塞线程）</li>
-</ol>
-]]></content>
-      <categories>
-        <category>存储</category>
-        <category>IO</category>
-      </categories>
-      <tags>
-        <tag>todo</tag>
-        <tag>异步 IO</tag>
-        <tag>liburing</tag>
-        <tag>io_uring</tag>
-        <tag>kernel</tag>
       </tags>
   </entry>
   <entry>
