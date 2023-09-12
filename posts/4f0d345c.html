@@ -353,12 +353,12 @@ io_uring_setup --&gt; io_uring_get_fd</pre>
 的核心系统调用之一，根据 <code>flags</code> 的配置以及
 <code>io_uring</code> 的模式不同，其功能也不同</p>
 <ol type="1">
-<li>开启 <code>IORING_SETUP_SQPOLL</code> 时、可以通过配置
+<li>开启 <code>IORING_SETUP_SQPOLL</code> 时，可以通过配置
 <code>flags</code> 的 <code>IORING_ENTER_SQ_WAKEUP</code>
 位来唤醒内核中的代理线程 <code>io_sq_thread</code></li>
-<li>未开启 <code>IORING_SETUP_SQPOLL</code> 时、可以通过配置
+<li>未开启 <code>IORING_SETUP_SQPOLL</code> 时，可以通过配置
 <code>to_submit</code> 用来主动提交指定数量的请求</li>
-<li>未开启 <code>IORING_SETUP_SQPOLL</code> 时、还可以通过配置
+<li>未开启 <code>IORING_SETUP_SQPOLL</code> 时，还可以通过配置
 <code>flags</code> 的 <code>IORING_ENTER_SQ_WAKEUP</code> 位以及
 <code>min_complete</code> 用来等待指定数量的请求完成</li>
 </ol>
