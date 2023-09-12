@@ -1,105 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo 插件推荐以及使用小技巧</title>
-    <url>/posts/4143201a.html</url>
-    <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span>
-是一个快速、简洁且高效的博客框架，个人只需用 Markdown
-来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT
-主题搭建的 <span id="more"></span></p>
-<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
-为例</p>
-<h2 id="插件推荐">插件推荐</h2>
-<h3 id="hexo-deployer-git"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></h3>
-<p>Hexo 支持一键部署网站到 git 仓库上，其他的一键部署方式参考 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">官网介绍<i class="fa fa-external-link-alt"></i></span></p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-deployer-git</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置 </li>
-</ul>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;仓库链接&gt;</span> <span class="comment"># 可以是 https 链接也可以是 git 链接</span></span><br><span class="line">  <span class="attr">branch:</span> [<span class="string">分支</span>] <span class="comment"># GitHub 的网站分支为 gh-pages，其他网站可能有所不同</span></span><br><span class="line">  <span class="attr">message:</span> [<span class="string">message</span>] <span class="comment"># 默认是 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}</span></span><br></pre></td></tr></tbody></table></figure>
-<p>默认的提交信息只有时间信息，没有过多的参考价值推荐使用自定义提交信息，具体参考
-<a href="#自定义提交信息">后续小节</a></p>
-<h3 id="hexo-word-counter"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">hexo-word-counter<i class="fa fa-external-link-alt"></i></span></h3>
-<p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-word-counter</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置 </li>
-</ul>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-word-counter</span></span><br><span class="line"><span class="comment">## https://github.com/next-theme/hexo-word-counter</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">awl:</span> <span class="number">4</span></span><br><span class="line">  <span class="attr">wpm:</span> <span class="number">275</span></span><br><span class="line">  <span class="attr">suffix:</span> <span class="string">"mins."</span></span><br></pre></td></tr></tbody></table></figure>
-<p>具体配置可以参考官方给出的说明：</p>
-<blockquote>
-<p>Note for Chinese users: because in Chinese language average word
-length about ~1.5 and if you at most cases write posts in Chinese
-(without mixed English), recommended to set awl to 2 and wpm to 300. But
-if you usualy mix your posts with English, awl to 4 and wpm to 275 will
-be nice.</p>
-</blockquote>
-<p>也就是说纯中文时推荐 <code>awl</code> 设为 2，<code>wpm</code> 设为
-300；而中英文混合时推荐 <code>awl</code> 设为 4，<code>wpm</code> 设为
-275</p>
-<h3 id="hexo-abbrlink"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></h3>
-<p>Hexo
-默认的文章链接是以时间以及文件名命名的，如果文件名为中文时转译之后会很长，并且不美观。而该插件可以利用
-hash 值替换原有的文章链接</p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-abbrlink</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置</li>
-</ul>
-<p>首先修改 <code>_config.yml</code> 文件中的 <code>permalink</code>
-的配置</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">posts/:abbrlink.html</span></span><br></pre></td></tr></tbody></table></figure>
-<p>再增加以下配置</p>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># abbrlink config</span></span><br><span class="line"><span class="comment">## https://github.com/rozbo/hexo-abbrlink</span></span><br><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span> <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span> <span class="comment"># support dec(default) and hex</span></span><br><span class="line">  <span class="attr">drafts:</span> <span class="literal">true</span> <span class="comment"># (true)Process draft,(false)Do not process draft. false(default)</span></span><br><span class="line">  <span class="comment"># Generate categories from directory-tree</span></span><br><span class="line">  <span class="comment"># depth: the max_depth of directory-tree you want to generate, should &gt; 0</span></span><br><span class="line">  <span class="attr">auto_category:</span></span><br><span class="line">     <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># true(default)</span></span><br><span class="line">     <span class="attr">depth:</span> <span class="number">3</span> <span class="comment"># 3(default)</span></span><br><span class="line">     <span class="attr">over_write:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">auto_title:</span> <span class="literal">false</span> <span class="comment"># enable auto title, it can auto fill the title by path</span></span><br><span class="line">  <span class="attr">auto_date:</span> <span class="literal">false</span> <span class="comment"># enable auto date, it can auto fill the date by time today</span></span><br><span class="line">  <span class="attr">force:</span> <span class="literal">false</span> <span class="comment"># enable force mode, in this mode, the plugin will ignore the cache, and calc the abbrlink for every post even it already had abbrlink.</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="hexo-generator-sitemap"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></h3>
-<p>为了使博客能被谷歌、bing、百度收录，最好生成 <code>sitemap</code>
-方便爬取，整体流程可以参考 <a href="/posts/abac0c46">这篇博文</a></p>
-<ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator-sitemap</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>配置 </li>
-</ul>
-<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-generator-sitemap</span></span><br><span class="line"><span class="comment">## https://github.com/hexojs/hexo-generator-sitemap</span></span><br><span class="line"><span class="attr">sitemap:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">sitemap.xml</span></span><br><span class="line">  <span class="comment"># template: ./sitemap_template.xml</span></span><br><span class="line">  <span class="attr">rel:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="小技巧">小技巧</h2>
-<h3 id="自定义提交信息">自定义提交信息</h3>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> <span class="string">"自定义提交信息"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>例如使用 <code>hexo</code> 仓库的提交信息来提交到 <code>deploy</code>
-仓库</p>
-<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> (git log <span class="literal">-1</span> <span class="literal">--pretty</span>=format:%s)</span><br></pre></td></tr></tbody></table></figure>
-<p>如果中文乱码，可以参考 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">这篇博客<i class="fa fa-external-link-alt"></i></span>
-修改 UTF-8 编码</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">【Hexo】一键部署<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">【GitHub】hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">【GitHub】hexo-word-counter<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">【GitHub】hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">【GitHub】hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1sb2cjX3ByZXR0eV9mb3JtYXRz">【Git】git log
-自定义输出格式<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">【CSDN】解决
-Windows PowerShell 乱码<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NexT 主题的配置使用记录</title>
     <url>/posts/9a0b7c3b.html</url>
     <content><![CDATA[<h2 id="简介">简介</h2>
@@ -266,6 +167,105 @@ Web Applications<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZpbnRhL3Bhbmd1Lmpz">【GitHub】pangu<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9idXN1YW56aS5pYnJ1Y2UuaW5mbw==">【不蒜子】官网<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGFsay9naXRhbGs=">【GitHub】Gitalk<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 插件推荐以及使用小技巧</title>
+    <url>/posts/4143201a.html</url>
+    <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuLw==">Hexo<i class="fa fa-external-link-alt"></i></span>
+是一个快速、简洁且高效的博客框架，个人只需用 Markdown
+来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT
+主题搭建的 <span id="more"></span></p>
+<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vcG93ZXJzaGVsbC9zY3JpcHRpbmcvaW5zdGFsbC9pbnN0YWxsaW5nLXBvd2Vyc2hlbGw/dmlldz1wb3dlcnNoZWxsLTcuMg==">PowerShell<i class="fa fa-external-link-alt"></i></span>
+为例</p>
+<h2 id="插件推荐">插件推荐</h2>
+<h3 id="hexo-deployer-git"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></h3>
+<p>Hexo 支持一键部署网站到 git 仓库上，其他的一键部署方式参考 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">官网介绍<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-deployer-git</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置 </li>
+</ul>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;仓库链接&gt;</span> <span class="comment"># 可以是 https 链接也可以是 git 链接</span></span><br><span class="line">  <span class="attr">branch:</span> [<span class="string">分支</span>] <span class="comment"># GitHub 的网站分支为 gh-pages，其他网站可能有所不同</span></span><br><span class="line">  <span class="attr">message:</span> [<span class="string">message</span>] <span class="comment"># 默认是 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}</span></span><br></pre></td></tr></tbody></table></figure>
+<p>默认的提交信息只有时间信息，没有过多的参考价值推荐使用自定义提交信息，具体参考
+<a href="#自定义提交信息">后续小节</a></p>
+<h3 id="hexo-word-counter"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">hexo-word-counter<i class="fa fa-external-link-alt"></i></span></h3>
+<p>显示每篇文章的字数统计以及大致阅读时长，需要主题支持</p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-word-counter</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置 </li>
+</ul>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-word-counter</span></span><br><span class="line"><span class="comment">## https://github.com/next-theme/hexo-word-counter</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">awl:</span> <span class="number">4</span></span><br><span class="line">  <span class="attr">wpm:</span> <span class="number">275</span></span><br><span class="line">  <span class="attr">suffix:</span> <span class="string">"mins."</span></span><br></pre></td></tr></tbody></table></figure>
+<p>具体配置可以参考官方给出的说明：</p>
+<blockquote>
+<p>Note for Chinese users: because in Chinese language average word
+length about ~1.5 and if you at most cases write posts in Chinese
+(without mixed English), recommended to set awl to 2 and wpm to 300. But
+if you usualy mix your posts with English, awl to 4 and wpm to 275 will
+be nice.</p>
+</blockquote>
+<p>也就是说纯中文时推荐 <code>awl</code> 设为 2，<code>wpm</code> 设为
+300；而中英文混合时推荐 <code>awl</code> 设为 4，<code>wpm</code> 设为
+275</p>
+<h3 id="hexo-abbrlink"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></h3>
+<p>Hexo
+默认的文章链接是以时间以及文件名命名的，如果文件名为中文时转译之后会很长，并且不美观。而该插件可以利用
+hash 值替换原有的文章链接</p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-abbrlink</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置</li>
+</ul>
+<p>首先修改 <code>_config.yml</code> 文件中的 <code>permalink</code>
+的配置</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">posts/:abbrlink.html</span></span><br></pre></td></tr></tbody></table></figure>
+<p>再增加以下配置</p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># abbrlink config</span></span><br><span class="line"><span class="comment">## https://github.com/rozbo/hexo-abbrlink</span></span><br><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span> <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span> <span class="comment"># support dec(default) and hex</span></span><br><span class="line">  <span class="attr">drafts:</span> <span class="literal">true</span> <span class="comment"># (true)Process draft,(false)Do not process draft. false(default)</span></span><br><span class="line">  <span class="comment"># Generate categories from directory-tree</span></span><br><span class="line">  <span class="comment"># depth: the max_depth of directory-tree you want to generate, should &gt; 0</span></span><br><span class="line">  <span class="attr">auto_category:</span></span><br><span class="line">     <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># true(default)</span></span><br><span class="line">     <span class="attr">depth:</span> <span class="number">3</span> <span class="comment"># 3(default)</span></span><br><span class="line">     <span class="attr">over_write:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">auto_title:</span> <span class="literal">false</span> <span class="comment"># enable auto title, it can auto fill the title by path</span></span><br><span class="line">  <span class="attr">auto_date:</span> <span class="literal">false</span> <span class="comment"># enable auto date, it can auto fill the date by time today</span></span><br><span class="line">  <span class="attr">force:</span> <span class="literal">false</span> <span class="comment"># enable force mode, in this mode, the plugin will ignore the cache, and calc the abbrlink for every post even it already had abbrlink.</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="hexo-generator-sitemap"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></h3>
+<p>为了使博客能被谷歌、bing、百度收录，最好生成 <code>sitemap</code>
+方便爬取，整体流程可以参考 <a href="/posts/abac0c46">这篇博文</a></p>
+<ul>
+<li>安装 </li>
+</ul>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator-sitemap</span> <span class="literal">--save</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置 </li>
+</ul>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># hexo-generator-sitemap</span></span><br><span class="line"><span class="comment">## https://github.com/hexojs/hexo-generator-sitemap</span></span><br><span class="line"><span class="attr">sitemap:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">sitemap.xml</span></span><br><span class="line">  <span class="comment"># template: ./sitemap_template.xml</span></span><br><span class="line">  <span class="attr">rel:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="小技巧">小技巧</h2>
+<h3 id="自定义提交信息">自定义提交信息</h3>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> <span class="string">"自定义提交信息"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>例如使用 <code>hexo</code> 仓库的提交信息来提交到 <code>deploy</code>
+仓库</p>
+<figure class="highlight ps"><table><tbody><tr><td class="code"><pre><span class="line">hexo deploy <span class="literal">-m</span> (git log <span class="literal">-1</span> <span class="literal">--pretty</span>=format:%s)</span><br></pre></td></tr></tbody></table></figure>
+<p>如果中文乱码，可以参考 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">这篇博客<i class="fa fa-external-link-alt"></i></span>
+修改 UTF-8 编码</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudA==">【Hexo】一键部署<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWRlcGxveWVyLWdpdA==">【GitHub】hexo-deployer-git<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by13b3JkLWNvdW50ZXI=">【GitHub】hexo-word-counter<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">【GitHub】hexo-abbrlink<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1zaXRlbWFw">【GitHub】hexo-generator-sitemap<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1sb2cjX3ByZXR0eV9mb3JtYXRz">【Git】git log
+自定义输出格式<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQyNjg2MC9hcnRpY2xlL2RldGFpbHMvODMzNDgyODQ=">【CSDN】解决
+Windows PowerShell 乱码<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>
@@ -572,6 +572,10 @@ XeTeX and LuaTeX<i class="fa fa-external-link-alt"></i></span></li>
 <p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29t">Overleaf<i class="fa fa-external-link-alt"></i></span> 是一个在线的 LaTeX
 编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑
 <span id="more"></span></p>
+<p>官网的 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJu">教程文档<i class="fa fa-external-link-alt"></i></span>
+给了丰富的图文教程，这里不再赘述</p>
+<p>推荐优先查看 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2hvdy10by9DcmVhdGluZ19hX2RvY3VtZW50X2luX092ZXJsZWFm">创建文档<i class="fa fa-external-link-alt"></i></span>
+和 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2hvdy10by9TaGFyaW5nX2FfcHJvamVjdA==">共享项目<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="本地环境">本地环境</h2>
 <h3 id="tex-live">TeX Live</h3>
 <p>TeX Live 可以利用镜像安装节省下载时间</p>
@@ -602,8 +606,7 @@ LaTeX，同时还有格式化和自动补全等功能，非常方便</p>
 <code>settings.json</code> 中直接手动添加如下代码:</p>
 <p>主要参考插件的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">官方
 recipes 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
-<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><!-- TODO: 弄清编译命令和编译链当前配置的具体含义，主要是 bibtex --></p></li>
+<p></p><figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 配置编译链，可以根据需要做修改</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.recipes"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk 🔃"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"latexmk"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex ➞ bibtex ➞ xelatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex ➞ bibtex ➞ pdflatex`×2"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"pdflatex"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="comment">// 具体的编译命令配置</span></span><br><span class="line"><span class="attr">"latex-workshop.latex.tools"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"latexmk"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-pdf"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-outdir=%OUTDIR%"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"xelatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"pdflatex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"-synctex=1"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"-file-line-error"</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"command"</span><span class="punctuation">:</span> <span class="string">"bibtex"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"args"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></tbody></table></figure><p></p></li>
 </ol>
 <h4 id="正向同步">正向同步</h4>
 <p>正向同步指的是编译完成后，在 <code>.tex</code>
@@ -675,6 +678,9 @@ synctex 配置<i class="fa fa-external-link-alt"></i></span> 修改</p>
 </ol>
 <h2 id="参考资料">参考资料</h2>
 <ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJu">【Overleaf】教程文档<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2hvdy10by9DcmVhdGluZ19hX2RvY3VtZW50X2luX092ZXJsZWFm">【Overleaf】创建文档<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub3ZlcmxlYWYuY29tL2xlYXJuL2hvdy10by9TaGFyaW5nX2FfcHJvamVjdA==">【Overleaf】共享项目<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvSW5zdGFsbCNyZXF1aXJlbWVudHM=">【LaTeX
 Workshop】依赖<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWVzLVl1L0xhVGVYLVdvcmtzaG9wL3dpa2kvQ29tcGlsZSNsYXRleC1yZWNpcGVz">【LaTeX
@@ -693,7 +699,6 @@ Studio Code 配置 LaTeX<i class="fa fa-external-link-alt"></i></span></li>
       </categories>
       <tags>
         <tag>LaTeX</tag>
-        <tag>todo</tag>
         <tag>VSCode</tag>
       </tags>
   </entry>
@@ -962,54 +967,6 @@ C++: fatal error: Killed signal terminated program cc1plus<i class="fa fa-extern
       </tags>
   </entry>
   <entry>
-    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
-    <url>/posts/29e0b18c.html</url>
-    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome
-时，并且 chrome
-已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应
-<del>（如果 chrome 没有打开时，则会正常跳出 chrome
-以及相应的网页，好气哦）</del> <span id="more"></span></p>
-<figure>
-<img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser">
-<figcaption aria-hidden="true">wechat_default_browser</figcaption>
-</figure>
-<h2 id="修复问题卸载-kgchromeplugin">修复问题：卸载 KGChromePlugin</h2>
-<p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin
-金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd
-都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
-<ol type="1">
-<li><p>可通过 chrome://version/ 查看命令行中是否含有
-<code>--register-pepper-plugins=XXX</code></p>
-<figure>
-<img data-src="/posts/29e0b18c/chrome_version_before.png" alt="chrome_version_before">
-<figcaption aria-hidden="true">chrome_version_before</figcaption>
-</figure></li>
-<li><p> 根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是
-<code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序
-<code>KGPMUninstall.exe</code>，双击进行卸载即可</p></li>
-<li><p>卸载之后，重启一下
-chrome，命令行应该就恢复正常了，此时也能在已打开 chrome
-的情况下在第三方应用中顺利打开超链接了</p>
-<figure>
-<img data-src="/posts/29e0b18c/chrome_version_after.png" alt="chrome_version_after">
-<figcaption aria-hidden="true">chrome_version_after</figcaption>
-</figure></li>
-</ol>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome
-浏览器 每次打开提示：“--no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>日常踩坑</category>
-      </categories>
-      <tags>
-        <tag>日常踩坑</tag>
-        <tag>chrome</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>自定义配置 RocksDB 进行 YCSB 测试</title>
     <url>/posts/4bc1e607.html</url>
     <content><![CDATA[<p>本文主要记录在利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JyaWFuZnJhbmtjb29wZXIvWUNTQg==">YCSB<i class="fa fa-external-link-alt"></i></span>
@@ -1124,6 +1081,54 @@ Fix ycsb.sh and ycsb.bat missing core dependencies #908<i class="fa fa-external-
         <tag>RocksDB</tag>
         <tag>Maven</tag>
         <tag>YCSB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
+    <url>/posts/29e0b18c.html</url>
+    <content><![CDATA[<p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome
+时，并且 chrome
+已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应
+<del>（如果 chrome 没有打开时，则会正常跳出 chrome
+以及相应的网页，好气哦）</del> <span id="more"></span></p>
+<figure>
+<img data-src="/posts/29e0b18c/wechat_default_browser.png" alt="wechat_default_browser">
+<figcaption aria-hidden="true">wechat_default_browser</figcaption>
+</figure>
+<h2 id="修复问题卸载-kgchromeplugin">修复问题：卸载 KGChromePlugin</h2>
+<p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin
+金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd
+都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
+<ol type="1">
+<li><p>可通过 chrome://version/ 查看命令行中是否含有
+<code>--register-pepper-plugins=XXX</code></p>
+<figure>
+<img data-src="/posts/29e0b18c/chrome_version_before.png" alt="chrome_version_before">
+<figcaption aria-hidden="true">chrome_version_before</figcaption>
+</figure></li>
+<li><p> 根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是
+<code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序
+<code>KGPMUninstall.exe</code>，双击进行卸载即可</p></li>
+<li><p>卸载之后，重启一下
+chrome，命令行应该就恢复正常了，此时也能在已打开 chrome
+的情况下在第三方应用中顺利打开超链接了</p>
+<figure>
+<img data-src="/posts/29e0b18c/chrome_version_after.png" alt="chrome_version_after">
+<figcaption aria-hidden="true">chrome_version_after</figcaption>
+</figure></li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM2Nzg0ODgwNA==">【知乎】chrome
+浏览器 每次打开提示：“--no-sandbox.” 怎么去除？<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常踩坑</category>
+      </categories>
+      <tags>
+        <tag>日常踩坑</tag>
+        <tag>chrome</tag>
       </tags>
   </entry>
   <entry>
@@ -2340,167 +2345,6 @@ Cache 与 Page 回写<i class="fa fa-external-link-alt"></i></span></li>
       </tags>
   </entry>
   <entry>
-    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-    <url>/posts/8ad4716e.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
-GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
-用户会选择 <code>PowerShell</code></p>
-<p>为了美化 <code>PowerShell</code>，个人选择了
-<code>Oh My Posh</code>。<code>Oh My Posh</code>
-是一个开源的主体的框架，支持
-<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
-等多种 <code>Shell</code></p>
-<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
-<span id="more"></span></p>
-<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
-<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
-<code>winget</code> 安装最新的版本</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
-<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
-所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
-字体</p>
-<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
-或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
-的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
-文件安装即可</p>
-<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
-<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
-Windows Terminal 应用中单独配置，这里不做介绍</p>
-<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
-<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
-直接打开配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>如果打开报错，则需要首先创建配置文件</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
-<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
-就会自动启用 <code>Oh My Posh</code> 了</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="选择主题">选择主题</h2>
-<p><code>Oh My Posh</code>
-支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
-预览</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
-<p>个人选择了 <code>powerlevel10k_rainbow</code>
-主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
-<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
-My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
-PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>PowerShell</tag>
-        <tag>Windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>美化 Shell 之 Linux Zsh 篇</title>
-    <url>/posts/f2cdf8a6.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
-<code>Zsh</code> 对 Linux 默认的
-<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
-<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
-并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
-改为 <code>Zsh</code></p>
-<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
-应运而生。 <code>Oh My Zsh</code>
-是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
-<code>Zsh</code> 配置提供了很大的便利</p>
-<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
-<span id="more"></span></p>
-<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
-<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
-为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
-<p>配置 Zsh 为默认 Shell</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
-<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
-<code>Oh My Zsh</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
-命名规则类似，<code>Zsh</code> 的配置文件是
-<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
-<h2 id="主题配置">主题配置</h2>
-<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
-给出了内置的所有主题的预览图</p>
-<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
-字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
-支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
-字体</a></p>
-<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
-中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
-也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
-<code>powerlevel10k</code> 主题</p>
-<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后重启终端后，<code>powerlevel10k</code>
-会进入引导流程，可以自行微调风格</p>
-<h2 id="插件安装">插件安装</h2>
-<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
-插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
-<code>zsh-syntax-highlighting</code> 插件</p>
-<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
-<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
-会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
-<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-autosuggestions</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
-<p><code>zsh-syntax-highlighting</code>
-开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
-<p>之后修改配置文件，在 <code>plugins</code> 中加入
-<code>zsh-syntax-highlighting</code> 即可</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
-shell<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
-仓库<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
-ZSH<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>Shell</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Zsh</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>page cache 回写机制</title>
     <url>/posts/646202b9.html</url>
     <content><![CDATA[<p>当前内容基于 Linux Kernel <span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90YWcvP2g9djUuNC4xMjE=">v5.4.121<i class="fa fa-external-link-alt"></i></span></p>
@@ -2844,6 +2688,167 @@ new_sync_write --&gt; call_write_iter</pre>
         <tag>buffer IO</tag>
         <tag>page cache</tag>
         <tag>writeback</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+    <url>/posts/8ad4716e.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在
+GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code>
+用户会选择 <code>PowerShell</code></p>
+<p>为了美化 <code>PowerShell</code>，个人选择了
+<code>Oh My Posh</code>。<code>Oh My Posh</code>
+是一个开源的主体的框架，支持
+<code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code>
+等多种 <code>Shell</code></p>
+<p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程
+<span id="more"></span></p>
+<h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
+<p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过
+<code>winget</code> 安装最新的版本</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># winget search Microsoft.PowerShell</span></span><br><span class="line">winget install <span class="literal">--id</span> Microsoft.Powershell <span class="literal">--source</span> winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-posh">安装 <code>Oh My Posh</code></h2>
+<p>通过 <code>winget</code> 一键安装 <code>Oh My Posh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh -s winget</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-nerd-字体">安装 Nerd 字体</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+其实只是在原本的开源字体上增加了一些图标（包括 PowerLine
+所需的符号），而 <code>Oh My Posh</code> 中大多数主体都需要 Nerd
+字体</p>
+<p>直接在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS9mb250LWRvd25sb2Fkcw==">官网<i class="fa fa-external-link-alt"></i></span>
+或者 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5YW5vYXNpcy9uZXJkLWZvbnRzL3JlbGVhc2Vz">GitHub
+的 Release<i class="fa fa-external-link-alt"></i></span> 中下载自己常用字体的压缩包，解压后直接打开 ttf
+文件安装即可</p>
+<p>个人习惯用 <code>Cascadia Code</code>、<code>FiraCode</code></p>
+<p>字体的启用与 <code>Shell</code> 的运行程序相关，需要在 VSCode 或者
+Windows Terminal 应用中单独配置，这里不做介绍</p>
+<h2 id="启用-oh-my-posh">启用 <code>Oh My Posh</code></h2>
+<p>启用 <code>Oh My Posh</code> 需要修改配置文件，通过 notepad
+直接打开配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>如果打开报错，则需要首先创建配置文件</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<p>在配置文件中添加以下内容，以后启动 <code>PowerShell</code>
+就会自动启用 <code>Oh My Posh</code> 了</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="选择主题">选择主题</h2>
+<p><code>Oh My Posh</code>
+支持非常丰富的主题，而且只需一行命令就可以直接在 <code>Shell</code>
+预览</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">Get-PoshThemes</span></span><br></pre></td></tr></tbody></table></figure>
+<p>个人选择了 <code>powerlevel10k_rainbow</code>
+主题，修改主题需要修改之前的配置文件，将之前内容进行修改即可，配置完成后需要重启终端～</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">"<span class="variable">$env:POSH_THEMES_PATH</span>/powerlevel10k_rainbow.omp.json"</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYv">【ohmyposh】Oh My Posh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbkRlRG9iYmVsZWVyL29oLW15LXBvc2g=">【GitHub】Oh
+My Posh 仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3Bvd2Vyc2hlbGwvc2NyaXB0aW5nL2luc3RhbGwvaW5zdGFsbGluZy1wb3dlcnNoZWxsLW9uLXdpbmRvd3M/dmlldz1wb3dlcnNoZWxsLTcuMw==">【Microsoft】Installing
+PowerShell on Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vd2luZG93cw==">【ohmyposh】Installation-Windows<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vZm9udHM=">【ohmyposh】Fonts<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15cG9zaC5kZXYvZG9jcy9pbnN0YWxsYXRpb24vcHJvbXB0">【ohmyposh】Prompt<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>PowerShell</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>美化 Shell 之 Linux Zsh 篇</title>
+    <url>/posts/f2cdf8a6.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p><code>Z shell（Zsh）</code>是一款可用作互动式登入的 shell 及指令码编写的命令直译器。
+<code>Zsh</code> 对 Linux 默认的
+<code>Bourne shell（sh）</code>做出了大量改进，同时加入了
+<code>Bash</code>、<code>ksh</code> 及 <code>tcsh</code> 的某些功能。
+并且自 2019 年起，macOS 的预设 <code>Shell</code> 已从 <code>Bash</code>
+改为 <code>Zsh</code></p>
+<p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code>
+应运而生。 <code>Oh My Zsh</code>
+是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理
+<code>Zsh</code> 配置提供了很大的便利</p>
+<p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程
+<span id="more"></span></p>
+<h2 id="安装-zsh">安装 <code>Zsh</code></h2>
+<p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu
+为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></tbody></table></figure>
+<p>配置 Zsh 为默认 Shell</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="安装-oh-my-zsh">安装 <code>Oh My Zsh</code></h2>
+<p>通过 <code>curl</code> 或者 <code>wget</code> 下载安装脚本一键安装
+<code>Oh My Zsh</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># curl</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># wget</span></span><br><span class="line">sh -c <span class="string">"<span class="subst">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code>
+命名规则类似，<code>Zsh</code> 的配置文件是
+<code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
+<h2 id="主题配置">主题配置</h2>
+<p><code>Oh My Zsh</code> 支持非常丰富的主题，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">官方<i class="fa fa-external-link-alt"></i></span>
+给出了内置的所有主题的预览图</p>
+<p>部分主题需要额外 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">PL
+字体<i class="fa fa-external-link-alt"></i></span> 以及 <span class="exturl" data-url="aHR0cHM6Ly93d3cubmVyZGZvbnRzLmNvbS8=">Nerd 字体<i class="fa fa-external-link-alt"></i></span>
+支持，参见 <a href="/posts/8ad4716e.html#安装%20Nerd%20字体">安装 Nerd
+字体</a></p>
+<p>由于在 <a href="/posts/8ad4716e.html"><code>Oh My Posh</code></a>
+中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code>
+也支持 <code>Oh My Zsh</code>，于是后来又额外安装了
+<code>powerlevel10k</code> 主题</p>
+<p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="variable">${ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom}</span>/themes/powerlevel10k</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel10k/powerlevel10k"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后重启终端后，<code>powerlevel10k</code>
+会进入引导流程，可以自行微调风格</p>
+<h2 id="插件安装">插件安装</h2>
+<p><code>Oh My Zsh</code> 默认会开启 <code>git</code>
+插件，除此之外个人还额外安装了 <code>zsh-autosuggestions</code> 以及
+<code>zsh-syntax-highlighting</code> 插件</p>
+<h3 id="zsh-autosuggestions"><code>zsh-autosuggestions</code></h3>
+<p><code>zsh-autosuggestions</code> 开启后，<code>Zsh</code>
+会根据历史记录和完成情况在您键入时建议命令，也就是根据历史记录快速补全命令，非常的好用！！！</p>
+<p>安装起来也非常简单，直接 <code>git clone</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-autosuggestions</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></h3>
+<p><code>zsh-syntax-highlighting</code>
+开启后，在输入命令时就有了语法高亮，提升整体颜值的同时，还能辅助检查命令是否打错，安装过程类似</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting <span class="variable">${ZSH_CUSTOM:-~/.oh-my-zsh/custom}</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</span></span><br></pre></td></tr></tbody></table></figure>
+<p>之后修改配置文件，在 <code>plugins</code> 中加入
+<code>zsh-syntax-highlighting</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhrL1pfc2hlbGw=">【维基百科】Z
+shell<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vaG15ei5zaC8=">【ohmyz】Oh My Zsh 官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaA==">【GitHub】Oh My Zsh
+仓库<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL0luc3RhbGxpbmctWlNI">【GitHub】Installing
+ZSH<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29obXl6c2gvb2hteXpzaC93aWtpL1RoZW1lcw==">【GitHub】Themes<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtYXV0b3N1Z2dlc3Rpb25z">【GitHub】zsh-autosuggestions<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pzaC11c2Vycy96c2gtc3ludGF4LWhpZ2hsaWdodGluZw==">【GitHub】zsh-syntax-highlighting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82MjUwMTE3NQ==">【Zhihu】oh-my-zsh：让终端飞<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWthdHYvcG93ZXJsZXZlbDEwayNpbnN0YWxsYXRpb24=">【GitHub】Powerlevel10k<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Zsh</tag>
       </tags>
   </entry>
   <entry>
@@ -3675,6 +3680,53 @@ WebUI 中将 layout 配置为
       </tags>
   </entry>
   <entry>
+    <title>OpenWrt 简介和安装</title>
+    <url>/posts/8507aaa1.html</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<h3 id="来源">来源</h3>
+<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
+系统。迫于 Linux 的开源协议要求，Linksys
+开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
+<span id="more"></span></p>
+<h3 id="介绍">介绍</h3>
+<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
+操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
+<h2 id="安装">安装</h2>
+<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
+中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
+<h3 id="一般安装流程">一般安装流程</h3>
+<p>通常的安装步骤主要通过以下流程：</p>
+<ol type="1">
+<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
+<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
+<li> [可选] 备份原有的所有 ROM 分区数据</li>
+<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
+<ul>
+<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
+<li>kernel 镜像</li>
+<li> rootfs 镜像</li>
+</ul></li>
+<li>重启设备</li>
+</ol>
+<h3 id="固件搜索下载">固件搜索下载</h3>
+<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
+页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenWrt 手动编译 ipk</title>
     <url>/posts/96a1807.html</url>
     <content><![CDATA[<h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
@@ -3759,53 +3811,6 @@ WebUI 中将 layout 配置为
         <tag>OpenWrt</tag>
         <tag>交叉编译</tag>
         <tag>ipk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt 简介和安装</title>
-    <url>/posts/8507aaa1.html</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<h3 id="来源">来源</h3>
-<p>2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks
-系统。迫于 Linux 的开源协议要求，Linksys
-开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
-<span id="more"></span></p>
-<h3 id="介绍">介绍</h3>
-<p>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux
-操作系统项目，提供了具有软件包管理功能的完全可写的文件系统，因此拥有了完全定制的能力，可以榨干设备的全部性能</p>
-<h2 id="安装">安装</h2>
-<p>初次安装推荐在 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">支持设备列表<i class="fa fa-external-link-alt"></i></span>
-中找到对应设备所在的 <span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ/ZGF0YXNydD0lNUVkZXZpY2UlMjBwYWdl">设备专属页面<i class="fa fa-external-link-alt"></i></span>，然后根据页面介绍进行安装</p>
-<h3 id="一般安装流程">一般安装流程</h3>
-<p>通常的安装步骤主要通过以下流程：</p>
-<ol type="1">
-<li>获取原厂固件的 SSH 登录权限（可能是通过原厂固件漏洞等方式）</li>
-<li>在原厂固件上利用 <code>cat /proc/mtd</code> 获取 ROM 分区的布局</li>
-<li> [可选] 备份原有的所有 ROM 分区数据</li>
-<li>利用 <code>mtd</code> 等命令直接对相应的 ROM 区域进行写入镜像
-<ul>
-<li>[可选] bootloader 镜像（设备运行的情况下，个人更倾向于刷入 <a href="/posts/53d6c2d9.html">Breed</a>）</li>
-<li>kernel 镜像</li>
-<li> rootfs 镜像</li>
-</ul></li>
-<li>重启设备</li>
-</ol>
-<h3 id="固件搜索下载">固件搜索下载</h3>
-<p>官网也对老手提供了快捷的 <span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">固件搜索<i class="fa fa-external-link-alt"></i></span>
-页面，能够更加快捷的找到 ROM 镜像的下载界面</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT3BlbldydA==">【维基百科】OpenWrt<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy8=">【OpenWrt】官网<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVud3J0Lm9yZy90b2gvc3RhcnQ=">【OpenWrt】支持设备列表<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9maXJtd2FyZS1zZWxlY3Rvci5vcGVud3J0Lm9yZy8=">【OpenWrt】固件搜索<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>路由器</category>
-      </categories>
-      <tags>
-        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
