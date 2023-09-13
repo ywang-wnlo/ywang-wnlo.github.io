@@ -129,12 +129,11 @@ if (!doNotTrack) {
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">LaTeX 语法</h2><div class="post-meta">
-                <div class="post-meta-line">
-                    <span class="post-category">出版于  <a href="/categories/latex/"><i class="fa-regular fa-folder fa-fw"></i>LaTeX</a></span></div>
+                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/latex/"><i class="fa-regular fa-folder fa-fw"></i>LaTeX</a></span></div>
                 <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-10-19">2021-10-19</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 347 字</span>&nbsp;
                     <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟</span>&nbsp;</div>
             </div>
-            
+
             <hr><div class="details toc" id="toc-static"  data-kept="">
                     <div class="details-summary toc-title">
                         <span>目录</span>
@@ -438,30 +437,34 @@ if (!doNotTrack) {
 <li><a href="https://www.overleaf.com/learn/latex/Mathematical_expressions" target="_blank" rel="noopener noreffer">【overleaf】Mathematical expressions</a></li>
 <li><a href="https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles" target="_blank" rel="noopener noreffer">【overleaf】Bibtex bibliography styles</a></li>
 </ul>
-</div><div class="post-footer" id="post-footer">
-    <div class="reward-container">
+</div><div class="post-footer" id="post-footer"><div class="reward-container">
     
     <div>请我一杯咖啡吧！</div>
     <button>赞赏</button>
     <div class="post-reward">
         <div>
             
-            <img src="/images/wechatpay.png" alt="微信">
+            <img src="/images/wechatpay.png" alt="微信" />
             <span>微信</span>
-        </div>
-        <div>
+        </div> <div>
             
-            <img src="/images/alipay.jpg" alt="支付宝">
+            <img src="/images/alipay.jpg" alt="支付宝" />
             <span>支付宝</span>
         </div>
     </div>
 </div>
 
-<script src="/js/reward.js"></script>
-
-
-
-    <div class="post-copyright">
+<script type="text/javascript">
+    function registerPostReward() {
+        const button = document.querySelector(".reward-container button");
+        if (!button) return;
+        button.addEventListener("click", () => {
+            document.querySelector(".post-reward").classList.toggle("active");
+        });
+    }
+    registerPostReward();
+</script>
+<div class="post-copyright">
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
@@ -477,8 +480,7 @@ if (!doNotTrack) {
         </li>
     </ul>
 </div>
-
-    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/latex/">LaTeX</a>
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/latex/">LaTeX</a>
                 </span><span><a href="/tags/todo/">todo</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
                 <span>更新于 2022-11-16</span>
