@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>pip - 标签 - 乐园</title>
+        <link>https://ywang-wnlo.github.io/tags/pip/</link>
+        <description>pip - 标签 - 乐园</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 08 Mar 2022 14:37:08 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/pip/" rel="self" type="application/rss+xml" /><item>
+    <title>解决 pip 安装第三方包时因 SSL 报错</title>
+    <link>https://ywang-wnlo.github.io/posts/2e7aa01a/</link>
+    <pubDate>Tue, 08 Mar 2022 14:37:08 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/2e7aa01a/</guid>
+    <description><![CDATA[踩坑 好久没用 python，最近重新下载安装好 python 后发现用 pip 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Zsh - 标签 - 乐园</title>
+        <link>https://ywang-wnlo.github.io/tags/zsh/</link>
+        <description>Zsh - 标签 - 乐园</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 16 Nov 2022 11:04:47 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/zsh/" rel="self" type="application/rss+xml" /><item>
+    <title>美化 Shell 之 Linux Zsh 篇</title>
+    <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
+    <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
+    <description><![CDATA[简介 Z shell（Zsh）是一款可用作互动式登入的shell及指令码编写的命令直译器。 Zsh 对 Linux 默认的 Bourne shell（sh）做出了大量改进，同时加]]></description>
+</item>
+</channel>
+</rss>

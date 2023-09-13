@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>NexT 主题的配置使用记录 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="NexT 主题的配置使用记录" />
+<meta property="og:description" content="简介 NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的 版本 在 【必读】更新说明" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/9a0b7c3b/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-04T16:49:51+00:00" />
+<meta property="article:modified_time" content="2023-09-13T14:50:54+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
+
+<meta name="twitter:title" content="NexT 主题的配置使用记录"/>
+<meta name="twitter:description" content="简介 NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的 版本 在 【必读】更新说明"/>
+<meta name="application-name" content="乐园">
+<meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/9a0b7c3b/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/935ae1f0/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/9ba60726/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "NexT 主题的配置使用记录",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ywang-wnlo.github.io\/posts\/9a0b7c3b\/"
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Hexo, NexT","wordcount":  2696 ,
+        "url": "https:\/\/ywang-wnlo.github.io\/posts\/9a0b7c3b\/","datePublished": "2021-12-04T16:49:51+00:00","dateModified": "2023-09-13T14:50:54+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
+                "@type": "Person",
+                "name": "Zeus"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="乐园"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/logo.svg"
+        data-srcset="/logo.svg, /logo.svg 1.5x, /logo.svg 2x"
+        data-sizes="auto"
+        alt="/logo.svg"
+        title="/logo.svg" />乐园</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/tags/"><i class='fa fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fa fa-th fa-fw'></i> 分类 </a><a class="menu-item" href="/posts/"><i class='fa fa-archive fa-fw'></i> 归档 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fa-solid fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fa-solid fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fa-solid fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="乐园"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/logo.svg"
+        data-srcset="/logo.svg, /logo.svg 1.5x, /logo.svg 2x"
+        data-sizes="auto"
+        alt="/logo.svg"
+        title="/logo.svg" />乐园</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fa-solid fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fa-solid fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>首页</a><a class="menu-item" href="/tags/" title=""><i class='fa fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fa fa-th fa-fw'></i>分类</a><a class="menu-item" href="/posts/" title=""><i class='fa fa-archive fa-fw'></i>归档</a><div class="menu-item"><a href="#" onclick="return false;" class="theme-switch" title="切换主题">
+                    <i class="fa-solid fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">NexT 主题的配置使用记录</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fa-solid fa-user-circle fa-fw"></i>Zeus</a></span>&nbsp;<span class="post-category">出版于  <a href="/categories/hexo/"><i class="fa-regular fa-folder fa-fw"></i>Hexo</a></span></div>
+                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-04">2021-12-04</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2696 字</span>&nbsp;
+                    <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目录</span>
+                        <span><i class="details-icon fa-solid fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a>
+      <ul>
+        <li><a href="#版本">版本</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#配置记录">配置记录</a>
+      <ul>
+        <li><a href="#风格主题">风格/主题</a></li>
+        <li><a href="#网页图标">网页图标</a></li>
+        <li><a href="#菜单栏">菜单栏</a></li>
+        <li><a href="#侧边栏">侧边栏</a></li>
+        <li><a href="#本地搜索">本地搜索</a></li>
+        <li><a href="#代码块">代码块</a></li>
+        <li><a href="#动画效果">动画效果</a></li>
+        <li><a href="#阅读进度">阅读进度</a></li>
+        <li><a href="#书签">书签</a></li>
+        <li><a href="#mermaid">Mermaid</a></li>
+        <li><a href="#lazyload">lazyload</a></li>
+        <li><a href="#fancybox">fancybox</a></li>
+        <li><a href="#pangu">pangu</a></li>
+        <li><a href="#捐赠">捐赠</a></li>
+        <li><a href="#版权声明">版权声明</a></li>
+        <li><a href="#不蒜子">不蒜子</a></li>
+        <li><a href="#gitalk">gitalk</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h2 id="简介">简介</h2>
+<p>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的</p>
+<!-- more -->
+<h3 id="版本">版本</h3>
+<p>在 <a href="https://github.com/next-theme/hexo-theme-next/issues/4" target="_blank" rel="noopener noreffer">【必读】更新说明及常见问题</a> 中有相关说明，NexT 一共有三个不同的仓库：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>年份</th>
+<th>仓库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v5.1.4 或更低</td>
+<td>2014 ~ 2017</td>
+<td><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener noreffer">iissnan/hexo-theme-next</a></td>
+</tr>
+<tr>
+<td>v6.0.0 ~ v7.8.0</td>
+<td>2018 ~ 2019</td>
+<td><a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener noreffer">theme-next/hexo-theme-next</a></td>
+</tr>
+<tr>
+<td>v8.0.0 或更高</td>
+<td>2020</td>
+<td><a href="https://github.com/next-theme/hexo-theme-next" target="_blank" rel="noopener noreffer">next-theme/hexo-theme-next</a></td>
+</tr>
+</tbody>
+</table>
+<p>旧的仓库基本上已经不再更新，因此推荐选择最新的 <a href="https://github.com/next-theme/hexo-theme-next" target="_blank" rel="noopener noreffer">next-theme/hexo-theme-next</a> 仓库的 NexT 主题</p>
+<h2 id="安装">安装</h2>
+<p>推荐使用 GitHub 进行安装，可以随时更新</p>
+<p>因为笔者个人在 Windows 环境下写博客，后续命令均以 <a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell?view=powershell-7.2" target="_blank" rel="noopener noreffer">PowerShell</a> 为例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ps" data-lang="ps"><span class="line"><span class="cl"><span class="nf">cd</span> <span class="p">&lt;</span><span class="nf">hexo-dir</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">#</span> <span class="nf">git</span> <span class="nf">clone</span> <span class="nf">https:</span><span class="err">/</span><span class="nv">/github.com/next-theme/hexo-theme-next.git</span> <span class="nf">.\themes\next\</span>
+</span></span><span class="line"><span class="cl"><span class="nf">git</span> <span class="nf">clone</span> <span class="nf">git@github.com:next-theme</span><span class="nv">/hexo-theme-next.git</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">cp</span> <span class="nf">.\themes\next\_config.yml</span> <span class="nf">.\_config.next.yml</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置记录">配置记录</h2>
+<p>对 NexT 主题的配置可以直接在 <code>hexo</code> 仓库下的配置文件 <code>_config.next.yml</code> 中进行修改即可，该文件的修改会在生成页面时覆盖主题目录下的配置文件 <code>.\themes\next\_config.yml</code></p>
+<p>衍生拓展：<a href="https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6" target="_blank" rel="noopener noreffer">【Hexo】配置文件优先级</a></p>
+<h3 id="风格主题">风格/主题</h3>
+<p>NexT 主题包含了 4 个风格，个人喜欢 Gemini，类似卡片的风格，边界比较明显</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="NexT_Schemes.png"
+        data-srcset="/posts/9a0b7c3b/NexT_Schemes.png, NexT_Schemes.png 1.5x, /posts/9a0b7c3b/NexT_Schemes.png 2x"
+        data-sizes="auto"
+        alt="/posts/9a0b7c3b/NexT_Schemes.png"
+        title="NexT_Schemes" /></p>
+<p>修改 <code>_config.next.yml</code> 之后，用 <code>hexo clean; hexo g; hexo s</code> 重新生成一下，就可以在 <a href="http://localhost:4000" target="_blank" rel="noopener noreffer">本地</a> 预览了（后续流程如果没有特殊说明则基本一致）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Schemes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># scheme: Muse</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># scheme: Mist</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># scheme: Pisces</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l">Gemini</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="网页图标">网页图标</h3>
+<p>在各类网站上下载合适图标，按照配置文件中的文件名命名，并放在 <code>images</code> 下即可</p>
+<p>衍生阅读：<a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html" target="_blank" rel="noopener noreffer">【Apple】Configuring Web Applications</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">favicon</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">small</span><span class="p">:</span><span class="w"> </span><span class="l">/images/favicon-16x16-next.png</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">medium</span><span class="p">:</span><span class="w"> </span><span class="l">/images/favicon-32x32-next.png</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apple_touch_icon</span><span class="p">:</span><span class="w"> </span><span class="l">/images/apple-touch-icon-next.png</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">safari_pinned_tab</span><span class="p">:</span><span class="w"> </span><span class="l">/images/logo.svg</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#android_manifest: /manifest.json</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="菜单栏">菜单栏</h3>
+<p>菜单栏配置默认没有开启，个人开启了 <code>首页</code>、<code>标签</code>、<code>分类</code>、<code>归档</code> 四个子项目，并开启了图标和数量的气泡显示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Usage: `Key: /link/ || icon`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-sensitive.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># External url should start with http:// or https://</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">menu</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">home</span><span class="p">:</span><span class="w"> </span><span class="l">/ || fa fa-home</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#about: /about/ || fa fa-user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l">/tags/ || fa fa-tags</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">categories</span><span class="p">:</span><span class="w"> </span><span class="l">/categories/ || fa fa-th</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archives</span><span class="p">:</span><span class="w"> </span><span class="l">/archives/ || fa fa-archive</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#schedule: /schedule/ || fa fa-calendar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#sitemap: /sitemap.xml || fa fa-sitemap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#commonweal: /404/ || fa fa-heartbeat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Enable / Disable menu icons / item badges.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">menu_settings</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">icons</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">badges</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="侧边栏">侧边栏</h3>
+<p>默认头像会开启旋转功能，花里胡哨的而且旋转有点快，个人选择了关闭</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Sidebar Avatar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">avatar</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Replace the default image and set the url here.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">/images/avatar.gif</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If true, the avatar will be displayed in circle.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rounded</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If true, the avatar will be rotated with the cursor.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rotated</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在单独的文章页面时侧边栏会默认显示为目录，并且 <code>标签</code>、<code>分类</code>、<code>归档</code> 已经在菜单栏开启了，所以个人选择了关闭</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Posts / Categories / Tags in sidebar.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">site_state</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其他社交网站的主页的配置起来也很简单，简单替换一下链接，并且取消注释即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Social Links</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Usage: `Key: permalink || icon`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Key is the link label showing to end users.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">social</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">GitHub</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/ywang-wnlo || fab fa-github</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">E-Mail</span><span class="p">:</span><span class="w"> </span><span class="l">mailto:ywang_wnlo@qq.com || fa fa-envelope</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#Weibo: https://weibo.com/yourname || fab fa-weibo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#Google: https://plus.google.com/yourname || fab fa-google</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#Twitter: https://twitter.com/yourname || fab fa-twitter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#FB Page: https://www.facebook.com/yourname || fab fa-facebook</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#YouTube: https://youtube.com/yourname || fab fa-youtube</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#Instagram: https://instagram.com/yourname || fab fa-instagram</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#Skype: skype:yourname?call|chat || fab fa-skype</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="本地搜索">本地搜索</h3>
+<p>本地搜索可以快速的检索所有的文章，有时候还是很有用的</p>
+<p>配置本地搜索之前，首先要在 <code>hexo</code> 下安装插件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ps" data-lang="ps"><span class="line"><span class="cl"><span class="nf">npm</span> <span class="nf">install</span> <span class="nf">hexo-generator-searchdb</span> <span class="nf">--save</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在配置中开启即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Local Search</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">local_search</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If auto, trigger search by changing input.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If manual, trigger search by pressing enter key or search button.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">trigger</span><span class="p">:</span><span class="w"> </span><span class="l">auto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Show top n results per article, show all results by setting to -1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">top_n_per_article</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Unescape html strings to the readable one.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">unescape</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Preload the search data when the page loads.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">preload</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="代码块">代码块</h3>
+<p>代码块的高亮有很多种配色可以选，并且可以开启一键复制功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">codeblock</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Code Highlight theme</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># All available themes: https://theme-next.js.org/highlight/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">theme</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">light</span><span class="p">:</span><span class="w"> </span><span class="l">vs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dark</span><span class="p">:</span><span class="w"> </span><span class="l">vs2015</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">prism</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">light</span><span class="p">:</span><span class="w"> </span><span class="l">prism</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dark</span><span class="p">:</span><span class="w"> </span><span class="l">prism-dark</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Add copy button on codeblock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">copy_button</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Available values: default | flat | mac</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">style</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="动画效果">动画效果</h3>
+<p>NexT 默认开启了动画效果，但是感觉比较慢，感觉有些影响阅读，推荐开启 <code>async</code>，并且适当的修改动画效果</p>
+<p>P.S. 菜单栏的动画不可以关闭和调整，应该是个 <a href="https://github.com/next-theme/hexo-theme-next/issues/412" target="_blank" rel="noopener noreffer">bug</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Use Animate.css to animate everything.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># For more information: https://animate.style</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">motion</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">async</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">transition</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># All available transition variants: https://theme-next.js.org/animate/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">post_block</span><span class="p">:</span><span class="w"> </span><span class="l">fadeIn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">post_header</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">post_body</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">coll_header</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Only for Pisces | Gemini.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sidebar</span><span class="p">:</span><span class="w"> </span><span class="l">fadeInDown</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="阅读进度">阅读进度</h3>
+<p>阅读进度有两种展示方式，一个在回到首页的按钮上直接显示百分比，另一个可以配置在首位部增加进度条，个人两个都开启了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">back2top</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Back to top in sidebar.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sidebar</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Scroll percent label in b2t button.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrollpercent</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Reading progress bar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">reading_progress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available values: left | right</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">start_at</span><span class="p">:</span><span class="w"> </span><span class="l">left</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available values: top | bottom</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l">bottom</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">reversed</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;#37c6c0&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">height</span><span class="p">:</span><span class="w"> </span><span class="l">5px</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="书签">书签</h3>
+<p>NexT 的书签功能可以保存当前的阅读进度，下次打开是会在续接该进度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Bookmark Support</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">bookmark</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Customize the color of the bookmark.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;#222&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If manual, only save it by clicking the bookmark-icon.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">save</span><span class="p">:</span><span class="w"> </span><span class="l">auto</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mermaid">Mermaid</h3>
+<p><a href="https://mermaid-js.github.io/mermaid/#/" target="_blank" rel="noopener noreffer">Mermaid</a> 可以快速的用代码生成简单的流程图、时序图、甘特图等</p>
+<p>NexT 中开启 Mermaid 支持很方便，同时还有不同的风格可以选</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Mermaid tag</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">mermaid</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available themes: default | dark | forest | neutral</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">theme</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">light</span><span class="p">:</span><span class="w"> </span><span class="l">neutral</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dark</span><span class="p">:</span><span class="w"> </span><span class="l">dark</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="lazyload">lazyload</h3>
+<p>lazyload 是网站常用的技术，通过按需加载，避免一次性加载过多内容导致的打开缓慢</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Vanilla JavaScript plugin for lazyloading images.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># For more information: https://apoorv.pro/lozad.js/demo/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">lazyload</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="fancybox">fancybox</h3>
+<p>fancybox 可以在点击图片时放大该图片，并且可以快速浏览当前文章的所有图片</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># For more information: https://fancyapps.com/fancybox/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">fancybox</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pangu">pangu</h3>
+<p>对于强迫症来说，中英文混排时加上空格能很大程度改善阅读体验，但是有时候会不小心打漏部分空格，而 <a href="https://github.com/vinta/pangu.js" target="_blank" rel="noopener noreffer">pangu</a> 这个项目就可以帮你在展示时自动加上空格</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Pangu Support</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># For more information: https://github.com/vinta/pangu.js</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Server-side plugin: https://github.com/next-theme/hexo-pangu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">pangu</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="捐赠">捐赠</h3>
+<p>文章末尾还可以求打赏，需要配置好相应的二维码图片，并且可以修改提示语句</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Donate (Sponsor) settings</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Front-matter variable (nonsupport animation).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">reward_settings</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If true, a donate button will be displayed in every article by default.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">animation</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="l">赏个鸡腿🍗</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">reward</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wechatpay</span><span class="p">:</span><span class="w"> </span><span class="l">/images/wechatpay.png</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">alipay</span><span class="p">:</span><span class="w"> </span><span class="l">/images/alipay.jpg</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#paypal: /images/paypal.png</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#bitcoin: /images/bitcoin.png</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="版权声明">版权声明</h3>
+<p>NexT 内置了文章末尾增加版权声明，只需手动开启即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Creative Commons 4.0 International License.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># See: https://creativecommons.org/about/cclicenses/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">creative_commons</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l">by-nc-sa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available values: big | small</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l">small</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sidebar</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">post</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">language</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="不蒜子">不蒜子</h3>
+<p><a href="https://busuanzi.ibruce.info/" target="_blank" rel="noopener noreffer">不蒜子</a> 是一个极简的网页计数器，NexT 已经内置，只需打开即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Show Views / Visitors of the website / page with busuanzi.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># For more information: http://ibruce.info/2015/04/04/busuanzi/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">busuanzi_count</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">total_visitors</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">total_visitors_icon</span><span class="p">:</span><span class="w"> </span><span class="l">fa fa-user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">total_views</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">total_views_icon</span><span class="p">:</span><span class="w"> </span><span class="l">fa fa-eye</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">post_views</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">post_views_icon</span><span class="p">:</span><span class="w"> </span><span class="l">far fa-eye</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="gitalk">gitalk</h3>
+<p>评论系统也是一个博客必不可少的，由于本博客搭在 GitHub Pages 上，所以评论系统就采用利用 GitHub Issues 实现的 <a href="https://github.com/gitalk/gitalk" target="_blank" rel="noopener noreffer">gitalk</a></p>
+<p>NexT 已经内置的 gitalk 的 <code>js</code> 和 <code>css</code>，在配置文件中开启并进行配置即可</p>
+<p>在修改配置文件之前需要先在 GitHub 上申请一个 OAuth
+Application，入口在 <code>【Settings】</code> -&gt; <code>【Developer settings】</code> -&gt; <code>【OAuth Apps】</code> -&gt; <code>【New OAuth App】</code>，或者直接使用这个 <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener noreffer">链接</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="OAuth_APP_Register.png"
+        data-srcset="/posts/9a0b7c3b/OAuth_APP_Register.png, OAuth_APP_Register.png 1.5x, /posts/9a0b7c3b/OAuth_APP_Register.png 2x"
+        data-sizes="auto"
+        alt="/posts/9a0b7c3b/OAuth_APP_Register.png"
+        title="OAuth_APP_Register" /></p>
+<p>填写好之后，记录下应用 id 以及密钥，如果没有显示密钥需要手动生成一下</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="OAuth_APP_ID_Secrets.png"
+        data-srcset="/posts/9a0b7c3b/OAuth_APP_ID_Secrets.png, OAuth_APP_ID_Secrets.png 1.5x, /posts/9a0b7c3b/OAuth_APP_ID_Secrets.png 2x"
+        data-sizes="auto"
+        alt="/posts/9a0b7c3b/OAuth_APP_ID_Secrets.png"
+        title="OAuth_APP_ID_Secrets" /></p>
+<p>然后首先选用 gitalk 作为评论系统</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Multiple Comment System Support</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">comments</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available values: tabs | buttons</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">style</span><span class="p">:</span><span class="w"> </span><span class="l">tabs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Choose a comment system to be displayed by default.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available values: disqus | disqusjs | changyan | livere | gitalk | utterances</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="l">gitalk</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Setting `true` means remembering the comment system selected by the visitor.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Lazyload all comment systems.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">lazyload</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Modify texts or order for any naves, here are some examples.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nav</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#disqus:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#  text: Load Disqus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#  order: -1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#gitalk:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#  order: -2</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 gitalk 配置中填上相应的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># Gitalk</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># For more information: https://gitalk.github.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">gitalk</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">github_id</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;GitHub id&gt;</span><span class="w"> </span><span class="c"># GitHub repo owner</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;GitHub id&gt;.github.io</span><span class="w"> </span><span class="c"># Repository name to store issues</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">client_id</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;应用 id&gt;</span><span class="w"> </span><span class="c"># GitHub Application Client ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">client_secret</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;应用密钥&gt;</span><span class="w"> </span><span class="c"># GitHub Application Client Secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">admin_user</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;GitHub id&gt;</span><span class="w"> </span><span class="c"># GitHub repo owner and collaborators, only these guys can initialize gitHub issues</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">distraction_free_mode</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># Facebook-like distraction free mode</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># When the official proxy is not available, you can change it to your own proxy address</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">proxy</span><span class="p">:</span><span class="w"> </span><span class="l">https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</span><span class="w"> </span><span class="c"># This is official proxy address</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Gitalk&#39;s display language depends on user&#39;s browser or system environment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># If you want everyone visiting your site to see a uniform language, you can set a force language value</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Available values: en | es-ES | fr | ru | zh-CN | zh-TW</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">language</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://theme-next.js.org" target="_blank" rel="noopener noreffer">【NexT】v8.0.0+ 官网</a></li>
+<li><a href="https://github.com/next-theme/hexo-theme-next/issues/4" target="_blank" rel="noopener noreffer">【必读】更新说明及常见问题</a></li>
+<li><a href="https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6" target="_blank" rel="noopener noreffer">【Hexo】配置文件优先级</a></li>
+<li><a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html" target="_blank" rel="noopener noreffer">【Apple】Configuring Web Applications</a></li>
+<li><a href="https://mermaid-js.github.io/mermaid/#/" target="_blank" rel="noopener noreffer">【Mermaid】官网</a></li>
+<li><a href="https://github.com/vinta/pangu.js" target="_blank" rel="noopener noreffer">【GitHub】pangu</a></li>
+<li><a href="https://busuanzi.ibruce.info" target="_blank" rel="noopener noreffer">【不蒜子】官网</a></li>
+<li><a href="https://github.com/gitalk/gitalk" target="_blank" rel="noopener noreffer">【GitHub】Gitalk</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="reward-container">
+    
+    <div>请我一杯咖啡吧！</div>
+    <button>赞赏</button>
+    <div class="post-reward">
+        <div>
+            
+            <img src="/images/wechatpay.png" alt="微信">
+            <span>微信</span>
+        </div>
+        <div>
+            
+            <img src="/images/alipay.jpg" alt="支付宝">
+            <span>支付宝</span>
+        </div>
+    </div>
+</div>
+
+<script src="/js/reward.js"></script>
+
+
+
+    <div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/9a0b7c3b/" title="NexT 主题的配置使用记录">https://ywang-wnlo.github.io/posts/9a0b7c3b/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/hexo/">Hexo</a>
+                </span><span><a href="/tags/next/">NexT</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新于 2023-09-13&nbsp;<a class="git-hash" href="https://github.com/ywang-wnlo/ywang-wnlo.github.io/commit/941b4c0293d0a3fce122189dcfa0d7c38968a87d" target="_blank" title="committed&nbsp;by&nbsp;Yu Wang(ywang_wnlo@hust.edu.cn)&nbsp;941b4c0:&nbsp;迁移 hexo 的 hexo 相关博客">
+                            <i class="fa-solid fa-hashtag fa-fw"></i>941b4c0</a></span>
+            </div><div class="post-info-mod"></div>
+        </div></div><div class="post-nav"><a href="/posts/935ae1f0/" class="prev" rel="prev" title="rm -r 与 rmdir 区别"><i class="fa-solid fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/posts/9ba60726/" class="next" rel="next" title="page cache 简介">Next Post<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/khusika/FeelIt" target="_blank" rel="noopener noreffer" title="FeelIt 1.0.1"><i class="fa-solid fa-hand-holding-heart fa-fw"></i> FeelIt</a>
+        </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/ywang-wnlo">Zeus</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('乐园\u00A0Service Worker Registered');
+        }, err => console.error('乐园\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('乐园\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fa-solid fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fa-solid fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"ywang-wnlo/ywang-wnlo.github.io"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

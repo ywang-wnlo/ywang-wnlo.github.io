@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>io_uring 简介和使用 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="io_uring 简介和使用" />
+<meta property="og:description" content="简介 io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK[1]，同时支持 buffer IO io_uring 的作者" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/c142853f/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-10-28T16:18:05+00:00" />
+<meta property="article:modified_time" content="2022-11-17T10:51:38+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
+
+<meta name="twitter:title" content="io_uring 简介和使用"/>
+<meta name="twitter:description" content="简介 io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK[1]，同时支持 buffer IO io_uring 的作者"/>
+<meta name="application-name" content="乐园">
+<meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/c142853f/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/51140c4a/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/d7259d1d/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "io_uring 简介和使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ywang-wnlo.github.io\/posts\/c142853f\/"
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "异步 IO, liburing, io_uring","wordcount":  1063 ,
+        "url": "https:\/\/ywang-wnlo.github.io\/posts\/c142853f\/","datePublished": "2021-10-28T16:18:05+00:00","dateModified": "2022-11-17T10:51:38+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
+                "@type": "Person",
+                "name": "Zeus"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="乐园"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/logo.svg"
+        data-srcset="/logo.svg, /logo.svg 1.5x, /logo.svg 2x"
+        data-sizes="auto"
+        alt="/logo.svg"
+        title="/logo.svg" />乐园</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/tags/"><i class='fa fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fa fa-th fa-fw'></i> 分类 </a><a class="menu-item" href="/posts/"><i class='fa fa-archive fa-fw'></i> 归档 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fa-solid fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fa-solid fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fa-solid fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="乐园"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/logo.svg"
+        data-srcset="/logo.svg, /logo.svg 1.5x, /logo.svg 2x"
+        data-sizes="auto"
+        alt="/logo.svg"
+        title="/logo.svg" />乐园</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fa-solid fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fa-solid fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>首页</a><a class="menu-item" href="/tags/" title=""><i class='fa fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fa fa-th fa-fw'></i>分类</a><a class="menu-item" href="/posts/" title=""><i class='fa fa-archive fa-fw'></i>归档</a><div class="menu-item"><a href="#" onclick="return false;" class="theme-switch" title="切换主题">
+                    <i class="fa-solid fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">io_uring 简介和使用</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fa-solid fa-user-circle fa-fw"></i>Zeus</a></span>&nbsp;<span class="post-category">出版于  <a href="/categories/io-stack/"><i class="fa-regular fa-folder fa-fw"></i>IO Stack</a></span></div>
+                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-10-28">2021-10-28</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 1063 字</span>&nbsp;
+                    <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目录</span>
+                        <span><i class="details-icon fa-solid fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#使用">使用</a>
+      <ul>
+        <li><a href="#系统调用">系统调用</a></li>
+        <li><a href="#liburing">liburing</a>
+          <ul>
+            <li><a href="#样例">样例</a></li>
+            <li><a href="#代码流程">代码流程</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#编译">编译</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h2 id="简介">简介</h2>
+<p>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK<a href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/" target="_blank" rel="noopener noreffer">[1]</a>，同时支持 buffer IO</p>
+<!-- more -->
+<p>io_uring 的作者 <a href="https://en.wikipedia.org/wiki/Jens_Axboe" target="_blank" rel="noopener noreffer">Jens Axboe</a> 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉</p>
+<h2 id="使用">使用</h2>
+<h3 id="系统调用">系统调用</h3>
+<p>io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
+<p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中</p>
+<p>用户程序可以直接使用 <code>syscall(__NR_xxx, ……)</code> 的方式直接调用，使用起来很麻烦</p>
+<h3 id="liburing">liburing</h3>
+<p>由于直接使用系统调用较为复杂，Jens Axboe 还提供了封装好的用户态库 liburing，简化了 io_uring 的使用，代码位置在 <a href="https://github.com/axboe/liburing" target="_blank" rel="noopener noreffer">github</a> 上</p>
+<h4 id="样例">样例</h4>
+<p>liburing 仓库的 <code>examples/</code> 目录下提供了几个简单的样例程序：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>功能</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>io_uring-test.c</code></td>
+<td>读取一个文件的全部内容</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>io_uring-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>使用 <code>user_data</code> 手动处理读写 IO 之间的依赖，读 IO 返回之后才下发写 IO</td>
+</tr>
+<tr>
+<td><code>link-cp.c</code></td>
+<td>复制一个文件的内容到另一个文件</td>
+<td>同时下发读写，使用 <code>IOSQE_IO_LINK</code> 保证读写之间的依赖<a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/" target="_blank" rel="noopener noreffer">[2]</a></td>
+</tr>
+<tr>
+<td><code>ucontext-cp.c</code></td>
+<td>复制 n 个文件的内容到另 n 个文件</td>
+<td>使用 <code>ucontext</code> 进行上下文切换，模拟 <a href="https://blog.csdn.net/qq910894904/article/details/41911175" target="_blank" rel="noopener noreffer">协程</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="代码流程">代码流程</h4>
+<p>仔细阅读前三个用例，可以看出使用 io_uring 的一般流程如下：</p>
+<ul>
+<li>使用 <code>open</code>、<code>fstat</code> 等函数来打开文件以及元数据查看等操作
+<ul>
+<li>因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 <code>fd</code>（由 <code>open</code> 函数执行返回的）</li>
+</ul>
+</li>
+<li>使用 <code>io_uring_queue_init</code> 初始化 <code>struct io_uring ring</code> 结构体</li>
+<li>初始化 <code>struct iovec *iovecs</code> 结构体用于存放用户态 buffer 指针和长度</li>
+<li>通过 <code>io_uring_get_sqe</code> 获取 <code>sqe</code></li>
+<li>通过 <code>io_uring_prep_#OP</code> 对 <code>sqe</code> 填充命令，buffer 以及 offset 信息
+<ul>
+<li>【可选】 通过 <code>io_uring_sqe_set_data</code> 对 <code>sqe</code> 附加 <code>user_data</code> 信息（该信息会在 <code>cqe</code> 中进行返回）</li>
+</ul>
+</li>
+<li>通过 <code>io_uring_submit</code> 对整个 <code>ring</code> 的所有 <code>sqe</code> 进行下发</li>
+<li>通过 <code>io_uring_wait_cqe</code> 或者 <code>io_uring_peek_cqe</code> 来获取 <code>cqe</code>
+<ul>
+<li><code>io_uring_wait_cqe</code> 会阻塞当前线程直到有一个 <code>cqe</code> 返回</li>
+<li><code>io_uring_peek_cqe</code> 不会阻塞，如果当前没有 <code>cqe</code>，就会返回错误</li>
+<li><code>io_uring_cqe_get_data</code> 可以从 <code>cqe</code> 中获取 <code>user_data</code></li>
+</ul>
+</li>
+<li>通过 <code>io_uring_cqe_seen</code> 对当前 <code>cqe</code> 进行清除，避免被二次处理</li>
+<li>所有 IO 完成后，通过 <code>io_uring_queue_exit</code> 将 <code>ring</code> 销毁</li>
+</ul>
+<h2 id="编译">编译</h2>
+<p>根据官方 <code>Makefile</code> 可以看出编译时有额外的三个条件</p>
+<ul>
+<li>定义 <code>_GNU_SOURCE</code> 宏，<code>-D</code> 宏定义</li>
+<li>指定额外的头文件目录，<code>-I</code> 指定头文件目录位置</li>
+<li>使用 <code>liburing</code> 库，<code>-L</code> 指定库位置，<code>-l</code> 指定库名</li>
+</ul>
+<p>即 <code>gcc -D_GNU_SOURCE -I../src/include/ -L../src/ -o test test.c -luring</code></p>
+<p>其中头文件目录下主要有三个头文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tree src/include/
+</span></span><span class="line"><span class="cl">src/include/
+</span></span><span class="line"><span class="cl">├── liburing
+</span></span><span class="line"><span class="cl">│   ├── barrier.h
+</span></span><span class="line"><span class="cl">│   └── io_uring.h
+</span></span><span class="line"><span class="cl">└── liburing.h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">1</span> directory, <span class="m">3</span> files
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>而 <code>liburing</code> 库也需要编译生成，推荐直接在 <code>liburing</code> 的顶层目录直接 <code>make all</code></p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="/posts/c142853f/io_uring.pdf" rel="">【PDF】官方 pdf</a></li>
+<li><a href="https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/" target="_blank" rel="noopener noreffer">【Kernel】io_uring 性能测试</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Jens_Axboe" target="_blank" rel="noopener noreffer">【维基百科】Jens Axboe</a></li>
+<li><a href="https://lore.kernel.org/linux-block/20190517214131.5925-1-axboe@kernel.dk/" target="_blank" rel="noopener noreffer">【Kernel】io_uring IOSQE_IO_LINK</a></li>
+<li><a href="https://kernel.taobao.org/2019/06/io_uring-a-new-linux-asynchronous-io-API/" target="_blank" rel="noopener noreffer">【阿里云技术博客】Linux 异步 IO 新时代：io_uring</a></li>
+<li><a href="https://github.com/Linkerist/blog/issues/25" target="_blank" rel="noopener noreffer">【GitHub】《操作系统与存储：解析 Linux 内核全新异步 IO 引擎 —— io_uring 设计与实现》</a></li>
+<li><a href="https://arthurchiao.art/blog/intro-to-io-uring-zh/" target="_blank" rel="noopener noreffer">【个人博客】[译] Linux 异步 I/O 框架 io_uring：基本原理、程序示例与性能压测（2020）</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="reward-container">
+    
+    <div>请我一杯咖啡吧！</div>
+    <button>赞赏</button>
+    <div class="post-reward">
+        <div>
+            
+            <img src="/images/wechatpay.png" alt="微信">
+            <span>微信</span>
+        </div>
+        <div>
+            
+            <img src="/images/alipay.jpg" alt="支付宝">
+            <span>支付宝</span>
+        </div>
+    </div>
+</div>
+
+<script src="/js/reward.js"></script>
+
+
+
+    <div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/c142853f/" title="io_uring 简介和使用">https://ywang-wnlo.github.io/posts/c142853f/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/%E5%BC%82%E6%AD%A5-io/">异步 IO</a>
+                </span><span><a href="/tags/liburing/">liburing</a>
+                </span><span><a href="/tags/io_uring/">io_uring</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新于 2022-11-17</span>
+            </div><div class="post-info-mod"></div>
+        </div></div><div class="post-nav"><a href="/posts/51140c4a/" class="prev" rel="prev" title="OpenWrt 配置使用"><i class="fa-solid fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/posts/d7259d1d/" class="next" rel="next" title="io_uring 用户库源码分析">Next Post<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/khusika/FeelIt" target="_blank" rel="noopener noreffer" title="FeelIt 1.0.1"><i class="fa-solid fa-hand-holding-heart fa-fw"></i> FeelIt</a>
+        </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/ywang-wnlo">Zeus</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('乐园\u00A0Service Worker Registered');
+        }, err => console.error('乐园\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('乐园\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fa-solid fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fa-solid fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"ywang-wnlo/ywang-wnlo.github.io"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

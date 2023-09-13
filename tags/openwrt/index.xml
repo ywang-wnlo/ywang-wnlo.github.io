@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>OpenWrt - 标签 - 乐园</title>
+        <link>https://ywang-wnlo.github.io/tags/openwrt/</link>
+        <description>OpenWrt - 标签 - 乐园</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 21 Aug 2023 14:25:43 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/openwrt/" rel="self" type="application/rss+xml" /><item>
+    <title>小米 WR30U 解锁并刷机</title>
+    <link>https://ywang-wnlo.github.io/posts/e6410576/</link>
+    <pubDate>Mon, 21 Aug 2023 14:25:43 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
+    <description><![CDATA[本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，整体步骤与 一般安装流程 类似，但是由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下]]></description>
+</item>
+<item>
+    <title>OpenWrt 手动编译 ipk</title>
+    <link>https://ywang-wnlo.github.io/posts/96a1807/</link>
+    <pubDate>Mon, 01 Nov 2021 11:08:42 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/96a1807/</guid>
+    <description><![CDATA[.ipk 文件 .ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的]]></description>
+</item>
+<item>
+    <title>OpenWrt 配置使用</title>
+    <link>https://ywang-wnlo.github.io/posts/51140c4a/</link>
+    <pubDate>Thu, 28 Oct 2021 16:17:24 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/51140c4a/</guid>
+    <description><![CDATA[Web 界面 一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 192.168.1.1，默认账号是 root，无密码，直接点击登录即可进]]></description>
+</item>
+<item>
+    <title>OpenWrt 简介和安装</title>
+    <link>https://ywang-wnlo.github.io/posts/8507aaa1/</link>
+    <pubDate>Thu, 28 Oct 2021 16:16:44 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/8507aaa1/</guid>
+    <description><![CDATA[简介 来源 2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展]]></description>
+</item>
+</channel>
+</rss>

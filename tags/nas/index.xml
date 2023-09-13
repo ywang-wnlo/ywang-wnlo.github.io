@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>NAS - 标签 - 乐园</title>
+        <link>https://ywang-wnlo.github.io/tags/nas/</link>
+        <description>NAS - 标签 - 乐园</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Oct 2021 16:17:24 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/nas/" rel="self" type="application/rss+xml" /><item>
+    <title>OpenWrt 配置使用</title>
+    <link>https://ywang-wnlo.github.io/posts/51140c4a/</link>
+    <pubDate>Thu, 28 Oct 2021 16:17:24 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/51140c4a/</guid>
+    <description><![CDATA[Web 界面 一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 192.168.1.1，默认账号是 root，无密码，直接点击登录即可进]]></description>
+</item>
+</channel>
+</rss>

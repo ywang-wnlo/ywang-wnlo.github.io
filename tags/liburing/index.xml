@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>liburing - 标签 - 乐园</title>
+        <link>https://ywang-wnlo.github.io/tags/liburing/</link>
+        <description>liburing - 标签 - 乐园</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 30 Oct 2021 16:18:05 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/liburing/" rel="self" type="application/rss+xml" /><item>
+    <title>io_uring 内核源码分析</title>
+    <link>https://ywang-wnlo.github.io/posts/4f0d345c/</link>
+    <pubDate>Sat, 30 Oct 2021 16:18:05 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4f0d345c/</guid>
+    <description><![CDATA[当前内容基于 Linux Kernel v5.4.121 1. io_uring 之前 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 io_uring_setup，io_uring_enter 和 io_uring_register 他们的入口都在 Linux]]></description>
+</item>
+<item>
+    <title>io_uring 用户库源码分析</title>
+    <link>https://ywang-wnlo.github.io/posts/d7259d1d/</link>
+    <pubDate>Fri, 29 Oct 2021 09:49:00 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/d7259d1d/</guid>
+    <description><![CDATA[当前内容基于 liburing 2.1 版本 整体流程 之前在 io_uring 简介和使用 有过总结，使用 io_uring 的一般流程如下： 使用 open、fstat 等函数来打开文件以及元数据查看等操作 因]]></description>
+</item>
+<item>
+    <title>io_uring 简介和使用</title>
+    <link>https://ywang-wnlo.github.io/posts/c142853f/</link>
+    <pubDate>Thu, 28 Oct 2021 16:18:05 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/c142853f/</guid>
+    <description><![CDATA[简介 io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK[1]，同时支持 buffer IO io_uring 的作者]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>OpenWrt 配置使用 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="OpenWrt 配置使用" />
+<meta property="og:description" content="Web 界面 一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 192.168.1.1，默认账号是 root，无密码，直接点击登录即可进" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/51140c4a/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-10-28T16:17:24+00:00" />
+<meta property="article:modified_time" content="2022-11-19T15:30:47+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
+
+<meta name="twitter:title" content="OpenWrt 配置使用"/>
+<meta name="twitter:description" content="Web 界面 一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 192.168.1.1，默认账号是 root，无密码，直接点击登录即可进"/>
+<meta name="application-name" content="乐园">
+<meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/51140c4a/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/8507aaa1/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/c142853f/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "OpenWrt 配置使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ywang-wnlo.github.io\/posts\/51140c4a\/"
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "锐捷, IPv6, NAS, OpenWrt","wordcount":  4732 ,
+        "url": "https:\/\/ywang-wnlo.github.io\/posts\/51140c4a\/","datePublished": "2021-10-28T16:17:24+00:00","dateModified": "2022-11-19T15:30:47+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
+                "@type": "Person",
+                "name": "Zeus"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="乐园"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/logo.svg"
+        data-srcset="/logo.svg, /logo.svg 1.5x, /logo.svg 2x"
+        data-sizes="auto"
+        alt="/logo.svg"
+        title="/logo.svg" />乐园</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/tags/"><i class='fa fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fa fa-th fa-fw'></i> 分类 </a><a class="menu-item" href="/posts/"><i class='fa fa-archive fa-fw'></i> 归档 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fa-solid fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fa-solid fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fa-solid fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="乐园"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/logo.svg"
+        data-srcset="/logo.svg, /logo.svg 1.5x, /logo.svg 2x"
+        data-sizes="auto"
+        alt="/logo.svg"
+        title="/logo.svg" />乐园</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fa-solid fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fa-solid fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>首页</a><a class="menu-item" href="/tags/" title=""><i class='fa fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fa fa-th fa-fw'></i>分类</a><a class="menu-item" href="/posts/" title=""><i class='fa fa-archive fa-fw'></i>归档</a><div class="menu-item"><a href="#" onclick="return false;" class="theme-switch" title="切换主题">
+                    <i class="fa-solid fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">OpenWrt 配置使用</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fa-solid fa-user-circle fa-fw"></i>Zeus</a></span>&nbsp;<span class="post-category">出版于  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw"></i>路由器</a></span></div>
+                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-10-28">2021-10-28</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4732 字</span>&nbsp;
+                    <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目录</span>
+                        <span><i class="details-icon fa-solid fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#web-界面">Web 界面</a>
+      <ul>
+        <li><a href="#汉化">汉化</a></li>
+        <li><a href="#root-密码">root 密码</a></li>
+        <li><a href="#ssh">ssh</a></li>
+        <li><a href="#升级-luci">升级 LuCI</a></li>
+        <li><a href="#美化">美化</a></li>
+      </ul>
+    </li>
+    <li><a href="#usb">USB</a>
+      <ul>
+        <li><a href="#安装-usb-驱动">安装 USB 驱动</a></li>
+        <li><a href="#自动挂载">自动挂载</a></li>
+        <li><a href="#extroot">Extroot</a></li>
+      </ul>
+    </li>
+    <li><a href="#锐捷认证">锐捷认证</a>
+      <ul>
+        <li><a href="#mentohust">MentoHUST</a></li>
+        <li><a href="#minieap">MiniEAP</a></li>
+      </ul>
+    </li>
+    <li><a href="#防火墙">防火墙</a>
+      <ul>
+        <li><a href="#开放端口">开放端口</a></li>
+        <li><a href="#端口转发">端口转发</a></li>
+      </ul>
+    </li>
+    <li><a href="#ipv6">IPv6</a></li>
+    <li><a href="#zerotier">ZeroTier</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#smb">SMB</a></li>
+    <li><a href="#bt-下载">BT 下载</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h2 id="web-界面">Web 界面</h2>
+<p>一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是 <code>root</code>，无密码，直接点击登录即可进入</p>
+<!-- more -->
+<h3 id="汉化">汉化</h3>
+<p>默认界面是英文的，可以在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/opkg" target="_blank" rel="noopener noreffer">系统-软件</a> 中搜索中文包安装进行汉化</p>
+<ul>
+<li>点击 <code>UPDATE LIST...</code> 耐心等待软件包的更新</li>
+<li>然后在 <code>Filter:</code> 下的输入框中输入 <code>luci-i18n-base-zh-cn</code>，在筛选出来的结果中点击 <code>INSTALL...</code>，安装勾上 <code>Overwrite files from other package(s)</code>，然后点击 <code>INSTALL</code>，耐心等待安装完成之后刷新网页（Ctrl+F5）可以看见大部分界面已经汉化了</li>
+<li>同理安装 <code>luci-i18n-opkg-zh-cn</code> 包用于 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/opkg" target="_blank" rel="noopener noreffer">系统-软件</a> 界面的汉化</li>
+<li>同理安装 <code>luci-i18n-firewall-zh-cn</code> 包用于 <a href="http://192.168.1.1/cgi-bin/luci/admin/network/firewall" target="_blank" rel="noopener noreffer">网络-防火墙</a> 界面的汉化</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg update
+</span></span><span class="line"><span class="cl">opkg install luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn luci-i18n-firewall-zh-cn
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="root-密码">root 密码</h3>
+<p>进入管理界面后进入 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/password" target="_blank" rel="noopener noreffer">系统-管理-密码</a> 界面修改路由器密码，同时也是系统的 root 账号的密码</p>
+<h3 id="ssh">ssh</h3>
+<p>然后在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/dropbear" target="_blank" rel="noopener noreffer">系统-管理-ssh</a> 可以配置 ssh 登录，参考配置如下</p>
+<ul>
+<li>接口：不指定 → 内网以及外网都可以 ssh 登录</li>
+<li>端口：22 → ssh 默认端口，不做修改</li>
+<li>密码验证：不勾选 → 推荐使用 ssh 登录</li>
+<li>允许 root 用户凭密码登录：不勾选 → 推荐使用 ssh 登录</li>
+<li>网关端口：根据需要勾选</li>
+</ul>
+<p>按照上面配置完成后将只能通过 ssh 密钥进行登录，所以还得在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/sshkeys" target="_blank" rel="noopener noreffer">系统-管理-ssh密钥</a> 添加设备的公钥</p>
+<h3 id="升级-luci">升级 LuCI</h3>
+<p>ssh 登入路由器后执行以下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 更新软件源</span>
+</span></span><span class="line"><span class="cl">opkg update
+</span></span><span class="line"><span class="cl"><span class="c1"># luci-compat 包有时可以帮助解决一些兼容性问题，推荐一同安装</span>
+</span></span><span class="line"><span class="cl">opkg install luci luci-base luci-compat
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="美化">美化</h3>
+<p>原始的 <code>bootstrap</code> 主题个人不太喜欢，在空间足够的情况下我个人额外安装了 <code>material</code>，主题的切换在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/system" target="_blank" rel="noopener noreffer">系统-系统-语言和界面</a> 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg update
+</span></span><span class="line"><span class="cl">opkg install luci-theme-material
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="usb">USB</h2>
+<p>很多路由器有 USB 端口，通过插入 U 盘或者接入磁盘、SSD 等设备可以拓展存储空间，这样就可以安装更多的插件，或者搭建一个简单的 FTP、SMB 服务器用于共享数据</p>
+<h3 id="安装-usb-驱动">安装 USB 驱动</h3>
+<p>依次执行以下命令进行驱动基本包的安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg update
+</span></span><span class="line"><span class="cl">opkg install kmod-usb-core
+</span></span><span class="line"><span class="cl"><span class="c1"># insmod usbcore</span>
+</span></span><span class="line"><span class="cl">opkg install kmod-usb-storage
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果设备是 USB 2.0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install kmod-usb2
+</span></span><span class="line"><span class="cl"><span class="c1"># insmod ehci-hcd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果设备是 USB 3.0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install kmod-usb3
+</span></span><span class="line"><span class="cl"><span class="c1"># insmod xhci-hcd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通常移动硬盘或者移动 SSD 还需要安装 UAS/UASP 支持</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install kmod-usb-storage-uas
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后热插拔存储设备，通常就能在 <code>/dev</code> 目录下看见 <code>sda</code> 设备了</p>
+<h3 id="自动挂载">自动挂载</h3>
+<ul>
+<li>
+<p>安装块设备工具包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install block-mount
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>分区</p>
+<p>个人已经提前将存储设备划分了两个分区，一个分区较小(sda1)用于后续的 <a href="#extroot" rel="">Extroot</a>，剩余的空间(sda2)全用于存储个人数据</p>
+</li>
+<li>
+<p>创建文件系统</p>
+<p>推荐移动磁盘用 ext4 文件系统，而移动 SSD 推荐使用 f2fs 文件系统</p>
+<p>分区和创建文件系统可以参考 <a href="https://openwrt.org/docs/guide-user/storage/usb-drives#create_a_partition_on_the_usb_disk" target="_blank" rel="noopener noreffer">官网的指导</a></p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ext4</span>
+</span></span><span class="line"><span class="cl">opkg install e2fsprogs
+</span></span><span class="line"><span class="cl">opkg install kmod-fs-ext4
+</span></span><span class="line"><span class="cl">mkfs.ext4 /dev/sda1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># f2fs</span>
+</span></span><span class="line"><span class="cl">opkg install f2fs-tools
+</span></span><span class="line"><span class="cl">opkg install kmod-fs-f2fs
+</span></span><span class="line"><span class="cl">mkfs.f2fs /dev/sda1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置挂载</p>
+<p>配置挂载可以通过直接在网页端的 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/mounts" target="_blank" rel="noopener noreffer">系统-挂载点</a> 进行手动配置，比较直观，如图所示：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="Mount-sda6.png"
+        data-srcset="/posts/51140c4a/Mount-sda6.png, Mount-sda6.png 1.5x, /posts/51140c4a/Mount-sda6.png 2x"
+        data-sizes="auto"
+        alt="/posts/51140c4a/Mount-sda6.png"
+        title="挂载设备" /></p>
+<ul>
+<li>已启用：勾选</li>
+<li>UUID：推荐使用 UUID 来进行挂载</li>
+<li>挂载点：也就是挂载的位置，通常在 <code>/mnt</code> 目录下新建一个文件夹</li>
+</ul>
+</li>
+</ul>
+<h3 id="extroot">Extroot</h3>
+<p>有时候安装太多包会导致本地空间不足，此时可以通过将包安装在 USB 设备上，也可以通过 Extroot 的方式将 USB 设备的空间直接配置成 <code>overlay</code> 分区，后者更为推荐</p>
+<ol>
+<li>
+<p>修改 <code>fstab</code>，将原本挂载的 <code>overlay</code> 设备挂载到新的目录 <code>/rwm</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>sed -n -e <span class="s2">&#34;/\s\/overlay\s.*</span>$<span class="s2">/s///p&#34;</span> /etc/mtab<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">uci -q delete fstab.rwm
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> fstab.rwm<span class="o">=</span><span class="s2">&#34;mount&#34;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> fstab.rwm.device<span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">DEVICE</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> fstab.rwm.target<span class="o">=</span><span class="s2">&#34;/rwm&#34;</span>
+</span></span><span class="line"><span class="cl">uci commit fstab
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>修改 <code>fstab</code>，配置 USB 设备挂载成 <code>overlay</code> 分区</p>
+<p>其中部分部分操作在 <a href="#%e8%87%aa%e5%8a%a8%e6%8c%82%e8%bd%bd" rel="">上节</a> 已经执行过，可以略去</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看分区信息</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># block info</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 确定分区并制作文件系统</span>
+</span></span><span class="line"><span class="cl"><span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&#34;/dev/sda1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mkfs.ext4 ${DEVICE}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">eval</span> <span class="k">$(</span>block info <span class="si">${</span><span class="nv">DEVICE</span><span class="si">}</span> <span class="p">|</span> grep -o -e <span class="s2">&#34;UUID=\S*&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">uci -q delete fstab.overlay
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> fstab.overlay<span class="o">=</span><span class="s2">&#34;mount&#34;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> fstab.overlay.uuid<span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">UUID</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> fstab.overlay.target<span class="o">=</span><span class="s2">&#34;/overlay&#34;</span>
+</span></span><span class="line"><span class="cl">uci commit fstab
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>将原本 <code>overlay</code> 分区数据复制到 USB 设备上，重启设备</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p /tmp/cproot
+</span></span><span class="line"><span class="cl">mount --bind /overlay /tmp/cproot
+</span></span><span class="line"><span class="cl">mkdir -p /mnt/tmp
+</span></span><span class="line"><span class="cl">mount <span class="si">${</span><span class="nv">DEVICE</span><span class="si">}</span> /mnt/tmp
+</span></span><span class="line"><span class="cl">tar -C /tmp/cproot -cvf - . <span class="p">|</span> tar -C /mnt/tmp -xf -
+</span></span><span class="line"><span class="cl">umount /tmp/cproot /mnt/tmp
+</span></span><span class="line"><span class="cl">reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="锐捷认证">锐捷认证</h2>
+<p>很多学校校园网通常采用锐捷认证，并且限制了用户账号的登陆数量，但是我们可以通过在路由器上进行锐捷认证来接入校园网，之后连接路由器的所有设备都会直接接入校园网而不需要认证了</p>
+<h3 id="mentohust">MentoHUST</h3>
+<p><strong>首选，自动重连比 Minieap 靠谱得多！！！</strong></p>
+<p><a href="http://byhh.hust.edu.cn/cgi-bin/bbsnewtcon?board=NetResource&amp;file=M.1230774282.A" target="_blank" rel="noopener noreffer">MentoHUST</a> 是华中科技大学的 <a href="http://byhh.hust.edu.cn/cgi-bin/bbsqry?userid=HustMoon" target="_blank" rel="noopener noreffer">HustMoon</a> 最初在校内 BBS 白云黄鹤上发布的一款可以在 Linux 系统上进行锐捷认证的软件。不过 <a href="https://code.google.com/archive/p/mentohust/" target="_blank" rel="noopener noreffer">原始项目</a> 已经归档，不在开发，GitHub 上有加入 v4 支持的 <a href="https://github.com/hyrathb/mentohust" target="_blank" rel="noopener noreffer">新项目</a></p>
+<p>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</p>
+<ul>
+<li>通过 <a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk" target="_blank" rel="noopener noreffer">MentoHUST-OpenWrt-ipk</a> OpenWrt 项目可以生成  <code>mentohust</code> 的二进制文件</li>
+<li><del>通过 <a href="https://github.com/BoringCat/luci-app-mentohust" target="_blank" rel="noopener noreffer">OpenWrt/LEDE LuCI for MentoHUST</a> 项目可以生成 MentoHUST 的 LuCI 控制界面</del>（命令行已经足够）</li>
+</ul>
+<p>手动编译 <code>ipk</code> 文件的过程可以参考 <a href="/posts/96a1807/" rel="">这里</a></p>
+<h3 id="minieap"><del>MiniEAP</del></h3>
+<p><del><a href="https://github.com/updateing/minieap" target="_blank" rel="noopener noreffer">MiniEAP</a> 是一个实现了标准 EAP-MD5-Challenge 算法的 EAP 客户端，支持通过插件来修改标准数据包以通过特殊服务端的认证。同时含有支持锐捷 v3 (v4) 算法的插件，可以用来进行锐捷认证</del></p>
+<p><del>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</del></p>
+<ul>
+<li><del>通过 <a href="https://github.com/BoringCat/minieap-openwrt" target="_blank" rel="noopener noreffer">minieap-openwrt</a> 项目可以生成 <code>minieap</code> 的二进制文件</del></li>
+<li><del>(可选) 通过 <a href="https://github.com/BoringCat/luci-app-minieap" target="_blank" rel="noopener noreffer">OpenWrt/LEDE LuCI for minieap</a> 项目可以生成 MiniEAP 的 LuCI 控制界面</del></li>
+</ul>
+<p><del>补充：如果想要掉线自动重新认证，在配置文件中不要配置 <code>no-auto-reauth</code>，参考该 <a href="https://github.com/updateing/minieap/issues/43" target="_blank" rel="noopener noreffer">minieap@issue#43</a></del></p>
+<h2 id="防火墙">防火墙</h2>
+<p>防火墙规则的详细配置可以参考 <a href="https://openwrt.org/docs/guide-user/firewall/firewall_configuration#rules" target="_blank" rel="noopener noreffer">官方的介绍</a> 以及部分 <a href="https://openwrt.org/zh-cn/doc/uci/firewall#%E4%B8%BE%E4%BE%8B" target="_blank" rel="noopener noreffer">例子</a></p>
+<h3 id="开放端口">开放端口</h3>
+<p>以开放 80 端口，用于外网直接访问 Web 界面为例：</p>
+<ol>
+<li>
+<p>首先要在 <a href="http://192.168.1.1/cgi-bin/luci/admin/network/firewall/rules" target="_blank" rel="noopener noreffer">网络-防火墙-通信规则</a> 点击新增，进行如下配置</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="Allow-LuCI-WAN.png"
+        data-srcset="/posts/51140c4a/Allow-LuCI-WAN.png, Allow-LuCI-WAN.png 1.5x, /posts/51140c4a/Allow-LuCI-WAN.png 2x"
+        data-sizes="auto"
+        alt="/posts/51140c4a/Allow-LuCI-WAN.png"
+        title="开放 80 端口" /></p>
+<ul>
+<li>名称：可以随意设置</li>
+<li>协议：根据需要进行选择即可</li>
+<li>源区域：选择 WAN 表示是从外网进行访问</li>
+<li>源地址以及源端口：主要用于限制来访的设备，可以根据需要进行配置</li>
+<li>目标区域：选择 <code>设备</code> 代表这是一个入站的规则</li>
+<li>目标地址：因为是访问设备，此时不需要配置</li>
+<li>目标端口：Web 的默认端口是 80</li>
+<li>操作：开放端口，当然是选择接受</li>
+</ul>
+</li>
+<li>
+<p>然后在 <a href="http://192.168.1.1/cgi-bin/luci/admin/status/iptables" target="_blank" rel="noopener noreffer">状态-防火墙</a> 根据需要对 IPv4、IPv6 防火墙进行重启即可</p>
+</li>
+</ol>
+<p>如果这时外网还是不能访问 LuCI 的 Web 界面，可以尝试路由器重启，确认路由器的 IP 是否能够 ping 通，以及确认 80 端口有没有被运营商封禁</p>
+<h3 id="端口转发">端口转发</h3>
+<p>以将 Windows 的远程连接的端口 3389 为例：</p>
+<ol>
+<li>
+<p>首先要在 <a href="http://192.168.1.1/cgi-bin/luci/admin/network/firewall/forwards" target="_blank" rel="noopener noreffer">网络-防火墙-端口转发</a> 点击新增，进行如下配置</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="Win-Remote.png"
+        data-srcset="/posts/51140c4a/Win-Remote.png, Win-Remote.png 1.5x, /posts/51140c4a/Win-Remote.png 2x"
+        data-sizes="auto"
+        alt="/posts/51140c4a/Win-Remote.png"
+        title="端口转发" /></p>
+<ul>
+<li>名称：可以随意设置</li>
+<li>协议：根据需要进行选择即可</li>
+<li>源区域：选择 WAN 表示是从外网进行访问</li>
+<li>外部端口：这里配置成 13389</li>
+<li>目标区域：选择 <code>LAN</code></li>
+<li>内部 IP 地址：配置成内网需要远程连接的主机</li>
+<li>内部端口：远程连接的默认端口是 3389</li>
+</ul>
+</li>
+<li>
+<p>然后在 <a href="http://192.168.1.1/cgi-bin/luci/admin/status/iptables" target="_blank" rel="noopener noreffer">状态-防火墙</a> 根据需要对 IPv4、IPv6 防火墙进行重启即可</p>
+</li>
+</ol>
+<p>后续就可以通过访问路由器 <code>WAN_IP:13389</code> 来远程连接内网的 Windows 主机了</p>
+<h2 id="ipv6">IPv6</h2>
+<p>在校园网环境下发现 WAN 口默认能自动获取到 IPv6 地址（但是 /128 的地址），并且在路由器上测试也能正常访问 IPv6 网站，但是局域网内的设备不能正常访问 IPv6 网站，于是选择 NAT6 的方式来解决</p>
+<p>参考 <a href="https://openwrt.org/docs/guide-user/network/ipv6/ipv6.nat6" target="_blank" rel="noopener noreffer">官网的 NAT6 文档</a>，需要在路由器内依次进行如下配置：</p>
+<p>注：基于 OpenWrt 22.03.2 版本配置，版本不同配置可能有所不同！</p>
+<ol>
+<li>
+<p>安装 kmod-ipt-nat6 包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Install packages</span>
+</span></span><span class="line"><span class="cl">opkg update
+</span></span><span class="line"><span class="cl">opkg install kmod-ipt-nat6
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置 IPv6 ULA 前缀，使得内网设备默认使用 IPv6</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Using IPv6 by default</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NET_ULA</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>uci get network.globals.ula_prefix<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> network.globals.ula_prefix<span class="o">=</span><span class="s2">&#34;d</span><span class="si">${</span><span class="nv">NET_ULA</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 默认 network.lan.ip6assign 配置可能有误，需要根据 ula_prefix 重新配置</span>
+</span></span><span class="line"><span class="cl"><span class="nv">IP6_ASSIGN</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="si">${</span><span class="nv">NET_ULA</span><span class="si">}</span> <span class="p">|</span> grep -E <span class="s1">&#39;(\d+)$&#39;</span> -o<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> network.lan.ip6assign<span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">IP6_ASSIGN</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">uci commit network
+</span></span><span class="line"><span class="cl">/etc/init.d/network restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置 WAN6 以及 LAN 端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uci <span class="nb">set</span> dhcp.wan6.ra<span class="o">=</span><span class="s1">&#39;relay&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> dhcp.wan6.dhcpv6<span class="o">=</span><span class="s1">&#39;relay&#39;</span>
+</span></span><span class="line"><span class="cl">uci delete dhcp.wan6.ndp
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> dhcp.wan6.master<span class="o">=</span><span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> dhcp.lan.ra_default<span class="o">=</span><span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> dhcp.lan.ra<span class="o">=</span><span class="s1">&#39;server&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> dhcp.lan.dhcpv6<span class="o">=</span><span class="s1">&#39;server&#39;</span>
+</span></span><span class="line"><span class="cl">uci delete dhcp.lan.ndp
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> dhcp.lan.ra_management<span class="o">=</span><span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">uci commit dhcp
+</span></span><span class="line"><span class="cl">/etc/init.d/odhcpd restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置防火墙</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Configure firewall</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@zone<span class="o">[</span>1<span class="o">]</span>.masq6<span class="o">=</span><span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">uci commit firewall
+</span></span><span class="line"><span class="cl">/etc/init.d/firewall restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加 ipv6 默认网关</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /etc/hotplug.d/iface
+</span></span><span class="line"><span class="cl">touch 90-nat66
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;#!/bin/sh&#34;</span> &gt;&gt; 90-nat66
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;[ \&#34;\$ACTION\&#34; = ifup ] || exit 0&#34;</span> &gt;&gt; 90-nat66
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;route -A inet6 add default gw \`(ip -6 route | grep default | awk &#39;{print \$5,\$6,\$7}&#39;)\`&#34;</span> &gt;&gt; 90-nat66
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以直接 <code>vim /etc/hotplug.d/iface/90-nat66</code> 填入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$ACTION</span><span class="s2">&#34;</span> <span class="o">=</span> ifup <span class="o">]</span> <span class="o">||</span> <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">route -A inet6 add default gw <span class="sb">`</span><span class="o">(</span>ip -6 route <span class="p">|</span> grep default <span class="p">|</span> awk <span class="s1">&#39;{print $5,$6,$7}&#39;</span><span class="o">)</span><span class="sb">`</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该步骤主要是让 OpenWRT 每次重启后自动添加 ipv6 默认网关，如果要立即生效可以手动执行</p>
+</li>
+<li>
+<p>重启路由器</p>
+</li>
+</ol>
+<h2 id="zerotier">ZeroTier</h2>
+<p>为了异地内网互访，ZeroTier 可以算是一个“神器”了，虽然不如 frp 稳定，但是胜在免费，无需公网 VPS</p>
+<ol>
+<li>
+<p>首先安装 zerotier 包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg update
+</span></span><span class="line"><span class="cl">opkg install zerotier
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>直接修改配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/config/zerotier
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>默认文件类似下面这样</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">config zerotier sample_config
+</span></span><span class="line"><span class="cl">    option enabled 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # persistent configuration folder (for ZT controller mode)
+</span></span><span class="line"><span class="cl">    #option config_path &#39;/etc/zerotier&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    #option port &#39;9993&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # Generate secret on first start
+</span></span><span class="line"><span class="cl">    option secret &#39;&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # Join a public network called Earth
+</span></span><span class="line"><span class="cl">    list join &#39;8056c2e21c000001&#39;
+</span></span><span class="line"><span class="cl">    #list join &#39;&lt;other_network&gt;&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改其中的 <code>enabled</code> 为 1，开启服务，并且 <code>list join</code> 后的网络 ID 改为自己申请的网络 ID 即可</p>
+<p>也可以新建一个配置，填上自己的网络 ID，如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uci <span class="nb">set</span> zerotier.openwrt_network<span class="o">=</span>zerotier
+</span></span><span class="line"><span class="cl">uci add_list zerotier.openwrt_network.join<span class="o">=</span><span class="s1">&#39;xxxxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> zerotier.openwrt_network.enabled<span class="o">=</span><span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">uci commit zerotier
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>重启路由器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置防火墙</p>
+<p>开启外网 udp 到 9993 端口的访问权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uci add firewall rule
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@rule<span class="o">[</span>-1<span class="o">]</span>.name<span class="o">=</span><span class="s1">&#39;Allow-ZeroTier-Inbound&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@rule<span class="o">[</span>-1<span class="o">]</span>.src<span class="o">=</span><span class="s1">&#39;*&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@rule<span class="o">[</span>-1<span class="o">]</span>.target<span class="o">=</span><span class="s1">&#39;ACCEPT&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@rule<span class="o">[</span>-1<span class="o">]</span>.proto<span class="o">=</span><span class="s1">&#39;udp&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@rule<span class="o">[</span>-1<span class="o">]</span>.dest_port<span class="o">=</span><span class="s1">&#39;9993&#39;</span>
+</span></span><span class="line"><span class="cl">uci commit firewall
+</span></span><span class="line"><span class="cl">/etc/init.d/firewall restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置 ZeroTier 的路由</p>
+<p>在 <a href="http://192.168.1.1/cgi-bin/luci/admin/network/network" target="_blank" rel="noopener noreffer">网络-接口</a> 界面新建一个接口，ztXXXXXXXX 根据实际情况替换，后续类似不再重复</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">名称：ZeroTier
+</span></span><span class="line"><span class="cl">协议：不配置协议
+</span></span><span class="line"><span class="cl">设备：ztXXXXXXXX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令行也可以</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uci <span class="nb">set</span> network.ZeroTier<span class="o">=</span>interface
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> network.ZeroTier.proto<span class="o">=</span><span class="s1">&#39;none&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> network.ZeroTier.device<span class="o">=</span><span class="s1">&#39;ztXXXXXXXX&#39;</span>
+</span></span><span class="line"><span class="cl">uci commit network
+</span></span><span class="line"><span class="cl">/etc/init.d/network restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在 <a href="http://192.168.1.1/cgi-bin/luci/admin/network/firewall" target="_blank" rel="noopener noreffer">网络-防火墙</a> 界面新建一个防火墙区域</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">名称: zerotier
+</span></span><span class="line"><span class="cl">入站数据：接受
+</span></span><span class="line"><span class="cl">出站数据：接受
+</span></span><span class="line"><span class="cl">转发：拒绝
+</span></span><span class="line"><span class="cl">IP 动态伪装: [√]
+</span></span><span class="line"><span class="cl">MSS 钳制: [ ]
+</span></span><span class="line"><span class="cl">涵盖的网络: [√] ZeroTier
+</span></span><span class="line"><span class="cl">允许转发到目标区域：[√] lan
+</span></span><span class="line"><span class="cl">                [√] wan wan6
+</span></span><span class="line"><span class="cl">允许来自源区域的转发：[√] lan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令行也可以，仅供参考</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uci add firewall zone
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@zone<span class="o">[</span>-1<span class="o">]</span>.name<span class="o">=</span><span class="s1">&#39;zerotier&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@zone<span class="o">[</span>-1<span class="o">]</span>.input<span class="o">=</span><span class="s1">&#39;ACCEPT&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@zone<span class="o">[</span>-1<span class="o">]</span>.output<span class="o">=</span><span class="s1">&#39;ACCEPT&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@zone<span class="o">[</span>-1<span class="o">]</span>.forward<span class="o">=</span><span class="s1">&#39;ACCEPT&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@zone<span class="o">[</span>-1<span class="o">]</span>.masq<span class="o">=</span><span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">uci add_list firewall.@zone<span class="o">[</span>-1<span class="o">]</span>.network<span class="o">=</span><span class="s1">&#39;ZeroTier&#39;</span>
+</span></span><span class="line"><span class="cl">uci add firewall forwarding
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@forwarding<span class="o">[</span>-1<span class="o">]</span>.src<span class="o">=</span><span class="s1">&#39;zerotier&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@forwarding<span class="o">[</span>-1<span class="o">]</span>.dest<span class="o">=</span><span class="s1">&#39;lan&#39;</span>
+</span></span><span class="line"><span class="cl">uci add firewall forwarding
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@forwarding<span class="o">[</span>-1<span class="o">]</span>.src<span class="o">=</span><span class="s1">&#39;zerotier&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@forwarding<span class="o">[</span>-1<span class="o">]</span>.dest<span class="o">=</span><span class="s1">&#39;wan&#39;</span>
+</span></span><span class="line"><span class="cl">uci add firewall forwarding
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@forwarding<span class="o">[</span>-1<span class="o">]</span>.src<span class="o">=</span><span class="s1">&#39;lan&#39;</span>
+</span></span><span class="line"><span class="cl">uci <span class="nb">set</span> firewall.@forwarding<span class="o">[</span>-1<span class="o">]</span>.dest<span class="o">=</span><span class="s1">&#39;zerotier&#39;</span>
+</span></span><span class="line"><span class="cl">uci commit firewall
+</span></span><span class="line"><span class="cl">/etc/init.d/firewall restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至此路由器本身的配置就完了，然后需要去 <a href="https://my.zerotier.com/network" target="_blank" rel="noopener noreffer">zerotier 官网</a> 配置一下路由</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="ZeroTier-Routes.png"
+        data-srcset="/posts/51140c4a/ZeroTier-Routes.png, ZeroTier-Routes.png 1.5x, /posts/51140c4a/ZeroTier-Routes.png 2x"
+        data-sizes="auto"
+        alt="/posts/51140c4a/ZeroTier-Routes.png"
+        title="ZeroTier 路由管理" /></p>
+<p>例如我的局域网段选的 <code>192.168.192.*</code>，两个路由器实际的内网的 LAN 口配置依次为 <code>192.168.22.0/24</code> 和 <code>192.168.33.0/24</code> 对应左边的红框，路由器自身的 ZeroTier 的虚拟 IP 为 <code>192.168.192.22</code> 和 <code>192.168.192.33</code> 则对应着右边红框，这里不详细展开，可以参考 <a href="https://stray.love/jiao-cheng/zerotier-zhong-jie-jiao-cheng" target="_blank" rel="noopener noreffer">这篇博文</a></p>
+</li>
+</ol>
+<h2 id="ftp">FTP</h2>
+<p>配置好 USB 后，就可以配置 FTP 来共享 USB 设备</p>
+<ol>
+<li>
+<p>首先安装 vsftpd 包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install vsftpd
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>修改配置文件 <code>/etc/vsftpd.conf</code>，这里给出个人的配置，可以参考</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">background</span><span class="o">=</span><span class="s">YES</span>
+</span></span><span class="line"><span class="cl"><span class="na">listen</span><span class="o">=</span><span class="s">YES</span>
+</span></span><span class="line"><span class="cl"><span class="na">anonymous_enable</span><span class="o">=</span><span class="s">NO</span>
+</span></span><span class="line"><span class="cl"><span class="na">local_enable</span><span class="o">=</span><span class="s">YES</span>
+</span></span><span class="line"><span class="cl"><span class="na">write_enable</span><span class="o">=</span><span class="s">YES</span>
+</span></span><span class="line"><span class="cl"><span class="na">local_umask</span><span class="o">=</span><span class="s">022</span>
+</span></span><span class="line"><span class="cl"><span class="na">check_shell</span><span class="o">=</span><span class="s">NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#dirmessage_enable=YES</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#ftpd_banner=Welcome to MINI FTP service.</span>
+</span></span><span class="line"><span class="cl"><span class="na">session_support</span><span class="o">=</span><span class="s">NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#syslog_enable=YES</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#userlist_enable=YES</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#userlist_deny=NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#userlist_file=/etc/vsftpd/vsftpd.users</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#xferlog_enable=YES</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#xferlog_file=/var/log/vsftpd.log</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#xferlog_std_format=YES</span>
+</span></span><span class="line"><span class="cl"><span class="c1">###</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### TLS/SSL options</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### example key generation: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd_privkey.pem -out /etc</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#ssl_enable=YES</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#allow_anon_ssl=NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#force_local_data_ssl=NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#force_local_logins_ssl=NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#ssl_tlsv1=YES</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#ssl_sslv2=NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#ssl_sslv3=NO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#rsa_cert_file=/etc/vsftpd/vsftpd_cert.pem</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#rsa_private_key_file=/etc/vsftpd/vsftpd_privkey.pem</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 共享的目录位置</span>
+</span></span><span class="line"><span class="cl"><span class="na">local_root</span><span class="o">=</span><span class="s">/mnt/ext4</span>
+</span></span><span class="line"><span class="cl"><span class="na">pasv_enable</span><span class="o">=</span><span class="s">YES</span>
+</span></span><span class="line"><span class="cl"><span class="na">pasv_min_port</span><span class="o">=</span><span class="s">10090</span>
+</span></span><span class="line"><span class="cl"><span class="na">pasv_max_port</span><span class="o">=</span><span class="s">10100</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>然后参考之前的 <a href="#%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3" rel="">开放端口</a>，打开 20、21、10090-10100 端口就可以在外网访问 FTP 服务器了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="Allow-FTP-WAN.png"
+        data-srcset="/posts/51140c4a/Allow-FTP-WAN.png, Allow-FTP-WAN.png 1.5x, /posts/51140c4a/Allow-FTP-WAN.png 2x"
+        data-sizes="auto"
+        alt="/posts/51140c4a/Allow-FTP-WAN.png"
+        title="开放 FTP 端口" /></p>
+</li>
+<li>
+<p>之后重启 <code>vsftpd</code> 服务即可使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/init.d/vsftpd restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>P.S. 连接 ftp 服务器的账号密码就是路由器的 root 账号密码</p>
+<h2 id="smb">SMB</h2>
+<p>使用 Samba 来共享的设备可以在 Windows 的文件资源管理器中挂载，使用起来和本地磁盘一样（在局域网内）</p>
+<ol>
+<li>
+<p>安装 samba4-server 以及 LuCI 管理界面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install samba4-server
+</span></span><span class="line"><span class="cl">opkg install luci-app-samba4 luci-i18n-samba4-zh-cn
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在网页端的 <a href="http://192.168.1.1/cgi-bin/luci/admin/services/samba4" target="_blank" rel="noopener noreffer">服务-网络共享</a> 中进行配置，个人配置如下，可以参考</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="Samba.png"
+        data-srcset="/posts/51140c4a/Samba.png, Samba.png 1.5x, /posts/51140c4a/Samba.png 2x"
+        data-sizes="auto"
+        alt="/posts/51140c4a/Samba.png"
+        title="Samba 配置" /></p>
+</li>
+<li>
+<p>之后重启 <code>samba4</code> 服务即可使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/init.d/samba4 restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>P.S. 连接 Samba 服务器的账号密码也是路由器的 root 账号密码</p>
+<h2 id="bt-下载">BT 下载</h2>
+<p>transmission 是一个轻量级跨平台的 BT 下载客户端</p>
+<ol>
+<li>
+<p>安装 transmission</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install transmission-daemon
+</span></span><span class="line"><span class="cl">opkg install transmission-cli
+</span></span><span class="line"><span class="cl">opkg install transmission-web   <span class="c1"># web 界面，可选</span>
+</span></span><span class="line"><span class="cl">opkg install transmission-remote
+</span></span><span class="line"><span class="cl">opkg install luci-app-transmission luci-i18n-transmission-zh-cn
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>直接修改 <code>/etc/config/transmission</code>，或者在网页端的 <a href="http://192.168.1.1/cgi-bin/luci/admin/services/transmission" target="_blank" rel="noopener noreffer">服务-Transmission</a> 进行配置，下面给出个人配置，可以参考</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="Transmission.png"
+        data-srcset="/posts/51140c4a/Transmission.png, Transmission.png 1.5x, /posts/51140c4a/Transmission.png 2x"
+        data-sizes="auto"
+        alt="/posts/51140c4a/Transmission.png"
+        title="Transmission 配置" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">config transmission</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option config_overwrite &#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option mem_percentage &#39;50&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option nice &#39;10&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option alt_speed_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option alt_speed_time_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option bind_address_ipv4 &#39;0.0.0.0&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option bind_address_ipv6 &#39;::&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option blocklist_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option cache_size_mb &#39;2&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option dht_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option download_queue_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option download_queue_size &#39;4&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option encryption &#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option idle_seeding_limit_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option lazy_bitfield_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option lpd_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option message_level &#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option peer_limit_global &#39;240&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option peer_limit_per_torrent &#39;60&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option peer_port &#39;51413&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option peer_port_random_on_start &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option peer_socket_tos &#39;default&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option pex_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option port_forwarding_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option preallocation &#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option queue_stalled_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option queue_stalled_minutes &#39;30&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option ratio_limit &#39;2.0000&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rename_partial_files &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_bind_address &#39;0.0.0.0&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_host_whitelist_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_port &#39;9091&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_url &#39;/transmission/&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_whitelist_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option scrape_paused_torrents_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option script_torrent_done_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option seed_queue_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option speed_limit_down_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option speed_limit_up_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option start_added_torrents &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option umask &#39;18&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option utp_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option scrape_paused_torrents &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option watch_dir_enabled &#39;false&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option enabled &#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option user &#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option group &#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option upload_slots_per_torrent &#39;10&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option download_dir &#39;/mnt/ext4/transmission&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option incomplete_dir_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option incomplete_dir &#39;/mnt/ext4/transmission/incomplete&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option trash_original_torrent_files &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_authentication_required &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_username &#39;rpc_username&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option rpc_password &#39;rpc_password&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option ratio_limit_enabled &#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">option config_dir &#39;/etc/transmission&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>之后重启 <code>transmission</code> 服务即可使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/init.d/transmission restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>连接的账号密码为自行配置的 <code>RPC</code> 连接的账号密码</p>
+<p>默认的 <a href="http://192.168.1.1:9091/transmission/web/" target="_blank" rel="noopener noreffer">Web 界面</a> 比较简陋，并且不能配置 tracker，个人推荐使用 <a href="https://github.com/transmission-remote-gui/transgui" target="_blank" rel="noopener noreffer">transgui</a> 来 <code>RPC</code> 连接使用</p>
+<p>如果需要远程访问，则需要将 <code>rpc_port</code> 配置的端口开放，具体流程参考 <a href="#%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3" rel="">上文</a></p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://openwrt.org/docs/guide-user/luci/luci.essentials" target="_blank" rel="noopener noreffer">【OpenWrt】LuCI</a></li>
+<li><a href="https://blog.csdn.net/weixin_43274097/article/details/107197717" target="_blank" rel="noopener noreffer">【CSDN】luci.cbi 报错</a></li>
+<li><a href="https://github.com/kuoruan/luci-app-v2ray/issues/42" target="_blank" rel="noopener noreffer">【GitHub】应用设置界面错误</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/storage/usb-installing" target="_blank" rel="noopener noreffer">【OpenWrt】安装 USB 驱动</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/storage/usb-drives" target="_blank" rel="noopener noreffer">【OpenWrt】使用 USB 设备</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/additional-software/extroot_configuration" target="_blank" rel="noopener noreffer">【OpenWrt】Extroot 配置</a></li>
+<li><a href="https://github.com/hyrathb/mentohust" target="_blank" rel="noopener noreffer">【GitHub】MentoHUST 加入 v4 支持</a></li>
+<li><a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk" target="_blank" rel="noopener noreffer">【GitHub】MentoHUST-OpenWrt-ipk</a></li>
+<li><a href="https://github.com/BoringCat/luci-app-mentohust" target="_blank" rel="noopener noreffer">【GitHub】OpenWrt/LEDE LuCI for MentoHUST</a></li>
+<li><a href="https://github.com/updateing/minieap" target="_blank" rel="noopener noreffer">【GitHub】MiniEAP</a></li>
+<li><a href="https://github.com/BoringCat/minieap-openwrt" target="_blank" rel="noopener noreffer">【GitHub】minieap-openwrt</a></li>
+<li><a href="https://github.com/BoringCat/luci-app-minieap" target="_blank" rel="noopener noreffer">【GitHub】OpenWrt/LEDE LuCI for minieap</a></li>
+<li><a href="https://github.com/updateing/minieap/issues/43" target="_blank" rel="noopener noreffer">【GitHub】no-auto-reauth 配置项的逻辑判断有问题</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/firewall/firewall_configuration#rules" target="_blank" rel="noopener noreffer">【OpenWrt】firewall rules</a></li>
+<li><a href="https://openwrt.org/zh-cn/doc/uci/firewall#%E4%B8%BE%E4%BE%8B" target="_blank" rel="noopener noreffer">【OpenWrt】防火墙配置举例</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/network/ipv6/ipv6.nat6" target="_blank" rel="noopener noreffer">【OpenWrt】IPv6 NAT6 配置</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/network/ipv6/ipv6_extras#using_ipv6_by_default" target="_blank" rel="noopener noreffer">【OpenWrt】默认使用 IPv6</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/network/ipv6/ipv6_extras#announcing_default_ipv6_route" target="_blank" rel="noopener noreffer">【OpenWrt】默认 IPv6 路由</a></li>
+<li><a href="https://www.bilibili.com/video/BV1Ny4y1x7Pa" target="_blank" rel="noopener noreffer">【Bilibili】【老湿基】IPv6 竟然也可以开 NAT｜OpenWRT IPv6 NAT 手把手教学</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/346606856" target="_blank" rel="noopener noreffer">【Zhihu】如何开启 NAT6</a></li>
+<li><a href="https://github.com/mwarning/zerotier-openwrt/wiki" target="_blank" rel="noopener noreffer">【GitHub】ZeroTier setup on OpenWRT</a></li>
+<li><a href="https://stray.love/jiao-cheng/zerotier-zhong-jie-jiao-cheng" target="_blank" rel="noopener noreffer">【个人博客】ZeroTier 中阶教程</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/services/nas/ftp.overview" target="_blank" rel="noopener noreffer">【OpenWrt】FTP</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/services/nas/samba" target="_blank" rel="noopener noreffer">【OpenWrt】Samba</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/services/downloading_and_filesharing/transmission" target="_blank" rel="noopener noreffer">【OpenWrt】transmission</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="reward-container">
+    
+    <div>请我一杯咖啡吧！</div>
+    <button>赞赏</button>
+    <div class="post-reward">
+        <div>
+            
+            <img src="/images/wechatpay.png" alt="微信">
+            <span>微信</span>
+        </div>
+        <div>
+            
+            <img src="/images/alipay.jpg" alt="支付宝">
+            <span>支付宝</span>
+        </div>
+    </div>
+</div>
+
+<script src="/js/reward.js"></script>
+
+
+
+    <div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/51140c4a/" title="OpenWrt 配置使用">https://ywang-wnlo.github.io/posts/51140c4a/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/%E9%94%90%E6%8D%B7/">锐捷</a>
+                </span><span><a href="/tags/ipv6/">IPv6</a>
+                </span><span><a href="/tags/nas/">NAS</a>
+                </span><span><a href="/tags/openwrt/">OpenWrt</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新于 2022-11-19</span>
+            </div><div class="post-info-mod"></div>
+        </div></div><div class="post-nav"><a href="/posts/8507aaa1/" class="prev" rel="prev" title="OpenWrt 简介和安装"><i class="fa-solid fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/posts/c142853f/" class="next" rel="next" title="io_uring 简介和使用">Next Post<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/khusika/FeelIt" target="_blank" rel="noopener noreffer" title="FeelIt 1.0.1"><i class="fa-solid fa-hand-holding-heart fa-fw"></i> FeelIt</a>
+        </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/ywang-wnlo">Zeus</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('乐园\u00A0Service Worker Registered');
+        }, err => console.error('乐园\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('乐园\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fa-solid fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fa-solid fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"ywang-wnlo/ywang-wnlo.github.io"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

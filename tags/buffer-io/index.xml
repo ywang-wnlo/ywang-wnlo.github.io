@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>buffer IO - 标签 - 乐园</title>
+        <link>https://ywang-wnlo.github.io/tags/buffer-io/</link>
+        <description>buffer IO - 标签 - 乐园</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 05 Dec 2021 22:22:08 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/buffer-io/" rel="self" type="application/rss+xml" /><item>
+    <title>page cache 简介</title>
+    <link>https://ywang-wnlo.github.io/posts/9ba60726/</link>
+    <pubDate>Sun, 05 Dec 2021 22:22:08 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/9ba60726/</guid>
+    <description><![CDATA[当前内容基于 Linux Kernel v5.4.121 page cache 由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的]]></description>
+</item>
+<item>
+    <title>page cache 回写机制</title>
+    <link>https://ywang-wnlo.github.io/posts/646202b9/</link>
+    <pubDate>Fri, 19 Nov 2021 16:24:30 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/646202b9/</guid>
+    <description><![CDATA[当前内容基于 Linux Kernel v5.4.121 writeback 回写 在 page cache 简介 有过介绍 buffer IO 通过 page cache 进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能 写入到 page cache 的数据不会立刻写]]></description>
+</item>
+</channel>
+</rss>
