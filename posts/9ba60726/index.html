@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/9ba60726/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-05T22:22:08+00:00" />
-<meta property="article:modified_time" content="2023-09-13T15:12:15+08:00" />
+<meta property="article:modified_time" content="2022-11-16T10:33:39+00:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
@@ -18,7 +18,10 @@
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/9ba60726/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/9a0b7c3b/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/todo/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/9ba60726/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/9a0b7c3b/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/abac0c46/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -28,14 +31,25 @@
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/"
         },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "buffer IO, kernel, page cache, writeback, todo","wordcount":  3923 ,
-        "url": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/","datePublished": "2021-12-05T22:22:08+00:00","dateModified": "2023-09-13T15:12:15+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/","datePublished": "2021-12-05T22:22:08+00:00","dateModified": "2022-11-16T10:33:39+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
                 "@type": "Person",
                 "name": "Zeus"
             },"description": ""
     }
-    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PST75Y16TW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-PST75Y16TW', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -157,7 +171,7 @@
 <h2 id="page-cache">page cache</h2>
 <p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
 <!-- more -->
-<p>经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9/" rel="">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的 <a href="/posts/todo" rel="">预读机制</a> 提升了顺序读性能</p>
+<p>经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9/" rel="">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的预读机制<!-- todo -->提升了顺序读性能</p>
 <h2 id="直接-io-与-缓存-io">直接 IO 与 缓存 IO</h2>
 <p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
 <ol>
@@ -1229,11 +1243,10 @@
                 </span><span><a href="/tags/writeback/">writeback</a>
                 </span><span><a href="/tags/todo/">todo</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新于 2023-09-13&nbsp;<a class="git-hash" href="https://github.com/ywang-wnlo/ywang-wnlo.github.io/commit/38f40fece7c2bb9e75616487f689c153eac3548d" target="_blank" title="committed&nbsp;by&nbsp;Yu Wang(ywang_wnlo@hust.edu.cn)&nbsp;38f40fe:&nbsp;修复 todo 链接">
-                            <i class="fa-solid fa-hashtag fa-fw"></i>38f40fe</a></span>
+                <span>更新于 2022-11-16</span>
             </div><div class="post-info-mod"></div>
         </div></div><div class="post-nav"><a href="/posts/9a0b7c3b/" class="prev" rel="prev" title="NexT 主题的配置使用记录"><i class="fa-solid fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/posts/todo/" class="next" rel="next" title="TODO">Next Post<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div>
+            <a href="/posts/abac0c46/" class="next" rel="next" title="Hexo 配置主流搜索引擎收录流程记录">Next Post<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
