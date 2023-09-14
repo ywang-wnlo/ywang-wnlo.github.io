@@ -4,22 +4,22 @@
         <link>https://ywang-wnlo.github.io/tags/%E5%BC%82%E6%AD%A5-io/</link>
         <description>异步 IO - 标签 - 乐园</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 30 Oct 2021 16:18:05 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/%E5%BC%82%E6%AD%A5-io/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 30 Oct 2021 16:18:05 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/%E5%BC%82%E6%AD%A5-io/" rel="self" type="application/rss+xml" /><item>
     <title>io_uring 内核源码分析</title>
     <link>https://ywang-wnlo.github.io/posts/4f0d345c/</link>
-    <pubDate>Sat, 30 Oct 2021 16:18:05 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4f0d345c/</guid>
+    <pubDate>Sat, 30 Oct 2021 16:18:05 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4f0d345c/</guid>
     <description><![CDATA[io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的内核源码分析]]></description>
 </item>
 <item>
     <title>io_uring 用户库源码分析</title>
     <link>https://ywang-wnlo.github.io/posts/d7259d1d/</link>
-    <pubDate>Fri, 29 Oct 2021 09:49:00 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/d7259d1d/</guid>
+    <pubDate>Fri, 29 Oct 2021 09:49:00 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/d7259d1d/</guid>
     <description><![CDATA[io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的用户库源码分析]]></description>
 </item>
 <item>
     <title>io_uring 简介和使用</title>
     <link>https://ywang-wnlo.github.io/posts/c142853f/</link>
-    <pubDate>Thu, 28 Oct 2021 16:18:05 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/c142853f/</guid>
+    <pubDate>Thu, 28 Oct 2021 16:18:05 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/c142853f/</guid>
     <description><![CDATA[io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的简介和使用]]></description>
 </item>
 </channel>

@@ -4,66 +4,66 @@
         <link>https://ywang-wnlo.github.io/</link>
         <description>一个新时代农民工的随手笔记</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 09 Sep 2023 23:35:41 &#43;0000</lastBuildDate>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</lastBuildDate>
             <atom:link href="https://ywang-wnlo.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>Debug 从入门到入土</title>
     <link>https://ywang-wnlo.github.io/posts/89f2ed7d/</link>
-    <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
+    <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
     <description><![CDATA[写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）]]></description>
 </item>
 <item>
     <title>小米 WR30U 解锁并刷机</title>
     <link>https://ywang-wnlo.github.io/posts/e6410576/</link>
-    <pubDate>Mon, 21 Aug 2023 14:25:43 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
+    <pubDate>Mon, 21 Aug 2023 14:25:43 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
     <description><![CDATA[本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下]]></description>
 </item>
 <item>
     <title>Ubuntu 环境配置大合集</title>
     <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
-    <pubDate>Thu, 24 Nov 2022 17:16:00 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
+    <pubDate>Thu, 24 Nov 2022 17:16:00 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
     <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置]]></description>
 </item>
 <item>
     <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
     <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
-    <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
+    <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
     <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
 </item>
 <item>
     <title>Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter</title>
     <link>https://ywang-wnlo.github.io/posts/3b7ae835/</link>
-    <pubDate>Wed, 16 Nov 2022 23:03:35 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/3b7ae835/</guid>
+    <pubDate>Wed, 16 Nov 2022 23:03:35 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/3b7ae835/</guid>
     <description><![CDATA[本文主要来源于 VCB-Studio 官网的科普教程，个人重新了梳理，记录 Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter 的配置过程]]></description>
 </item>
 <item>
     <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
     <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
-    <pubDate>Wed, 16 Nov 2022 13:43:05 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
+    <pubDate>Wed, 16 Nov 2022 13:43:05 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
     <description><![CDATA[本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置]]></description>
 </item>
 <item>
     <title>美化 Shell 之 Linux Zsh 篇</title>
     <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
-    <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
+    <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
     <description><![CDATA[本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置]]></description>
 </item>
 <item>
     <title>从 SSLEOFError 到正确配置 Proxy</title>
     <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
-    <pubDate>Tue, 29 Mar 2022 13:48:31 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
+    <pubDate>Tue, 29 Mar 2022 13:48:31 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
     <description><![CDATA[本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程]]></description>
 </item>
 <item>
     <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
     <link>https://ywang-wnlo.github.io/posts/29e0b18c/</link>
-    <pubDate>Mon, 14 Mar 2022 16:09:34 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/29e0b18c/</guid>
+    <pubDate>Mon, 14 Mar 2022 16:09:34 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/29e0b18c/</guid>
     <description><![CDATA[最近电脑有个问题持续了好久：当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下，在微信内通过默认浏览器打开总是没有反应。本文主要记录了修复 chrome 打不开微信或者部分第三方应用内链接的过程]]></description>
 </item>
 <item>
     <title>解决 pip 安装第三方包时因 SSL 报错</title>
     <link>https://ywang-wnlo.github.io/posts/2e7aa01a/</link>
-    <pubDate>Tue, 08 Mar 2022 14:37:08 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/2e7aa01a/</guid>
+    <pubDate>Tue, 08 Mar 2022 14:37:08 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/2e7aa01a/</guid>
     <description><![CDATA[好久没用 python，最近重新下载安装好 python 后发现用 pip 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的。本文主要记录了其解决办法]]></description>
 </item>
 </channel>

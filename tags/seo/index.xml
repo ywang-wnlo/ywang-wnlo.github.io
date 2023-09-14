@@ -4,10 +4,10 @@
         <link>https://ywang-wnlo.github.io/tags/seo/</link>
         <description>SEO - 标签 - 乐园</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 08 Dec 2021 22:00:29 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/seo/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 08 Dec 2021 22:00:29 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/seo/" rel="self" type="application/rss+xml" /><item>
     <title>Hexo 配置主流搜索引擎收录流程记录</title>
     <link>https://ywang-wnlo.github.io/posts/abac0c46/</link>
-    <pubDate>Wed, 08 Dec 2021 22:00:29 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/abac0c46/</guid>
+    <pubDate>Wed, 08 Dec 2021 22:00:29 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/abac0c46/</guid>
     <description><![CDATA[想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录]]></description>
 </item>
 </channel>

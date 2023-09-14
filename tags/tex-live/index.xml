@@ -4,10 +4,10 @@
         <link>https://ywang-wnlo.github.io/tags/tex-live/</link>
         <description>TeX Live - 标签 - 乐园</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 19 Oct 2021 10:08:26 &#43;0000</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/tex-live/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 19 Oct 2021 10:08:26 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/tex-live/" rel="self" type="application/rss+xml" /><item>
     <title>LaTeX 环境配置</title>
     <link>https://ywang-wnlo.github.io/posts/4f94956/</link>
-    <pubDate>Tue, 19 Oct 2021 10:08:26 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4f94956/</guid>
+    <pubDate>Tue, 19 Oct 2021 10:08:26 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4f94956/</guid>
     <description><![CDATA[LaTex 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要介绍 LaTeX 的环境配置，包括网页环境和本地环境]]></description>
 </item>
 </channel>
