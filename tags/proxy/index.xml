@@ -8,7 +8,7 @@
     <title>从 SSLEOFError 到正确配置 Proxy</title>
     <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
     <pubDate>Tue, 29 Mar 2022 13:48:31 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
-    <description><![CDATA[本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写 踩坑 在前几天搞定 pip 的 SSL 认证之后，结果在利用 requests 库请求 HTTPS 网站又出现了 SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1129)')) 的 SSL 相关错误 经过一系]]></description>
+    <description><![CDATA[本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程]]></description>
 </item>
 </channel>
 </rss>

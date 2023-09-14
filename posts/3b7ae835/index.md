@@ -2,7 +2,6 @@
 
 
 本文主要来源于 VCB-Studio 官网的 [科普教程](https://vcb-s.com/archives/7228)，个人重新梳理进行备份
-<!-- more -->
 
 ## 安装程序
 

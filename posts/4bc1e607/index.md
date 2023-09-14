@@ -2,7 +2,6 @@
 
 
 本文主要记录在利用 [YCSB](https://github.com/brianfrankcooper/YCSB) 使用配置文件测试 [RocksDB](https://github.com/facebook/rocksdb) 的过程中遇到的一些问题以及相应的解决办法
-<!-- more -->
 
 ## 简介
 

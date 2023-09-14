@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>美化 Shell 之 Linux Zsh 篇 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="美化 Shell 之 Linux Zsh 篇" />
-<meta property="og:description" content="简介 Z shell（Zsh）是一款可用作互动式登入的shell及指令码编写的命令直译器。 Zsh 对 Linux 默认的 Bourne shell（sh）做出了大量改进，同时加" />
+<meta property="og:description" content="本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/f2cdf8a6/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-16T11:04:47+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="美化 Shell 之 Linux Zsh 篇"/>
-<meta name="twitter:description" content="简介 Z shell（Zsh）是一款可用作互动式登入的shell及指令码编写的命令直译器。 Zsh 对 Linux 默认的 Bourne shell（sh）做出了大量改进，同时加"/>
+<meta name="twitter:description" content="本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/f2cdf8a6\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Linux, Shell, Zsh","wordcount":  948 ,
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Linux, Shell, Zsh, Oh My Zsh, Nerd Font","wordcount":  922 ,
         "url": "https:\/\/ywang-wnlo.github.io\/posts\/f2cdf8a6\/","datePublished": "2022-11-16T11:04:47+00:00","dateModified": "2022-11-16T19:20:41+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
@@ -132,8 +132,10 @@ if (!doNotTrack) {
                 <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw"></i>Linux</a>&nbsp;<a href="/categories/shell/"><i class="fa-regular fa-folder fa-fw"></i>Shell</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
                         </span><span><a href="/tags/shell/"><i class="fa fa-tag fa-fw"></i>Shell</a>&nbsp;
                         </span><span><a href="/tags/zsh/"><i class="fa fa-tag fa-fw"></i>Zsh</a>&nbsp;
+                        </span><span><a href="/tags/oh-my-zsh/"><i class="fa fa-tag fa-fw"></i>Oh My Zsh</a>&nbsp;
+                        </span><span><a href="/tags/nerd-font/"><i class="fa fa-tag fa-fw"></i>Nerd Font</a>&nbsp;
                         </span></div>
-                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 948 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 922 字</span>&nbsp;
                     <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟</span>&nbsp;</div>
             </div>
 
@@ -164,7 +166,6 @@ if (!doNotTrack) {
 <p>为了美化以及快速配置 <code>Zsh</code>，<code>Oh My Zsh</code> 应运而生。
 <code>Oh My Zsh</code> 是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理 <code>Zsh</code> 配置提供了很大的便利</p>
 <p>本文主要记录自己的 <code>Oh My Zsh</code> 安装以及配置流程</p>
-<!-- more -->
 <h2 id="安装-zsh">安装 <code>Zsh</code></h2>
 <p>如果没有安装 <code>Zsh</code> 则需要手动安装一下，以 Ubuntu 为例：</p>
 <div class="highlight"><div class="chroma">
@@ -203,7 +204,7 @@ if (!doNotTrack) {
 </div><p>类似于 <code>bash</code> 的配置文件 <code>~/.bashrc</code> 命名规则类似，<code>Zsh</code> 的配置文件是 <code>~/.zshrc</code>，后续配置只需对该配置文件进行小小的修改即可</p>
 <h2 id="主题配置">主题配置</h2>
 <p><code>Oh My Zsh</code> 支持非常丰富的主题，<a href="https://github.com/ohmyzsh/ohmyzsh/wiki/Themes" target="_blank" rel="noopener noreffer">官方</a> 给出了内置的所有主题的预览图</p>
-<p>部分主题需要额外 <a href="https://github.com/powerline/fonts" target="_blank" rel="noopener noreffer">PL 字体</a> 以及 <a href="https://www.nerdfonts.com/" target="_blank" rel="noopener noreffer">Nerd 字体</a> 支持，参见 [安装 Nerd 字体](/posts/8ad4716e/#安装 Nerd 字体)</p>
+<p>部分主题需要额外 <a href="https://github.com/powerline/fonts" target="_blank" rel="noopener noreffer">PL 字体</a> 以及 <a href="https://www.nerdfonts.com/" target="_blank" rel="noopener noreffer">Nerd 字体</a> 支持，参见 <a href="/posts/8ad4716e/#%e5%ae%89%e8%a3%85-nerd-%e5%ad%97%e4%bd%93" rel="">安装 Nerd 字体</a></p>
 <p>由于在 <a href="/posts/8ad4716e/" rel=""><code>Oh My Posh</code></a> 中用习惯了 <code>powerlevel10k</code>，并且 <code>powerlevel10k</code> 也支持 <code>Oh My Zsh</code>，于是后来又额外安装了 <code>powerlevel10k</code> 主题</p>
 <p>安装流程也很方便，直接从 GitHub 拉取仓库，然后修改配置文件即可</p>
 <div class="highlight"><div class="chroma">
@@ -334,6 +335,8 @@ if (!doNotTrack) {
 <div class="post-info"><div class="post-info-tag"><span><a href="/tags/linux/">Linux</a>
                 </span><span><a href="/tags/shell/">Shell</a>
                 </span><span><a href="/tags/zsh/">Zsh</a>
+                </span><span><a href="/tags/oh-my-zsh/">Oh My Zsh</a>
+                </span><span><a href="/tags/nerd-font/">Nerd Font</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
                 <span>更新于 2022-11-16</span>
             </div><div class="post-info-mod"></div>

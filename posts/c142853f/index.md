@@ -4,7 +4,6 @@
 ## 简介
 
 io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。相比 Linux 在 2.6 版本引入的 AIO，io_uring 性能强很多，接近 SPDK[[1]](https://lore.kernel.org/linux-block/20190116175003.17880-1-axboe@kernel.dk/)，同时支持 buffer IO
-<!-- more -->
 
 io_uring 的作者 [Jens Axboe](https://en.wikipedia.org/wiki/Jens_Axboe) 是 Linux 内核块层和其他块设备的维护者，同时也是 CFQ、Noop、Deadline 调度器、blktrace 以及 FIO 的作者，对内核块层非常熟悉
 

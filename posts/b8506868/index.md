@@ -1,7 +1,7 @@
 # 利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用
 
+
 本文主要记录自己在利用 [RocksDB](https://github.com/facebook/rocksdb) + [ZenFS](https://github.com/westerndigitalcorporation/zenfs) 测试 [ZNS](https://zonedstorage.io/docs/introduction/zns) 过程中遇到的一些问题以及相应的解决办法
-<!-- more -->
 
 ## 配置 ZNS 环境
 

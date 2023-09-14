@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>美化 Shell 之 Windows/Linux PowerShell 篇 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="美化 Shell 之 Windows/Linux PowerShell 篇" />
-<meta property="og:description" content="简介 PowerShell 是 Windows 最新的 Shell，而且在 GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 Linux 用户会选择 PowerShell 为了美化 PowerShell，个人选择了 Oh My Po" />
+<meta property="og:description" content="本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/8ad4716e/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-16T13:43:05+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="美化 Shell 之 Windows/Linux PowerShell 篇"/>
-<meta name="twitter:description" content="简介 PowerShell 是 Windows 最新的 Shell，而且在 GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 Linux 用户会选择 PowerShell 为了美化 PowerShell，个人选择了 Oh My Po"/>
+<meta name="twitter:description" content="本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/8ad4716e\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "PowerShell, Windows","wordcount":  666 ,
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Windows, Shell, PowerShell, Oh My Posh, Nerd Font","wordcount":  666 ,
         "url": "https:\/\/ywang-wnlo.github.io\/posts\/8ad4716e\/","datePublished": "2022-11-16T13:43:05+00:00","dateModified": "2022-11-16T13:43:05+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
@@ -129,8 +129,11 @@ if (!doNotTrack) {
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">美化 Shell 之 Windows/Linux PowerShell 篇</h2><div class="post-meta">
-                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/shell/"><i class="fa-regular fa-folder fa-fw"></i>Shell</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/powershell/"><i class="fa fa-tag fa-fw"></i>PowerShell</a>&nbsp;
-                        </span><span><a href="/tags/windows/"><i class="fa fa-tag fa-fw"></i>Windows</a>&nbsp;
+                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/shell/"><i class="fa-regular fa-folder fa-fw"></i>Shell</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/windows/"><i class="fa fa-tag fa-fw"></i>Windows</a>&nbsp;
+                        </span><span><a href="/tags/shell/"><i class="fa fa-tag fa-fw"></i>Shell</a>&nbsp;
+                        </span><span><a href="/tags/powershell/"><i class="fa fa-tag fa-fw"></i>PowerShell</a>&nbsp;
+                        </span><span><a href="/tags/oh-my-posh/"><i class="fa fa-tag fa-fw"></i>Oh My Posh</a>&nbsp;
+                        </span><span><a href="/tags/nerd-font/"><i class="fa fa-tag fa-fw"></i>Nerd Font</a>&nbsp;
                         </span></div>
                 <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 666 字</span>&nbsp;
                     <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟</span>&nbsp;</div>
@@ -156,7 +159,6 @@ if (!doNotTrack) {
 <p><code>PowerShell</code> 是 Windows 最新的 <code>Shell</code>，而且在 GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 <code>Linux</code> 用户会选择 <code>PowerShell</code></p>
 <p>为了美化 <code>PowerShell</code>，个人选择了 <code>Oh My Posh</code>。<code>Oh My Posh</code> 是一个开源的主体的框架，支持 <code>PowerShell</code>、<code>CMD</code>、<code>Zsh</code>、<code>Bash</code>、<code>Fish</code> 等多种 <code>Shell</code></p>
 <p>本文主要记录自己的 <code>Oh My Posh</code> 安装以及配置流程</p>
-<!-- more -->
 <h2 id="安装最新的-powershell">安装最新的 <code>PowerShell</code></h2>
 <p>Windows 默认安装的 <code>PowerShell</code> 版本太旧，所以先通过 <code>winget</code> 安装最新的版本</p>
 <div class="highlight"><div class="chroma">
@@ -289,8 +291,11 @@ if (!doNotTrack) {
         </li>
     </ul>
 </div>
-<div class="post-info"><div class="post-info-tag"><span><a href="/tags/powershell/">PowerShell</a>
-                </span><span><a href="/tags/windows/">Windows</a>
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/windows/">Windows</a>
+                </span><span><a href="/tags/shell/">Shell</a>
+                </span><span><a href="/tags/powershell/">PowerShell</a>
+                </span><span><a href="/tags/oh-my-posh/">Oh My Posh</a>
+                </span><span><a href="/tags/nerd-font/">Nerd Font</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
                 <span>更新于 2022-11-16</span>
             </div><div class="post-info-mod"></div>

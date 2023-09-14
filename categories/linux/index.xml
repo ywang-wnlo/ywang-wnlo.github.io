@@ -8,19 +8,19 @@
     <title>Ubuntu 环境配置大合集</title>
     <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
     <pubDate>Thu, 24 Nov 2022 17:16:00 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
-    <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置 修改默认编辑器为 vim 一般 Ubuntu 的默认编辑器是 nano，用起来非常不顺手，可以通过]]></description>
+    <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置]]></description>
 </item>
 <item>
     <title>美化 Shell 之 Linux Zsh 篇</title>
     <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
     <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
-    <description><![CDATA[简介 Z shell（Zsh）是一款可用作互动式登入的shell及指令码编写的命令直译器。 Zsh 对 Linux 默认的 Bourne shell（sh）做出了大量改进，同时加]]></description>
+    <description><![CDATA[本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置]]></description>
 </item>
 <item>
     <title>rm -r 与 rmdir 区别</title>
     <link>https://ywang-wnlo.github.io/posts/935ae1f0/</link>
     <pubDate>Wed, 24 Nov 2021 19:47:38 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/935ae1f0/</guid>
-    <description><![CDATA[背景 今天学弟在使用 NVMe-over-TCP 时发现无法卸载 nvmet 驱动，显示使用中 在一起探讨和测试中发现最终的原因竟然在于 rm -r 和 rmdir 这两个命令上 二者区别 命令 主要系统调用 操作]]></description>
+    <description><![CDATA[本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程]]></description>
 </item>
 </channel>
 </rss>

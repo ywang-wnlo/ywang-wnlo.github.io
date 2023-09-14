@@ -1,8 +1,7 @@
-# LaTeX 语法
+# LaTeX 常用语法记录
 
 
 中文支持参考环境配置中的 [内容](/posts/4f94956/#中文支持)，在这里不做重复
-<!-- more -->
 
 ## 长度
 
@@ -96,16 +95,16 @@ $E=mc^2$
 
 其中 `bibfile` 为 `.bib` 文件的名，而 `stylename` 是风格名称，以 overleaf 为例，有如下选项
 
-| stylename | output |
-| ---- | --- |
-| abbrc | ![BibtexStylesAbbrc](/posts/2033aa70/BibtexStylesAbbrc.png) |
-| acm | ![BibtexStylesAcm](/posts/2033aa70/BibtexStylesAcm.png) |
-| alpha | ![BibtexStylesAlpha](/posts/2033aa70/BibtexStylesAlpha.png) |
-| apalike | ![BibtexStylesApalike](/posts/2033aa70/BibtexStylesApalike.png) |
-| ieeetr | ![BibtexStylesIeeetr](/posts/2033aa70/BibtexStylesIeeetr.png) |
-| plain | ![BibtexStylesPlain](/posts/2033aa70/BibtexStylesPlain.png) |
-| siam | ![BibtexStylesSiam](/posts/2033aa70/BibtexStylesSiam.png) |
-| unsrt | ![BibtexStylesUnsrt](/posts/2033aa70/BibtexStylesUnsrt.png) |
+| stylename | output                                                          |
+| --------- | --------------------------------------------------------------- |
+| abbrc     | ![BibtexStylesAbbrc](/posts/2033aa70/BibtexStylesAbbrc.png)     |
+| acm       | ![BibtexStylesAcm](/posts/2033aa70/BibtexStylesAcm.png)         |
+| alpha     | ![BibtexStylesAlpha](/posts/2033aa70/BibtexStylesAlpha.png)     |
+| apalike   | ![BibtexStylesApalike](/posts/2033aa70/BibtexStylesApalike.png) |
+| ieeetr    | ![BibtexStylesIeeetr](/posts/2033aa70/BibtexStylesIeeetr.png)   |
+| plain     | ![BibtexStylesPlain](/posts/2033aa70/BibtexStylesPlain.png)     |
+| siam      | ![BibtexStylesSiam](/posts/2033aa70/BibtexStylesSiam.png)       |
+| unsrt     | ![BibtexStylesUnsrt](/posts/2033aa70/BibtexStylesUnsrt.png)     |
 
 ## TODO
 

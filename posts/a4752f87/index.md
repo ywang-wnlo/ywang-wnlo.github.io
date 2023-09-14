@@ -6,7 +6,6 @@
 Tex 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。
 
 LaTeX 利用 TeX 对 `.tex` 后缀的文件进行编译，生成 `.dvi` 文件
-<!-- more -->
 
 ## pdfTeX、XeTeX 和 LuaTeX
 

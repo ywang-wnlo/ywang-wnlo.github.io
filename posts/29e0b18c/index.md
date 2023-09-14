@@ -3,7 +3,6 @@
 
 最近电脑有个问题持续了好久：**当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下**，在微信内通过默认浏览器打开总是没有反应
 ~~（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）~~
-<!-- more -->
 
 ![wechat_default_browser](wechat_default_browser.png)
 

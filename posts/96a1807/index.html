@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>OpenWrt 手动编译 ipk - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="OpenWrt 手动编译 ipk" />
-<meta property="og:description" content=".ipk 文件 .ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的" />
+<meta property="og:description" content="OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录自己手动编译 OpenWrt 的 ipk 文件的过程" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/96a1807/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-11-01T11:08:42+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="OpenWrt 手动编译 ipk"/>
-<meta name="twitter:description" content=".ipk 文件 .ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的"/>
+<meta name="twitter:description" content="OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录自己手动编译 OpenWrt 的 ipk 文件的过程"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/96a1807\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "交叉编译, ipk, OpenWrt","wordcount":  995 ,
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "OpenWrt, 交叉编译, ipk","wordcount":  995 ,
         "url": "https:\/\/ywang-wnlo.github.io\/posts\/96a1807\/","datePublished": "2021-11-01T11:08:42+00:00","dateModified": "2022-11-19T11:39:15+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
@@ -129,9 +129,9 @@ if (!doNotTrack) {
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">OpenWrt 手动编译 ipk</h2><div class="post-meta">
-                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw"></i>路由器</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/"><i class="fa fa-tag fa-fw"></i>交叉编译</a>&nbsp;
+                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw"></i>路由器</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
+                        </span><span><a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/"><i class="fa fa-tag fa-fw"></i>交叉编译</a>&nbsp;
                         </span><span><a href="/tags/ipk/"><i class="fa fa-tag fa-fw"></i>ipk</a>&nbsp;
-                        </span><span><a href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
                         </span></div>
                 <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-01">2021-11-01</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 995 字</span>&nbsp;
                     <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟</span>&nbsp;</div>
@@ -160,7 +160,6 @@ if (!doNotTrack) {
                 </div><div class="content" id="content"><h2 id="ipk-文件"><code>.ipk</code> 文件</h2>
 <p><code>.ipk</code> 文件是可以通过 OpenWrt 的包管理软件 <code>opkg</code> 直接安装，好比 <code>.deb</code> 文件与 <code>apt</code> 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的软件使用，例如锐捷认证等</p>
 <p>但是由于路由器平台通常与常用的服务器或者个人 PC 的处理器架构不同，并且路由器的处理器本身性能较弱，几乎不可能直接在路由器上进行编译生成 <code>.ipk</code> 文件，因此需要交叉编译来实现</p>
-<!-- more -->
 <p>而官方的 <a href="https://github.com/openwrt/openwrt" target="_blank" rel="noopener noreffer">OpenWrt</a> 仓库就提供了一个方便使用的交叉编译环境</p>
 <h2 id="编译准备">编译准备</h2>
 <p>以 Debian / Ubuntu 为例，参考 <a href="https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem" target="_blank" rel="noopener noreffer">官网给出的要求</a>，可以通过下面命令来进行安装依赖包</p>
@@ -346,9 +345,9 @@ if (!doNotTrack) {
         </li>
     </ul>
 </div>
-<div class="post-info"><div class="post-info-tag"><span><a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/">交叉编译</a>
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/openwrt/">OpenWrt</a>
+                </span><span><a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/">交叉编译</a>
                 </span><span><a href="/tags/ipk/">ipk</a>
-                </span><span><a href="/tags/openwrt/">OpenWrt</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
                 <span>更新于 2022-11-19</span>
             </div><div class="post-info-mod"></div>

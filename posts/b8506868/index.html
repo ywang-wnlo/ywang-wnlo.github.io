@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用" />
-<meta property="og:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法 配置 ZNS 环境 ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当" />
+<meta property="og:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/b8506868/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-22T22:54:45+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用"/>
-<meta name="twitter:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法 配置 ZNS 环境 ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当"/>
+<meta name="twitter:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -174,7 +174,6 @@ if (!doNotTrack) {
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><p>本文主要记录自己在利用 <a href="https://github.com/facebook/rocksdb" target="_blank" rel="noopener noreffer">RocksDB</a> + <a href="https://github.com/westerndigitalcorporation/zenfs" target="_blank" rel="noopener noreffer">ZenFS</a> 测试 <a href="https://zonedstorage.io/docs/introduction/zns" target="_blank" rel="noopener noreffer">ZNS</a> 过程中遇到的一些问题以及相应的解决办法</p>
-<!-- more -->
 <h2 id="配置-zns-环境">配置 ZNS 环境</h2>
 <p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS 设备类型是基于闪存的 SSD。但是 ZNS SSD 目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
 <h3 id="配置-femu">配置 FEMU</h3>

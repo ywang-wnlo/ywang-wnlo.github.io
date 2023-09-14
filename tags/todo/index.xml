@@ -8,13 +8,13 @@
     <title>page cache 简介</title>
     <link>https://ywang-wnlo.github.io/posts/9ba60726/</link>
     <pubDate>Sun, 05 Dec 2021 22:22:08 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/9ba60726/</guid>
-    <description><![CDATA[当前内容基于 Linux Kernel v5.4.121 page cache 由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的]]></description>
+    <description><![CDATA[page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析]]></description>
 </item>
 <item>
-    <title>LaTeX 语法</title>
+    <title>LaTeX 常用语法记录</title>
     <link>https://ywang-wnlo.github.io/posts/2033aa70/</link>
     <pubDate>Tue, 19 Oct 2021 10:08:41 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/2033aa70/</guid>
-    <description><![CDATA[中文支持参考环境配置中的 内容，在这里不做重复 长度 常用的长度单位 单位 含义 换算成 pt 换成算成 mm pt 基本单位 1 pt 0.35146 mm mm 毫米 2.84 pt 1 mm cm 厘米 28.4 pt 10 mm in 英寸]]></description>
+    <description><![CDATA[LaTeX 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要记录一些常用的 LaTeX 语法]]></description>
 </item>
 </channel>
 </rss>

@@ -4,7 +4,6 @@
 ## 踩坑
 
 好久没用 `python`，最近重新下载安装好 `python` 后发现用 `pip` 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的
-<!-- more -->
 
 1. check_hostname requires server_hostname
 

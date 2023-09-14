@@ -8,7 +8,7 @@
     <title>Breed 介绍、刷入和使用</title>
     <link>https://ywang-wnlo.github.io/posts/53d6c2d9/</link>
     <pubDate>Sun, 31 Oct 2021 23:00:37 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/53d6c2d9/</guid>
-    <description><![CDATA[介绍 Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟” 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致]]></description>
+    <description><![CDATA[Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟”。本文主要记录 Breed 的介绍、刷入和使用过程]]></description>
 </item>
 </channel>
 </rss>

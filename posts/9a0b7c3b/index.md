@@ -3,8 +3,7 @@
 
 ## 简介
 
-NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客就是使用 Hexo 配合 NexT 主题搭建的
-<!-- more -->
+NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。当前博客曾经就是使用 Hexo 配合 NexT 主题搭建的
 
 ### 版本
 

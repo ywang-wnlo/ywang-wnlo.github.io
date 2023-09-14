@@ -1,8 +1,7 @@
 # Hexo 插件推荐以及使用小技巧
 
 
-[Hexo](https://hexo.io/zh-cn/) 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前博客就是使用 Hexo 配合 NexT 主题搭建的
-<!-- more -->
+[Hexo](https://hexo.io/zh-cn/) 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。当前曾经博客就是使用 Hexo 配合 NexT 主题搭建的
 
 因为笔者个人在 Windows 环境下写博客，后续命令均以 [PowerShell](https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell?view=powershell-7.2) 为例
 

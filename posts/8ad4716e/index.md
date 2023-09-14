@@ -8,7 +8,6 @@
 为了美化 `PowerShell`，个人选择了 `Oh My Posh`。`Oh My Posh` 是一个开源的主体的框架，支持 `PowerShell`、`CMD`、`Zsh`、`Bash`、`Fish` 等多种 `Shell`
 
 本文主要记录自己的 `Oh My Posh` 安装以及配置流程
-<!-- more -->
 
 ## 安装最新的 `PowerShell`
 

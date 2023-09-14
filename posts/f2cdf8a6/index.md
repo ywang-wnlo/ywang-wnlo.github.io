@@ -11,7 +11,6 @@
 `Oh My Zsh` 是一个开源的、社区驱动的框架，支持各种插件以及主题，在管理 `Zsh` 配置提供了很大的便利
 
 本文主要记录自己的 `Oh My Zsh` 安装以及配置流程
-<!-- more -->
 
 ## 安装 `Zsh`
 
@@ -44,7 +43,7 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 
 `Oh My Zsh` 支持非常丰富的主题，[官方](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes) 给出了内置的所有主题的预览图
 
-部分主题需要额外 [PL 字体](https://github.com/powerline/fonts) 以及 [Nerd 字体](https://www.nerdfonts.com/) 支持，参见 [安装 Nerd 字体](/posts/8ad4716e/#安装 Nerd 字体) 
+部分主题需要额外 [PL 字体](https://github.com/powerline/fonts) 以及 [Nerd 字体](https://www.nerdfonts.com/) 支持，参见 [安装 Nerd 字体](/posts/8ad4716e/#安装-nerd-字体)
 
 由于在 [`Oh My Posh`](/posts/8ad4716e/) 中用习惯了 `powerlevel10k`，并且 `powerlevel10k` 也支持 `Oh My Zsh`，于是后来又额外安装了 `powerlevel10k` 主题
 

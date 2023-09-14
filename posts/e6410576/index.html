@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>小米 WR30U 解锁并刷机 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="小米 WR30U 解锁并刷机" />
-<meta property="og:description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，整体步骤与 一般安装流程 类似，但是由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下" />
+<meta property="og:description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/e6410576/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-08-21T14:25:43+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="小米 WR30U 解锁并刷机"/>
-<meta name="twitter:description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，整体步骤与 一般安装流程 类似，但是由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下"/>
+<meta name="twitter:description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/e6410576\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "OpenWrt, BootLoader, ImmortalWrt","wordcount":  1452 ,
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "WR30U, OpenWrt, BootLoader, ImmortalWrt","wordcount":  1452 ,
         "url": "https:\/\/ywang-wnlo.github.io\/posts\/e6410576\/","datePublished": "2023-08-21T14:25:43+00:00","dateModified": "2023-08-21T14:25:43+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
@@ -129,7 +129,8 @@ if (!doNotTrack) {
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">小米 WR30U 解锁并刷机</h2><div class="post-meta">
-                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw"></i>路由器</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
+                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw"></i>路由器</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/wr30u/"><i class="fa fa-tag fa-fw"></i>WR30U</a>&nbsp;
+                        </span><span><a href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
                         </span><span><a href="/tags/bootloader/"><i class="fa fa-tag fa-fw"></i>BootLoader</a>&nbsp;
                         </span><span><a href="/tags/immortalwrt/"><i class="fa fa-tag fa-fw"></i>ImmortalWrt</a>&nbsp;
                         </span></div>
@@ -167,7 +168,6 @@ if (!doNotTrack) {
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><p>本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，整体步骤与 <a href="/posts/8507aaa1/#%e4%b8%80%e8%88%ac%e5%ae%89%e8%a3%85%e6%b5%81%e7%a8%8b" rel="">一般安装流程</a> 类似，但是由于 WR30U 的解锁 <code>ssh</code> 和刷机的过程中有一些细节需要注意，因此记录一下</p>
-<!-- more -->
 <h2 id="解锁-ssh">解锁 ssh</h2>
 <h3 id="环境准备">环境准备</h3>
 <p>需要一台<strong>同时具有 WiFi 和有线网络</strong>的电脑，以及一根网线</p>
@@ -437,7 +437,8 @@ if (!doNotTrack) {
         </li>
     </ul>
 </div>
-<div class="post-info"><div class="post-info-tag"><span><a href="/tags/openwrt/">OpenWrt</a>
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/wr30u/">WR30U</a>
+                </span><span><a href="/tags/openwrt/">OpenWrt</a>
                 </span><span><a href="/tags/bootloader/">BootLoader</a>
                 </span><span><a href="/tags/immortalwrt/">ImmortalWrt</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">

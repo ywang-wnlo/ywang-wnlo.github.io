@@ -8,13 +8,13 @@
     <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
     <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
     <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
-    <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法 配置 ZNS 环境 ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当]]></description>
+    <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
 </item>
 <item>
     <title>自定义配置 RocksDB 进行 YCSB 测试</title>
     <link>https://ywang-wnlo.github.io/posts/4bc1e607/</link>
     <pubDate>Sun, 26 Dec 2021 00:20:25 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4bc1e607/</guid>
-    <description><![CDATA[本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法 简介 YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服]]></description>
+    <description><![CDATA[本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法]]></description>
 </item>
 </channel>
 </rss>

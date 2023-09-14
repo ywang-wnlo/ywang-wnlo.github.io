@@ -8,7 +8,6 @@
 在前几天搞定 `pip` 的 SSL 认证之后，结果在利用 `requests` 库请求 HTTPS 网站又出现了 `SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1129)'))` 的 SSL 相关错误
 
 经过一系列的查询资料和测试发现，原因竟然在于 `python` 自身的 `urllib` 库没有正确配置 HTTPS 代理
-<!-- more -->
 
 ## 代理服务器
 

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Hexo 配置主流搜索引擎收录流程记录 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="Hexo 配置主流搜索引擎收录流程记录" />
-<meta property="og:description" content="想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录 搜索引擎能搜索" />
+<meta property="og:description" content="想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/abac0c46/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-08T22:00:29+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="Hexo 配置主流搜索引擎收录流程记录"/>
-<meta name="twitter:description" content="想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录 搜索引擎能搜索"/>
+<meta name="twitter:description" content="想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/abac0c46\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Hexo, NexT","wordcount":  1736 ,
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Hexo, NexT, SEO","wordcount":  1736 ,
         "url": "https:\/\/ywang-wnlo.github.io\/posts\/abac0c46\/","datePublished": "2021-12-08T22:00:29+00:00","dateModified": "2022-11-16T10:33:39+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
@@ -131,6 +131,7 @@ if (!doNotTrack) {
         </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">Hexo 配置主流搜索引擎收录流程记录</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/hexo/"><i class="fa-regular fa-folder fa-fw"></i>Hexo</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/hexo/"><i class="fa fa-tag fa-fw"></i>Hexo</a>&nbsp;
                         </span><span><a href="/tags/next/"><i class="fa fa-tag fa-fw"></i>NexT</a>&nbsp;
+                        </span><span><a href="/tags/seo/"><i class="fa fa-tag fa-fw"></i>SEO</a>&nbsp;
                         </span></div>
                 <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 1736 字</span>&nbsp;
                     <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟</span>&nbsp;</div>
@@ -167,7 +168,6 @@ if (!doNotTrack) {
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><p>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</p>
-<!-- more -->
 <p>搜索引擎能搜索到网站的前提是它抓取了网站的内容，并对其建立了索引，其实也就是爬虫爬取 + 插入数据库。虽然大部分搜索引擎都是自动抓取网络上的所有链接，并尝试爬取以及入库，但通常会比较缓慢（毕竟它并不一定知道我们网站的地址hhh）。所以更加推荐由我们站长主动出击，直接告诉它我们的网站地址</p>
 <p>延伸阅读：<a href="https://developers.google.com/search/docs/basics/how-search-works?hl=zh-CN" target="_blank" rel="noopener noreffer">Google 搜索运作方式的基础知识</a></p>
 <h2 id="是否已经被收录">是否已经被收录</h2>
@@ -400,6 +400,7 @@ if (!doNotTrack) {
 </div>
 <div class="post-info"><div class="post-info-tag"><span><a href="/tags/hexo/">Hexo</a>
                 </span><span><a href="/tags/next/">NexT</a>
+                </span><span><a href="/tags/seo/">SEO</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
                 <span>更新于 2022-11-16</span>
             </div><div class="post-info-mod"></div>

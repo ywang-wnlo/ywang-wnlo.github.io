@@ -6,7 +6,6 @@
 ### Overleaf
 
 [Overleaf](https://www.overleaf.com) 是一个在线的 LaTeX 编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑
-<!-- more -->
 
 官网的 [教程文档](https://www.overleaf.com/learn) 给了丰富的图文教程，这里不再赘述
 

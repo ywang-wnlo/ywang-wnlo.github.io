@@ -8,7 +8,7 @@
     <title>OpenWrt 配置使用</title>
     <link>https://ywang-wnlo.github.io/posts/51140c4a/</link>
     <pubDate>Thu, 28 Oct 2021 16:17:24 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/51140c4a/</guid>
-    <description><![CDATA[Web 界面 一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 192.168.1.1，默认账号是 root，无密码，直接点击登录即可进]]></description>
+    <description><![CDATA[OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的配置和使用过程]]></description>
 </item>
 </channel>
 </rss>

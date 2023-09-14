@@ -8,7 +8,7 @@
     <title>LaTeX 环境配置</title>
     <link>https://ywang-wnlo.github.io/posts/4f94956/</link>
     <pubDate>Tue, 19 Oct 2021 10:08:26 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4f94956/</guid>
-    <description><![CDATA[网页环境 Overleaf Overleaf 是一个在线的 LaTeX 编辑环境，可以避免在本地安装和配置的过程，同时还能和他人共享编辑 官网的 教程文档 给了丰富的图文教程，这里不再赘述 推荐]]></description>
+    <description><![CDATA[LaTex 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要介绍 LaTeX 的环境配置，包括网页环境和本地环境]]></description>
 </item>
 </channel>
 </rss>

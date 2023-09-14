@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>自定义配置 RocksDB 进行 YCSB 测试 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="自定义配置 RocksDB 进行 YCSB 测试" />
-<meta property="og:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法 简介 YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服" />
+<meta property="og:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/4bc1e607/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-26T00:20:25+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="自定义配置 RocksDB 进行 YCSB 测试"/>
-<meta name="twitter:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法 简介 YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服"/>
+<meta name="twitter:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/4bc1e607\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Maven, RocksDB, YCSB","wordcount":  1625 ,
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "日常踩坑, Maven, RocksDB, YCSB","wordcount":  1625 ,
         "url": "https:\/\/ywang-wnlo.github.io\/posts\/4bc1e607\/","datePublished": "2021-12-26T00:20:25+00:00","dateModified": "2022-11-16T10:33:39+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
@@ -129,7 +129,8 @@ if (!doNotTrack) {
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">自定义配置 RocksDB 进行 YCSB 测试</h2><div class="post-meta">
-                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/%E6%B5%8B%E8%AF%95/"><i class="fa-regular fa-folder fa-fw"></i>测试</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/maven/"><i class="fa fa-tag fa-fw"></i>Maven</a>&nbsp;
+                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/%E6%B5%8B%E8%AF%95/"><i class="fa-regular fa-folder fa-fw"></i>测试</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
+                        </span><span><a href="/tags/maven/"><i class="fa fa-tag fa-fw"></i>Maven</a>&nbsp;
                         </span><span><a href="/tags/rocksdb/"><i class="fa fa-tag fa-fw"></i>RocksDB</a>&nbsp;
                         </span><span><a href="/tags/ycsb/"><i class="fa fa-tag fa-fw"></i>YCSB</a>&nbsp;
                         </span></div>
@@ -153,7 +154,6 @@ if (!doNotTrack) {
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><p>本文主要记录在利用 <a href="https://github.com/brianfrankcooper/YCSB" target="_blank" rel="noopener noreffer">YCSB</a> 使用配置文件测试 <a href="https://github.com/facebook/rocksdb" target="_blank" rel="noopener noreffer">RocksDB</a> 的过程中遇到的一些问题以及相应的解决办法</p>
-<!-- more -->
 <h2 id="简介">简介</h2>
 <p>YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服务进行基础测试的工具，支持目前常见的 NoSQL 数据库产品，如 HBase、MongoDB、OrientDB、Redis 等等</p>
 <p>RocksDB 是一个具有键/值接口的存储引擎，其中键和值是任意字节流。它是在 Facebook（Meta） 基于 LevelDB 开发的，并为 LevelDB API 提供向后兼容的支持</p>
@@ -542,7 +542,8 @@ if (!doNotTrack) {
         </li>
     </ul>
 </div>
-<div class="post-info"><div class="post-info-tag"><span><a href="/tags/maven/">Maven</a>
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</a>
+                </span><span><a href="/tags/maven/">Maven</a>
                 </span><span><a href="/tags/rocksdb/">RocksDB</a>
                 </span><span><a href="/tags/ycsb/">YCSB</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">

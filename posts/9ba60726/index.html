@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>page cache 简介 - 乐园</title><meta name="description" content="一个新时代农民工的随手笔记"><meta property="og:title" content="page cache 简介" />
-<meta property="og:description" content="当前内容基于 Linux Kernel v5.4.121 page cache 由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的" />
+<meta property="og:description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/9ba60726/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-05T22:22:08+00:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
 <meta name="twitter:title" content="page cache 简介"/>
-<meta name="twitter:description" content="当前内容基于 Linux Kernel v5.4.121 page cache 由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的"/>
+<meta name="twitter:description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "buffer IO, kernel, page cache, writeback, todo","wordcount":  3923 ,
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "page cache, buffer IO, kernel, page cache, writeback, todo","wordcount":  3923 ,
         "url": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/","datePublished": "2021-12-05T22:22:08+00:00","dateModified": "2022-11-16T10:33:39+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
@@ -129,7 +129,8 @@ if (!doNotTrack) {
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">page cache 简介</h2><div class="post-meta">
-                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/io-stack/"><i class="fa-regular fa-folder fa-fw"></i>IO Stack</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
+                <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/io-stack/"><i class="fa-regular fa-folder fa-fw"></i>IO Stack</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
+                        </span><span><a href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
                         </span><span><a href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
                         </span><span><a href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
                         </span><span><a href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
@@ -175,7 +176,6 @@ if (!doNotTrack) {
                 </div><div class="content" id="content"><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121" target="_blank" rel="noopener noreffer">v5.4.121</a></p>
 <h2 id="page-cache">page cache</h2>
 <p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
-<!-- more -->
 <p>经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9/" rel="">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的预读机制<!-- todo -->提升了顺序读性能</p>
 <h2 id="直接-io-与-缓存-io">直接 IO 与 缓存 IO</h2>
 <p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
@@ -1245,7 +1245,8 @@ if (!doNotTrack) {
         </li>
     </ul>
 </div>
-<div class="post-info"><div class="post-info-tag"><span><a href="/tags/buffer-io/">buffer IO</a>
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/page-cache/">page cache</a>
+                </span><span><a href="/tags/buffer-io/">buffer IO</a>
                 </span><span><a href="/tags/kernel/">kernel</a>
                 </span><span><a href="/tags/page-cache/">page cache</a>
                 </span><span><a href="/tags/writeback/">writeback</a>

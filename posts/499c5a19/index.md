@@ -1,4 +1,4 @@
-# LaTeX PPT
+# LaTeX 制作 PPT
 
 
 ## Beamer 模板
@@ -6,7 +6,6 @@
 PPT 推荐用 Beamer 模板来做，Beamer 是一个用于制作幻灯片的 LaTeX 文档类，可以用来制作演讲稿、学术报告、课件等
 
 以下仅记录个人常用的一些功能，具体可以参考 [Overleaf 上相关介绍](https://www.overleaf.com/learn/latex/Beamer) 来使用
-<!-- more -->
 
 ![Beamer](Beamer-overview.png)
 

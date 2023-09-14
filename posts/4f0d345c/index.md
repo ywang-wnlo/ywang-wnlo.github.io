@@ -8,7 +8,6 @@
 [之前](/posts/c142853f/#系统调用) 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 `io_uring_setup`，`io_uring_enter` 和 `io_uring_register`
 
 他们的入口都在 Linux 内核源码的 `fs/io_uring.c` 文件中，下面将逐个分析
-<!-- more -->
 
 ## 2. 系统调用 `io_uring_setup`
 

@@ -8,7 +8,7 @@
     <title>rm -r 与 rmdir 区别</title>
     <link>https://ywang-wnlo.github.io/posts/935ae1f0/</link>
     <pubDate>Wed, 24 Nov 2021 19:47:38 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/935ae1f0/</guid>
-    <description><![CDATA[背景 今天学弟在使用 NVMe-over-TCP 时发现无法卸载 nvmet 驱动，显示使用中 在一起探讨和测试中发现最终的原因竟然在于 rm -r 和 rmdir 这两个命令上 二者区别 命令 主要系统调用 操作]]></description>
+    <description><![CDATA[本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程]]></description>
 </item>
 </channel>
 </rss>

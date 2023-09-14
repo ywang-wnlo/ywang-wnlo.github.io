@@ -8,7 +8,7 @@
     <title>OpenWrt 手动编译 ipk</title>
     <link>https://ywang-wnlo.github.io/posts/96a1807/</link>
     <pubDate>Mon, 01 Nov 2021 11:08:42 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/96a1807/</guid>
-    <description><![CDATA[.ipk 文件 .ipk 文件是可以通过 OpenWrt 的包管理软件 opkg 直接安装，好比 .deb 文件与 apt 的关系。虽然官方的软件仓库已经很丰富了，但是有时仍然需要从源码编译一些第三方的]]></description>
+    <description><![CDATA[OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录自己手动编译 OpenWrt 的 ipk 文件的过程]]></description>
 </item>
 </channel>
 </rss>

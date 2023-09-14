@@ -8,7 +8,7 @@
     <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
     <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
     <pubDate>Wed, 16 Nov 2022 13:43:05 &#43;0000</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
-    <description><![CDATA[简介 PowerShell 是 Windows 最新的 Shell，而且在 GitHub 上开源并且提供了跨平台支持（虽然估计没哪个 Linux 用户会选择 PowerShell 为了美化 PowerShell，个人选择了 Oh My Po]]></description>
+    <description><![CDATA[本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置]]></description>
 </item>
 </channel>
 </rss>

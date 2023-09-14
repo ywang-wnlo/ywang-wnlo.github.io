@@ -6,7 +6,6 @@
 ### 来源
 
 2002 年底 Linksys 公司推出 WRT-54G，采用了 Linux 取代了原来的 vXworks 系统。迫于 Linux 的开源协议要求，Linksys 开源了路由器的固件代码，后续逐渐发展成了 OpenWrt 这样一个项目
-<!-- more -->
 
 ### 介绍
 

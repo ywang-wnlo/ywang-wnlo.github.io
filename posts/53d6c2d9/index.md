@@ -6,7 +6,6 @@
 Breed 是国内个人 [hackpascal](https://github.com/hackpascal) 开发的闭源 Bootloader，也被称为“不死鸟”
 
 因为有些官方升级固件自带 bootloader，如果从官方固件升级，会导致现有 bootloader 被覆盖。而当 Breed 更新固件时，它会自动删除固件附带的引导加载程序，因此可以防止 Breed 被覆盖
-<!-- more -->
 
 Breed 拥有以下特性：
 
