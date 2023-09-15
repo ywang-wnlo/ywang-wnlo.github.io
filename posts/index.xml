@@ -4,7 +4,13 @@
         <link>https://ywang-wnlo.github.io/posts/</link>
         <description>所有文章 | 乐园</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Sep 2023 11:01:50 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>FeelIt 主题的配置以及魔改记录</title>
+    <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
+    <pubDate>Fri, 15 Sep 2023 11:01:50 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
+    <description><![CDATA[本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改]]></description>
+</item>
+<item>
     <title>更换博客框架至 Hugo</title>
     <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
     <pubDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
@@ -57,12 +63,6 @@
     <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
     <pubDate>Tue, 29 Mar 2022 13:48:31 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
     <description><![CDATA[本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程]]></description>
-</item>
-<item>
-    <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
-    <link>https://ywang-wnlo.github.io/posts/29e0b18c/</link>
-    <pubDate>Mon, 14 Mar 2022 16:09:34 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/29e0b18c/</guid>
-    <description><![CDATA[最近电脑有个问题持续了好久：当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下，在微信内通过默认浏览器打开总是没有反应。本文主要记录了修复 chrome 打不开微信或者部分第三方应用内链接的过程]]></description>
 </item>
 </channel>
 </rss>

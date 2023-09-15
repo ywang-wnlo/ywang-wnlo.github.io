@@ -4,7 +4,13 @@
         <link>https://ywang-wnlo.github.io/tags/hugo/</link>
         <description>Hugo - 标签 - 乐园</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/hugo/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Sep 2023 11:01:50 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/hugo/" rel="self" type="application/rss+xml" /><item>
+    <title>FeelIt 主题的配置以及魔改记录</title>
+    <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
+    <pubDate>Fri, 15 Sep 2023 11:01:50 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
+    <description><![CDATA[本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改]]></description>
+</item>
+<item>
     <title>更换博客框架至 Hugo</title>
     <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
     <pubDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
