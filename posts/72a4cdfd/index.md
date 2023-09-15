@@ -72,10 +72,21 @@ vncserver -localhost no
 
 在 Windows 直接下载 [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/) 配置好相应的 IP 以及端口即可
 
+## 找不到库文件
+
+有时候编译出来的程序会找不到库文件，形如 `error while loading shared libraries: xxx.so.x: cannot open shared object file: No such file or directory` 的错误，可以通过下面的方法解决
+
+```bash
+sudo ldconfig
+```
+
+之后再执行程序就可以了
+
 ## 参考资料
 
 - [【man】update-alternatives](https://man7.org/linux/man-pages/man1/update-alternatives.1.html)
 - [【stackoverflow】How to fix a locale setting warning from Perl](https://stackoverflow.com/questions/2499794/how-to-fix-a-locale-setting-warning-from-perl)
 - [【linuxhint】timedatectl](https://linuxhint.com/how-to-use-timedatectl-ubuntu/)
 - [【myfreax】如何在 Ubuntu 22.04 安装 VNC](https://www.myfreax.com/how-to-install-and-configure-vnc-on-ubuntu-22-04/)
+- [【stackoverflow】Linux error while loading shared libraries: cannot open shared object file: No such file or directory](https://stackoverflow.com/questions/480764)
 

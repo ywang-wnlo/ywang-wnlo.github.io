@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/72a4cdfd/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-24T17:16:00+08:00" />
-<meta property="article:modified_time" content="2023-03-20T16:51:08+08:00" />
+<meta property="article:modified_time" content="2023-09-15T20:33:57+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/72a4cdfd\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Ubuntu, Linux, nano, vim, perl, timedatectl, VNC","wordcount":  438 ,
-        "url": "https:\/\/ywang-wnlo.github.io\/posts\/72a4cdfd\/","datePublished": "2022-11-24T17:16:00+08:00","dateModified": "2023-03-20T16:51:08+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Ubuntu, Linux, nano, vim, perl, timedatectl, VNC, ldconfig","wordcount":  544 ,
+        "url": "https:\/\/ywang-wnlo.github.io\/posts\/72a4cdfd\/","datePublished": "2022-11-24T17:16:00+08:00","dateModified": "2023-09-15T20:33:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
                 "@type": "Person",
@@ -118,9 +118,10 @@
                         </span><span><a href="/tags/perl/"><i class="fa fa-tag fa-fw"></i>perl</a>&nbsp;
                         </span><span><a href="/tags/timedatectl/"><i class="fa fa-tag fa-fw"></i>timedatectl</a>&nbsp;
                         </span><span><a href="/tags/vnc/"><i class="fa fa-tag fa-fw"></i>VNC</a>&nbsp;
+                        </span><span><a href="/tags/ldconfig/"><i class="fa fa-tag fa-fw"></i>ldconfig</a>&nbsp;
                         </span></div>
-                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-24">2022-11-24</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 438 字</span>&nbsp;
-                    <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-24">2022-11-24</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 544 字</span>&nbsp;
+                    <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟</span>&nbsp;</div>
             </div>
 
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -134,6 +135,7 @@
     <li><a href="#解决报错-perl-warning-setting-locale-failed">解决报错 perl: warning: Setting locale failed</a></li>
     <li><a href="#配置时区">配置时区</a></li>
     <li><a href="#远程-vnc">远程 VNC</a></li>
+    <li><a href="#找不到库文件">找不到库文件</a></li>
     <li><a href="#参考资料">参考资料</a></li>
   </ul>
 </nav></div>
@@ -247,12 +249,24 @@
 <li>客户端</li>
 </ul>
 <p>在 Windows 直接下载 <a href="https://www.realvnc.com/en/connect/download/viewer/" target="_blank" rel="noopener noreffer">VNC Viewer</a> 配置好相应的 IP 以及端口即可</p>
+<h2 id="找不到库文件">找不到库文件</h2>
+<p>有时候编译出来的程序会找不到库文件，形如 <code>error while loading shared libraries: xxx.so.x: cannot open shared object file: No such file or directory</code> 的错误，可以通过下面的方法解决</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ldconfig
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后再执行程序就可以了</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://man7.org/linux/man-pages/man1/update-alternatives.1.html" target="_blank" rel="noopener noreffer">【man】update-alternatives</a></li>
 <li><a href="https://stackoverflow.com/questions/2499794/how-to-fix-a-locale-setting-warning-from-perl" target="_blank" rel="noopener noreffer">【stackoverflow】How to fix a locale setting warning from Perl</a></li>
 <li><a href="https://linuxhint.com/how-to-use-timedatectl-ubuntu/" target="_blank" rel="noopener noreffer">【linuxhint】timedatectl</a></li>
 <li><a href="https://www.myfreax.com/how-to-install-and-configure-vnc-on-ubuntu-22-04/" target="_blank" rel="noopener noreffer">【myfreax】如何在 Ubuntu 22.04 安装 VNC</a></li>
+<li><a href="https://stackoverflow.com/questions/480764" target="_blank" rel="noopener noreffer">【stackoverflow】Linux error while loading shared libraries: cannot open shared object file: No such file or directory</a></li>
 </ul>
 </div><div class="post-footer" id="post-footer"><div class="reward-container">
     
@@ -304,8 +318,9 @@
                 </span><span><a href="/tags/perl/">perl</a>
                 </span><span><a href="/tags/timedatectl/">timedatectl</a>
                 </span><span><a href="/tags/vnc/">VNC</a>
+                </span><span><a href="/tags/ldconfig/">ldconfig</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新于 2023-03-20</span>
+                <span>更新于 2023-09-15</span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/posts/72a4cdfd/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
