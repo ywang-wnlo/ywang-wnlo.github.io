@@ -344,14 +344,70 @@ index 07c34eba..dac28fdb 100644
                      {{- with .Site.Params.dateformat | default "2006-01-02" | .PublishDate.Format -}}
 ```
 
-<!-- ## 改用 highlight.js
+## 改用 `highlight.js`
 
-Hugo 的默认语法高亮是使用的 `Chroma`，但是 `Chroma` 的语法高亮效果不是很好，而且 FeetIt 的代码配色也不太好看，所以个人选择改用 `highlight.js`
- -->
+Hugo 的默认语法高亮是使用的 `Chroma`，但是 `Chroma` 的语法高亮效果不是很好，而且 FeetIt 的代码配色也不太好看（尤其是 Diff），所以个人选择改用 `highlight.js`
+
+{{< admonition failure "废弃方案" false >}}
+~~首先在 `layouts/partials/assets.html` 添加 `hisghlight.js` 的样式和脚本，这里选了 `github-dark` 的样式~~
+
+```diff
+diff --git a/layouts/partials/assets.html b/layouts/partials/assets.html
+index 15ae2653..da783b30 100644
+--- a/layouts/partials/assets.html
++++ b/layouts/partials/assets.html
+@@ -90,6 +90,12 @@
+     {{- $config = T "copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
+ {{- end -}}
+
++{{- /* highlight.js */ -}}
++{{- $source := "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/github-dark.min.css" -}}
++{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
++{{- $source := "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js" -}}
++{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
++
+ {{- /* Sharer.js */ -}}
+ {{- if $params.share.enable -}}
+     {{- $source := $cdn.sharerJS | default "lib/sharer/sharer.min.js" -}}
+```
+
+{{< /admonition >}}
+
+首先在主题配置里面添加 `hisghlight.js` 的样式和脚本，这里选了 `github-dark` 的样式
+
+```toml
+[params.page.library]
+    [params.page.library.css]
+        highlightCSS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/github-dark.min.css"
+    [params.page.library.js]
+        highlightJS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js"
+```
+
+然后还得在 `assets/js/theme.js` 中调用 `highlightAll` 方法
+
+```diff
+diff --git a/assets/js/theme.js b/assets/js/theme.js
+index f57a8f11..1686f376 100644
+--- a/assets/js/theme.js
++++ b/assets/js/theme.js
+@@ -373,6 +373,7 @@ class Theme {
+                 $chroma.insertBefore($header, $chroma.firstChild);
+             }
+         });
++        hljs.highlightAll();
+     }
+
+     initTable() {
+```
+
+为了保留主题的代码复制等功能，没有直接关闭 `Chroma`，所以还是会先加载 FeelIt 的配置，可能会闪烁一下才会加载 `highlight.js` 的配置，不过个人觉得影响不大，就没有再去管了
+
+如有还有什么更优雅的方式，欢迎评论区指正~
 
 ## 参考资料
 
 - [【GitHub】FeelIt](https://github.com/khusika/FeelIt)
 - [【FeelIt】基础配置](https://feelit.khusika.dev/theme-documentation-basics/)
 - [【个人博客】Hexo NexT 魔改系列之三 ── 评论篇](https://wangjiezhe.com/posts/2018-10-29-Hexo-NexT-3/#1-%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F)
+- [【个人博客】hugo 集成 Highlight.js](https://dawnarc.com/2018/01/hugo%E9%9B%86%E6%88%90highlight.js/)
 
