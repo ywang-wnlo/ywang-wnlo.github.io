@@ -404,6 +404,90 @@ index f57a8f11..1686f376 100644
 
 如有还有什么更优雅的方式，欢迎评论区指正~
 
+## 文章底部增加相关推荐
+
+相关推荐可以让读者更好的阅读，所以个人选择在文章底部增加相关推荐，正好学习了一下 Hugo 的语法
+
+主要是根据相同标签的数量进行推荐，算法其实比较简单hhhhh
+
+不过只按照标签数量进行排序的话，会导致每次生成的顺序都不一样，所以个人选择了按照标题先进行了一次排序
+
+修改的方法和之前添加打赏以及版权说明的方法类似
+
+```diff
+diff --git a/layouts/partials/single/footer.html b/layouts/partials/single/footer.html
+index 1b553dc5..77bca6b4 100644
+--- a/layouts/partials/single/footer.html
++++ b/layouts/partials/single/footer.html
+@@ -1,6 +1,8 @@
+ {{- $params := .Scratch.Get "params" -}}
+
+ <div class="post-footer" id="post-footer">
++    {{- partial "single/related.html" . -}}
++
+     {{- partial "single/reward.html" . -}}
+
+     {{- partial "single/copyright.html" . -}}
+
+diff --git a/layouts/partials/single/related.html b/layouts/partials/single/related.html
+new file mode 100644
+index 00000000..d209e33a
+--- /dev/null
++++ b/layouts/partials/single/related.html
+@@ -0,0 +1,49 @@
++{{- $params := .Scratch.Get "params" -}}
++
++{{- $excludePageUrl := .RelPermalink -}}
++
++{{- $relatedposts := dict -}}
++
++{{- with .Params.tags }}
++    {{- range $value := . }}
++        {{- $curTag := (lower $value) }}
++        {{- if ne $curTag "todo" }}
++            {{- $posts := index $.Site.Taxonomies.tags $curTag }}
++            {{- if gt (len $posts.Pages) 1 }}
++                {{- range $posts.Pages }}
++                {{- if ne .RelPermalink $excludePageUrl }}
++                    {{- if not (isset $relatedposts .RelPermalink) }}
++                        {{- $relatedPoints := (len (intersect .Params.tags $.Params.tags)) }}
++                        {{- $dictValue := (dict "Title" .Title "Points" $relatedPoints "Tags" .Params.tags "Href" .RelPermalink ) }}
++                        {{- $relatedposts = $relatedposts | merge (dict .RelPermalink $dictValue) }}
++                    {{- end }}
++                {{- end }}
++                {{- end }}
++            {{- end }}
++        {{- end }}
++    {{- end }}
++{{ end }}
++
++{{- $relatedposts = (sort $relatedposts "Title" "desc") -}}
++{{- $relatedposts = (sort $relatedposts "Points" "desc") -}}
++
++{{- if gt (len $relatedposts) 0 }}
++<div class="related-posts">
++    <h2 id="related-posts-head">相关文章推荐</h2>
++    <ul>
++        {{- range $value := first 5 $relatedposts }}
++        <li class="related-post-item">
++            <a class="related-post-link" href="{{ $value.Href }}" title="{{ $value.Title }}">{{ $value.Title }}</a>&nbsp;&nbsp;
++            {{- range $tag := $value.Tags -}}
++            {{- $tag := partialCached "function/path.html" $tag $tag | printf "/tags/%v" | $.Site.GetPage -}}
++            {{ if in $.Params.tags $tag.Title }}
++            <a class="tag-same" href="{{ $tag.RelPermalink }}"><i class="fa fa-tag fa-fw"></i>{{ $tag.Title }}</a>&nbsp;
++            {{- else }}
++            <a class="tag-diff" href="{{ $tag.RelPermalink }}"><i class="fa fa-tag fa-fw"></i>{{ $tag.Title }}</a>&nbsp;
++            {{- end }}
++            {{- end }}
++        </li>
++        {{- end }}
++    </ul>
++</div>
++{{ end }}
+```
+
+`css` 样式改得不太好看，有兴趣的可以自己修改一下，具体的可以参考这个 [commit：文章底部增加相关推荐](https://github.com/ywang-wnlo/FeelIt/commit/4933bceb09358f9ac1ae249c78ebb34dae6be3ed)
+
 ## 参考资料
 
 - [【GitHub】FeelIt](https://github.com/khusika/FeelIt)

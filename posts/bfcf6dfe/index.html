@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/bfcf6dfe/" /><meta property="og:image" content="https://ywang-wnlo.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-09-15T21:30:20+08:00" />
-<meta property="article:modified_time" content="2023-09-15T21:30:20+08:00" />
+<meta property="article:modified_time" content="2023-09-16T13:23:02+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ywang-wnlo.github.io/logo.png"/>
 
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ywang-wnlo.github.io\/posts\/bfcf6dfe\/"
-        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Hugo, FeelIt","wordcount":  2660 ,
-        "url": "https:\/\/ywang-wnlo.github.io\/posts\/bfcf6dfe\/","datePublished": "2023-09-15T21:30:20+08:00","dateModified": "2023-09-15T21:30:20+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/ywang-wnlo.github.io\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Hugo, FeelIt","wordcount":  3316 ,
+        "url": "https:\/\/ywang-wnlo.github.io\/posts\/bfcf6dfe\/","datePublished": "2023-09-15T21:30:20+08:00","dateModified": "2023-09-16T13:23:02+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zeus","logo": "https:\/\/ywang-wnlo.github.io\/images\/avatar.jpg"},"author": {
                 "@type": "Person",
@@ -114,8 +114,8 @@
                 <div class="post-meta-line"><span class="post-category">出版于  <a href="/categories/%E5%8D%9A%E5%AE%A2/"><i class="fa-regular fa-folder fa-fw"></i>博客</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;标签:&nbsp;<span><a href="/tags/hugo/"><i class="fa fa-tag fa-fw"></i>Hugo</a>&nbsp;
                         </span><span><a href="/tags/feelit/"><i class="fa fa-tag fa-fw"></i>FeelIt</a>&nbsp;
                         </span></div>
-                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-15">2023-09-15</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2660 字</span>&nbsp;
-                    <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-15">2023-09-15</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 3316 字</span>&nbsp;
+                    <span><i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟</span>&nbsp;</div>
             </div>
 
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -133,6 +133,7 @@
     <li><a href="#修改页面以及-utterances-宽度">修改页面以及 utterances 宽度</a></li>
     <li><a href="#文章头部增加标签">文章头部增加标签</a></li>
     <li><a href="#改用-highlightjs">改用 <code>highlight.js</code></a></li>
+    <li><a href="#文章底部增加相关推荐">文章底部增加相关推荐</a></li>
     <li><a href="#参考资料">参考资料</a></li>
   </ul>
 </nav></div>
@@ -863,6 +864,156 @@
 </div>
 </div><p>为了保留主题的代码复制等功能，没有直接关闭 <code>Chroma</code>，所以还是会先加载 FeelIt 的配置，可能会闪烁一下才会加载 <code>highlight.js</code> 的配置，不过个人觉得影响不大，就没有再去管了</p>
 <p>如有还有什么更优雅的方式，欢迎评论区指正~</p>
+<h2 id="文章底部增加相关推荐">文章底部增加相关推荐</h2>
+<p>相关推荐可以让读者更好的阅读，所以个人选择在文章底部增加相关推荐，正好学习了一下 Hugo 的语法</p>
+<p>主要是根据相同标签的数量进行推荐，算法其实比较简单hhhhh</p>
+<p>不过只按照标签数量进行排序的话，会导致每次生成的顺序都不一样，所以个人选择了按照标题先进行了一次排序</p>
+<p>修改的方法和之前添加打赏以及版权说明的方法类似</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gh">diff --git a/layouts/partials/single/footer.html b/layouts/partials/single/footer.html
+</span></span></span><span class="line"><span class="cl"><span class="gh">index 1b553dc5..77bca6b4 100644
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span><span class="gd">--- a/layouts/partials/single/footer.html
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+++ b/layouts/partials/single/footer.html
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span><span class="gu">@@ -1,6 +1,8 @@
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span> {{- $params := .Scratch.Get &#34;params&#34; -}}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> &lt;div class=&#34;post-footer&#34; id=&#34;post-footer&#34;&gt;
+</span></span><span class="line"><span class="cl"><span class="gi">+    {{- partial &#34;single/related.html&#34; . -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>     {{- partial &#34;single/reward.html&#34; . -}}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     {{- partial &#34;single/copyright.html&#34; . -}}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gh">diff --git a/layouts/partials/single/related.html b/layouts/partials/single/related.html
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>new file mode 100644
+</span></span><span class="line"><span class="cl"><span class="gh">index 00000000..d209e33a
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span><span class="gd">--- /dev/null
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+++ b/layouts/partials/single/related.html
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span><span class="gu">@@ -0,0 +1,49 @@
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span><span class="gi">+{{- $params := .Scratch.Get &#34;params&#34; -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{- $excludePageUrl := .RelPermalink -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{- $relatedposts := dict -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{- with .Params.tags }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    {{- range $value := . }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        {{- $curTag := (lower $value) }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        {{- if ne $curTag &#34;todo&#34; }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- $posts := index $.Site.Taxonomies.tags $curTag }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- if gt (len $posts.Pages) 1 }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                {{- range $posts.Pages }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                {{- if ne .RelPermalink $excludePageUrl }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    {{- if not (isset $relatedposts .RelPermalink) }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        {{- $relatedPoints := (len (intersect .Params.tags $.Params.tags)) }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        {{- $dictValue := (dict &#34;Title&#34; .Title &#34;Points&#34; $relatedPoints &#34;Tags&#34; .Params.tags &#34;Href&#34; .RelPermalink ) }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        {{- $relatedposts = $relatedposts | merge (dict .RelPermalink $dictValue) }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{ end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{- $relatedposts = (sort $relatedposts &#34;Title&#34; &#34;desc&#34;) -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{- $relatedposts = (sort $relatedposts &#34;Points&#34; &#34;desc&#34;) -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{- if gt (len $relatedposts) 0 }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+&lt;div class=&#34;related-posts&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    &lt;h2 id=&#34;related-posts-head&#34;&gt;相关文章推荐&lt;/h2&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    &lt;ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        {{- range $value := first 5 $relatedposts }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        &lt;li class=&#34;related-post-item&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            &lt;a class=&#34;related-post-link&#34; href=&#34;{{ $value.Href }}&#34; title=&#34;{{ $value.Title }}&#34;&gt;{{ $value.Title }}&lt;/a&gt;&amp;nbsp;&amp;nbsp;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- range $tag := $value.Tags -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- $tag := partialCached &#34;function/path.html&#34; $tag $tag | printf &#34;/tags/%v&#34; | $.Site.GetPage -}}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{ if in $.Params.tags $tag.Title }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            &lt;a class=&#34;tag-same&#34; href=&#34;{{ $tag.RelPermalink }}&#34;&gt;&lt;i class=&#34;fa fa-tag fa-fw&#34;&gt;&lt;/i&gt;{{ $tag.Title }}&lt;/a&gt;&amp;nbsp;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- else }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            &lt;a class=&#34;tag-diff&#34; href=&#34;{{ $tag.RelPermalink }}&#34;&gt;&lt;i class=&#34;fa fa-tag fa-fw&#34;&gt;&lt;/i&gt;{{ $tag.Title }}&lt;/a&gt;&amp;nbsp;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        &lt;/li&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        {{- end }}
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    &lt;/ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+{{ end }}
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>css</code> 样式改得不太好看，有兴趣的可以自己修改一下，具体的可以参考这个 <a href="https://github.com/ywang-wnlo/FeelIt/commit/4933bceb09358f9ac1ae249c78ebb34dae6be3ed" target="_blank" rel="noopener noreffer">commit：文章底部增加相关推荐</a></p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://github.com/khusika/FeelIt" target="_blank" rel="noopener noreffer">【GitHub】FeelIt</a></li>
@@ -925,7 +1076,7 @@
 <div class="post-info"><div class="post-info-tag"><span><a href="/tags/hugo/">Hugo</a>
                 </span><span><a href="/tags/feelit/">FeelIt</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新于 2023-09-15</span>
+                <span>更新于 2023-09-16</span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/posts/bfcf6dfe/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
