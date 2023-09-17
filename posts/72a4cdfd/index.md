@@ -90,3 +90,9 @@ sudo ldconfig
 - [【myfreax】如何在 Ubuntu 22.04 安装 VNC](https://www.myfreax.com/how-to-install-and-configure-vnc-on-ubuntu-22-04/)
 - [【stackoverflow】Linux error while loading shared libraries: cannot open shared object file: No such file or directory](https://stackoverflow.com/questions/480764)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/72a4cdfd/  
+

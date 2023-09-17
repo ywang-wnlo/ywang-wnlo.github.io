@@ -39,3 +39,9 @@ OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的
 - [【OpenWrt】支持设备列表](https://openwrt.org/toh/start)
 - [【OpenWrt】固件搜索](https://firmware-selector.openwrt.org/)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/8507aaa1/  
+

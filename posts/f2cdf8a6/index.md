@@ -111,3 +111,9 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 - [【Zhihu】oh-my-zsh：让终端飞](https://zhuanlan.zhihu.com/p/62501175)
 - [【GitHub】Powerlevel10k](https://github.com/romkatv/powerlevel10k#installation)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/f2cdf8a6/  
+

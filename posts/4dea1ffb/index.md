@@ -163,3 +163,9 @@ GitHub Pages 的部署会尝试用 Jekyll 编译，但是 Hugo 的博客是不�
 - [【Hugo】官方文档](https://gohugo.io/documentation/)
 - [【个人博客】Hugo 系列(4) - 从 Hexo 迁移至 Hugo 以及使用 LoveIt 主题的踩坑记录](https://lewky.cn/posts/hugo-4.html/#hugo%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8abbrlink%E5%AF%BC%E8%87%B4%E7%9A%84url%E4%B8%8E%E5%8E%9F%E6%9C%AChexo%E7%9A%84url%E4%B8%8D%E5%90%8C%E6%AD%A5)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/4dea1ffb/  
+

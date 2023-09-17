@@ -645,3 +645,9 @@ io_iopoll_getevents --> io_do_iopoll --> iopoll["f_op->iopoll"]
   2. 系统调用 `io_uring_enter` 将会触发，用于轮询 IO 完成情况，直到到达指定的 `wait_nr` 数量 IO 完成后才会退出轮询
   3. 当初始化时同时配置了 `IORING_SETUP_SQPOLL` 时，`io_sq_thread` 内核线程触发，当存在未完成的 IO 时调用，用于更新 IO 完成情况（ `io_do_iopoll` 的参数 `min = 0`，即每次调用无论是否有新完成的 IO 都会退出轮询，不会阻塞线程）
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/4f0d345c/  
+

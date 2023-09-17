@@ -225,3 +225,9 @@ Caused by: java.lang.ClassNotFoundException: org.HdrHistogram.EncodableHistogram
 - [【GitHub】[core] Fix ycsb.sh and ycsb.bat missing core dependencies #908](https://github.com/brianfrankcooper/YCSB/issues/1105)
 - [【CSDN】rocksdb 在 YCSB 中的运行教程](https://blog.csdn.net/a993096281/article/details/87864340)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/4bc1e607/  
+

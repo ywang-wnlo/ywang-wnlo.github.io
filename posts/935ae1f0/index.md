@@ -446,3 +446,9 @@ exit_group(0)                           = ?
 - [【man】open](https://man7.org/linux/man-pages/man2/open.2.html)
 - [【stackexchange】Why are rmdir and unlink two separate system calls?](https://unix.stackexchange.com/questions/150960/why-are-rmdir-and-unlink-two-separate-system-calls)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/935ae1f0/  
+

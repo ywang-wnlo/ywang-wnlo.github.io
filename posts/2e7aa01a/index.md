@@ -87,3 +87,9 @@ python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-
 - [【CSDN】python pip 的安装、更新、卸载、降级、和使用 pip 管理包](https://blog.csdn.net/tz_zs/article/details/87939977)
 - [【CSDN】修改 pip 配置文件路径、更改 pip 源、使用 pip 安装已经下载的 whl 文件](https://blog.csdn.net/ykun089/article/details/106057952)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/2e7aa01a/  
+

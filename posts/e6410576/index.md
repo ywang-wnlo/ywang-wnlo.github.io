@@ -154,3 +154,9 @@ ImmortalWrt 是 OpenWrt 的一个分支，相比于 OpenWrt 有更多的软件�
 - [【个人博客】hanwckf - mt798x uboot 功能介绍](https://cmi.hanwckf.top/p/mt798x-uboot-usage)
 - [【ImmortalWrt】固件下载](https://firmware-selector.immortalwrt.org/)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/e6410576/  
+

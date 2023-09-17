@@ -27,3 +27,9 @@ pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增�
 
 - [【Overleaf】pdfTeX, XeTeX and LuaTeX](https://www.overleaf.com/learn/latex/Articles/What%27s_in_a_Name%3A_A_Guide_to_the_Many_Flavours_of_TeX#And_finally:_from_TeX_to_pdfTeX.2C_XeTeX_and_LuaTeX)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/a4752f87/  
+

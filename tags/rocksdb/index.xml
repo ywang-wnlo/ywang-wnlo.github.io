@@ -1,20 +1,24 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>RocksDB - 标签 - 乐园</title>
-        <link>https://ywang-wnlo.github.io/tags/rocksdb/</link>
-        <description>RocksDB - 标签 - 乐园</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/rocksdb/" rel="self" type="application/rss+xml" /><item>
-    <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
-    <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
-    <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
-    <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
+  <channel>
+    <title>RocksDB - 标签 - 乐园</title>
+    <link>https://ywang-wnlo.github.io/tags/rocksdb/</link>
+    <description>RocksDB - 标签 - 乐园</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/rocksdb/" rel="self" type="application/rss+xml" /><item>
+  <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
+  <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
+  <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
+  <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
 </item>
 <item>
-    <title>自定义配置 RocksDB 进行 YCSB 测试</title>
-    <link>https://ywang-wnlo.github.io/posts/4bc1e607/</link>
-    <pubDate>Sun, 26 Dec 2021 00:20:25 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4bc1e607/</guid>
-    <description><![CDATA[本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法]]></description>
+  <title>自定义配置 RocksDB 进行 YCSB 测试</title>
+  <link>https://ywang-wnlo.github.io/posts/4bc1e607/</link>
+  <pubDate>Sun, 26 Dec 2021 00:20:25 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/4bc1e607/</guid>
+  <description><![CDATA[本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法]]></description>
 </item>
 </channel>
 </rss>

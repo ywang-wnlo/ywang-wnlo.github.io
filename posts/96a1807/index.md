@@ -109,3 +109,9 @@ make package/mentohust/compile V=s -j
 - [【GitHub】OpenWrt](https://github.com/openwrt/openwrt)
 - [【GitHub】MentoHUST-OpenWrt-ipk](https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/96a1807/  
+

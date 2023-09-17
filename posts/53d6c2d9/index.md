@@ -179,3 +179,9 @@ Breed 的刷入和固件刷入流程基本一致：
 - [【恩山论坛】小米路由器 MINI 刷 Breed 及 Pandavan 教程](https://www.right.com.cn/forum/thread-690605-1-1.html)
 - [【恩山论坛】小米路由器 3G 刷 Breed 及老毛子 Padavan 固件教程](https://www.right.com.cn/forum/thread-257423-1-1.html)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/53d6c2d9/  
+

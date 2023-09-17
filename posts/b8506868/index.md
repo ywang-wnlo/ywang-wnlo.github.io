@@ -223,3 +223,9 @@ sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direc
 - [【CSDN】问题解决 C++: fatal error: Killed signal terminated program cc1plus](https://blog.csdn.net/weixin_44796670/article/details/121234446)
 - [【GitHub】libzbd](https://github.com/westerndigitalcorporation/libzbd)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/b8506868/  
+

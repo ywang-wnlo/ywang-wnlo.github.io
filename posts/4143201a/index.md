@@ -149,3 +149,9 @@ hexo deploy -m (git log -1 --pretty=format:%s)
 - [【Git】git log 自定义输出格式](https://git-scm.com/docs/git-log#_pretty_formats)
 - [【CSDN】解决 Windows PowerShell 乱码](https://blog.csdn.net/weixin_43426860/article/details/83348284)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/4143201a/  
+

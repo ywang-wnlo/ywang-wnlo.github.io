@@ -1,70 +1,90 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>乐园</title>
-        <link>https://ywang-wnlo.github.io/</link>
-        <description>一个新时代农民工的随手笔记</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-            <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Sep 2023 21:30:20 &#43;0800</lastBuildDate>
-            <atom:link href="https://ywang-wnlo.github.io/index.xml" rel="self" type="application/rss+xml" />
-        <item>
-    <title>FeelIt 主题的配置以及魔改记录</title>
-    <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
-    <pubDate>Fri, 15 Sep 2023 21:30:20 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
-    <description><![CDATA[本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改]]></description>
+  <channel>
+    <title>乐园</title>
+    <link>https://ywang-wnlo.github.io/</link>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 15 Sep 2023 21:30:20 &#43;0800</lastBuildDate>
+      <atom:link href="https://ywang-wnlo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+  <title>FeelIt 主题的配置以及魔改记录</title>
+  <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
+  <pubDate>Fri, 15 Sep 2023 21:30:20 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
+  <description><![CDATA[本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改]]></description>
 </item>
 <item>
-    <title>更换博客框架至 Hugo</title>
-    <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
-    <pubDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
-    <description><![CDATA[本文主要记录了自己迁移博客至 Hugo 的过程中遇到的问题，以及一些小技巧]]></description>
+  <title>更换博客框架至 Hugo</title>
+  <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
+  <pubDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
+  <description><![CDATA[本文主要记录了自己迁移博客至 Hugo 的过程中遇到的问题，以及一些小技巧]]></description>
 </item>
 <item>
-    <title>Debug 从入门到入土</title>
-    <link>https://ywang-wnlo.github.io/posts/89f2ed7d/</link>
-    <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
-    <description><![CDATA[写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）]]></description>
+  <title>Debug 从入门到入土</title>
+  <link>https://ywang-wnlo.github.io/posts/89f2ed7d/</link>
+  <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
+  <description><![CDATA[写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）]]></description>
 </item>
 <item>
-    <title>小米 WR30U 解锁并刷机</title>
-    <link>https://ywang-wnlo.github.io/posts/e6410576/</link>
-    <pubDate>Mon, 21 Aug 2023 14:25:43 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
-    <description><![CDATA[本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下]]></description>
+  <title>小米 WR30U 解锁并刷机</title>
+  <link>https://ywang-wnlo.github.io/posts/e6410576/</link>
+  <pubDate>Mon, 21 Aug 2023 14:25:43 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
+  <description><![CDATA[本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下]]></description>
 </item>
 <item>
-    <title>Ubuntu 环境配置大合集</title>
-    <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
-    <pubDate>Thu, 24 Nov 2022 17:16:00 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
-    <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置]]></description>
+  <title>Ubuntu 环境配置大合集</title>
+  <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
+  <pubDate>Thu, 24 Nov 2022 17:16:00 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
+  <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置]]></description>
 </item>
 <item>
-    <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
-    <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
-    <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
-    <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
+  <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
+  <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
+  <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
+  <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
 </item>
 <item>
-    <title>Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter</title>
-    <link>https://ywang-wnlo.github.io/posts/3b7ae835/</link>
-    <pubDate>Wed, 16 Nov 2022 23:03:35 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/3b7ae835/</guid>
-    <description><![CDATA[本文主要来源于 VCB-Studio 官网的科普教程，个人重新了梳理，记录 Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter 的配置过程]]></description>
+  <title>Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter</title>
+  <link>https://ywang-wnlo.github.io/posts/3b7ae835/</link>
+  <pubDate>Wed, 16 Nov 2022 23:03:35 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/3b7ae835/</guid>
+  <description><![CDATA[本文主要来源于 VCB-Studio 官网的科普教程，个人重新了梳理，记录 Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter 的配置过程]]></description>
 </item>
 <item>
-    <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-    <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
-    <pubDate>Wed, 16 Nov 2022 13:43:05 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
-    <description><![CDATA[本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置]]></description>
+  <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+  <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
+  <pubDate>Wed, 16 Nov 2022 13:43:05 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
+  <description><![CDATA[本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置]]></description>
 </item>
 <item>
-    <title>美化 Shell 之 Linux Zsh 篇</title>
-    <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
-    <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
-    <description><![CDATA[本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置]]></description>
+  <title>美化 Shell 之 Linux Zsh 篇</title>
+  <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
+  <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
+  <description><![CDATA[本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置]]></description>
 </item>
 <item>
-    <title>从 SSLEOFError 到正确配置 Proxy</title>
-    <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
-    <pubDate>Tue, 29 Mar 2022 13:48:31 &#43;0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author><guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
-    <description><![CDATA[本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程]]></description>
+  <title>从 SSLEOFError 到正确配置 Proxy</title>
+  <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
+  <pubDate>Tue, 29 Mar 2022 13:48:31 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
+  <description><![CDATA[本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程]]></description>
 </item>
 </channel>
 </rss>

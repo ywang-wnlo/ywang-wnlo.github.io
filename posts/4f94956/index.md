@@ -302,3 +302,9 @@ You can also insert Latin text in your document
 - [【知乎】Visual Studio Code 配置 LaTeX](https://zhuanlan.zhihu.com/p/166523064)
 - [【Overleaf】Chinese](https://cn.overleaf.com/learn/latex/Chinese)
 
+
+---
+
+> 作者: [Zeus](https://github.com/ywang-wnlo)  
+> URL: https://ywang-wnlo.github.io/posts/4f94956/  
+
