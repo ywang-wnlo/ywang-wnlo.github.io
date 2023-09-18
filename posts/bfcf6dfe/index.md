@@ -1,6 +1,10 @@
 # FeelIt 主题的配置以及魔改记录
 
 
+{{< admonition warning "写在最前" >}}
+以下大部分修改在 [FixIt](https://github.com/hugo-fixit/FixIt) 主题中已经得到了解决，所以个人已经切换到了 FixIt 主题
+{{< /admonition >}}
+
 {{< admonition abstract >}}
 本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改
 {{< /admonition >}}
@@ -219,6 +223,7 @@ index 00000000..b5130edb
 +        </li>
 +    </ul>
 +</div>
++{{- end }}
 
 diff --git a/layouts/partials/single/footer.html b/layouts/partials/single/footer.html
 index 9f02be9b..d9abf429 100644
@@ -490,6 +495,7 @@ index 00000000..d209e33a
 
 ## 参考资料
 
+- [【GitHub】FixIt](https://github.com/hugo-fixit/FixIt)
 - [【GitHub】FeelIt](https://github.com/khusika/FeelIt)
 - [【FeelIt】基础配置](https://feelit.khusika.dev/theme-documentation-basics/)
 - [【个人博客】Hexo NexT 魔改系列之三 ── 评论篇](https://wangjiezhe.com/posts/2018-10-29-Hexo-NexT-3/#1-%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F)
