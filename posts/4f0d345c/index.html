@@ -1310,7 +1310,57 @@
 <li>系统调用 <code>io_uring_enter</code> 将会触发，用于轮询 IO 完成情况，直到到达指定的 <code>wait_nr</code> 数量 IO 完成后才会退出轮询</li>
 <li>当初始化时同时配置了 <code>IORING_SETUP_SQPOLL</code> 时，<code>io_sq_thread</code> 内核线程触发，当存在未完成的 IO 时调用，用于更新 IO 完成情况（ <code>io_do_iopoll</code> 的参数 <code>min = 0</code>，即每次调用无论是否有新完成的 IO 都会退出轮询，不会阻塞线程）</li>
 </ol>
-</div><div class="post-reward">
+</div><div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/4f0d345c/" title="io_uring 内核源码分析">https://ywang-wnlo.github.io/posts/4f0d345c/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+<div class="related-posts">
+    <h2 id="related-posts-head">相关文章推荐</h2>
+    <ul>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/d7259d1d/" title="io_uring 用户库源码分析">io_uring 用户库源码分析</a>&nbsp;&nbsp;
+            <a class="tag-same" href="/tags/%E5%BC%82%E6%AD%A5-io/"><i class="fa fa-tag fa-fw"></i>异步 IO</a>&nbsp;
+            <a class="tag-same" href="/tags/liburing/"><i class="fa fa-tag fa-fw"></i>liburing</a>&nbsp;
+            <a class="tag-same" href="/tags/io_uring/"><i class="fa fa-tag fa-fw"></i>io_uring</a>&nbsp;
+        </li>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/c142853f/" title="io_uring 简介和使用">io_uring 简介和使用</a>&nbsp;&nbsp;
+            <a class="tag-same" href="/tags/%E5%BC%82%E6%AD%A5-io/"><i class="fa fa-tag fa-fw"></i>异步 IO</a>&nbsp;
+            <a class="tag-same" href="/tags/liburing/"><i class="fa fa-tag fa-fw"></i>liburing</a>&nbsp;
+            <a class="tag-same" href="/tags/io_uring/"><i class="fa fa-tag fa-fw"></i>io_uring</a>&nbsp;
+        </li>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a>&nbsp;&nbsp;
+            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
+            <a class="tag-diff" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
+            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
+            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
+            <a class="tag-diff" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
+            <a class="tag-diff" href="/tags/todo/"><i class="fa fa-tag fa-fw"></i>todo</a>&nbsp;
+        </li>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/646202b9/" title="page cache 回写机制">page cache 回写机制</a>&nbsp;&nbsp;
+            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
+            <a class="tag-diff" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
+            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
+            <a class="tag-diff" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
+        </li>
+    </ul>
+</div>
+<div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
