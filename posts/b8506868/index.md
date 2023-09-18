@@ -163,6 +163,9 @@ DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make -j db_bench
 # 安装编译好的 RocksDB 库
 sudo DEBUG_LEVEL=0 ROCKSDB_PLUGINS=zenfs make install
 
+# 确保 RocksDB 库能被找到
+sudo ldconfig
+
 # 编译必要的 ZenFS 工具
 cd plugin/zenfs/util
 make -j
