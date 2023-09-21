@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>论文数据提取 - 标签 - 乐园</title>
+    <link>https://ywang-wnlo.github.io/tags/%E8%AE%BA%E6%96%87%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/</link>
+    <description>论文数据提取 - 标签 - 乐园</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/%E8%AE%BA%E6%96%87%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/" rel="self" type="application/rss+xml" /><item>
+  <title>从论文的图中提取数据</title>
+  <link>https://ywang-wnlo.github.io/posts/139abad8/</link>
+  <pubDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/139abad8/</guid>
+  <description><![CDATA[有时候我们需要从论文的图中提取数据，这时候可以使用一些工具来帮助我们。本文介绍了一个非常方便的工具 <code>WebPlotDigitizer</code>，无需安装，直接在网页上即可使用。]]></description>
+</item>
+</channel>
+</rss>

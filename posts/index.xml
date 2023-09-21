@@ -4,7 +4,15 @@
     <link>https://ywang-wnlo.github.io/posts/</link>
     <description>所有文章 | 乐园</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>从论文的图中提取数据</title>
+  <link>https://ywang-wnlo.github.io/posts/139abad8/</link>
+  <pubDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/139abad8/</guid>
+  <description><![CDATA[有时候我们需要从论文的图中提取数据，这时候可以使用一些工具来帮助我们。本文介绍了一个非常方便的工具 <code>WebPlotDigitizer</code>，无需安装，直接在网页上即可使用。]]></description>
+</item>
+<item>
   <title>Python 环境隔离</title>
   <link>https://ywang-wnlo.github.io/posts/28f3e4d7/</link>
   <pubDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
   <author>Zeus</author>
   <guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
   <description><![CDATA[本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置]]></description>
-</item>
-<item>
-  <title>美化 Shell 之 Linux Zsh 篇</title>
-  <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
-  <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
-  <description><![CDATA[本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置]]></description>
 </item>
 </channel>
 </rss>

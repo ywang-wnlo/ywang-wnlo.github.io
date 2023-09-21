@@ -4,7 +4,23 @@
     <link>https://ywang-wnlo.github.io/tags/</link>
     <description>Tags - 标签 - 乐园</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+  <title>工具</title>
+  <link>https://ywang-wnlo.github.io/tags/%E5%B7%A5%E5%85%B7/</link>
+  <pubDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/tags/%E5%B7%A5%E5%85%B7/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>论文数据提取</title>
+  <link>https://ywang-wnlo.github.io/tags/%E8%AE%BA%E6%96%87%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/</link>
+  <pubDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/tags/%E8%AE%BA%E6%96%87%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>conda</title>
   <link>https://ywang-wnlo.github.io/tags/conda/</link>
   <pubDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
   <pubDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</pubDate>
   <author>Zeus</author>
   <guid>https://ywang-wnlo.github.io/tags/hexo/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>addr2line</title>
-  <link>https://ywang-wnlo.github.io/tags/addr2line/</link>
-  <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/tags/addr2line/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>assert</title>
-  <link>https://ywang-wnlo.github.io/tags/assert/</link>
-  <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/tags/assert/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>
