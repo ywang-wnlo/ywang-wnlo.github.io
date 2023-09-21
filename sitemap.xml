@@ -2,16 +2,23 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://ywang-wnlo.github.io/categories/</loc><lastmod>2023-09-18T19:13:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/categories/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/conda/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/posts/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/python/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/posts/28f3e4d7/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/venv/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/virtualenv/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/virtualenvwrapper/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/</loc><lastmod>2023-09-21T21:34:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/feelit/</loc><lastmod>2023-09-18T09:38:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/bfcf6dfe/</loc><lastmod>2023-09-18T09:38:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/hugo/</loc><lastmod>2023-09-18T09:38:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/posts/</loc><lastmod>2023-09-18T19:13:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/</loc><lastmod>2023-09-18T19:13:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc><lastmod>2023-09-18T09:38:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/</loc><lastmod>2023-09-18T19:13:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/hexo/</loc><lastmod>2023-09-14T21:33:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/posts/4dea1ffb/</loc><lastmod>2023-09-14T21:33:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/hexo/</loc><lastmod>2023-09-14T21:33:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/posts/4dea1ffb/</loc><lastmod>2023-09-14T21:33:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/addr2line/</loc><lastmod>2023-09-11T18:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/assert/</loc><lastmod>2023-09-11T18:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/debug/</loc><lastmod>2023-09-11T18:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
@@ -20,7 +27,6 @@
       <loc>https://ywang-wnlo.github.io/tags/objdump/</loc><lastmod>2023-09-11T18:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/</loc><lastmod>2023-09-11T18:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/</loc><lastmod>2023-09-18T19:13:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/</loc><lastmod>2023-09-11T18:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/bootloader/</loc><lastmod>2023-08-21T14:25:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/immortalwrt/</loc><lastmod>2023-08-21T14:25:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/openwrt/</loc><lastmod>2023-08-21T14:25:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
@@ -60,7 +66,6 @@
       <loc>https://ywang-wnlo.github.io/tags/zsh/</loc><lastmod>2022-11-16T19:20:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/f2cdf8a6/</loc><lastmod>2022-11-16T19:20:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/proxy/</loc><lastmod>2022-03-20T18:36:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/python/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/ssl/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/76f6af57/</loc><lastmod>2022-03-20T18:36:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/chrome/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -74,8 +79,8 @@
       <loc>https://ywang-wnlo.github.io/tags/next/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/seo/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/buffer-io/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/categories/io-stack/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/kernel/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/categories/io-stack/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/kernel/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/page-cache/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/9ba60726/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/todo/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -90,10 +95,10 @@
       <loc>https://ywang-wnlo.github.io/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/</loc><lastmod>2022-11-19T11:39:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/breed/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/53d6c2d9/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/io_uring/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/posts/4f0d345c/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/liburing/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/%E5%BC%82%E6%AD%A5-io/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/io_uring/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/posts/4f0d345c/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/liburing/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/%E5%BC%82%E6%AD%A5-io/</loc><lastmod>2023-09-12T10:58:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/d7259d1d/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/c142853f/</loc><lastmod>2022-11-17T10:51:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/ipv6/</loc><lastmod>2022-11-19T15:30:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -101,13 +106,13 @@
       <loc>https://ywang-wnlo.github.io/posts/51140c4a/</loc><lastmod>2022-11-19T15:30:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/tags/%E9%94%90%E6%8D%B7/</loc><lastmod>2022-11-19T15:30:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/8507aaa1/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/latex/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/categories/latex/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/latex/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/categories/latex/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/2033aa70/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/beamer/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/posts/499c5a19/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/posts/4f94956/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/overleaf/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/tex-live/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ywang-wnlo.github.io/tags/vscode/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/beamer/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/posts/499c5a19/</loc><lastmod>2023-09-12T11:37:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/posts/4f94956/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/overleaf/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/tex-live/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://ywang-wnlo.github.io/tags/vscode/</loc><lastmod>2023-09-12T11:30:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ywang-wnlo.github.io/posts/a4752f87/</loc><lastmod>2022-11-16T10:33:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
