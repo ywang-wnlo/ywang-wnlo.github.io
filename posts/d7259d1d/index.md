@@ -83,7 +83,7 @@
 
   - `__sys_io_uring_enter`
 
-    系统调用陷入内核态，将参数传递给内核的 `io_uring_setup` 函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的 `ring->flags` 相关<!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) -->
+    系统调用陷入内核态，将参数传递给内核的 `io_uring_enter` 函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的 `ring->flags` 相关<!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) -->
 
 ## `io_uring_wait_cqe`
 
