@@ -128,7 +128,7 @@ opkg install kmod-usb-storage-uas
 
   配置挂载可以通过直接在网页端的 [系统-挂载点](http://192.168.1.1/cgi-bin/luci/admin/system/mounts) 进行手动配置，比较直观，如图所示：
 
-  ![挂载设备](Mount-sda6.png)
+  ![挂载设备](Mount-sda6.png "挂载设备")
 
   - 已启用：勾选
   - UUID：推荐使用 UUID 来进行挂载
@@ -219,7 +219,7 @@ opkg install kmod-usb-storage-uas
 
 1. 首先要在 [网络-防火墙-通信规则](http://192.168.1.1/cgi-bin/luci/admin/network/firewall/rules) 点击新增，进行如下配置
 
-    ![开放 80 端口](Allow-LuCI-WAN.png)
+    ![开放 80 端口](Allow-LuCI-WAN.png "开放 80 端口")
 
     - 名称：可以随意设置
     - 协议：根据需要进行选择即可
@@ -240,7 +240,7 @@ opkg install kmod-usb-storage-uas
 
 1. 首先要在 [网络-防火墙-端口转发](http://192.168.1.1/cgi-bin/luci/admin/network/firewall/forwards) 点击新增，进行如下配置
 
-    ![端口转发](Win-Remote.png)
+    ![端口转发](Win-Remote.png "端口转发")
 
     - 名称：可以随意设置
     - 协议：根据需要进行选择即可
@@ -458,10 +458,10 @@ opkg install kmod-usb-storage-uas
     uci commit firewall
     /etc/init.d/firewall restart
     ```
-    
+
     至此路由器本身的配置就完了，然后需要去 [zerotier 官网](https://my.zerotier.com/network) 配置一下路由
 
-    ![ZeroTier 路由管理](ZeroTier-Routes.png)
+    ![ZeroTier 路由管理](ZeroTier-Routes.png "ZeroTier 路由管理")
 
     例如我的局域网段选的 `192.168.192.*`，两个路由器实际的内网的 LAN 口配置依次为 `192.168.22.0/24` 和 `192.168.33.0/24` 对应左边的红框，路由器自身的 ZeroTier 的虚拟 IP 为 `192.168.192.22` 和 `192.168.192.33` 则对应着右边红框，这里不详细展开，可以参考 [这篇博文](https://stray.love/jiao-cheng/zerotier-zhong-jie-jiao-cheng)
 
@@ -516,7 +516,7 @@ opkg install kmod-usb-storage-uas
 
 3. 然后参考之前的 [开放端口](#开放端口)，打开 20、21、10090-10100 端口就可以在外网访问 FTP 服务器了
 
-    ![开放 FTP 端口](Allow-FTP-WAN.png)
+    ![开放 FTP 端口](Allow-FTP-WAN.png "开放 FTP 端口")
 
 4. 之后重启 `vsftpd` 服务即可使用
 
@@ -539,7 +539,7 @@ P.S. 连接 ftp 服务器的账号密码就是路由器的 root 账号密码
 
 2. 在网页端的 [服务-网络共享](http://192.168.1.1/cgi-bin/luci/admin/services/samba4) 中进行配置，个人配置如下，可以参考
 
-    ![Samba 配置](Samba.png)
+    ![Samba 配置](Samba.png "Samba 配置")
 
 3. 之后重启 `samba4` 服务即可使用
 
@@ -565,7 +565,7 @@ transmission 是一个轻量级跨平台的 BT 下载客户端
 
 2. 直接修改 `/etc/config/transmission`，或者在网页端的 [服务-Transmission](http://192.168.1.1/cgi-bin/luci/admin/services/transmission) 进行配置，下面给出个人配置，可以参考
 
-    ![Transmission 配置](Transmission.png)
+    ![Transmission 配置](Transmission.png "Transmission 配置")
 
     ```ini
     config transmission
@@ -662,7 +662,7 @@ transmission 是一个轻量级跨平台的 BT 下载客户端
 - [【OpenWrt】默认使用 IPv6](https://openwrt.org/docs/guide-user/network/ipv6/ipv6_extras#using_ipv6_by_default)
 - [【OpenWrt】默认 IPv6 路由](https://openwrt.org/docs/guide-user/network/ipv6/ipv6_extras#announcing_default_ipv6_route)
 - [【Bilibili】【老湿基】IPv6 竟然也可以开 NAT｜OpenWRT IPv6 NAT 手把手教学](https://www.bilibili.com/video/BV1Ny4y1x7Pa)
-- [【Zhihu】如何开启 NAT6](https://zhuanlan.zhihu.com/p/346606856)
+- [【知乎】如何开启 NAT6](https://zhuanlan.zhihu.com/p/346606856)
 - [【GitHub】ZeroTier setup on OpenWRT](https://github.com/mwarning/zerotier-openwrt/wiki)
 - [【个人博客】ZeroTier 中阶教程](https://stray.love/jiao-cheng/zerotier-zhong-jie-jiao-cheng)
 - [【OpenWrt】FTP](https://openwrt.org/docs/guide-user/services/nas/ftp.overview)

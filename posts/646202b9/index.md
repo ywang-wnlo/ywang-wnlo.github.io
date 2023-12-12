@@ -78,7 +78,7 @@ struct backing_dev_info {
 
 1. `name` 字段
 
-    ![name 字段](bdi_name.png)
+    ![name 字段](bdi_name.png "name 字段")
 
     在 `block/blk-core.c` 中 `blk_alloc_queue_node` 会调用 `bdi_alloc_node` 来初始化该结构体，其中 `name` 字段赋值为 `"block"`
 
@@ -90,7 +90,7 @@ struct backing_dev_info {
 
     在 `mm/backing-dev.c` 的 `bdi_register_va` 还会对 `dev_name` 进行赋值
 
-    ![dev_name 字段](bdi_dev_name.png)
+    ![dev_name 字段](bdi_dev_name.png "dev_name 字段")
 
     根据调用栈溯源可以发现，`mm/backing-dev.c` 的 `bdi_register_owner` 将 `fmt` 和 `args` 传递到 `bdi_register_va`，最终会将主设备号和次设备号拼接组合后进行赋值
 
@@ -98,7 +98,7 @@ struct backing_dev_info {
 
     在 `mm/backing-dev.c` 的 `bdi_register_owner` 还会对 `owner` 进行赋值
 
-    ![owner 字段](bdi_owner.png)
+    ![owner 字段](bdi_owner.png "owner 字段")
 
     实际赋值的为 `disk` 对应的 `dev`，通过 `disk_to_dev` 宏转换得到
 
@@ -354,7 +354,7 @@ struct writeback_control {
 
 由于这是个 `delayed_work`，注册的工作函数不会立即执行，需要后续利用 `mod_delayed_work` 来修改 `delayed_work` 内置的定时器时间来唤醒
 
-![wb_init 调用图](wb_init.png)
+![wb_init 调用图](wb_init.png "wb_init 调用图")
 
 (P.S. 图片中函数开头为 `cg` 代表和 `cgroup` 相关，同一层级多个同名函数和宏定义的编译控制有关)
 
@@ -364,7 +364,7 @@ struct writeback_control {
 
 虽然 `dwork` 是个 `delayed_work`，但是我们可以在调用 `mod_delayed_work` 将延时设置为 0，来立即唤醒回写线程
 
-![dwork 调用图](dwork_callers.png)
+![dwork 调用图](dwork_callers.png "dwork 调用图")
 
 #### `wb_wakeup`
 
@@ -451,7 +451,7 @@ void wb_wakeup_delayed(struct bdi_writeback *wb)
 
 `wb_wakeup_delayed` 使用 5s 作为时间间隔，当调用 `wb_wakeup_delayed` 后，回写线程会在 5s 后被唤醒
 
-![wb_wakeup_delayed 调用图](wb_wakeup_delayed.png)
+![wb_wakeup_delayed 调用图](wb_wakeup_delayed.png "wb_wakeup_delayed 调用图")
 
 定时唤醒只会在两种情形下被调用：
 
@@ -462,7 +462,7 @@ void wb_wakeup_delayed(struct bdi_writeback *wb)
 
 ### 释放销毁
 
-![release_bdi 调用图](release_bdi.png)
+![release_bdi 调用图](release_bdi.png "release_bdi 调用图")
 
 当需要对整个 `backing_dev_info` 结构释放时，也会立即唤醒内核回写线程，并且会下刷现有的所有工作
 

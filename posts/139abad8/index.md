@@ -16,7 +16,7 @@
 
 `WebPlotDigitizer` 的网页地址为 [https://apps.automeris.io/wpd/index.zh_CN.html](https://apps.automeris.io/wpd/index.zh_CN.html)，并且 [其源码开源](https://github.com/ankitrohatgi/WebPlotDigitizer)。
 
-![WebPlotDigitizer](WebPlotDigitizer.png)
+![WebPlotDigitizer](WebPlotDigitizer.png "WebPlotDigitizer")
 
 ## 使用方法
 

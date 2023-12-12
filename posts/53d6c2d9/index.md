@@ -160,13 +160,13 @@ Breed 的刷入和固件刷入流程基本一致：
 
 刷入 Breed 后，耐心等待设备重启，通常可以通过 192.168.1.1 这个地址来进入 Breed 的 Web 管理界面
 
-![Breed 的 Web 管理界面](Breed-WEB.png)
+![Breed 的 Web 管理界面](Breed-WEB.png "Breed 的 Web 管理界面")
 
 ## 通过 Breed 刷机
 
 通过 Breed 刷机就很方便了，直接在 [固件更新](http://192.168.1.1/upgrade.html) 界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可
 
-![Breed 进行固件更新](Breed-upgrade.png)
+![Breed 进行固件更新](Breed-upgrade.png "Breed 进行固件更新")
 
 ## 其他功能
 

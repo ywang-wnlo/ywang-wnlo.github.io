@@ -33,11 +33,11 @@ conda install pycryptodome
 
 3. 打开 `控制面板 - 网络和 Internet - 网络和共享中心 - 更改适配器设置 - 选择 WLAN - 右键属性 - 共享`，勾选第一个并确认，这个时候 WR30U 会通过有线连接共享电脑的网络，并且网络指示灯会变成蓝色
 
-    ![共享网络](共享网络.png)
+    ![共享网络](共享网络.png "共享网络")
 
 4. 打开 `控制面板 - 系统和安全 - Windows Defender 防火墙 - 启动或关闭 Windows Defender 防火墙`，关闭 Windows Defender 防火墙
 
-    ![关闭防火墙](关闭防火墙.png)
+    ![关闭防火墙](关闭防火墙.png "关闭防火墙")
 
 5. 运行解锁脚本，并按照脚本提示操作
 
@@ -141,7 +141,7 @@ ImmortalWrt 是 OpenWrt 的一个分支，相比于 OpenWrt 有更多的软件�
 
 4. 直接访问 [WebUI](http://192.168.31.1) 进行刷固件，将 layout 选为 `immortalwrt-112m`，然后上传前面下载的固件，点击刷机即可
 
-    ![layout 选择](layout 选择.png)
+    ![layout 选择](layout选择.png "layout 选择")
 
 ## 刷为原厂固件
 

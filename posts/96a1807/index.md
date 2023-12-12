@@ -59,7 +59,7 @@ make menuconfig
 
 以小米 R3G 路由器为例，应该将他们配置成如下图所示
 
-![平台配置](Target-Config.png)
+![平台配置](Target-Config.png "平台配置")
 
 ### 获取交叉编译链
 
@@ -92,7 +92,7 @@ make menuconfig
 
 对于 `MentoHUST` 来说，在 `Network` 中的 `Ruijie` 找到对应选项并配置成 `M` 即可，如下图
 
-![MentoHUST 配置](MentoHUST-Config.png)
+![MentoHUST 配置](MentoHUST-Config.png "MentoHUST 配置")
 
 配置完成后就可以进行编译了，编译命令也很简单，以 `MentoHUST` 为例如下所示
 

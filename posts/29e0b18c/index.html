@@ -10,7 +10,7 @@
 <meta name="description" content="最近电脑有个问题持续了好久：当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下，在微信内通过默认浏览器打开总是没有反应。本文主要记录了修复 chrome 打不开微信或者部分第三方应用内链接的过程" /><meta name="keywords" content='日常踩坑, chrome' /><meta itemprop="name" content="修复 chrome 打不开微信或者部分第三方应用内链接">
 <meta itemprop="description" content="最近电脑有个问题持续了好久：当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下，在微信内通过默认浏览器打开总是没有反应。本文主要记录了修复 chrome 打不开微信或者部分第三方应用内链接的过程"><meta itemprop="datePublished" content="2022-03-14T16:09:34+08:00" />
 <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00" />
-<meta itemprop="wordCount" content="380">
+<meta itemprop="wordCount" content="414">
 <meta itemprop="keywords" content="日常踩坑,chrome," /><meta property="og:title" content="修复 chrome 打不开微信或者部分第三方应用内链接" />
 <meta property="og:description" content="最近电脑有个问题持续了好久：当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下，在微信内通过默认浏览器打开总是没有反应。本文主要记录了修复 chrome 打不开微信或者部分第三方应用内链接的过程" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/29e0b18c\/"
-    },"genre": "posts","keywords": "日常踩坑, chrome","wordcount":  380 ,
+    },"genre": "posts","keywords": "日常踩坑, chrome","wordcount":  414 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/29e0b18c\/","datePublished": "2022-03-14T16:09:34+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -163,7 +163,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
           <span class="post-category">收录于 <a href="/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 日常踩坑</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2022-03-14 16:09:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2022-03-14">2022-03-14</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="380 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="修复 chrome 打不开微信或者部分第三方应用内链接">
+      <div class="post-meta-line"><span title="发布于 2022-03-14 16:09:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2022-03-14">2022-03-14</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="414 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="修复 chrome 打不开微信或者部分第三方应用内链接">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -186,20 +186,23 @@
       </div>
     </div><p>最近电脑有个问题持续了好久：<strong>当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下</strong>，在微信内通过默认浏览器打开总是没有反应
 <del>（如果 chrome 没有打开时，则会正常跳出 chrome 以及相应的网页，好气哦）</del></p>
-<p><img loading="lazy" src="/posts/29e0b18c/wechat_default_browser.png" srcset="/posts/29e0b18c/wechat_default_browser.png?size=small, /posts/29e0b18c/wechat_default_browser.png?size=medium 1.5x, /posts/29e0b18c/wechat_default_browser.png?size=large 2x" sizes="auto" data-title="wechat_default_browser" data-alt="wechat_default_browser" style="--width: 713px;--aspect-ratio: 713 / 280;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><figure><a class="lightgallery" href="/posts/29e0b18c/wechat_default_browser.png?size=large" data-thumbnail="/posts/29e0b18c/wechat_default_browser.png?size=small" data-sub-html="<h2>微信-用默认浏览器打开</h2><p>微信-用默认浏览器打开</p>"><img loading="lazy" src="/posts/29e0b18c/wechat_default_browser.png" srcset="/posts/29e0b18c/wechat_default_browser.png?size=small, /posts/29e0b18c/wechat_default_browser.png?size=medium 1.5x, /posts/29e0b18c/wechat_default_browser.png?size=large 2x" sizes="auto" data-title="微信-用默认浏览器打开" data-alt="微信-用默认浏览器打开" style="--width: 713px;--aspect-ratio: 713 / 280;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">微信-用默认浏览器打开</figcaption>
+  </figure></p>
 <h2 id="修复问题卸载-kgchromeplugin">修复问题：卸载 KGChromePlugin</h2>
 <p>经过各种查询资料，最后发现原因是 chrome 的启动参数被 KGChromePlugin 金格插件篡改了，从而导致部分第三方应用（实测，微信、vscode、cmd 都不行，但是 QQ 可以）无法调用 chrome 打开超链接</p>
 <ol>
 <li>
 <p>可通过 chrome://version/ 查看命令行中是否含有 <code>--register-pepper-plugins=XXX</code></p>
-<p><img loading="lazy" src="/posts/29e0b18c/chrome_version_before.png" srcset="/posts/29e0b18c/chrome_version_before.png?size=small, /posts/29e0b18c/chrome_version_before.png?size=medium 1.5x, /posts/29e0b18c/chrome_version_before.png?size=large 2x" sizes="auto" data-title="chrome_version_before" data-alt="chrome_version_before" style="--width: 1246px;--aspect-ratio: 1246 / 490;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><figure><a class="lightgallery" href="/posts/29e0b18c/chrome_version_before.png?size=large" data-thumbnail="/posts/29e0b18c/chrome_version_before.png?size=small" data-sub-html="<h2>被篡改的 Chrome 启动命令行</h2><p>被篡改的 Chrome 启动命令行</p>"><img loading="lazy" src="/posts/29e0b18c/chrome_version_before.png" srcset="/posts/29e0b18c/chrome_version_before.png?size=small, /posts/29e0b18c/chrome_version_before.png?size=medium 1.5x, /posts/29e0b18c/chrome_version_before.png?size=large 2x" sizes="auto" data-title="被篡改的 Chrome 启动命令行" data-alt="被篡改的 Chrome 启动命令行" style="--width: 1246px;--aspect-ratio: 1246 / 490;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">被篡改的 Chrome 启动命令行</figcaption>
+  </figure></p>
 </li>
 <li>
 <p>根据 XXX 中的路径信息，找到 KGChromePlugin 所在的文件路径，通常是 <code>C:\Program Files (x86)\KGChromePlugin</code>，然后在文件夹中找到卸载程序 <code>KGPMUninstall.exe</code>，双击进行卸载即可</p>
 </li>
 <li>
 <p>卸载之后，重启一下 chrome，命令行应该就恢复正常了，此时也能在已打开 chrome 的情况下在第三方应用中顺利打开超链接了</p>
-<p><img loading="lazy" src="/posts/29e0b18c/chrome_version_after.png" srcset="/posts/29e0b18c/chrome_version_after.png?size=small, /posts/29e0b18c/chrome_version_after.png?size=medium 1.5x, /posts/29e0b18c/chrome_version_after.png?size=large 2x" sizes="auto" data-title="chrome_version_after" data-alt="chrome_version_after" style="--width: 970px;--aspect-ratio: 970 / 385;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><figure><a class="lightgallery" href="/posts/29e0b18c/chrome_version_after.png?size=large" data-thumbnail="/posts/29e0b18c/chrome_version_after.png?size=small" data-sub-html="<h2>卸载干净之后的 Chrome 启动命令行</h2><p>卸载干净之后的 Chrome 启动命令行</p>"><img loading="lazy" src="/posts/29e0b18c/chrome_version_after.png" srcset="/posts/29e0b18c/chrome_version_after.png?size=small, /posts/29e0b18c/chrome_version_after.png?size=medium 1.5x, /posts/29e0b18c/chrome_version_after.png?size=large 2x" sizes="auto" data-title="卸载干净之后的 Chrome 启动命令行" data-alt="卸载干净之后的 Chrome 启动命令行" style="--width: 970px;--aspect-ratio: 970 / 385;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">卸载干净之后的 Chrome 启动命令行</figcaption>
+  </figure></p>
 </li>
 </ol>
 <h2 id="参考资料">参考资料</h2>

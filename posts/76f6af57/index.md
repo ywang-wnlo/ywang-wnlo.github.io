@@ -13,7 +13,7 @@
 
 ### 普通的代理服务器
 
-![Proxy_Server](Proxy_Server.png)
+![普通的代理服务器](Proxy_Server.png "普通的代理服务器")
 
 上面提及的 HTTP(S) 代理，其实是通过代理服务器进行 HTTP(S) 流量的转发的意思，也是在上图中的 *黄线* 所代表的协议，文中后续用 <u>出口协议</u> 来指代
 
@@ -25,7 +25,7 @@
 
 其实代理服务器和 SS、SSR、V2Ray、Clash 等科学上网代理工具都是同一种性质，主要的不同点在于与实际代理服务器之间的 <u>入口协议</u> 部分（例如 Shadowsocks、VMess、Trojan 等）。为了不被 GFW 发现，需要实现对流量的混淆加密等。而且通常为了兼容性等因素，大多数科学上网工具在与实际代理服务器之间还有一级本地的代理服务器
 
-![Fuck_GFW](Fuck_GFW.png)
+![科学上网工具](Fuck_GFW.png "科学上网工具")
 
 科学上网工具的特殊协议只是在上图中的只有红线部分使用，而整个蓝色框的部分就是科学上网工具，用户并不需要关心这些特殊协议，只需要通过与通常代理服务器一样的 *绿线* 的 <u>入口协议</u> 来进行连接即可
 
@@ -33,7 +33,7 @@
 
 因此 <u>入口协议</u> 和 <u>出口协议</u> 之间其实没有任何因果联系，以 [Clash for Windows, CFW](https://github.com/Fndroid/clash_for_windows_pkg) 为例
 
-![Clash_for_Windows_Local_Proxy](Clash_for_Windows_Local_Proxy.png)
+![Clash for Windows 的代理配置](Clash_for_Windows_Local_Proxy.png "Clash for Windows 的代理配置")
 
 它的 <u>入口协议</u> 支持 http 以及 socks，而且都在同一个端口，因此正确的代理配置应该是这样的：
 
@@ -69,7 +69,7 @@ HTTPS_PROXY=https://127.0.0.1:7890
 
 但是在 `urllib3` 库升级到 v1.26.0 版本之后，增加了对 HTTPS 的 <u>入口协议</u> 的支持，参见 [Add support for HTTPS connections to proxies.](https://github.com/urllib3/urllib3/commit/8c7a43b4a4ca0c8d36d55f132daa2a43d06fe3c4)
 
-![Urllib3_Support_HTTPS](Urllib3_Support_HTTPS.png)
+![Urllib3 新增支持 HTTPS 支持](Urllib3_Support_HTTPS.png "Urllib3 新增支持 HTTPS 支持")
 
 ### pip
 
@@ -77,7 +77,7 @@ HTTPS_PROXY=https://127.0.0.1:7890
 
 当 `pip` 版本高于 [20.3](https://pypi.org/project/pip/20.3/#history) 时，内置的 `requests` 包升级到了 v2.25.0，`urllib3` 包也升级到了 v1.26.2，也就是说开始支持 HTTPS 的 <u>入口协议</u> 了，参见 [pypa/pip 20.3 (2020-11-30) NEWS.rst](https://github.com/pypa/pip/blob/c31c148a5b1d87591862c715adc7a7e5f3242fba/NEWS.rst#vendored-libraries)
 
-![Pip_Support_HTTPS](Pip_Support_HTTPS.png)
+![Pip 也支持了 HTTPS](Pip_Support_HTTPS.png "Pip 也支持了 HTTPS")
 
 ### 万恶之源 urllib
 
@@ -85,7 +85,7 @@ HTTPS_PROXY=https://127.0.0.1:7890
 
 一般 `CFW` 等科学上网软件都会通过修改 Windows 注册表的 `计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings` 目录下的 `ProxyServer` 来配置代理服务器地址端口以及 `ProxyEnable` 是否启用代理
 
-![Win11_Reg](Win11_Reg.png)
+![Windows 的注册表](Win11_Reg.png "Windows 的注册表")
 
 `CFW` 在配置代理服务器时，仅仅给出了地址和端口，并没有给出 <u>入口协议</u>
 

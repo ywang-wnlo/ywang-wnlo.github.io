@@ -10,7 +10,7 @@
 <meta name="description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下" /><meta name="keywords" content='WR30U, OpenWrt, BootLoader, ImmortalWrt' /><meta itemprop="name" content="小米 WR30U 解锁并刷机">
 <meta itemprop="description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下"><meta itemprop="datePublished" content="2023-08-21T14:25:43+08:00" />
 <meta itemprop="dateModified" content="2023-08-21T14:25:43+08:00" />
-<meta itemprop="wordCount" content="1452">
+<meta itemprop="wordCount" content="1446">
 <meta itemprop="keywords" content="WR30U,OpenWrt,BootLoader,ImmortalWrt," /><meta property="og:title" content="小米 WR30U 解锁并刷机" />
 <meta property="og:description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/e6410576\/"
-    },"genre": "posts","keywords": "WR30U, OpenWrt, BootLoader, ImmortalWrt","wordcount":  1452 ,
+    },"genre": "posts","keywords": "WR30U, OpenWrt, BootLoader, ImmortalWrt","wordcount":  1446 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/e6410576\/","datePublished": "2023-08-21T14:25:43+08:00","dateModified": "2023-08-21T14:25:43+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -163,7 +163,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
           <span class="post-category">收录于 <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 路由器</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-08-21 14:25:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-21">2023-08-21</time></span>&nbsp;<span title="更新于 2023-08-21 14:25:43"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-21">2023-08-21</time></span>&nbsp;<span title="1452 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="小米 WR30U 解锁并刷机">
+      <div class="post-meta-line"><span title="发布于 2023-08-21 14:25:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-21">2023-08-21</time></span>&nbsp;<span title="更新于 2023-08-21 14:25:43"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-21">2023-08-21</time></span>&nbsp;<span title="1446 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="小米 WR30U 解锁并刷机">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -235,11 +235,13 @@
 </li>
 <li>
 <p>打开 <code>控制面板 - 网络和 Internet - 网络和共享中心 - 更改适配器设置 - 选择 WLAN - 右键属性 - 共享</code>，勾选第一个并确认，这个时候 WR30U 会通过有线连接共享电脑的网络，并且网络指示灯会变成蓝色</p>
-<p><img loading="lazy" src="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png" srcset="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=small, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=medium 1.5x, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=large 2x" sizes="auto" data-title="共享网络" data-alt="共享网络" style="--width: 1687px;--aspect-ratio: 1687 / 951;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><figure><a class="lightgallery" href="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=large" data-thumbnail="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=small" data-sub-html="<h2>共享网络</h2><p>共享网络</p>"><img loading="lazy" src="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png" srcset="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=small, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=medium 1.5x, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=large 2x" sizes="auto" data-title="共享网络" data-alt="共享网络" style="--width: 1687px;--aspect-ratio: 1687 / 951;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">共享网络</figcaption>
+  </figure></p>
 </li>
 <li>
 <p>打开 <code>控制面板 - 系统和安全 - Windows Defender 防火墙 - 启动或关闭 Windows Defender 防火墙</code>，关闭 Windows Defender 防火墙</p>
-<p><img loading="lazy" src="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png" srcset="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=small, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=medium 1.5x, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=large 2x" sizes="auto" data-title="关闭防火墙" data-alt="关闭防火墙" style="--width: 1691px;--aspect-ratio: 1691 / 953;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><figure><a class="lightgallery" href="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=large" data-thumbnail="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=small" data-sub-html="<h2>关闭防火墙</h2><p>关闭防火墙</p>"><img loading="lazy" src="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png" srcset="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=small, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=medium 1.5x, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=large 2x" sizes="auto" data-title="关闭防火墙" data-alt="关闭防火墙" style="--width: 1691px;--aspect-ratio: 1691 / 953;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">关闭防火墙</figcaption>
+  </figure></p>
 </li>
 <li>
 <p>运行解锁脚本，并按照脚本提示操作</p>
@@ -396,7 +398,8 @@
 </li>
 <li>
 <p>直接访问 <a href="http://192.168.31.1"target="_blank" rel="external nofollow noopener noreferrer">WebUI</a> 进行刷固件，将 layout 选为 <code>immortalwrt-112m</code>，然后上传前面下载的固件，点击刷机即可</p>
-<p>![layout 选择](layout 选择.png)</p>
+<p><figure><a class="lightgallery" href="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=large" data-thumbnail="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=small" data-sub-html="<h2>layout 选择</h2><p>layout 选择</p>"><img loading="lazy" src="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png" srcset="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=small, /posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=medium 1.5x, /posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=large 2x" sizes="auto" data-title="layout 选择" data-alt="layout 选择" style="--width: 1577px;--aspect-ratio: 1577 / 924;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">layout 选择</figcaption>
+  </figure></p>
 </li>
 </ol>
 <h2 id="刷为原厂固件">刷为原厂固件</h2>

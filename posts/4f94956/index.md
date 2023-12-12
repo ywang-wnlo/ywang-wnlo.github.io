@@ -288,7 +288,7 @@ You can also insert Latin text in your document
 1. 首先 `.tex` 文件名以及路径尽量不要含有空格以及中文字符
 2. 在使用 `latexmk` 和 VSCode 的 LaTeX Workshop 时，推荐使用第三个编译链 `Recipe: latexmk (lualatex)`
 
-    ![编译中文 LaTeX](build-chinese-latex.png)
+    ![编译中文 LaTeX](build-chinese-latex.png "编译中文 LaTeX")
 
 ## 参考资料
 

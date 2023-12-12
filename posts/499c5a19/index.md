@@ -7,7 +7,7 @@ PPT 推荐用 Beamer 模板来做，Beamer 是一个用于制作幻灯片的 LaT
 
 以下仅记录个人常用的一些功能，具体可以参考 [Overleaf 上相关介绍](https://www.overleaf.com/learn/latex/Beamer) 来使用
 
-![Beamer](Beamer-overview.png)
+![Beamer](Beamer-overview.png "Beamer")
 
 ## 特性
 
@@ -22,7 +22,7 @@ Beamer 中通常会用一对 `\begin{frame}`、`\end{frame}` 来制作一页幻�
 \end{frame}
 ```
 
-![frame](Beamer-frame.png)
+![frame](Beamer-frame.png "frame")
 
 然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides
 
@@ -42,7 +42,7 @@ Beamer 中通常会用一对 `\begin{frame}`、`\end{frame}` 来制作一页幻�
 \end{frame}
 ```
 
-![pause](Beamer-pause.jpg)
+![pause](Beamer-pause.jpg "pause")
 
 #### `itemize` 中的尖括号 \<strat-end\>
 
@@ -59,7 +59,7 @@ Beamer 中通常会用一对 `\begin{frame}`、`\end{frame}` 来制作一页幻�
 \end{frame}
 ```
 
-![item](Beamer-item.jpg)
+![item](Beamer-item.jpg "item")
 
 ## 参考资料
 

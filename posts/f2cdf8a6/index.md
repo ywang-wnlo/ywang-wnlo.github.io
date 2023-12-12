@@ -108,7 +108,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 - [【GitHub】Themes](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
 - [【GitHub】zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [【GitHub】zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-- [【Zhihu】oh-my-zsh：让终端飞](https://zhuanlan.zhihu.com/p/62501175)
+- [【知乎】oh-my-zsh：让终端飞](https://zhuanlan.zhihu.com/p/62501175)
 - [【GitHub】Powerlevel10k](https://github.com/romkatv/powerlevel10k#installation)
 
 

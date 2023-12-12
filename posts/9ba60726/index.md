@@ -25,11 +25,11 @@
 
 详细的 Linux IO 栈图如下（来源于 [Thomas-Krenn-Wiki](https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram)）：
 
-![Linux-storage-stack-diagram](Linux-storage-stack-diagram_v4.10.png)
+![Linux IO 栈](Linux-storage-stack-diagram_v4.10.png "Linux IO 栈")
 
 其实简化一下，可以分为文件系统、块层和设备驱动层这三层
 
-![simple_IO_stack](simple_IO_stack.png)
+![简化的 Linux IO 栈](simple_IO_stack.png "简化的 Linux IO 栈")
 
 ## Linux 中的具体实现
 

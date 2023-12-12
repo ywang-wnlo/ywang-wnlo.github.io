@@ -193,7 +193,14 @@
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121"target="_blank" rel="external nofollow noopener noreferrer">v5.4.121</a></p>
+      </div><div class="content" id="content"><div class="details admonition note open">
+      <div class="details-summary admonition-title">
+        <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      </div>
+      <div class="details-content">
+        <div class="admonition-content">本文最后更新于 2023-09-12，文中内容可能已过时。</div>
+      </div>
+    </div><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121"target="_blank" rel="external nofollow noopener noreferrer">v5.4.121</a></p>
 <h2 id="1-io_uring">1. <code>io_uring</code></h2>
 <p><a href="/posts/c142853f/#%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8">之前</a> 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
 <p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中，下面将逐个分析</p>
