@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>个人简历相关的基础知识梳理 - 乐园</title><meta name="author" content="Zeus">
+<meta name="author-link" content="https://github.com/ywang-wnlo">
+<meta name="description" content="个人自用的简历相关的基础知识梳理，未来可能会对每个小方向进行展开" /><meta name="keywords" content='kernel, XNU, Linux, cgroup, page cache, 中断, IPC, 自旋锁, 互斥锁, 虚拟地址, 分页, 缺页中断, 多级页表, TLB' /><meta itemprop="name" content="个人简历相关的基础知识梳理">
+<meta itemprop="description" content="个人自用的简历相关的基础知识梳理，未来可能会对每个小方向进行展开"><meta itemprop="datePublished" content="2023-12-11T18:56:18+08:00" />
+<meta itemprop="dateModified" content="2023-12-11T18:56:18+08:00" />
+<meta itemprop="wordCount" content="5040">
+<meta itemprop="keywords" content="kernel,XNU,Linux,cgroup,page cache,中断,IPC,自旋锁,互斥锁,虚拟地址,分页,缺页中断,多级页表,TLB," /><meta property="og:title" content="个人简历相关的基础知识梳理" />
+<meta property="og:description" content="个人自用的简历相关的基础知识梳理，未来可能会对每个小方向进行展开" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/2c65e859/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-11T18:56:18+08:00" />
+<meta property="article:modified_time" content="2023-12-11T18:56:18+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="个人简历相关的基础知识梳理"/>
+<meta name="twitter:description" content="个人自用的简历相关的基础知识梳理，未来可能会对每个小方向进行展开"/>
+<meta name="application-name" content="乐园">
+<meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/2c65e859/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/139abad8/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "个人简历相关的基础知识梳理",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ywang-wnlo.github.io\/posts\/2c65e859\/"
+    },"genre": "posts","keywords": "kernel, XNU, Linux, cgroup, page cache, 中断, IPC, 自旋锁, 互斥锁, 虚拟地址, 分页, 缺页中断, 多级页表, TLB","wordcount":  5040 ,
+    "url": "https:\/\/ywang-wnlo.github.io\/posts\/2c65e859\/","datePublished": "2023-12-11T18:56:18+08:00","dateModified": "2023-12-11T18:56:18+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Zeus"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/"
+                
+                
+              ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/"
+                  
+                  
+                ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title d-none">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content d-none" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>个人简历相关的基础知识梳理</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
+          <span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 学习笔记</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2023-12-11 18:56:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-11">2023-12-11</time></span>&nbsp;<span title="更新于 2023-12-11 18:56:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-11">2023-12-11</time></span>&nbsp;<span title="5040 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 11 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="个人简历相关的基础知识梳理">
+              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+            </span>&nbsp;</div>
+    </div><div class="details toc d-none" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#后台-io-管控项目">后台 IO 管控项目</a>
+      <ul>
+        <li><a href="#xnu">XNU</a></li>
+        <li><a href="#微内核宏内核">微内核、宏内核</a></li>
+        <li><a href="#cgroup">cgroup</a></li>
+      </ul>
+    </li>
+    <li><a href="#计算存储存算融合项目">计算存储/存算融合项目</a>
+      <ul>
+        <li><a href="#linux-移植">Linux 移植</a>
+          <ul>
+            <li><a href="#设备树文件">设备树文件</a></li>
+          </ul>
+        </li>
+        <li><a href="#linux-内核裁剪">Linux 内核裁剪</a>
+          <ul>
+            <li><a href="#根文件系统">根文件系统</a></li>
+          </ul>
+        </li>
+        <li><a href="#linux-启动">Linux 启动</a>
+          <ul>
+            <li><a href="#其他硬件模块的适配">其他硬件模块的适配</a></li>
+            <li><a href="#双核启动">双核启动</a></li>
+          </ul>
+        </li>
+        <li><a href="#中断控制器">中断控制器</a>
+          <ul>
+            <li><a href="#中断抢占">中断抢占</a></li>
+            <li><a href="#上半部下半部">上半部/下半部</a></li>
+          </ul>
+        </li>
+        <li><a href="#ipc---mailbox">IPC - mailbox</a>
+          <ul>
+            <li><a href="#其他进程间通信">其他进程间通信</a></li>
+          </ul>
+        </li>
+        <li><a href="#其他-linux-内核相关的知识">其他 Linux 内核相关的知识</a>
+          <ul>
+            <li><a href="#自旋锁和互斥锁">自旋锁和互斥锁</a></li>
+            <li><a href="#虚拟地址">虚拟地址</a></li>
+            <li><a href="#分页与缺页中断">分页与缺页中断</a></li>
+            <li><a href="#多级页表">多级页表</a></li>
+            <li><a href="#tlb">TLB</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content" data-password="be50f5adc546a3cf43d6e666b5090c1f" data-content="PGgyIGlkPd6e523b93abb5bac131ea905c289099dca8ebb4e0be644bb3c63418SLliY3oqIAiPuWJjeiogDwvaDI&#43;CjxwPuS4quS6uuiHqueUqOeahOeugOWOhuebuOWFs&#43;eahOWfuuehgOefpeivhuais&#43;eQhu&#43;8jOacquadpeWPr&#43;iDveS8muWvueavj&#43;S4quWwj&#43;aWueWQkei/m&#43;ihjOWxleW8gDwvcD4KPGgyIGlkPSLlkI7lj7AtaW8t566h5o6n6aG555uuIj7lkI7lj7AgSU8g566h5o6n6aG555uuPC9oMj4KPHVsPgo8bGk&#43;PHN0cm9uZz7nm67moIfvvJo8L3N0cm9uZz4g5Yi26YCg5a2Y5YKo5Y2W54K54oCU4oCU5a2m5Lmg44CB5YCf6Ym05Y&#43;L5ZWGIElPIOeuoeaOp&#43;aWueW8jzwvbGk&#43;CjxsaT48c3Ryb25nPui0n&#43;i0o&#43;S7u&#43;WKoe&#43;8mjwvc3Ryb25nPiDpmIXor7sgRGFyd2luIOezu&#43;e7n&#43;WGheaguCBYTlUg5LitIElPIOeuoeaOp&#43;aWueW8jzwvbGk&#43;CjwvdWw&#43;CjxoMyBpZD0ieG51Ij5YTlU8L2gzPgo8cD5YTlUg5piv5LiA5Liq55Sx6Iu55p6c55S16ISR5Y&#43;R5bGV55qE55So5LqOIG1hY09TIOaTjeS9nOezu&#43;e7n&#43;eahOaTjeS9nOezu&#43;e7n&#43;WGheaguOOAggrlroPmmK8gRGFyd2luIOaTjeS9nOezu&#43;e7n&#43;eahOS4gOmDqOWIhu&#43;8jOi3n&#43;maj&#43;edgCBEYXJ3aW4g5LiA5ZCM5L2c5Li66Ieq55Sx5Y&#43;K5byA5pS&#43;5rqQ5Luj56CB6L2v5Lu26KKr5Y&#43;R5biD44CCCuWug&#43;i/mOaYryBpT1PjgIF0dk9TIOWSjCB3YXRjaE9TIOaTjeS9nOezu&#43;e7n&#43;eahOWGheaguOOAgjwvcD4KPHA&#43;WE5VID0gTWFjaCArIEJTRCArIEkvTyBLaXQgKyDigKbigKY8L3A&#43;CjxwPjxmaWd1cmU&#43;PGEgY2xhc3M9ImxpZ2h0Z2FsbGVyeSIgaHJlZj0iL3Bvc3RzLzJjNjVlODU5L0Rhcndpbi5wbmc/c2l6ZT1sYXJnZSIgZGF0YS10aHVtYm5haWw9Ii9wb3N0cy8yYzY1ZTg1OS9EYXJ3aW4ucG5nP3NpemU9c21hbGwiIGRhdGEtc3ViLWh0bWw9IjxoMj5EYXJ3aW4g5p625p6EPC9oMj48cD5EYXJ3aW4g5p625p6EPC9wPiI&#43;PGltZyBsb2FkaW5nPSJsYXp5IiBzcmM9Ii9wb3N0cy8yYzY1ZTg1OS9EYXJ3aW4ucG5nIiBzcmNzZXQ9Ii9wb3N0cy8yYzY1ZTg1OS9EYXJ3aW4ucG5nP3NpemU9c21hbGwsIC9wb3N0cy8yYzY1ZTg1OS9EYXJ3aW4ucG5nP3NpemU9bWVkaXVtIDEuNXgsIC9wb3N0cy8yYzY1ZTg1OS9EYXJ3aW4ucG5nP3NpemU9bGFyZ2UgMngiIHNpemVzPSJhdXRvIiBkYXRhLXRpdGxlPSJEYXJ3aW4g5p625p6EIiBkYXRhLWFsdD0iRGFyd2luIOaetuaehCIgc3R5bGU9Ii0td2lkdGg6IDU1NHB4Oy0tYXNwZWN0LXJhdGlvOiA1NTQgLyA2MDY7YmFja2dyb3VuZDogdXJsKC9zdmcvbG9hZGluZy5taW4uc3ZnKSBuby1yZXBlYXQgY2VudGVyOyIgb25sb2FkPSJ0aGlzLnRpdGxlPXRoaXMuZGF0YXNldC50aXRsZTt0aGlzLmFsdD10aGlzLmRhdGFzZXQuYWx0O2Zvcihjb25zdCBpIG9mIFsnc3R5bGUnLCAnZGF0YS10aXRsZScsJ2RhdGEtYWx0Jywnb25lcnJvcicsJ29ubG9hZCddKXt0aGlzLnJlbW92ZUF0dHJpYnV0ZShpKTt9dGhpcy5kYXRhc2V0Lmxhenlsb2FkZWQ9Jyc7IiBvbmVycm9yPSJ0aGlzLnRpdGxlPXRoaXMuZGF0YXNldC50aXRsZTt0aGlzLmFsdD10aGlzLmRhdGFzZXQuYWx0O2Zvcihjb25zdCBpIG9mIFsnc3R5bGUnLCAnZGF0YS10aXRsZScsJ2RhdGEtYWx0Jywnb25lcnJvcicsJ29ubG9hZCddKXt0aGlzLnJlbW92ZUF0dHJpYnV0ZShpKTt9Ii8&#43;PC9hPjxmaWdjYXB0aW9uIGNsYXNzPSJpbWFnZS1jYXB0aW9uIj5EYXJ3aW4g5p625p6EPC9maWdjYXB0aW9uPg0KICA8L2ZpZ3VyZT48L3A&#43;CjxoMyBpZD0i5b6u5YaF5qC45a6P5YaF5qC4Ij7lvq7lhoXmoLjjgIHlro/lhoXmoLg8L2gzPgo8dWw&#43;CjxsaT48c3Ryb25nPuW&#43;ruWGheaguO&#43;8mjwvc3Ryb25nPiDnlKjmiLfmnI3liqHlkozlhoXmoLjmnI3liqHkvJrkv53lrZjlnKjkuI3lkIznmoTlnLDlnYDnqbrpl7TkuK08L2xpPgo8bGk&#43;PHN0cm9uZz7lro/lhoXmoLjvvJo8L3N0cm9uZz4g55So5oi35pyN5Yqh5ZKM5YaF5qC45pyN5Yqh6YO95L&#43;d5a2Y5Zyo55u45ZCM55qE5Zyw5Z2A56m66Ze05Lit77yM5a6D5Lus6YO955Sx5YaF5qC46L&#43;b6KGM57uf5LiA566h55CGPC9saT4KPC91bD4KPHA&#43;PGZpZ3VyZT48YSBjbGFzcz0ibGlnaHRnYWxsZXJ5IiBocmVmPSIvcG9zdHMvMmM2NWU4NTkvJUU1JUJFJUFFJUU1JTg2JTg1JUU2JUEwJUI4dnMlRTUlQUUlOEYlRTUlODYlODUlRTYlQTAlQjgucG5nP3NpemU9bGFyZ2UiIGRhdGEtdGh1bWJuYWlsPSIvcG9zdHMvMmM2NWU4NTkvJUU1JUJFJUFFJUU1JTg2JTg1JUU2JUEwJUI4dnMlRTUlQUUlOEYlRTUlODYlODUlRTYlQTAlQjgucG5nP3NpemU9c21hbGwiIGRhdGEtc3ViLWh0bWw9IjxoMj7lvq7lhoXmoLh2c&#43;Wuj&#43;WGheaguDwvaDI&#43;PHA&#43;5b6u5YaF5qC4dnPlro/lhoXmoLg8L3A&#43;Ij48aW1nIGxvYWRpbmc9ImxhenkiIHNyYz0iL3Bvc3RzLzJjNjVlODU5LyVFNSVCRSVBRSVFNSU4NiU4NSVFNiVBMCVCOHZzJUU1JUFFJThGJUU1JTg2JTg1JUU2JUEwJUI4LnBuZyIgc3Jjc2V0PSIvcG9zdHMvMmM2NWU4NTkvJUU1JUJFJUFFJUU1JTg2JTg1JUU2JUEwJUI4dnMlRTUlQUUlOEYlRTUlODYlODUlRTYlQTAlQjgucG5nP3NpemU9c21hbGwsIC9wb3N0cy8yYzY1ZTg1OS8lRTUlQkUlQUUlRTUlODYlODUlRTYlQTAlQjh2cyVFNSVBRSU4RiVFNSU4NiU4NSVFNiVBMCVCOC5wbmc/c2l6ZT1tZWRpdW0gMS41eCwgL3Bvc3RzLzJjNjVlODU5LyVFNSVCRSVBRSVFNSU4NiU4NSVFNiVBMCVCOHZzJUU1JUFFJThGJUU1JTg2JTg1JUU2JUEwJUI4LnBuZz9zaXplPWxhcmdlIDJ4IiBzaXplcz0iYXV0byIgZGF0YS10aXRsZT0i5b6u5YaF5qC4dnPlro/lhoXmoLgiIGRhdGEtYWx0PSLlvq7lhoXmoLh2c&#43;Wuj&#43;WGheaguCIgc3R5bGU9Ii0td2lkdGg6IDc4M3B4Oy0tYXNwZWN0LXJhdGlvOiA3ODMgLyA0NDk7YmFja2dyb3VuZDogdXJsKC9zdmcvbG9hZGluZy5taW4uc3ZnKSBuby1yZXBlYXQgY2VudGVyOyIgb25sb2FkPSJ0aGlzLnRpdGxlPXRoaXMuZGF0YXNldC50aXRsZTt0aGlzLmFsdD10aGlzLmRhdGFzZXQuYWx0O2Zvcihjb25zdCBpIG9mIFsnc3R5bGUnLCAnZGF0YS10aXRsZScsJ2RhdGEtYWx0Jywnb25lcnJvcicsJ29ubG9hZCddKXt0aGlzLnJlbW92ZUF0dHJpYnV0ZShpKTt9dGhpcy5kYXRhc2V0Lmxhenlsb2FkZWQ9Jyc7IiBvbmVycm9yPSJ0aGlzLnRpdGxlPXRoaXMuZGF0YXNldC50aXRsZTt0aGlzLmFsdD10aGlzLmRhdGFzZXQuYWx0O2Zvcihjb25zdCBpIG9mIFsnc3R5bGUnLCAnZGF0YS10aXRsZScsJ2RhdGEtYWx0Jywnb25lcnJvcicsJ29ubG9hZCddKXt0aGlzLnJlbW92ZUF0dHJpYnV0ZShpKTt9Ii8&#43;PC9hPjxmaWdjYXB0aW9uIGNsYXNzPSJpbWFnZS1jYXB0aW9uIj7lvq7lhoXmoLh2c&#43;Wuj&#43;WGheaguDwvZmlnY2FwdGlvbj4NCiAgPC9maWd1cmU&#43;PC9wPgo8cD5YTlUg5piv5LiA5LiqPHN0cm9uZz7mt7flkIjlhoXmoLg8L3N0cm9uZz7vvIzlsIblro/lhoXmoLjkuI7lvq7lhoXmoLjkuKTogIXnmoTnibnmgKflhbzmlLblubbok4TvvIzku6XmnJ/lkIzml7bmi6XmnInkuKTnp43lhoXmoLjnmoTkvJjngrnvvJo8L3A&#43;Cjx1bD4KPGxpPuWcqOW&#43;ruWGheaguOS4reaPkOmrmOaTjeS9nOezu&#43;e7n&#43;aooeWdl&#43;WMlueoi&#43;W6puS7peWPiuiuqeaTjeS9nOezu&#43;e7n&#43;abtOWkmueahOmDqOWIhuaOpeWPl&#43;WGheWtmOS/neaKpOeahOa2iOaBr&#43;S8oOmAkuacuuWItjwvbGk&#43;CjxsaT7lkozlro/lhoXmoLjlnKjpq5jotJ/ojbfkuIvooajnjrDnmoTpq5jmgKfog708L2xpPgo8L3VsPgo8ZGl2IGNsYXNzPSJkZXRhaWxzIGFkbW9uaXRpb24gdGlwIG9wZW4iPg0KICAgIDxkaXYgY2xhc3M9ImRldGFpbHMtc3VtbWFyeSBhZG1vbml0aW9uLXRpdGxlIj4NCiAgICAgIDxpIGNsYXNzPSJpY29uIGZhLXNvbGlkIGZhLWxpZ2h0YnVsYiBmYS1mdyIgYXJpYS1oaWRkZW49InRydWUiPjwvaT7popjlpJbor508aSBjbGFzcz0iZGV0YWlscy1pY29uIGZhLXNvbGlkIGZhLWFuZ2xlLXJpZ2h0IGZhLWZ3IiBhcmlhLWhpZGRlbj0idHJ1ZSI&#43;PC9pPg0KICAgIDwvZGl2Pg0KICAgIDxkaXYgY2xhc3M9ImRldGFpbHMtY29udGVudCI&#43;DQogICAgICA8ZGl2IGNsYXNzPSJhZG1vbml0aW9uLWNvbnRlbnQiPjx1bD4KPGxpPldpbmRvd3Mg5Lmf5pivPHN0cm9uZz7mt7flkIjlhoXmoLg8L3N0cm9uZz48L2xpPgo8bGk&#43;TGludXgg5piv5LiA5Liq5YCf6Ym05LqG5b6u5YaF5qC457K&#43;6auT55qEPHN0cm9uZz7lro/lhoXmoLjnu5PmnoQ8L3N0cm9uZz7vvIxMaW51eCDmlK/mjIHmqKHlnZfljJbnmoTorr7orqHjgIHmiqLljaDlvI/lhoXmoLjjgIHlr7nlhoXmoLjnur/nqIvnmoTmlK/mjIHku6Xlj4rliqjmgIHliqDovb3lhoXmoLjmqKHlnZfnmoTog73lipvjgILkuI3ku4XlpoLmraTvvIxMaW51eCDov5jpgb/lhY3kuoblhbblvq7lhoXmoLjorr7orqHnmoTmgKfog73mjZ/lpLHvvIzlhYHorrjkuIDliIfov5DooYzlnKjlhoXmoLjmqKHlvI/kuIvvvIznm7TmjqXosIPnlKjlh73mlbDvvIzml6DpnIDmtojmga/kvKDpgJLjgII8L2xpPgo8L3VsPgo8L2Rpdj4NCiAgICA8L2Rpdj4NCiAgPC9kaXY&#43;CjxoMyBpZD0iY2dyb3VwIj5jZ3JvdXA8L2gzPgo8cD5jZ291cCDmmK8gTGludXgg5YaF5qC45o&#43;Q5L6b55qE5LiA56eN5py65Yi277yM55So5LqO6ZmQ5Yi244CB6K6w5b2V44CB6ZqU56a76L&#43;b56iL57uE5omA5L2/55So55qE54mp55CG6LWE5rqQ77yI5aaCIENQVeOAgeWGheWtmOOAgeejgeebmOOAgee9kee7nOW4puWuveetie&#43;8ieOAgjwvcD4KPHA&#43;55u45q&#43;UIHYxIOeJiOacrO&#43;8jHYyIOeJiOacrOeahCBjZ3JvdXAg5pyJ5Lul5LiL54m554K577yaPC9wPgo8dWw&#43;CjxsaT7ph4fnlKjljZXkuIDlsYLnuqfnu5PmnoTvvIzkuI3lho3mlK/mjIHlsYLnuqfnu5PmnoQ8L2xpPgo8bGk&#43;5paw55qE5Yqf6IO954m55oCn77yM5L6L5aaC5Y6L5Yqb6Zi75aGe5L&#43;h5oGv77yIUHJlc3N1cmUgU3RhbGwgSW5mb3JtYXRpb27vvIxQU0nvvIk8L2xpPgo8bGk&#43;6Leo5aSa5Liq6LWE5rqQ55qE6LWE5rqQ5YiG6YWN566h55CG5ZKM6ZqU56a76IO95Yqb55qE5aKe5by6Cjx1bD4KPGxpPuWvueS6juS4jeWQjOenjeexu&#43;eahOWGheWtmOWIhumFje&#43;8iOe9kee7nOWGheWtmOOAgeWGheaguOWGheWtmOetie&#43;8iei/m&#43;ihjOe7n&#43;S4gOeahOeuoeeQhjwvbGk&#43;CjxsaT7lr7nkuo7ohI/pobXlm57lhpnnrYnpnZ7nm7TmjqXotYTmupDmtojogJfnmoTmlK/mjIE8L2xpPgo8L3VsPgo8L2xpPgo8L3VsPgo8aDIgaWQ9Iuiuoeeul&#43;WtmOWCqOWtmOeul&#43;iejeWQiOmhueebriI&#43;6K6h566X5a2Y5YKoL&#43;WtmOeul&#43;iejeWQiOmhueebrjwvaDI&#43;Cjx1bD4KPGxpPjxzdHJvbmc&#43;55uu5qCH77yaPC9zdHJvbmc&#43;IOaOoue0oui/keaVsOaNruWkhOeQhuaetuaehOWSjOWbuuaAgeebmOeahOe7k&#43;WQiDwvbGk&#43;CjxsaT48c3Ryb25nPui0n&#43;i0o&#43;S7u&#43;WKoe&#43;8mjwvc3Ryb25nPiDmnoTlu7rljp/lnovns7vnu5/vvIzpqozor4Hov5HmlbDmja7lpITnkIbmnrbmnoTlkozlm7rmgIHnm5jnmoTnu5PlkIjnmoTlj6/ooYzmgKflkozmlLbnm4o8L2xpPgo8L3VsPgo8aDMgaWQ9ImxpbnV4Leenu&#43;akjSI&#43;TGludXgg56e75qSNPC9oMz4KPHA&#43;56e75qSN55qE55uu55qE5piv5Li65LqG6K6pIExpbnV4IOWGheaguOiDveWkn&#43;WcqOe7meWumueahOehrOS7tuW5s&#43;WPsOS4iui/kOihjO&#43;8jOWMheaLrCBDUFXjgIHlhoXlrZjjgIHlpJborr7nrYnjgII8L3A&#43;CjxwPuS4uuS6huabtOW/q&#43;eahOe8luivke&#43;8jOaIkeS7rOWcqOacjeWKoeWZqOS4iumFjee9ruS6huS6pOWPiee8luivkeeOr&#43;Wig&#43;&#43;8jOWcqOacjeWKoeWZqOS4iui/m&#43;ihjOWGheaguOeahOS6pOWPiee8luivkeWQjuW&#43;l&#43;WIsOeahOWGheaguOmVnOWDj&#43;WwseaYr&#43;ebruagh&#43;W5s&#43;WPsOeahOWGheaguOmVnOWDj&#43;OAgjwvcD4KPGRpdiBjbGFzcz0iaGlnaGxpZ2h0IiBpZD0iaWQtMSI&#43;PGRpdiBjbGFzcz0iY2hyb21hIj4KPHRhYmxlIGNsYXNzPSJsbnRhYmxlIj48dHI&#43;PHRkIGNsYXNzPSJsbnRkIj4KPHByZSB0YWJpbmRleD0iMCIgY2xhc3M9ImNocm9tYSI&#43;PGNvZGU&#43;PHNwYW4gY2xhc3M9ImxudCI&#43;MQo8L3NwYW4&#43;PHNwYW4gY2xhc3M9ImxudCI&#43;Mgo8L3NwYW4&#43;PHNwYW4gY2xhc3M9ImxudCI&#43;Mwo8L3NwYW4&#43;PHNwYW4gY2xhc3M9ImxudCI&#43;NAo8L3NwYW4&#43;PC9jb2RlPjwvcHJlPjwvdGQ&#43;Cjx0ZCBjbGFzcz0ibG50ZCI&#43;CjxwcmUgdGFiaW5kZXg9IjAiIGNsYXNzPSJjaHJvbWEiPjxjb2RlIGNsYXNzPSJsYW5ndWFnZS1iYXNoIiBkYXRhLWxhbmc9ImJhc2giPjxzcGFuIGNsYXNzPSJsaW5lIj48c3BhbiBjbGFzcz0iY2wiPnN1ZG8gYXB0IGluc3RhbGwgZ2NjLWFybS1saW51eC1nbnVlYWJpaGYKPC9zcGFuPjwvc3Bhbj48c3BhbiBjbGFzcz0ibGluZSI&#43;PHNwYW4gY2xhc3M9ImNsIj4KPC9zcGFuPjwvc3Bhbj48c3BhbiBjbGFzcz0ibGluZSI&#43;PHNwYW4gY2xhc3M9ImNsIj48c3BhbiBjbGFzcz0ibmIiPmV4cG9ydDwvc3Bhbj4gPHNwYW4gY2xhc3M9Im52Ij5BUkNIPC9zcGFuPjxzcGFuIGNsYXNzPSJvIj49PC9zcGFuPmFybQo8L3NwYW4&#43;PC9zcGFuPjxzcGFuIGNsYXNzPSJsaW5lIj48c3BhbiBjbGFzcz0iY2wiPjxzcGFuIGNsYXNzPSJuYiI&#43;ZXhwb3J0PC9zcGFuPiA8c3BhbiBjbGFzcz0ibnYiPkNST1NTX0NPTVBJTEU8L3NwYW4&#43;PHNwYW4gY2xhc3M9Im8iPj08L3NwYW4&#43;YXJtLWxpbnV4LWdudWVhYmloZi08L3NwYW4&#43;PC9zcGFuPjwvY29kZT48L3ByZT48L3RkPjwvdHI&#43;PC90YWJsZT4KPC9kaXY&#43;CjwvZGl2Pjx0YWJsZT4KPHRoZWFkPgo8dHI&#43;Cjx0aD7lt6Xlhbfpk77liY3nvIA8L3RoPgo8dGg&#43;6YCC55So5py65ZmoPC90aD4KPC90cj4KPC90aGVhZD4KPHRib2R5Pgo8dHI&#43;Cjx0ZD5hcm0tbGludXgtZ251ZWFiaWhmPC90ZD4KPHRkPjMyLWJpdCBBcm12NyBDb3J0ZXgtQSwgaGFyZC1mbG9hdCwgbGl0dGxlLWVuZGlhbjwvdGQ&#43;CjwvdHI&#43;Cjx0cj4KPHRkPmFybXY4bC1saW51eC1nbnVlYWJpaGY8L3RkPgo8dGQ&#43;MzItYml0IEFybXY4IENvcnRleC1BLCBoYXJkLWZsb2F0LCBsaXR0bGUtZW5kaWFuPC90ZD4KPC90cj4KPHRyPgo8dGQ&#43;YWFyY2g2NC1saW51eC1nbnU8L3RkPgo8dGQ&#43;NjQtYml0IEFybXY4IENvcnRleC1BLCBsaXR0bGUtZW5kaWFuPC90ZD4KPC90cj4KPC90Ym9keT4KPC90YWJsZT4KPHA&#43;5YWI5LuO5qCR6I6T5rS&#43;55qE5a6Y5pa55Zu65Lu25Lit5oq95Y&#43;W5Ye66K6&#43;5aSH5qCR5paH5Lu25Lul5Y&#43;KIGJvb3Rsb2FkZXIg562J5LqM6L&#43;b5Yi25paH5Lu277yM54S25ZCO57uT5ZCI5paw55qE5YaF5qC46ZWc5YOP77yM5Yi25L2c5oiQ56ym5ZCI5YW26KaB5rGC55qE6ZWc5YOP44CCPC9wPgo8aDQgaWQ9IuiuvuWkh&#43;agkeaWh&#43;S7tiI&#43;6K6&#43;5aSH5qCR5paH5Lu2PC9oND4KPHA&#43;6K6&#43;5aSH5qCR5pivIExpbnV4IOS4uuS6huWunueOsOmpseWKqOS7o&#43;eggeS4juiuvuWkh&#43;S/oeaBr&#43;eahOWIhuemu&#43;&#43;8jOiAjOaPkOWHuueahOS4gOenjeacuuWItuOAgjwvcD4KPHA&#43;6K6&#43;5aSH5qCR5paH5Lu25Y&#43;v5Lul55CG6Kej5oiQ5Li66K6&#43;5aSH55qE5L&#43;h5oGv6KGo77yM5a6D5o&#43;P6L&#43;w5LqG6K6&#43;5aSH55qE57G75Z6L44CB5Zyw5Z2A44CB5Lit5pat562J5L&#43;h5oGv77yM5Li66amx5Yqo56iL5bqP5o&#43;Q5L6b5LqG56Gs5Lu25L&#43;h5oGv77yM5L2/5b6X6amx5Yqo56iL5bqP5LiN6ZyA6KaB5YWz5b&#43;D56Gs5Lu255qE5YW35L2T5L&#43;h5oGv77yM5LuO6ICM5a6e546w5LqG6amx5Yqo56iL5bqP5LiO56Gs5Lu255qE5YiG56a744CCCuWFt&#43;S9k&#43;adpeivtO&#43;8jOWPr&#43;S7peiupOS4uumpseWKqOeoi&#43;W6j&#43;S4reWIneWni&#43;WMlui/h&#43;eoi&#43;S4reeahOS4gOS6m&#43;WPguaVsOadpea6kOS6juiuvuWkh&#43;agkeaWh&#43;S7tuOAgjwvcD4KPGgzIGlkPSJsaW51eC3lhoXmoLjoo4HliaoiPkxpbnV4IOWGheaguOijgeWJqjwvaDM&#43;CjxwPuijgeWJqueahOebrueahOaYr&#43;S4uuS6hueyvueugCBMaW51eCDlhoXmoLjnmoTlpKflsI/vvIzlh4/lsJHkuI3lv4XopoHnmoTlip/og73vvIzku6XpgILlupTltYzlhaXlvI/nmoQgUk9NIOepuumXtOS9jueahOaDheWGteOAgjwvcD4KPHA&#43;6KOB5Ymq5Li76KaB6YCa6L&#43;H5o6n5Yi25YaF5qC457yW6K&#43;R5pe255qE6YWN572u6YCJ6aG55p2l5a6e546w77yM6YWN572u6YCJ6aG555qE6YWN572u5paH5Lu25Li6IDxjb2RlPi5jb25maWc8L2NvZGU&#43;77yM6YCa5bi46YCa6L&#43;HIDxjb2RlPm1ha2UgbWVudWNvbmZpZzwvY29kZT4g5ZG95Luk5p2l6L&#43;b6KGM6YWN572u44CCPC9wPgo8aDQgaWQ9IuagueaWh&#43;S7tuezu&#43;e7nyI&#43;5qC55paH5Lu257O757ufPC9oND4KPHA&#43;5q2k5aSWIExpbnV4IOmZpOS6huWGheaguOi/mOmcgOimgeagueaWh&#43;S7tuezu&#43;e7n&#43;&#43;8jOagueaWh&#43;S7tuezu&#43;e7n&#43;aYryBMaW51eCDlhoXmoLjlkK/liqjlkI7nmoTnrKzkuIDkuKrmlofku7bns7vnu5/vvIzlroPljIXlkKvkuoYgTGludXgg5YaF5qC45ZCv5Yqo5pe26ZyA6KaB55qE5omA5pyJ5paH5Lu277yM5YyF5ous5ZCv5Yqo6ISa5pys44CB6amx5Yqo56iL5bqP44CB5bqU55So56iL5bqP5Lul5Y&#43;K5bqT5paH5Lu2562J44CCPC9wPgo8cD7ph4fnlKggQnVzeUJveCDmnaXmnoTlu7rmoLnmlofku7bns7vnu5/vvIxCdXN5Qm94IOaYr&#43;S4gOS4qumbhuaIkOS6hiBMaW51eCDns7vnu5/kuK3mnIDluLjnlKjnmoTlt6XlhbfnmoTova/ku7bvvIzlroPlsIYgTGludXgg57O757uf5Lit55qE5bi455So5bel5YW36ZuG5oiQ5Yiw5LiA5Liq5Y&#43;v5omn6KGM5paH5Lu25Lit44CCPC9wPgo8dGFibGU&#43;Cjx0aGVhZD4KPHRyPgo8dGg&#43;5paH5Lu25aS5PC90aD4KPHRoPuivtOaYjjwvdGg&#43;CjwvdHI&#43;CjwvdGhlYWQ&#43;Cjx0Ym9keT4KPHRyPgo8dGQ&#43;PGNvZGU&#43;L2V0Yy88L2NvZGU&#43;PC90ZD4KPHRkPuWtmOWCqOmHjeimgeeahOmFjee9ruaWh&#43;S7tjwvdGQ&#43;CjwvdHI&#43;Cjx0cj4KPHRkPjxjb2RlPi9iaW4vPC9jb2RlPjwvdGQ&#43;Cjx0ZD7lrZjlgqjluLjnlKjkuJTlvIDmnLrml7blv4XpobvnlKjliLDnmoTmiafooYzmlofku7Y8L3RkPgo8L3RyPgo8dHI&#43;Cjx0ZD48Y29kZT4vc2Jpbi88L2NvZGU&#43;PC90ZD4KPHRkPuWtmOWCqOedgOW8gOacuui/h&#43;eoi&#43;S4reaJgOmcgOeahOezu&#43;e7n&#43;aJp&#43;ihjOaWh&#43;S7tjwvdGQ&#43;CjwvdHI&#43;Cjx0cj4KPHRkPjxjb2RlPi9saWIvPC9jb2RlPjwvdGQ&#43;Cjx0ZD7lrZjlgqggPGNvZGU&#43;L2Jpbi88L2NvZGU&#43;IOWPiiA8Y29kZT4vc2Jpbi88L2NvZGU&#43;IOeahOaJp&#43;ihjOaWh&#43;S7tuaJgOmcgOeahOmTvuaOpeW6k&#43;&#43;8jOS7peWPiuWGheaguOaooeWdlzwvdGQ&#43;CjwvdHI&#43;Cjx0cj4KPHRkPjxjb2RlPi9kZXYvPC9jb2RlPjwvdGQ&#43;Cjx0ZD7lrZjlgqjorr7lpIfmlofku7Y8L3RkPgo8L3RyPgo8L3Rib2R5Pgo8L3RhYmxlPgo8aDMgaWQ9ImxpbnV4LeWQr&#43;WKqCI&#43;TGludXgg5ZCv5YqoPC9oMz4KPHA&#43;5Zyo5omn6KGMIExpbnV4IOWQr&#43;WKqOWJje&#43;8jGJvb3Rsb2FkZXIg6ZyA6KaB5a6M5oiQ5Lul5LiL5Yeg5Liq5Lu75Yqh77yaPC9wPgo8dWw&#43;CjxsaT5DUFUg5aSE5LqOIE5vLVNlY3VyZSBFTDEg5qih5byPPC9saT4KPGxpPk1NVe&#43;8jERjYWNoZSDlpITkuo7lhbPpl63nirbmgIHvvIxJY2FjaGUg54q25oCB5rKh6ZmQ5Yi2PC9saT4KPGxpPuWvhOWtmOWZqCB4MD1kdGIg54mp55CG5Zyw5Z2A77yMeDEseDIseDM9MDwvbGk&#43;CjwvdWw&#43;CjxkaXYgY2xhc3M9ImRldGFpbHMgYWRtb25pdGlvbiB0aXAgb3BlbiI&#43;DQogICAgPGRpdiBjbGFzcz0iZGV0YWlscy1zdW1tYXJ5IGFkbW9uaXRpb24tdGl0bGUiPg0KICAgICAgPGkgY2xhc3M9Imljb24gZmEtc29saWQgZmEtbGlnaHRidWxiIGZhLWZ3IiBhcmlhLWhpZGRlbj0idHJ1ZSI&#43;PC9pPumimOWkluivnTxpIGNsYXNzPSJkZXRhaWxzLWljb24gZmEtc29saWQgZmEtYW5nbGUtcmlnaHQgZmEtZnciIGFyaWEtaGlkZGVuPSJ0cnVlIj48L2k&#43;DQogICAgPC9kaXY&#43;DQogICAgPGRpdiBjbGFzcz0iZGV0YWlscy1jb250ZW50Ij4NCiAgICAgIDxkaXYgY2xhc3M9ImFkbW9uaXRpb24tY29udGVudCI&#43;PHA&#43;QVJNdjgg5bCG54m55p2D57qn5Yir5YiG5Li6IDQg5LiqIGxldmVs77yM5q&#43;P5LiqIGxldmVsIOeahOeJueadg&#43;S4jeS4gOagt&#43;eahO&#43;8jOeJueadg&#43;Wkp&#43;WwjyBFTDAgJmx0OyBFTDEgJmx0OyBFTDIgJmx0OyBFTDPjgII8L3A&#43;Cjx0YWJsZT4KPHRoZWFkPgo8dHI&#43;Cjx0aD5FTDwvdGg&#43;Cjx0aD7or7TmmI48L3RoPgo8L3RyPgo8L3RoZWFkPgo8dGJvZHk&#43;Cjx0cj4KPHRkPkVMMDwvdGQ&#43;Cjx0ZD7lsLHmmK/nlKjmiLfnqbrpl7TvvIzlnKggTm9yYW1sIHdvcmxkIOS4reavlOWmgui/kOihjOeahOW6lOeUqOeoi&#43;W6j&#43;&#43;8jOWcqCBTZWN1cmUgd29ybGQg5bCx5pivIFRB77yMVHJ1c3QgQXBwbGljYXRpb248L3RkPgo8L3RyPgo8dHI&#43;Cjx0ZD5FTDE8L3RkPgo8dGQ&#43;6L&#43;Q6KGM5pON5L2c57O757uf77yMTm9yYW1hbCBXb3JsZCDmr5TlpoIgTGludXgg5pON5L2c57O757uf77yM5oiW6ICFIFdJbmNlIOaTjeS9nOezu&#43;e7n&#43;OAguWcqCBTZWN1cmUgV29ybGQg5YiZ5bCx5pivIFRydXN0ZWQgT1PvvIzmr5TlpoLpq5jpgJrnmoQgUVNFRSwg5byA5rqQ55qEIE9QLVRFRe&#43;8jOixjOixhuiNmueahCBURUUg562JPC90ZD4KPC90cj4KPHRyPgo8dGQ&#43;RUwyPC90ZD4KPHRkPkFSTSDkuLrkuobmlK/mjIHomZrmi5/ljJbvvIzorr7orqHnmoQgSHlwZXJ2aXNvciDlsYLvvIzlj6rmnInlnKggTm9yYW1sIHdvcmxkIOS9v&#43;eUqOOAgjwvdGQ&#43;CjwvdHI&#43;Cjx0cj4KPHRkPkVMMzwvdGQ&#43;Cjx0ZD5TZWN1cmUgTW9uaXRlciDnmoTkvZznlKjmmK/nlKjkuo4gTm9yYW1sIHdvcmxkIOWSjCBTZWN1cmUgd29ybGQg5YiH5o2i5L2/55So44CC5b2TIG5vcmFtbCB3b3JsZCDmg7PopoHorr/pl64gU2VjdXJlIHdvcmxkIOmcgOimgeWPkemAgSBTTUMg5oyH5Luk6L&#43;b5YWlIFNlY3VyZSBNb25pdGVyIOWxgu&#43;8jOeEtuWQjui/m&#43;WFpeWIsCBTZWN1cmUgd29ybGQ8L3RkPgo8L3RyPgo8L3Rib2R5Pgo8L3RhYmxlPgo8L2Rpdj4NCiAgICA8L2Rpdj4NCiAgPC9kaXY&#43;CjxoNCBpZD0i5YW25LuW56Gs5Lu25qih5Z2X55qE6YCC6YWNIj7lhbbku5bnoazku7bmqKHlnZfnmoTpgILphY08L2g0Pgo8dWw&#43;CjxsaT5MaW51eCBLZXJuZWwg6KaB5rGCIENQVSDov5DooYzlnKggTm8tU2VjdXJlIEVMMSDmqKHlvI/kuIvvvIzlr7nlupQgR0lDIOaOp&#43;WItuWZqOaooeW8j&#43;S5n&#43;mcgOimgeS/ruaUueaIkCBOby1TZWN1cmXjgII8L2xpPgo8bGk&#43;6YWN572uIExpbnV4IOaguOWvueW6lOeahCBBUk0gR2VuZXJpYyBUaW1lciDkvb/og73vvIjmoLjlr7nlupTnmoTkvb/og73pnIDopoHlnKggRUwzIOaooeW8j&#43;S4i&#43;mFjee9ru&#43;8ieOAgjwvbGk&#43;CjwvdWw&#43;CjxoNCBpZD0i5Y&#43;M5qC45ZCv5YqoIj7lj4zmoLjlkK/liqg8L2g0Pgo8cD7lnKggYm9vdGxvYWRlciDkuK3vvIzkuLvmoLjooqvphY3nva7kuLrmrbvlvqrnjq/nrYnlvoXlhbblkK/liqjlnLDlnYAgQ09SRXhfQk9PVF9BRERSIOeahOiuvue9ru&#43;8jOW9k&#43;WFtuWQr&#43;WKqOWcsOWdgOiiq&#43;iuvue9ruWQju&#43;8jOS4u&#43;aguOW8gOWni&#43;aJp&#43;ihjCBMaW51eCDlhoXmoLjlkK/liqjjgII8L3A&#43;CjxwPuiAjOS7juaguOWImemAmui/hyBXRkUg5oyH5Luk6L&#43;b5YWlIGlkbGUg54q25oCB77yM55u05Yiw5Li75qC45ZCv5Yqo5ZCO77yM5Li75qC46YCa6L&#43;HIFNFViDmjIfku6TvvIjkvJrkv67mlLnmiYDmnInmoLjnmoQgRXZlbnQg5a&#43;E5a2Y5Zmo77yJ5ZSk6YaS5LuO5qC477yM5LuO5qC45byA5aeL6Lez6L2s5YiwIENPUkV5X0JPT1RfQUREUu&#43;8jOW8gOWni&#43;WFtuWQjue7reeahOWQr&#43;WKqOa1geeoi&#43;OAgjwvcD4KPGgzIGlkPSLkuK3mlq3mjqfliLblmagiPuS4reaWreaOp&#43;WItuWZqDwvaDM&#43;Cjx0YWJsZT4KPHRoZWFkPgo8dHI&#43;Cjx0aD7mpoLlv7U8L3RoPgo8dGg&#43;6K&#43;05piOPC90aD4KPC90cj4KPC90aGVhZD4KPHRib2R5Pgo8dHI&#43;Cjx0ZD5JUlE8L3RkPgo8dGQ&#43;54mp55CG5pmu6YCa5Lit5patPC90ZD4KPC90cj4KPHRyPgo8dGQ&#43;RklRPC90ZD4KPHRkPueJqeeQhuW/q&#43;mAn&#43;S4reaWrTwvdGQ&#43;CjwvdHI&#43;Cjx0cj4KPHRkPlZJUlE8L3RkPgo8dGQ&#43;6Jma5ouf5pmu6YCa5Lit5patPC90ZD4KPC90cj4KPHRyPgo8dGQ&#43;VkZJUTwvdGQ&#43;Cjx0ZD7omZrmi5/lv6vpgJ/kuK3mlq08L3RkPgo8L3RyPgo8dHI&#43;Cjx0ZD5TR0k8L3RkPgo8dGQ&#43;6L2v5Lu26Kem5Y&#43;R5Lit5patKFNvZnR3YXJlIEdlbmVyYXRlZCBJbnRlcnJ1cHQp77yM6YCa5bi455So5LqO5aSa5qC46Ze06YCa6K6vPC90ZD4KPC90cj4KPHRyPgo8dGQ&#43;UFBJPC90ZD4KPHRkPuengeacieWkluiuvuS4reaWrShQcml2YXRlIFBlcmlwaGVyYWwgSW50ZXJydXB0Ke&#43;8jOaYr&#43;avj&#43;S4qiBDUFUg56eB5pyJ55qE5Lit5patPC90ZD4KPC90cj4KPHRyPgo8dGQ&#43;U1BJPC90ZD4KPHRkPuWFrOeUqOWkluiuvuS4reaWrShTaGFyZWQgUGVyaXBoZXJhbCBJbnRlcnJ1cHQpPC90ZD4KPC90cj4KPC90Ym9keT4KPC90YWJsZT4KPHA&#43;5Lit5pat5o6n5Yi25Zmo5piv5aSW6K6&#43;5ZKMIENQVSDkuYvpl7TnmoTmoaXmooHvvIzlroPotJ/otKPlsIblpJborr7nmoTkuK3mlq3kv6Hlj7fovazmjaLmiJAgQ1BVIOWPr&#43;S7peivhuWIq&#43;eahOS4reaWreS/oeWPt&#43;&#43;8jOW5tuS4lOS4reaWreaOp&#43;WItuWZqOi/mOi0n&#43;i0o&#43;S4reaWreeahOS8mOWFiOe6p&#43;OAgeS4reaWreeahOWxj&#43;iUveOAgeS4reaWreeahOWIhuWPkeetieWKn&#43;iDveOAgjwvcD4KPGg0IGlkPSLkuK3mlq3miqLljaAiPuS4reaWreaKouWNoDwvaDQ&#43;CjxwPuiZveeEtiBBUk0g55qEIEdJQyDkuK3mlq3mjqfliLblmajmlK/mjIHkuK3mlq3miqLljaDvvIzkvYbmmK8gTGludXgg5b2T5YmN5bm25LiN5pSv5oyB5Lit5pat5oqi5Y2g77yI5pu&#43;57uP5pSv5oyB6L&#43;H77yM5L2G5piv5Li65LqG6YG/5YWN5qCI5rqi5Ye655qE5oOF5Ya177yM5pS&#43;5byD5LqG6K&#43;l5Yqf6IO955qE5pSv5oyB77yJ44CCPC9wPgo8aDQgaWQ9IuS4iuWNiumDqOS4i&#43;WNiumDqCI&#43;5LiK5Y2K6YOoL&#43;S4i&#43;WNiumDqDwvaDQ&#43;CjxwPkxpbnV4IOS4reaWreWPr&#43;S7peWIhuS4uuS4iuWNiumDqOWSjOS4i&#43;WNiumDqO&#43;8jOS4iuWNiumDqOaYr&#43;S4reaWreWkhOeQhueoi&#43;W6j&#43;&#43;8jOeUqOS6juWkhOeQhue0p&#43;aApeeahOW3peS9nO&#43;8jOS4i&#43;WNiumDqOaYr&#43;W7tui/n&#43;WkhOeQhueoi&#43;W6j&#43;&#43;8jOeUqOS6juWkhOeQhuiAl&#43;aXtueahOW3peS9nOOAggrlhbbkuK3vvIzkuIrljYrpg6jov5DooYzov4fnqIvkuK3kvJrlhbPpl63kuK3mlq3vvIzogIzkuIvljYrpg6jliJnkuI3kvJrlhbPpl63kuK3mlq3vvIzku47ogIzmj5DljYfkuobkuK3mlq3nmoTlk43lupTpgJ/luqbjgII8L3A&#43;CjxwPuW9k&#43;WJjeS4i&#43;WNiumDqOS4u&#43;imgeWMheaLrOi9r&#43;S4reaWre&#43;8iHNvZnRpcnHvvInjgIF0YXNrbGV0IOWSjCB3b3JrcXVldWUg5LiJ56eN77yaPC9wPgo8dGFibGU&#43;Cjx0aGVhZD4KPHRyPgo8dGg&#43;5YiG57G7PC90aD4KPHRoPuS4iuS4i&#43;aWhzwvdGg&#43;Cjx0aD7lhbbku5Y8L3RoPgo8L3RyPgo8L3RoZWFkPgo8dGJvZHk&#43;Cjx0cj4KPHRkPui9r&#43;S4reaWrTwvdGQ&#43;Cjx0ZD7kuK3mlq3kuIrkuIvmlofvvIjkuI3lhYHorrjnnaHnnKDvvIk8L3RkPgo8dGQ&#43;6Z2Z5oCB5YiG6YWN77yM5pSv5oyB5bm25Y&#43;R77yM5L2G5piv6ZyA6KaB6ICD6JmR6YeN5YWl44CB5bm25Y&#43;R562J77yM6ZyA6KaB5Yqg5YWl5ZCM5q2l5py65Yi2PC90ZD4KPC90cj4KPHRyPgo8dGQ&#43;dGFza2xldDwvdGQ&#43;Cjx0ZD7kuK3mlq3kuIrkuIvmlofvvIjkuI3lhYHorrjnnaHnnKDvvIk8L3RkPgo8dGQ&#43;5Y&#43;v5Lul5Yqo5oCB5YiG6YWN77yM5pa55L6/5omp5bGV77yM57uR5a6a5Zyo5Y2V5LiqIENQVSDkuIo8L3RkPgo8L3RyPgo8dHI&#43;Cjx0ZD53b3JrcXVldWU8L3RkPgo8dGQ&#43;6L&#43;b56iL5LiK5LiL5paH77yI5Y&#43;v5Lul552h55yg77yJPC90ZD4KPHRkPuW3peS9nOmYn&#43;WIl&#43;WunueOsOS6huWGheaguOe6v&#43;eoi&#43;eahOWwgeijhe&#43;8jOS5n&#43;WPr&#43;S7peeUqOWGheaguOe6v&#43;eoi&#43;abv&#43;aNojwvdGQ&#43;CjwvdHI&#43;CjwvdGJvZHk&#43;CjwvdGFibGU&#43;CjxoMyBpZD0iaXBjLS0tbWFpbGJveCI&#43;SVBDIC0gbWFpbGJveDwvaDM&#43;CjxwPklQQyDmmK8gSW50ZXItUHJvY2VzcyBDb21tdW5pY2F0aW9uIOeahOe8qeWGme&#43;8jOWAvOW&#43;l&#43;aYr&#43;i/m&#43;eoi&#43;mXtOmAmuS/oeOAgjwvcD4KPHA&#43;bWFpbGJveCDmmK/kuIDnp43moYbmnrbvvIzpgJrov4fmtojmga/pmJ/liJflkozkuK3mlq3pqbHliqjkv6Hlj7flpITnkIblpJrlpITnkIblmajpl7TnmoTpgJrorq/jgII8L3A&#43;CjxwPuWFtuWunueOsOWIhuS4uiBjb250b2xsZXIg5ZKMIGNsaWVudOOAgueugOWNleeahOivtOWwseaYryBjbGllbnQg5Y&#43;v5Lul6YCa6L&#43;HIGNvbnRyb2xsZXIg5o&#43;Q5L6b55qEIGNoYW5uZWwg5Y&#43;R6YCB5L&#43;h5oGv57uZIGNvbnRyb2xsZXLjgII8L3A&#43;CjxoNCBpZD0i5YW25LuW6L&#43;b56iL6Ze06YCa5L&#43;hIj7lhbbku5bov5vnqIvpl7TpgJrkv6E8L2g0Pgo8cD5MaW51eCDkuIrnmoQgSVBDIOaWueW8j&#43;S4u&#43;imgeWIhuS4uuS7peS4i&#43;WHoOenje&#43;8mjwvcD4KPHVsPgo8bGk&#43;566h6YGT77yIcGlwZe&#43;8iQo8YmxvY2txdW90ZT4KPHA&#43;5Yy/5ZCN566h6YGT6aG&#43;5ZCN5oCd5LmJ77yM5a6D5rKh5pyJ5ZCN5a2X5qCH6K&#43;G77yMPHN0cm9uZz7ljL/lkI3nrqHpgZM8L3N0cm9uZz7mmK/nibnmrormlofku7blj6rlrZjlnKjkuo7lhoXlrZjvvIzmsqHmnInlrZjlnKjkuo7mlofku7bns7vnu5/kuK3vvIxzaGVsbCDlkb3ku6TkuK3nmoQgPGNvZGU&#43;fDwvY29kZT4g56uW57q/5bCx5piv5Yy/5ZCN566h6YGT77yM6YCa5L&#43;h55qE5pWw5o2u5pivPHN0cm9uZz7ml6DmoLzlvI/nmoTmtYHlubbkuJTlpKflsI/lj5fpmZA8L3N0cm9uZz7vvIzpgJrkv6HnmoTmlrnlvI/mmK88c3Ryb25nPuWNleWQkTwvc3Ryb25nPueahO&#43;8jOaVsOaNruWPquiDveWcqOS4gOS4quaWueWQkeS4iua1geWKqO&#43;8jOWmguaenOimgeWPjOWQkemAmuS/oe&#43;8jOmcgOimgeWIm&#43;W7uuS4pOS4queuoemBk&#43;&#43;8jOWGjeadpTxzdHJvbmc&#43;5Yy/5ZCN566h6YGT5piv5Y&#43;q6IO955So5LqO5a2Y5Zyo54i25a2Q5YWz57O755qE6L&#43;b56iL6Ze06YCa5L&#43;hPC9zdHJvbmc&#43;77yM5Yy/5ZCN566h6YGT55qE55Sf5ZG95ZGo5pyf6ZqP552A6L&#43;b56iL5Yib5bu66ICM5bu656uL77yM6ZqP552A6L&#43;b56iL57uI5q2i6ICM5raI5aSx44CCCjxzdHJvbmc&#43;5ZG95ZCN566h6YGTPC9zdHJvbmc&#43;56qB56C05LqG5Yy/5ZCN566h6YGT5Y&#43;q6IO95Zyo5Lqy57yY5YWz57O76L&#43;b56iL6Ze055qE6YCa5L&#43;h6ZmQ5Yi277yM5Zug5Li65L2/55So5ZG95ZCN566h6YGT55qE5YmN5o&#43;Q77yM6ZyA6KaB5Zyo5paH5Lu257O757uf5Yib5bu65LiA5Liq57G75Z6L5Li6IHAg55qE6K6&#43;5aSH5paH5Lu277yM6YKj5LmI5q&#43;r5peg5YWz57O755qE6L&#43;b56iL5bCx5Y&#43;v5Lul6YCa6L&#43;H6L&#43;Z5Liq6K6&#43;5aSH5paH5Lu26L&#43;b6KGM6YCa5L&#43;h44CCCuWPpuWklu&#43;8jOS4jeeuoeaYr&#43;WMv&#43;WQjeeuoemBk&#43;i/mOaYr&#43;WRveWQjeeuoemBk&#43;&#43;8jOi/m&#43;eoi&#43;WGmeWFpeeahOaVsOaNrumDveaYrzxzdHJvbmc&#43;57yT5a2Y5Zyo5YaF5qC4PC9zdHJvbmc&#43;5Lit77yM5Y&#43;m5LiA5Liq6L&#43;b56iL6K&#43;75Y&#43;W5pWw5o2u5pe25YCZ6Ieq54S25Lmf5piv5LuO5YaF5qC45Lit6I635Y&#43;W77yM5ZCM5pe26YCa5L&#43;h5pWw5o2u6YO96YG15b6qPHN0cm9uZz7lhYjov5vlhYjlh7o8L3N0cm9uZz7ljp/liJnvvIzkuI3mlK/mjIEgbHNlZWsg5LmL57G755qE5paH5Lu25a6a5L2N5pON5L2c44CCPC9wPgo8L2Jsb2NrcXVvdGU&#43;CjwvbGk&#43;CjxsaT7mtojmga/pmJ/liJfvvIhtZXNzYWdlIHF1ZXVl77yJCjxibG9ja3F1b3RlPgo8cD48c3Ryb25nPua2iOaBr&#43;mYn&#43;WIlzwvc3Ryb25nPuWFi&#43;acjeS6hueuoemBk&#43;mAmuS/oeeahOaVsOaNruaYr&#43;aXoOagvOW8j&#43;eahOWtl&#43;iKgua1geeahOmXrumimO&#43;8jOa2iOaBr&#43;mYn&#43;WIl&#43;WunumZheS4iuaYr&#43;S/neWtmOWcqOWGheaguOeahOa2iOaBr&#43;mTvuihqO&#43;8jOa2iOaBr&#43;mYn&#43;WIl&#43;eahOa2iOaBr&#43;S9k&#43;aYr&#43;WPr&#43;S7peeUqOaIt&#43;iHquWumuS5ieeahOaVsOaNruexu&#43;Wei&#43;&#43;8jOWPkemAgeaVsOaNruaXtu&#43;8jOS8muiiq&#43;WIhuaIkOS4gOS4quS4gOS4queLrOeri&#43;eahOa2iOaBr&#43;S9k&#43;&#43;8jOW9k&#43;eEtuaOpeaUtuaVsOaNruaXtu&#43;8jOS5n&#43;imgeS4juWPkemAgeaWueWPkemAgeeahOa2iOaBr&#43;S9k&#43;eahOaVsOaNruexu&#43;Wei&#43;S/neaMgeS4gOiHtO&#43;8jOi/meagt&#43;aJjeiDveS/neivgeivu&#43;WPlueahOaVsOaNruaYr&#43;ato&#43;ehrueahOOAggrmtojmga/pmJ/liJfpgJrkv6HnmoTpgJ/luqbkuI3mmK/mnIDlj4rml7bnmoTvvIzmr5Xnq588c3Ryb25nPuavj&#43;asoeaVsOaNrueahOWGmeWFpeWSjOivu&#43;WPlumDvemcgOimgee7j&#43;i/h&#43;eUqOaIt&#43;aAgeS4juWGheaguOaAgeS5i&#43;mXtOeahOaLt&#43;i0nei/h&#43;eoizwvc3Ryb25nPuOAgjwvcD4KPC9ibG9ja3F1b3RlPgo8L2xpPgo8bGk&#43;5YWx5Lqr5YaF5a2Y77yIc2hhcmVkIG1lbW9yee&#43;8iQo8YmxvY2txdW90ZT4KPHA&#43;PHN0cm9uZz7lhbHkuqvlhoXlrZg8L3N0cm9uZz7lj6/ku6Xop6PlhrPmtojmga/pmJ/liJfpgJrkv6HkuK3nlKjmiLfmgIHkuI7lhoXmoLjmgIHkuYvpl7TmlbDmja7mi7fotJ3ov4fnqIvluKbmnaXnmoTlvIDplIDvvIw8c3Ryb25nPuWug&#43;ebtOaOpeWIhumFjeS4gOS4quWFseS6q&#43;epuumXtO&#43;8jOavj&#43;S4qui/m&#43;eoi&#43;mDveWPr&#43;S7peebtOaOpeiuv&#43;mXrjwvc3Ryb25nPu&#43;8jOWwseWDj&#43;iuv&#43;mXrui/m&#43;eoi&#43;iHquW3seeahOepuumXtOS4gOagt&#43;W/q&#43;aNt&#43;aWueS&#43;v&#43;&#43;8jOS4jemcgOimgemZt&#43;WFpeWGheaguOaAgeaIluiAheezu&#43;e7n&#43;iwg&#43;eUqO&#43;8jOWkp&#43;Wkp&#43;aPkOmrmOS6humAmuS/oeeahOmAn&#43;W6pu&#43;8jOS6q&#43;aciTxzdHJvbmc&#43;5pyA5b&#43;rPC9zdHJvbmc&#43;55qE6L&#43;b56iL6Ze06YCa5L&#43;h5pa55byP5LmL5ZCN44CCCuS9huaYr&#43;S&#43;v&#43;aNt&#43;mrmOaViOeahOWFseS6q&#43;WGheWtmOmAmuS/oe&#43;8jDxzdHJvbmc&#43;5bim5p2l5paw55qE6Zeu6aKY77yM5aSa6L&#43;b56iL56ue5LqJ5ZCM5Liq5YWx5Lqr6LWE5rqQ5Lya6YCg5oiQ5pWw5o2u55qE6ZSZ5LmxPC9zdHJvbmc&#43;44CCPC9wPgo8L2Jsb2NrcXVvdGU&#43;CjwvbGk&#43;CjxsaT7kv6Hlj7fph4/vvIhzZW1hcGhvcmXvvIkKPGJsb2NrcXVvdGU&#43;CjxwPumCo&#43;S5iO&#43;8jOWwsemcgOimgTxzdHJvbmc&#43;5L&#43;h5Y&#43;36YePPC9zdHJvbmc&#43;5p2l5L&#43;d5oqk5YWx5Lqr6LWE5rqQ77yM5Lul56Gu5L&#43;d5Lu75L2V5pe25Yi75Y&#43;q6IO95pyJ5LiA5Liq6L&#43;b56iL6K6/6Zeu5YWx5Lqr6LWE5rqQ77yM6L&#43;Z56eN5pa55byP5bCx5piv5LqS5pal6K6/6Zeu44CCCjxzdHJvbmc&#43;5L&#43;h5Y&#43;36YeP5LiN5LuF5Y&#43;v5Lul5a6e546w6K6/6Zeu55qE5LqS5pal5oCn77yM6L&#43;Y5Y&#43;v5Lul5a6e546w6L&#43;b56iL6Ze055qE5ZCM5q2lPC9zdHJvbmc&#43;77yM5L&#43;h5Y&#43;36YeP5YW25a6e5piv5LiA5Liq6K6h5pWw5Zmo77yM6KGo56S655qE5piv6LWE5rqQ5Liq5pWw77yM5YW25YC85Y&#43;v5Lul6YCa6L&#43;H5Lik5Liq5Y6f5a2Q5pON5L2c5p2l5o6n5Yi277yM5YiG5Yir5pivKiogUCDmk43kvZzlkowgViDmk43kvZwqKuOAgjwvcD4KPC9ibG9ja3F1b3RlPgo8L2xpPgo8bGk&#43;5L&#43;h5Y&#43;377yIc2lnbmFs77yJCjxibG9ja3F1b3RlPgo8cD7kuI7kv6Hlj7fph4/lkI3lrZflvojnm7jkvLznmoTlj6vkv6Hlj7fvvIzlroPkv6nlkI3lrZfomb3nhLbnm7jkvLzvvIzkvYblip/og73kuIDngrnlhL/pg73kuI3kuIDmoLfjgILkv6Hlj7fmmK88c3Ryb25nPuW8guatpemAmuS/oeacuuWItjwvc3Ryb25nPu&#43;8jOS/oeWPt&#43;WPr&#43;S7peWcqOW6lOeUqOi/m&#43;eoi&#43;WSjOWGheaguOS5i&#43;mXtOebtOaOpeS6pOS6ku&#43;8jOWGheaguOS5n&#43;WPr&#43;S7peWIqeeUqOS/oeWPt&#43;adpemAmuefpeeUqOaIt&#43;epuumXtOeahOi/m&#43;eoi&#43;WPkeeUn&#43;S6huWTquS6m&#43;ezu&#43;e7n&#43;S6i&#43;S7tu&#43;8jOS/oeWPt&#43;S6i&#43;S7tueahOadpea6kOS4u&#43;imgeacieehrOS7tuadpea6kO&#43;8iOWmgumUruebmCBDbHRyK0Mg77yJ5ZKM6L2v5Lu25p2l5rqQ77yI5aaCIGtpbGwg5ZG95Luk77yJ77yM5LiA5pem5pyJ5L&#43;h5Y&#43;35Y&#43;R55Sf77yMPHN0cm9uZz7ov5vnqIvmnInkuInnp43mlrnlvI/lk43lupTkv6Hlj7cgMS4g5omn6KGM6buY6K6k5pON5L2c44CBMi4g5o2V5o2J5L&#43;h5Y&#43;344CBMy4g5b&#43;955Wl5L&#43;h5Y&#43;344CCPC9zdHJvbmc&#43;CuacieS4pOS4quS/oeWPt&#43;aYr&#43;W6lOeUqOi/m&#43;eoi&#43;aXoOazleaNleaNieWSjOW/veeVpeeahO&#43;8jOWNsyBTSUdLSUxMIOWSjCBTSUdTVE9Q77yM6L&#43;Z5piv5Li65LqG5pa55L6/5oiR5Lus6IO95Zyo5Lu75L2V5pe25YCZ57uT5p2f5oiW5YGc5q2i5p&#43;Q5Liq6L&#43;b56iL44CCPC9wPgo8L2Jsb2NrcXVvdGU&#43;CjwvbGk&#43;CjxsaT7lpZfmjqXlrZfvvIhzb2NrZXTvvIkKPGJsb2NrcXVvdGU&#43;CjxwPuWJjemdouivtOWIsOeahOmAmuS/oeacuuWItu&#43;8jOmDveaYr&#43;W3peS9nOS6juWQjOS4gOWPsOS4u&#43;acuu&#43;8jOWmguaenDxzdHJvbmc&#43;6KaB5LiO5LiN5ZCM5Li75py655qE6L&#43;b56iL6Ze06YCa5L&#43;h77yM6YKj5LmI5bCx6ZyA6KaBIFNvY2tldCDpgJrkv6HkuoY8L3N0cm9uZz7jgIIKU29ja2V0IOWunumZheS4iuS4jeS7heeUqOS6juS4jeWQjOeahOS4u&#43;acuui/m&#43;eoi&#43;mXtOmAmuS/oe&#43;8jOi/mOWPr&#43;S7peeUqOS6juacrOWcsOS4u&#43;acuui/m&#43;eoi&#43;mXtOmAmuS/oe&#43;8jOWPr&#43;agueaNruWIm&#43;W7uiBTb2NrZXQg55qE57G75Z6L5LiN5ZCM77yM5YiG5Li65LiJ56eN5bi46KeB55qE6YCa5L&#43;h5pa55byP77yM5LiA5Liq5piv5Z&#43;65LqOIFRDUCDljY/orq7nmoTpgJrkv6HmlrnlvI/vvIzkuIDkuKrmmK/ln7rkuo4gVURQIOWNj&#43;iurueahOmAmuS/oeaWueW8j&#43;&#43;8jOS4gOS4quaYr&#43;acrOWcsOi/m&#43;eoi&#43;mXtOmAmuS/oeaWueW8j&#43;OAgjwvcD4KPC9ibG9ja3F1b3RlPgo8L2xpPgo8L3VsPgo8cD7lkIzkuKrov5vnqIvkuIvnmoTnur/nqIvkuYvpl7Tpg73mmK/lhbHkuqvov5vnqIvnmoTotYTmupDvvIzlj6ropoHmmK/lhbHkuqvlj5jph4/pg73lj6/ku6XlgZrliLDnur/nqIvpl7TpgJrkv6HvvIzmr5TlpoLlhajlsYDlj5jph4/vvIzmiYDku6Xlr7nkuo7nur/nqIvpl7TlhbPms6jnmoTkuI3mmK/pgJrkv6HmlrnlvI/vvIzogIzmmK/lhbPms6jlpJrnur/nqIvnq57kuonlhbHkuqvotYTmupDnmoTpl67popjvvIzkv6Hlj7fph4/kuZ/lkIzmoLflj6/ku6XlnKjnur/nqIvpl7Tlrp7njrDkupLmlqXkuI7lkIzmraXvvJo8L3A&#43;Cjx1bD4KPGxpPuS6kuaWpeeahOaWueW8j&#43;&#43;8jOWPr&#43;S/neivgeS7u&#43;aEj&#43;aXtuWIu&#43;WPquacieS4gOS4que6v&#43;eoi&#43;iuv&#43;mXruWFseS6q&#43;i1hOa6kO&#43;8mzwvbGk&#43;CjxsaT7lkIzmraXnmoTmlrnlvI/vvIzlj6/kv53or4Hnur/nqIsgQSDlupTlnKjnur/nqIsgQiDkuYvliY3miafooYzvvJs8L2xpPgo8L3VsPgo8aDMgaWQ9IuWFtuS7li1saW51eC3lhoXmoLjnm7jlhbPnmoTnn6Xor4YiPuWFtuS7liBMaW51eCDlhoXmoLjnm7jlhbPnmoTnn6Xor4Y8L2gzPgo8aDQgaWQ9IuiHquaXi&#43;mUgeWSjOS6kuaWpemUgSI&#43;6Ieq5peL6ZSB5ZKM5LqS5pal6ZSBPC9oND4KPHVsPgo8bGk&#43;6Ieq5peL6ZSB5Yqg6ZSB5aSx6LSl5ZCO77yM57q/56iL5Lya5b&#43;Z562J5b6F77yM55u05Yiw5a6D5ou/5Yiw6ZSBPC9saT4KPGxpPuS6kuaWpemUgeWKoOmUgeWksei0peWQju&#43;8jOe6v&#43;eoi&#43;S8mumHiuaUviBDUFUg77yM57uZ5YW25LuW57q/56iLPC9saT4KPC91bD4KPGg0IGlkPSLomZrmi5/lnLDlnYAiPuiZmuaLn&#43;WcsOWdgDwvaDQ&#43;Cjx1bD4KPGxpPuaIkeS7rOeoi&#43;W6j&#43;aJgOS9v&#43;eUqOeahOWGheWtmOWcsOWdgOWPq&#43;WBmjxzdHJvbmc&#43;6Jma5ouf5YaF5a2Y5Zyw5Z2A77yIVmlydHVhbCBNZW1vcnkgQWRkcmVzc&#43;&#43;8iTwvc3Ryb25nPjwvbGk&#43;CjxsaT7ogIzlrp7pmYXlrZjlnKjnoazku7bph4zpnaLnmoTnqbrpl7TlnLDlnYDlj6s8c3Ryb25nPueJqeeQhuWGheWtmOWcsOWdgO&#43;8iFBoeXNpY2FsIE1lbW9yeSBBZGRyZXNz77yJPC9zdHJvbmc&#43;PC9saT4KPC91bD4KPHA&#43;PHN0cm9uZz7mk43kvZzns7vnu5/kvJrmj5DkvpvkuIDnp43mnLrliLbvvIzlsIbkuI3lkIzov5vnqIvnmoTomZrmi5/lnLDlnYDlkozkuI3lkIzlhoXlrZjnmoTniannkIblnLDlnYDmmKDlsITotbfmnaXjgII8L3N0cm9uZz4K5aaC5p6c56iL5bqP6KaB6K6/6Zeu6Jma5ouf5Zyw5Z2A55qE5pe25YCZ77yM55Sx5pON5L2c57O757uf6L2s5o2i5oiQ5LiN5ZCM55qE54mp55CG5Zyw5Z2A77yM6L&#43;Z5qC35LiN5ZCM55qE6L&#43;b56iL6L&#43;Q6KGM55qE5pe25YCZ77yM5YaZ5YWl55qE5piv5LiN5ZCM55qE54mp55CG5Zyw5Z2A77yM6L&#43;Z5qC35bCx5LiN5Lya5Yay56qB5LqG44CCPC9wPgo8cD7mk43kvZzns7vnu5/lvJXlhaXkuobomZrmi5/lhoXlrZjvvIzov5vnqIvmjIHmnInnmoTomZrmi5/lnLDlnYDkvJrpgJrov4cgQ1BVIOiKr&#43;eJh&#43;S4reeahOWGheWtmOeuoeeQhuWNleWFg&#43;&#43;8iE1NVe&#43;8ieeahOaYoOWwhOWFs&#43;ezu&#43;&#43;8jOadpei9rOaNouWPmOaIkOeJqeeQhuWcsOWdgO&#43;8jOeEtuWQjuWGjemAmui/h&#43;eJqeeQhuWcsOWdgOiuv&#43;mXruWGheWtmOOAgjwvcD4KPGg0IGlkPSLliIbpobXkuI7nvLrpobXkuK3mlq0iPuWIhumhteS4jue8uumhteS4reaWrTwvaDQ&#43;CjxwPjxzdHJvbmc&#43;5YiG6aG15piv5oqK5pW05Liq6Jma5ouf5ZKM54mp55CG5YaF5a2Y56m66Ze05YiH5oiQ5LiA5q615q615Zu65a6a5bC65a&#43;455qE5aSn5bCPPC9zdHJvbmc&#43;44CC6L&#43;Z5qC35LiA5Liq6L&#43;e57ut5bm25LiU5bC65a&#43;45Zu65a6a55qE5YaF5a2Y56m66Ze077yM5oiR5Lus5Y&#43;r6aG177yIUGFnZe&#43;8ieOAguWcqCBMaW51eCDkuIvvvIzmr4/kuIDpobXnmoTlpKflsI/kuLogNEtC44CCPC9wPgo8cD7omZrmi5/lnLDlnYDkuI7niannkIblnLDlnYDkuYvpl7TpgJrov4fpobXooajmnaXmmKDlsITvvIzpobXooajmmK/lrZjlgqjlnKjlhoXlrZjph4znmoTvvIw8c3Ryb25nPuWGheWtmOeuoeeQhuWNleWFg&#43;&#43;8iE1NVe&#43;8ieWwseWBmuWwhuiZmuaLn&#43;WGheWtmOWcsOWdgOi9rOaNouaIkOeJqeeQhuWcsOWdgOeahOW3peS9nDwvc3Ryb25nPuOAgjwvcD4KPHA&#43;6ICM5b2T6L&#43;b56iL6K6/6Zeu55qE6Jma5ouf5Zyw5Z2A5Zyo6aG16KGo5Lit5p&#43;l5LiN5Yiw5pe277yM57O757uf5Lya5Lqn55Sf5LiA5Liq57y66aG15byC5bi477yM6L&#43;b5YWl57O757uf5YaF5qC456m66Ze05YiG6YWN54mp55CG5YaF5a2Y44CB5pu05paw6L&#43;b56iL6aG16KGo77yM5pyA5ZCO5YaN6L&#43;U5Zue55So5oi356m66Ze077yM5oGi5aSN6L&#43;b56iL55qE6L&#43;Q6KGM44CCPC9wPgo8aDQgaWQ9IuWkmue6p&#43;mhteihqCI&#43;5aSa57qn6aG16KGoPC9oND4KPHA&#43;5a&#43;55LqO5Y2V6aG16KGo55qE5a6e546w5pa55byP77yM5ZyoIDMyIOS9jeWSjOmhteWkp&#43;WwjyA0S0Ig55qE546v5aKD5LiL77yM5LiA5Liq6L&#43;b56iL55qE6aG16KGo6ZyA6KaB6KOF5LiLIDEwMCDlpJrkuIfkuKrpobXooajpobnvvIzlubbkuJTmr4/kuKrpobXooajpobnmmK/ljaDnlKggNCDlrZfoioLlpKflsI/nmoTvvIzkuo7mmK/nm7jlvZPkuo7mr4/kuKrov5vnqIvnmoTpobXooajpnIDljaDnlKggNE1CIOWkp&#43;Wwj&#43;eahOepuumXtOOAgjwvcD4KPHA&#43;6aG16KGo5LiA5a6a6KaB6KaG55uW5YWo6YOo6Jma5ouf5Zyw5Z2A56m66Ze077yM5LiN5YiG57qn55qE6aG16KGo5bCx6ZyA6KaB5pyJIDEwMCDlpJrkuIfkuKrpobXooajpobnmnaXmmKDlsITvvIzogIzkuoznuqfliIbpobXliJnlj6rpnIDopoEgMTAyNCDkuKrpobXooajpobnvvIjmraTml7bkuIDnuqfpobXooajopobnm5bliLDkuoblhajpg6jomZrmi5/lnLDlnYDnqbrpl7TvvIzkuoznuqfpobXooajlnKjpnIDopoHml7bliJvlu7rvvInjgII8L3A&#43;CjxoNCBpZD0idGxiIj5UTEI8L2g0Pgo8cD7nqIvluo/mmK/mnInlsYDpg6jmgKfnmoTvvIzljbPlnKjkuIDmrrXml7bpl7TlhoXvvIzmlbTkuKrnqIvluo/nmoTmiafooYzku4XpmZDkuo7nqIvluo/kuK3nmoTmn5DkuIDpg6jliIbjgILnm7jlupTlnLDvvIzmiafooYzmiYDorr/pl67nmoTlrZjlgqjnqbrpl7TkuZ/lsYDpmZDkuo7mn5DkuKrlhoXlrZjljLrln5/jgII8L3A&#43;CjxwPuS6juaYr&#43;aKiuacgOW4uOiuv&#43;mXrueahOWHoOS4qumhteihqOmhueWtmOWCqOWIsOiuv&#43;mXrumAn&#43;W6puabtOW/q&#43;eahOehrOS7tu&#43;8jOWcqCBDUFUg6Iqv54mH5Lit77yM5Yqg5YWl5LqG5LiA5Liq5LiT6Zeo5a2Y5pS&#43;56iL5bqP5pyA5bi46K6/6Zeu55qE6aG16KGo6aG555qEIENhY2hl77yM6L&#43;Z5LiqIENhY2hlIOWwseaYryBUTELvvIhUcmFuc2xhdGlvbiBMb29rYXNpZGUgQnVmZmVy77yJIO&#43;8jOmAmuW4uOensOS4uumhteihqOe8k&#43;WtmOOAgei9rOWdgOaXgei3r&#43;e8k&#43;WtmOOAgeW/q&#43;ihqOetieOAgjwvcD4KPGgyIGlkPSLlj4LogIPotYTmlpkiPuWPguiAg&#43;i1hOaWmTwvaDI&#43;Cjx1bD4KPGxpPjxhIGhyZWY9Imh0dHBzOi8vemh1YW5sYW4uemhpaHUuY29tL3AvNTM2MTIxMTcidGFyZ2V0PSJfYmxhbmsiIHJlbD0iZXh0ZXJuYWwgbm9mb2xsb3cgbm9vcGVuZXIgbm9yZWZlcnJlciI&#43;44CQ55&#43;l5LmO44CR5b6u5YaF5qC45ZKM5a6P5YaF5qC4PC9hPjwvbGk&#43;CjxsaT48YSBocmVmPSJodHRwczovL2Nsb3VkLnRlbmNlbnQuY29tL2RldmVsb3Blci9hcnRpY2xlLzIwMjEyOTEidGFyZ2V0PSJfYmxhbmsiIHJlbD0iZXh0ZXJuYWwgbm9mb2xsb3cgbm9vcGVuZXIgbm9yZWZlcnJlciI&#43;44CQ6IW&#43;6K6v5LqR44CR6IGK5LiA6IGK5a6P5YaF5qC45ZKM5b6u5YaF5qC4PC9hPjwvbGk&#43;CjxsaT48YSBocmVmPSJodHRwczovL2t1YmVybmV0ZXMuaW8vZG9jcy9jb25jZXB0cy9hcmNoaXRlY3R1cmUvY2dyb3Vwcy8idGFyZ2V0PSJfYmxhbmsiIHJlbD0iZXh0ZXJuYWwgbm9mb2xsb3cgbm9vcGVuZXIgbm9yZWZlcnJlciI&#43;44CQa3ViZXJuZXRlc&#43;OAkUFib3V0IGNncm91cCB2MjwvYT48L2xpPgo8bGk&#43;PGEgaHJlZj0iaHR0cHM6Ly9jbG91ZC50ZW5jZW50LmNvbS9kZXZlbG9wZXIvYXJ0aWNsZS8xNzkxMjc1InRhcmdldD0iX2JsYW5rIiByZWw9ImV4dGVybmFsIG5vZm9sbG93IG5vb3BlbmVyIG5vcmVmZXJyZXIiPuOAkOiFvuiur&#43;S6keOAkUxpbnV4IOagueaWh&#43;S7tuezu&#43;e7n&#43;&#43;8iHJvb3RmcyDljp/nkIbor6bop6PvvIk8L2E&#43;PC9saT4KPGxpPjxhIGhyZWY9Imh0dHBzOi8vd3d3LmNuYmxvZ3MuY29tL2NoYXJsZXMtemhhbmctYmxvZy9wLzM0MTkzMDEuaHRtbCJ0YXJnZXQ9Il9ibGFuayIgcmVsPSJleHRlcm5hbCBub2ZvbGxvdyBub29wZW5lciBub3JlZmVycmVyIj7jgJDljZrlrqLlm63jgJHkvb/nlKggQnVzeUJveCDliLbkvZzltYzlhaXlvI8gTGludXgg5qC55paH5Lu257O757ufPC9hPjwvbGk&#43;CjxsaT48YSBocmVmPSJodHRwczovL2Jsb2cuY3Nkbi5uZXQvbG9uZ3dhbmcxNTUwNjkvYXJ0aWNsZS9kZXRhaWxzLzEwNTAxMDE4MiJ0YXJnZXQ9Il9ibGFuayIgcmVsPSJleHRlcm5hbCBub2ZvbGxvdyBub29wZW5lciBub3JlZmVycmVyIj7jgJBDU0RO44CRQVJNdjgtQSBFeGNlcHRpb24gTGV2ZWxzPC9hPjwvbGk&#43;CjxsaT48YSBocmVmPSJodHRwOi8vd3d3Lndvd290ZWNoLm5ldC9hcm12OGFfYXJjaC93ZmVfd2ZpLmh0bWwidGFyZ2V0PSJfYmxhbmsiIHJlbD0iZXh0ZXJuYWwgbm9mb2xsb3cgbm9vcGVuZXIgbm9yZWZlcnJlciI&#43;44CQ5Liq5Lq65Y2a5a6i44CRQVJNIFdGSSDlkowgV0ZFIOaMh&#43;S7pDwvYT48L2xpPgo8bGk&#43;PGEgaHJlZj0iaHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvZGxlYWRpbmcvYXJ0aWNsZS9kZXRhaWxzLzUyOTcxMTc5InRhcmdldD0iX2JsYW5rIiByZWw9ImV4dGVybmFsIG5vZm9sbG93IG5vb3BlbmVyIG5vcmVmZXJyZXIiPuOAkENTRE7jgJFMaW51eCDlhoXmoLjkuK3nmoTova/kuK3mlq3jgIF0YXNrbGV0IOWSjOW3peS9nOmYn&#43;WIl&#43;ivpuinozwvYT48L2xpPgo8bGk&#43;PGEgaHJlZj0iaHR0cHM6Ly93d3cueGlhb2xpbmNvZGluZy5jb20vb3MvNF9wcm9jZXNzL3Byb2Nlc3NfY29tbXUuaHRtbCJ0YXJnZXQ9Il9ibGFuayIgcmVsPSJleHRlcm5hbCBub2ZvbGxvdyBub29wZW5lciBub3JlZmVycmVyIj7jgJDlsI/mnpdjb2RpbmfjgJHov5vnqIvpl7TmnInlk6rkupvpgJrkv6HmlrnlvI/vvJ88L2E&#43;PC9saT4KPGxpPjxhIGhyZWY9Imh0dHBzOi8vd3d3LnhpYW9saW5jb2RpbmcuY29tL29zLzNfbWVtb3J5L3ZtZW0uaHRtbCJ0YXJnZXQ9Il9ibGFuayIgcmVsPSJleHRlcm5hbCBub2ZvbGxvdyBub29wZW5lciBub3JlZmVycmVyIj7jgJDlsI/mnpdjb2RpbmfjgJHkuLrku4DkuYjopoHmnInomZrmi5/lhoXlrZjvvJ88L2E&#43;PC9saT4KPC91bD4K"><div class="fixit-decryptor-container">
+  <img class="fixit-decryptor-loading" src="/svg/loading.min.svg" alt="decryptor loading" />
+  <label for="fixit-decryptor-input" title='密码'>
+    <input type="password" id="fixit-decryptor-input" class="d-none" placeholder="🔑 请输入密码访问" />
+  </label>
+  <button class="fixit-encryptor-btn d-none"><i class="fa-solid fa-lock" aria-hidden="true"></i> 重新加密</button>
+</div>
+</div><div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/2c65e859/" title="个人简历相关的基础知识梳理">https://ywang-wnlo.github.io/posts/2c65e859/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+<div class="related-posts">
+    <h2 id="related-posts-head">相关文章推荐</h2>
+    <ul>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a>&nbsp;&nbsp;
+            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
+            <a class="tag-diff" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
+            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
+            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
+            <a class="tag-diff" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
+            <a class="tag-diff" href="/tags/todo/"><i class="fa fa-tag fa-fw"></i>todo</a>&nbsp;
+        </li>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/646202b9/" title="page cache 回写机制">page cache 回写机制</a>&nbsp;&nbsp;
+            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
+            <a class="tag-diff" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
+            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
+            <a class="tag-diff" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
+        </li>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/f2cdf8a6/" title="美化 Shell 之 Linux Zsh 篇">美化 Shell 之 Linux Zsh 篇</a>&nbsp;&nbsp;
+            <a class="tag-same" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
+            <a class="tag-diff" href="/tags/shell/"><i class="fa fa-tag fa-fw"></i>Shell</a>&nbsp;
+            <a class="tag-diff" href="/tags/zsh/"><i class="fa fa-tag fa-fw"></i>Zsh</a>&nbsp;
+            <a class="tag-diff" href="/tags/oh-my-zsh/"><i class="fa fa-tag fa-fw"></i>Oh My Zsh</a>&nbsp;
+            <a class="tag-diff" href="/tags/nerd-font/"><i class="fa fa-tag fa-fw"></i>Nerd Font</a>&nbsp;
+        </li>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/72a4cdfd/" title="Ubuntu 环境配置大合集">Ubuntu 环境配置大合集</a>&nbsp;&nbsp;
+            <a class="tag-diff" href="/tags/ubuntu/"><i class="fa fa-tag fa-fw"></i>Ubuntu</a>&nbsp;
+            <a class="tag-same" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
+            <a class="tag-diff" href="/tags/nano/"><i class="fa fa-tag fa-fw"></i>nano</a>&nbsp;
+            <a class="tag-diff" href="/tags/vim/"><i class="fa fa-tag fa-fw"></i>vim</a>&nbsp;
+            <a class="tag-diff" href="/tags/perl/"><i class="fa fa-tag fa-fw"></i>perl</a>&nbsp;
+            <a class="tag-diff" href="/tags/timedatectl/"><i class="fa fa-tag fa-fw"></i>timedatectl</a>&nbsp;
+            <a class="tag-diff" href="/tags/vnc/"><i class="fa fa-tag fa-fw"></i>VNC</a>&nbsp;
+            <a class="tag-diff" href="/tags/ldconfig/"><i class="fa fa-tag fa-fw"></i>ldconfig</a>&nbsp;
+        </li>
+        <li class="related-post-item">
+            <a class="related-post-link" href="/posts/935ae1f0/" title="rm -r 与 rmdir 区别">rm -r 与 rmdir 区别</a>&nbsp;&nbsp;
+            <a class="tag-same" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
+            <a class="tag-diff" href="/tags/shell/"><i class="fa fa-tag fa-fw"></i>Shell</a>&nbsp;
+            <a class="tag-diff" href="/tags/strace/"><i class="fa fa-tag fa-fw"></i>strace</a>&nbsp;
+        </li>
+    </ul>
+</div>
+<div class="post-reward">
+    <div class="comment">请我一杯咖啡吧！</div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward">赞赏</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+          </div></div>
+  </div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2023-12-11 18:56:18">更新于 2023-12-11&nbsp;</span>
+      </div><div class="post-info-license d-none">
+          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+        </div></div>
+    <div class="post-info-line d-none">
+      <div class="post-info-md"><span><a href="/posts/2c65e859/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/kernel/' class="post-tag">kernel</a><a href='/tags/xnu/' class="post-tag">XNU</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/cgroup/' class="post-tag">cgroup</a><a href='/tags/page-cache/' class="post-tag">page cache</a><a href='/tags/%E4%B8%AD%E6%96%AD/' class="post-tag">中断</a><a href='/tags/ipc/' class="post-tag">IPC</a><a href='/tags/%E8%87%AA%E6%97%8B%E9%94%81/' class="post-tag">自旋锁</a><a href='/tags/%E4%BA%92%E6%96%A5%E9%94%81/' class="post-tag">互斥锁</a><a href='/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/' class="post-tag">虚拟地址</a><a href='/tags/%E5%88%86%E9%A1%B5/' class="post-tag">分页</a><a href='/tags/%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD/' class="post-tag">缺页中断</a><a href='/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/' class="post-tag">多级页表</a><a href='/tags/tlb/' class="post-tag">TLB</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/139abad8/" class="post-nav-item" rel="prev" title="从论文的图中提取数据"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>从论文的图中提取数据</a></div>
+</div>
+<div id="comments"><div id="giscus">
+          <script
+            src="https://giscus.app/client.js"
+            data-repo="ywang-wnlo/ywang-wnlo.github.io"
+            data-repo-id="R_kgDOGTSTcQ"
+            data-category="announcements"
+            data-category-id="DIC_kwDOGTSTcc4CZaXg"
+            data-mapping="pathname"
+            data-strict="0"
+            
+            data-theme="preferred_color_scheme"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-lang="zh-CN"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async
+            defer
+          ></script>
+        </div>
+        <noscript>
+          Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
+        </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://unpkg.com/crypto-js@4.1.1/core.js" defer></script><script src="https://unpkg.com/crypto-js@4.1.1/enc-base64.js" defer></script><script src="https://unpkg.com/crypto-js@4.1.1/md5.js" defer></script><script src="https://unpkg.com/crypto-js@4.1.1/sha256.js" defer></script><script src="/js/fixit-decryptor.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"encryption":{"all":true,"shortcode":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

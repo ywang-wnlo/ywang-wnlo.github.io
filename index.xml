@@ -4,7 +4,7 @@
     <link>https://ywang-wnlo.github.io/</link>
     <description>一个新时代农民工的随手笔记</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</lastBuildDate>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Mon, 11 Dec 2023 18:56:18 &#43;0800</lastBuildDate>
       <atom:link href="https://ywang-wnlo.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>从论文的图中提取数据</title>
@@ -77,14 +77,6 @@
   <author>Zeus</author>
   <guid>https://ywang-wnlo.github.io/posts/3b7ae835/</guid>
   <description><![CDATA[本文主要来源于 VCB-Studio 官网的科普教程，个人重新了梳理，记录 Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter 的配置过程]]></description>
-</item>
-<item>
-  <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-  <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
-  <pubDate>Wed, 16 Nov 2022 13:43:05 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
-  <description><![CDATA[本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置]]></description>
 </item>
 </channel>
 </rss>
