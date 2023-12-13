@@ -12,5 +12,13 @@
   <guid>https://ywang-wnlo.github.io/posts/2c65e859/</guid>
   <description><![CDATA[个人自用的简历相关的基础知识梳理，未来可能会对每个小方向进行展开]]></description>
 </item>
+<item>
+  <title>从 C 过渡到 C&#43;&#43;</title>
+  <link>https://ywang-wnlo.github.io/posts/89c4acb1/</link>
+  <pubDate>Sun, 24 Sep 2023 11:48:03 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/89c4acb1/</guid>
+  <description><![CDATA[本文介绍了 C++ 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数]]></description>
+</item>
 </channel>
 </rss>
