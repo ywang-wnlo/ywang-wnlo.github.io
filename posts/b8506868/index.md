@@ -13,7 +13,7 @@ ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最�
 
 FEMU 的环境搭建比较简单，参考其 [官方仓库 README](https://github.com/vtess/FEMU#installation) 操作即可
 
-**容易踩坑：**但是需要注意 ZNS 对 Linux 内核版本有要求，**必须在 5.10 以上**，因此推荐安装 Ubuntu 22.04 LTS。
+**容易踩坑：** 但是需要注意 ZNS 对 Linux 内核版本有要求，**必须在 5.10 以上**，因此推荐安装 Ubuntu 22.04 LTS。
 不建议手动更新内核，过程复杂耗时，而且（`sudo make headers_install` 安装内核用户头文件过程中）存在一定的风险性
 
 ### QEMU 制作和安装系统镜像
@@ -80,7 +80,7 @@ qemu-system-x86_64 -enable-kvm -cpu host -smp=16 -m 4G -hda u22s.qcow2 -nographi
 
 以 Ubuntu 为例：
 
-**容易踩坑：**一定要记得按照顺序来，先安装好所有依赖再编译
+**容易踩坑：** 一定要记得按照顺序来，先安装好所有依赖再编译
 
 ```bash
 # 基本的编译工具等不过多介绍
@@ -114,7 +114,7 @@ DEBUG_LEVEL=0 make -j db_bench
 sudo make install
 ```
 
-**容易踩坑：**如果 `-j` 会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考 [这篇博客](https://blog.csdn.net/weixin_44796670/article/details/121234446) 利用 swap “增加”可用内存大小，或者限制下编译的并发度，例如 `-j8`
+**容易踩坑：** 如果 `-j` 会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考 [这篇博客](https://blog.csdn.net/weixin_44796670/article/details/121234446) 利用 swap “增加”可用内存大小，或者限制下编译的并发度，例如 `-j8`
 
 利用 `db_bench` 测试可以参考 [官方测试](https://github.com/facebook/rocksdb/wiki/Performance-Benchmarks) 的方式，利用 [`benchmark.sh`](https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh) 来测试，当然也可以直接运行 `db_bench`
 
@@ -196,7 +196,7 @@ sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1
 echo mq-deadline | sudo tee /sys/block/nvme1n1/queue/scheduler
 ```
 
-**容易踩坑：**利用 `zenfs` 创建 ZenFS 文件系统，其中 **`zbd` 后直接给出设备名**即可，不需要给出设备路径；而且需要指定 `aux_path` 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS 设备上，并且使用**绝对路径**
+**容易踩坑：** 利用 `zenfs` 创建 ZenFS 文件系统，其中 **`zbd` 后直接给出设备名**即可，不需要给出设备路径；而且需要指定 `aux_path` 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS 设备上，并且使用**绝对路径**
 
 ```bash
 cd ~

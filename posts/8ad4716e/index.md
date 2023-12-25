@@ -44,11 +44,13 @@ winget install JanDeDobbeleer.OhMyPosh -s winget
 notepad $PROFILE
 ```
 
-> 如果打开报错，则需要首先创建配置文件
->
-> ```PowerShell
-> New-Item -Path $PROFILE -Type File -Force
-> ```
+{{< admonition warning "如果打开报错，则需要首先创建配置文件" >}}
+
+```PowerShell
+New-Item -Path $PROFILE -Type File -Force
+```
+
+{{< /admonition >}}
 
 在配置文件中添加以下内容，以后启动 `PowerShell` 就会自动启用 `Oh My Posh` 了
 

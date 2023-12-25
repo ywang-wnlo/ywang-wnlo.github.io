@@ -259,11 +259,11 @@ int main () {
     vector<int> myvector = {32,71,12,45,26,80,53,33};
 
     // 默认升序(操作符 <)
-    sort (myvector.begin(), myvector.begin() + 4);
+    sort(myvector.begin(), myvector.begin() + 4);
     // (12 32 45 71) 26 80 53 33
 
     // 自定义比较函数
-    sort (myvector.begin() + 4, myvector.end(), myfunction);
+    sort(myvector.begin() + 4, myvector.end(), myfunction);
     // 12 32 45 71 (80 53 33 26)
 
     for (int i = 0; i < myvector.size(); i++) {

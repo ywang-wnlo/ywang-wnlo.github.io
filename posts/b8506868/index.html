@@ -10,7 +10,7 @@
 <meta name="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法" /><meta name="keywords" content='日常踩坑, RocksDB, ZNS, QEMU, grub' /><meta itemprop="name" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
 <meta itemprop="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法"><meta itemprop="datePublished" content="2022-11-22T22:54:45+08:00" />
 <meta itemprop="dateModified" content="2023-09-18T19:13:39+08:00" />
-<meta itemprop="wordCount" content="1692">
+<meta itemprop="wordCount" content="1680">
 <meta itemprop="keywords" content="日常踩坑,RocksDB,ZNS,QEMU,grub," /><meta property="og:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用" />
 <meta property="og:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/b8506868\/"
-    },"genre": "posts","keywords": "日常踩坑, RocksDB, ZNS, QEMU, grub","wordcount":  1692 ,
+    },"genre": "posts","keywords": "日常踩坑, RocksDB, ZNS, QEMU, grub","wordcount":  1680 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/b8506868\/","datePublished": "2022-11-22T22:54:45+08:00","dateModified": "2023-09-18T19:13:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -163,7 +163,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
           <span class="post-category">收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2022-11-22 22:54:45"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-22">2022-11-22</time></span>&nbsp;<span title="更新于 2023-09-18 19:13:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-18">2023-09-18</time></span>&nbsp;<span title="1692 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
+      <div class="post-meta-line"><span title="发布于 2022-11-22 22:54:45"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-22">2022-11-22</time></span>&nbsp;<span title="更新于 2023-09-18 19:13:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-18">2023-09-18</time></span>&nbsp;<span title="1680 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -200,13 +200,20 @@
     <li><a href="#参考资料">参考资料</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>本文主要记录自己在利用 <a href="https://github.com/facebook/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">RocksDB</a> + <a href="https://github.com/westerndigitalcorporation/zenfs"target="_blank" rel="external nofollow noopener noreferrer">ZenFS</a> 测试 <a href="https://zonedstorage.io/docs/introduction/zns"target="_blank" rel="external nofollow noopener noreferrer">ZNS</a> 过程中遇到的一些问题以及相应的解决办法</p>
+      </div><div class="content" id="content"><div class="details admonition note open">
+      <div class="details-summary admonition-title">
+        <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      </div>
+      <div class="details-content">
+        <div class="admonition-content">本文最后更新于 2023-09-18，文中内容可能已过时。</div>
+      </div>
+    </div><p>本文主要记录自己在利用 <a href="https://github.com/facebook/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">RocksDB</a> + <a href="https://github.com/westerndigitalcorporation/zenfs"target="_blank" rel="external nofollow noopener noreferrer">ZenFS</a> 测试 <a href="https://zonedstorage.io/docs/introduction/zns"target="_blank" rel="external nofollow noopener noreferrer">ZNS</a> 过程中遇到的一些问题以及相应的解决办法</p>
 <h2 id="配置-zns-环境">配置 ZNS 环境</h2>
 <p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS 设备类型是基于闪存的 SSD。但是 ZNS SSD 目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
 <h3 id="配置-femu">配置 FEMU</h3>
 <p>官网给了 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#zoned-block-device-emulation-with-null_blk"target="_blank" rel="external nofollow noopener noreferrer">null_blk</a> 以及 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#nvme-zoned-namespace-device-emulation-with-qemu"target="_blank" rel="external nofollow noopener noreferrer">QEMU</a> 的配置方法，但是个人对 <a href="https://github.com/vtess/FEMU"target="_blank" rel="external nofollow noopener noreferrer">FEMU</a> 比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用 FEMU 模拟 ZNS 搭建环境</p>
 <p>FEMU 的环境搭建比较简单，参考其 <a href="https://github.com/vtess/FEMU#installation"target="_blank" rel="external nofollow noopener noreferrer">官方仓库 README</a> 操作即可</p>
-<p>**容易踩坑：**但是需要注意 ZNS 对 Linux 内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu 22.04 LTS。
+<p><strong>容易踩坑：</strong> 但是需要注意 ZNS 对 Linux 内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu 22.04 LTS。
 不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code> 安装内核用户头文件过程中）存在一定的风险性</p>
 <h3 id="qemu-制作和安装系统镜像">QEMU 制作和安装系统镜像</h3>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -304,7 +311,7 @@
 <p><a href="https://github.com/facebook/rocksdb/blob/main/INSTALL.md"target="_blank" rel="external nofollow noopener noreferrer">RocksDB 官方仓库的 Wiki</a> 有较为详细的安装指导</p>
 <h3 id="环境以及依赖安装">环境以及依赖安装</h3>
 <p>以 Ubuntu 为例：</p>
-<p>**容易踩坑：**一定要记得按照顺序来，先安装好所有依赖再编译</p>
+<p><strong>容易踩坑：</strong> 一定要记得按照顺序来，先安装好所有依赖再编译</p>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -355,7 +362,7 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 安装编译好的 RocksDB 库</span>
 </span></span><span class="line"><span class="cl">sudo make install</span></span></code></pre></td></tr></table>
 </div>
-</div><p>**容易踩坑：**如果 <code>-j</code> 会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考 <a href="https://blog.csdn.net/weixin_44796670/article/details/121234446"target="_blank" rel="external nofollow noopener noreferrer">这篇博客</a> 利用 swap “增加”可用内存大小，或者限制下编译的并发度，例如 <code>-j8</code></p>
+</div><p><strong>容易踩坑：</strong> 如果 <code>-j</code> 会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考 <a href="https://blog.csdn.net/weixin_44796670/article/details/121234446"target="_blank" rel="external nofollow noopener noreferrer">这篇博客</a> 利用 swap “增加”可用内存大小，或者限制下编译的并发度，例如 <code>-j8</code></p>
 <p>利用 <code>db_bench</code> 测试可以参考 <a href="https://github.com/facebook/rocksdb/wiki/Performance-Benchmarks"target="_blank" rel="external nofollow noopener noreferrer">官方测试</a> 的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"target="_blank" rel="external nofollow noopener noreferrer"><code>benchmark.sh</code></a> 来测试，当然也可以直接运行 <code>db_bench</code></p>
 <h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
 <p><a href="https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md"target="_blank" rel="external nofollow noopener noreferrer">ZenFS 官方仓库</a>其实给了相应的指导，这里重新梳理下</p>
@@ -470,7 +477,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> mq-deadline <span class="p">|</span> sudo tee /sys/block/nvme1n1/queue/scheduler</span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>容易踩坑：<strong>利用 <code>zenfs</code> 创建 ZenFS 文件系统，其中 <strong><code>zbd</code> 后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定 <code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS 设备上，并且使用</strong>绝对路径</strong></p>
+</div><p><strong>容易踩坑：</strong> 利用 <code>zenfs</code> 创建 ZenFS 文件系统，其中 <strong><code>zbd</code> 后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定 <code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS 设备上，并且使用<strong>绝对路径</strong></p>
 <div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -634,6 +641,6 @@
         </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
