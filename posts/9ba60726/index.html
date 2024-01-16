@@ -10,7 +10,7 @@
 <meta name="description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析" /><meta name="keywords" content='page cache, buffer IO, kernel, page cache, writeback, todo' /><meta itemprop="name" content="page cache 简介">
 <meta itemprop="description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析"><meta itemprop="datePublished" content="2021-12-05T22:22:08+08:00" />
 <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00" />
-<meta itemprop="wordCount" content="3932">
+<meta itemprop="wordCount" content="3972">
 <meta itemprop="keywords" content="page cache,buffer IO,kernel,page cache,writeback,todo," /><meta property="og:title" content="page cache 简介" />
 <meta property="og:description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/"
-    },"genre": "posts","keywords": "page cache, buffer IO, kernel, page cache, writeback, todo","wordcount":  3932 ,
+    },"genre": "posts","keywords": "page cache, buffer IO, kernel, page cache, writeback, todo","wordcount":  3972 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/","datePublished": "2021-12-05T22:22:08+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>page cache 简介</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/io-stack/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2021-12-05 22:22:08"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-05">2021-12-05</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="3932 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="page cache 简介">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/io-stack/" class="post-category" title="分类 - IO Stack"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div><div class="post-meta-line"><span title="发布于 2021-12-05 22:22:08"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-05">2021-12-05</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="3972 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="page cache 简介">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -207,11 +201,11 @@
         <div class="admonition-content">本文最后更新于 2022-11-16，文中内容可能已过时。</div>
       </div>
     </div><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121"target="_blank" rel="external nofollow noopener noreferrer">v5.4.121</a></p>
-<h2 id="page-cache">page cache</h2>
-<p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
+<h2 id="page-cache" class="heading-element">
+  <a href="#page-cache" class="heading-mark"></a>page cache</h2><p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
 <p>经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9/">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的预读机制<!-- todo -->提升了顺序读性能</p>
-<h2 id="直接-io-与-缓存-io">直接 IO 与 缓存 IO</h2>
-<p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
+<h2 id="直接-io-与-缓存-io" class="heading-element">
+  <a href="#%e7%9b%b4%e6%8e%a5-io-%e4%b8%8e-%e7%bc%93%e5%ad%98-io" class="heading-mark"></a>直接 IO 与 缓存 IO</h2><p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
 <ol>
 <li>不经过缓存，直接写底层存储设备，但同时要使缓存中数据失效，也叫不缓存（nowrite）</li>
 <li>只写缓存，缓存中数据定期刷到底层存储设备上，也叫写回（write back）</li>
@@ -219,18 +213,18 @@
 </ol>
 <p>前两种就是 Linux 在 IO 栈中支持的直接 IO（direct IO）和缓存 IO（buffer IO）</p>
 <p>第三种策略虽然能非常简单保证缓存和底层设备的一致性，不过基于时间局部性原理，page cache 中的数据可能只是中间态，会被频繁修改，每次写穿会产生大量的开销</p>
-<h2 id="linux-io-栈">Linux IO 栈</h2>
-<p>详细的 Linux IO 栈图如下（来源于 <a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram"target="_blank" rel="external nofollow noopener noreferrer">Thomas-Krenn-Wiki</a>）：</p>
-<p><figure><a class="lightgallery" href="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=large" data-thumbnail="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=small" data-sub-html="<h2>Linux IO 栈</h2><p>Linux IO 栈</p>"><img loading="lazy" src="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png" srcset="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=small, /posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=medium 1.5x, /posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=large 2x" sizes="auto" data-title="Linux IO 栈" data-alt="Linux IO 栈" style="--width: 1755px;--aspect-ratio: 1755 / 2487;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Linux IO 栈</figcaption>
+<h2 id="linux-io-栈" class="heading-element">
+  <a href="#linux-io-%e6%a0%88" class="heading-mark"></a>Linux IO 栈</h2><p>详细的 Linux IO 栈图如下（来源于 <a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram"target="_blank" rel="external nofollow noopener noreferrer">Thomas-Krenn-Wiki</a>）：</p>
+<p><figure><a class="lightgallery" href="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=large" data-thumbnail="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=small" data-sub-html="<h2>Linux IO 栈</h2><p>Linux IO 栈</p>"><img loading="lazy" src="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png" alt="Linux IO 栈" srcset="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=small, /posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=medium 1.5x, /posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=large 2x" sizes="auto" data-title="Linux IO 栈" style="--width: 1755px;--aspect-ratio: 1755 / 2487;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Linux IO 栈</figcaption>
   </figure></p>
 <p>其实简化一下，可以分为文件系统、块层和设备驱动层这三层</p>
-<p><figure><a class="lightgallery" href="/posts/9ba60726/simple_IO_stack.png?size=large" data-thumbnail="/posts/9ba60726/simple_IO_stack.png?size=small" data-sub-html="<h2>简化的 Linux IO 栈</h2><p>简化的 Linux IO 栈</p>"><img loading="lazy" src="/posts/9ba60726/simple_IO_stack.png" srcset="/posts/9ba60726/simple_IO_stack.png?size=small, /posts/9ba60726/simple_IO_stack.png?size=medium 1.5x, /posts/9ba60726/simple_IO_stack.png?size=large 2x" sizes="auto" data-title="简化的 Linux IO 栈" data-alt="简化的 Linux IO 栈" style="--width: 300px;--aspect-ratio: 300 / 351;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">简化的 Linux IO 栈</figcaption>
+<p><figure><a class="lightgallery" href="/posts/9ba60726/simple_IO_stack.png?size=large" data-thumbnail="/posts/9ba60726/simple_IO_stack.png?size=small" data-sub-html="<h2>简化的 Linux IO 栈</h2><p>简化的 Linux IO 栈</p>"><img loading="lazy" src="/posts/9ba60726/simple_IO_stack.png" alt="简化的 Linux IO 栈" srcset="/posts/9ba60726/simple_IO_stack.png?size=small, /posts/9ba60726/simple_IO_stack.png?size=medium 1.5x, /posts/9ba60726/simple_IO_stack.png?size=large 2x" sizes="auto" data-title="简化的 Linux IO 栈" style="--width: 300px;--aspect-ratio: 300 / 351;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">简化的 Linux IO 栈</figcaption>
   </figure></p>
-<h2 id="linux-中的具体实现">Linux 中的具体实现</h2>
-<p>这里介绍和 page cache 相关的主要结构体和一些常用的函数</p>
-<h3 id="相关结构体">相关结构体</h3>
-<h4 id="超级块-super_block">超级块 <code>super_block</code></h4>
-<p>每个文件系统都有 <code>super_block</code> 结构体，用于存储该文件系统的特定信息</p>
+<h2 id="linux-中的具体实现" class="heading-element">
+  <a href="#linux-%e4%b8%ad%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0" class="heading-mark"></a>Linux 中的具体实现</h2><p>这里介绍和 page cache 相关的主要结构体和一些常用的函数</p>
+<h3 id="相关结构体" class="heading-element">
+  <a href="#%e7%9b%b8%e5%85%b3%e7%bb%93%e6%9e%84%e4%bd%93" class="heading-mark"></a>相关结构体</h3><h4 id="超级块-super_block" class="heading-element">
+  <a href="#%e8%b6%85%e7%ba%a7%e5%9d%97-super_block" class="heading-mark"></a>超级块 <code>super_block</code></h4><p>每个文件系统都有 <code>super_block</code> 结构体，用于存储该文件系统的特定信息</p>
 <p>其定义在 <code>include/linux/fs.h</code> 中</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -494,8 +488,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>super_block</code> 通常在挂载文件系统时会从底层存储设备上读取并构建，并且需要同步回底层存储设备</p>
-<h4 id="索引节点-inode">索引节点 <code>inode</code></h4>
-<p>而 <code>inode</code> 则是文件系统中最重要的一个结构体，用于保存一个文件的元数据以及其在底层设备上的位置信息等（在 Linux 下一切皆是文件，目录也是一种文件）</p>
+<h4 id="索引节点-inode" class="heading-element">
+  <a href="#%e7%b4%a2%e5%bc%95%e8%8a%82%e7%82%b9-inode" class="heading-mark"></a>索引节点 <code>inode</code></h4><p>而 <code>inode</code> 则是文件系统中最重要的一个结构体，用于保存一个文件的元数据以及其在底层设备上的位置信息等（在 Linux 下一切皆是文件，目录也是一种文件）</p>
 <p>其定义也在 <code>include/linux/fs.h</code> 中</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -741,8 +735,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>与 <code>super_block</code> 一样，<code>inode</code> 也是从底层存储设备上读取并构建的，并且也需要同步回底层存储设备</p>
-<h4 id="文件-file">文件 <code>file</code></h4>
-<p><code>file</code> 其实是已经打开的底层存储设备上的文件在内存中的表示。与前面两个结构体有所不同，底层存储设备上并不会存储，该结构体只是内核抽象出来的，仅仅存在于内存中，方便管理</p>
+<h4 id="文件-file" class="heading-element">
+  <a href="#%e6%96%87%e4%bb%b6-file" class="heading-mark"></a>文件 <code>file</code></h4><p><code>file</code> 其实是已经打开的底层存储设备上的文件在内存中的表示。与前面两个结构体有所不同，底层存储设备上并不会存储，该结构体只是内核抽象出来的，仅仅存在于内存中，方便管理</p>
 <p>其定义也在 <code>include/linux/fs.h</code> 中</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -830,8 +824,8 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">__attribute__</span><span class="p">((</span><span class="nf">aligned</span><span class="p">(</span><span class="mi">4</span><span class="p">)));</span>	<span class="cm">/* lest something weird decides that 2 is OK */</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>每个 file 都与一个 inode 对应</p>
-<h4 id="目录项-dentry">目录项 <code>dentry</code></h4>
-<p><code>dentry</code> 与 <code>file</code> 类似，底层设备上并不会存储，该结构体也是内核抽象出来的，针对目录文件进行特殊的管理</p>
+<h4 id="目录项-dentry" class="heading-element">
+  <a href="#%e7%9b%ae%e5%bd%95%e9%a1%b9-dentry" class="heading-mark"></a>目录项 <code>dentry</code></h4><p><code>dentry</code> 与 <code>file</code> 类似，底层设备上并不会存储，该结构体也是内核抽象出来的，针对目录文件进行特殊的管理</p>
 <p>目录项相对于文件具有更高的热度，同时为了加速打开文件时的路径解析，内核中还实现了目录项缓存 <code>dcache</code> 用于缓存 <code>dentry</code></p>
 <p>其定义在 <code>include/linux/dcache.h</code> 中</p>
 <div class="highlight" id="id-4"><div class="chroma">
@@ -906,8 +900,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>因为目录也是文件，所以每个 <code>dentry</code> 也会与一个 <code>inode</code> 对应</p>
-<h4 id="页缓存-address_space">页缓存 <code>address_space</code></h4>
-<p>在 <code>inode</code> 结构体中可以看见一个类型为 <code>address_space</code> 结构体指针的 <code>i_mapping</code> 字段，其实它就是 page cache 的核心结构体</p>
+<h4 id="页缓存-address_space" class="heading-element">
+  <a href="#%e9%a1%b5%e7%bc%93%e5%ad%98-address_space" class="heading-mark"></a>页缓存 <code>address_space</code></h4><p>在 <code>inode</code> 结构体中可以看见一个类型为 <code>address_space</code> 结构体指针的 <code>i_mapping</code> 字段，其实它就是 page cache 的核心结构体</p>
 <p>其定义也在 <code>include/linux/fs.h</code> 中</p>
 <div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1088,8 +1082,8 @@
 </div>
 </div><p>每一个 <code>address_space</code> 与一个 <code>inode</code> 对应，同时 <code>file</code> 中的 <code>f_mapping</code> 字段通常由该文件的 <code>inode</code> 中 <code>i_mapping</code> 赋值，也就是说每个文件都会有独自的 <code>file</code>、<code>inode</code> 以及 <code>address_space</code> 结构体</p>
 <p><code>address_space</code> 结构体 <code>struct xarray i_pages</code> 就是该文件的 page cache 中缓存的所有物理页。它是通过基数树这一结构进行管理的，而 <code>xarray</code> 只是在基数树上进行了一层封装</p>
-<h3 id="常用函数">常用函数</h3>
-<p>通常 <code>address_space</code> 上会挂载一个 <code>address_space_operations</code> 结构，用于自定义对 page cache 中的页面操作的函数</p>
+<h3 id="常用函数" class="heading-element">
+  <a href="#%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0" class="heading-mark"></a>常用函数</h3><p>通常 <code>address_space</code> 上会挂载一个 <code>address_space_operations</code> 结构，用于自定义对 page cache 中的页面操作的函数</p>
 <p><code>address_space_operations</code> 结构定义也在 <code>include/linux/fs.h</code> 中</p>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1195,21 +1189,21 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里简要介绍一下其中通用的部分常用函数</p>
-<h4 id="从底层填充">从底层填充</h4>
-<p>当打开一个文件后，page cache 不会立即缓存这个文件的所有数据页，而是随着对文件的读写来逐渐填充的</p>
+<h4 id="从底层填充" class="heading-element">
+  <a href="#%e4%bb%8e%e5%ba%95%e5%b1%82%e5%a1%ab%e5%85%85" class="heading-mark"></a>从底层填充</h4><p>当打开一个文件后，page cache 不会立即缓存这个文件的所有数据页，而是随着对文件的读写来逐渐填充的</p>
 <p><code>readpage</code> 和 <code>readpages</code> 就是将底层存储设备上的一个或者多个页的数据读到 page cache 中</p>
-<h4 id="写入修改">写入修改</h4>
-<p>page cache 的写入较为复杂，主要分为三个阶段：</p>
+<h4 id="写入修改" class="heading-element">
+  <a href="#%e5%86%99%e5%85%a5%e4%bf%ae%e6%94%b9" class="heading-mark"></a>写入修改</h4><p>page cache 的写入较为复杂，主要分为三个阶段：</p>
 <ol>
 <li><code>write_begin</code> 主要负责查找、或者分配新的物理页，并将其锁定，有时还需要先从底层读取最新的数据页</li>
 <li><code>writepage</code> 或者 <code>writepages</code> 就是负责对这些物理页的实际写入过程</li>
 <li><code>write_end</code> 主要负责解锁这些物理页，并且更新 <code>inode</code> 中的元数据信息，例如 <code>i_size</code></li>
 </ol>
-<h4 id="其他">其他</h4>
-<p><code>direct_IO</code> 则是负责不经过 page cache 的直接 IO 的实现</p>
+<h4 id="其他" class="heading-element">
+  <a href="#%e5%85%b6%e4%bb%96" class="heading-mark"></a>其他</h4><p><code>direct_IO</code> 则是负责不经过 page cache 的直接 IO 的实现</p>
 <p>需要注意的是，当需要读的数据在 page cache 中缓存的和底层存储数据不一致时，也就是 <code>page</code> 为 <code>dirty</code> 状态时，通常需要调用 <code>filemap_write_and_wait</code> 或者 <code>filemap_write_and_wait_range</code> 先将这部分脏数据写到底层设备之后，才能执行 direct read</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
+<h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
 <li><a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram"target="_blank" rel="external nofollow noopener noreferrer">【Thomas-Krenn-Wiki】Linux Storage Stack Diagram</a></li>
 <li><a href="https://blog.csdn.net/juS3Ve/article/details/82322637"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈</a></li>
 <li><a href="https://www.doc-developpement-durable.org/file/Projets-informatiques/cours-&amp;-manuels-informatiques/Linux/Linux%20Kernel%20Development,%203rd%20Edition.pdf"target="_blank" rel="external nofollow noopener noreferrer">【LKD】Linux Kernel Development (3rd Edition)</a></li>
@@ -1221,7 +1215,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -1232,50 +1226,17 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/646202b9/" title="page cache 回写机制">page cache 回写机制</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-same" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-same" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/xnu/"><i class="fa fa-tag fa-fw"></i>XNU</a>&nbsp;
-            <a class="tag-diff" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
-            <a class="tag-diff" href="/tags/cgroup/"><i class="fa fa-tag fa-fw"></i>cgroup</a>&nbsp;
-            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/ipc/"><i class="fa fa-tag fa-fw"></i>IPC</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%87%AA%E6%97%8B%E9%94%81/"><i class="fa fa-tag fa-fw"></i>自旋锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%BA%92%E6%96%A5%E9%94%81/"><i class="fa fa-tag fa-fw"></i>互斥锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"><i class="fa fa-tag fa-fw"></i>虚拟地址</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%88%86%E9%A1%B5/"><i class="fa fa-tag fa-fw"></i>分页</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>缺页中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/"><i class="fa fa-tag fa-fw"></i>多级页表</a>&nbsp;
-            <a class="tag-diff" href="/tags/tlb/"><i class="fa fa-tag fa-fw"></i>TLB</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/4f0d345c/" title="io_uring 内核源码分析">io_uring 内核源码分析</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/%E5%BC%82%E6%AD%A5-io/"><i class="fa fa-tag fa-fw"></i>异步 IO</a>&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/liburing/"><i class="fa fa-tag fa-fw"></i>liburing</a>&nbsp;
-            <a class="tag-diff" href="/tags/io_uring/"><i class="fa fa-tag fa-fw"></i>io_uring</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/646202b9/" title="page cache 回写机制">page cache 回写机制</a></li><li>
+          <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
+          <a href="/posts/4f0d345c/" title="io_uring 内核源码分析">io_uring 内核源码分析</a></li><li>
+          <a href="/posts/2033aa70/" title="LaTeX 常用语法记录">LaTeX 常用语法记录</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -1283,18 +1244,16 @@
       <div class="post-info-mod">
         <span title="更新于 2022-11-16 10:33:39">更新于 2022-11-16&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/9ba60726/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/9ba60726/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/page-cache/' class="post-tag">page cache</a><a href='/tags/buffer-io/' class="post-tag">buffer IO</a><a href='/tags/kernel/' class="post-tag">kernel</a><a href='/tags/page-cache/' class="post-tag">page cache</a><a href='/tags/writeback/' class="post-tag">writeback</a><a href='/tags/todo/' class="post-tag">todo</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/buffer-io/" class="post-tag" title="标签 - buffer IO">buffer IO</a><a href="/tags/kernel/" class="post-tag" title="标签 - kernel">kernel</a><a href="/tags/page-cache/" class="post-tag" title="标签 - page cache">page cache</a><a href="/tags/writeback/" class="post-tag" title="标签 - writeback">writeback</a><a href="/tags/todo/" class="post-tag" title="标签 - todo">todo</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -1326,11 +1285,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -1338,5 +1300,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

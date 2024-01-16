@@ -1,9 +1,9 @@
 # 更换博客框架至 Hugo
 
 
-{{< admonition abstract >}}
+{{&lt; admonition abstract &gt;}}
 本文主要记录了自己迁移博客至 Hugo 的过程中遇到的问题，以及一些小技巧
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 前言
 
@@ -85,7 +85,7 @@ hugo
 
 hugo 的 Front matter 的部分变量名和 Hexo 的不一样，需要做一些转换
 
-例如：`update` --> `lastmod`
+例如：`update` --&gt; `lastmod`
 
 ### 永久链接
 
@@ -95,7 +95,7 @@ hugo 的 Front matter 的部分变量名和 Hexo 的不一样，需要做一些�
 
 ```toml
 [permalinks]
-    posts = "/posts/:slug"
+    posts = &#34;/posts/:slug&#34;
 ```
 
 ### 图片路径
@@ -133,11 +133,11 @@ $ tree
 
 ## 发布博客
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 在发布之前需要将之前 hexo 占用的 `gh-pages` 分支名改掉，例如改为 `hexo`
 
 然后新建一个分支，例如 `gh-pages`，然后重新将 `gh-pages` 的分支设置为 GitHub Pages 的分支
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 接下来发布就比较简单了，个人选择手动 `git push` publish 文件夹到 GitHub 的对应仓库即可
 
@@ -148,15 +148,15 @@ git remote add origin xxx
 git checkout -b gh-pages
 
 git add .
-git commit -m "first publish"
+git commit -m &#34;first publish&#34;
 git push -u origin gh-pages
 ```
 
 ## 加快部署
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 GitHub Pages 的部署会尝试用 Jekyll 编译，但是 Hugo 的博客是不需要编译的，所以可以在仓库的根目录下添加一个 `.nojekyll` 文件，这样就可以加快部署速度
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 参考资料
 

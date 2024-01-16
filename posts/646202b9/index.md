@@ -22,14 +22,14 @@ buffer IO 通过 page cache 进行缓存，减少对底层存储设备的直接�
 ```c
 struct backing_dev_info {
 	u64 id;
-	struct rb_node rb_node; /* keyed by ->id */
+	struct rb_node rb_node; /* keyed by -&gt;id */
 	struct list_head bdi_list;
 	unsigned long ra_pages;	/* max readahead in PAGE_SIZE units */
 	unsigned long io_pages;	/* max allowed IO size */
 	congested_fn *congested_fn; /* Function pointer if device is md/dm */
 	void *congested_data;	/* Pointer to aux data for congested func */
 
-	// 通常为 "block"
+	// 通常为 &#34;block&#34;
 	const char *name;
 
 	struct kref refcnt;	/* Reference counter for the structure */
@@ -38,7 +38,7 @@ struct backing_dev_info {
 	unsigned int max_ratio, max_prop_frac;
 
 	/*
-	 * Sum of avg_write_bw of wbs with dirty inodes.  > 0 if there are
+	 * Sum of avg_write_bw of wbs with dirty inodes.  &gt; 0 if there are
 	 * any dirty wbs, which is depended upon by bdi_has_dirty().
 	 */
 	atomic_long_t tot_write_bandwidth;
@@ -78,9 +78,9 @@ struct backing_dev_info {
 
 1. `name` 字段
 
-    ![name 字段](bdi_name.png "name 字段")
+    ![name 字段](bdi_name.png &#34;name 字段&#34;)
 
-    在 `block/blk-core.c` 中 `blk_alloc_queue_node` 会调用 `bdi_alloc_node` 来初始化该结构体，其中 `name` 字段赋值为 `"block"`
+    在 `block/blk-core.c` 中 `blk_alloc_queue_node` 会调用 `bdi_alloc_node` 来初始化该结构体，其中 `name` 字段赋值为 `&#34;block&#34;`
 
 2. `dev` 字段
 
@@ -90,7 +90,7 @@ struct backing_dev_info {
 
     在 `mm/backing-dev.c` 的 `bdi_register_va` 还会对 `dev_name` 进行赋值
 
-    ![dev_name 字段](bdi_dev_name.png "dev_name 字段")
+    ![dev_name 字段](bdi_dev_name.png &#34;dev_name 字段&#34;)
 
     根据调用栈溯源可以发现，`mm/backing-dev.c` 的 `bdi_register_owner` 将 `fmt` 和 `args` 传递到 `bdi_register_va`，最终会将主设备号和次设备号拼接组合后进行赋值
 
@@ -98,7 +98,7 @@ struct backing_dev_info {
 
     在 `mm/backing-dev.c` 的 `bdi_register_owner` 还会对 `owner` 进行赋值
 
-    ![owner 字段](bdi_owner.png "owner 字段")
+    ![owner 字段](bdi_owner.png &#34;owner 字段&#34;)
 
     实际赋值的为 `disk` 对应的 `dev`，通过 `disk_to_dev` 宏转换得到
 
@@ -110,10 +110,10 @@ struct backing_dev_info {
 /*
  * Each wb (bdi_writeback) can perform writeback operations, is measured
  * and throttled, independently.  Without cgroup writeback, each bdi
- * (bdi_writeback) is served by its embedded bdi->wb.
+ * (bdi_writeback) is served by its embedded bdi-&gt;wb.
  *
  * On the default hierarchy, blkcg implicitly enables memcg.  This allows
- * using memcg's page ownership for attributing writeback IOs, and every
+ * using memcg&#39;s page ownership for attributing writeback IOs, and every
  * memcg - blkcg combination can be served by its own wb by assigning a
  * dedicated wb to each memcg, which enables isolation across different
  * cgroups and propagation of IO back pressure down from the IO layer upto
@@ -146,11 +146,11 @@ struct bdi_writeback {
 	unsigned long dirtied_stamp;
 	unsigned long written_stamp;	/* pages written at bw_time_stamp */
 	unsigned long write_bandwidth;	/* the estimated write bandwidth */
-	unsigned long avg_write_bandwidth; /* further smoothed write bw, > 0 */
+	unsigned long avg_write_bandwidth; /* further smoothed write bw, &gt; 0 */
 
 	/*
 	 * The base dirty throttle rate, re-calculated on every 200ms.
-	 * All the bdi tasks' dirty rate will be curbed under it.
+	 * All the bdi tasks&#39; dirty rate will be curbed under it.
 	 * @dirty_ratelimit tracks the estimated @balanced_dirty_ratelimit
 	 * in small steps and is much more smooth/stable than the latter.
 	 */
@@ -161,21 +161,21 @@ struct bdi_writeback {
 	int dirty_exceeded;
 	enum wb_reason start_all_reason;
 
-	spinlock_t work_lock;		/* protects work_list & dwork scheduling */
+	spinlock_t work_lock;		/* protects work_list &amp; dwork scheduling */
 	struct list_head work_list;
 	struct delayed_work dwork;	/* work item used for writeback */
 
 	unsigned long dirty_sleep;	/* last wait */
 
-	struct list_head bdi_node;	/* anchored at bdi->wb_list */
+	struct list_head bdi_node;	/* anchored at bdi-&gt;wb_list */
 
 #ifdef CONFIG_CGROUP_WRITEBACK
-	struct percpu_ref refcnt;	/* used only for !root wb's */
+	struct percpu_ref refcnt;	/* used only for !root wb&#39;s */
 	struct fprop_local_percpu memcg_completions;
 	struct cgroup_subsys_state *memcg_css; /* the associated memcg */
 	struct cgroup_subsys_state *blkcg_css; /* and blkcg */
-	struct list_head memcg_node;	/* anchored at memcg->cgwb_list */
-	struct list_head blkcg_node;	/* anchored at blkcg->cgwb_list */
+	struct list_head memcg_node;	/* anchored at memcg-&gt;cgwb_list */
+	struct list_head blkcg_node;	/* anchored at blkcg-&gt;cgwb_list */
 
 	union {
 		struct work_struct release_work;
@@ -191,7 +191,7 @@ struct bdi_writeback {
 
 ```mermaid
 graph TD
-bdi_init --> cgwb_bdi_init --> wb_init
+bdi_init --&gt; cgwb_bdi_init --&gt; wb_init
 ```
 
 #### 部分字段说明
@@ -275,9 +275,9 @@ struct writeback_control {
 	long pages_skipped;		/* Pages which were not written */
 
 	/*
-	 * For a_ops->writepages(): if start or end are non-zero then this is
+	 * For a_ops-&gt;writepages(): if start or end are non-zero then this is
 	 * a hint that the filesystem need only write out the pages inside that
-	 * byterange.  The byte at `end' is included in the writeout request.
+	 * byterange.  The byte at `end&#39; is included in the writeout request.
 	 */
 	loff_t range_start;
 	loff_t range_end;
@@ -350,11 +350,11 @@ struct writeback_control {
 
 ### 初始化
 
-`wb_init` 函数会对 `wb->dwork` 赋值，注册实际的工作函数 `wb_workfn`
+`wb_init` 函数会对 `wb-&gt;dwork` 赋值，注册实际的工作函数 `wb_workfn`
 
 由于这是个 `delayed_work`，注册的工作函数不会立即执行，需要后续利用 `mod_delayed_work` 来修改 `delayed_work` 内置的定时器时间来唤醒
 
-![wb_init 调用图](wb_init.png "wb_init 调用图")
+![wb_init 调用图](wb_init.png &#34;wb_init 调用图&#34;)
 
 (P.S. 图片中函数开头为 `cg` 代表和 `cgroup` 相关，同一层级多个同名函数和宏定义的编译控制有关)
 
@@ -364,7 +364,7 @@ struct writeback_control {
 
 虽然 `dwork` 是个 `delayed_work`，但是我们可以在调用 `mod_delayed_work` 将延时设置为 0，来立即唤醒回写线程
 
-![dwork 调用图](dwork_callers.png "dwork 调用图")
+![dwork 调用图](dwork_callers.png &#34;dwork 调用图&#34;)
 
 #### `wb_wakeup`
 
@@ -374,10 +374,10 @@ struct writeback_control {
 // fs/fs-writeback.c
 static void wb_wakeup(struct bdi_writeback *wb)
 {
-	spin_lock_bh(&wb->work_lock);
-	if (test_bit(WB_registered, &wb->state))
-		mod_delayed_work(bdi_wq, &wb->dwork, 0);
-	spin_unlock_bh(&wb->work_lock);
+	spin_lock_bh(&amp;wb-&gt;work_lock);
+	if (test_bit(WB_registered, &amp;wb-&gt;state))
+		mod_delayed_work(bdi_wq, &amp;wb-&gt;dwork, 0);
+	spin_unlock_bh(&amp;wb-&gt;work_lock);
 }
 ```
 
@@ -392,18 +392,18 @@ static void wb_queue_work(struct bdi_writeback *wb,
 {
 	trace_writeback_queue(wb, work);
 
-	if (work->done)
-		atomic_inc(&work->done->cnt);
+	if (work-&gt;done)
+		atomic_inc(&amp;work-&gt;done-&gt;cnt);
 
-	spin_lock_bh(&wb->work_lock);
+	spin_lock_bh(&amp;wb-&gt;work_lock);
 
-	if (test_bit(WB_registered, &wb->state)) {
-		list_add_tail(&work->list, &wb->work_list);
-		mod_delayed_work(bdi_wq, &wb->dwork, 0);
+	if (test_bit(WB_registered, &amp;wb-&gt;state)) {
+		list_add_tail(&amp;work-&gt;list, &amp;wb-&gt;work_list);
+		mod_delayed_work(bdi_wq, &amp;wb-&gt;dwork, 0);
 	} else
 		finish_writeback_work(wb, work);
 
-	spin_unlock_bh(&wb->work_lock);
+	spin_unlock_bh(&amp;wb-&gt;work_lock);
 }
 ```
 
@@ -414,7 +414,7 @@ static void wb_queue_work(struct bdi_writeback *wb,
 ```c
 // mm/page-writeback.c
 /*
- * The interval between `kupdate'-style writebacks
+ * The interval between `kupdate&#39;-style writebacks
  */
 unsigned int dirty_writeback_interval = 5 * 100; /* centiseconds */
 
@@ -427,11 +427,11 @@ EXPORT_SYMBOL_GPL(dirty_writeback_interval);
  * This function is used when the first inode for this wb is marked dirty. It
  * wakes-up the corresponding bdi thread which should then take care of the
  * periodic background write-out of dirty inodes. Since the write-out would
- * starts only 'dirty_writeback_interval' centisecs from now anyway, we just
+ * starts only &#39;dirty_writeback_interval&#39; centisecs from now anyway, we just
  * set up a timer which wakes the bdi thread up later.
  *
- * Note, we wouldn't bother setting up the timer, but this function is on the
- * fast-path (used by '__mark_inode_dirty()'), so we save few context switches
+ * Note, we wouldn&#39;t bother setting up the timer, but this function is on the
+ * fast-path (used by &#39;__mark_inode_dirty()&#39;), so we save few context switches
  * by delaying the wake-up.
  *
  * We have to be careful not to postpone flush work if it is scheduled for
@@ -442,16 +442,16 @@ void wb_wakeup_delayed(struct bdi_writeback *wb)
 	unsigned long timeout;
 
 	timeout = msecs_to_jiffies(dirty_writeback_interval * 10);
-	spin_lock_bh(&wb->work_lock);
-	if (test_bit(WB_registered, &wb->state))
-		queue_delayed_work(bdi_wq, &wb->dwork, timeout);
-	spin_unlock_bh(&wb->work_lock);
+	spin_lock_bh(&amp;wb-&gt;work_lock);
+	if (test_bit(WB_registered, &amp;wb-&gt;state))
+		queue_delayed_work(bdi_wq, &amp;wb-&gt;dwork, timeout);
+	spin_unlock_bh(&amp;wb-&gt;work_lock);
 }
 ```
 
 `wb_wakeup_delayed` 使用 5s 作为时间间隔，当调用 `wb_wakeup_delayed` 后，回写线程会在 5s 后被唤醒
 
-![wb_wakeup_delayed 调用图](wb_wakeup_delayed.png "wb_wakeup_delayed 调用图")
+![wb_wakeup_delayed 调用图](wb_wakeup_delayed.png &#34;wb_wakeup_delayed 调用图&#34;)
 
 定时唤醒只会在两种情形下被调用：
 
@@ -462,14 +462,14 @@ void wb_wakeup_delayed(struct bdi_writeback *wb)
 
 ### 释放销毁
 
-![release_bdi 调用图](release_bdi.png "release_bdi 调用图")
+![release_bdi 调用图](release_bdi.png &#34;release_bdi 调用图&#34;)
 
 当需要对整个 `backing_dev_info` 结构释放时，也会立即唤醒内核回写线程，并且会下刷现有的所有工作
 
 ```mermaid
 graph TD
-release_bdi --> bdi_unregister --> wb_shutdown
-release_bdi ---> wb_exit
+release_bdi --&gt; bdi_unregister --&gt; wb_shutdown
+release_bdi ---&gt; wb_exit
 ```
 
 ## 细节分析
@@ -486,15 +486,15 @@ release_bdi ---> wb_exit
 /**
  * write_cache_pages - walk the list of dirty pages of the given address space and write all of them.
  * @mapping: address space structure to write
- * @wbc: subtract the number of written pages from *@wbc->nr_to_write
+ * @wbc: subtract the number of written pages from *@wbc-&gt;nr_to_write
  * @writepage: function called for each page
  * @data: data passed to writepage function
  *
  * If a page is already under I/O, write_cache_pages() skips it, even
- * if it's dirty.  This is desirable behaviour for memory-cleaning writeback,
+ * if it&#39;s dirty.  This is desirable behaviour for memory-cleaning writeback,
  * but it is INCORRECT for data-integrity system calls such as fsync().  fsync()
  * and msync() need to guarantee that all the data which was dirty at the time
- * the call was made get new I/O started against them.  If wbc->sync_mode is
+ * the call was made get new I/O started against them.  If wbc-&gt;sync_mode is
  * WB_SYNC_ALL then we were called for data integrity and we must wait for
  * existing IO to complete.
  *
@@ -509,7 +509,7 @@ release_bdi ---> wb_exit
  * pages in PageWriteback to aggregate IO until write_cache_pages() returns,
  * we do not loop back to the start of the file. Doing so causes a page
  * lock/page writeback access order inversion - we should only ever lock
- * multiple pages in ascending page->index order, and looping back to the start
+ * multiple pages in ascending page-&gt;index order, and looping back to the start
  * of the file violates that rule and causes deadlocks.
  *
  * Return: %0 on success, negative error code otherwise
@@ -530,36 +530,36 @@ int write_cache_pages(struct address_space *mapping,
 	int range_whole = 0;
 	xa_mark_t tag;
 
-	pagevec_init(&pvec);
-	if (wbc->range_cyclic) {
-		writeback_index = mapping->writeback_index; /* prev offset */
+	pagevec_init(&amp;pvec);
+	if (wbc-&gt;range_cyclic) {
+		writeback_index = mapping-&gt;writeback_index; /* prev offset */
 		index = writeback_index;
 		end = -1;
 	} else {
-		index = wbc->range_start >> PAGE_SHIFT;
-		end = wbc->range_end >> PAGE_SHIFT;
-		if (wbc->range_start == 0 && wbc->range_end == LLONG_MAX)
+		index = wbc-&gt;range_start &gt;&gt; PAGE_SHIFT;
+		end = wbc-&gt;range_end &gt;&gt; PAGE_SHIFT;
+		if (wbc-&gt;range_start == 0 &amp;&amp; wbc-&gt;range_end == LLONG_MAX)
 			range_whole = 1;
 	}
-	if (wbc->sync_mode == WB_SYNC_ALL || wbc->tagged_writepages)
+	if (wbc-&gt;sync_mode == WB_SYNC_ALL || wbc-&gt;tagged_writepages)
 		tag = PAGECACHE_TAG_TOWRITE;
 	else
 		tag = PAGECACHE_TAG_DIRTY;
-	if (wbc->sync_mode == WB_SYNC_ALL || wbc->tagged_writepages)
+	if (wbc-&gt;sync_mode == WB_SYNC_ALL || wbc-&gt;tagged_writepages)
 		tag_pages_for_writeback(mapping, index, end);
 	done_index = index;
-	while (!done && (index <= end)) {
+	while (!done &amp;&amp; (index &lt;= end)) {
 		int i;
 
-		nr_pages = pagevec_lookup_range_tag(&pvec, mapping, &index, end,
+		nr_pages = pagevec_lookup_range_tag(&amp;pvec, mapping, &amp;index, end,
 				tag);
 		if (nr_pages == 0)
 			break;
 
-		for (i = 0; i < nr_pages; i++) {
+		for (i = 0; i &lt; nr_pages; i&#43;&#43;) {
 			struct page *page = pvec.pages[i];
 
-			done_index = page->index;
+			done_index = page-&gt;index;
 
 			lock_page(page);
 
@@ -571,7 +571,7 @@ int write_cache_pages(struct address_space *mapping,
 			 * even if there is now a new, dirty page at the same
 			 * pagecache address.
 			 */
-			if (unlikely(page->mapping != mapping)) {
+			if (unlikely(page-&gt;mapping != mapping)) {
 continue_unlock:
 				unlock_page(page);
 				continue;
@@ -583,7 +583,7 @@ continue_unlock:
 			}
 
 			if (PageWriteback(page)) {
-				if (wbc->sync_mode != WB_SYNC_NONE)
+				if (wbc-&gt;sync_mode != WB_SYNC_NONE)
 					wait_on_page_writeback(page);
 				else
 					goto continue_unlock;
@@ -593,14 +593,14 @@ continue_unlock:
 			if (!clear_page_dirty_for_io(page))
 				goto continue_unlock;
 
-			trace_wbc_writepage(wbc, inode_to_bdi(mapping->host));
+			trace_wbc_writepage(wbc, inode_to_bdi(mapping-&gt;host));
 			error = (*writepage)(page, wbc, data);
 			if (unlikely(error)) {
 				/*
 				 * Handle errors according to the type of
-				 * writeback. There's no need to continue for
+				 * writeback. There&#39;s no need to continue for
 				 * background writeback. Just push done_index
-				 * past this page so media errors won't choke
+				 * past this page so media errors won&#39;t choke
 				 * writeout for the entire file. For integrity
 				 * writeback, we must process the entire dirty
 				 * set regardless of errors because the fs may
@@ -611,9 +611,9 @@ continue_unlock:
 				if (error == AOP_WRITEPAGE_ACTIVATE) {
 					unlock_page(page);
 					error = 0;
-				} else if (wbc->sync_mode != WB_SYNC_ALL) {
+				} else if (wbc-&gt;sync_mode != WB_SYNC_ALL) {
 					ret = error;
-					done_index = page->index + 1;
+					done_index = page-&gt;index &#43; 1;
 					done = 1;
 					break;
 				}
@@ -627,13 +627,13 @@ continue_unlock:
 			 * keep going until we have written all the pages
 			 * we tagged for writeback prior to entering this loop.
 			 */
-			if (--wbc->nr_to_write <= 0 &&
-			    wbc->sync_mode == WB_SYNC_NONE) {
+			if (--wbc-&gt;nr_to_write &lt;= 0 &amp;&amp;
+			    wbc-&gt;sync_mode == WB_SYNC_NONE) {
 				done = 1;
 				break;
 			}
 		}
-		pagevec_release(&pvec);
+		pagevec_release(&amp;pvec);
 		cond_resched();
 	}
 
@@ -642,10 +642,10 @@ continue_unlock:
 	 * back the index back to the start of the file for the next
 	 * time we are called.
 	 */
-	if (wbc->range_cyclic && !done)
+	if (wbc-&gt;range_cyclic &amp;&amp; !done)
 		done_index = 0;
-	if (wbc->range_cyclic || (range_whole && wbc->nr_to_write > 0))
-		mapping->writeback_index = done_index;
+	if (wbc-&gt;range_cyclic || (range_whole &amp;&amp; wbc-&gt;nr_to_write &gt; 0))
+		mapping-&gt;writeback_index = done_index;
 
 	return ret;
 }
@@ -668,18 +668,18 @@ static long writeback_chunk_size(struct bdi_writeback *wb,
 	 * The intended call sequence for WB_SYNC_ALL writeback is:
 	 *
 	 *      wb_writeback()
-	 *          writeback_sb_inodes()       <== called only once
-	 *              write_cache_pages()     <== called once for each inode
+	 *          writeback_sb_inodes()       &lt;== called only once
+	 *              write_cache_pages()     &lt;== called once for each inode
 	 *                   (quickly) tag currently dirty pages
 	 *                   (maybe slowly) sync all tagged pages
 	 */
-	if (work->sync_mode == WB_SYNC_ALL || work->tagged_writepages)
+	if (work-&gt;sync_mode == WB_SYNC_ALL || work-&gt;tagged_writepages)
 		pages = LONG_MAX;
 	else {
-		pages = min(wb->avg_write_bandwidth / 2,
+		pages = min(wb-&gt;avg_write_bandwidth / 2,
 			    global_wb_domain.dirty_limit / DIRTY_SCOPE);
-		pages = min(pages, work->nr_pages);
-		pages = round_down(pages + MIN_WRITEBACK_PAGES,
+		pages = min(pages, work-&gt;nr_pages);
+		pages = round_down(pages &#43; MIN_WRITEBACK_PAGES,
 				   MIN_WRITEBACK_PAGES);
 	}
 
@@ -693,19 +693,19 @@ static long writeback_chunk_size(struct bdi_writeback *wb,
 
 ```commit
 [PATCH] writeback: fix range handling
-When a writeback_control's `start' and `end' fields are used to
+When a writeback_control&#39;s `start&#39; and `end&#39; fields are used to
 indicate a one-byte-range starting at file offset zero, the required
-values of .start=0,.end=0 mean that the ->writepages() implementation
+values of .start=0,.end=0 mean that the -&gt;writepages() implementation
 has no way of telling that it is being asked to perform a range
-request.  Because we're currently overloading (start == 0 && end == 0)
-to mean "this is not a write-a-range request".
+request.  Because we&#39;re currently overloading (start == 0 &amp;&amp; end == 0)
+to mean &#34;this is not a write-a-range request&#34;.
 
 To make all this sane, the patch changes range of writeback_control.
 
-So caller does: If it is calling ->writepages() to write pages, it
+So caller does: If it is calling -&gt;writepages() to write pages, it
 sets range (range_start/end or range_cyclic) always.
 
-And if range_cyclic is true, ->writepages() thinks the range is
+And if range_cyclic is true, -&gt;writepages() thinks the range is
 cyclic, otherwise it just uses range_start and range_end.
 
 This patch does,
@@ -713,27 +713,27 @@ This patch does,
     - Add LLONG_MAX, LLONG_MIN, ULLONG_MAX to include/linux/kernel.h
       -1 is usually ok for range_end (type is long long). But, if someone did,
 
-		range_end += val;		range_end is "val - 1"
-		u64val = range_end >> bits;	u64val is "~(0ULL)"
+		range_end &#43;= val;		range_end is &#34;val - 1&#34;
+		u64val = range_end &gt;&gt; bits;	u64val is &#34;~(0ULL)&#34;
 
       or something, they are wrong. So, this adds LLONG_MAX to avoid nasty
       things, and uses LLONG_MAX for range_end.
 
-    - All callers of ->writepages() sets range_start/end or range_cyclic.
+    - All callers of -&gt;writepages() sets range_start/end or range_cyclic.
 
-    - Fix updates of ->writeback_index. It seems already bit strange.
+    - Fix updates of -&gt;writeback_index. It seems already bit strange.
       If it starts at 0 and ended by check of nr_to_write, this last
       index may reduce chance to scan end of file.  So, this updates
-      ->writeback_index only if range_cyclic is true or whole-file is
+      -&gt;writeback_index only if range_cyclic is true or whole-file is
       scanned.
 
-Signed-off-by: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
-Cc: Nathan Scott <nathans@sgi.com>
-Cc: Anton Altaparmakov <aia21@cantab.net>
-Cc: Steven French <sfrench@us.ibm.com>
-Cc: "Vladimir V. Saveliev" <vs@namesys.com>
-Signed-off-by: Andrew Morton <akpm@osdl.org>
-Signed-off-by: Linus Torvalds <torvalds@osdl.org>
+Signed-off-by: OGAWA Hirofumi &lt;hirofumi@mail.parknet.co.jp&gt;
+Cc: Nathan Scott &lt;nathans@sgi.com&gt;
+Cc: Anton Altaparmakov &lt;aia21@cantab.net&gt;
+Cc: Steven French &lt;sfrench@us.ibm.com&gt;
+Cc: &#34;Vladimir V. Saveliev&#34; &lt;vs@namesys.com&gt;
+Signed-off-by: Andrew Morton &lt;akpm@osdl.org&gt;
+Signed-off-by: Linus Torvalds &lt;torvalds@osdl.org&gt;
 ```
 
 `range_cyclic` 和 `range_start/end` 互斥
@@ -743,21 +743,21 @@ Signed-off-by: Linus Torvalds <torvalds@osdl.org>
 
 ```mermaid
 graph TD
-do_writepages --> writepages("mapping->a_ops->writepages()")
-do_writepages --> generic_writepages --> write_cache_pages
+do_writepages --&gt; writepages(&#34;mapping-&gt;a_ops-&gt;writepages()&#34;)
+do_writepages --&gt; generic_writepages --&gt; write_cache_pages
 ```
 
 结合实际代码，在 `mm/page-writeback.c` 的 `write_cache_pages` 函数中有以下片段
 
 ```c
-	if (wbc->range_cyclic) {
-		writeback_index = mapping->writeback_index; /* prev offset */
+	if (wbc-&gt;range_cyclic) {
+		writeback_index = mapping-&gt;writeback_index; /* prev offset */
 		index = writeback_index;
 		end = -1;
 	} else {
-		index = wbc->range_start >> PAGE_SHIFT;
-		end = wbc->range_end >> PAGE_SHIFT;
-		if (wbc->range_start == 0 && wbc->range_end == LLONG_MAX)
+		index = wbc-&gt;range_start &gt;&gt; PAGE_SHIFT;
+		end = wbc-&gt;range_end &gt;&gt; PAGE_SHIFT;
+		if (wbc-&gt;range_start == 0 &amp;&amp; wbc-&gt;range_end == LLONG_MAX)
 			range_whole = 1;
 	}
 
@@ -768,13 +768,13 @@ do_writepages --> generic_writepages --> write_cache_pages
 	 * back the index back to the start of the file for the next
 	 * time we are called.
 	 */
-	if (wbc->range_cyclic && !done)
+	if (wbc-&gt;range_cyclic &amp;&amp; !done)
 		done_index = 0;
-	if (wbc->range_cyclic || (range_whole && wbc->nr_to_write > 0))
-		mapping->writeback_index = done_index;
+	if (wbc-&gt;range_cyclic || (range_whole &amp;&amp; wbc-&gt;nr_to_write &gt; 0))
+		mapping-&gt;writeback_index = done_index;
 ```
 
-`range_cyclic` 开启后会使用 `mapping->writeback_index` 作为本次回写的起始地址，并会在完成本次回写流程（回写页数限制或者到达文件末尾）后更新 `mapping->writeback_index`
+`range_cyclic` 开启后会使用 `mapping-&gt;writeback_index` 作为本次回写的起始地址，并会在完成本次回写流程（回写页数限制或者到达文件末尾）后更新 `mapping-&gt;writeback_index`
 
 ### 定期回写
 
@@ -792,12 +792,12 @@ static long wb_check_old_data_flush(struct bdi_writeback *wb)
 	if (!dirty_writeback_interval)
 		return 0;
 
-	expired = wb->last_old_flush +
+	expired = wb-&gt;last_old_flush &#43;
 			msecs_to_jiffies(dirty_writeback_interval * 10);
 	if (time_before(jiffies, expired))
 		return 0;
 
-	wb->last_old_flush = jiffies;
+	wb-&gt;last_old_flush = jiffies;
 	nr_pages = get_nr_dirty_pages();
 
 	if (nr_pages) {
@@ -810,7 +810,7 @@ static long wb_check_old_data_flush(struct bdi_writeback *wb)
 			.reason		= WB_REASON_PERIODIC,
 		};
 
-		return wb_writeback(wb, &work);
+		return wb_writeback(wb, &amp;work);
 	}
 
 	return 0;
@@ -819,14 +819,14 @@ static long wb_check_old_data_flush(struct bdi_writeback *wb)
 
 ```mermaid
 graph TD
-wb_wakeup -.-> wb_workfn -->|通常情况| wb_do_writeback --> wb_check_old_data_flush
+wb_wakeup -.-&gt; wb_workfn --&gt;|通常情况| wb_do_writeback --&gt; wb_check_old_data_flush
 ```
 
 首先要保证当前时间在上次定期回写的 5s （和定期唤醒的时间间隔一致）后，并且当前存在脏页，才会生成一次定期回写的任务，也就是说每 5s 内最多触发一次定期回写
 
 生成的回写任务交给 `fs/fs-writeback.c` 的 `wb_writeback` 函数处理
 
-并且定期回写属于一种后台回写，优先级较低，只有在 `wb->work_list` 为空时才会执行
+并且定期回写属于一种后台回写，优先级较低，只有在 `wb-&gt;work_list` 为空时才会执行
 
 `wb_writeback` 执行定期回写时只会选择在至脏时间在当前时间 30s 之前的 `inode` 的所有脏页进行回写
 
@@ -854,8 +854,8 @@ int vm_dirty_ratio = 20;
 
     ```mermaid
 	graph TD
-	generic_perform_write --> balance_dirty_pages_ratelimited --> balance_dirty_pages --> wb_start_background_writeback --> wb_wakeup
-	wb_wakeup -.-> wb_workfn -->|通常情况| wb_do_writeback -->|wb_over_bg_thresh| wb_check_background_flush
+	generic_perform_write --&gt; balance_dirty_pages_ratelimited --&gt; balance_dirty_pages --&gt; wb_start_background_writeback --&gt; wb_wakeup
+	wb_wakeup -.-&gt; wb_workfn --&gt;|通常情况| wb_do_writeback --&gt;|wb_over_bg_thresh| wb_check_background_flush
     ```
 
     当用户 `write` 调用使用 `generic_perform_write` 来写 page cache 时，会调用 `balance_dirty_pages_ratelimited` 来检查脏页率，当脏页率超过 10% 就会调用 `balance_dirty_pages` 来唤醒 `wb_workfn` 来进行下刷脏页，此时并不会阻塞当前的 `write` 过程
@@ -879,10 +879,10 @@ int vm_dirty_ratio = 20;
  * writeback runs on all devices in parallel. Then we sync all inodes reliably
  * which effectively also waits for all flusher threads to finish doing
  * writeback. At this point all data is on disk so metadata should be stable
- * and we tell filesystems to sync their metadata via ->sync_fs() calls.
+ * and we tell filesystems to sync their metadata via -&gt;sync_fs() calls.
  * Finally, we writeout all block devices because some filesystems (e.g. ext2)
  * just write metadata (such as inodes or bitmaps) to block device page cache
- * and do not sync it on their own in ->sync_fs().
+ * and do not sync it on their own in -&gt;sync_fs().
  */
 void ksys_sync(void)
 {
@@ -893,8 +893,8 @@ void ksys_sync(void)
 	// 下发所有 inode 的回写任务
 	iterate_supers(sync_inodes_one_sb, NULL);
 	// 调用 sync_fs() 同步文件系统的元数据
-	iterate_supers(sync_fs_one_sb, &nowait);
-	iterate_supers(sync_fs_one_sb, &wait);
+	iterate_supers(sync_fs_one_sb, &amp;nowait);
+	iterate_supers(sync_fs_one_sb, &amp;wait);
 	// 回写块设备的 page cache
 	iterate_bdevs(fdatawrite_one_bdev, NULL);
 	iterate_bdevs(fdatawait_one_bdev, NULL);
@@ -922,7 +922,7 @@ SYSCALL_DEFINE0(sync)
 ```c
 // fs/sync.c
 /**
- * vfs_fsync_range - helper to sync a range of data & metadata to disk
+ * vfs_fsync_range - helper to sync a range of data &amp; metadata to disk
  * @file:		file to sync
  * @start:		offset in bytes of the beginning of data range to sync
  * @end:		offset in bytes of the end of data range (inclusive)
@@ -934,13 +934,13 @@ SYSCALL_DEFINE0(sync)
  */
 int vfs_fsync_range(struct file *file, loff_t start, loff_t end, int datasync)
 {
-	struct inode *inode = file->f_mapping->host;
+	struct inode *inode = file-&gt;f_mapping-&gt;host;
 
-	if (!file->f_op->fsync)
+	if (!file-&gt;f_op-&gt;fsync)
 		return -EINVAL;
-	if (!datasync && (inode->i_state & I_DIRTY_TIME))
+	if (!datasync &amp;&amp; (inode-&gt;i_state &amp; I_DIRTY_TIME))
 		mark_inode_dirty_sync(inode);
-	return file->f_op->fsync(file, start, end, datasync);
+	return file-&gt;f_op-&gt;fsync(file, start, end, datasync);
 }
 EXPORT_SYMBOL(vfs_fsync_range);
 
@@ -981,7 +981,7 @@ SYSCALL_DEFINE1(fdatasync, unsigned int, fd)
 }
 ```
 
-`fsync` 和 `fdatasync` 会调用文件系统注册的 `f_op->fsync()` 函数进行脏页的下刷。很多文件系统会使用或者参考通用的 `generic_file_fsync` 来实现，这里针对 `__generic_file_fsync` 进行分析
+`fsync` 和 `fdatasync` 会调用文件系统注册的 `f_op-&gt;fsync()` 函数进行脏页的下刷。很多文件系统会使用或者参考通用的 `generic_file_fsync` 来实现，这里针对 `__generic_file_fsync` 进行分析
 
 ```c
 // fs/libfs.c
@@ -1000,7 +1000,7 @@ SYSCALL_DEFINE1(fdatasync, unsigned int, fd)
 int __generic_file_fsync(struct file *file, loff_t start, loff_t end,
 				 int datasync)
 {
-	struct inode *inode = file->f_mapping->host;
+	struct inode *inode = file-&gt;f_mapping-&gt;host;
 	int err;
 	int ret;
 
@@ -1009,10 +1009,10 @@ int __generic_file_fsync(struct file *file, loff_t start, loff_t end,
 		return err;
 
 	inode_lock(inode);
-	ret = sync_mapping_buffers(inode->i_mapping);
-	if (!(inode->i_state & I_DIRTY_ALL))
+	ret = sync_mapping_buffers(inode-&gt;i_mapping);
+	if (!(inode-&gt;i_state &amp; I_DIRTY_ALL))
 		goto out;
-	if (datasync && !(inode->i_state & I_DIRTY_DATASYNC))
+	if (datasync &amp;&amp; !(inode-&gt;i_state &amp; I_DIRTY_DATASYNC))
 		goto out;
 
 	err = sync_inode_metadata(inode, 1);
@@ -1042,13 +1042,13 @@ EXPORT_SYMBOL(__generic_file_fsync);
 int generic_file_fsync(struct file *file, loff_t start, loff_t end,
 		       int datasync)
 {
-	struct inode *inode = file->f_mapping->host;
+	struct inode *inode = file-&gt;f_mapping-&gt;host;
 	int err;
 
 	err = __generic_file_fsync(file, start, end, datasync);
 	if (err)
 		return err;
-	return blkdev_issue_flush(inode->i_sb->s_bdev, GFP_KERNEL, NULL);
+	return blkdev_issue_flush(inode-&gt;i_sb-&gt;s_bdev, GFP_KERNEL, NULL);
 }
 EXPORT_SYMBOL(generic_file_fsync);
 ```
@@ -1063,7 +1063,7 @@ EXPORT_SYMBOL(generic_file_fsync);
 
 ```mermaid
 graph LR
-write系统调用 --> ksys_write --> vfs_write --> __vfs_write -->|ext4,f2fs等文件系统| new_sync_write
+write系统调用 --&gt; ksys_write --&gt; vfs_write --&gt; __vfs_write --&gt;|ext4,f2fs等文件系统| new_sync_write
 ```
 
 在 `ext4`、`f2fs` 等文件系统 `write` 系统调用会使用 `new_sync_write` 来调用实际文件系统注册的 `read_iter` 函数
@@ -1072,9 +1072,9 @@ write系统调用 --> ksys_write --> vfs_write --> __vfs_write -->|ext4,f2fs等�
 
 ```mermaid
 graph TD
-new_sync_write --> init_sync_kiocb --> iocb_flags
-new_sync_write --> iov_iter_init
-new_sync_write --> call_write_iter
+new_sync_write --&gt; init_sync_kiocb --&gt; iocb_flags
+new_sync_write --&gt; iov_iter_init
+new_sync_write --&gt; call_write_iter
 ```
 
 和之前一样，大多数文件系统会直接使用或者参考通用的 `generic_file_write_iter` 来实现 `read_iter` 函数，这里针对 `generic_file_write_iter` 进行分析
@@ -1096,17 +1096,17 @@ new_sync_write --> call_write_iter
  */
 ssize_t generic_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 {
-	struct file *file = iocb->ki_filp;
-	struct inode *inode = file->f_mapping->host;
+	struct file *file = iocb-&gt;ki_filp;
+	struct inode *inode = file-&gt;f_mapping-&gt;host;
 	ssize_t ret;
 
 	inode_lock(inode);
 	ret = generic_write_checks(iocb, from);
-	if (ret > 0)
+	if (ret &gt; 0)
 		ret = __generic_file_write_iter(iocb, from);
 	inode_unlock(inode);
 
-	if (ret > 0)
+	if (ret &gt; 0)
 		ret = generic_write_sync(iocb, ret);
 	return ret;
 }
@@ -1124,10 +1124,10 @@ EXPORT_SYMBOL(generic_file_write_iter);
  */
 static inline ssize_t generic_write_sync(struct kiocb *iocb, ssize_t count)
 {
-	if (iocb->ki_flags & IOCB_DSYNC) {
-		int ret = vfs_fsync_range(iocb->ki_filp,
-				iocb->ki_pos - count, iocb->ki_pos - 1,
-				(iocb->ki_flags & IOCB_SYNC) ? 0 : 1);
+	if (iocb-&gt;ki_flags &amp; IOCB_DSYNC) {
+		int ret = vfs_fsync_range(iocb-&gt;ki_filp,
+				iocb-&gt;ki_pos - count, iocb-&gt;ki_pos - 1,
+				(iocb-&gt;ki_flags &amp; IOCB_SYNC) ? 0 : 1);
 		if (ret)
 			return ret;
 	}

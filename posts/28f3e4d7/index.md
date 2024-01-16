@@ -19,7 +19,7 @@ Python 3.3 之后，Python 自带了 `venv` 工具，是内置的一个模块，
 
 ```bash
 # 创建环境
-python -m venv <env_dir>
+python -m venv &lt;env_dir&gt;
 # 通常在当前目录下创建 .venv 目录作为虚拟环境
 python -m venv .venv
 
@@ -67,16 +67,16 @@ pip install virtualenvwrapper-win
 
 ```bash
 # 创建环境
-mkvirtualenv <env_name>
+mkvirtualenv &lt;env_name&gt;
 
 # 激活环境（仍然不太兼容最新的 PowerShell）
-workon <env_name>
+workon &lt;env_name&gt;
 
 # 退出环境
 deactivate
 
 # 删除环境
-rmvirtualenv <env_name>
+rmvirtualenv &lt;env_name&gt;
 ```
 
 ### `virtualenvwrapper` 包管理
@@ -96,26 +96,26 @@ rmvirtualenv <env_name>
 
 ```bash
 # 创建环境
-conda create -n <env_name> [python=<python_version>] [package_name]
+conda create -n &lt;env_name&gt; [python=&lt;python_version&gt;] [package_name]
 
 # 激活环境
-conda activate <env_name>
+conda activate &lt;env_name&gt;
 
 # 退出环境
 conda deactivate
 
 # 删除环境
-conda remove -n <env_name> --all
+conda remove -n &lt;env_name&gt; --all
 ```
 
 ### `conda` 包管理
 
 ```bash
-conda install <package_name>
+conda install &lt;package_name&gt;
 
 conda list
 
-conda remove <package_name>
+conda remove &lt;package_name&gt;
 ```
 
 ## 总结

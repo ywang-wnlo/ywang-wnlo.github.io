@@ -10,7 +10,7 @@
 <meta name="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法" /><meta name="keywords" content='日常踩坑, RocksDB, ZNS, QEMU, grub' /><meta itemprop="name" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
 <meta itemprop="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法"><meta itemprop="datePublished" content="2022-11-22T22:54:45+08:00" />
 <meta itemprop="dateModified" content="2023-09-18T19:13:39+08:00" />
-<meta itemprop="wordCount" content="1680">
+<meta itemprop="wordCount" content="1699">
 <meta itemprop="keywords" content="日常踩坑,RocksDB,ZNS,QEMU,grub," /><meta property="og:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用" />
 <meta property="og:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/b8506868\/"
-    },"genre": "posts","keywords": "日常踩坑, RocksDB, ZNS, QEMU, grub","wordcount":  1680 ,
+    },"genre": "posts","keywords": "日常踩坑, RocksDB, ZNS, QEMU, grub","wordcount":  1699 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/b8506868\/","datePublished": "2022-11-22T22:54:45+08:00","dateModified": "2023-09-18T19:13:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2022-11-22 22:54:45"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-22">2022-11-22</time></span>&nbsp;<span title="更新于 2023-09-18 19:13:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-18">2023-09-18</time></span>&nbsp;<span title="1680 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category" title="分类 - 测试"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div><div class="post-meta-line"><span title="发布于 2022-11-22 22:54:45"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-22">2022-11-22</time></span>&nbsp;<span title="更新于 2023-09-18 19:13:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-18">2023-09-18</time></span>&nbsp;<span title="1699 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -208,15 +202,15 @@
         <div class="admonition-content">本文最后更新于 2023-09-18，文中内容可能已过时。</div>
       </div>
     </div><p>本文主要记录自己在利用 <a href="https://github.com/facebook/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">RocksDB</a> + <a href="https://github.com/westerndigitalcorporation/zenfs"target="_blank" rel="external nofollow noopener noreferrer">ZenFS</a> 测试 <a href="https://zonedstorage.io/docs/introduction/zns"target="_blank" rel="external nofollow noopener noreferrer">ZNS</a> 过程中遇到的一些问题以及相应的解决办法</p>
-<h2 id="配置-zns-环境">配置 ZNS 环境</h2>
-<p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS 设备类型是基于闪存的 SSD。但是 ZNS SSD 目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
-<h3 id="配置-femu">配置 FEMU</h3>
-<p>官网给了 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#zoned-block-device-emulation-with-null_blk"target="_blank" rel="external nofollow noopener noreferrer">null_blk</a> 以及 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#nvme-zoned-namespace-device-emulation-with-qemu"target="_blank" rel="external nofollow noopener noreferrer">QEMU</a> 的配置方法，但是个人对 <a href="https://github.com/vtess/FEMU"target="_blank" rel="external nofollow noopener noreferrer">FEMU</a> 比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用 FEMU 模拟 ZNS 搭建环境</p>
+<h2 id="配置-zns-环境" class="heading-element">
+  <a href="#%e9%85%8d%e7%bd%ae-zns-%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置 ZNS 环境</h2><p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS 设备类型是基于闪存的 SSD。但是 ZNS SSD 目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
+<h3 id="配置-femu" class="heading-element">
+  <a href="#%e9%85%8d%e7%bd%ae-femu" class="heading-mark"></a>配置 FEMU</h3><p>官网给了 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#zoned-block-device-emulation-with-null_blk"target="_blank" rel="external nofollow noopener noreferrer">null_blk</a> 以及 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#nvme-zoned-namespace-device-emulation-with-qemu"target="_blank" rel="external nofollow noopener noreferrer">QEMU</a> 的配置方法，但是个人对 <a href="https://github.com/vtess/FEMU"target="_blank" rel="external nofollow noopener noreferrer">FEMU</a> 比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用 FEMU 模拟 ZNS 搭建环境</p>
 <p>FEMU 的环境搭建比较简单，参考其 <a href="https://github.com/vtess/FEMU#installation"target="_blank" rel="external nofollow noopener noreferrer">官方仓库 README</a> 操作即可</p>
 <p><strong>容易踩坑：</strong> 但是需要注意 ZNS 对 Linux 内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu 22.04 LTS。
 不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code> 安装内核用户头文件过程中）存在一定的风险性</p>
-<h3 id="qemu-制作和安装系统镜像">QEMU 制作和安装系统镜像</h3>
-<div class="highlight" id="id-1"><div class="chroma">
+<h3 id="qemu-制作和安装系统镜像" class="heading-element">
+  <a href="#qemu-%e5%88%b6%e4%bd%9c%e5%92%8c%e5%ae%89%e8%a3%85%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f" class="heading-mark"></a>QEMU 制作和安装系统镜像</h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -307,10 +301,10 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 举例</span>
 </span></span><span class="line"><span class="cl">qemu-system-x86_64 -enable-kvm -cpu host -smp<span class="o">=</span><span class="m">16</span> -m 4G -hda u22s.qcow2 -nographic</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="配置-rocksdb-环境">配置 RocksDB 环境</h2>
-<p><a href="https://github.com/facebook/rocksdb/blob/main/INSTALL.md"target="_blank" rel="external nofollow noopener noreferrer">RocksDB 官方仓库的 Wiki</a> 有较为详细的安装指导</p>
-<h3 id="环境以及依赖安装">环境以及依赖安装</h3>
-<p>以 Ubuntu 为例：</p>
+</div><h2 id="配置-rocksdb-环境" class="heading-element">
+  <a href="#%e9%85%8d%e7%bd%ae-rocksdb-%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置 RocksDB 环境</h2><p><a href="https://github.com/facebook/rocksdb/blob/main/INSTALL.md"target="_blank" rel="external nofollow noopener noreferrer">RocksDB 官方仓库的 Wiki</a> 有较为详细的安装指导</p>
+<h3 id="环境以及依赖安装" class="heading-element">
+  <a href="#%e7%8e%af%e5%a2%83%e4%bb%a5%e5%8f%8a%e4%be%9d%e8%b5%96%e5%ae%89%e8%a3%85" class="heading-mark"></a>环境以及依赖安装</h3><p>以 Ubuntu 为例：</p>
 <p><strong>容易踩坑：</strong> 一定要记得按照顺序来，先安装好所有依赖再编译</p>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -343,8 +337,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># sudo apt install liblz4-dev</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># sudo apt install libzstd-dev</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="编译-rocksdb-库以及测试工具">编译 RocksDB 库以及测试工具</h3>
-<p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
+</div><h3 id="编译-rocksdb-库以及测试工具" class="heading-element">
+  <a href="#%e7%bc%96%e8%af%91-rocksdb-%e5%ba%93%e4%bb%a5%e5%8f%8a%e6%b5%8b%e8%af%95%e5%b7%a5%e5%85%b7" class="heading-mark"></a>编译 RocksDB 库以及测试工具</h3><p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
 <p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考 <a href="/posts/4bc1e607/">这篇博文</a></p>
 <p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code> 即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
 <div class="highlight" id="id-7"><div class="chroma">
@@ -364,10 +358,10 @@
 </div>
 </div><p><strong>容易踩坑：</strong> 如果 <code>-j</code> 会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考 <a href="https://blog.csdn.net/weixin_44796670/article/details/121234446"target="_blank" rel="external nofollow noopener noreferrer">这篇博客</a> 利用 swap “增加”可用内存大小，或者限制下编译的并发度，例如 <code>-j8</code></p>
 <p>利用 <code>db_bench</code> 测试可以参考 <a href="https://github.com/facebook/rocksdb/wiki/Performance-Benchmarks"target="_blank" rel="external nofollow noopener noreferrer">官方测试</a> 的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"target="_blank" rel="external nofollow noopener noreferrer"><code>benchmark.sh</code></a> 来测试，当然也可以直接运行 <code>db_bench</code></p>
-<h2 id="配置-zenfs-环境">配置 ZenFS 环境</h2>
-<p><a href="https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md"target="_blank" rel="external nofollow noopener noreferrer">ZenFS 官方仓库</a>其实给了相应的指导，这里重新梳理下</p>
-<h3 id="安装-libzbd">安装 libzbd</h3>
-<div class="highlight" id="id-8"><div class="chroma">
+<h2 id="配置-zenfs-环境" class="heading-element">
+  <a href="#%e9%85%8d%e7%bd%ae-zenfs-%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置 ZenFS 环境</h2><p><a href="https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md"target="_blank" rel="external nofollow noopener noreferrer">ZenFS 官方仓库</a>其实给了相应的指导，这里重新梳理下</p>
+<h3 id="安装-libzbd" class="heading-element">
+  <a href="#%e5%ae%89%e8%a3%85-libzbd" class="heading-mark"></a>安装 libzbd</h3><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -408,8 +402,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 安装</span>
 </span></span><span class="line"><span class="cl">sudo make install</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="zenfs-插件编译">ZenFS 插件编译</h3>
-<p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
+</div><h3 id="zenfs-插件编译" class="heading-element">
+  <a href="#zenfs-%e6%8f%92%e4%bb%b6%e7%bc%96%e8%af%91" class="heading-mark"></a>ZenFS 插件编译</h3><p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
 <div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -454,10 +448,10 @@
 </span></span><span class="line"><span class="cl">make -j</span></span></code></pre></td></tr></table>
 </div>
 </div><p>至此所有测试需要的环境已经基本搭建好了</p>
-<h2 id="测试">测试</h2>
-<p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为 <code>nvme1n1</code></p>
-<h3 id="利用-zenfs-的测试脚本测试">利用 zenfs 的测试脚本测试</h3>
-<p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO 调度器，制作文件系统以及自动配置 RocksDB 参数，但是参数配置的不够合理，需要自行修改</p>
+<h2 id="测试" class="heading-element">
+  <a href="#%e6%b5%8b%e8%af%95" class="heading-mark"></a>测试</h2><p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为 <code>nvme1n1</code></p>
+<h3 id="利用-zenfs-的测试脚本测试" class="heading-element">
+  <a href="#%e5%88%a9%e7%94%a8-zenfs-%e7%9a%84%e6%b5%8b%e8%af%95%e8%84%9a%e6%9c%ac%e6%b5%8b%e8%af%95" class="heading-mark"></a>利用 zenfs 的测试脚本测试</h3><p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO 调度器，制作文件系统以及自动配置 RocksDB 参数，但是参数配置的不够合理，需要自行修改</p>
 <div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -468,8 +462,8 @@
 </span></span><span class="line"><span class="cl">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span></span></code></pre></td></tr></table>
 </div>
 </div><p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value 大小，运行时间较长，最后的测试结果汇总在 <code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
-<h3 id="直接-db_bench-测试">直接 db_bench 测试</h3>
-<p>首先配置底层 IO 调度器为 <code>mq-deadline</code> 用户保持有序性（因为 ZNS 只支持追加写</p>
+<h3 id="直接-db_bench-测试" class="heading-element">
+  <a href="#%e7%9b%b4%e6%8e%a5-db_bench-%e6%b5%8b%e8%af%95" class="heading-mark"></a>直接 db_bench 测试</h3><p>首先配置底层 IO 调度器为 <code>mq-deadline</code> 用户保持有序性（因为 ZNS 只支持追加写</p>
 <div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -503,8 +497,8 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> rocksdb
 </span></span><span class="line"><span class="cl">sudo ./db_bench --fs_uri<span class="o">=</span>zenfs://dev:nvme1n1 --benchmarks<span class="o">=</span>fillrandom --use_direct_io_for_flush_and_compaction</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="参考资料">参考资料</h2>
-<ul>
+</div><h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
 <li><a href="https://github.com/facebook/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】RocksDB</a></li>
 <li><a href="https://github.com/westerndigitalcorporation/zenfs"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】ZenFS</a></li>
 <li><a href="https://zonedstorage.io/docs/introduction/zns"target="_blank" rel="external nofollow noopener noreferrer">【zonedstorage】ZNS</a></li>
@@ -520,7 +514,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -531,55 +525,18 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/4bc1e607/" title="自定义配置 RocksDB 进行 YCSB 测试">自定义配置 RocksDB 进行 YCSB 测试</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/maven/"><i class="fa fa-tag fa-fw"></i>Maven</a>&nbsp;
-            <a class="tag-same" href="/tags/rocksdb/"><i class="fa fa-tag fa-fw"></i>RocksDB</a>&nbsp;
-            <a class="tag-diff" href="/tags/ycsb/"><i class="fa fa-tag fa-fw"></i>YCSB</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/29e0b18c/" title="修复 chrome 打不开微信或者部分第三方应用内链接">修复 chrome 打不开微信或者部分第三方应用内链接</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/chrome/"><i class="fa fa-tag fa-fw"></i>chrome</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/2e7aa01a/" title="解决 pip 安装第三方包时因 SSL 报错">解决 pip 安装第三方包时因 SSL 报错</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/pip/"><i class="fa fa-tag fa-fw"></i>pip</a>&nbsp;
-            <a class="tag-diff" href="/tags/python/"><i class="fa fa-tag fa-fw"></i>python</a>&nbsp;
-            <a class="tag-diff" href="/tags/ssl/"><i class="fa fa-tag fa-fw"></i>SSL</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/76f6af57/" title="从 SSLEOFError 到正确配置 Proxy">从 SSLEOFError 到正确配置 Proxy</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/proxy/"><i class="fa fa-tag fa-fw"></i>proxy</a>&nbsp;
-            <a class="tag-diff" href="/tags/python/"><i class="fa fa-tag fa-fw"></i>python</a>&nbsp;
-            <a class="tag-diff" href="/tags/ssl/"><i class="fa fa-tag fa-fw"></i>SSL</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/89f2ed7d/" title="Debug 从入门到入土">Debug 从入门到入土</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/debug/"><i class="fa fa-tag fa-fw"></i>Debug</a>&nbsp;
-            <a class="tag-diff" href="/tags/addr2line/"><i class="fa fa-tag fa-fw"></i>addr2line</a>&nbsp;
-            <a class="tag-diff" href="/tags/gdb/"><i class="fa fa-tag fa-fw"></i>gdb</a>&nbsp;
-            <a class="tag-diff" href="/tags/objdump/"><i class="fa fa-tag fa-fw"></i>objdump</a>&nbsp;
-            <a class="tag-diff" href="/tags/assert/"><i class="fa fa-tag fa-fw"></i>assert</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/"><i class="fa fa-tag fa-fw"></i>反汇编</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/4bc1e607/" title="自定义配置 RocksDB 进行 YCSB 测试">自定义配置 RocksDB 进行 YCSB 测试</a></li><li>
+          <a href="/posts/89f2ed7d/" title="Debug 从入门到入土">Debug 从入门到入土</a></li><li>
+          <a href="/posts/76f6af57/" title="从 SSLEOFError 到正确配置 Proxy">从 SSLEOFError 到正确配置 Proxy</a></li><li>
+          <a href="/posts/29e0b18c/" title="修复 chrome 打不开微信或者部分第三方应用内链接">修复 chrome 打不开微信或者部分第三方应用内链接</a></li><li>
+          <a href="/posts/2e7aa01a/" title="解决 pip 安装第三方包时因 SSL 报错">解决 pip 安装第三方包时因 SSL 报错</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -587,18 +544,16 @@
       <div class="post-info-mod">
         <span title="更新于 2023-09-18 19:13:39">更新于 2023-09-18&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/b8506868/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/b8506868/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/' class="post-tag">日常踩坑</a><a href='/tags/rocksdb/' class="post-tag">RocksDB</a><a href='/tags/zns/' class="post-tag">ZNS</a><a href='/tags/qemu/' class="post-tag">QEMU</a><a href='/tags/grub/' class="post-tag">grub</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" class="post-tag" title="标签 - 日常踩坑">日常踩坑</a><a href="/tags/rocksdb/" class="post-tag" title="标签 - RocksDB">RocksDB</a><a href="/tags/zns/" class="post-tag" title="标签 - ZNS">ZNS</a><a href="/tags/qemu/" class="post-tag" title="标签 - QEMU">QEMU</a><a href="/tags/grub/" class="post-tag" title="标签 - grub">grub</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -630,11 +585,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -642,5 +600,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

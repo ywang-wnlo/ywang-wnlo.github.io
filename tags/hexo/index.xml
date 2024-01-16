@@ -2,7 +2,7 @@
   <channel>
     <title>Hexo - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/hexo/</link>
-    <description>Hexo - 标签 - 乐园</description>
+    <description>Hexo - 标签 | 乐园</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
       <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/hexo/" rel="self" type="application/rss+xml" /><item>
   <title>更换博客框架至 Hugo</title>

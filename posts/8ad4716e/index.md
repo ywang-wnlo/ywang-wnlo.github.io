@@ -44,13 +44,13 @@ winget install JanDeDobbeleer.OhMyPosh -s winget
 notepad $PROFILE
 ```
 
-{{< admonition warning "如果打开报错，则需要首先创建配置文件" >}}
+{{&lt; admonition warning &#34;如果打开报错，则需要首先创建配置文件&#34; &gt;}}
 
 ```PowerShell
 New-Item -Path $PROFILE -Type File -Force
 ```
 
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 在配置文件中添加以下内容，以后启动 `PowerShell` 就会自动启用 `Oh My Posh` 了
 
@@ -71,7 +71,7 @@ Get-PoshThemes
 ```PowerShell
 notepad $PROFILE
 
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/powerlevel10k_rainbow.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config &#34;$env:POSH_THEMES_PATH/powerlevel10k_rainbow.omp.json&#34; | Invoke-Expression
 ```
 
 ## 参考资料

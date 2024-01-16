@@ -7,7 +7,7 @@
 
 由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存
 
-经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 [回写机制](/posts/646202b9/) 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的预读机制<!-- todo -->提升了顺序读性能
+经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 [回写机制](/posts/646202b9/) 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的预读机制&lt;!-- todo --&gt;提升了顺序读性能
 
 ## 直接 IO 与 缓存 IO
 
@@ -25,11 +25,11 @@
 
 详细的 Linux IO 栈图如下（来源于 [Thomas-Krenn-Wiki](https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram)）：
 
-![Linux IO 栈](Linux-storage-stack-diagram_v4.10.png "Linux IO 栈")
+![Linux IO 栈](Linux-storage-stack-diagram_v4.10.png &#34;Linux IO 栈&#34;)
 
 其实简化一下，可以分为文件系统、块层和设备驱动层这三层
 
-![简化的 Linux IO 栈](simple_IO_stack.png "简化的 Linux IO 栈")
+![简化的 Linux IO 栈](simple_IO_stack.png &#34;简化的 Linux IO 栈&#34;)
 
 ## Linux 中的具体实现
 
@@ -115,7 +115,7 @@ struct super_block {
 
 	/*
 	 * Filesystem subtype.  If non-empty the filesystem type field
-	 * in /proc/mounts will be "type.subtype"
+	 * in /proc/mounts will be &#34;type.subtype&#34;
 	 */
 	const char *s_subtype;
 
@@ -185,8 +185,8 @@ struct super_block {
 ```c
 /*
  * Keep mostly read-only and often accessed (especially for
- * the RCU path lookup and 'stat' data) fields at the beginning
- * of the 'struct inode'
+ * the RCU path lookup and &#39;stat&#39; data) fields at the beginning
+ * of the &#39;struct inode&#39;
  */
 struct inode {
 	// inode 类型
@@ -271,7 +271,7 @@ struct inode {
 	atomic_t		i_readcount; /* struct files open RO */
 #endif
 	union {
-		const struct file_operations	*i_fop;	/* former ->i_op->default_file_ops */
+		const struct file_operations	*i_fop;	/* former -&gt;i_op-&gt;default_file_ops */
 		void (*free_inode)(struct inode *);
 	};
 	struct file_lock_context	*i_flctx;
@@ -455,12 +455,12 @@ struct address_space {
 	/*
 	 * On most architectures that alignment is already the case; but
 	 * must be enforced here for CRIS, to let the least significant bit
-	 * of struct page's "mapping" pointer be used for PAGE_MAPPING_ANON.
+	 * of struct page&#39;s &#34;mapping&#34; pointer be used for PAGE_MAPPING_ANON.
 	 */
 struct request_queue;
 
 struct block_device {
-	dev_t			bd_dev;  /* not a kdev_t - it's a search key */
+	dev_t			bd_dev;  /* not a kdev_t - it&#39;s a search key */
 	int			bd_openers;
 	struct inode *		bd_inode;	/* will die */
 	struct super_block *	bd_super;
@@ -484,7 +484,7 @@ struct block_device {
 	struct backing_dev_info *bd_bdi;
 	struct list_head	bd_list;
 	/*
-	 * Private data.  You must have bd_claim'ed the block_device
+	 * Private data.  You must have bd_claim&#39;ed the block_device
 	 * to use this.  NOTE:  bd_claim allows an owner to claim
 	 * the same device multiple times, the owner must take special
 	 * care to not mess up bd_private for that case.
@@ -520,7 +520,7 @@ struct address_space_operations {
 	int (*set_page_dirty)(struct page *page);
 
 	/*
-	 * Reads in the requested pages. Unlike ->readpage(), this is
+	 * Reads in the requested pages. Unlike -&gt;readpage(), this is
 	 * PURELY used for read-ahead!.
 	 */
 	int (*readpages)(struct file *filp, struct address_space *mapping,
@@ -533,7 +533,7 @@ struct address_space_operations {
 				loff_t pos, unsigned len, unsigned copied,
 				struct page *page, void *fsdata);
 
-	/* Unfortunately this kludge is needed for FIBMAP. Don't use it */
+	/* Unfortunately this kludge is needed for FIBMAP. Don&#39;t use it */
 	sector_t (*bmap)(struct address_space *, sector_t);
 	void (*invalidatepage) (struct page *, unsigned int, unsigned int);
 	int (*releasepage) (struct page *, gfp_t);
@@ -586,7 +586,7 @@ page cache 的写入较为复杂，主要分为三个阶段：
 
 - [【Thomas-Krenn-Wiki】Linux Storage Stack Diagram](https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram)
 - [【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈](https://blog.csdn.net/juS3Ve/article/details/82322637)
-- [【LKD】Linux Kernel Development (3rd Edition)](https://www.doc-developpement-durable.org/file/Projets-informatiques/cours-&-manuels-informatiques/Linux/Linux%20Kernel%20Development,%203rd%20Edition.pdf)
+- [【LKD】Linux Kernel Development (3rd Edition)](https://www.doc-developpement-durable.org/file/Projets-informatiques/cours-&amp;-manuels-informatiques/Linux/Linux%20Kernel%20Development,%203rd%20Edition.pdf)
 - [【阿里云技术博客】The Xarray Data Structure](https://kernel.taobao.org/2018/05/The-XArray-data-structure/)
 - [【LWN】Some VFS address space operations changes](https://lwn.net/Articles/254856/)
 - [【博客园】Page Cache 与 Page 回写](https://www.cnblogs.com/linhaostudy/p/10196915.html)

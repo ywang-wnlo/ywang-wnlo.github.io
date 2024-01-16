@@ -32,9 +32,9 @@ chsh -s $(which zsh)
 
 ```bash
 # curl
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c &#34;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&#34;
 # wget
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c &#34;$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&#34;
 ```
 
 类似于 `bash` 的配置文件 `~/.bashrc` 命名规则类似，`Zsh` 的配置文件是 `~/.zshrc`，后续配置只需对该配置文件进行小小的修改即可
@@ -54,7 +54,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 vim ~/.zshrc
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME=&#34;powerlevel10k/powerlevel10k&#34;
 ```
 
 之后重启终端后，`powerlevel10k` 会进入引导流程，可以自行微调风格

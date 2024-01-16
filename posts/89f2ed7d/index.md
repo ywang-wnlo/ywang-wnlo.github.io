@@ -1,7 +1,7 @@
 # Debug 从入门到入土
 
 
-写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）
+写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C&#43;&#43; 的 segment fault 为例）
 
 ## 分类
 
@@ -26,7 +26,7 @@
 以下面的代码为例：
 
 ```c
-#include <stdio.h>
+#include &lt;stdio.h&gt;
 
 int main() {
     int *p = NULL;
@@ -46,8 +46,8 @@ $ ./test
 
 # dmesg 查看内核日志，可以看到 segmentation fault 的详细信息
 $ dmesg | tail -n 2
-[46592.916853] test[7533]: segfault at 0 ip 000000000040111a sp 00007ffce6095a70 error 6 in test[401000+1000]
-[46592.916875] Code: c3 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 f3 0f 1e fa eb 8a f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 <c7> 00 02 00 00 00 b8 00 00 00 00 5d c3 66 0f 1f 84 00 00 00 00 00
+[46592.916853] test[7533]: segfault at 0 ip 000000000040111a sp 00007ffce6095a70 error 6 in test[401000&#43;1000]
+[46592.916875] Code: c3 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 f3 0f 1e fa eb 8a f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 b8 00 00 00 00 5d c3 66 0f 1f 84 00 00 00 00 00
 ```
 
 此时可以根据 `ip 000000000040111a` 来定位出错的位置，`ip` 后面跟着的数字就是 IP 寄存器的值，也就是出错时的程序运行位置，可以通过 `addr2line` 来将其转换为文件名和行号
@@ -75,7 +75,7 @@ main
 以下面的代码为例：
 
 ```c
-#include <stdio.h>
+#include &lt;stdio.h&gt;
 
 void func_bug() {
     int *p = NULL;
@@ -99,8 +99,8 @@ $ ./test
 
 # dmesg 查看内核日志，可以看到 segmentation fault 的详细信息
 $ dmesg | tail -n 2
-[49630.541707] test[8173]: segfault at 0 ip 000055bce6f6c13d sp 00007fffad5149b0 error 6 in test[55bce6f6c000+1000]
-[49630.541732] Code: 5d c3 0f 1f 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa e9 77 ff ff ff f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 <c7> 00 02 00 00 00 90 5d c3 f3 0f 1e fa 55 48 89 e5 48 83 ec 10 c7
+[49630.541707] test[8173]: segfault at 0 ip 000055bce6f6c13d sp 00007fffad5149b0 error 6 in test[55bce6f6c000&#43;1000]
+[49630.541732] Code: 5d c3 0f 1f 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa e9 77 ff ff ff f3 0f 1e fa 55 48 89 e5 48 c7 45 f8 00 00 00 00 48 8b 45 f8 &lt;c7&gt; 00 02 00 00 00 90 5d c3 f3 0f 1e fa 55 48 89 e5 48 83 ec 10 c7
 ```
 
 由于没有关闭 ASLR，所以每次运行程序时，`ip` 的值都会不一样，但是可以简单的换算获取到实际偏移量
@@ -123,7 +123,7 @@ Idx Name          Size      VMA               LMA               File off  Algn
 
 #### 计算偏移量
 
-然后根据 `dmesg` 中的 `ip` 以及程序被映射的 `VMA` 首地址计算代码偏移量，也就是 `ip 000055bce6f6c13d …… in test[55bce6f6c000+xxx]`，计算出 `0x55bce6f6c13d - 0x55bce6f6c000 = 0x13d`，然后在加上 `.init` 段的起始地址 `0x1000`，就可以得到实际的偏移量 `0x113d`
+然后根据 `dmesg` 中的 `ip` 以及程序被映射的 `VMA` 首地址计算代码偏移量，也就是 `ip 000055bce6f6c13d …… in test[55bce6f6c000&#43;xxx]`，计算出 `0x55bce6f6c13d - 0x55bce6f6c000 = 0x13d`，然后在加上 `.init` 段的起始地址 `0x1000`，就可以得到实际的偏移量 `0x113d`
 
 ```bash
 # 反汇编原程序
@@ -134,33 +134,33 @@ $ objdump -d ./test
 
 Disassembly of section .init:
 
-0000000000001000 <_init>:
+0000000000001000 &lt;_init&gt;:
     1000:       f3 0f 1e fa             endbr64
     1004:       48 83 ec 08             sub    $0x8,%rsp
-    1008:       48 8b 05 d9 2f 00 00    mov    0x2fd9(%rip),%rax        # 3fe8 <__gmon_start__>
+    1008:       48 8b 05 d9 2f 00 00    mov    0x2fd9(%rip),%rax        # 3fe8 &lt;__gmon_start__&gt;
     100f:       48 85 c0                test   %rax,%rax
-    1012:       74 02                   je     1016 <_init+0x16>
+    1012:       74 02                   je     1016 &lt;_init&#43;0x16&gt;
     1014:       ff d0                   callq  *%rax
     1016:       48 83 c4 08             add    $0x8,%rsp
     101a:       c3                      retq
 
 Disassembly of section .plt:
 
-0000000000001020 <.plt>:
-    1020:       ff 35 a2 2f 00 00       pushq  0x2fa2(%rip)        # 3fc8 <_GLOBAL_OFFSET_TABLE_+0x8>
-    1026:       f2 ff 25 a3 2f 00 00    bnd jmpq *0x2fa3(%rip)        # 3fd0 <_GLOBAL_OFFSET_TABLE_+0x10>
+0000000000001020 &lt;.plt&gt;:
+    1020:       ff 35 a2 2f 00 00       pushq  0x2fa2(%rip)        # 3fc8 &lt;_GLOBAL_OFFSET_TABLE_&#43;0x8&gt;
+    1026:       f2 ff 25 a3 2f 00 00    bnd jmpq *0x2fa3(%rip)        # 3fd0 &lt;_GLOBAL_OFFSET_TABLE_&#43;0x10&gt;
     102d:       0f 1f 00                nopl   (%rax)
 
 Disassembly of section .plt.got:
 
-0000000000001030 <__cxa_finalize@plt>:
+0000000000001030 &lt;__cxa_finalize@plt&gt;:
     1030:       f3 0f 1e fa             endbr64
-    1034:       f2 ff 25 bd 2f 00 00    bnd jmpq *0x2fbd(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
+    1034:       f2 ff 25 bd 2f 00 00    bnd jmpq *0x2fbd(%rip)        # 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;
     103b:       0f 1f 44 00 00          nopl   0x0(%rax,%rax,1)
 
 Disassembly of section .text:
 
-0000000000001040 <_start>:
+0000000000001040 &lt;_start&gt;:
     1040:       f3 0f 1e fa             endbr64
     1044:       31 ed                   xor    %ebp,%ebp
     1046:       49 89 d1                mov    %rdx,%r9
@@ -169,68 +169,68 @@ Disassembly of section .text:
     104d:       48 83 e4 f0             and    $0xfffffffffffffff0,%rsp
     1051:       50                      push   %rax
     1052:       54                      push   %rsp
-    1053:       4c 8d 05 86 01 00 00    lea    0x186(%rip),%r8        # 11e0 <__libc_csu_fini>
-    105a:       48 8d 0d 0f 01 00 00    lea    0x10f(%rip),%rcx        # 1170 <__libc_csu_init>
-    1061:       48 8d 3d de 00 00 00    lea    0xde(%rip),%rdi        # 1146 <main>
-    1068:       ff 15 72 2f 00 00       callq  *0x2f72(%rip)        # 3fe0 <__libc_start_main@GLIBC_2.2.5>
+    1053:       4c 8d 05 86 01 00 00    lea    0x186(%rip),%r8        # 11e0 &lt;__libc_csu_fini&gt;
+    105a:       48 8d 0d 0f 01 00 00    lea    0x10f(%rip),%rcx        # 1170 &lt;__libc_csu_init&gt;
+    1061:       48 8d 3d de 00 00 00    lea    0xde(%rip),%rdi        # 1146 &lt;main&gt;
+    1068:       ff 15 72 2f 00 00       callq  *0x2f72(%rip)        # 3fe0 &lt;__libc_start_main@GLIBC_2.2.5&gt;
     106e:       f4                      hlt
     106f:       90                      nop
 
-0000000000001070 <deregister_tm_clones>:
-    1070:       48 8d 3d 99 2f 00 00    lea    0x2f99(%rip),%rdi        # 4010 <__TMC_END__>
-    1077:       48 8d 05 92 2f 00 00    lea    0x2f92(%rip),%rax        # 4010 <__TMC_END__>
+0000000000001070 &lt;deregister_tm_clones&gt;:
+    1070:       48 8d 3d 99 2f 00 00    lea    0x2f99(%rip),%rdi        # 4010 &lt;__TMC_END__&gt;
+    1077:       48 8d 05 92 2f 00 00    lea    0x2f92(%rip),%rax        # 4010 &lt;__TMC_END__&gt;
     107e:       48 39 f8                cmp    %rdi,%rax
-    1081:       74 15                   je     1098 <deregister_tm_clones+0x28>
-    1083:       48 8b 05 4e 2f 00 00    mov    0x2f4e(%rip),%rax        # 3fd8 <_ITM_deregisterTMCloneTable>
+    1081:       74 15                   je     1098 &lt;deregister_tm_clones&#43;0x28&gt;
+    1083:       48 8b 05 4e 2f 00 00    mov    0x2f4e(%rip),%rax        # 3fd8 &lt;_ITM_deregisterTMCloneTable&gt;
     108a:       48 85 c0                test   %rax,%rax
-    108d:       74 09                   je     1098 <deregister_tm_clones+0x28>
+    108d:       74 09                   je     1098 &lt;deregister_tm_clones&#43;0x28&gt;
     108f:       ff e0                   jmpq   *%rax
     1091:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)
     1098:       c3                      retq
     1099:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)
 
-00000000000010a0 <register_tm_clones>:
-    10a0:       48 8d 3d 69 2f 00 00    lea    0x2f69(%rip),%rdi        # 4010 <__TMC_END__>
-    10a7:       48 8d 35 62 2f 00 00    lea    0x2f62(%rip),%rsi        # 4010 <__TMC_END__>
+00000000000010a0 &lt;register_tm_clones&gt;:
+    10a0:       48 8d 3d 69 2f 00 00    lea    0x2f69(%rip),%rdi        # 4010 &lt;__TMC_END__&gt;
+    10a7:       48 8d 35 62 2f 00 00    lea    0x2f62(%rip),%rsi        # 4010 &lt;__TMC_END__&gt;
     10ae:       48 29 fe                sub    %rdi,%rsi
     10b1:       48 89 f0                mov    %rsi,%rax
     10b4:       48 c1 ee 3f             shr    $0x3f,%rsi
     10b8:       48 c1 f8 03             sar    $0x3,%rax
     10bc:       48 01 c6                add    %rax,%rsi
     10bf:       48 d1 fe                sar    %rsi
-    10c2:       74 14                   je     10d8 <register_tm_clones+0x38>
-    10c4:       48 8b 05 25 2f 00 00    mov    0x2f25(%rip),%rax        # 3ff0 <_ITM_registerTMCloneTable>
+    10c2:       74 14                   je     10d8 &lt;register_tm_clones&#43;0x38&gt;
+    10c4:       48 8b 05 25 2f 00 00    mov    0x2f25(%rip),%rax        # 3ff0 &lt;_ITM_registerTMCloneTable&gt;
     10cb:       48 85 c0                test   %rax,%rax
-    10ce:       74 08                   je     10d8 <register_tm_clones+0x38>
+    10ce:       74 08                   je     10d8 &lt;register_tm_clones&#43;0x38&gt;
     10d0:       ff e0                   jmpq   *%rax
     10d2:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)
     10d8:       c3                      retq
     10d9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)
 
-00000000000010e0 <__do_global_dtors_aux>:
+00000000000010e0 &lt;__do_global_dtors_aux&gt;:
     10e0:       f3 0f 1e fa             endbr64
-    10e4:       80 3d 25 2f 00 00 00    cmpb   $0x0,0x2f25(%rip)        # 4010 <__TMC_END__>
-    10eb:       75 2b                   jne    1118 <__do_global_dtors_aux+0x38>
+    10e4:       80 3d 25 2f 00 00 00    cmpb   $0x0,0x2f25(%rip)        # 4010 &lt;__TMC_END__&gt;
+    10eb:       75 2b                   jne    1118 &lt;__do_global_dtors_aux&#43;0x38&gt;
     10ed:       55                      push   %rbp
-    10ee:       48 83 3d 02 2f 00 00    cmpq   $0x0,0x2f02(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
+    10ee:       48 83 3d 02 2f 00 00    cmpq   $0x0,0x2f02(%rip)        # 3ff8 &lt;__cxa_finalize@GLIBC_2.2.5&gt;
     10f5:       00
     10f6:       48 89 e5                mov    %rsp,%rbp
-    10f9:       74 0c                   je     1107 <__do_global_dtors_aux+0x27>
-    10fb:       48 8b 3d 06 2f 00 00    mov    0x2f06(%rip),%rdi        # 4008 <__dso_handle>
-    1102:       e8 29 ff ff ff          callq  1030 <__cxa_finalize@plt>
-    1107:       e8 64 ff ff ff          callq  1070 <deregister_tm_clones>
-    110c:       c6 05 fd 2e 00 00 01    movb   $0x1,0x2efd(%rip)        # 4010 <__TMC_END__>
+    10f9:       74 0c                   je     1107 &lt;__do_global_dtors_aux&#43;0x27&gt;
+    10fb:       48 8b 3d 06 2f 00 00    mov    0x2f06(%rip),%rdi        # 4008 &lt;__dso_handle&gt;
+    1102:       e8 29 ff ff ff          callq  1030 &lt;__cxa_finalize@plt&gt;
+    1107:       e8 64 ff ff ff          callq  1070 &lt;deregister_tm_clones&gt;
+    110c:       c6 05 fd 2e 00 00 01    movb   $0x1,0x2efd(%rip)        # 4010 &lt;__TMC_END__&gt;
     1113:       5d                      pop    %rbp
     1114:       c3                      retq
     1115:       0f 1f 00                nopl   (%rax)
     1118:       c3                      retq
     1119:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)
 
-0000000000001120 <frame_dummy>:
+0000000000001120 &lt;frame_dummy&gt;:
     1120:       f3 0f 1e fa             endbr64
-    1124:       e9 77 ff ff ff          jmpq   10a0 <register_tm_clones>
+    1124:       e9 77 ff ff ff          jmpq   10a0 &lt;register_tm_clones&gt;
 
-0000000000001129 <func_bug>:
+0000000000001129 &lt;func_bug&gt;:
     1129:       f3 0f 1e fa             endbr64
     112d:       55                      push   %rbp
     112e:       48 89 e5                mov    %rsp,%rbp
@@ -242,23 +242,23 @@ Disassembly of section .text:
     1144:       5d                      pop    %rbp
     1145:       c3                      retq
 
-0000000000001146 <main>:
+0000000000001146 &lt;main&gt;:
     1146:       f3 0f 1e fa             endbr64
     114a:       55                      push   %rbp
     114b:       48 89 e5                mov    %rsp,%rbp
     114e:       48 83 ec 10             sub    $0x10,%rsp
     1152:       c7 45 fc 01 00 00 00    movl   $0x1,-0x4(%rbp)
     1159:       b8 00 00 00 00          mov    $0x0,%eax
-    115e:       e8 c6 ff ff ff          callq  1129 <func_bug>
+    115e:       e8 c6 ff ff ff          callq  1129 &lt;func_bug&gt;
     1163:       b8 00 00 00 00          mov    $0x0,%eax
     1168:       c9                      leaveq
     1169:       c3                      retq
     116a:       66 0f 1f 44 00 00       nopw   0x0(%rax,%rax,1)
 
-0000000000001170 <__libc_csu_init>:
+0000000000001170 &lt;__libc_csu_init&gt;:
     1170:       f3 0f 1e fa             endbr64
     1174:       41 57                   push   %r15
-    1176:       4c 8d 3d 73 2c 00 00    lea    0x2c73(%rip),%r15        # 3df0 <__frame_dummy_init_array_entry>
+    1176:       4c 8d 3d 73 2c 00 00    lea    0x2c73(%rip),%r15        # 3df0 &lt;__frame_dummy_init_array_entry&gt;
     117d:       41 56                   push   %r14
     117f:       49 89 d6                mov    %rdx,%r14
     1182:       41 55                   push   %r13
@@ -266,13 +266,13 @@ Disassembly of section .text:
     1187:       41 54                   push   %r12
     1189:       41 89 fc                mov    %edi,%r12d
     118c:       55                      push   %rbp
-    118d:       48 8d 2d 64 2c 00 00    lea    0x2c64(%rip),%rbp        # 3df8 <__do_global_dtors_aux_fini_array_entry>
+    118d:       48 8d 2d 64 2c 00 00    lea    0x2c64(%rip),%rbp        # 3df8 &lt;__do_global_dtors_aux_fini_array_entry&gt;
     1194:       53                      push   %rbx
     1195:       4c 29 fd                sub    %r15,%rbp
     1198:       48 83 ec 08             sub    $0x8,%rsp
-    119c:       e8 5f fe ff ff          callq  1000 <_init>
+    119c:       e8 5f fe ff ff          callq  1000 &lt;_init&gt;
     11a1:       48 c1 fd 03             sar    $0x3,%rbp
-    11a5:       74 1f                   je     11c6 <__libc_csu_init+0x56>
+    11a5:       74 1f                   je     11c6 &lt;__libc_csu_init&#43;0x56&gt;
     11a7:       31 db                   xor    %ebx,%ebx
     11a9:       0f 1f 80 00 00 00 00    nopl   0x0(%rax)
     11b0:       4c 89 f2                mov    %r14,%rdx
@@ -281,7 +281,7 @@ Disassembly of section .text:
     11b9:       41 ff 14 df             callq  *(%r15,%rbx,8)
     11bd:       48 83 c3 01             add    $0x1,%rbx
     11c1:       48 39 dd                cmp    %rbx,%rbp
-    11c4:       75 ea                   jne    11b0 <__libc_csu_init+0x40>
+    11c4:       75 ea                   jne    11b0 &lt;__libc_csu_init&#43;0x40&gt;
     11c6:       48 83 c4 08             add    $0x8,%rsp
     11ca:       5b                      pop    %rbx
     11cb:       5d                      pop    %rbp
@@ -293,13 +293,13 @@ Disassembly of section .text:
     11d5:       66 66 2e 0f 1f 84 00    data16 nopw %cs:0x0(%rax,%rax,1)
     11dc:       00 00 00 00
 
-00000000000011e0 <__libc_csu_fini>:
+00000000000011e0 &lt;__libc_csu_fini&gt;:
     11e0:       f3 0f 1e fa             endbr64
     11e4:       c3                      retq
 
 Disassembly of section .fini:
 
-00000000000011e8 <_fini>:
+00000000000011e8 &lt;_fini&gt;:
     11e8:       f3 0f 1e fa             endbr64
     11ec:       48 83 ec 08             sub    $0x8,%rsp
     11f0:       48 83 c4 08             add    $0x8,%rsp
@@ -309,7 +309,7 @@ Disassembly of section .fini:
 查看 `0x113d` 附近的代码段
 
 ```x86asm
-0000000000001129 <func_bug>:
+0000000000001129 &lt;func_bug&gt;:
     1129:       f3 0f 1e fa             endbr64
     112d:       55                      push   %rbp
     112e:       48 89 e5                mov    %rsp,%rbp
@@ -343,7 +343,7 @@ $ objdump -d --start-address=0x1129 --stop-address=0x1146 ./test
 
 Disassembly of section .text:
 
-0000000000001129 <func_bug>:
+0000000000001129 &lt;func_bug&gt;:
     1129:       f3 0f 1e fa             endbr64
     112d:       55                      push   %rbp
     112e:       48 89 e5                mov    %rsp,%rbp
@@ -371,10 +371,10 @@ $ objdump -S -l --start-address=0x1129 --stop-address=0x1146 ./test
 
 Disassembly of section .text:
 
-0000000000001129 <func_bug>:
+0000000000001129 &lt;func_bug&gt;:
 func_bug():
 /home/wangyu/test.c:3
-#include <stdio.h>
+#include &lt;stdio.h&gt;
 
 void func_bug() {
     1129:       f3 0f 1e fa             endbr64
@@ -401,7 +401,7 @@ void func_bug() {
 
 ### 最强工具 `gdb`
 
-`gdb` 是 GNU 出品的一个强大的调试工具，可以用来调试多种语言的程序，例如 C/C++、Go、Rust 等
+`gdb` 是 GNU 出品的一个强大的调试工具，可以用来调试多种语言的程序，例如 C/C&#43;&#43;、Go、Rust 等
 
 `gdb` 的使用方法非常多，这里只介绍一些常用的用法，更多的用法可以通过 `man gdb` 查看
 
@@ -410,7 +410,7 @@ void func_bug() {
 以下面的代码为例：
 
 ```c
-#include <stdio.h>
+#include &lt;stdio.h&gt;
 
 void func_bug() {
     int *p = NULL;
@@ -419,7 +419,7 @@ void func_bug() {
 
 int main(int argc, char *argv[]) {
     if (argc == 1) {
-        printf("usage: %s arg1\n", argv[0]);
+        printf(&#34;usage: %s arg1\n&#34;, argv[0]);
         return 0;
     }
     func_bug();
@@ -434,19 +434,19 @@ int main(int argc, char *argv[]) {
 $ gdb ./test
 GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
 Copyright (C) 2020 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+License GPLv3&#43;: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
-Type "show copying" and "show warranty" for details.
-This GDB was configured as "x86_64-linux-gnu".
-Type "show configuration" for configuration details.
+Type &#34;show copying&#34; and &#34;show warranty&#34; for details.
+This GDB was configured as &#34;x86_64-linux-gnu&#34;.
+Type &#34;show configuration&#34; for configuration details.
 For bug reporting instructions, please see:
-<http://www.gnu.org/software/gdb/bugs/>.
+&lt;http://www.gnu.org/software/gdb/bugs/&gt;.
 Find the GDB manual and other documentation resources online at:
-    <http://www.gnu.org/software/gdb/documentation/>.
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
 
-For help, type "help".
-Type "apropos word" to search for commands related to "word"...
+For help, type &#34;help&#34;.
+Type &#34;apropos word&#34; to search for commands related to &#34;word&#34;...
 Reading symbols from ./test...
 (gdb)
 ```
@@ -550,7 +550,7 @@ Num     Type           Disp Enb Address            What
 ```bash
 # 打印源代码
 (gdb) l
-1       #include <stdio.h>
+1       #include &lt;stdio.h&gt;
 2
 3       void func_bug() {
 4           int *p = NULL;
@@ -559,7 +559,7 @@ Num     Type           Disp Enb Address            What
 7
 8       int main(int argc, char *argv[]) {
 9           if (argc == 1) {
-10              printf("usage: %s arg1\n", argv[0]);
+10              printf(&#34;usage: %s arg1\n&#34;, argv[0]);
 ```
 
 直接输入 `l` 命令会打印出当前断点所在的代码，也可以通过 `l xxx` 来打印指定的代码，xxx 可以是行号，也可以是函数名
@@ -587,10 +587,10 @@ Num     Type           Disp Enb Address            What
 
 ### `assert`
 
-`assert` 是 C/C++ 中的一个宏，用于判断一个表达式是否为真，如果为假，则输出错误信息，并终止程序的运行
+`assert` 是 C/C&#43;&#43; 中的一个宏，用于判断一个表达式是否为真，如果为假，则输出错误信息，并终止程序的运行
 
 ```c
-#include <assert.h>
+#include &lt;assert.h&gt;
 
 int main() {
     int a = 1;
@@ -602,7 +602,7 @@ int main() {
 例如上述代码会输出如下错误信息，并终止程序的运行：
 
 ```bash
-test: test.c:5: main: Assertion `a == 2' failed.
+test: test.c:5: main: Assertion `a == 2&#39; failed.
 [1]    3563773 abort (core dumped)  ./test
 ```
 

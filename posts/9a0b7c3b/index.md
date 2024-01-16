@@ -24,7 +24,7 @@ v8.0.0 或更高 | 2020 | [next-theme/hexo-theme-next](https://github.com/next-t
 因为笔者个人在 Windows 环境下写博客，后续命令均以 [PowerShell](https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell?view=powershell-7.2) 为例
 
 ```ps
-cd <hexo-dir>
+cd &lt;hexo-dir&gt;
 # git clone https://github.com/next-theme/hexo-theme-next.git .\themes\next\
 git clone git@github.com:next-theme/hexo-theme-next.git
 
@@ -41,7 +41,7 @@ cp .\themes\next\_config.yml .\_config.next.yml
 
 NexT 主题包含了 4 个风格，个人喜欢 Gemini，类似卡片的风格，边界比较明显
 
-![NexT 主题风格](NexT_Schemes.png "NexT 主题风格")
+![NexT 主题风格](NexT_Schemes.png &#34;NexT 主题风格&#34;)
 
 修改 `_config.next.yml` 之后，用 `hexo clean; hexo g; hexo s` 重新生成一下，就可以在 [本地](http://localhost:4000) 预览了（后续流程如果没有特殊说明则基本一致）
 
@@ -226,7 +226,7 @@ reading_progress:
   # Available values: top | bottom
   position: bottom
   reversed: false
-  color: "#37c6c0"
+  color: &#34;#37c6c0&#34;
   height: 5px
 ```
 
@@ -239,7 +239,7 @@ NexT 的书签功能可以保存当前的阅读进度，下次打开是会在续
 bookmark:
   enable: true
   # Customize the color of the bookmark.
-  color: "#222"
+  color: &#34;#222&#34;
   # If auto, save the reading progress when closing the page or clicking the bookmark-icon.
   # If manual, only save it by clicking the bookmark-icon.
   save: auto
@@ -354,13 +354,13 @@ busuanzi_count:
 
 NexT 已经内置的 gitalk 的 `js` 和 `css`，在配置文件中开启并进行配置即可
 
-在修改配置文件之前需要先在 GitHub 上申请一个 OAuth Application，入口在 `【Settings】` -> `【Developer settings】` -> `【OAuth Apps】` -> `【New OAuth App】`，或者直接使用这个 [链接](https://github.com/settings/applications/new)
+在修改配置文件之前需要先在 GitHub 上申请一个 OAuth Application，入口在 `【Settings】` -&gt; `【Developer settings】` -&gt; `【OAuth Apps】` -&gt; `【New OAuth App】`，或者直接使用这个 [链接](https://github.com/settings/applications/new)
 
-![申请 OAuth Application](OAuth_APP_Register.png "申请 OAuth Application")
+![申请 OAuth Application](OAuth_APP_Register.png &#34;申请 OAuth Application&#34;)
 
 填写好之后，记录下应用 id 以及密钥，如果没有显示密钥需要手动生成一下
 
-![获取 id 密钥](OAuth_APP_ID_Secrets.png "获取 id 密钥")
+![获取 id 密钥](OAuth_APP_ID_Secrets.png &#34;获取 id 密钥&#34;)
 
 然后首先选用 gitalk 作为评论系统
 
@@ -392,15 +392,15 @@ comments:
 # For more information: https://gitalk.github.io
 gitalk:
   enable: true
-  github_id: <GitHub id> # GitHub repo owner
-  repo: <GitHub id>.github.io # Repository name to store issues
-  client_id: <应用 id> # GitHub Application Client ID
-  client_secret: <应用密钥> # GitHub Application Client Secret
-  admin_user: <GitHub id> # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  github_id: &lt;GitHub id&gt; # GitHub repo owner
+  repo: &lt;GitHub id&gt;.github.io # Repository name to store issues
+  client_id: &lt;应用 id&gt; # GitHub Application Client ID
+  client_secret: &lt;应用密钥&gt; # GitHub Application Client Secret
+  admin_user: &lt;GitHub id&gt; # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
   distraction_free_mode: true # Facebook-like distraction free mode
   # When the official proxy is not available, you can change it to your own proxy address
   proxy: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token # This is official proxy address
-  # Gitalk's display language depends on user's browser or system environment
+  # Gitalk&#39;s display language depends on user&#39;s browser or system environment
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
   language:
@@ -408,7 +408,7 @@ gitalk:
 
 ## 参考资料
 
-- [【NexT】v8.0.0+ 官网](https://theme-next.js.org)
+- [【NexT】v8.0.0&#43; 官网](https://theme-next.js.org)
 - [【必读】更新说明及常见问题](https://github.com/next-theme/hexo-theme-next/issues/4)
 - [【Hexo】配置文件优先级](https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
 - [【Apple】Configuring Web Applications](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html)

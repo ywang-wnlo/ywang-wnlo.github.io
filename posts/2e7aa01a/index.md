@@ -7,12 +7,12 @@
 
 1. check_hostname requires server_hostname
 
-    > `raise ValueError("check_hostname requires server_hostname")`
-    > `ValueError: check_hostname requires server_hostname`
+    &gt; `raise ValueError(&#34;check_hostname requires server_hostname&#34;)`
+    &gt; `ValueError: check_hostname requires server_hostname`
 
 2. EOF occurred in violation of protocol
 
-    > `Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)'))) - skipping`
+    &gt; `Could not fetch URL https://pypi.org/simple/xxx/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host=&#39;pypi.org&#39;, port=443): Max retries exceeded with url: /simple/xxx/ (Caused by SSLError(SSLEOFError(8, &#39;EOF occurred in violation of protocol (_ssl.c:997)&#39;))) - skipping`
 
 ## 什么是 SSL ？
 

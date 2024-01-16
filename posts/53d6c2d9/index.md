@@ -96,7 +96,7 @@ Breed 拥有以下特性：
 | breed-ar9342-wr1041nv2.bin (不再更新)             | TP-LINK WR1042N v2 专用，波特率 115200，复位键 GPIO#14                                                                                  |
 | breed-ar9342-huawei-ws322.bin (不再更新)          | 华为 WS322 专用，波特率 115200，复位键 GPIO#0，WPS 键 GPIO#16                                                                           |
 | breed-ar9344.bin (不再更新)                       | AR9344 百兆版，通用，波特率 115200，复位键 GPIO#16                                                                                      |
-| breed-ar9344-ar8327n.bin (不再更新)               | AR9344 + AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16                                                                            |
+| breed-ar9344-ar8327n.bin (不再更新)               | AR9344 &#43; AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16                                                                            |
 | breed-ar9344-wdr3320v2.bin (不再更新)             | TP-LINK WDR3320  v2 专用，波特率 115200，复位键 GPIO#16                                                                                 |
 | breed-ar9344-wr941nv6.bin (不再更新)              | TP-LINK WR941N v6 专用，波特率 115200，复位键 GPIO#12                                                                                   |
 | breed-ar9344-mw4530r.bin (不再更新)               | 水星 MW4530R 专用，波特率 115200，复位键 GPIO#17，QSS 键 GPIO#16                                                                        |
@@ -107,8 +107,8 @@ Breed 拥有以下特性：
 | breed-qca953x.bin                                 | QCA9531/QCA9533，通用，波特率 115200，复位键 GPIO#12                                                                                    |
 | breed-qca953x-letv-lba-047-ch.bin                 | 乐视路由专用，波特率 115200，复位键 GPIO#17                                                                                             |
 | breed-qca9558-wr941nv7.bin                        | TP-LINK WR941N v7 专用，波特率 115200，复位键 GPIO#17                                                                                   |
-| breed-qca9558-ar8236.bin                          | QCA9558 + AR8236 百兆版，通用，波特率 115200，复位键 GPIO#16                                                                            |
-| breed-qca9558-ar8327n.bin                         | QCA9558 + AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16                                                                           |
+| breed-qca9558-ar8236.bin                          | QCA9558 &#43; AR8236 百兆版，通用，波特率 115200，复位键 GPIO#16                                                                            |
+| breed-qca9558-ar8327n.bin                         | QCA9558 &#43; AR8327N 千兆版，通用，波特率 115200，复位键 GPIO#16                                                                           |
 | breed-qca9558-wr2041nv2.bin                       | TP-LINK WR2041N v2 专用，波特率 115200，复位键 GPIO#17                                                                                  |
 | breed-qca9558-wr1043ndv2.bin                      | TP-LINK WR1043ND v2 专用，波特率 115200，复位键 GPIO#16                                                                                 |
 | breed-qca9558-dw33d.bin                           | 大麦 DW33D 专用，波特率 115200，复位键 GPIO#17                                                                                          |
@@ -160,13 +160,13 @@ Breed 的刷入和固件刷入流程基本一致：
 
 刷入 Breed 后，耐心等待设备重启，通常可以通过 192.168.1.1 这个地址来进入 Breed 的 Web 管理界面
 
-![Breed 的 Web 管理界面](Breed-WEB.png "Breed 的 Web 管理界面")
+![Breed 的 Web 管理界面](Breed-WEB.png &#34;Breed 的 Web 管理界面&#34;)
 
 ## 通过 Breed 刷机
 
 通过 Breed 刷机就很方便了，直接在 [固件更新](http://192.168.1.1/upgrade.html) 界面，勾选固件，并上传对应的固件，并勾选正确的闪存布局后，点击上传，等待设备重启即可
 
-![Breed 进行固件更新](Breed-upgrade.png "Breed 进行固件更新")
+![Breed 进行固件更新](Breed-upgrade.png &#34;Breed 进行固件更新&#34;)
 
 ## 其他功能
 

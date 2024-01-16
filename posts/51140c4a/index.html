@@ -10,7 +10,7 @@
 <meta name="description" content="OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的配置和使用过程" /><meta name="keywords" content='OpenWrt, 锐捷, IPv6, NAS' /><meta itemprop="name" content="OpenWrt 配置使用">
 <meta itemprop="description" content="OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的配置和使用过程"><meta itemprop="datePublished" content="2021-10-28T16:17:24+08:00" />
 <meta itemprop="dateModified" content="2022-11-19T15:30:47+08:00" />
-<meta itemprop="wordCount" content="4758">
+<meta itemprop="wordCount" content="4799">
 <meta itemprop="keywords" content="OpenWrt,锐捷,IPv6,NAS," /><meta property="og:title" content="OpenWrt 配置使用" />
 <meta property="og:description" content="OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的配置和使用过程" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/51140c4a\/"
-    },"genre": "posts","keywords": "OpenWrt, 锐捷, IPv6, NAS","wordcount":  4758 ,
+    },"genre": "posts","keywords": "OpenWrt, 锐捷, IPv6, NAS","wordcount":  4799 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/51140c4a\/","datePublished": "2021-10-28T16:17:24+08:00","dateModified": "2022-11-19T15:30:47+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>OpenWrt 配置使用</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 路由器</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2021-10-28 16:17:24"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2021-10-28">2021-10-28</time></span>&nbsp;<span title="更新于 2022-11-19 15:30:47"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-19">2022-11-19</time></span>&nbsp;<span title="4758 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 10 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="OpenWrt 配置使用">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" class="post-category" title="分类 - 路由器"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 路由器</a></span></div><div class="post-meta-line"><span title="发布于 2021-10-28 16:17:24"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-10-28">2021-10-28</time></span>&nbsp;<span title="更新于 2022-11-19 15:30:47"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-19">2022-11-19</time></span>&nbsp;<span title="4799 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 10 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="OpenWrt 配置使用">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -216,10 +210,10 @@
       <div class="details-content">
         <div class="admonition-content">本文最后更新于 2022-11-19，文中内容可能已过时。</div>
       </div>
-    </div><h2 id="web-界面">Web 界面</h2>
-<p>一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是 <code>root</code>，无密码，直接点击登录即可进入</p>
-<h3 id="汉化">汉化</h3>
-<p>默认界面是英文的，可以在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/opkg"target="_blank" rel="external nofollow noopener noreferrer">系统-软件</a> 中搜索中文包安装进行汉化</p>
+    </div><h2 id="web-界面" class="heading-element">
+  <a href="#web-%e7%95%8c%e9%9d%a2" class="heading-mark"></a>Web 界面</h2><p>一般 OpenWrt 安装好之后会已经默启用了 Web 管理界面（LuCI），默认地址是 <code>192.168.1.1</code>，默认账号是 <code>root</code>，无密码，直接点击登录即可进入</p>
+<h3 id="汉化" class="heading-element">
+  <a href="#%e6%b1%89%e5%8c%96" class="heading-mark"></a>汉化</h3><p>默认界面是英文的，可以在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/opkg"target="_blank" rel="external nofollow noopener noreferrer">系统-软件</a> 中搜索中文包安装进行汉化</p>
 <ul>
 <li>点击 <code>UPDATE LIST...</code> 耐心等待软件包的更新</li>
 <li>然后在 <code>Filter:</code> 下的输入框中输入 <code>luci-i18n-base-zh-cn</code>，在筛选出来的结果中点击 <code>INSTALL...</code>，安装勾上 <code>Overwrite files from other package(s)</code>，然后点击 <code>INSTALL</code>，耐心等待安装完成之后刷新网页（Ctrl+F5）可以看见大部分界面已经汉化了</li>
@@ -235,10 +229,10 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg update
 </span></span><span class="line"><span class="cl">opkg install luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn luci-i18n-firewall-zh-cn</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="root-密码">root 密码</h3>
-<p>进入管理界面后进入 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/password"target="_blank" rel="external nofollow noopener noreferrer">系统-管理-密码</a> 界面修改路由器密码，同时也是系统的 root 账号的密码</p>
-<h3 id="ssh">ssh</h3>
-<p>然后在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/dropbear"target="_blank" rel="external nofollow noopener noreferrer">系统-管理-ssh</a> 可以配置 ssh 登录，参考配置如下</p>
+</div><h3 id="root-密码" class="heading-element">
+  <a href="#root-%e5%af%86%e7%a0%81" class="heading-mark"></a>root 密码</h3><p>进入管理界面后进入 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/password"target="_blank" rel="external nofollow noopener noreferrer">系统-管理-密码</a> 界面修改路由器密码，同时也是系统的 root 账号的密码</p>
+<h3 id="ssh" class="heading-element">
+  <a href="#ssh" class="heading-mark"></a>ssh</h3><p>然后在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/dropbear"target="_blank" rel="external nofollow noopener noreferrer">系统-管理-ssh</a> 可以配置 ssh 登录，参考配置如下</p>
 <ul>
 <li>接口：不指定 → 内网以及外网都可以 ssh 登录</li>
 <li>端口：22 → ssh 默认端口，不做修改</li>
@@ -247,8 +241,8 @@
 <li>网关端口：根据需要勾选</li>
 </ul>
 <p>按照上面配置完成后将只能通过 ssh 密钥进行登录，所以还得在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/admin/sshkeys"target="_blank" rel="external nofollow noopener noreferrer">系统-管理-ssh密钥</a> 添加设备的公钥</p>
-<h3 id="升级-luci">升级 LuCI</h3>
-<p>ssh 登入路由器后执行以下命令：</p>
+<h3 id="升级-luci" class="heading-element">
+  <a href="#%e5%8d%87%e7%ba%a7-luci" class="heading-mark"></a>升级 LuCI</h3><p>ssh 登入路由器后执行以下命令：</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -262,8 +256,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># luci-compat 包有时可以帮助解决一些兼容性问题，推荐一同安装</span>
 </span></span><span class="line"><span class="cl">opkg install luci luci-base luci-compat</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="美化">美化</h3>
-<p>原始的 <code>bootstrap</code> 主题个人不太喜欢，在空间足够的情况下我个人额外安装了 <code>material</code>，主题的切换在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/system"target="_blank" rel="external nofollow noopener noreferrer">系统-系统-语言和界面</a> 中</p>
+</div><h3 id="美化" class="heading-element">
+  <a href="#%e7%be%8e%e5%8c%96" class="heading-mark"></a>美化</h3><p>原始的 <code>bootstrap</code> 主题个人不太喜欢，在空间足够的情况下我个人额外安装了 <code>material</code>，主题的切换在 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/system"target="_blank" rel="external nofollow noopener noreferrer">系统-系统-语言和界面</a> 中</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -273,10 +267,10 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg update
 </span></span><span class="line"><span class="cl">opkg install luci-theme-material</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="usb">USB</h2>
-<p>很多路由器有 USB 端口，通过插入 U 盘或者接入磁盘、SSD 等设备可以拓展存储空间，这样就可以安装更多的插件，或者搭建一个简单的 FTP、SMB 服务器用于共享数据</p>
-<h3 id="安装-usb-驱动">安装 USB 驱动</h3>
-<p>依次执行以下命令进行驱动基本包的安装</p>
+</div><h2 id="usb" class="heading-element">
+  <a href="#usb" class="heading-mark"></a>USB</h2><p>很多路由器有 USB 端口，通过插入 U 盘或者接入磁盘、SSD 等设备可以拓展存储空间，这样就可以安装更多的插件，或者搭建一个简单的 FTP、SMB 服务器用于共享数据</p>
+<h3 id="安装-usb-驱动" class="heading-element">
+  <a href="#%e5%ae%89%e8%a3%85-usb-%e9%a9%b1%e5%8a%a8" class="heading-mark"></a>安装 USB 驱动</h3><p>依次执行以下命令进行驱动基本包的安装</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -319,8 +313,8 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">opkg install kmod-usb-storage-uas</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后热插拔存储设备，通常就能在 <code>/dev</code> 目录下看见 <code>sda</code> 设备了</p>
-<h3 id="自动挂载">自动挂载</h3>
-<ul>
+<h3 id="自动挂载" class="heading-element">
+  <a href="#%e8%87%aa%e5%8a%a8%e6%8c%82%e8%bd%bd" class="heading-mark"></a>自动挂载</h3><ul>
 <li>
 <p>安装块设备工具包</p>
 <div class="highlight" id="id-8"><div class="chroma">
@@ -367,7 +361,7 @@
 <li>
 <p>配置挂载</p>
 <p>配置挂载可以通过直接在网页端的 <a href="http://192.168.1.1/cgi-bin/luci/admin/system/mounts"target="_blank" rel="external nofollow noopener noreferrer">系统-挂载点</a> 进行手动配置，比较直观，如图所示：</p>
-<p><figure><a class="lightgallery" href="/posts/51140c4a/Mount-sda6.png?size=large" data-thumbnail="/posts/51140c4a/Mount-sda6.png?size=small" data-sub-html="<h2>挂载设备</h2><p>挂载设备</p>"><img loading="lazy" src="/posts/51140c4a/Mount-sda6.png" srcset="/posts/51140c4a/Mount-sda6.png?size=small, /posts/51140c4a/Mount-sda6.png?size=medium 1.5x, /posts/51140c4a/Mount-sda6.png?size=large 2x" sizes="auto" data-title="挂载设备" data-alt="挂载设备" style="--width: 1692px;--aspect-ratio: 1692 / 474;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">挂载设备</figcaption>
+<p><figure><a class="lightgallery" href="/posts/51140c4a/Mount-sda6.png?size=large" data-thumbnail="/posts/51140c4a/Mount-sda6.png?size=small" data-sub-html="<h2>挂载设备</h2><p>挂载设备</p>"><img loading="lazy" src="/posts/51140c4a/Mount-sda6.png" alt="挂载设备" srcset="/posts/51140c4a/Mount-sda6.png?size=small, /posts/51140c4a/Mount-sda6.png?size=medium 1.5x, /posts/51140c4a/Mount-sda6.png?size=large 2x" sizes="auto" data-title="挂载设备" style="--width: 1692px;--aspect-ratio: 1692 / 474;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">挂载设备</figcaption>
   </figure></p>
 <ul>
 <li>已启用：勾选</li>
@@ -376,8 +370,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="extroot">Extroot</h3>
-<p>有时候安装太多包会导致本地空间不足，此时可以通过将包安装在 USB 设备上，也可以通过 Extroot 的方式将 USB 设备的空间直接配置成 <code>overlay</code> 分区，后者更为推荐</p>
+<h3 id="extroot" class="heading-element">
+  <a href="#extroot" class="heading-mark"></a>Extroot</h3><p>有时候安装太多包会导致本地空间不足，此时可以通过将包安装在 USB 设备上，也可以通过 Extroot 的方式将 USB 设备的空间直接配置成 <code>overlay</code> 分区，后者更为推荐</p>
 <ol>
 <li>
 <p>修改 <code>fstab</code>，将原本挂载的 <code>overlay</code> 设备挂载到新的目录 <code>/rwm</code></p>
@@ -457,10 +451,10 @@
 </div>
 </div></li>
 </ol>
-<h2 id="锐捷认证">锐捷认证</h2>
-<p>很多学校校园网通常采用锐捷认证，并且限制了用户账号的登陆数量，但是我们可以通过在路由器上进行锐捷认证来接入校园网，之后连接路由器的所有设备都会直接接入校园网而不需要认证了</p>
-<h3 id="mentohust">MentoHUST</h3>
-<p><strong>首选，自动重连比 Minieap 靠谱得多！！！</strong></p>
+<h2 id="锐捷认证" class="heading-element">
+  <a href="#%e9%94%90%e6%8d%b7%e8%ae%a4%e8%af%81" class="heading-mark"></a>锐捷认证</h2><p>很多学校校园网通常采用锐捷认证，并且限制了用户账号的登陆数量，但是我们可以通过在路由器上进行锐捷认证来接入校园网，之后连接路由器的所有设备都会直接接入校园网而不需要认证了</p>
+<h3 id="mentohust" class="heading-element">
+  <a href="#mentohust" class="heading-mark"></a>MentoHUST</h3><p><strong>首选，自动重连比 Minieap 靠谱得多！！！</strong></p>
 <p><a href="http://byhh.hust.edu.cn/cgi-bin/bbsnewtcon?board=NetResource&amp;file=M.1230774282.A"target="_blank" rel="external nofollow noopener noreferrer">MentoHUST</a> 是华中科技大学的 <a href="http://byhh.hust.edu.cn/cgi-bin/bbsqry?userid=HustMoon"target="_blank" rel="external nofollow noopener noreferrer">HustMoon</a> 最初在校内 BBS 白云黄鹤上发布的一款可以在 Linux 系统上进行锐捷认证的软件。不过 <a href="https://code.google.com/archive/p/mentohust/"target="_blank" rel="external nofollow noopener noreferrer">原始项目</a> 已经归档，不在开发，GitHub 上有加入 v4 支持的 <a href="https://github.com/hyrathb/mentohust"target="_blank" rel="external nofollow noopener noreferrer">新项目</a></p>
 <p>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</p>
 <ul>
@@ -468,22 +462,22 @@
 <li><del>通过 <a href="https://github.com/BoringCat/luci-app-mentohust"target="_blank" rel="external nofollow noopener noreferrer">OpenWrt/LEDE LuCI for MentoHUST</a> 项目可以生成 MentoHUST 的 LuCI 控制界面</del>（命令行已经足够）</li>
 </ul>
 <p>手动编译 <code>ipk</code> 文件的过程可以参考 <a href="/posts/96a1807/">这里</a></p>
-<h3 id="minieap"><del>MiniEAP</del></h3>
-<p><del><a href="https://github.com/updateing/minieap"target="_blank" rel="external nofollow noopener noreferrer">MiniEAP</a> 是一个实现了标准 EAP-MD5-Challenge 算法的 EAP 客户端，支持通过插件来修改标准数据包以通过特殊服务端的认证。同时含有支持锐捷 v3 (v4) 算法的插件，可以用来进行锐捷认证</del></p>
+<h3 id="minieap" class="heading-element">
+  <a href="#minieap" class="heading-mark"></a><del>MiniEAP</del></h3><p><del><a href="https://github.com/updateing/minieap"target="_blank" rel="external nofollow noopener noreferrer">MiniEAP</a> 是一个实现了标准 EAP-MD5-Challenge 算法的 EAP 客户端，支持通过插件来修改标准数据包以通过特殊服务端的认证。同时含有支持锐捷 v3 (v4) 算法的插件，可以用来进行锐捷认证</del></p>
 <p><del>而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 <code>.ipk</code> 文件，然后 <code>opkg install xxx.ipk</code> 进行安装即可</del></p>
 <ul>
 <li><del>通过 <a href="https://github.com/BoringCat/minieap-openwrt"target="_blank" rel="external nofollow noopener noreferrer">minieap-openwrt</a> 项目可以生成 <code>minieap</code> 的二进制文件</del></li>
 <li><del>(可选) 通过 <a href="https://github.com/BoringCat/luci-app-minieap"target="_blank" rel="external nofollow noopener noreferrer">OpenWrt/LEDE LuCI for minieap</a> 项目可以生成 MiniEAP 的 LuCI 控制界面</del></li>
 </ul>
 <p><del>补充：如果想要掉线自动重新认证，在配置文件中不要配置 <code>no-auto-reauth</code>，参考该 <a href="https://github.com/updateing/minieap/issues/43"target="_blank" rel="external nofollow noopener noreferrer">minieap@issue#43</a></del></p>
-<h2 id="防火墙">防火墙</h2>
-<p>防火墙规则的详细配置可以参考 <a href="https://openwrt.org/docs/guide-user/firewall/firewall_configuration#rules"target="_blank" rel="external nofollow noopener noreferrer">官方的介绍</a> 以及部分 <a href="https://openwrt.org/zh-cn/doc/uci/firewall#%E4%B8%BE%E4%BE%8B"target="_blank" rel="external nofollow noopener noreferrer">例子</a></p>
-<h3 id="开放端口">开放端口</h3>
-<p>以开放 80 端口，用于外网直接访问 Web 界面为例：</p>
+<h2 id="防火墙" class="heading-element">
+  <a href="#%e9%98%b2%e7%81%ab%e5%a2%99" class="heading-mark"></a>防火墙</h2><p>防火墙规则的详细配置可以参考 <a href="https://openwrt.org/docs/guide-user/firewall/firewall_configuration#rules"target="_blank" rel="external nofollow noopener noreferrer">官方的介绍</a> 以及部分 <a href="https://openwrt.org/zh-cn/doc/uci/firewall#%E4%B8%BE%E4%BE%8B"target="_blank" rel="external nofollow noopener noreferrer">例子</a></p>
+<h3 id="开放端口" class="heading-element">
+  <a href="#%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3" class="heading-mark"></a>开放端口</h3><p>以开放 80 端口，用于外网直接访问 Web 界面为例：</p>
 <ol>
 <li>
 <p>首先要在 <a href="http://192.168.1.1/cgi-bin/luci/admin/network/firewall/rules"target="_blank" rel="external nofollow noopener noreferrer">网络-防火墙-通信规则</a> 点击新增，进行如下配置</p>
-<p><figure><a class="lightgallery" href="/posts/51140c4a/Allow-LuCI-WAN.png?size=large" data-thumbnail="/posts/51140c4a/Allow-LuCI-WAN.png?size=small" data-sub-html="<h2>开放 80 端口</h2><p>开放 80 端口</p>"><img loading="lazy" src="/posts/51140c4a/Allow-LuCI-WAN.png" srcset="/posts/51140c4a/Allow-LuCI-WAN.png?size=small, /posts/51140c4a/Allow-LuCI-WAN.png?size=medium 1.5x, /posts/51140c4a/Allow-LuCI-WAN.png?size=large 2x" sizes="auto" data-title="开放 80 端口" data-alt="开放 80 端口" style="--width: 1689px;--aspect-ratio: 1689 / 803;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">开放 80 端口</figcaption>
+<p><figure><a class="lightgallery" href="/posts/51140c4a/Allow-LuCI-WAN.png?size=large" data-thumbnail="/posts/51140c4a/Allow-LuCI-WAN.png?size=small" data-sub-html="<h2>开放 80 端口</h2><p>开放 80 端口</p>"><img loading="lazy" src="/posts/51140c4a/Allow-LuCI-WAN.png" alt="开放 80 端口" srcset="/posts/51140c4a/Allow-LuCI-WAN.png?size=small, /posts/51140c4a/Allow-LuCI-WAN.png?size=medium 1.5x, /posts/51140c4a/Allow-LuCI-WAN.png?size=large 2x" sizes="auto" data-title="开放 80 端口" style="--width: 1689px;--aspect-ratio: 1689 / 803;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">开放 80 端口</figcaption>
   </figure></p>
 <ul>
 <li>名称：可以随意设置</li>
@@ -501,12 +495,12 @@
 </li>
 </ol>
 <p>如果这时外网还是不能访问 LuCI 的 Web 界面，可以尝试路由器重启，确认路由器的 IP 是否能够 ping 通，以及确认 80 端口有没有被运营商封禁</p>
-<h3 id="端口转发">端口转发</h3>
-<p>以将 Windows 的远程连接的端口 3389 为例：</p>
+<h3 id="端口转发" class="heading-element">
+  <a href="#%e7%ab%af%e5%8f%a3%e8%bd%ac%e5%8f%91" class="heading-mark"></a>端口转发</h3><p>以将 Windows 的远程连接的端口 3389 为例：</p>
 <ol>
 <li>
 <p>首先要在 <a href="http://192.168.1.1/cgi-bin/luci/admin/network/firewall/forwards"target="_blank" rel="external nofollow noopener noreferrer">网络-防火墙-端口转发</a> 点击新增，进行如下配置</p>
-<p><figure><a class="lightgallery" href="/posts/51140c4a/Win-Remote.png?size=large" data-thumbnail="/posts/51140c4a/Win-Remote.png?size=small" data-sub-html="<h2>端口转发</h2><p>端口转发</p>"><img loading="lazy" src="/posts/51140c4a/Win-Remote.png" srcset="/posts/51140c4a/Win-Remote.png?size=small, /posts/51140c4a/Win-Remote.png?size=medium 1.5x, /posts/51140c4a/Win-Remote.png?size=large 2x" sizes="auto" data-title="端口转发" data-alt="端口转发" style="--width: 1689px;--aspect-ratio: 1689 / 790;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">端口转发</figcaption>
+<p><figure><a class="lightgallery" href="/posts/51140c4a/Win-Remote.png?size=large" data-thumbnail="/posts/51140c4a/Win-Remote.png?size=small" data-sub-html="<h2>端口转发</h2><p>端口转发</p>"><img loading="lazy" src="/posts/51140c4a/Win-Remote.png" alt="端口转发" srcset="/posts/51140c4a/Win-Remote.png?size=small, /posts/51140c4a/Win-Remote.png?size=medium 1.5x, /posts/51140c4a/Win-Remote.png?size=large 2x" sizes="auto" data-title="端口转发" style="--width: 1689px;--aspect-ratio: 1689 / 790;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">端口转发</figcaption>
   </figure></p>
 <ul>
 <li>名称：可以随意设置</li>
@@ -523,8 +517,8 @@
 </li>
 </ol>
 <p>后续就可以通过访问路由器 <code>WAN_IP:13389</code> 来远程连接内网的 Windows 主机了</p>
-<h2 id="ipv6">IPv6</h2>
-<p>在校园网环境下发现 WAN 口默认能自动获取到 IPv6 地址（但是 /128 的地址），并且在路由器上测试也能正常访问 IPv6 网站，但是局域网内的设备不能正常访问 IPv6 网站，于是选择 NAT6 的方式来解决</p>
+<h2 id="ipv6" class="heading-element">
+  <a href="#ipv6" class="heading-mark"></a>IPv6</h2><p>在校园网环境下发现 WAN 口默认能自动获取到 IPv6 地址（但是 /128 的地址），并且在路由器上测试也能正常访问 IPv6 网站，但是局域网内的设备不能正常访问 IPv6 网站，于是选择 NAT6 的方式来解决</p>
 <p>参考 <a href="https://openwrt.org/docs/guide-user/network/ipv6/ipv6.nat6"target="_blank" rel="external nofollow noopener noreferrer">官网的 NAT6 文档</a>，需要在路由器内依次进行如下配置：</p>
 <p>注：基于 OpenWrt 22.03.2 版本配置，版本不同配置可能有所不同！</p>
 <ol>
@@ -651,8 +645,8 @@
 <p>重启路由器</p>
 </li>
 </ol>
-<h2 id="zerotier">ZeroTier</h2>
-<p>为了异地内网互访，ZeroTier 可以算是一个“神器”了，虽然不如 frp 稳定，但是胜在免费，无需公网 VPS</p>
+<h2 id="zerotier" class="heading-element">
+  <a href="#zerotier" class="heading-mark"></a>ZeroTier</h2><p>为了异地内网互访，ZeroTier 可以算是一个“神器”了，虽然不如 frp 稳定，但是胜在免费，无需公网 VPS</p>
 <ol>
 <li>
 <p>首先安装 zerotier 包</p>
@@ -859,13 +853,13 @@
 </span></span><span class="line"><span class="cl">/etc/init.d/firewall restart</span></span></code></pre></td></tr></table>
 </div>
 </div><p>至此路由器本身的配置就完了，然后需要去 <a href="https://my.zerotier.com/network"target="_blank" rel="external nofollow noopener noreferrer">zerotier 官网</a> 配置一下路由</p>
-<p><figure><a class="lightgallery" href="/posts/51140c4a/ZeroTier-Routes.png?size=large" data-thumbnail="/posts/51140c4a/ZeroTier-Routes.png?size=small" data-sub-html="<h2>ZeroTier 路由管理</h2><p>ZeroTier 路由管理</p>"><img loading="lazy" src="/posts/51140c4a/ZeroTier-Routes.png" srcset="/posts/51140c4a/ZeroTier-Routes.png?size=small, /posts/51140c4a/ZeroTier-Routes.png?size=medium 1.5x, /posts/51140c4a/ZeroTier-Routes.png?size=large 2x" sizes="auto" data-title="ZeroTier 路由管理" data-alt="ZeroTier 路由管理" style="--width: 1084px;--aspect-ratio: 1084 / 1160;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ZeroTier 路由管理</figcaption>
+<p><figure><a class="lightgallery" href="/posts/51140c4a/ZeroTier-Routes.png?size=large" data-thumbnail="/posts/51140c4a/ZeroTier-Routes.png?size=small" data-sub-html="<h2>ZeroTier 路由管理</h2><p>ZeroTier 路由管理</p>"><img loading="lazy" src="/posts/51140c4a/ZeroTier-Routes.png" alt="ZeroTier 路由管理" srcset="/posts/51140c4a/ZeroTier-Routes.png?size=small, /posts/51140c4a/ZeroTier-Routes.png?size=medium 1.5x, /posts/51140c4a/ZeroTier-Routes.png?size=large 2x" sizes="auto" data-title="ZeroTier 路由管理" style="--width: 1084px;--aspect-ratio: 1084 / 1160;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ZeroTier 路由管理</figcaption>
   </figure></p>
 <p>例如我的局域网段选的 <code>192.168.192.*</code>，两个路由器实际的内网的 LAN 口配置依次为 <code>192.168.22.0/24</code> 和 <code>192.168.33.0/24</code> 对应左边的红框，路由器自身的 ZeroTier 的虚拟 IP 为 <code>192.168.192.22</code> 和 <code>192.168.192.33</code> 则对应着右边红框，这里不详细展开，可以参考 <a href="https://stray.love/jiao-cheng/zerotier-zhong-jie-jiao-cheng"target="_blank" rel="external nofollow noopener noreferrer">这篇博文</a></p>
 </li>
 </ol>
-<h2 id="ftp">FTP</h2>
-<p>配置好 USB 后，就可以配置 FTP 来共享 USB 设备</p>
+<h2 id="ftp" class="heading-element">
+  <a href="#ftp" class="heading-mark"></a>FTP</h2><p>配置好 USB 后，就可以配置 FTP 来共享 USB 设备</p>
 <ol>
 <li>
 <p>首先安装 vsftpd 包</p>
@@ -955,7 +949,7 @@
 </div></li>
 <li>
 <p>然后参考之前的 <a href="#%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3">开放端口</a>，打开 20、21、10090-10100 端口就可以在外网访问 FTP 服务器了</p>
-<p><figure><a class="lightgallery" href="/posts/51140c4a/Allow-FTP-WAN.png?size=large" data-thumbnail="/posts/51140c4a/Allow-FTP-WAN.png?size=small" data-sub-html="<h2>开放 FTP 端口</h2><p>开放 FTP 端口</p>"><img loading="lazy" src="/posts/51140c4a/Allow-FTP-WAN.png" srcset="/posts/51140c4a/Allow-FTP-WAN.png?size=small, /posts/51140c4a/Allow-FTP-WAN.png?size=medium 1.5x, /posts/51140c4a/Allow-FTP-WAN.png?size=large 2x" sizes="auto" data-title="开放 FTP 端口" data-alt="开放 FTP 端口" style="--width: 1695px;--aspect-ratio: 1695 / 809;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">开放 FTP 端口</figcaption>
+<p><figure><a class="lightgallery" href="/posts/51140c4a/Allow-FTP-WAN.png?size=large" data-thumbnail="/posts/51140c4a/Allow-FTP-WAN.png?size=small" data-sub-html="<h2>开放 FTP 端口</h2><p>开放 FTP 端口</p>"><img loading="lazy" src="/posts/51140c4a/Allow-FTP-WAN.png" alt="开放 FTP 端口" srcset="/posts/51140c4a/Allow-FTP-WAN.png?size=small, /posts/51140c4a/Allow-FTP-WAN.png?size=medium 1.5x, /posts/51140c4a/Allow-FTP-WAN.png?size=large 2x" sizes="auto" data-title="开放 FTP 端口" style="--width: 1695px;--aspect-ratio: 1695 / 809;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">开放 FTP 端口</figcaption>
   </figure></p>
 </li>
 <li>
@@ -970,8 +964,8 @@
 </div></li>
 </ol>
 <p>P.S. 连接 ftp 服务器的账号密码就是路由器的 root 账号密码</p>
-<h2 id="smb">SMB</h2>
-<p>使用 Samba 来共享的设备可以在 Windows 的文件资源管理器中挂载，使用起来和本地磁盘一样（在局域网内）</p>
+<h2 id="smb" class="heading-element">
+  <a href="#smb" class="heading-mark"></a>SMB</h2><p>使用 Samba 来共享的设备可以在 Windows 的文件资源管理器中挂载，使用起来和本地磁盘一样（在局域网内）</p>
 <ol>
 <li>
 <p>安装 samba4-server 以及 LuCI 管理界面</p>
@@ -987,7 +981,7 @@
 </div></li>
 <li>
 <p>在网页端的 <a href="http://192.168.1.1/cgi-bin/luci/admin/services/samba4"target="_blank" rel="external nofollow noopener noreferrer">服务-网络共享</a> 中进行配置，个人配置如下，可以参考</p>
-<p><figure><a class="lightgallery" href="/posts/51140c4a/Samba.png?size=large" data-thumbnail="/posts/51140c4a/Samba.png?size=small" data-sub-html="<h2>Samba 配置</h2><p>Samba 配置</p>"><img loading="lazy" src="/posts/51140c4a/Samba.png" srcset="/posts/51140c4a/Samba.png?size=small, /posts/51140c4a/Samba.png?size=medium 1.5x, /posts/51140c4a/Samba.png?size=large 2x" sizes="auto" data-title="Samba 配置" data-alt="Samba 配置" style="--width: 1469px;--aspect-ratio: 1469 / 362;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Samba 配置</figcaption>
+<p><figure><a class="lightgallery" href="/posts/51140c4a/Samba.png?size=large" data-thumbnail="/posts/51140c4a/Samba.png?size=small" data-sub-html="<h2>Samba 配置</h2><p>Samba 配置</p>"><img loading="lazy" src="/posts/51140c4a/Samba.png" alt="Samba 配置" srcset="/posts/51140c4a/Samba.png?size=small, /posts/51140c4a/Samba.png?size=medium 1.5x, /posts/51140c4a/Samba.png?size=large 2x" sizes="auto" data-title="Samba 配置" style="--width: 1469px;--aspect-ratio: 1469 / 362;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Samba 配置</figcaption>
   </figure></p>
 </li>
 <li>
@@ -1002,8 +996,8 @@
 </div></li>
 </ol>
 <p>P.S. 连接 Samba 服务器的账号密码也是路由器的 root 账号密码</p>
-<h2 id="bt-下载">BT 下载</h2>
-<p>transmission 是一个轻量级跨平台的 BT 下载客户端</p>
+<h2 id="bt-下载" class="heading-element">
+  <a href="#bt-%e4%b8%8b%e8%bd%bd" class="heading-mark"></a>BT 下载</h2><p>transmission 是一个轻量级跨平台的 BT 下载客户端</p>
 <ol>
 <li>
 <p>安装 transmission</p>
@@ -1025,7 +1019,7 @@
 </div></li>
 <li>
 <p>直接修改 <code>/etc/config/transmission</code>，或者在网页端的 <a href="http://192.168.1.1/cgi-bin/luci/admin/services/transmission"target="_blank" rel="external nofollow noopener noreferrer">服务-Transmission</a> 进行配置，下面给出个人配置，可以参考</p>
-<p><figure><a class="lightgallery" href="/posts/51140c4a/Transmission.png?size=large" data-thumbnail="/posts/51140c4a/Transmission.png?size=small" data-sub-html="<h2>Transmission 配置</h2><p>Transmission 配置</p>"><img loading="lazy" src="/posts/51140c4a/Transmission.png" srcset="/posts/51140c4a/Transmission.png?size=small, /posts/51140c4a/Transmission.png?size=medium 1.5x, /posts/51140c4a/Transmission.png?size=large 2x" sizes="auto" data-title="Transmission 配置" data-alt="Transmission 配置" style="--width: 1462px;--aspect-ratio: 1462 / 5110;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Transmission 配置</figcaption>
+<p><figure><a class="lightgallery" href="/posts/51140c4a/Transmission.png?size=large" data-thumbnail="/posts/51140c4a/Transmission.png?size=small" data-sub-html="<h2>Transmission 配置</h2><p>Transmission 配置</p>"><img loading="lazy" src="/posts/51140c4a/Transmission.png" alt="Transmission 配置" srcset="/posts/51140c4a/Transmission.png?size=small, /posts/51140c4a/Transmission.png?size=medium 1.5x, /posts/51140c4a/Transmission.png?size=large 2x" sizes="auto" data-title="Transmission 配置" style="--width: 1462px;--aspect-ratio: 1462 / 5110;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Transmission 配置</figcaption>
   </figure></p>
 <div class="highlight" id="id-35"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1165,8 +1159,8 @@
 <p>连接的账号密码为自行配置的 <code>RPC</code> 连接的账号密码</p>
 <p>默认的 <a href="http://192.168.1.1:9091/transmission/web/"target="_blank" rel="external nofollow noopener noreferrer">Web 界面</a> 比较简陋，并且不能配置 tracker，个人推荐使用 <a href="https://github.com/transmission-remote-gui/transgui"target="_blank" rel="external nofollow noopener noreferrer">transgui</a> 来 <code>RPC</code> 连接使用</p>
 <p>如果需要远程访问，则需要将 <code>rpc_port</code> 配置的端口开放，具体流程参考 <a href="#%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3">上文</a></p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
+<h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
 <li><a href="https://openwrt.org/docs/guide-user/luci/luci.essentials"target="_blank" rel="external nofollow noopener noreferrer">【OpenWrt】LuCI</a></li>
 <li><a href="https://blog.csdn.net/weixin_43274097/article/details/107197717"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】luci.cbi 报错</a></li>
 <li><a href="https://github.com/kuoruan/luci-app-v2ray/issues/42"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】应用设置界面错误</a></li>
@@ -1197,7 +1191,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -1208,36 +1202,16 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/e6410576/" title="小米 WR30U 解锁并刷机">小米 WR30U 解锁并刷机</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/wr30u/"><i class="fa fa-tag fa-fw"></i>WR30U</a>&nbsp;
-            <a class="tag-same" href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
-            <a class="tag-diff" href="/tags/bootloader/"><i class="fa fa-tag fa-fw"></i>BootLoader</a>&nbsp;
-            <a class="tag-diff" href="/tags/immortalwrt/"><i class="fa fa-tag fa-fw"></i>ImmortalWrt</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/96a1807/" title="OpenWrt 手动编译 ipk">OpenWrt 手动编译 ipk</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/"><i class="fa fa-tag fa-fw"></i>交叉编译</a>&nbsp;
-            <a class="tag-diff" href="/tags/ipk/"><i class="fa fa-tag fa-fw"></i>ipk</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/8507aaa1/" title="OpenWrt 简介和安装">OpenWrt 简介和安装</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/e6410576/" title="小米 WR30U 解锁并刷机">小米 WR30U 解锁并刷机</a></li><li>
+          <a href="/posts/96a1807/" title="OpenWrt 手动编译 ipk">OpenWrt 手动编译 ipk</a></li><li>
+          <a href="/posts/8507aaa1/" title="OpenWrt 简介和安装">OpenWrt 简介和安装</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -1245,18 +1219,16 @@
       <div class="post-info-mod">
         <span title="更新于 2022-11-19 15:30:47">更新于 2022-11-19&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/51140c4a/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/51140c4a/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/openwrt/' class="post-tag">OpenWrt</a><a href='/tags/%E9%94%90%E6%8D%B7/' class="post-tag">锐捷</a><a href='/tags/ipv6/' class="post-tag">IPv6</a><a href='/tags/nas/' class="post-tag">NAS</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/openwrt/" class="post-tag" title="标签 - OpenWrt">OpenWrt</a><a href="/tags/%E9%94%90%E6%8D%B7/" class="post-tag" title="标签 - 锐捷">锐捷</a><a href="/tags/ipv6/" class="post-tag" title="标签 - IPv6">IPv6</a><a href="/tags/nas/" class="post-tag" title="标签 - NAS">NAS</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -1288,11 +1260,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -1300,5 +1275,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

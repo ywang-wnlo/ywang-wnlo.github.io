@@ -19,10 +19,10 @@ vim .bashrc
 # vim .zshrc
 
 # 新增以下内容
-export LC_ALL="en_US.UTF-8"
+export LC_ALL=&#34;en_US.UTF-8&#34;
 ```
 
-然后重新登录 shell 或者手动执行一下 `export LC_ALL="en_US.UTF-8"`
+然后重新登录 shell 或者手动执行一下 `export LC_ALL=&#34;en_US.UTF-8&#34;`
 
 然后再执行
 

@@ -1,28 +1,28 @@
-# 从 C 过渡到 C++
+# 从 C 过渡到 C&#43;&#43;
 
 
 ## 前言
 
 由于 C 语言缺乏对 Map、Set 等数据结构的支持，在写算法题时，经常需要自己实现这些数据结构或者借助第三方库，例如 [uthash](https://troydhanson.github.io/uthash/userguide.html) 等。
 
-但是很难保证，线上笔试的编译环境是否支持这些第三方库，因此为了秋招以及重温对 C++ 的理解，最近在重新梳理 C++ 的知识。
+但是很难保证，线上笔试的编译环境是否支持这些第三方库，因此为了秋招以及重温对 C&#43;&#43; 的理解，最近在重新梳理 C&#43;&#43; 的知识。
 
 ## 字符串以及文件操作
 
 ### 字符串
 
-C++ 支持字符串类型，即 `string`，而 C 语言中没有字符串类型，只能使用字符数组来表示字符串。
-C++ 中的字符串类型为 `string`，其定义在 `string` 头文件中。
+C&#43;&#43; 支持字符串类型，即 `string`，而 C 语言中没有字符串类型，只能使用字符数组来表示字符串。
+C&#43;&#43; 中的字符串类型为 `string`，其定义在 `string` 头文件中。
 
 ```cpp
-#include <iostream>
-#include <string>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
 
 using namespace std;
 
 int main() {
-    string s = "Hello World";
-    cout << s << endl;
+    string s = &#34;Hello World&#34;;
+    cout &lt;&lt; s &lt;&lt; endl;
     return 0;
 }
 ```
@@ -30,54 +30,54 @@ int main() {
 针对 `string` 类型的变量，可以继续用 `[]` 进行索引，也可以使用 `size()` 函数获取字符串的长度。
 
 ```cpp
-#include <iostream>
-#include <string>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
 
 using namespace std;
 
 int main() {
-    string s = "Hello World";
-    for (int i = 0; i < s.size(); i++) {
-        cout << s[i];
+    string s = &#34;Hello World&#34;;
+    for (int i = 0; i &lt; s.size(); i&#43;&#43;) {
+        cout &lt;&lt; s[i];
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     return 0;
 }
 ```
 
-C++ 中的字符串类型和字符数组之间可以相互转换，只需使用 `c_str()` 函数以及 `string` 构造函数进行转换即可。
+C&#43;&#43; 中的字符串类型和字符数组之间可以相互转换，只需使用 `c_str()` 函数以及 `string` 构造函数进行转换即可。
 
 ```cpp
-#include <iostream>
-#include <string>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
 
 using namespace std;
 
 int main() {
-    string s = "Hello World";
+    string s = &#34;Hello World&#34;;
     char c[100];
     strcpy(c, s.c_str());
-    printf("%s\n", c);
+    printf(&#34;%s\n&#34;, c);
 
     string s2(c);
-    cout << s2 << endl;
+    cout &lt;&lt; s2 &lt;&lt; endl;
     return 0;
 }
 ```
 
 ### 标准输入输出
 
-`cin` 和 `cout` 是 C++ 的标准输入输出流，分别对应于 C 语言中的 `scanf` 和 `printf`。
+`cin` 和 `cout` 是 C&#43;&#43; 的标准输入输出流，分别对应于 C 语言中的 `scanf` 和 `printf`。
 
 ```cpp
-#include <iostream>
+#include &lt;iostream&gt;
 
 using namespace std;
 
 int main() {
     int a, b;
-    cin >> a >> b;
-    cout << a + b << endl;
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; a &#43; b &lt;&lt; endl;
     return 0;
 }
 ```
@@ -85,15 +85,15 @@ int main() {
 然而 `cout` 的格式化输出较为麻烦，例如输出一个浮点数，需要指定精度、小数点后保留的位数等。
 
 ```cpp
-#include <iostream>
+#include &lt;iostream&gt;
 // iomanip 头文件中定义了一些用于格式化输出的函数
-#include <iomanip>
+#include &lt;iomanip&gt;
 
 using namespace std;
 
 int main() {
     double a = 1.0 / 3.0;
-    cout << fixed << setprecision(3) << a << endl;
+    cout &lt;&lt; fixed &lt;&lt; setprecision(3) &lt;&lt; a &lt;&lt; endl;
     return 0;
 }
 ```
@@ -102,20 +102,20 @@ int main() {
 
 ### 文件输入输出
 
-C++ 中的文件输入输出流分别为 `ifstream` 和 `ofstream`，分别对应于 C 语言中的 `fopen` 和 `fprintf`。
+C&#43;&#43; 中的文件输入输出流分别为 `ifstream` 和 `ofstream`，分别对应于 C 语言中的 `fopen` 和 `fprintf`。
 
 ```cpp
-#include <iostream>
-#include <fstream>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
 
 using namespace std;
 
 int main() {
-    ifstream fin("input.txt");
-    ofstream fout("output.txt");
+    ifstream fin(&#34;input.txt&#34;);
+    ofstream fout(&#34;output.txt&#34;);
     int a, b;
-    fin >> a >> b;
-    fout << a + b << endl;
+    fin &gt;&gt; a &gt;&gt; b;
+    fout &lt;&lt; a &#43; b &lt;&lt; endl;
     return 0;
 }
 ```
@@ -130,18 +130,18 @@ int main() {
 `eof` 函数用于判断输入流是否已经读取到文件末尾。
 
 ```cpp
-#include <iostream>
-#include <fstream>
-#include <string>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
 
 using namespace std;
 
 int main() {
-    ifstream fin("input.txt");
+    ifstream fin(&#34;input.txt&#34;);
     string a;
     while (!fin.eof()) {
         getline(fin, a);
-        cout << a << endl;
+        cout &lt;&lt; a &lt;&lt; endl;
     }
     return 0;
 }
@@ -153,29 +153,29 @@ int main() {
 他们的用法类似，只是返回值类型不同。
 
 ```cpp
-#include <iostream>
-#include <string>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
 
 using namespace std;
 
 int main() {
-    string a = "123";
+    string a = &#34;123&#34;;
     int b = stoi(a);
-    cout << b << endl;
+    cout &lt;&lt; b &lt;&lt; endl;
 
-    string c = "123.456";
+    string c = &#34;123.456&#34;;
     float d = stof(c);
-    cout << d << endl;
+    cout &lt;&lt; d &lt;&lt; endl;
 }
 ```
 
 ## STL
 
-STL 即标准模板库是 C++ 中的一个重要组成部分，包含了很多常用的数据结构和算法，例如 `vector`、`map`、`set`、`sort` 等。
+STL 即标准模板库是 C&#43;&#43; 中的一个重要组成部分，包含了很多常用的数据结构和算法，例如 `vector`、`map`、`set`、`sort` 等。
 
 ### 容器与容器适配器
 
-C++ 的 STL 包含基础的容器和容器适配器，容器适配器是基础容器的封装，提供了一些特殊的功能。
+C&#43;&#43; 的 STL 包含基础的容器和容器适配器，容器适配器是基础容器的封装，提供了一些特殊的功能。
 
 - 序列式容器：`vector`、`deque`、`forward_list`、`list`、`array`
 - 关联式容器：`set`、`map`、`unordered_set`、`unordered_map`
@@ -199,42 +199,42 @@ C++ 的 STL 包含基础的容器和容器适配器，容器适配器是基础�
 - `back()`：获取数组的末尾元素
 
 ```cpp
-#include <iostream>
-#include <vector>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
 
 using namespace std;
 
 int main() {
-    vector<int> v;
+    vector&lt;int&gt; v;
     v.push_back(1);
     v.push_back(2);
     v.emplace_back(3);
     v.emplace_back(4);
-    for (int i = 0; i < v.size(); i++) {
-        cout << v[i] << " ";
+    for (int i = 0; i &lt; v.size(); i&#43;&#43;) {
+        cout &lt;&lt; v[i] &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 1 2 3 4
 
     v.pop_back();
     v.pop_back();
-    vector<int>::iterator it;
-    for (it = v.begin(); it != v.end(); it++) {
-        cout << *it << " ";
+    vector&lt;int&gt;::iterator it;
+    for (it = v.begin(); it != v.end(); it&#43;&#43;) {
+        cout &lt;&lt; *it &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 1 2
 
     v.insert(v.begin(), 3);
-    v.insert(v.begin() + 1, 4);
-    for (int i = 0; i < v.size(); i++) {
-        cout << v[i] << " ";
+    v.insert(v.begin() &#43; 1, 4);
+    for (int i = 0; i &lt; v.size(); i&#43;&#43;) {
+        cout &lt;&lt; v[i] &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 3 4 1 2
 
     v.clear();
-    cout << v.empty() << endl;
+    cout &lt;&lt; v.empty() &lt;&lt; endl;
     // 1
     return 0;
 }
@@ -242,34 +242,34 @@ int main() {
 
 ### 快速排序
 
-C++ 中的快速排序函数为 `sort`，包含在 `algorithm` 头文件中，其第一个参数为数组的首地址，第二个参数为数组的末尾地址，第三个参数为比较函数。
+C&#43;&#43; 中的快速排序函数为 `sort`，包含在 `algorithm` 头文件中，其第一个参数为数组的首地址，第二个参数为数组的末尾地址，第三个参数为比较函数。
 
 ```cpp
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
 
 using namespace std;
 
 bool myfunction (int i, int j) {
-    return i > j;
+    return i &gt; j;
 }
 
 int main () {
-    vector<int> myvector = {32,71,12,45,26,80,53,33};
+    vector&lt;int&gt; myvector = {32,71,12,45,26,80,53,33};
 
-    // 默认升序(操作符 <)
-    sort(myvector.begin(), myvector.begin() + 4);
+    // 默认升序(操作符 &lt;)
+    sort(myvector.begin(), myvector.begin() &#43; 4);
     // (12 32 45 71) 26 80 53 33
 
     // 自定义比较函数
-    sort(myvector.begin() + 4, myvector.end(), myfunction);
+    sort(myvector.begin() &#43; 4, myvector.end(), myfunction);
     // 12 32 45 71 (80 53 33 26)
 
-    for (int i = 0; i < myvector.size(); i++) {
-        cout << myvector[i] << " ";
+    for (int i = 0; i &lt; myvector.size(); i&#43;&#43;) {
+        cout &lt;&lt; myvector[i] &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
 
     return 0;
 }
@@ -294,42 +294,42 @@ int main () {
 - `back()`：获取队列的末尾元素
 
 ```cpp
-#include <iostream>
-#include <deque>
+#include &lt;iostream&gt;
+#include &lt;deque&gt;
 
 using namespace std;
 
 int main() {
-    deque<int> d;
+    deque&lt;int&gt; d;
     d.push_back(1);
     d.push_back(2);
     d.emplace_back(3);
     d.emplace_back(4);
-    for (int i = 0; i < d.size(); i++) {
-        cout << d[i] << " ";
+    for (int i = 0; i &lt; d.size(); i&#43;&#43;) {
+        cout &lt;&lt; d[i] &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 1 2 3 4
 
     d.pop_back();
     d.pop_back();
-    deque<int>::iterator it;
-    for (it = d.begin(); it != d.end(); it++) {
-        cout << *it << " ";
+    deque&lt;int&gt;::iterator it;
+    for (it = d.begin(); it != d.end(); it&#43;&#43;) {
+        cout &lt;&lt; *it &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 1 2
 
     d.push_front(3);
     d.push_front(4);
-    for (int i = 0; i < d.size(); i++) {
-        cout << d[i] << " ";
+    for (int i = 0; i &lt; d.size(); i&#43;&#43;) {
+        cout &lt;&lt; d[i] &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 4 3 1 2
 
     d.clear();
-    cout << d.empty() << endl;
+    cout &lt;&lt; d.empty() &lt;&lt; endl;
     // 1
     return 0;
 }
@@ -348,25 +348,25 @@ int main() {
 - `back()`：获取队列的末尾元素
 
 ```cpp
-#include <iostream>
-#include <queue>
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
 
 using namespace std;
 
 int main() {
-    queue<int> q;
+    queue&lt;int&gt; q;
     q.push(1);
     q.push(2);
     q.emplace(3);
     q.emplace(4);
-    cout << q.front() << endl;
+    cout &lt;&lt; q.front() &lt;&lt; endl;
     // 1
-    cout << q.back() << endl;
+    cout &lt;&lt; q.back() &lt;&lt; endl;
     // 4
     q.pop();
-    cout << q.front() << endl;
+    cout &lt;&lt; q.front() &lt;&lt; endl;
     // 2
-    cout << q.back() << endl;
+    cout &lt;&lt; q.back() &lt;&lt; endl;
     // 4
     return 0;
 }
@@ -384,21 +384,21 @@ int main() {
 - `top()`：获取栈顶元素
 
 ```cpp
-#include <iostream>
-#include <stack>
+#include &lt;iostream&gt;
+#include &lt;stack&gt;
 
 using namespace std;
 
 int main() {
-    stack<int> s;
+    stack&lt;int&gt; s;
     s.push(1);
     s.push(2);
     s.emplace(3);
     s.emplace(4);
-    cout << s.top() << endl;
+    cout &lt;&lt; s.top() &lt;&lt; endl;
     // 4
     s.pop();
-    cout << s.top() << endl;
+    cout &lt;&lt; s.top() &lt;&lt; endl;
     // 3
     return 0;
 }
@@ -421,34 +421,34 @@ int main() {
 - 如果想要实现从小到大的顺序排列，也就是小顶堆、小根堆，需要使用 `greater` 比较函数。
 
 ```cpp
-#include <iostream>
-#include <queue>
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
 
 using namespace std;
 
 int main() {
     // 默认大顶堆
-    priority_queue<int> q;
+    priority_queue&lt;int&gt; q;
     q.push(1);
     q.push(2);
     q.emplace(3);
     q.emplace(4);
-    cout << q.top() << endl;
+    cout &lt;&lt; q.top() &lt;&lt; endl;
     // 4
     q.pop();
-    cout << q.top() << endl;
+    cout &lt;&lt; q.top() &lt;&lt; endl;
     // 3
 
     // 小顶堆
-    priority_queue<int, vector<int>, greater<int>> q2;
+    priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q2;
     q2.push(1);
     q2.push(2);
     q2.emplace(3);
     q2.emplace(4);
-    cout << q2.top() << endl;
+    cout &lt;&lt; q2.top() &lt;&lt; endl;
     // 1
     q2.pop();
-    cout << q2.top() << endl;
+    cout &lt;&lt; q2.top() &lt;&lt; endl;
     // 2
     return 0;
 }
@@ -470,42 +470,42 @@ int main() {
 - `find(xxx)`：查找集合中是否存在某个元素，如果存在则返回该元素的迭代器，否则返回 `end()` 迭代器
 
 ```cpp
-#include <iostream>
-#include <set>
+#include &lt;iostream&gt;
+#include &lt;set&gt;
 
 using namespace std;
 
 int main() {
-    set<int> s;
+    set&lt;int&gt; s;
     s.insert(1);
     s.insert(2);
     s.emplace(3);
     s.emplace(4);
-    set<int>::iterator it;
-    for (it = s.begin(); it != s.end(); it++) {
-        cout << *it << " ";
+    set&lt;int&gt;::iterator it;
+    for (it = s.begin(); it != s.end(); it&#43;&#43;) {
+        cout &lt;&lt; *it &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 1 2 3 4
 
     s.erase(1);
     s.erase(2);
-    for (it = s.begin(); it != s.end(); it++) {
-        cout << *it << " ";
+    for (it = s.begin(); it != s.end(); it&#43;&#43;) {
+        cout &lt;&lt; *it &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 3 4
 
-    cout << s.count(3) << endl;
+    cout &lt;&lt; s.count(3) &lt;&lt; endl;
     // 1
-    cout << s.count(5) << endl;
+    cout &lt;&lt; s.count(5) &lt;&lt; endl;
     // 0
 
     if (s.find(3) != s.end()) {
-        cout << "find 3" << endl;
+        cout &lt;&lt; &#34;find 3&#34; &lt;&lt; endl;
     }
     if (s.find(5) == s.end()) {
-        cout << "not find 5" << endl;
+        cout &lt;&lt; &#34;not find 5&#34; &lt;&lt; endl;
     }
     return 0;
 }
@@ -517,7 +517,7 @@ int main() {
 
 - `[]`：获取映射中某个元素的值，如果不存在则会创建该元素并赋值为 0
 - `at(k)`：获取映射中某个元素的值，如果不存在则会抛出异常
-- `insert(pair<k, v>)`：在映射中插入一个元素
+- `insert(pair&lt;k, v&gt;)`：在映射中插入一个元素
 - `emplace(k, v)`：在映射中插入一个元素，与 `insert` 的区别是，`emplace` 效率更高
 - `erase(k)`：删除映射中的一个元素
 - `empty()`：判断映射是否为空
@@ -529,44 +529,44 @@ int main() {
 - `find(k)`：查找映射中是否存在某个元素，如果存在则返回该元素的迭代器，否则返回 `end()` 迭代器
 
 ```cpp
-#include <iostream>
-#include <map>
+#include &lt;iostream&gt;
+#include &lt;map&gt;
 
 using namespace std;
 
 int main() {
-    map<string, int> m;
-    m["a"] = 1;
-    m["b"] = 2;
-    m.emplace("c", 3);
-    m.emplace("d", 4);
-    map<string, int>::iterator it;
-    for (it = m.begin(); it != m.end(); it++) {
-        cout << it->first << " " << it->second << endl;
+    map&lt;string, int&gt; m;
+    m[&#34;a&#34;] = 1;
+    m[&#34;b&#34;] = 2;
+    m.emplace(&#34;c&#34;, 3);
+    m.emplace(&#34;d&#34;, 4);
+    map&lt;string, int&gt;::iterator it;
+    for (it = m.begin(); it != m.end(); it&#43;&#43;) {
+        cout &lt;&lt; it-&gt;first &lt;&lt; &#34; &#34; &lt;&lt; it-&gt;second &lt;&lt; endl;
     }
     // a 1
     // b 2
     // c 3
     // d 4
 
-    m.erase("a");
-    m.erase("b");
-    for (it = m.begin(); it != m.end(); it++) {
-        cout << it->first << " " << it->second << endl;
+    m.erase(&#34;a&#34;);
+    m.erase(&#34;b&#34;);
+    for (it = m.begin(); it != m.end(); it&#43;&#43;) {
+        cout &lt;&lt; it-&gt;first &lt;&lt; &#34; &#34; &lt;&lt; it-&gt;second &lt;&lt; endl;
     }
     // c 3
     // d 4
 
-    cout << m.count("c") << endl;
+    cout &lt;&lt; m.count(&#34;c&#34;) &lt;&lt; endl;
     // 1
-    cout << m.count("e") << endl;
+    cout &lt;&lt; m.count(&#34;e&#34;) &lt;&lt; endl;
     // 0
 
-    if (m.find("c") != m.end()) {
-        cout << "find c" << endl;
+    if (m.find(&#34;c&#34;) != m.end()) {
+        cout &lt;&lt; &#34;find c&#34; &lt;&lt; endl;
     }
-    if (m.find("e") == m.end()) {
-        cout << "not find e" << endl;
+    if (m.find(&#34;e&#34;) == m.end()) {
+        cout &lt;&lt; &#34;not find e&#34; &lt;&lt; endl;
     }
     return 0;
 }
@@ -577,42 +577,42 @@ int main() {
 `unordered_set` 容器就是无序集合，其底层实现为哈希表，其常用的成员函数和 `set` 容器相同。
 
 ```cpp
-#include <iostream>
-#include <unordered_set>
+#include &lt;iostream&gt;
+#include &lt;unordered_set&gt;
 
 using namespace std;
 
 int main() {
-    unordered_set<int> s;
+    unordered_set&lt;int&gt; s;
     s.insert(1);
     s.insert(2);
     s.emplace(3);
     s.emplace(4);
-    unordered_set<int>::iterator it;
-    for (it = s.begin(); it != s.end(); it++) {
-        cout << *it << " ";
+    unordered_set&lt;int&gt;::iterator it;
+    for (it = s.begin(); it != s.end(); it&#43;&#43;) {
+        cout &lt;&lt; *it &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 4 3 2 1
 
     s.erase(1);
     s.erase(2);
-    for (it = s.begin(); it != s.end(); it++) {
-        cout << *it << " ";
+    for (it = s.begin(); it != s.end(); it&#43;&#43;) {
+        cout &lt;&lt; *it &lt;&lt; &#34; &#34;;
     }
-    cout << endl;
+    cout &lt;&lt; endl;
     // 4 3
 
-    cout << s.count(3) << endl;
+    cout &lt;&lt; s.count(3) &lt;&lt; endl;
     // 1
-    cout << s.count(5) << endl;
+    cout &lt;&lt; s.count(5) &lt;&lt; endl;
     // 0
 
     if (s.find(3) != s.end()) {
-        cout << "find 3" << endl;
+        cout &lt;&lt; &#34;find 3&#34; &lt;&lt; endl;
     }
     if (s.find(5) == s.end()) {
-        cout << "not find 5" << endl;
+        cout &lt;&lt; &#34;not find 5&#34; &lt;&lt; endl;
     }
     return 0;
 }
@@ -623,40 +623,40 @@ int main() {
 `unordered_map` 容器就是哈希表，其底层实现为哈希表，其常用的成员函数和 `map` 容器相同。
 
 ```cpp
-#include <iostream>
-#include <unordered_map>
+#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
 
 using namespace std;
 
 int main() {
-    unordered_map<string, int> m;
-    m["a"] = 1;
-    m["b"] = 2;
-    m.emplace("c", 3);
-    m.emplace("d", 4);
-    unordered_map<string, int>::iterator it;
-    for (it = m.begin(); it != m.end(); it++) {
-        cout << it->first << " " << it->second << endl;
+    unordered_map&lt;string, int&gt; m;
+    m[&#34;a&#34;] = 1;
+    m[&#34;b&#34;] = 2;
+    m.emplace(&#34;c&#34;, 3);
+    m.emplace(&#34;d&#34;, 4);
+    unordered_map&lt;string, int&gt;::iterator it;
+    for (it = m.begin(); it != m.end(); it&#43;&#43;) {
+        cout &lt;&lt; it-&gt;first &lt;&lt; &#34; &#34; &lt;&lt; it-&gt;second &lt;&lt; endl;
     }
     // 顺序不确定
 
-    m.erase("a");
-    m.erase("b");
-    for (it = m.begin(); it != m.end(); it++) {
-        cout << it->first << " " << it->second << endl;
+    m.erase(&#34;a&#34;);
+    m.erase(&#34;b&#34;);
+    for (it = m.begin(); it != m.end(); it&#43;&#43;) {
+        cout &lt;&lt; it-&gt;first &lt;&lt; &#34; &#34; &lt;&lt; it-&gt;second &lt;&lt; endl;
     }
     // 顺序不确定
 
-    cout << m.count("c") << endl;
+    cout &lt;&lt; m.count(&#34;c&#34;) &lt;&lt; endl;
     // 1
-    cout << m.count("e") << endl;
+    cout &lt;&lt; m.count(&#34;e&#34;) &lt;&lt; endl;
     // 0
 
-    if (m.find("c") != m.end()) {
-        cout << "find c->" << m["c"] << endl;
+    if (m.find(&#34;c&#34;) != m.end()) {
+        cout &lt;&lt; &#34;find c-&gt;&#34; &lt;&lt; m[&#34;c&#34;] &lt;&lt; endl;
     }
-    if (m.find("e") == m.end()) {
-        cout << "not find e" << endl;
+    if (m.find(&#34;e&#34;) == m.end()) {
+        cout &lt;&lt; &#34;not find e&#34; &lt;&lt; endl;
     }
     return 0;
 }
@@ -668,29 +668,29 @@ int main() {
 
 `tuple` 容器就是元组，其常用的成员函数有：
 
-- `get<i>(tuple)`：获取元组中第 `i` 个元素的值
+- `get&lt;i&gt;(tuple)`：获取元组中第 `i` 个元素的值
 - `make_tuple(xxx, xxx, ……)`：创建一个元组
 - `tie(xxx, xxx, ……)`：将元组中的值赋值给变量
 
 ```cpp
-#include <iostream>
-#include <tuple>
+#include &lt;iostream&gt;
+#include &lt;tuple&gt;
 
 using namespace std;
 
 int main() {
-    tuple<int, string, float> t(1, "a", 1.0);
-    cout << get<0>(t) << endl;
-    cout << get<1>(t) << endl;
-    cout << get<2>(t) << endl;
+    tuple&lt;int, string, float&gt; t(1, &#34;a&#34;, 1.0);
+    cout &lt;&lt; get&lt;0&gt;(t) &lt;&lt; endl;
+    cout &lt;&lt; get&lt;1&gt;(t) &lt;&lt; endl;
+    cout &lt;&lt; get&lt;2&gt;(t) &lt;&lt; endl;
     // 1
     // a
     // 1
 
-    auto t2 = make_tuple(2, "b", 2.0);
-    cout << get<0>(t2) << endl;
-    cout << get<1>(t2) << endl;
-    cout << get<2>(t2) << endl;
+    auto t2 = make_tuple(2, &#34;b&#34;, 2.0);
+    cout &lt;&lt; get&lt;0&gt;(t2) &lt;&lt; endl;
+    cout &lt;&lt; get&lt;1&gt;(t2) &lt;&lt; endl;
+    cout &lt;&lt; get&lt;2&gt;(t2) &lt;&lt; endl;
     // 2
     // b
     // 2
@@ -699,9 +699,9 @@ int main() {
     string b;
     float c;
     tie(a, b, c) = t;
-    cout << a << endl;
-    cout << b << endl;
-    cout << c << endl;
+    cout &lt;&lt; a &lt;&lt; endl;
+    cout &lt;&lt; b &lt;&lt; endl;
+    cout &lt;&lt; c &lt;&lt; endl;
     // 1
     // a
     // 1
@@ -718,22 +718,22 @@ int main() {
 - `make_pair(xxx, xxx)`：创建一个二元组
 
 ```cpp
-#include <iostream>
+#include &lt;iostream&gt;
 // utility 头文件中定义了 make_pair
-#include <utility>
+#include &lt;utility&gt;
 
 using namespace std;
 
 int main() {
-    pair<int, string> p(1, "a");
-    cout << p.first << endl;
-    cout << p.second << endl;
+    pair&lt;int, string&gt; p(1, &#34;a&#34;);
+    cout &lt;&lt; p.first &lt;&lt; endl;
+    cout &lt;&lt; p.second &lt;&lt; endl;
     // 1
     // a
 
-    auto p2 = make_pair(2, "b");
-    cout << p2.first << endl;
-    cout << p2.second << endl;
+    auto p2 = make_pair(2, &#34;b&#34;);
+    cout &lt;&lt; p2.first &lt;&lt; endl;
+    cout &lt;&lt; p2.second &lt;&lt; endl;
     // 2
     // b
     return 0;

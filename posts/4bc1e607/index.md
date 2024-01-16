@@ -13,11 +13,11 @@ RocksDB 是一个具有键/值接口的存储引擎，其中键和值是任意�
 
 由于 YCSB 是用 Java 实现的，一般测试的数据库都需要提供 Java 版本的 `.jar` 包
 
-虽然 RocksDB 最初是 C++ 的一个库（因为是嵌入式数据库），但是后续也提供了 Java 的 API 以及可以通过源码编译出 `.jar` 包，也可以直接通过 `Maven` 获取
+虽然 RocksDB 最初是 C&#43;&#43; 的一个库（因为是嵌入式数据库），但是后续也提供了 Java 的 API 以及可以通过源码编译出 `.jar` 包，也可以直接通过 `Maven` 获取
 
 官方在 GitHub 上给出了 [Java 版本的介绍](https://github.com/facebook/rocksdb/wiki/RocksJava-Basics)，编译过程也很简单
 
-首先需要保证机器上安装好了 Java 的环境，必须在 1.7+ 版本以上，例如，安装 `openjdk-8-jdk` 包即可
+首先需要保证机器上安装好了 Java 的环境，必须在 1.7&#43; 版本以上，例如，安装 `openjdk-8-jdk` 包即可
 
 ```bash
 sudo apt install openjdk-8-jdk
@@ -32,7 +32,7 @@ sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-de
 实际编译 jar 包时，需要提前配置好环境变量
 
 ```bash
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export JAVA_HOME=&#34;/usr/lib/jvm/java-8-openjdk-amd64&#34;
 ```
 
 实际编译时，有两个中版本可以选择，其中 `rocksdbjava` 是 debug 版本，而 `rocksdbjavastatic` 这是 release 版本，不过官方在 Java 版说明中没有提及，我是在 [Makefile 文件](https://github.com/facebook/rocksdb/blob/main/Makefile) 中找到的
@@ -88,7 +88,7 @@ Command line: -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workl
 YCSB Client 0.18.0-SNAPSHOT
 
 Loading workload...
-Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/htrace/core/Tracer$Builder
+Exception in thread &#34;main&#34; java.lang.NoClassDefFoundError: org/apache/htrace/core/Tracer$Builder
         at site.ycsb.Client.getTracer(Client.java:458)
         at site.ycsb.Client.main(Client.java:304)
 Caused by: java.lang.ClassNotFoundException: org.apache.htrace.core.Tracer$Builder
@@ -107,24 +107,24 @@ Caused by: java.lang.ClassNotFoundException: org.apache.htrace.core.Tracer$Build
 可以手动将 `./core/pom.xml` 中 `htrace` 的依赖信息复制添加到 `./rocksdb/pom.xml` 中
 
 ```xml
-<!-- ./rocksdb/pom.xml -->
+&lt;!-- ./rocksdb/pom.xml --&gt;
 	……
-    <dependency>
-      <groupId>org.rocksdb</groupId>
-      <artifactId>rocksdbjni</artifactId>
-      <version>${rocksdb.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.htrace</groupId>
-      <artifactId>htrace-core4</artifactId>
-      <version>4.1.0-incubating</version>
-    </dependency>
-    <dependency>
-      <groupId>site.ycsb</groupId>
-      <artifactId>core</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.rocksdb&lt;/groupId&gt;
+      &lt;artifactId&gt;rocksdbjni&lt;/artifactId&gt;
+      &lt;version&gt;${rocksdb.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.htrace&lt;/groupId&gt;
+      &lt;artifactId&gt;htrace-core4&lt;/artifactId&gt;
+      &lt;version&gt;4.1.0-incubating&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;site.ycsb&lt;/groupId&gt;
+      &lt;artifactId&gt;core&lt;/artifactId&gt;
+      &lt;version&gt;${project.version}&lt;/version&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
 	……
 ```
 
@@ -143,7 +143,7 @@ Starting test.
 [Thread-3] INFO site.ycsb.db.rocksdb.RocksDBClient - RocksDB data dir: tmp
 2021-12-25 16:10:30:807 0 sec: 0 operations; est completion in 0 second
 DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
-Exception in thread "Thread-3" java.lang.NoClassDefFoundError: org/HdrHistogram/EncodableHistogram
+Exception in thread &#34;Thread-3&#34; java.lang.NoClassDefFoundError: org/HdrHistogram/EncodableHistogram
         at site.ycsb.measurements.Measurements.constructOneMeasurement(Measurements.java:129)
         at site.ycsb.measurements.Measurements.getOpMeasurement(Measurements.java:220)
         at site.ycsb.measurements.Measurements.measure(Measurements.java:188)
@@ -175,29 +175,29 @@ Caused by: java.lang.ClassNotFoundException: org.HdrHistogram.EncodableHistogram
 原因和之前一样，再次将 `HdrHistogram` 相关的依赖，从 `./core/pom.xml` 复制添加到 `./rocksdb/pom.xml` 中
 
 ```xml
-<!-- ./rocksdb/pom.xml -->
+&lt;!-- ./rocksdb/pom.xml --&gt;
 	……
-    <dependency>
-      <groupId>org.rocksdb</groupId>
-      <artifactId>rocksdbjni</artifactId>
-      <version>${rocksdb.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.htrace</groupId>
-      <artifactId>htrace-core4</artifactId>
-      <version>4.1.0-incubating</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hdrhistogram</groupId>
-      <artifactId>HdrHistogram</artifactId>
-      <version>2.1.4</version>
-    </dependency>
-    <dependency>
-      <groupId>site.ycsb</groupId>
-      <artifactId>core</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.rocksdb&lt;/groupId&gt;
+      &lt;artifactId&gt;rocksdbjni&lt;/artifactId&gt;
+      &lt;version&gt;${rocksdb.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.htrace&lt;/groupId&gt;
+      &lt;artifactId&gt;htrace-core4&lt;/artifactId&gt;
+      &lt;version&gt;4.1.0-incubating&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.hdrhistogram&lt;/groupId&gt;
+      &lt;artifactId&gt;HdrHistogram&lt;/artifactId&gt;
+      &lt;version&gt;2.1.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;site.ycsb&lt;/groupId&gt;
+      &lt;artifactId&gt;core&lt;/artifactId&gt;
+      &lt;version&gt;${project.version}&lt;/version&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
 	……
 ```
 

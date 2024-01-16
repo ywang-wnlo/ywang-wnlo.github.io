@@ -1,7 +1,7 @@
-# 利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用
+# 利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用
 
 
-本文主要记录自己在利用 [RocksDB](https://github.com/facebook/rocksdb) + [ZenFS](https://github.com/westerndigitalcorporation/zenfs) 测试 [ZNS](https://zonedstorage.io/docs/introduction/zns) 过程中遇到的一些问题以及相应的解决办法
+本文主要记录自己在利用 [RocksDB](https://github.com/facebook/rocksdb) &#43; [ZenFS](https://github.com/westerndigitalcorporation/zenfs) 测试 [ZNS](https://zonedstorage.io/docs/introduction/zns) 过程中遇到的一些问题以及相应的解决办法
 
 ## 配置 ZNS 环境
 
@@ -49,11 +49,11 @@ GRUB_TIMEOUT=3
 GRUB_TERMINAL=serial
 
 # 用于保证内核启动时能输出到屏幕
-GRUB_CMDLINE_LINUX="ip=dhcp console=ttyS0,115200"
+GRUB_CMDLINE_LINUX=&#34;ip=dhcp console=ttyS0,115200&#34;
 
 # (可选)屏蔽子菜单和 recovery 内核，方便快速切换内核
 GRUB_DISABLE_SUBMENU=y
-GRUB_DISABLE_RECOVERY="true"
+GRUB_DISABLE_RECOVERY=&#34;true&#34;
 ```
 
 然后更新重启即可
@@ -223,7 +223,7 @@ sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direc
 - [【Wikibooks】QEMU/Images](https://en.wikibooks.org/wiki/QEMU/Images#Creating_an_image)
 - [【QEMU】Direct Linux Boot](https://www.qemu.org/docs/master/system/linuxboot.html)
 - [【ask ubuntu】How to get to the GRUB menu at boot-time using serial console?](https://askubuntu.com/questions/924913/how-to-get-to-the-grub-menu-at-boot-time-using-serial-console)
-- [【CSDN】问题解决 C++: fatal error: Killed signal terminated program cc1plus](https://blog.csdn.net/weixin_44796670/article/details/121234446)
+- [【CSDN】问题解决 C&#43;&#43;: fatal error: Killed signal terminated program cc1plus](https://blog.csdn.net/weixin_44796670/article/details/121234446)
 - [【GitHub】libzbd](https://github.com/westerndigitalcorporation/libzbd)
 
 

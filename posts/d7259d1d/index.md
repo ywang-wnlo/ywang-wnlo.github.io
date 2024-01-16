@@ -6,7 +6,7 @@
 ## 整体流程
 
 之前在 [io_uring 简介和使用](/posts/c142853f/#代码流程) 有过总结，使用 io_uring 的一般流程如下：
-<!-- more -->
+&lt;!-- more --&gt;
 
 - 使用 `open`、`fstat` 等函数来打开文件以及元数据查看等操作
   - 因为 io_uring 替换的是读写接口，后续 io_uring 操作的对象是 `fd`（由 `open` 函数执行返回的）
@@ -29,8 +29,8 @@
 
   ```mermaid
   graph TD
-  io_uring_queue_init --> io_uring_queue_init_params --> __sys_io_uring_setup --> syscall -->|陷入内核|io_uring_setup
-  io_uring_queue_init_params --> io_uring_queue_mmap --> io_uring_mmap --> mmap
+  io_uring_queue_init --&gt; io_uring_queue_init_params --&gt; __sys_io_uring_setup --&gt; syscall --&gt;|陷入内核|io_uring_setup
+  io_uring_queue_init_params --&gt; io_uring_queue_mmap --&gt; io_uring_mmap --&gt; mmap
   ```
 
 - 函数功能
@@ -39,13 +39,13 @@
 
   初始化时传递的 `flags` 将影响 `io_uring` 的运行方式：
 
-  - `IORING_SETUP_IOPOLL`：开启此选项必须保证后续只用 `O_DIRECT` 打开文件并且文件系统的 `file_operations` 中注册了 `iopoll` 函数，否则 IO 将下发失败。开启后内核将调用注册的 `iopoll` 函数来主动轮询设备驱动确认 IO 是否完成<!-- ，`iopoll` 的触发时机可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) -->
+  - `IORING_SETUP_IOPOLL`：开启此选项必须保证后续只用 `O_DIRECT` 打开文件并且文件系统的 `file_operations` 中注册了 `iopoll` 函数，否则 IO 将下发失败。开启后内核将调用注册的 `iopoll` 函数来主动轮询设备驱动确认 IO 是否完成&lt;!-- ，`iopoll` 的触发时机可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --&gt;
   - `IORING_SETUP_SQPOLL`：将启动一个单独的内核线程 `io_sq_thread`，内核将主动轮询 SQ，然后将 IO 下发至驱动设备，能大大减少提交 IO 时的系统调用开销（内核线程工作时，提交 IO 将无需系统调用；但是该线程可能会休眠，休眠时需要系统调用来唤醒该线程）
   - `IORING_SETUP_SQ_AFF`：当 `IORING_SETUP_SQPOLL` 已经配置后，启用 `sq_thread_cpu` 字段，用于配置内核线程 `io_sq_thread` 的跑在哪个 CPU 上
 
 ## `io_uring_get_sqe`
 
-由于 SQ 已经通过 `mmap` 映射到用户态，该函数只需在读取 `sq->khead` 时通过 `io_uring_smp_load_acquire` 保证一致性，而 `sq->sqe_tail` 只用于用户态，直接读取即可，根据 `sq->khead` 以及 `sq->sqe_tail` 判断 SQ 是否已满，未满则给出 `sq->sqe_tail` 处的 `sqe` 即可，然后更新 `sq->sqe_tail`
+由于 SQ 已经通过 `mmap` 映射到用户态，该函数只需在读取 `sq-&gt;khead` 时通过 `io_uring_smp_load_acquire` 保证一致性，而 `sq-&gt;sqe_tail` 只用于用户态，直接读取即可，根据 `sq-&gt;khead` 以及 `sq-&gt;sqe_tail` 判断 SQ 是否已满，未满则给出 `sq-&gt;sqe_tail` 处的 `sqe` 即可，然后更新 `sq-&gt;sqe_tail`
 
 ## `io_uring_prep_#OP`
 
@@ -53,7 +53,7 @@
 
 ## `io_uring_sqe_set_data`
 
-直接对 `sqe->user_data` 进行赋值
+直接对 `sqe-&gt;user_data` 进行赋值
 
 ## `io_uring_submit`
 
@@ -61,29 +61,29 @@
 
     ```mermaid
     graph TD
-    io_uring_submit --> __io_uring_submit_and_wait --> __io_uring_flush_sq
-    __io_uring_submit_and_wait --> __io_uring_submit --> sq_ring_needs_enter
-    __io_uring_submit --> __sys_io_uring_enter --> __sys_io_uring_enter2 --> syscall -->|陷入内核|io_uring_enter
+    io_uring_submit --&gt; __io_uring_submit_and_wait --&gt; __io_uring_flush_sq
+    __io_uring_submit_and_wait --&gt; __io_uring_submit --&gt; sq_ring_needs_enter
+    __io_uring_submit --&gt; __sys_io_uring_enter --&gt; __sys_io_uring_enter2 --&gt; syscall --&gt;|陷入内核|io_uring_enter
     ```
 
 - 函数功能
 
   - `__io_uring_flush_sq`
 
-    根据 `sq->sqe_tail`、`sq->sqe_head` 差值依次填充 `sq->array`，然后一次性更新 `sq->ktail`，并返回内核中仍未处理 `sqe` 数量（`sq->ktail - sq->khead`）
+    根据 `sq-&gt;sqe_tail`、`sq-&gt;sqe_head` 差值依次填充 `sq-&gt;array`，然后一次性更新 `sq-&gt;ktail`，并返回内核中仍未处理 `sqe` 数量（`sq-&gt;ktail - sq-&gt;khead`）
 
   - `sq_ring_needs_enter`
 
     判断内核线程 `io_sq_thread` 是否启用以及正常工作（没有休眠）:
 
-    - 首先要判断用户态 `ring->flags` 是否配置了 `IORING_SETUP_SQPOLL` 标志位，判断是否启用了内核线程 `io_sq_thread`
-    - 然后再判断内核态 `ring->sq.kflags` 是否配置了 `IORING_SQ_NEED_WAKEUP` 标志位，判断内核线程 `io_sq_thread` 是否需要唤醒
+    - 首先要判断用户态 `ring-&gt;flags` 是否配置了 `IORING_SETUP_SQPOLL` 标志位，判断是否启用了内核线程 `io_sq_thread`
+    - 然后再判断内核态 `ring-&gt;sq.kflags` 是否配置了 `IORING_SQ_NEED_WAKEUP` 标志位，判断内核线程 `io_sq_thread` 是否需要唤醒
 
     当内核线程 `io_sq_thread` 启用并且正常工作时，则整个 `io_uring_submit` 到此结束，无需后续的 `__sys_io_uring_enter` 系统调用，减少了 IO 下发的系统调用的开销
 
   - `__sys_io_uring_enter`
 
-    系统调用陷入内核态，将参数传递给内核的 `io_uring_enter` 函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的 `ring->flags` 相关<!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) -->
+    系统调用陷入内核态，将参数传递给内核的 `io_uring_enter` 函数，主要用于提交 IO 和获取 IO 完成情况，具体功能和初始化时配置的 `ring-&gt;flags` 相关&lt;!-- ，详细分析可以参看 [io_uring 内核源码分析](/io_uring/内核源码分析) --&gt;
 
 ## `io_uring_wait_cqe`
 
@@ -95,11 +95,11 @@
 
 ## `io_uring_cqe_get_data`
 
-`cqe->user_data` 会在 IO 完成后，从 `sqe` 复制到对应的 `cqe` 中，该函数只用直接对 `cqe->user_data` 进行读取
+`cqe-&gt;user_data` 会在 IO 完成后，从 `sqe` 复制到对应的 `cqe` 中，该函数只用直接对 `cqe-&gt;user_data` 进行读取
 
 ## `io_uring_cqe_seen`
 
-更新 `cq->khead`，避免当前 `cqe` 被重复获取
+更新 `cq-&gt;khead`，避免当前 `cqe` 被重复获取
 
 ## `io_uring_queue_exit`
 

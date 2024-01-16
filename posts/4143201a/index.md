@@ -22,9 +22,9 @@ npm install hexo-deployer-git --save
 ```yml
 deploy:
   type: git
-  repo: <仓库链接> # 可以是 https 链接也可以是 git 链接
+  repo: &lt;仓库链接&gt; # 可以是 https 链接也可以是 git 链接
   branch: [分支] # GitHub 的网站分支为 gh-pages，其他网站可能有所不同
-  message: [message] # 默认是 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}
+  message: [message] # 默认是 Site updated: {{ now(&#39;YYYY-MM-DD HH:mm:ss&#39;) }}
 ```
 
 默认的提交信息只有时间信息，没有过多的参考价值推荐使用自定义提交信息，具体参考 [后续小节](#自定义提交信息)
@@ -52,13 +52,13 @@ symbols_count_time:
   exclude_codeblock: false
   awl: 4
   wpm: 275
-  suffix: "mins."
+  suffix: &#34;mins.&#34;
 ```
 
 具体配置可以参考官方给出的说明：
 
-> Note for Chinese users: because in Chinese language average word length about ~1.5 and if you at most cases write posts in Chinese (without mixed English), recommended to set awl to 2 and wpm to 300.
-> But if you usualy mix your posts with English, awl to 4 and wpm to 275 will be nice.
+&gt; Note for Chinese users: because in Chinese language average word length about ~1.5 and if you at most cases write posts in Chinese (without mixed English), recommended to set awl to 2 and wpm to 300.
+&gt; But if you usualy mix your posts with English, awl to 4 and wpm to 275 will be nice.
 
 也就是说纯中文时推荐 `awl` 设为 2，`wpm` 设为 300；而中英文混合时推荐 `awl` 设为 4，`wpm` 设为 275
 
@@ -90,7 +90,7 @@ abbrlink:
   rep: hex # support dec(default) and hex
   drafts: true # (true)Process draft,(false)Do not process draft. false(default)
   # Generate categories from directory-tree
-  # depth: the max_depth of directory-tree you want to generate, should > 0
+  # depth: the max_depth of directory-tree you want to generate, should &gt; 0
   auto_category:
      enable: true # true(default)
      depth: 3 # 3(default)
@@ -128,7 +128,7 @@ sitemap:
 ### 自定义提交信息
 
 ```ps
-hexo deploy -m "自定义提交信息"
+hexo deploy -m &#34;自定义提交信息&#34;
 ```
 
 例如使用 `hexo` 仓库的提交信息来提交到 `deploy` 仓库

@@ -10,7 +10,7 @@
 <meta name="description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下" /><meta name="keywords" content='WR30U, OpenWrt, BootLoader, ImmortalWrt' /><meta itemprop="name" content="小米 WR30U 解锁并刷机">
 <meta itemprop="description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下"><meta itemprop="datePublished" content="2023-08-21T14:25:43+08:00" />
 <meta itemprop="dateModified" content="2023-08-21T14:25:43+08:00" />
-<meta itemprop="wordCount" content="1446">
+<meta itemprop="wordCount" content="1467">
 <meta itemprop="keywords" content="WR30U,OpenWrt,BootLoader,ImmortalWrt," /><meta property="og:title" content="小米 WR30U 解锁并刷机" />
 <meta property="og:description" content="本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/e6410576\/"
-    },"genre": "posts","keywords": "WR30U, OpenWrt, BootLoader, ImmortalWrt","wordcount":  1446 ,
+    },"genre": "posts","keywords": "WR30U, OpenWrt, BootLoader, ImmortalWrt","wordcount":  1467 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/e6410576\/","datePublished": "2023-08-21T14:25:43+08:00","dateModified": "2023-08-21T14:25:43+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>小米 WR30U 解锁并刷机</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 路由器</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-08-21 14:25:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-21">2023-08-21</time></span>&nbsp;<span title="更新于 2023-08-21 14:25:43"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-21">2023-08-21</time></span>&nbsp;<span title="1446 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="小米 WR30U 解锁并刷机">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" class="post-category" title="分类 - 路由器"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 路由器</a></span></div><div class="post-meta-line"><span title="发布于 2023-08-21 14:25:43"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-21">2023-08-21</time></span>&nbsp;<span title="1467 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="小米 WR30U 解锁并刷机">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -203,9 +197,9 @@
         <div class="admonition-content">本文最后更新于 2023-08-21，文中内容可能已过时。</div>
       </div>
     </div><p>本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，整体步骤与 <a href="/posts/8507aaa1/#%e4%b8%80%e8%88%ac%e5%ae%89%e8%a3%85%e6%b5%81%e7%a8%8b">一般安装流程</a> 类似，但是由于 WR30U 的解锁 <code>ssh</code> 和刷机的过程中有一些细节需要注意，因此记录一下</p>
-<h2 id="解锁-ssh">解锁 ssh</h2>
-<h3 id="环境准备">环境准备</h3>
-<p>需要一台<strong>同时具有 WiFi 和有线网络</strong>的电脑，以及一根网线</p>
+<h2 id="解锁-ssh" class="heading-element">
+  <a href="#%e8%a7%a3%e9%94%81-ssh" class="heading-mark"></a>解锁 ssh</h2><h3 id="环境准备" class="heading-element">
+  <a href="#%e7%8e%af%e5%a2%83%e5%87%86%e5%a4%87" class="heading-mark"></a>环境准备</h3><p>需要一台<strong>同时具有 WiFi 和有线网络</strong>的电脑，以及一根网线</p>
 <p>然后需要配置 <code>python</code> 环境，并且安装 <code>pycryptodome</code> 依赖</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -219,8 +213,8 @@
 </span></span><span class="line"><span class="cl">conda install pycryptodome</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后是解锁脚本，可以直接从 <a href="https://github.com/PatriciaLee3/wr30u_ssh/blob/main/server_emulator.py"target="_blank" rel="external nofollow noopener noreferrer">PatriciaLee3</a> 的仓库中下载</p>
-<h3 id="解锁过程">解锁过程</h3>
-<p><a href="https://github.com/PatriciaLee3/wr30u_ssh/blob/main/README.md"target="_blank" rel="external nofollow noopener noreferrer">PatriciaLee3</a> 的仓库中已经给出了详细的解锁过程，这里只是简单记录一下</p>
+<h3 id="解锁过程" class="heading-element">
+  <a href="#%e8%a7%a3%e9%94%81%e8%bf%87%e7%a8%8b" class="heading-mark"></a>解锁过程</h3><p><a href="https://github.com/PatriciaLee3/wr30u_ssh/blob/main/README.md"target="_blank" rel="external nofollow noopener noreferrer">PatriciaLee3</a> 的仓库中已经给出了详细的解锁过程，这里只是简单记录一下</p>
 <ol>
 <li>
 <p>电脑连接原厂固件的路由器，进入 192.168.31.1 的管理后台，在常用设置-上网设置里分别设置：</p>
@@ -235,12 +229,12 @@
 </li>
 <li>
 <p>打开 <code>控制面板 - 网络和 Internet - 网络和共享中心 - 更改适配器设置 - 选择 WLAN - 右键属性 - 共享</code>，勾选第一个并确认，这个时候 WR30U 会通过有线连接共享电脑的网络，并且网络指示灯会变成蓝色</p>
-<p><figure><a class="lightgallery" href="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=large" data-thumbnail="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=small" data-sub-html="<h2>共享网络</h2><p>共享网络</p>"><img loading="lazy" src="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png" srcset="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=small, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=medium 1.5x, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=large 2x" sizes="auto" data-title="共享网络" data-alt="共享网络" style="--width: 1687px;--aspect-ratio: 1687 / 951;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">共享网络</figcaption>
+<p><figure><a class="lightgallery" href="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=large" data-thumbnail="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=small" data-sub-html="<h2>共享网络</h2><p>共享网络</p>"><img loading="lazy" src="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png" alt="共享网络" srcset="/posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=small, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=medium 1.5x, /posts/e6410576/%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C.png?size=large 2x" sizes="auto" data-title="共享网络" style="--width: 1687px;--aspect-ratio: 1687 / 951;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">共享网络</figcaption>
   </figure></p>
 </li>
 <li>
 <p>打开 <code>控制面板 - 系统和安全 - Windows Defender 防火墙 - 启动或关闭 Windows Defender 防火墙</code>，关闭 Windows Defender 防火墙</p>
-<p><figure><a class="lightgallery" href="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=large" data-thumbnail="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=small" data-sub-html="<h2>关闭防火墙</h2><p>关闭防火墙</p>"><img loading="lazy" src="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png" srcset="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=small, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=medium 1.5x, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=large 2x" sizes="auto" data-title="关闭防火墙" data-alt="关闭防火墙" style="--width: 1691px;--aspect-ratio: 1691 / 953;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">关闭防火墙</figcaption>
+<p><figure><a class="lightgallery" href="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=large" data-thumbnail="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=small" data-sub-html="<h2>关闭防火墙</h2><p>关闭防火墙</p>"><img loading="lazy" src="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png" alt="关闭防火墙" srcset="/posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=small, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=medium 1.5x, /posts/e6410576/%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99.png?size=large 2x" sizes="auto" data-title="关闭防火墙" style="--width: 1691px;--aspect-ratio: 1691 / 953;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">关闭防火墙</figcaption>
   </figure></p>
 </li>
 <li>
@@ -259,15 +253,15 @@
 <p>解锁完成后，路由器的账号密码为 <code>root</code> 和 <code>admin</code>，之后记得重新开启防火墙，并且关闭共享网络</p>
 </li>
 </ol>
-<h2 id="刷入-mt798x-uboot">刷入 mt798x uboot</h2>
-<h3 id="简介">简介</h3>
-<p>这里首先推荐刷入 hanwckf 的 <a href="https://cmi.hanwckf.top/p/mt798x-uboot-usage"target="_blank" rel="external nofollow noopener noreferrer">mt798x uboot</a>，这个 uboot 有很多功能，其中以下两点非常实用：</p>
+<h2 id="刷入-mt798x-uboot" class="heading-element">
+  <a href="#%e5%88%b7%e5%85%a5-mt798x-uboot" class="heading-mark"></a>刷入 mt798x uboot</h2><h3 id="简介" class="heading-element">
+  <a href="#%e7%ae%80%e4%bb%8b" class="heading-mark"></a>简介</h3><p>这里首先推荐刷入 hanwckf 的 <a href="https://cmi.hanwckf.top/p/mt798x-uboot-usage"target="_blank" rel="external nofollow noopener noreferrer">mt798x uboot</a>，这个 uboot 有很多功能，其中以下两点非常实用：</p>
 <ul>
 <li>【使用方便】自带 MTK 原厂开发的简易 WebUI 恢复界面，可以通过 WebUI 直接刷入固件或者更新 uboot</li>
 <li>【兼容性好】支持多种 Flash 分区布局切换功能（仅支持 spi-nand），可以在 WebUI 中切换不同的分区布局，完美兼容小米原厂固件</li>
 </ul>
-<h3 id="刷入流程">刷入流程</h3>
-<ol>
+<h3 id="刷入流程" class="heading-element">
+  <a href="#%e5%88%b7%e5%85%a5%e6%b5%81%e7%a8%8b" class="heading-mark"></a>刷入流程</h3><ol>
 <li>
 <p>电脑接入正常网络，然后去 hanwckf 的仓库 release 页面下载对应的 uboot 文件：<a href="https://github.com/hanwckf/bl-mt798x/releases"target="_blank" rel="external nofollow noopener noreferrer">mt7981_wr30u-fip-fixed-parts-multi-layout.bin</a></p>
 </li>
@@ -380,11 +374,11 @@
 </div>
 </div></li>
 </ol>
-<h2 id="刷入-immortalwrt">刷入 ImmortalWrt</h2>
-<h3 id="简介-1">简介</h3>
-<p>ImmortalWrt 是 OpenWrt 的一个分支，相比于 OpenWrt 有更多的软件包以及设备支持，并且对中国大陆用户有特殊优化</p>
-<h3 id="刷入流程-1">刷入流程</h3>
-<ol>
+<h2 id="刷入-immortalwrt" class="heading-element">
+  <a href="#%e5%88%b7%e5%85%a5-immortalwrt" class="heading-mark"></a>刷入 ImmortalWrt</h2><h3 id="简介-1" class="heading-element">
+  <a href="#%e7%ae%80%e4%bb%8b-1" class="heading-mark"></a>简介</h3><p>ImmortalWrt 是 OpenWrt 的一个分支，相比于 OpenWrt 有更多的软件包以及设备支持，并且对中国大陆用户有特殊优化</p>
+<h3 id="刷入流程-1" class="heading-element">
+  <a href="#%e5%88%b7%e5%85%a5%e6%b5%81%e7%a8%8b-1" class="heading-mark"></a>刷入流程</h3><ol>
 <li>
 <p>电脑连接正常网络，去官网下载 <a href="https://firmware-selector.immortalwrt.org/?version=23.05-SNAPSHOT&amp;target=mediatek%2Ffilogic&amp;id=xiaomi_mi-router-wr30u-112m-nmbm"target="_blank" rel="external nofollow noopener noreferrer">Sysupgrade 固件</a></p>
 <p>这里选择了 custom U-Boot layout 的固件，也就是 112M UBI layout 的固件，这样可以有更多的空间用于安装软件包，固件名格式为 <code>immortalwrt-xxxxxx-mediatek-filogic-xiaomi_mi-router-wr30u-112m-nmbm-squashfs-sysupgrade.bin</code></p>
@@ -398,14 +392,14 @@
 </li>
 <li>
 <p>直接访问 <a href="http://192.168.31.1"target="_blank" rel="external nofollow noopener noreferrer">WebUI</a> 进行刷固件，将 layout 选为 <code>immortalwrt-112m</code>，然后上传前面下载的固件，点击刷机即可</p>
-<p><figure><a class="lightgallery" href="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=large" data-thumbnail="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=small" data-sub-html="<h2>layout 选择</h2><p>layout 选择</p>"><img loading="lazy" src="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png" srcset="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=small, /posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=medium 1.5x, /posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=large 2x" sizes="auto" data-title="layout 选择" data-alt="layout 选择" style="--width: 1577px;--aspect-ratio: 1577 / 924;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">layout 选择</figcaption>
+<p><figure><a class="lightgallery" href="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=large" data-thumbnail="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=small" data-sub-html="<h2>layout 选择</h2><p>layout 选择</p>"><img loading="lazy" src="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png" alt="layout 选择" srcset="/posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=small, /posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=medium 1.5x, /posts/e6410576/layout%E9%80%89%E6%8B%A9.png?size=large 2x" sizes="auto" data-title="layout 选择" style="--width: 1577px;--aspect-ratio: 1577 / 924;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">layout 选择</figcaption>
   </figure></p>
 </li>
 </ol>
-<h2 id="刷为原厂固件">刷为原厂固件</h2>
-<p>刷回原厂固件的过程与刷入 ImmortalWrt 类似，只是需要下载<a href="https://github.com/hanwckf/xiaomi-router-stock-ubi-bin"target="_blank" rel="external nofollow noopener noreferrer">原厂固件</a>，然后在 WebUI 中将 layout 配置为 <code>default</code>，之后上传原厂固件刷机即可</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
+<h2 id="刷为原厂固件" class="heading-element">
+  <a href="#%e5%88%b7%e4%b8%ba%e5%8e%9f%e5%8e%82%e5%9b%ba%e4%bb%b6" class="heading-mark"></a>刷为原厂固件</h2><p>刷回原厂固件的过程与刷入 ImmortalWrt 类似，只是需要下载<a href="https://github.com/hanwckf/xiaomi-router-stock-ubi-bin"target="_blank" rel="external nofollow noopener noreferrer">原厂固件</a>，然后在 WebUI 中将 layout 配置为 <code>default</code>，之后上传原厂固件刷机即可</p>
+<h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
 <li><a href="https://blog.qust.me/wr30u"target="_blank" rel="external nofollow noopener noreferrer">【个人博客】酱紫表 - 小米 WR30U 解锁 SSH 刷 openwrt，最有性价比的百元路由器</a></li>
 <li><a href="https://github.com/PatriciaLee3/wr30u_ssh"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】wr30u_ssh</a></li>
 <li><a href="https://cmi.hanwckf.top/p/mt798x-uboot-usage"target="_blank" rel="external nofollow noopener noreferrer">【个人博客】hanwckf - mt798x uboot 功能介绍</a></li>
@@ -415,7 +409,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -426,41 +420,17 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/96a1807/" title="OpenWrt 手动编译 ipk">OpenWrt 手动编译 ipk</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/"><i class="fa fa-tag fa-fw"></i>交叉编译</a>&nbsp;
-            <a class="tag-diff" href="/tags/ipk/"><i class="fa fa-tag fa-fw"></i>ipk</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/51140c4a/" title="OpenWrt 配置使用">OpenWrt 配置使用</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E9%94%90%E6%8D%B7/"><i class="fa fa-tag fa-fw"></i>锐捷</a>&nbsp;
-            <a class="tag-diff" href="/tags/ipv6/"><i class="fa fa-tag fa-fw"></i>IPv6</a>&nbsp;
-            <a class="tag-diff" href="/tags/nas/"><i class="fa fa-tag fa-fw"></i>NAS</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/8507aaa1/" title="OpenWrt 简介和安装">OpenWrt 简介和安装</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/openwrt/"><i class="fa fa-tag fa-fw"></i>OpenWrt</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/53d6c2d9/" title="Breed 介绍、刷入和使用">Breed 介绍、刷入和使用</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/breed/"><i class="fa fa-tag fa-fw"></i>Breed</a>&nbsp;
-            <a class="tag-same" href="/tags/bootloader/"><i class="fa fa-tag fa-fw"></i>BootLoader</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/96a1807/" title="OpenWrt 手动编译 ipk">OpenWrt 手动编译 ipk</a></li><li>
+          <a href="/posts/53d6c2d9/" title="Breed 介绍、刷入和使用">Breed 介绍、刷入和使用</a></li><li>
+          <a href="/posts/51140c4a/" title="OpenWrt 配置使用">OpenWrt 配置使用</a></li><li>
+          <a href="/posts/8507aaa1/" title="OpenWrt 简介和安装">OpenWrt 简介和安装</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -468,18 +438,16 @@
       <div class="post-info-mod">
         <span title="更新于 2023-08-21 14:25:43">更新于 2023-08-21&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/e6410576/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/e6410576/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/wr30u/' class="post-tag">WR30U</a><a href='/tags/openwrt/' class="post-tag">OpenWrt</a><a href='/tags/bootloader/' class="post-tag">BootLoader</a><a href='/tags/immortalwrt/' class="post-tag">ImmortalWrt</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/wr30u/" class="post-tag" title="标签 - WR30U">WR30U</a><a href="/tags/openwrt/" class="post-tag" title="标签 - OpenWrt">OpenWrt</a><a href="/tags/bootloader/" class="post-tag" title="标签 - BootLoader">BootLoader</a><a href="/tags/immortalwrt/" class="post-tag" title="标签 - ImmortalWrt">ImmortalWrt</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -511,11 +479,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -523,5 +494,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

@@ -48,83 +48,83 @@ TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 [官网](ht
 
     ```json
     // 配置编译链，可以根据需要做修改
-    "latex-workshop.latex.recipes": [
+    &#34;latex-workshop.latex.recipes&#34;: [
         {
-            "name": "xelatex 🔃",
-            "tools": [
-                "xelatex"
+            &#34;name&#34;: &#34;xelatex 🔃&#34;,
+            &#34;tools&#34;: [
+                &#34;xelatex&#34;
             ]
         },
         {
-            "name": "pdflatex 🔃",
-            "tools": [
-                "pdflatex"
+            &#34;name&#34;: &#34;pdflatex 🔃&#34;,
+            &#34;tools&#34;: [
+                &#34;pdflatex&#34;
             ]
         },
         {
-            "name": "latexmk 🔃",
-            "tools": [
-                "latexmk"
+            &#34;name&#34;: &#34;latexmk 🔃&#34;,
+            &#34;tools&#34;: [
+                &#34;latexmk&#34;
             ]
         },
         {
-            "name": "xelatex ➞ bibtex ➞ xelatex`×2",
-            "tools": [
-                "xelatex",
-                "bibtex",
-                "xelatex",
-                "xelatex"
+            &#34;name&#34;: &#34;xelatex ➞ bibtex ➞ xelatex`×2&#34;,
+            &#34;tools&#34;: [
+                &#34;xelatex&#34;,
+                &#34;bibtex&#34;,
+                &#34;xelatex&#34;,
+                &#34;xelatex&#34;
             ]
         },
         {
-            "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
-            "tools": [
-                "pdflatex",
-                "bibtex",
-                "pdflatex",
-                "pdflatex"
+            &#34;name&#34;: &#34;pdflatex ➞ bibtex ➞ pdflatex`×2&#34;,
+            &#34;tools&#34;: [
+                &#34;pdflatex&#34;,
+                &#34;bibtex&#34;,
+                &#34;pdflatex&#34;,
+                &#34;pdflatex&#34;
             ]
         }
     ],
     // 具体的编译命令配置
-    "latex-workshop.latex.tools": [
+    &#34;latex-workshop.latex.tools&#34;: [
         {
-            "name": "latexmk",
-            "command": "latexmk",
-            "args": [
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-pdf",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
+            &#34;name&#34;: &#34;latexmk&#34;,
+            &#34;command&#34;: &#34;latexmk&#34;,
+            &#34;args&#34;: [
+                &#34;-synctex=1&#34;,
+                &#34;-interaction=nonstopmode&#34;,
+                &#34;-file-line-error&#34;,
+                &#34;-pdf&#34;,
+                &#34;-outdir=%OUTDIR%&#34;,
+                &#34;%DOC%&#34;
             ]
         },
         {
-            "name": "xelatex",
-            "command": "xelatex",
-            "args": [
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "%DOC%"
+            &#34;name&#34;: &#34;xelatex&#34;,
+            &#34;command&#34;: &#34;xelatex&#34;,
+            &#34;args&#34;: [
+                &#34;-synctex=1&#34;,
+                &#34;-interaction=nonstopmode&#34;,
+                &#34;-file-line-error&#34;,
+                &#34;%DOC%&#34;
             ]
         },
         {
-            "name": "pdflatex",
-            "command": "pdflatex",
-            "args": [
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "%DOC%"
+            &#34;name&#34;: &#34;pdflatex&#34;,
+            &#34;command&#34;: &#34;pdflatex&#34;,
+            &#34;args&#34;: [
+                &#34;-synctex=1&#34;,
+                &#34;-interaction=nonstopmode&#34;,
+                &#34;-file-line-error&#34;,
+                &#34;%DOC%&#34;
             ]
         },
         {
-            "name": "bibtex",
-            "command": "bibtex",
-            "args": [
-                "%DOCFILE%"
+            &#34;name&#34;: &#34;bibtex&#34;,
+            &#34;command&#34;: &#34;bibtex&#34;,
+            &#34;args&#34;: [
+                &#34;%DOCFILE%&#34;
             ]
         }
     ],
@@ -137,7 +137,7 @@ TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 [官网](ht
 推荐打开文件修改后，编译完成后自动正向同步。该功能通过 `latex-workshop.synctex.afterBuild.enabled` 来控制
 
 ```json
-"latex-workshop.synctex.afterBuild.enabled": true,
+&#34;latex-workshop.synctex.afterBuild.enabled&#34;: true,
 ```
 
 #### 反向同步
@@ -152,7 +152,7 @@ TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 [官网](ht
 
     ```json
     // 默认 Ctrl 加鼠标左键
-    "latex-workshop.view.pdf.internal.synctex.keybinding": "ctrl-click",
+    &#34;latex-workshop.view.pdf.internal.synctex.keybinding&#34;: &#34;ctrl-click&#34;,
     ```
 
 2. 外部 PDF 浏览器
@@ -161,28 +161,28 @@ TeXstudio 也是一个很好的 LaTeX 编辑软件，可以直接去 [官网](ht
 
     ```json
     // 配置为使用外部 PDF 浏览软件来浏览 PDF
-    "latex-workshop.view.pdf.viewer": "external",
+    &#34;latex-workshop.view.pdf.viewer&#34;: &#34;external&#34;,
     // 配置外部 PDF 浏览软件的命令行以及参数
-    "latex-workshop.view.pdf.external.viewer.command": "D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe", // 自行修改路径
-    "latex-workshop.view.pdf.external.viewer.args": [
-        "%PDF%"
+    &#34;latex-workshop.view.pdf.external.viewer.command&#34;: &#34;D:/Program/SumatraPDF/SumatraPDF-3.2-64.exe&#34;, // 自行修改路径
+    &#34;latex-workshop.view.pdf.external.viewer.args&#34;: [
+        &#34;%PDF%&#34;
     ],
     ```
 
-    在 SumatraPDF 的设置-选项中设置反向搜索命令行 `C:\Users\<user>\AppData\Local\Programs\Microsoft VS Code\Code.exe -g "%f:%l"`，Code 的路径应该为完整的绝对路径
+    在 SumatraPDF 的设置-选项中设置反向搜索命令行 `C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe -g &#34;%f:%l&#34;`，Code 的路径应该为完整的绝对路径
 
 #### 其他可选配置
 
 ```json
 // 关闭自动编译
-"latex-workshop.latex.autoBuild.run": "never",
+&#34;latex-workshop.latex.autoBuild.run&#34;: &#34;never&#34;,
 // 默认选择上次编译链
-"latex-workshop.latex.recipe.default": "lastUsed"
+&#34;latex-workshop.latex.recipe.default&#34;: &#34;lastUsed&#34;
 // 右键菜单
-"latex-workshop.showContextMenu": true,
+&#34;latex-workshop.showContextMenu&#34;: true,
 // 关闭编译出错的弹窗
-"latex-workshop.message.error.show": false,
-"latex-workshop.message.warning.show": false,
+&#34;latex-workshop.message.error.show&#34;: false,
+&#34;latex-workshop.message.warning.show&#34;: false,
 ```
 
 ## 中文支持
@@ -288,7 +288,7 @@ You can also insert Latin text in your document
 1. 首先 `.tex` 文件名以及路径尽量不要含有空格以及中文字符
 2. 在使用 `latexmk` 和 VSCode 的 LaTeX Workshop 时，推荐使用第三个编译链 `Recipe: latexmk (lualatex)`
 
-    ![编译中文 LaTeX](build-chinese-latex.png "编译中文 LaTeX")
+    ![编译中文 LaTeX](build-chinese-latex.png &#34;编译中文 LaTeX&#34;)
 
 ## 参考资料
 

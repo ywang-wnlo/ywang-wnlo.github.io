@@ -10,7 +10,7 @@
 <meta name="description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C&#43;&#43; 的 segment fault 为例）" /><meta name="keywords" content='日常踩坑, Debug, addr2line, gdb, objdump, assert, 反汇编' /><meta itemprop="name" content="Debug 从入门到入土">
 <meta itemprop="description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C&#43;&#43; 的 segment fault 为例）"><meta itemprop="datePublished" content="2023-09-09T23:35:41+08:00" />
 <meta itemprop="dateModified" content="2023-09-11T18:44:19+08:00" />
-<meta itemprop="wordCount" content="4814">
+<meta itemprop="wordCount" content="4848">
 <meta itemprop="keywords" content="日常踩坑,Debug,addr2line,gdb,objdump,assert,反汇编," /><meta property="og:title" content="Debug 从入门到入土" />
 <meta property="og:description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C&#43;&#43; 的 segment fault 为例）" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/89f2ed7d\/"
-    },"genre": "posts","keywords": "日常踩坑, Debug, addr2line, gdb, objdump, assert, 反汇编","wordcount":  4814 ,
+    },"genre": "posts","keywords": "日常踩坑, Debug, addr2line, gdb, objdump, assert, 反汇编","wordcount":  4848 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/89f2ed7d\/","datePublished": "2023-09-09T23:35:41+08:00","dateModified": "2023-09-11T18:44:19+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Debug 从入门到入土</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 日常踩坑</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-09-09 23:35:41"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-09">2023-09-09</time></span>&nbsp;<span title="更新于 2023-09-11 18:44:19"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-11">2023-09-11</time></span>&nbsp;<span title="4814 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 10 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Debug 从入门到入土">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" class="post-category" title="分类 - 日常踩坑"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 日常踩坑</a></span></div><div class="post-meta-line"><span title="发布于 2023-09-09 23:35:41"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-09">2023-09-09</time></span>&nbsp;<span title="更新于 2023-09-11 18:44:19"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-11">2023-09-11</time></span>&nbsp;<span title="4848 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 10 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Debug 从入门到入土">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -221,18 +215,18 @@
         <div class="admonition-content">本文最后更新于 2023-09-11，文中内容可能已过时。</div>
       </div>
     </div><p>写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）</p>
-<h2 id="分类">分类</h2>
-<p>根据调试时机与 bug 产生的时间的前后关系，主要分为“事后”、“事中”、“事先”三类：</p>
+<h2 id="分类" class="heading-element">
+  <a href="#%e5%88%86%e7%b1%bb" class="heading-mark"></a>分类</h2><p>根据调试时机与 bug 产生的时间的前后关系，主要分为“事后”、“事中”、“事先”三类：</p>
 <ul>
 <li>“事后” 主要是通过 addr2line 或者 objdump 等工具，定位报错时的程序运行位置</li>
 <li>“事中” 主要是通过 GDB 来观察程序运行时的状态，实时的捕捉 bug</li>
 <li>“事先” 主要是通过在源代码中插入打印语句，来观察程序运行时各个变量的状态</li>
 </ul>
-<h2 id="事后">事后</h2>
-<p>通常为了快速的定位 bug，会根据出错时的程序输出，来判断重新出错的位置</p>
+<h2 id="事后" class="heading-element">
+  <a href="#%e4%ba%8b%e5%90%8e" class="heading-mark"></a>事后</h2><p>通常为了快速的定位 bug，会根据出错时的程序输出，来判断重新出错的位置</p>
 <p>然而一般的程序输出可能不足以提供足够信息的情况，此时可以根据 <code>segmentation fault (core dumped)</code> 信息并且借助一些工具来定位出错的位置</p>
-<h3 id="addr2line"><code>addr2line</code></h3>
-<p><code>addr2line</code> 在程序<strong>含有 debug 信息</strong>时可以快速的将地址转换为文件名和行号</p>
+<h3 id="addr2line" class="heading-element">
+  <a href="#addr2line" class="heading-mark"></a><code>addr2line</code></h3><p><code>addr2line</code> 在程序<strong>含有 debug 信息</strong>时可以快速的将地址转换为文件名和行号</p>
 <p>具体的使用方法可以通过 <code>man addr2line</code> 查看，这里简单介绍一下常用的用法</p>
 <p>以下面的代码为例：</p>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -306,8 +300,8 @@
 <li>需要提前在编译时加上 <code>-g</code> 选项，生成 debug 信息</li>
 <li>对于高版本的 gcc，需要加上 <code>-no-pie</code> 选项，避免 ASLR 的影响</li>
 </ul>
-<h3 id="objdump-反汇编"><code>objdump</code> 反汇编</h3>
-<p>通过 <code>objdump</code> 进行反汇编也是一种比较常用的定位 segmentation fault 的方法，这种方法能够精确的定位到执行的汇编指令，并且没有 <code>addr2line</code> 的上述限制，但是需要一定的汇编基础，否则看不懂汇编指令也是没用的</p>
+<h3 id="objdump-反汇编" class="heading-element">
+  <a href="#objdump-%e5%8f%8d%e6%b1%87%e7%bc%96" class="heading-mark"></a><code>objdump</code> 反汇编</h3><p>通过 <code>objdump</code> 进行反汇编也是一种比较常用的定位 segmentation fault 的方法，这种方法能够精确的定位到执行的汇编指令，并且没有 <code>addr2line</code> 的上述限制，但是需要一定的汇编基础，否则看不懂汇编指令也是没用的</p>
 <p>汇编指令的快速查询可以直接 Google 或者在一些工具站，例如 <a href="https://www.felixcloutier.com/x86/"target="_blank" rel="external nofollow noopener noreferrer">【felixcloutier】</a> 或者 <a href="https://www.cs.virginia.edu/~evans/cs216/guides/x86.html#instructions"target="_blank" rel="external nofollow noopener noreferrer">【University of Virginia Computer Science】x86 Assembly Guide</a> 上进行速查</p>
 <p>以下面的代码为例：</p>
 <div class="highlight" id="id-4"><div class="chroma">
@@ -392,8 +386,8 @@
 </span></span><span class="line"><span class="cl">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我们查看 <code>VMA</code> 列，可以看到 <code>.init</code> 段的起始地址为 <code>0x1000</code>（个人经验，如果不对，欢迎 dalao 指正）</p>
-<h4 id="计算偏移量">计算偏移量</h4>
-<p>然后根据 <code>dmesg</code> 中的 <code>ip</code> 以及程序被映射的 <code>VMA</code> 首地址计算代码偏移量，也就是 <code>ip 000055bce6f6c13d …… in test[55bce6f6c000+xxx]</code>，计算出 <code>0x55bce6f6c13d - 0x55bce6f6c000 = 0x13d</code>，然后在加上 <code>.init</code> 段的起始地址 <code>0x1000</code>，就可以得到实际的偏移量 <code>0x113d</code></p>
+<h4 id="计算偏移量" class="heading-element">
+  <a href="#%e8%ae%a1%e7%ae%97%e5%81%8f%e7%a7%bb%e9%87%8f" class="heading-mark"></a>计算偏移量</h4><p>然后根据 <code>dmesg</code> 中的 <code>ip</code> 以及程序被映射的 <code>VMA</code> 首地址计算代码偏移量，也就是 <code>ip 000055bce6f6c13d …… in test[55bce6f6c000+xxx]</code>，计算出 <code>0x55bce6f6c13d - 0x55bce6f6c000 = 0x13d</code>，然后在加上 <code>.init</code> 段的起始地址 <code>0x1000</code>，就可以得到实际的偏移量 <code>0x113d</code></p>
 <div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -786,8 +780,8 @@
 </div><p>结合源码以及汇编的前后内容不难分析出 <code>movl $0x2,(%rax)</code> 与源代码 <code>*p = 2;</code> 对应
 而 <code>movq $0x0,-0x8(%rbp)</code> 以及 <code>mov -0x8(%rbp),%rax</code> 与源代码中的 <code>int *p = NULL;</code> 对应</p>
 <p>因此不难判断出实际的出错原因为对空指针的进行了写操作</p>
-<h4 id="优化">优化</h4>
-<ul>
+<h4 id="优化" class="heading-element">
+  <a href="#%e4%bc%98%e5%8c%96" class="heading-mark"></a>优化</h4><ul>
 <li>起始地址</li>
 </ul>
 <p>通常出错的程序可能会比较大，反汇编整个程序会非常耗时，此时可以通过 <code>objdump</code> 的 <code>--start-address=xxx --stop-address=xxx</code> 选项来指定反汇编的开始地址和结束地址</p>
@@ -906,10 +900,10 @@
 </span></span><span class="line"><span class="cl">    1144:       5d                      pop    %rbp
 </span></span><span class="line"><span class="cl">    1145:       c3                      retq</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="事中">事中</h2>
-<p>为了更好的查看出错时的程序的各个变量值，可以借助最强工具 <code>gdb</code> 来进行调试运行</p>
-<h3 id="最强工具-gdb">最强工具 <code>gdb</code></h3>
-<p><code>gdb</code> 是 GNU 出品的一个强大的调试工具，可以用来调试多种语言的程序，例如 C/C++、Go、Rust 等</p>
+</div><h2 id="事中" class="heading-element">
+  <a href="#%e4%ba%8b%e4%b8%ad" class="heading-mark"></a>事中</h2><p>为了更好的查看出错时的程序的各个变量值，可以借助最强工具 <code>gdb</code> 来进行调试运行</p>
+<h3 id="最强工具-gdb" class="heading-element">
+  <a href="#%e6%9c%80%e5%bc%ba%e5%b7%a5%e5%85%b7-gdb" class="heading-mark"></a>最强工具 <code>gdb</code></h3><p><code>gdb</code> 是 GNU 出品的一个强大的调试工具，可以用来调试多种语言的程序，例如 C/C++、Go、Rust 等</p>
 <p><code>gdb</code> 的使用方法非常多，这里只介绍一些常用的用法，更多的用法可以通过 <code>man gdb</code> 查看</p>
 <p>同样需要在编译时加上 <code>-g</code> 选项，生成 debug 信息</p>
 <p>以下面的代码为例：</p>
@@ -948,8 +942,8 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="启动">启动</h4>
-<div class="highlight" id="id-12"><div class="chroma">
+</div><h4 id="启动" class="heading-element">
+  <a href="#%e5%90%af%e5%8a%a8" class="heading-mark"></a>启动</h4><div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1002,8 +996,8 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 设置参数</span>
 </span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> args arg1 arg2 ...</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="运行">运行</h4>
-<p><code>gdb</code> 启动程序后，并不会直接运行程序，而是需要手动输入 <code>run</code> 命令来运行程序</p>
+</div><h4 id="运行" class="heading-element">
+  <a href="#%e8%bf%90%e8%a1%8c" class="heading-mark"></a>运行</h4><p><code>gdb</code> 启动程序后，并不会直接运行程序，而是需要手动输入 <code>run</code> 命令来运行程序</p>
 <div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1028,8 +1022,8 @@
 </span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这时能非常清晰的看出出错的位置</p>
-<h4 id="查看变量">查看变量</h4>
-<p><code>print</code> 命令来查看变量的值，用法如下：</p>
+<h4 id="查看变量" class="heading-element">
+  <a href="#%e6%9f%a5%e7%9c%8b%e5%8f%98%e9%87%8f" class="heading-mark"></a>查看变量</h4><p><code>print</code> 命令来查看变量的值，用法如下：</p>
 <div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1041,8 +1035,8 @@
 </span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print p
 </span></span><span class="line"><span class="cl"><span class="nv">$1</span> <span class="o">=</span> <span class="o">(</span>int *<span class="o">)</span> 0x0</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="查看堆栈">查看堆栈</h4>
-<p><code>bt</code> 命令来查看堆栈，用法如下：</p>
+</div><h4 id="查看堆栈" class="heading-element">
+  <a href="#%e6%9f%a5%e7%9c%8b%e5%a0%86%e6%a0%88" class="heading-mark"></a>查看堆栈</h4><p><code>bt</code> 命令来查看堆栈，用法如下：</p>
 <div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1056,8 +1050,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#0  0x000055555555515d in func_bug () at test.c:5</span>
 </span></span><span class="line"><span class="cl"><span class="c1">#1  0x00005555555551ab in main (argc=4, argv=0x7fffffffe388) at test.c:13</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="配置断点">配置断点</h4>
-<p><code>break</code> 或者 <code>b</code> 命令来配置断点，用法如下：</p>
+</div><h4 id="配置断点" class="heading-element">
+  <a href="#%e9%85%8d%e7%bd%ae%e6%96%ad%e7%82%b9" class="heading-mark"></a>配置断点</h4><p><code>break</code> 或者 <code>b</code> 命令来配置断点，用法如下：</p>
 <div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1073,8 +1067,8 @@
 </span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> test.c:5
 </span></span><span class="line"><span class="cl">Breakpoint <span class="m">2</span> at 0x555555555159: file test.c, line 5.</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="查看断点">查看断点</h4>
-<p><code>info breakpoints</code> 或者 <code>info b</code> 命令来查看断点，用法如下：</p>
+</div><h4 id="查看断点" class="heading-element">
+  <a href="#%e6%9f%a5%e7%9c%8b%e6%96%ad%e7%82%b9" class="heading-mark"></a>查看断点</h4><p><code>info breakpoints</code> 或者 <code>info b</code> 命令来查看断点，用法如下：</p>
 <div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1090,8 +1084,8 @@
 </span></span><span class="line"><span class="cl"><span class="m">1</span>       breakpoint     keep y   0x0000555555555149 in func_bug at test.c:3
 </span></span><span class="line"><span class="cl"><span class="m">2</span>       breakpoint     keep y   0x0000555555555159 in func_bug at test.c:5</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="删除断点">删除断点</h4>
-<p><code>delete</code> 或者 <code>d</code> 命令来删除断点，用法如下：</p>
+</div><h4 id="删除断点" class="heading-element">
+  <a href="#%e5%88%a0%e9%99%a4%e6%96%ad%e7%82%b9" class="heading-mark"></a>删除断点</h4><p><code>delete</code> 或者 <code>d</code> 命令来删除断点，用法如下：</p>
 <div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1107,13 +1101,13 @@
 </span></span><span class="line"><span class="cl">Num     Type           Disp Enb Address            What
 </span></span><span class="line"><span class="cl"><span class="m">1</span>       breakpoint     keep y   0x0000555555555149 in func_bug at test.c:3</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="单步执行">单步执行</h4>
-<p><code>next</code> 或者 <code>n</code> 命令来单步执行，如果遇到函数调用，则不会进入函数内部</p>
+</div><h4 id="单步执行" class="heading-element">
+  <a href="#%e5%8d%95%e6%ad%a5%e6%89%a7%e8%a1%8c" class="heading-mark"></a>单步执行</h4><p><code>next</code> 或者 <code>n</code> 命令来单步执行，如果遇到函数调用，则不会进入函数内部</p>
 <p><code>step</code> 或者 <code>s</code> 命令来单步执行，如果遇到函数调用，则会进入函数内部</p>
-<h4 id="继续执行">继续执行</h4>
-<p><code>continue</code> 或者 <code>c</code> 命令来继续执行，直到遇到断点或者程序结束</p>
-<h4 id="打印源代码">打印源代码</h4>
-<p><code>list</code> 或者 <code>l</code> 命令来打印源代码，用法如下：</p>
+<h4 id="继续执行" class="heading-element">
+  <a href="#%e7%bb%a7%e7%bb%ad%e6%89%a7%e8%a1%8c" class="heading-mark"></a>继续执行</h4><p><code>continue</code> 或者 <code>c</code> 命令来继续执行，直到遇到断点或者程序结束</p>
+<h4 id="打印源代码" class="heading-element">
+  <a href="#%e6%89%93%e5%8d%b0%e6%ba%90%e4%bb%a3%e7%a0%81" class="heading-mark"></a>打印源代码</h4><p><code>list</code> 或者 <code>l</code> 命令来打印源代码，用法如下：</p>
 <div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1144,9 +1138,9 @@
 </span></span><span class="line"><span class="cl"><span class="m">10</span>              printf<span class="o">(</span><span class="s2">&#34;usage: %s arg1\n&#34;</span>, argv<span class="o">[</span>0<span class="o">])</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>直接输入 <code>l</code> 命令会打印出当前断点所在的代码，也可以通过 <code>l xxx</code> 来打印指定的代码，xxx 可以是行号，也可以是函数名</p>
-<h2 id="事先">事先</h2>
-<h3 id="printf"><code>printf</code></h3>
-<p>虽然 <code>printf</code> 是最简单的调试方法，但是也是最常用的调试方法，基本上没有 <code>printf</code> 调试不出来的 bug</p>
+<h2 id="事先" class="heading-element">
+  <a href="#%e4%ba%8b%e5%85%88" class="heading-mark"></a>事先</h2><h3 id="printf" class="heading-element">
+  <a href="#printf" class="heading-mark"></a><code>printf</code></h3><p>虽然 <code>printf</code> 是最简单的调试方法，但是也是最常用的调试方法，基本上没有 <code>printf</code> 调试不出来的 bug</p>
 <p><strong>一般流程如下：</strong></p>
 <ol>
 <li>通常对于一般的 bug，可以先根据出错时的程序输出，大致估计出错的位置</li>
@@ -1158,8 +1152,8 @@
 <p>但是然而 <code>printf</code> 本身会造成程序的运行效率降低，有时会出现<strong>加了 <code>printf</code> 之后 bug 复现不了，去掉 <code>printf</code> 之后 bug 又复现了</strong>的情况</p>
 <p>这种情况下就需要优化 <code>printf</code> 的方式，例如<strong>改用 <code>sprintf</code> 将内容输出到内存中，然后通过单独的线程 <code>fprintf</code> 转储到文件中</strong>，这样就会减少对程序的运行效率的影响</p>
 <p>当然也可以换用后续的其他的调试方法</p>
-<h3 id="assert"><code>assert</code></h3>
-<p><code>assert</code> 是 C/C++ 中的一个宏，用于判断一个表达式是否为真，如果为假，则输出错误信息，并终止程序的运行</p>
+<h3 id="assert" class="heading-element">
+  <a href="#assert" class="heading-mark"></a><code>assert</code></h3><p><code>assert</code> 是 C/C++ 中的一个宏，用于判断一个表达式是否为真，如果为假，则输出错误信息，并终止程序的运行</p>
 <div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1213,14 +1207,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define ASSERT(x)
 </span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="小节">小节</h2>
-<p>通常情况下，我个人会在出错后根据程序的编译耗时来进行选择 debug 的方式</p>
+</div><h2 id="小节" class="heading-element">
+  <a href="#%e5%b0%8f%e8%8a%82" class="heading-mark"></a>小节</h2><p>通常情况下，我个人会在出错后根据程序的编译耗时来进行选择 debug 的方式</p>
 <ul>
 <li>当程序编译耗时较短时，我会优先选择 <code>printf</code> 的方式来进行调试</li>
 <li>而当程序编译耗时较长时，我会优先选择 <code>objdump</code> 的方式来进行判断，如果 <code>objdump</code> 无法快速定位到出错的位置，我会再选择 <code>gdb</code> 的方式来进行调试</li>
 </ul>
-<h2 id="参考资料">参考资料</h2>
-<ul>
+<h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
 <li><a href="https://man7.org/linux/man-pages/man1/addr2line.1.html"target="_blank" rel="external nofollow noopener noreferrer">【man】addr2line</a></li>
 <li><a href="https://man7.org/linux/man-pages/man1/objdump.1.html"target="_blank" rel="external nofollow noopener noreferrer">【man】objdump</a></li>
 <li><a href="https://www.felixcloutier.com/x86/"target="_blank" rel="external nofollow noopener noreferrer">【felixcloutier】</a></li>
@@ -1231,7 +1225,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -1242,53 +1236,18 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/4bc1e607/" title="自定义配置 RocksDB 进行 YCSB 测试">自定义配置 RocksDB 进行 YCSB 测试</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/maven/"><i class="fa fa-tag fa-fw"></i>Maven</a>&nbsp;
-            <a class="tag-diff" href="/tags/rocksdb/"><i class="fa fa-tag fa-fw"></i>RocksDB</a>&nbsp;
-            <a class="tag-diff" href="/tags/ycsb/"><i class="fa fa-tag fa-fw"></i>YCSB</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/29e0b18c/" title="修复 chrome 打不开微信或者部分第三方应用内链接">修复 chrome 打不开微信或者部分第三方应用内链接</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/chrome/"><i class="fa fa-tag fa-fw"></i>chrome</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/b8506868/" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/rocksdb/"><i class="fa fa-tag fa-fw"></i>RocksDB</a>&nbsp;
-            <a class="tag-diff" href="/tags/zns/"><i class="fa fa-tag fa-fw"></i>ZNS</a>&nbsp;
-            <a class="tag-diff" href="/tags/qemu/"><i class="fa fa-tag fa-fw"></i>QEMU</a>&nbsp;
-            <a class="tag-diff" href="/tags/grub/"><i class="fa fa-tag fa-fw"></i>grub</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/2e7aa01a/" title="解决 pip 安装第三方包时因 SSL 报错">解决 pip 安装第三方包时因 SSL 报错</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/pip/"><i class="fa fa-tag fa-fw"></i>pip</a>&nbsp;
-            <a class="tag-diff" href="/tags/python/"><i class="fa fa-tag fa-fw"></i>python</a>&nbsp;
-            <a class="tag-diff" href="/tags/ssl/"><i class="fa fa-tag fa-fw"></i>SSL</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/76f6af57/" title="从 SSLEOFError 到正确配置 Proxy">从 SSLEOFError 到正确配置 Proxy</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/"><i class="fa fa-tag fa-fw"></i>日常踩坑</a>&nbsp;
-            <a class="tag-diff" href="/tags/proxy/"><i class="fa fa-tag fa-fw"></i>proxy</a>&nbsp;
-            <a class="tag-diff" href="/tags/python/"><i class="fa fa-tag fa-fw"></i>python</a>&nbsp;
-            <a class="tag-diff" href="/tags/ssl/"><i class="fa fa-tag fa-fw"></i>SSL</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/b8506868/" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</a></li><li>
+          <a href="/posts/76f6af57/" title="从 SSLEOFError 到正确配置 Proxy">从 SSLEOFError 到正确配置 Proxy</a></li><li>
+          <a href="/posts/29e0b18c/" title="修复 chrome 打不开微信或者部分第三方应用内链接">修复 chrome 打不开微信或者部分第三方应用内链接</a></li><li>
+          <a href="/posts/2e7aa01a/" title="解决 pip 安装第三方包时因 SSL 报错">解决 pip 安装第三方包时因 SSL 报错</a></li><li>
+          <a href="/posts/4bc1e607/" title="自定义配置 RocksDB 进行 YCSB 测试">自定义配置 RocksDB 进行 YCSB 测试</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -1296,18 +1255,16 @@
       <div class="post-info-mod">
         <span title="更新于 2023-09-11 18:44:19">更新于 2023-09-11&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/89f2ed7d/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/89f2ed7d/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/' class="post-tag">日常踩坑</a><a href='/tags/debug/' class="post-tag">Debug</a><a href='/tags/addr2line/' class="post-tag">addr2line</a><a href='/tags/gdb/' class="post-tag">gdb</a><a href='/tags/objdump/' class="post-tag">objdump</a><a href='/tags/assert/' class="post-tag">assert</a><a href='/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/' class="post-tag">反汇编</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" class="post-tag" title="标签 - 日常踩坑">日常踩坑</a><a href="/tags/debug/" class="post-tag" title="标签 - Debug">Debug</a><a href="/tags/addr2line/" class="post-tag" title="标签 - addr2line">addr2line</a><a href="/tags/gdb/" class="post-tag" title="标签 - gdb">gdb</a><a href="/tags/objdump/" class="post-tag" title="标签 - objdump">objdump</a><a href="/tags/assert/" class="post-tag" title="标签 - assert">assert</a><a href="/tags/%E5%8F%8D%E6%B1%87%E7%BC%96/" class="post-tag" title="标签 - 反汇编">反汇编</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -1339,11 +1296,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -1351,5 +1311,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

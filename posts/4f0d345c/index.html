@@ -10,7 +10,7 @@
 <meta name="description" content="io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的内核源码分析" /><meta name="keywords" content='异步 IO, kernel, liburing, io_uring' /><meta itemprop="name" content="io_uring 内核源码分析">
 <meta itemprop="description" content="io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的内核源码分析"><meta itemprop="datePublished" content="2021-10-30T16:18:05+08:00" />
 <meta itemprop="dateModified" content="2023-09-12T10:58:50+08:00" />
-<meta itemprop="wordCount" content="3296">
+<meta itemprop="wordCount" content="3302">
 <meta itemprop="keywords" content="异步 IO,kernel,liburing,io_uring," /><meta property="og:title" content="io_uring 内核源码分析" />
 <meta property="og:description" content="io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的内核源码分析" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/4f0d345c\/"
-    },"genre": "posts","keywords": "异步 IO, kernel, liburing, io_uring","wordcount":  3296 ,
+    },"genre": "posts","keywords": "异步 IO, kernel, liburing, io_uring","wordcount":  3302 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/4f0d345c\/","datePublished": "2021-10-30T16:18:05+08:00","dateModified": "2023-09-12T10:58:50+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>io_uring 内核源码分析</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/io-stack/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2021-10-30 16:18:05"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2021-10-30">2021-10-30</time></span>&nbsp;<span title="更新于 2023-09-12 10:58:50"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-12">2023-09-12</time></span>&nbsp;<span title="3296 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="io_uring 内核源码分析">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/io-stack/" class="post-category" title="分类 - IO Stack"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div><div class="post-meta-line"><span title="发布于 2021-10-30 16:18:05"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-10-30">2021-10-30</time></span>&nbsp;<span title="更新于 2023-09-12 10:58:50"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-12">2023-09-12</time></span>&nbsp;<span title="3302 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="io_uring 内核源码分析">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -201,13 +195,13 @@
         <div class="admonition-content">本文最后更新于 2023-09-12，文中内容可能已过时。</div>
       </div>
     </div><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121"target="_blank" rel="external nofollow noopener noreferrer">v5.4.121</a></p>
-<h2 id="1-io_uring">1. <code>io_uring</code></h2>
-<p><a href="/posts/c142853f/#%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8">之前</a> 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
+<h2 id="1-io_uring" class="heading-element">
+  <a href="#1-io_uring" class="heading-mark"></a>1. <code>io_uring</code></h2><p><a href="/posts/c142853f/#%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8">之前</a> 介绍过 io_uring 只增加了三个 Linux 系统调用分别是 <code>io_uring_setup</code>，<code>io_uring_enter</code> 和 <code>io_uring_register</code></p>
 <p>他们的入口都在 Linux 内核源码的 <code>fs/io_uring.c</code> 文件中，下面将逐个分析</p>
-<h2 id="2-系统调用-io_uring_setup">2. 系统调用 <code>io_uring_setup</code></h2>
-<p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d/#io-uring-queue-init">用户库源码分析</a> 中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
-<h3 id="21-io_uring_setup">2.1. <code>io_uring_setup</code></h3>
-<div class="highlight" id="id-1"><div class="chroma">
+<h2 id="2-系统调用-io_uring_setup" class="heading-element">
+  <a href="#2-%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8-io_uring_setup" class="heading-mark"></a>2. 系统调用 <code>io_uring_setup</code></h2><p><code>io_uring_setup</code> 的作用在 <a href="/posts/d7259d1d/#io-uring-queue-init">用户库源码分析</a> 中有过介绍，主要是初始化初始化 <code>io_uring</code> 结构体</p>
+<h3 id="21-io_uring_setup" class="heading-element">
+  <a href="#21-io_uring_setup" class="heading-mark"></a>2.1. <code>io_uring_setup</code></h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -297,8 +291,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到 <code>io_uring_setup</code> 的核心函数是 <code>io_uring_create</code></p>
-<h3 id="22-io_uring_create">2.2. <code>io_uring_create</code></h3>
-<div class="highlight" id="id-2"><div class="chroma">
+<h3 id="22-io_uring_create" class="heading-element">
+  <a href="#22-io_uring_create" class="heading-mark"></a>2.2. <code>io_uring_create</code></h3><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -507,8 +501,8 @@
 <p><code>io_uring_get_fd</code> 将 <code>struct io_ring_ctx *ctx</code> 暴露给用户态访问</p>
 </li>
 </ol>
-<h3 id="23-io_sq_offload_start">2.3. <code>io_sq_offload_start</code></h3>
-<div class="highlight" id="id-4"><div class="chroma">
+<h3 id="23-io_sq_offload_start" class="heading-element">
+  <a href="#23-io_sq_offload_start" class="heading-mark"></a>2.3. <code>io_sq_offload_start</code></h3><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -673,8 +667,8 @@
 <li><code>io_ring-wq</code> 主要处理读 IO，以及 direct 写 IO</li>
 <li><code>io_ring-write-wq</code> 主要是处理 buffer 写 IO</li>
 </ul>
-<h2 id="3-系统调用-io_uring_enter">3. 系统调用 <code>io_uring_enter</code></h2>
-<div class="highlight" id="id-5"><div class="chroma">
+<h2 id="3-系统调用-io_uring_enter" class="heading-element">
+  <a href="#3-%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8-io_uring_enter" class="heading-mark"></a>3. 系统调用 <code>io_uring_enter</code></h2><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -817,8 +811,8 @@
 <li>未开启 <code>IORING_SETUP_SQPOLL</code> 时，可以通过配置 <code>to_submit</code> 用来主动提交指定数量的请求</li>
 <li>未开启 <code>IORING_SETUP_SQPOLL</code> 时，还可以通过配置 <code>flags</code> 的 <code>IORING_ENTER_SQ_WAKEUP</code> 位以及 <code>min_complete</code> 用来等待指定数量的请求完成</li>
 </ol>
-<h2 id="4-系统调用-io_uring_register">4. 系统调用 <code>io_uring_register</code></h2>
-<div class="highlight" id="id-6"><div class="chroma">
+<h2 id="4-系统调用-io_uring_register" class="heading-element">
+  <a href="#4-%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8-io_uring_register" class="heading-mark"></a>4. 系统调用 <code>io_uring_register</code></h2><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1017,8 +1011,8 @@
 </div>
 </div><p><code>io_uring_register</code> 主要用于注册/释放各种不同类型的缓冲区资源</p>
 <p>通过提前注册这些缓冲区可以减轻后续每个 IO 的申请资源开销，属于一种高级功能，在这里不做过多展开</p>
-<h2 id="5-内核线程-io_sq_thread">5. 内核线程 <code>io_sq_thread</code></h2>
-<div class="highlight" id="id-7"><div class="chroma">
+<h2 id="5-内核线程-io_sq_thread" class="heading-element">
+  <a href="#5-%e5%86%85%e6%a0%b8%e7%ba%bf%e7%a8%8b-io_sq_thread" class="heading-mark"></a>5. 内核线程 <code>io_sq_thread</code></h2><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -1305,13 +1299,13 @@
 </div>
 </div><div class="mermaid" id="id-8"></div><p><code>sq_thread</code> 的功能比较简单，就是一个代理线程，主要是负责将用户写入 <code>sq</code> 中的请求下发到设备驱动</p>
 <p>此外在开启了 IOPOLL 模式时，<code>sq_thread</code> 同时负责轮询设备驱动确认 IO 是否完成</p>
-<h2 id="6-iopoll-模式">6. <code>IOPOLL</code> 模式</h2>
-<h3 id="61-启用">6.1. 启用</h3>
-<p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了 <code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code> 模式</p>
-<h3 id="62-限制">6.2. 限制</h3>
-<p>开启此选项必须保证后续只用 <code>O_DIRECT</code> 打开文件并且文件系统的 <code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO 将下发失败</p>
-<h3 id="63-调用栈">6.3. 调用栈</h3>
-<p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认 IO 是否完成</p>
+<h2 id="6-iopoll-模式" class="heading-element">
+  <a href="#6-iopoll-%e6%a8%a1%e5%bc%8f" class="heading-mark"></a>6. <code>IOPOLL</code> 模式</h2><h3 id="61-启用" class="heading-element">
+  <a href="#61-%e5%90%af%e7%94%a8" class="heading-mark"></a>6.1. 启用</h3><p>当 <code>io_uring_setup</code> 初始化时 <code>flags</code> 配置了 <code>IORING_SETUP_IOPOLL</code> 字段后将开启 <code>IOPOLL</code> 模式</p>
+<h3 id="62-限制" class="heading-element">
+  <a href="#62-%e9%99%90%e5%88%b6" class="heading-mark"></a>6.2. 限制</h3><p>开启此选项必须保证后续只用 <code>O_DIRECT</code> 打开文件并且文件系统的 <code>file_operations</code> 中注册了 <code>iopoll</code> 函数，否则 IO 将下发失败</p>
+<h3 id="63-调用栈" class="heading-element">
+  <a href="#63-%e8%b0%83%e7%94%a8%e6%a0%88" class="heading-mark"></a>6.3. 调用栈</h3><p>开启后内核将调用注册的 <code>iopoll</code> 函数来主动轮询设备驱动确认 IO 是否完成</p>
 <p>对 <code>f_op-&gt;iopoll</code> 函数调用关系进行了分析</p>
 <div class="mermaid" id="id-9"></div><p>主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了 <code>IORING_SETUP_IOPOLL</code>）：</p>
 <ol>
@@ -1323,7 +1317,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -1334,64 +1328,18 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/d7259d1d/" title="io_uring 用户库源码分析">io_uring 用户库源码分析</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E5%BC%82%E6%AD%A5-io/"><i class="fa fa-tag fa-fw"></i>异步 IO</a>&nbsp;
-            <a class="tag-same" href="/tags/liburing/"><i class="fa fa-tag fa-fw"></i>liburing</a>&nbsp;
-            <a class="tag-same" href="/tags/io_uring/"><i class="fa fa-tag fa-fw"></i>io_uring</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/c142853f/" title="io_uring 简介和使用">io_uring 简介和使用</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/%E5%BC%82%E6%AD%A5-io/"><i class="fa fa-tag fa-fw"></i>异步 IO</a>&nbsp;
-            <a class="tag-same" href="/tags/liburing/"><i class="fa fa-tag fa-fw"></i>liburing</a>&nbsp;
-            <a class="tag-same" href="/tags/io_uring/"><i class="fa fa-tag fa-fw"></i>io_uring</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/xnu/"><i class="fa fa-tag fa-fw"></i>XNU</a>&nbsp;
-            <a class="tag-diff" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
-            <a class="tag-diff" href="/tags/cgroup/"><i class="fa fa-tag fa-fw"></i>cgroup</a>&nbsp;
-            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/ipc/"><i class="fa fa-tag fa-fw"></i>IPC</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%87%AA%E6%97%8B%E9%94%81/"><i class="fa fa-tag fa-fw"></i>自旋锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%BA%92%E6%96%A5%E9%94%81/"><i class="fa fa-tag fa-fw"></i>互斥锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"><i class="fa fa-tag fa-fw"></i>虚拟地址</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%88%86%E9%A1%B5/"><i class="fa fa-tag fa-fw"></i>分页</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>缺页中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/"><i class="fa fa-tag fa-fw"></i>多级页表</a>&nbsp;
-            <a class="tag-diff" href="/tags/tlb/"><i class="fa fa-tag fa-fw"></i>TLB</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-diff" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-diff" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
-            <a class="tag-diff" href="/tags/todo/"><i class="fa fa-tag fa-fw"></i>todo</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/646202b9/" title="page cache 回写机制">page cache 回写机制</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-diff" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/d7259d1d/" title="io_uring 用户库源码分析">io_uring 用户库源码分析</a></li><li>
+          <a href="/posts/c142853f/" title="io_uring 简介和使用">io_uring 简介和使用</a></li><li>
+          <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
+          <a href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a></li><li>
+          <a href="/posts/646202b9/" title="page cache 回写机制">page cache 回写机制</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -1399,18 +1347,16 @@
       <div class="post-info-mod">
         <span title="更新于 2023-09-12 10:58:50">更新于 2023-09-12&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/4f0d345c/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/4f0d345c/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E5%BC%82%E6%AD%A5-io/' class="post-tag">异步 IO</a><a href='/tags/kernel/' class="post-tag">kernel</a><a href='/tags/liburing/' class="post-tag">liburing</a><a href='/tags/io_uring/' class="post-tag">io_uring</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E5%BC%82%E6%AD%A5-io/" class="post-tag" title="标签 - 异步 IO">异步 IO</a><a href="/tags/kernel/" class="post-tag" title="标签 - kernel">kernel</a><a href="/tags/liburing/" class="post-tag" title="标签 - liburing">liburing</a><a href="/tags/io_uring/" class="post-tag" title="标签 - io_uring">io_uring</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -1442,11 +1388,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -1454,5 +1403,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"data":{"id-3":"graph TD\nio_uring_setup --\u003e io_ring_ctx_alloc\nio_uring_setup --\u003e io_allocate_scq_urings\nio_uring_setup --\u003e io_sq_offload_start\nio_uring_setup --\u003e io_uring_get_fd","id-8":"graph TD\nio_sq_thread --\u003e io_sqring_entries\nio_sq_thread --\u003e io_submit_sqes\nio_sq_thread --\u003e io_commit_sqring\nio_sq_thread --\u003e io_iopoll_getevents","id-9":"graph TD\nio_uring_create --\u003e io_ring_ctx_wait_and_kill\nio_uring_release --\u003e io_ring_ctx_wait_and_kill\nio_ring_ctx_wait_and_kill --\u003e io_iopoll_reap_events\nio_ring_ctx_wait_and_kill --\u003e io_ring_ctx_free\nio_ring_ctx_free --\u003e io_iopoll_reap_events\nio_iopoll_reap_events --\u003e io_iopoll_getevents\n\nsyscall[\"SYSCALL_DEFINE6(io_uring_enter, ……)\"] --\u003e io_iopoll_check --\u003e io_iopoll_getevents\n\nio_sq_thread --\u003e io_iopoll_getevents\n\nio_iopoll_getevents --\u003e io_do_iopoll --\u003e iopoll[\"f_op-\u003eiopoll\"]"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"data":{"id-3":"graph TD\nio_uring_setup --\u003e io_ring_ctx_alloc\nio_uring_setup --\u003e io_allocate_scq_urings\nio_uring_setup --\u003e io_sq_offload_start\nio_uring_setup --\u003e io_uring_get_fd","id-8":"graph TD\nio_sq_thread --\u003e io_sqring_entries\nio_sq_thread --\u003e io_submit_sqes\nio_sq_thread --\u003e io_commit_sqring\nio_sq_thread --\u003e io_iopoll_getevents","id-9":"graph TD\nio_uring_create --\u003e io_ring_ctx_wait_and_kill\nio_uring_release --\u003e io_ring_ctx_wait_and_kill\nio_ring_ctx_wait_and_kill --\u003e io_iopoll_reap_events\nio_ring_ctx_wait_and_kill --\u003e io_ring_ctx_free\nio_ring_ctx_free --\u003e io_iopoll_reap_events\nio_iopoll_reap_events --\u003e io_iopoll_getevents\n\nsyscall[\"SYSCALL_DEFINE6(io_uring_enter, ……)\"] --\u003e io_iopoll_check --\u003e io_iopoll_getevents\n\nio_sq_thread --\u003e io_iopoll_getevents\n\nio_iopoll_getevents --\u003e io_do_iopoll --\u003e iopoll[\"f_op-\u003eiopoll\"]"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

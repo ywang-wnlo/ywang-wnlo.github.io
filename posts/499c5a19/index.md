@@ -7,7 +7,7 @@ PPT 推荐用 Beamer 模板来做，Beamer 是一个用于制作幻灯片的 LaT
 
 以下仅记录个人常用的一些功能，具体可以参考 [Overleaf 上相关介绍](https://www.overleaf.com/learn/latex/Beamer) 来使用
 
-![Beamer](Beamer-overview.png "Beamer")
+![Beamer](Beamer-overview.png &#34;Beamer&#34;)
 
 ## 特性
 
@@ -22,7 +22,7 @@ Beamer 中通常会用一对 `\begin{frame}`、`\end{frame}` 来制作一页幻�
 \end{frame}
 ```
 
-![frame](Beamer-frame.png "frame")
+![frame](Beamer-frame.png &#34;frame&#34;)
 
 然而其实 frame 并不等同于 slide，其实 frame 对应的是一组 slides
 
@@ -42,24 +42,24 @@ Beamer 中通常会用一对 `\begin{frame}`、`\end{frame}` 来制作一页幻�
 \end{frame}
 ```
 
-![pause](Beamer-pause.jpg "pause")
+![pause](Beamer-pause.jpg &#34;pause&#34;)
 
-#### `itemize` 中的尖括号 \<strat-end\>
+#### `itemize` 中的尖括号 \&lt;strat-end\&gt;
 
 ```tex
 \begin{frame}
 \frametitle{item 中的尖括号}
 
 \begin{itemize}
-	\item<1-> 该文字在 1+ 页均可见
-	\item<2-3> 该文字在 2-3 页均可见
-	\item<3> 该文字仅在第 3 页均可见
-	\item<4-> 该文字在 4+ 页均可见
+	\item&lt;1-&gt; 该文字在 1&#43; 页均可见
+	\item&lt;2-3&gt; 该文字在 2-3 页均可见
+	\item&lt;3&gt; 该文字仅在第 3 页均可见
+	\item&lt;4-&gt; 该文字在 4&#43; 页均可见
 \end{itemize}
 \end{frame}
 ```
 
-![item](Beamer-item.jpg "item")
+![item](Beamer-item.jpg &#34;item&#34;)
 
 ## 参考资料
 

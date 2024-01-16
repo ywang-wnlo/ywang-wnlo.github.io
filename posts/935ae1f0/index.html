@@ -10,7 +10,7 @@
 <meta name="description" content="本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程" /><meta name="keywords" content='Linux, Shell, strace' /><meta itemprop="name" content="rm -r 与 rmdir 区别">
 <meta itemprop="description" content="本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程"><meta itemprop="datePublished" content="2021-11-24T19:47:38+08:00" />
 <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00" />
-<meta itemprop="wordCount" content="3340">
+<meta itemprop="wordCount" content="3341">
 <meta itemprop="keywords" content="Linux,Shell,strace," /><meta property="og:title" content="rm -r 与 rmdir 区别" />
 <meta property="og:description" content="本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/935ae1f0\/"
-    },"genre": "posts","keywords": "Linux, Shell, strace","wordcount":  3340 ,
+    },"genre": "posts","keywords": "Linux, Shell, strace","wordcount":  3341 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/935ae1f0\/","datePublished": "2021-11-24T19:47:38+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>rm -r 与 rmdir 区别</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a>&ensp;<a href="/categories/shell/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Shell</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2021-11-24 19:47:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2021-11-24">2021-11-24</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="3340 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="rm -r 与 rmdir 区别">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a>&ensp;<a href="/categories/shell/" class="post-category" title="分类 - Shell"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Shell</a></span></div><div class="post-meta-line"><span title="发布于 2021-11-24 19:47:38"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-11-24">2021-11-24</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="3341 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="rm -r 与 rmdir 区别">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -199,11 +193,11 @@
       <div class="details-content">
         <div class="admonition-content">本文最后更新于 2022-11-16，文中内容可能已过时。</div>
       </div>
-    </div><h2 id="背景">背景</h2>
-<p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
+    </div><h2 id="背景" class="heading-element">
+  <a href="#%e8%83%8c%e6%99%af" class="heading-mark"></a>背景</h2><p>今天学弟在使用 NVMe-over-TCP 时发现无法卸载 <code>nvmet</code> 驱动，显示使用中</p>
 <p>在一起探讨和测试中发现最终的原因竟然在于 <code>rm -r</code> 和 <code>rmdir</code> 这两个命令上</p>
-<h2 id="二者区别">二者区别</h2>
-<table>
+<h2 id="二者区别" class="heading-element">
+  <a href="#%e4%ba%8c%e8%80%85%e5%8c%ba%e5%88%ab" class="heading-mark"></a>二者区别</h2><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -224,20 +218,20 @@
 </tr>
 </tbody>
 </table>
-<h3 id="rmdir"><code>rmdir</code></h3>
-<p><code>rmdir</code> 直接调用 <code>rmdir</code> 来删除目录，如果目录非空，则会删除失败</p>
-<h3 id="rm--r"><code>rm -r</code></h3>
-<ol>
+<h3 id="rmdir" class="heading-element">
+  <a href="#rmdir" class="heading-mark"></a><code>rmdir</code></h3><p><code>rmdir</code> 直接调用 <code>rmdir</code> 来删除目录，如果目录非空，则会删除失败</p>
+<h3 id="rm--r" class="heading-element">
+  <a href="#rm--r" class="heading-mark"></a><code>rm -r</code></h3><ol>
 <li>会先用 <code>openat</code> 打开目录，通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
 <li>再第二次加上 <code>O_CLOEXEC</code> 标记<code>openat</code> 打开目录，表明当前目录即将删除，再次通过 <code>getdents64</code> 获取目录中的内容，然后 <code>close</code> 目录</li>
 <li>然后依次通过 <code>unlinkat</code> 删除目录中的内容</li>
 <li>最后通过 <code>unlinkat</code> 删除目录</li>
 </ol>
-<h3 id="rm--rf"><code>rm -rf</code></h3>
-<p>但是如果使用的是 <code>rm -rf</code>，并且在第 3 步删除目录内文件失败时，则会跳过第 4 步，也就是说不会再对目录做任何操作</p>
-<h2 id="测试过程">测试过程</h2>
-<h3 id="配置环境">配置环境</h3>
-<p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
+<h3 id="rm--rf" class="heading-element">
+  <a href="#rm--rf" class="heading-mark"></a><code>rm -rf</code></h3><p>但是如果使用的是 <code>rm -rf</code>，并且在第 3 步删除目录内文件失败时，则会跳过第 4 步，也就是说不会再对目录做任何操作</p>
+<h2 id="测试过程" class="heading-element">
+  <a href="#%e6%b5%8b%e8%af%95%e8%bf%87%e7%a8%8b" class="heading-mark"></a>测试过程</h2><h3 id="配置环境" class="heading-element">
+  <a href="#%e9%85%8d%e7%bd%ae%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置环境</h3><p>首先建立一个非空目录，并且给目录中的文件配置权限，禁止删除文件</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -265,8 +259,8 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="m">0</span> directories, <span class="m">1</span> file</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="rmdir-1"><code>rmdir</code></h3>
-<div class="highlight" id="id-3"><div class="chroma">
+</div><h3 id="rmdir-1" class="heading-element">
+  <a href="#rmdir-1" class="heading-mark"></a><code>rmdir</code></h3><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -429,8 +423,8 @@
 </span></span><span class="line"><span class="cl">exit_group(1)                           = ?
 </span></span><span class="line"><span class="cl">+++ exited with 1 +++</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="rm--r-1"><code>rm -r</code></h3>
-<div class="highlight" id="id-5"><div class="chroma">
+</div><h3 id="rm--r-1" class="heading-element">
+  <a href="#rm--r-1" class="heading-mark"></a><code>rm -r</code></h3><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -659,8 +653,8 @@
 </span></span><span class="line"><span class="cl">exit_group(1)                           = ?
 </span></span><span class="line"><span class="cl">+++ exited with 1 +++</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="rm--rf-1"><code>rm -rf</code></h3>
-<div class="highlight" id="id-7"><div class="chroma">
+</div><h3 id="rm--rf-1" class="heading-element">
+  <a href="#rm--rf-1" class="heading-mark"></a><code>rm -rf</code></h3><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1007,8 +1001,8 @@
 </span></span><span class="line"><span class="cl">exit_group(0)                           = ?
 </span></span><span class="line"><span class="cl">+++ exited with 0 +++</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="参考资料">参考资料</h2>
-<ul>
+</div><h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
 <li><a href="https://community.mellanox.com/s/article/howto-configure-nvme-over-fabrics"target="_blank" rel="external nofollow noopener noreferrer">【mellanox 社区】HowTo Configure NVMe over Fabrics</a></li>
 <li><a href="https://open.tech2real.com/info_detail_page?id=18441"target="_blank" rel="external nofollow noopener noreferrer">【硬见】NVMe-oF 不只是 RDMA，还有 TCP</a></li>
 <li><a href="https://blog.csdn.net/codedancing/article/details/103835085"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】Linux 防止文件和目录被意外删除或修改</a></li>
@@ -1019,7 +1013,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -1030,63 +1024,17 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/f2cdf8a6/" title="美化 Shell 之 Linux Zsh 篇">美化 Shell 之 Linux Zsh 篇</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
-            <a class="tag-same" href="/tags/shell/"><i class="fa fa-tag fa-fw"></i>Shell</a>&nbsp;
-            <a class="tag-diff" href="/tags/zsh/"><i class="fa fa-tag fa-fw"></i>Zsh</a>&nbsp;
-            <a class="tag-diff" href="/tags/oh-my-zsh/"><i class="fa fa-tag fa-fw"></i>Oh My Zsh</a>&nbsp;
-            <a class="tag-diff" href="/tags/nerd-font/"><i class="fa fa-tag fa-fw"></i>Nerd Font</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/8ad4716e/" title="美化 Shell 之 Windows/Linux PowerShell 篇">美化 Shell 之 Windows/Linux PowerShell 篇</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/windows/"><i class="fa fa-tag fa-fw"></i>Windows</a>&nbsp;
-            <a class="tag-same" href="/tags/shell/"><i class="fa fa-tag fa-fw"></i>Shell</a>&nbsp;
-            <a class="tag-diff" href="/tags/powershell/"><i class="fa fa-tag fa-fw"></i>PowerShell</a>&nbsp;
-            <a class="tag-diff" href="/tags/oh-my-posh/"><i class="fa fa-tag fa-fw"></i>Oh My Posh</a>&nbsp;
-            <a class="tag-diff" href="/tags/nerd-font/"><i class="fa fa-tag fa-fw"></i>Nerd Font</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/xnu/"><i class="fa fa-tag fa-fw"></i>XNU</a>&nbsp;
-            <a class="tag-same" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
-            <a class="tag-diff" href="/tags/cgroup/"><i class="fa fa-tag fa-fw"></i>cgroup</a>&nbsp;
-            <a class="tag-diff" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/ipc/"><i class="fa fa-tag fa-fw"></i>IPC</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%87%AA%E6%97%8B%E9%94%81/"><i class="fa fa-tag fa-fw"></i>自旋锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%BA%92%E6%96%A5%E9%94%81/"><i class="fa fa-tag fa-fw"></i>互斥锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"><i class="fa fa-tag fa-fw"></i>虚拟地址</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%88%86%E9%A1%B5/"><i class="fa fa-tag fa-fw"></i>分页</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>缺页中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/"><i class="fa fa-tag fa-fw"></i>多级页表</a>&nbsp;
-            <a class="tag-diff" href="/tags/tlb/"><i class="fa fa-tag fa-fw"></i>TLB</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/72a4cdfd/" title="Ubuntu 环境配置大合集">Ubuntu 环境配置大合集</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/ubuntu/"><i class="fa fa-tag fa-fw"></i>Ubuntu</a>&nbsp;
-            <a class="tag-same" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
-            <a class="tag-diff" href="/tags/nano/"><i class="fa fa-tag fa-fw"></i>nano</a>&nbsp;
-            <a class="tag-diff" href="/tags/vim/"><i class="fa fa-tag fa-fw"></i>vim</a>&nbsp;
-            <a class="tag-diff" href="/tags/perl/"><i class="fa fa-tag fa-fw"></i>perl</a>&nbsp;
-            <a class="tag-diff" href="/tags/timedatectl/"><i class="fa fa-tag fa-fw"></i>timedatectl</a>&nbsp;
-            <a class="tag-diff" href="/tags/vnc/"><i class="fa fa-tag fa-fw"></i>VNC</a>&nbsp;
-            <a class="tag-diff" href="/tags/ldconfig/"><i class="fa fa-tag fa-fw"></i>ldconfig</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/f2cdf8a6/" title="美化 Shell 之 Linux Zsh 篇">美化 Shell 之 Linux Zsh 篇</a></li><li>
+          <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
+          <a href="/posts/72a4cdfd/" title="Ubuntu 环境配置大合集">Ubuntu 环境配置大合集</a></li><li>
+          <a href="/posts/8ad4716e/" title="美化 Shell 之 Windows/Linux PowerShell 篇">美化 Shell 之 Windows/Linux PowerShell 篇</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -1094,18 +1042,16 @@
       <div class="post-info-mod">
         <span title="更新于 2022-11-16 10:33:39">更新于 2022-11-16&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/935ae1f0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/935ae1f0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/shell/' class="post-tag">Shell</a><a href='/tags/strace/' class="post-tag">strace</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a><a href="/tags/shell/" class="post-tag" title="标签 - Shell">Shell</a><a href="/tags/strace/" class="post-tag" title="标签 - strace">strace</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -1137,11 +1083,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -1149,5 +1098,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

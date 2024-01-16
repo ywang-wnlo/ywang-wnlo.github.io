@@ -38,7 +38,7 @@
 ```bash
 mkdir dir
 touch dir/file
-sudo chattr +i dir/file
+sudo chattr &#43;i dir/file
 ```
 
 此时目录树如下
@@ -55,30 +55,30 @@ dir
 
 ```bash
 $ strace -o rmdir rmdir dir/
-rmdir: failed to remove 'dir/': Directory not empty
+rmdir: failed to remove &#39;dir/&#39;: Directory not empty
 ```
 
 `strace` 抓到的内容如下，主要内容在第 37 行
 
 ```strace
-execve("/usr/bin/rmdir", ["rmdir", "dir/"], 0x7ffe38ddae38 /* 26 vars */) = 0
+execve(&#34;/usr/bin/rmdir&#34;, [&#34;rmdir&#34;, &#34;dir/&#34;], 0x7ffe38ddae38 /* 26 vars */) = 0
 brk(NULL)                               = 0x561e92b83000
 arch_prctl(0x3001 /* ARCH_??? */, 0x7fff06684960) = -1 EINVAL (Invalid argument)
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access(&#34;/etc/ld.so.preload&#34;, R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/etc/ld.so.cache&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0
 mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af80c000
 close(3)                                = 0
-openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+openat(AT_FDCWD, &#34;/lib/x86_64-linux-gnu/libc.so.6&#34;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &#34;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&#34;..., 832) = 832
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0
 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f51af80a000
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f51af618000
 mprotect(0x7f51af63d000, 1847296, PROT_NONE) = 0
 mmap(0x7f51af63d000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f51af63d000
@@ -93,79 +93,79 @@ mprotect(0x7f51af845000, 4096, PROT_READ) = 0
 munmap(0x7f51af80c000, 46019)           = 0
 brk(NULL)                               = 0x561e92b83000
 brk(0x561e92ba4000)                     = 0x561e92ba4000
-openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, &#34;/usr/lib/locale/locale-archive&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0
 mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f51af332000
 close(3)                                = 0
-rmdir("dir/")                           = -1 ENOTEMPTY (Directory not empty)
-openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+rmdir(&#34;dir/&#34;)                           = -1 ENOTEMPTY (Directory not empty)
+openat(AT_FDCWD, &#34;/usr/share/locale/locale.alias&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0
-read(3, "# Locale name alias data base.\n#"..., 4096) = 2996
-read(3, "", 4096)                       = 0
+read(3, &#34;# Locale name alias data base.\n#&#34;..., 4096) = 2996
+read(3, &#34;&#34;, 4096)                       = 0
 close(3)                                = 0
-openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-write(2, "rmdir: ", 7)                  = 7
-write(2, "failed to remove 'dir/'", 23) = 23
-openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-write(2, ": Directory not empty", 21)   = 21
-write(2, "\n", 1)                       = 1
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &#34;rmdir: &#34;, 7)                  = 7
+write(2, &#34;failed to remove &#39;dir/&#39;&#34;, 23) = 23
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &#34;: Directory not empty&#34;, 21)   = 21
+write(2, &#34;\n&#34;, 1)                       = 1
 close(1)                                = 0
 close(2)                                = 0
 exit_group(1)                           = ?
-+++ exited with 1 +++
+&#43;&#43;&#43; exited with 1 &#43;&#43;&#43;
 ```
 
 ### `rm -r`
 
 ```bash
 $ strace -o rm_r_fail.strace rm -r dir/
-rm: cannot remove 'dir/file': Operation not permitted
-rm: cannot remove 'dir/': Directory not empty
+rm: cannot remove &#39;dir/file&#39;: Operation not permitted
+rm: cannot remove &#39;dir/&#39;: Directory not empty
 ```
 
 `strace` 抓到的内容如下，主要内容在第 39-59 以及 94-96 行
 
 ```strace
-execve("/usr/bin/rm", ["rm", "-r", "dir/"], 0x7ffc2c0fb640 /* 26 vars */) = 0
+execve(&#34;/usr/bin/rm&#34;, [&#34;rm&#34;, &#34;-r&#34;, &#34;dir/&#34;], 0x7ffc2c0fb640 /* 26 vars */) = 0
 brk(NULL)                               = 0x56082871e000
 arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd0d910cf0) = -1 EINVAL (Invalid argument)
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access(&#34;/etc/ld.so.preload&#34;, R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/etc/ld.so.cache&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0
 mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c441d000
 close(3)                                = 0
-openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+openat(AT_FDCWD, &#34;/lib/x86_64-linux-gnu/libc.so.6&#34;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &#34;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&#34;..., 832) = 832
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0
 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f65c441b000
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f65c4229000
 mprotect(0x7f65c424e000, 1847296, PROT_NONE) = 0
 mmap(0x7f65c424e000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f65c424e000
@@ -180,23 +180,23 @@ mprotect(0x7f65c4456000, 4096, PROT_READ) = 0
 munmap(0x7f65c441d000, 46019)           = 0
 brk(NULL)                               = 0x56082871e000
 brk(0x56082873f000)                     = 0x56082873f000
-openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, &#34;/usr/lib/locale/locale-archive&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0
 mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f65c3f43000
 close(3)                                = 0
 ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0
-lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
-newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
-openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3
+lstat(&#34;/&#34;, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+newfstatat(AT_FDCWD, &#34;dir/&#34;, {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+openat(AT_FDCWD, &#34;dir/&#34;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3
 fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
 fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)
 fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
 getdents64(3, /* 3 entries */, 32768)   = 72
 close(3)                                = 0
 geteuid()                               = 1000
-newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
-faccessat(AT_FDCWD, "dir/", W_OK)       = 0
-openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3
+newfstatat(AT_FDCWD, &#34;dir/&#34;, {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+faccessat(AT_FDCWD, &#34;dir/&#34;, W_OK)       = 0
+openat(AT_FDCWD, &#34;dir/&#34;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3
 fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
 fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)
 fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
@@ -205,85 +205,85 @@ fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4
 getdents64(3, /* 3 entries */, 32768)   = 72
 getdents64(3, /* 0 entries */, 32768)   = 0
 close(3)                                = 0
-newfstatat(4, "file", {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0
-faccessat(4, "file", W_OK)              = -1 EPERM (Operation not permitted)
-openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(4, &#34;file&#34;, {st_mode=S_IFREG|0664, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0
+faccessat(4, &#34;file&#34;, W_OK)              = -1 EPERM (Operation not permitted)
+openat(AT_FDCWD, &#34;/usr/share/locale/locale.alias&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0
-read(3, "# Locale name alias data base.\n#"..., 4096) = 2996
-read(3, "", 4096)                       = 0
+read(3, &#34;# Locale name alias data base.\n#&#34;..., 4096) = 2996
+read(3, &#34;&#34;, 4096)                       = 0
 close(3)                                = 0
-openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-write(2, "rm: ", 4)                     = 4
-write(2, "cannot remove 'dir/file'", 24) = 24
-openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-write(2, ": Operation not permitted", 25) = 25
-write(2, "\n", 1)                       = 1
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &#34;rm: &#34;, 4)                     = 4
+write(2, &#34;cannot remove &#39;dir/file&#39;&#34;, 24) = 24
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &#34;: Operation not permitted&#34;, 25) = 25
+write(2, &#34;\n&#34;, 1)                       = 1
 close(4)                                = 0
-newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
-faccessat(AT_FDCWD, "dir/", W_OK)       = 0
-unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)
-write(2, "rm: ", 4)                     = 4
-write(2, "cannot remove 'dir/'", 20)    = 20
-write(2, ": Directory not empty", 21)   = 21
-write(2, "\n", 1)                       = 1
+newfstatat(AT_FDCWD, &#34;dir/&#34;, {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+faccessat(AT_FDCWD, &#34;dir/&#34;, W_OK)       = 0
+unlinkat(AT_FDCWD, &#34;dir/&#34;, AT_REMOVEDIR) = -1 ENOTEMPTY (Directory not empty)
+write(2, &#34;rm: &#34;, 4)                     = 4
+write(2, &#34;cannot remove &#39;dir/&#39;&#34;, 20)    = 20
+write(2, &#34;: Directory not empty&#34;, 21)   = 21
+write(2, &#34;\n&#34;, 1)                       = 1
 lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)
 close(0)                                = 0
 close(1)                                = 0
 close(2)                                = 0
 exit_group(1)                           = ?
-+++ exited with 1 +++
+&#43;&#43;&#43; exited with 1 &#43;&#43;&#43;
 ```
 
 ### `rm -rf`
 
 ```bash
 $ strace -o rm_fail.strace rm -rf dir/
-rm: cannot remove 'dir/file': Operation not permitted
+rm: cannot remove &#39;dir/file&#39;: Operation not permitted
 ```
 
 `strace` 抓到的内容如下，主要内容在第 39-55 行
 
 ```strace
-execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7fff7bc99c20 /* 26 vars */) = 0
+execve(&#34;/usr/bin/rm&#34;, [&#34;rm&#34;, &#34;-rf&#34;, &#34;dir/&#34;], 0x7fff7bc99c20 /* 26 vars */) = 0
 brk(NULL)                               = 0x5566570fe000
 arch_prctl(0x3001 /* ARCH_??? */, 0x7ffde2720670) = -1 EINVAL (Invalid argument)
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access(&#34;/etc/ld.so.preload&#34;, R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/etc/ld.so.cache&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0
 mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb89d87000
 close(3)                                = 0
-openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+openat(AT_FDCWD, &#34;/lib/x86_64-linux-gnu/libc.so.6&#34;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &#34;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&#34;..., 832) = 832
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0
 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fcb89d85000
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcb89b93000
 mprotect(0x7fcb89bb8000, 1847296, PROT_NONE) = 0
 mmap(0x7fcb89bb8000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7fcb89bb8000
@@ -298,20 +298,20 @@ mprotect(0x7fcb89dc0000, 4096, PROT_READ) = 0
 munmap(0x7fcb89d87000, 46019)           = 0
 brk(NULL)                               = 0x5566570fe000
 brk(0x55665711f000)                     = 0x55665711f000
-openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, &#34;/usr/lib/locale/locale-archive&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0
 mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fcb898ad000
 close(3)                                = 0
 ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0
-lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
-newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
-openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3
+lstat(&#34;/&#34;, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+newfstatat(AT_FDCWD, &#34;dir/&#34;, {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+openat(AT_FDCWD, &#34;dir/&#34;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3
 fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
 fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)
 fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
 getdents64(3, /* 3 entries */, 32768)   = 72
 close(3)                                = 0
-openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3
+openat(AT_FDCWD, &#34;dir/&#34;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3
 fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
 fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)
 fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
@@ -320,47 +320,47 @@ fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4
 getdents64(3, /* 3 entries */, 32768)   = 72
 getdents64(3, /* 0 entries */, 32768)   = 0
 close(3)                                = 0
-unlinkat(4, "file", 0)                  = -1 EPERM (Operation not permitted)
-openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+unlinkat(4, &#34;file&#34;, 0)                  = -1 EPERM (Operation not permitted)
+openat(AT_FDCWD, &#34;/usr/share/locale/locale.alias&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=2996, ...}) = 0
-read(3, "# Locale name alias data base.\n#"..., 4096) = 2996
-read(3, "", 4096)                       = 0
+read(3, &#34;# Locale name alias data base.\n#&#34;..., 4096) = 2996
+read(3, &#34;&#34;, 4096)                       = 0
 close(3)                                = 0
-openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-write(2, "rm: ", 4)                     = 4
-write(2, "cannot remove 'dir/file'", 24) = 24
-openat(AT_FDCWD, "/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
-write(2, ": Operation not permitted", 25) = 25
-write(2, "\n", 1)                       = 1
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &#34;rm: &#34;, 4)                     = 4
+write(2, &#34;cannot remove &#39;dir/file&#39;&#34;, 24) = 24
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en_US/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale/en/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.UTF-8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en.utf8/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo&#34;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, &#34;: Operation not permitted&#34;, 25) = 25
+write(2, &#34;\n&#34;, 1)                       = 1
 close(4)                                = 0
 lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)
 close(0)                                = 0
 close(1)                                = 0
 close(2)                                = 0
 exit_group(1)                           = ?
-+++ exited with 1 +++
+&#43;&#43;&#43; exited with 1 &#43;&#43;&#43;
 ```
 
 最后取消文件的权限，看一下 `rm -rf` 成功时的系统调用
@@ -373,24 +373,24 @@ strace -o rm_rf_succ.strace rm -rf dir/
 `strace` 抓到的内容如下，主要内容在第 39-57 行
 
 ```strace
-execve("/usr/bin/rm", ["rm", "-rf", "dir/"], 0x7ffee56569a0 /* 26 vars */) = 0
+execve(&#34;/usr/bin/rm&#34;, [&#34;rm&#34;, &#34;-rf&#34;, &#34;dir/&#34;], 0x7ffee56569a0 /* 26 vars */) = 0
 brk(NULL)                               = 0x55cc9fc1d000
 arch_prctl(0x3001 /* ARCH_??? */, 0x7ffec41c6210) = -1 EINVAL (Invalid argument)
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
-openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access(&#34;/etc/ld.so.preload&#34;, R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &#34;/etc/ld.so.cache&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=46019, ...}) = 0
 mmap(NULL, 46019, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771df9d000
 close(3)                                = 0
-openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+openat(AT_FDCWD, &#34;/lib/x86_64-linux-gnu/libc.so.6&#34;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &#34;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360q\2\0\0\0\0\0&#34;..., 832) = 832
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0
 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f771df9b000
-pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+pread64(3, &#34;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&#34;..., 784, 64) = 784
+pread64(3, &#34;\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0&#34;, 32, 848) = 32
+pread64(3, &#34;\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X&gt;\263&#34;..., 68, 880) = 68
 mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f771dda9000
 mprotect(0x7f771ddce000, 1847296, PROT_NONE) = 0
 mmap(0x7f771ddce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f771ddce000
@@ -405,20 +405,20 @@ mprotect(0x7f771dfd6000, 4096, PROT_READ) = 0
 munmap(0x7f771df9d000, 46019)           = 0
 brk(NULL)                               = 0x55cc9fc1d000
 brk(0x55cc9fc3e000)                     = 0x55cc9fc3e000
-openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, &#34;/usr/lib/locale/locale-archive&#34;, O_RDONLY|O_CLOEXEC) = 3
 fstat(3, {st_mode=S_IFREG|0644, st_size=3035952, ...}) = 0
 mmap(NULL, 3035952, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f771dac3000
 close(3)                                = 0
 ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0
-lstat("/", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
-newfstatat(AT_FDCWD, "dir/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
-openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3
+lstat(&#34;/&#34;, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+newfstatat(AT_FDCWD, &#34;dir/&#34;, {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+openat(AT_FDCWD, &#34;dir/&#34;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_DIRECTORY) = 3
 fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
 fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)
 fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
 getdents64(3, /* 3 entries */, 32768)   = 72
 close(3)                                = 0
-openat(AT_FDCWD, "dir/", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3
+openat(AT_FDCWD, &#34;dir/&#34;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3
 fstat(3, {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
 fcntl(3, F_GETFL)                       = 0x38800 (flags O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_NOFOLLOW|O_DIRECTORY)
 fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
@@ -427,15 +427,15 @@ fcntl(3, F_DUPFD_CLOEXEC, 3)            = 4
 getdents64(3, /* 3 entries */, 32768)   = 72
 getdents64(3, /* 0 entries */, 32768)   = 0
 close(3)                                = 0
-unlinkat(4, "file", 0)                  = 0
+unlinkat(4, &#34;file&#34;, 0)                  = 0
 close(4)                                = 0
-unlinkat(AT_FDCWD, "dir/", AT_REMOVEDIR) = 0
+unlinkat(AT_FDCWD, &#34;dir/&#34;, AT_REMOVEDIR) = 0
 lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)
 close(0)                                = 0
 close(1)                                = 0
 close(2)                                = 0
 exit_group(0)                           = ?
-+++ exited with 0 +++
+&#43;&#43;&#43; exited with 0 &#43;&#43;&#43;
 ```
 
 ## 参考资料

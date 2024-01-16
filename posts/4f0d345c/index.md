@@ -28,26 +28,26 @@ static long io_uring_setup(u32 entries, struct io_uring_params __user *params)
 	int i;
 
 	// 用户态拷贝到内核态
-	if (copy_from_user(&p, params, sizeof(p)))
+	if (copy_from_user(&amp;p, params, sizeof(p)))
 		return -EFAULT;
 	// 确认保留区域没有被赋值
-	for (i = 0; i < ARRAY_SIZE(p.resv); i++) {
+	for (i = 0; i &lt; ARRAY_SIZE(p.resv); i&#43;&#43;) {
 		if (p.resv[i])
 			return -EINVAL;
 	}
 
 	// 检查 flags 参数
-	if (p.flags & ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |
+	if (p.flags &amp; ~(IORING_SETUP_IOPOLL | IORING_SETUP_SQPOLL |
 			IORING_SETUP_SQ_AFF))
 		return -EINVAL;
 
 	// 分配内存空间，创建 workqueue，创建 fd 等
-	ret = io_uring_create(entries, &p);
-	if (ret < 0)
+	ret = io_uring_create(entries, &amp;p);
+	if (ret &lt; 0)
 		return ret;
 
 	// 内核态拷贝回用户态
-	if (copy_to_user(params, &p, sizeof(p)))
+	if (copy_to_user(params, &amp;p, sizeof(p)))
 		return -EFAULT;
 
 	return ret;
@@ -72,17 +72,17 @@ static int io_uring_create(unsigned entries, struct io_uring_params *p)
 	bool account_mem;
 	int ret;
 
-	if (!entries || entries > IORING_MAX_ENTRIES)
+	if (!entries || entries &gt; IORING_MAX_ENTRIES)
 		return -EINVAL;
 
 	/*
-	 * Use twice as many entries for the CQ ring. It's possible for the
+	 * Use twice as many entries for the CQ ring. It&#39;s possible for the
 	 * application to drive a higher depth than the size of the SQ ring,
 	 * since the sqes are only used at submission time. This allows for
 	 * some flexibility in overcommitting a bit.
 	 */
-	p->sq_entries = roundup_pow_of_two(entries);
-	p->cq_entries = 2 * p->sq_entries;
+	p-&gt;sq_entries = roundup_pow_of_two(entries);
+	p-&gt;cq_entries = 2 * p-&gt;sq_entries;
 
 	user = get_uid(current_user());
 	// 允许对共享内存段进行锁定
@@ -91,7 +91,7 @@ static int io_uring_create(unsigned entries, struct io_uring_params *p)
 	if (account_mem) {
 		// 不能对共享内存段进行锁定，就需要增加当前可以锁定的内存
 		ret = io_account_mem(user,
-				ring_pages(p->sq_entries, p->cq_entries));
+				ring_pages(p-&gt;sq_entries, p-&gt;cq_entries));
 		if (ret) {
 			free_uid(user);
 			return ret;
@@ -101,17 +101,17 @@ static int io_uring_create(unsigned entries, struct io_uring_params *p)
 	ctx = io_ring_ctx_alloc(p);
 	if (!ctx) {
 		if (account_mem)
-			io_unaccount_mem(user, ring_pages(p->sq_entries,
-								p->cq_entries));
+			io_unaccount_mem(user, ring_pages(p-&gt;sq_entries,
+								p-&gt;cq_entries));
 		free_uid(user);
 		return -ENOMEM;
 	}
-	ctx->compat = in_compat_syscall();
-	ctx->account_mem = account_mem;
-	ctx->user = user;
+	ctx-&gt;compat = in_compat_syscall();
+	ctx-&gt;account_mem = account_mem;
+	ctx-&gt;user = user;
 
-	ctx->creds = get_current_cred();
-	if (!ctx->creds) {
+	ctx-&gt;creds = get_current_cred();
+	if (!ctx-&gt;creds) {
 		ret = -ENOMEM;
 		goto err;
 	}
@@ -126,33 +126,33 @@ static int io_uring_create(unsigned entries, struct io_uring_params *p)
 	if (ret)
 		goto err;
 
-	memset(&p->sq_off, 0, sizeof(p->sq_off));
-	p->sq_off.head = offsetof(struct io_rings, sq.head);
-	p->sq_off.tail = offsetof(struct io_rings, sq.tail);
-	p->sq_off.ring_mask = offsetof(struct io_rings, sq_ring_mask);
-	p->sq_off.ring_entries = offsetof(struct io_rings, sq_ring_entries);
-	p->sq_off.flags = offsetof(struct io_rings, sq_flags);
-	p->sq_off.dropped = offsetof(struct io_rings, sq_dropped);
-	p->sq_off.array = (char *)ctx->sq_array - (char *)ctx->rings;
+	memset(&amp;p-&gt;sq_off, 0, sizeof(p-&gt;sq_off));
+	p-&gt;sq_off.head = offsetof(struct io_rings, sq.head);
+	p-&gt;sq_off.tail = offsetof(struct io_rings, sq.tail);
+	p-&gt;sq_off.ring_mask = offsetof(struct io_rings, sq_ring_mask);
+	p-&gt;sq_off.ring_entries = offsetof(struct io_rings, sq_ring_entries);
+	p-&gt;sq_off.flags = offsetof(struct io_rings, sq_flags);
+	p-&gt;sq_off.dropped = offsetof(struct io_rings, sq_dropped);
+	p-&gt;sq_off.array = (char *)ctx-&gt;sq_array - (char *)ctx-&gt;rings;
 
-	memset(&p->cq_off, 0, sizeof(p->cq_off));
-	p->cq_off.head = offsetof(struct io_rings, cq.head);
-	p->cq_off.tail = offsetof(struct io_rings, cq.tail);
-	p->cq_off.ring_mask = offsetof(struct io_rings, cq_ring_mask);
-	p->cq_off.ring_entries = offsetof(struct io_rings, cq_ring_entries);
-	p->cq_off.overflow = offsetof(struct io_rings, cq_overflow);
-	p->cq_off.cqes = offsetof(struct io_rings, cqes);
+	memset(&amp;p-&gt;cq_off, 0, sizeof(p-&gt;cq_off));
+	p-&gt;cq_off.head = offsetof(struct io_rings, cq.head);
+	p-&gt;cq_off.tail = offsetof(struct io_rings, cq.tail);
+	p-&gt;cq_off.ring_mask = offsetof(struct io_rings, cq_ring_mask);
+	p-&gt;cq_off.ring_entries = offsetof(struct io_rings, cq_ring_entries);
+	p-&gt;cq_off.overflow = offsetof(struct io_rings, cq_overflow);
+	p-&gt;cq_off.cqes = offsetof(struct io_rings, cqes);
 
 	/*
-	 * Install ring fd as the very last thing, so we don't risk someone
+	 * Install ring fd as the very last thing, so we don&#39;t risk someone
 	 * having closed it before we finish setup
 	 */
 	// 创建 fd 便于用户态访问 ctx
 	ret = io_uring_get_fd(ctx);
-	if (ret < 0)
+	if (ret &lt; 0)
 		goto err;
 
-	p->features = IORING_FEAT_SINGLE_MMAP;
+	p-&gt;features = IORING_FEAT_SINGLE_MMAP;
 	return ret;
 err:
 	io_ring_ctx_wait_and_kill(ctx);
@@ -162,10 +162,10 @@ err:
 
 ```mermaid
 graph TD
-io_uring_setup --> io_ring_ctx_alloc
-io_uring_setup --> io_allocate_scq_urings
-io_uring_setup --> io_sq_offload_start
-io_uring_setup --> io_uring_get_fd
+io_uring_setup --&gt; io_ring_ctx_alloc
+io_uring_setup --&gt; io_allocate_scq_urings
+io_uring_setup --&gt; io_sq_offload_start
+io_uring_setup --&gt; io_uring_get_fd
 ```
 
 1. `io_ring_ctx_alloc` 主要用来申请空间，初始化列表头、互斥锁、自旋锁等结构
@@ -187,67 +187,67 @@ static int io_sq_offload_start(struct io_ring_ctx *ctx,
 {
 	int ret;
 
-	mmgrab(current->mm);
-	ctx->sqo_mm = current->mm;
+	mmgrab(current-&gt;mm);
+	ctx-&gt;sqo_mm = current-&gt;mm;
 
-	if (ctx->flags & IORING_SETUP_SQPOLL) {
+	if (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {
 		// IORING_SETUP_SQPOLL 将会创建一个内核线程来 poll SQ
 		ret = -EPERM;
 		if (!capable(CAP_SYS_ADMIN))
 			goto err;
 
-		ctx->sq_thread_idle = msecs_to_jiffies(p->sq_thread_idle);
-		if (!ctx->sq_thread_idle)
-			ctx->sq_thread_idle = HZ;
+		ctx-&gt;sq_thread_idle = msecs_to_jiffies(p-&gt;sq_thread_idle);
+		if (!ctx-&gt;sq_thread_idle)
+			ctx-&gt;sq_thread_idle = HZ;
 
-		if (p->flags & IORING_SETUP_SQ_AFF) {
-			int cpu = p->sq_thread_cpu;
+		if (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {
+			int cpu = p-&gt;sq_thread_cpu;
 
 			ret = -EINVAL;
-			if (cpu >= nr_cpu_ids)
+			if (cpu &gt;= nr_cpu_ids)
 				goto err;
 			if (!cpu_online(cpu))
 				goto err;
 
-			ctx->sqo_thread = kthread_create_on_cpu(io_sq_thread,
+			ctx-&gt;sqo_thread = kthread_create_on_cpu(io_sq_thread,
 							ctx, cpu,
-							"io_uring-sq");
+							&#34;io_uring-sq&#34;);
 		} else {
-			ctx->sqo_thread = kthread_create(io_sq_thread, ctx,
-							"io_uring-sq");
+			ctx-&gt;sqo_thread = kthread_create(io_sq_thread, ctx,
+							&#34;io_uring-sq&#34;);
 		}
-		if (IS_ERR(ctx->sqo_thread)) {
-			ret = PTR_ERR(ctx->sqo_thread);
-			ctx->sqo_thread = NULL;
+		if (IS_ERR(ctx-&gt;sqo_thread)) {
+			ret = PTR_ERR(ctx-&gt;sqo_thread);
+			ctx-&gt;sqo_thread = NULL;
 			goto err;
 		}
-		wake_up_process(ctx->sqo_thread);
-	} else if (p->flags & IORING_SETUP_SQ_AFF) {
-		/* Can't have SQ_AFF without SQPOLL */
+		wake_up_process(ctx-&gt;sqo_thread);
+	} else if (p-&gt;flags &amp; IORING_SETUP_SQ_AFF) {
+		/* Can&#39;t have SQ_AFF without SQPOLL */
 		ret = -EINVAL;
 		goto err;
 	}
 
 	/* Do QD, or 2 * CPUS, whatever is smallest */
-	ctx->sqo_wq[0] = alloc_workqueue("io_ring-wq",
+	ctx-&gt;sqo_wq[0] = alloc_workqueue(&#34;io_ring-wq&#34;,
 			WQ_UNBOUND | WQ_FREEZABLE,
-			min(ctx->sq_entries - 1, 2 * num_online_cpus()));
-	if (!ctx->sqo_wq[0]) {
+			min(ctx-&gt;sq_entries - 1, 2 * num_online_cpus()));
+	if (!ctx-&gt;sqo_wq[0]) {
 		ret = -ENOMEM;
 		goto err;
 	}
 
 	/*
 	 * This is for buffered writes, where we want to limit the parallelism
-	 * due to file locking in file systems. As "normal" buffered writes
+	 * due to file locking in file systems. As &#34;normal&#34; buffered writes
 	 * should parellelize on writeout quite nicely, limit us to having 2
 	 * pending. This avoids massive contention on the inode when doing
 	 * buffered async writes.
 	 */
 	// 对 buffer 写的 workqueue 深度进行限制，减少锁争用开销?
-	ctx->sqo_wq[1] = alloc_workqueue("io_ring-write-wq",
+	ctx-&gt;sqo_wq[1] = alloc_workqueue(&#34;io_ring-write-wq&#34;,
 						WQ_UNBOUND | WQ_FREEZABLE, 2);
-	if (!ctx->sqo_wq[1]) {
+	if (!ctx-&gt;sqo_wq[1]) {
 		ret = -ENOMEM;
 		goto err;
 	}
@@ -255,15 +255,15 @@ static int io_sq_offload_start(struct io_ring_ctx *ctx,
 	return 0;
 err:
 	io_finish_async(ctx);
-	mmdrop(ctx->sqo_mm);
-	ctx->sqo_mm = NULL;
+	mmdrop(ctx-&gt;sqo_mm);
+	ctx-&gt;sqo_mm = NULL;
 	return ret;
 }
 ```
 
 当 `flags` 中配置了 `IORING_SETUP_SQPOLL` 时，将启动一个单独的内核线程 `io_sq_thread`，而当 `IORING_SETUP_SQ_AFF` 字段也配置时，将根据 `sq_thread_cpu` 字段，在指定的 CPU 上启用内核线程 `io_sq_thread`
 
-同时该函数还会创建两个工作队列 `ctx->sqo_wq[2]` 分别名为 `io_ring-wq` 和 `io_ring-write-wq`
+同时该函数还会创建两个工作队列 `ctx-&gt;sqo_wq[2]` 分别名为 `io_ring-wq` 和 `io_ring-write-wq`
 
 - `io_ring-wq` 主要处理读 IO，以及 direct 写 IO
 - `io_ring-write-wq` 主要是处理 buffer 写 IO
@@ -280,7 +280,7 @@ SYSCALL_DEFINE6(io_uring_enter, unsigned int, fd, u32, to_submit,
 	int submitted = 0;
 	struct fd f;
 
-	if (flags & ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))
+	if (flags &amp; ~(IORING_ENTER_GETEVENTS | IORING_ENTER_SQ_WAKEUP))
 		return -EINVAL;
 
 	f = fdget(fd);
@@ -288,12 +288,12 @@ SYSCALL_DEFINE6(io_uring_enter, unsigned int, fd, u32, to_submit,
 		return -EBADF;
 
 	ret = -EOPNOTSUPP;
-	if (f.file->f_op != &io_uring_fops)
+	if (f.file-&gt;f_op != &amp;io_uring_fops)
 		goto out_fput;
 
 	ret = -ENXIO;
-	ctx = f.file->private_data;
-	if (!percpu_ref_tryget(&ctx->refs))
+	ctx = f.file-&gt;private_data;
+	if (!percpu_ref_tryget(&amp;ctx-&gt;refs))
 		goto out_fput;
 
 	/*
@@ -302,37 +302,37 @@ SYSCALL_DEFINE6(io_uring_enter, unsigned int, fd, u32, to_submit,
 	 * we were asked to.
 	 */
 	ret = 0;
-	if (ctx->flags & IORING_SETUP_SQPOLL) {
+	if (ctx-&gt;flags &amp; IORING_SETUP_SQPOLL) {
 		// 唤醒内核中的 sq_thread
-		if (flags & IORING_ENTER_SQ_WAKEUP)
-			wake_up(&ctx->sqo_wait);
+		if (flags &amp; IORING_ENTER_SQ_WAKEUP)
+			wake_up(&amp;ctx-&gt;sqo_wait);
 		submitted = to_submit;
 	} else if (to_submit) {
 		// 主动提交请求
-		to_submit = min(to_submit, ctx->sq_entries);
+		to_submit = min(to_submit, ctx-&gt;sq_entries);
 
-		mutex_lock(&ctx->uring_lock);
+		mutex_lock(&amp;ctx-&gt;uring_lock);
 		submitted = io_ring_submit(ctx, to_submit);
-		mutex_unlock(&ctx->uring_lock);
+		mutex_unlock(&amp;ctx-&gt;uring_lock);
 
 		if (submitted != to_submit)
 			goto out;
 	}
-	if (flags & IORING_ENTER_GETEVENTS) {
+	if (flags &amp; IORING_ENTER_GETEVENTS) {
 		// 等待指定数量的请求完成
 		unsigned nr_events = 0;
 
-		min_complete = min(min_complete, ctx->cq_entries);
+		min_complete = min(min_complete, ctx-&gt;cq_entries);
 
-		if (ctx->flags & IORING_SETUP_IOPOLL) {
-			ret = io_iopoll_check(ctx, &nr_events, min_complete);
+		if (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) {
+			ret = io_iopoll_check(ctx, &amp;nr_events, min_complete);
 		} else {
 			ret = io_cqring_wait(ctx, min_complete, sig, sigsz);
 		}
 	}
 
 out:
-	percpu_ref_put(&ctx->refs);
+	percpu_ref_put(&amp;ctx-&gt;refs);
 out_fput:
 	fdput(f);
 	return submitted ? submitted : ret;
@@ -360,15 +360,15 @@ SYSCALL_DEFINE4(io_uring_register, unsigned int, fd, unsigned int, opcode,
 		return -EBADF;
 
 	ret = -EOPNOTSUPP;
-	if (f.file->f_op != &io_uring_fops)
+	if (f.file-&gt;f_op != &amp;io_uring_fops)
 		goto out_fput;
 
-	ctx = f.file->private_data;
+	ctx = f.file-&gt;private_data;
 
-	mutex_lock(&ctx->uring_lock);
+	mutex_lock(&amp;ctx-&gt;uring_lock);
 	// 核心函数
 	ret = __io_uring_register(ctx, opcode, arg, nr_args);
-	mutex_unlock(&ctx->uring_lock);
+	mutex_unlock(&amp;ctx-&gt;uring_lock);
 out_fput:
 	fdput(f);
 	return ret;
@@ -376,31 +376,31 @@ out_fput:
 
 static int __io_uring_register(struct io_ring_ctx *ctx, unsigned opcode,
 			       void __user *arg, unsigned nr_args)
-	__releases(ctx->uring_lock)
-	__acquires(ctx->uring_lock)
+	__releases(ctx-&gt;uring_lock)
+	__acquires(ctx-&gt;uring_lock)
 {
 	int ret;
 
 	/*
-	 * We're inside the ring mutex, if the ref is already dying, then
+	 * We&#39;re inside the ring mutex, if the ref is already dying, then
 	 * someone else killed the ctx or is already going through
 	 * io_uring_register().
 	 */
-	if (percpu_ref_is_dying(&ctx->refs))
+	if (percpu_ref_is_dying(&amp;ctx-&gt;refs))
 		return -ENXIO;
 
-	percpu_ref_kill(&ctx->refs);
+	percpu_ref_kill(&amp;ctx-&gt;refs);
 
 	/*
 	 * Drop uring mutex before waiting for references to exit. If another
 	 * thread is currently inside io_uring_enter() it might need to grab
 	 * the uring_lock to make progress. If we hold it here across the drain
-	 * wait, then we can deadlock. It's safe to drop the mutex here, since
-	 * no new references will come in after we've killed the percpu ref.
+	 * wait, then we can deadlock. It&#39;s safe to drop the mutex here, since
+	 * no new references will come in after we&#39;ve killed the percpu ref.
 	 */
-	mutex_unlock(&ctx->uring_lock);
-	wait_for_completion(&ctx->ctx_done);
-	mutex_lock(&ctx->uring_lock);
+	mutex_unlock(&amp;ctx-&gt;uring_lock);
+	wait_for_completion(&amp;ctx-&gt;ctx_done);
+	mutex_lock(&amp;ctx-&gt;uring_lock);
 
 	// 根据 opcode 注册/释放相应的缓冲区资源
 	switch (opcode) {
@@ -440,8 +440,8 @@ static int __io_uring_register(struct io_ring_ctx *ctx, unsigned opcode,
 	}
 
 	/* bring the ctx back to life */
-	reinit_completion(&ctx->ctx_done);
-	percpu_ref_reinit(&ctx->refs);
+	reinit_completion(&amp;ctx-&gt;ctx_done);
+	percpu_ref_reinit(&amp;ctx-&gt;refs);
 	return ret;
 }
 ```
@@ -464,11 +464,11 @@ static int io_sq_thread(void *data)
 	unsigned long timeout;
 
 	// 通知主线程，sqo 线程已经启动
-	complete(&ctx->sqo_thread_started);
+	complete(&amp;ctx-&gt;sqo_thread_started);
 
 	old_fs = get_fs();
 	set_fs(USER_DS);
-	old_cred = override_creds(ctx->creds);
+	old_cred = override_creds(ctx-&gt;creds);
 
 	// 线程的主循环
 	timeout = inflight = 0;
@@ -480,26 +480,26 @@ static int io_sq_thread(void *data)
 		if (inflight) {
 			unsigned nr_events = 0;
 
-			if (ctx->flags & IORING_SETUP_IOPOLL) {
+			if (ctx-&gt;flags &amp; IORING_SETUP_IOPOLL) {
 				/*
 				 * inflight is the count of the maximum possible
 				 * entries we submitted, but it can be smaller
-				 * if we dropped some of them. If we don't have
+				 * if we dropped some of them. If we don&#39;t have
 				 * poll entries available, then we know that we
 				 * have nothing left to poll for. Reset the
 				 * inflight count to zero in that case.
 				 */
-				mutex_lock(&ctx->uring_lock);
+				mutex_lock(&amp;ctx-&gt;uring_lock);
 				// iopoll 模式下，sqo 还需要负责执行 poll
-				if (!list_empty(&ctx->poll_list))
-					io_iopoll_getevents(ctx, &nr_events, 0);
+				if (!list_empty(&amp;ctx-&gt;poll_list))
+					io_iopoll_getevents(ctx, &amp;nr_events, 0);
 				else
 					inflight = 0;
-				mutex_unlock(&ctx->uring_lock);
+				mutex_unlock(&amp;ctx-&gt;uring_lock);
 			} else {
 				/*
 				 * Normal IO, just pretend everything completed.
-				 * We don't have to poll completions for that.
+				 * We don&#39;t have to poll completions for that.
 				 */
 				// 非 iopoll 模式下，直接将 inflight 设置为 0
 				nr_events = inflight;
@@ -507,14 +507,14 @@ static int io_sq_thread(void *data)
 
 			inflight -= nr_events;
 			if (!inflight)
-				timeout = jiffies + ctx->sq_thread_idle;
+				timeout = jiffies &#43; ctx-&gt;sq_thread_idle;
 		}
 
 		// 获取 sq ring 中的 sqe 数量
 		to_submit = io_sqring_entries(ctx);
 		if (!to_submit) {
 			/*
-			 * Drop cur_mm before scheduling, we can't hold it for
+			 * Drop cur_mm before scheduling, we can&#39;t hold it for
 			 * long periods (or over schedule()). Do this before
 			 * adding ourselves to the waitqueue, as the unuse/drop
 			 * may sleep.
@@ -526,7 +526,7 @@ static int io_sq_thread(void *data)
 			}
 
 			/*
-			 * We're polling. If we're within the defined idle
+			 * We&#39;re polling. If we&#39;re within the defined idle
 			 * period, then let us spin without work before going
 			 * to sleep.
 			 */
@@ -536,48 +536,48 @@ static int io_sq_thread(void *data)
 				continue;
 			}
 
-			prepare_to_wait(&ctx->sqo_wait, &wait,
+			prepare_to_wait(&amp;ctx-&gt;sqo_wait, &amp;wait,
 						TASK_INTERRUPTIBLE);
 
 			/* Tell userspace we may need a wakeup call */
-			ctx->rings->sq_flags |= IORING_SQ_NEED_WAKEUP;
+			ctx-&gt;rings-&gt;sq_flags |= IORING_SQ_NEED_WAKEUP;
 			/* make sure to read SQ tail after writing flags */
 			smp_mb();
 
 			to_submit = io_sqring_entries(ctx);
 			if (!to_submit) {
 				if (kthread_should_park()) {
-					finish_wait(&ctx->sqo_wait, &wait);
+					finish_wait(&amp;ctx-&gt;sqo_wait, &amp;wait);
 					break;
 				}
 				if (signal_pending(current))
 					flush_signals(current);
 				schedule();
-				finish_wait(&ctx->sqo_wait, &wait);
+				finish_wait(&amp;ctx-&gt;sqo_wait, &amp;wait);
 
-				ctx->rings->sq_flags &= ~IORING_SQ_NEED_WAKEUP;
+				ctx-&gt;rings-&gt;sq_flags &amp;= ~IORING_SQ_NEED_WAKEUP;
 				continue;
 			}
-			finish_wait(&ctx->sqo_wait, &wait);
+			finish_wait(&amp;ctx-&gt;sqo_wait, &amp;wait);
 
-			ctx->rings->sq_flags &= ~IORING_SQ_NEED_WAKEUP;
+			ctx-&gt;rings-&gt;sq_flags &amp;= ~IORING_SQ_NEED_WAKEUP;
 		}
 
 		/* Unless all new commands are FIXED regions, grab mm */
 		if (!cur_mm) {
-			mm_fault = !mmget_not_zero(ctx->sqo_mm);
+			mm_fault = !mmget_not_zero(ctx-&gt;sqo_mm);
 			if (!mm_fault) {
-				use_mm(ctx->sqo_mm);
-				cur_mm = ctx->sqo_mm;
+				use_mm(ctx-&gt;sqo_mm);
+				cur_mm = ctx-&gt;sqo_mm;
 			}
 		}
 
-		to_submit = min(to_submit, ctx->sq_entries);
+		to_submit = min(to_submit, ctx-&gt;sq_entries);
 		// 提交请求
-		inflight += io_submit_sqes(ctx, to_submit, cur_mm != NULL,
+		inflight &#43;= io_submit_sqes(ctx, to_submit, cur_mm != NULL,
 					   mm_fault);
 
-		/* Commit SQ ring head once we've consumed all SQEs */
+		/* Commit SQ ring head once we&#39;ve consumed all SQEs */
 		// 更新 sq ring 的 head
 		io_commit_sqring(ctx);
 	}
@@ -597,10 +597,10 @@ static int io_sq_thread(void *data)
 
 ```mermaid
 graph TD
-io_sq_thread --> io_sqring_entries
-io_sq_thread --> io_submit_sqes
-io_sq_thread --> io_commit_sqring
-io_sq_thread --> io_iopoll_getevents
+io_sq_thread --&gt; io_sqring_entries
+io_sq_thread --&gt; io_submit_sqes
+io_sq_thread --&gt; io_commit_sqring
+io_sq_thread --&gt; io_iopoll_getevents
 ```
 
 `sq_thread` 的功能比较简单，就是一个代理线程，主要是负责将用户写入 `sq` 中的请求下发到设备驱动
@@ -621,22 +621,22 @@ io_sq_thread --> io_iopoll_getevents
 
 开启后内核将调用注册的 `iopoll` 函数来主动轮询设备驱动确认 IO 是否完成
 
-对 `f_op->iopoll` 函数调用关系进行了分析
+对 `f_op-&gt;iopoll` 函数调用关系进行了分析
 
 ```mermaid
 graph TD
-io_uring_create --> io_ring_ctx_wait_and_kill
-io_uring_release --> io_ring_ctx_wait_and_kill
-io_ring_ctx_wait_and_kill --> io_iopoll_reap_events
-io_ring_ctx_wait_and_kill --> io_ring_ctx_free
-io_ring_ctx_free --> io_iopoll_reap_events
-io_iopoll_reap_events --> io_iopoll_getevents
+io_uring_create --&gt; io_ring_ctx_wait_and_kill
+io_uring_release --&gt; io_ring_ctx_wait_and_kill
+io_ring_ctx_wait_and_kill --&gt; io_iopoll_reap_events
+io_ring_ctx_wait_and_kill --&gt; io_ring_ctx_free
+io_ring_ctx_free --&gt; io_iopoll_reap_events
+io_iopoll_reap_events --&gt; io_iopoll_getevents
 
-syscall["SYSCALL_DEFINE6(io_uring_enter, ……)"] --> io_iopoll_check --> io_iopoll_getevents
+syscall[&#34;SYSCALL_DEFINE6(io_uring_enter, ……)&#34;] --&gt; io_iopoll_check --&gt; io_iopoll_getevents
 
-io_sq_thread --> io_iopoll_getevents
+io_sq_thread --&gt; io_iopoll_getevents
 
-io_iopoll_getevents --> io_do_iopoll --> iopoll["f_op->iopoll"]
+io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll[&#34;f_op-&gt;iopoll&#34;]
 ```
 
 主要有三条调用路线（所有调用逻辑都会判断是否在初始化时配置了 `IORING_SETUP_IOPOLL`）：

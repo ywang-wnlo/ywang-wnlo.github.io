@@ -10,7 +10,7 @@
 默认界面是英文的，可以在 [系统-软件](http://192.168.1.1/cgi-bin/luci/admin/system/opkg) 中搜索中文包安装进行汉化
 
 - 点击 `UPDATE LIST...` 耐心等待软件包的更新
-- 然后在 `Filter:` 下的输入框中输入 `luci-i18n-base-zh-cn`，在筛选出来的结果中点击 `INSTALL...`，安装勾上 `Overwrite files from other package(s)`，然后点击 `INSTALL`，耐心等待安装完成之后刷新网页（Ctrl+F5）可以看见大部分界面已经汉化了
+- 然后在 `Filter:` 下的输入框中输入 `luci-i18n-base-zh-cn`，在筛选出来的结果中点击 `INSTALL...`，安装勾上 `Overwrite files from other package(s)`，然后点击 `INSTALL`，耐心等待安装完成之后刷新网页（Ctrl&#43;F5）可以看见大部分界面已经汉化了
 - 同理安装 `luci-i18n-opkg-zh-cn` 包用于 [系统-软件](http://192.168.1.1/cgi-bin/luci/admin/system/opkg) 界面的汉化
 - 同理安装 `luci-i18n-firewall-zh-cn` 包用于 [网络-防火墙](http://192.168.1.1/cgi-bin/luci/admin/network/firewall) 界面的汉化
 
@@ -128,7 +128,7 @@ opkg install kmod-usb-storage-uas
 
   配置挂载可以通过直接在网页端的 [系统-挂载点](http://192.168.1.1/cgi-bin/luci/admin/system/mounts) 进行手动配置，比较直观，如图所示：
 
-  ![挂载设备](Mount-sda6.png "挂载设备")
+  ![挂载设备](Mount-sda6.png &#34;挂载设备&#34;)
 
   - 已启用：勾选
   - UUID：推荐使用 UUID 来进行挂载
@@ -141,11 +141,11 @@ opkg install kmod-usb-storage-uas
 1. 修改 `fstab`，将原本挂载的 `overlay` 设备挂载到新的目录 `/rwm`
 
     ```bash
-    DEVICE="$(sed -n -e "/\s\/overlay\s.*$/s///p" /etc/mtab)"
+    DEVICE=&#34;$(sed -n -e &#34;/\s\/overlay\s.*$/s///p&#34; /etc/mtab)&#34;
     uci -q delete fstab.rwm
-    uci set fstab.rwm="mount"
-    uci set fstab.rwm.device="${DEVICE}"
-    uci set fstab.rwm.target="/rwm"
+    uci set fstab.rwm=&#34;mount&#34;
+    uci set fstab.rwm.device=&#34;${DEVICE}&#34;
+    uci set fstab.rwm.target=&#34;/rwm&#34;
     uci commit fstab
     ```
 
@@ -158,14 +158,14 @@ opkg install kmod-usb-storage-uas
     # block info
 
     # 确定分区并制作文件系统
-    DEVICE="/dev/sda1"
+    DEVICE=&#34;/dev/sda1&#34;
     # mkfs.ext4 ${DEVICE}
 
-    eval $(block info ${DEVICE} | grep -o -e "UUID=\S*")
+    eval $(block info ${DEVICE} | grep -o -e &#34;UUID=\S*&#34;)
     uci -q delete fstab.overlay
-    uci set fstab.overlay="mount"
-    uci set fstab.overlay.uuid="${UUID}"
-    uci set fstab.overlay.target="/overlay"
+    uci set fstab.overlay=&#34;mount&#34;
+    uci set fstab.overlay.uuid=&#34;${UUID}&#34;
+    uci set fstab.overlay.target=&#34;/overlay&#34;
     uci commit fstab
     ```
 
@@ -189,7 +189,7 @@ opkg install kmod-usb-storage-uas
 
 **首选，自动重连比 Minieap 靠谱得多！！！**
 
-[MentoHUST](http://byhh.hust.edu.cn/cgi-bin/bbsnewtcon?board=NetResource&file=M.1230774282.A) 是华中科技大学的 [HustMoon](http://byhh.hust.edu.cn/cgi-bin/bbsqry?userid=HustMoon) 最初在校内 BBS 白云黄鹤上发布的一款可以在 Linux 系统上进行锐捷认证的软件。不过 [原始项目](https://code.google.com/archive/p/mentohust/) 已经归档，不在开发，GitHub 上有加入 v4 支持的 [新项目](https://github.com/hyrathb/mentohust)
+[MentoHUST](http://byhh.hust.edu.cn/cgi-bin/bbsnewtcon?board=NetResource&amp;file=M.1230774282.A) 是华中科技大学的 [HustMoon](http://byhh.hust.edu.cn/cgi-bin/bbsqry?userid=HustMoon) 最初在校内 BBS 白云黄鹤上发布的一款可以在 Linux 系统上进行锐捷认证的软件。不过 [原始项目](https://code.google.com/archive/p/mentohust/) 已经归档，不在开发，GitHub 上有加入 v4 支持的 [新项目](https://github.com/hyrathb/mentohust)
 
 而在 OpenWrt 可以通过 GitHub 上的两个项目手动编译 `.ipk` 文件，然后 `opkg install xxx.ipk` 进行安装即可
 
@@ -219,7 +219,7 @@ opkg install kmod-usb-storage-uas
 
 1. 首先要在 [网络-防火墙-通信规则](http://192.168.1.1/cgi-bin/luci/admin/network/firewall/rules) 点击新增，进行如下配置
 
-    ![开放 80 端口](Allow-LuCI-WAN.png "开放 80 端口")
+    ![开放 80 端口](Allow-LuCI-WAN.png &#34;开放 80 端口&#34;)
 
     - 名称：可以随意设置
     - 协议：根据需要进行选择即可
@@ -240,7 +240,7 @@ opkg install kmod-usb-storage-uas
 
 1. 首先要在 [网络-防火墙-端口转发](http://192.168.1.1/cgi-bin/luci/admin/network/firewall/forwards) 点击新增，进行如下配置
 
-    ![端口转发](Win-Remote.png "端口转发")
+    ![端口转发](Win-Remote.png &#34;端口转发&#34;)
 
     - 名称：可以随意设置
     - 协议：根据需要进行选择即可
@@ -274,11 +274,11 @@ opkg install kmod-usb-storage-uas
 
     ```bash
     # Using IPv6 by default
-    NET_ULA="$(uci get network.globals.ula_prefix)"
-    uci set network.globals.ula_prefix="d${NET_ULA:1}"
+    NET_ULA=&#34;$(uci get network.globals.ula_prefix)&#34;
+    uci set network.globals.ula_prefix=&#34;d${NET_ULA:1}&#34;
     # 默认 network.lan.ip6assign 配置可能有误，需要根据 ula_prefix 重新配置
-    IP6_ASSIGN="$(echo ${NET_ULA} | grep -E '(\d+)$' -o)"
-    uci set network.lan.ip6assign="${IP6_ASSIGN}"
+    IP6_ASSIGN=&#34;$(echo ${NET_ULA} | grep -E &#39;(\d&#43;)$&#39; -o)&#34;
+    uci set network.lan.ip6assign=&#34;${IP6_ASSIGN}&#34;
     uci commit network
     /etc/init.d/network restart
     ```
@@ -286,16 +286,16 @@ opkg install kmod-usb-storage-uas
 3. 配置 WAN6 以及 LAN 端口
 
     ```bash
-    uci set dhcp.wan6.ra='relay'
-    uci set dhcp.wan6.dhcpv6='relay'
+    uci set dhcp.wan6.ra=&#39;relay&#39;
+    uci set dhcp.wan6.dhcpv6=&#39;relay&#39;
     uci delete dhcp.wan6.ndp
-    uci set dhcp.wan6.master='1'
+    uci set dhcp.wan6.master=&#39;1&#39;
 
-    uci set dhcp.lan.ra_default='1'
-    uci set dhcp.lan.ra='server'
-    uci set dhcp.lan.dhcpv6='server'
+    uci set dhcp.lan.ra_default=&#39;1&#39;
+    uci set dhcp.lan.ra=&#39;server&#39;
+    uci set dhcp.lan.dhcpv6=&#39;server&#39;
     uci delete dhcp.lan.ndp
-    uci set dhcp.lan.ra_management='1'
+    uci set dhcp.lan.ra_management=&#39;1&#39;
 
     uci commit dhcp
     /etc/init.d/odhcpd restart
@@ -305,7 +305,7 @@ opkg install kmod-usb-storage-uas
 
     ```bash
     # Configure firewall
-    uci set firewall.@zone[1].masq6="1"
+    uci set firewall.@zone[1].masq6=&#34;1&#34;
     uci commit firewall
     /etc/init.d/firewall restart
     ```
@@ -315,17 +315,17 @@ opkg install kmod-usb-storage-uas
     ```bash
     cd /etc/hotplug.d/iface
     touch 90-nat66
-    echo "#!/bin/sh" >> 90-nat66
-    echo "[ \"\$ACTION\" = ifup ] || exit 0" >> 90-nat66
-    echo "route -A inet6 add default gw \`(ip -6 route | grep default | awk '{print \$5,\$6,\$7}')\`" >> 90-nat66
+    echo &#34;#!/bin/sh&#34; &gt;&gt; 90-nat66
+    echo &#34;[ \&#34;\$ACTION\&#34; = ifup ] || exit 0&#34; &gt;&gt; 90-nat66
+    echo &#34;route -A inet6 add default gw \`(ip -6 route | grep default | awk &#39;{print \$5,\$6,\$7}&#39;)\`&#34; &gt;&gt; 90-nat66
     ```
 
     也可以直接 `vim /etc/hotplug.d/iface/90-nat66` 填入：
 
     ```bast
     #!/bin/sh
-    [ "$ACTION" = ifup ] || exit 0
-    route -A inet6 add default gw `(ip -6 route | grep default | awk '{print $5,$6,$7}')`
+    [ &#34;$ACTION&#34; = ifup ] || exit 0
+    route -A inet6 add default gw `(ip -6 route | grep default | awk &#39;{print $5,$6,$7}&#39;)`
     ```
 
     该步骤主要是让 OpenWRT 每次重启后自动添加 ipv6 默认网关，如果要立即生效可以手动执行
@@ -357,16 +357,16 @@ opkg install kmod-usb-storage-uas
         option enabled 0
 
         # persistent configuration folder (for ZT controller mode)
-        #option config_path '/etc/zerotier'
+        #option config_path &#39;/etc/zerotier&#39;
 
-        #option port '9993'
+        #option port &#39;9993&#39;
 
         # Generate secret on first start
-        option secret ''
+        option secret &#39;&#39;
 
         # Join a public network called Earth
-        list join '8056c2e21c000001'
-        #list join '<other_network>'
+        list join &#39;8056c2e21c000001&#39;
+        #list join &#39;&lt;other_network&gt;&#39;
     ```
 
     修改其中的 `enabled` 为 1，开启服务，并且 `list join` 后的网络 ID 改为自己申请的网络 ID 即可
@@ -375,8 +375,8 @@ opkg install kmod-usb-storage-uas
 
     ```bash
     uci set zerotier.openwrt_network=zerotier
-    uci add_list zerotier.openwrt_network.join='xxxxxxxxxxxxxxxx'
-    uci set zerotier.openwrt_network.enabled='1'
+    uci add_list zerotier.openwrt_network.join=&#39;xxxxxxxxxxxxxxxx&#39;
+    uci set zerotier.openwrt_network.enabled=&#39;1&#39;
     uci commit zerotier
     ```
 
@@ -392,11 +392,11 @@ opkg install kmod-usb-storage-uas
 
     ```bash
     uci add firewall rule
-    uci set firewall.@rule[-1].name='Allow-ZeroTier-Inbound'
-    uci set firewall.@rule[-1].src='*'
-    uci set firewall.@rule[-1].target='ACCEPT'
-    uci set firewall.@rule[-1].proto='udp'
-    uci set firewall.@rule[-1].dest_port='9993'
+    uci set firewall.@rule[-1].name=&#39;Allow-ZeroTier-Inbound&#39;
+    uci set firewall.@rule[-1].src=&#39;*&#39;
+    uci set firewall.@rule[-1].target=&#39;ACCEPT&#39;
+    uci set firewall.@rule[-1].proto=&#39;udp&#39;
+    uci set firewall.@rule[-1].dest_port=&#39;9993&#39;
     uci commit firewall
     /etc/init.d/firewall restart
     ```
@@ -415,8 +415,8 @@ opkg install kmod-usb-storage-uas
 
     ```bash
     uci set network.ZeroTier=interface
-    uci set network.ZeroTier.proto='none'
-    uci set network.ZeroTier.device='ztXXXXXXXX'
+    uci set network.ZeroTier.proto=&#39;none&#39;
+    uci set network.ZeroTier.device=&#39;ztXXXXXXXX&#39;
     uci commit network
     /etc/init.d/network restart
     ```
@@ -440,28 +440,28 @@ opkg install kmod-usb-storage-uas
 
     ```bash
     uci add firewall zone
-    uci set firewall.@zone[-1].name='zerotier'
-    uci set firewall.@zone[-1].input='ACCEPT'
-    uci set firewall.@zone[-1].output='ACCEPT'
-    uci set firewall.@zone[-1].forward='ACCEPT'
-    uci set firewall.@zone[-1].masq='1'
-    uci add_list firewall.@zone[-1].network='ZeroTier'
+    uci set firewall.@zone[-1].name=&#39;zerotier&#39;
+    uci set firewall.@zone[-1].input=&#39;ACCEPT&#39;
+    uci set firewall.@zone[-1].output=&#39;ACCEPT&#39;
+    uci set firewall.@zone[-1].forward=&#39;ACCEPT&#39;
+    uci set firewall.@zone[-1].masq=&#39;1&#39;
+    uci add_list firewall.@zone[-1].network=&#39;ZeroTier&#39;
     uci add firewall forwarding
-    uci set firewall.@forwarding[-1].src='zerotier'
-    uci set firewall.@forwarding[-1].dest='lan'
+    uci set firewall.@forwarding[-1].src=&#39;zerotier&#39;
+    uci set firewall.@forwarding[-1].dest=&#39;lan&#39;
     uci add firewall forwarding
-    uci set firewall.@forwarding[-1].src='zerotier'
-    uci set firewall.@forwarding[-1].dest='wan'
+    uci set firewall.@forwarding[-1].src=&#39;zerotier&#39;
+    uci set firewall.@forwarding[-1].dest=&#39;wan&#39;
     uci add firewall forwarding
-    uci set firewall.@forwarding[-1].src='lan'
-    uci set firewall.@forwarding[-1].dest='zerotier'
+    uci set firewall.@forwarding[-1].src=&#39;lan&#39;
+    uci set firewall.@forwarding[-1].dest=&#39;zerotier&#39;
     uci commit firewall
     /etc/init.d/firewall restart
     ```
 
     至此路由器本身的配置就完了，然后需要去 [zerotier 官网](https://my.zerotier.com/network) 配置一下路由
 
-    ![ZeroTier 路由管理](ZeroTier-Routes.png "ZeroTier 路由管理")
+    ![ZeroTier 路由管理](ZeroTier-Routes.png &#34;ZeroTier 路由管理&#34;)
 
     例如我的局域网段选的 `192.168.192.*`，两个路由器实际的内网的 LAN 口配置依次为 `192.168.22.0/24` 和 `192.168.33.0/24` 对应左边的红框，路由器自身的 ZeroTier 的虚拟 IP 为 `192.168.192.22` 和 `192.168.192.33` 则对应着右边红框，这里不详细展开，可以参考 [这篇博文](https://stray.love/jiao-cheng/zerotier-zhong-jie-jiao-cheng)
 
@@ -516,7 +516,7 @@ opkg install kmod-usb-storage-uas
 
 3. 然后参考之前的 [开放端口](#开放端口)，打开 20、21、10090-10100 端口就可以在外网访问 FTP 服务器了
 
-    ![开放 FTP 端口](Allow-FTP-WAN.png "开放 FTP 端口")
+    ![开放 FTP 端口](Allow-FTP-WAN.png &#34;开放 FTP 端口&#34;)
 
 4. 之后重启 `vsftpd` 服务即可使用
 
@@ -539,7 +539,7 @@ P.S. 连接 ftp 服务器的账号密码就是路由器的 root 账号密码
 
 2. 在网页端的 [服务-网络共享](http://192.168.1.1/cgi-bin/luci/admin/services/samba4) 中进行配置，个人配置如下，可以参考
 
-    ![Samba 配置](Samba.png "Samba 配置")
+    ![Samba 配置](Samba.png &#34;Samba 配置&#34;)
 
 3. 之后重启 `samba4` 服务即可使用
 
@@ -565,68 +565,68 @@ transmission 是一个轻量级跨平台的 BT 下载客户端
 
 2. 直接修改 `/etc/config/transmission`，或者在网页端的 [服务-Transmission](http://192.168.1.1/cgi-bin/luci/admin/services/transmission) 进行配置，下面给出个人配置，可以参考
 
-    ![Transmission 配置](Transmission.png "Transmission 配置")
+    ![Transmission 配置](Transmission.png &#34;Transmission 配置&#34;)
 
     ```ini
     config transmission
-        option config_overwrite '1'
-        option mem_percentage '50'
-        option nice '10'
-        option alt_speed_enabled 'false'
-        option alt_speed_time_enabled 'false'
-        option bind_address_ipv4 '0.0.0.0'
-        option bind_address_ipv6 '::'
-        option blocklist_enabled 'false'
-        option cache_size_mb '2'
-        option dht_enabled 'true'
-        option download_queue_enabled 'true'
-        option download_queue_size '4'
-        option encryption '1'
-        option idle_seeding_limit_enabled 'false'
-        option lazy_bitfield_enabled 'true'
-        option lpd_enabled 'false'
-        option message_level '1'
-        option peer_limit_global '240'
-        option peer_limit_per_torrent '60'
-        option peer_port '51413'
-        option peer_port_random_on_start 'false'
-        option peer_socket_tos 'default'
-        option pex_enabled 'true'
-        option port_forwarding_enabled 'true'
-        option preallocation '1'
-        option queue_stalled_enabled 'true'
-        option queue_stalled_minutes '30'
-        option ratio_limit '2.0000'
-        option rename_partial_files 'true'
-        option rpc_bind_address '0.0.0.0'
-        option rpc_enabled 'true'
-        option rpc_host_whitelist_enabled 'false'
-        option rpc_port '9091'
-        option rpc_url '/transmission/'
-        option rpc_whitelist_enabled 'false'
-        option scrape_paused_torrents_enabled 'true'
-        option script_torrent_done_enabled 'false'
-        option seed_queue_enabled 'false'
-        option speed_limit_down_enabled 'false'
-        option speed_limit_up_enabled 'false'
-        option start_added_torrents 'true'
-        option umask '18'
-        option utp_enabled 'true'
-        option scrape_paused_torrents 'true'
-        option watch_dir_enabled 'false'
-        option enabled '1'
-        option user 'root'
-        option group 'root'
-        option upload_slots_per_torrent '10'
-        option download_dir '/mnt/ext4/transmission'
-        option incomplete_dir_enabled 'true'
-        option incomplete_dir '/mnt/ext4/transmission/incomplete'
-        option trash_original_torrent_files 'true'
-        option rpc_authentication_required 'true'
-        option rpc_username 'rpc_username'
-        option rpc_password 'rpc_password'
-        option ratio_limit_enabled 'true'
-        option config_dir '/etc/transmission'
+        option config_overwrite &#39;1&#39;
+        option mem_percentage &#39;50&#39;
+        option nice &#39;10&#39;
+        option alt_speed_enabled &#39;false&#39;
+        option alt_speed_time_enabled &#39;false&#39;
+        option bind_address_ipv4 &#39;0.0.0.0&#39;
+        option bind_address_ipv6 &#39;::&#39;
+        option blocklist_enabled &#39;false&#39;
+        option cache_size_mb &#39;2&#39;
+        option dht_enabled &#39;true&#39;
+        option download_queue_enabled &#39;true&#39;
+        option download_queue_size &#39;4&#39;
+        option encryption &#39;1&#39;
+        option idle_seeding_limit_enabled &#39;false&#39;
+        option lazy_bitfield_enabled &#39;true&#39;
+        option lpd_enabled &#39;false&#39;
+        option message_level &#39;1&#39;
+        option peer_limit_global &#39;240&#39;
+        option peer_limit_per_torrent &#39;60&#39;
+        option peer_port &#39;51413&#39;
+        option peer_port_random_on_start &#39;false&#39;
+        option peer_socket_tos &#39;default&#39;
+        option pex_enabled &#39;true&#39;
+        option port_forwarding_enabled &#39;true&#39;
+        option preallocation &#39;1&#39;
+        option queue_stalled_enabled &#39;true&#39;
+        option queue_stalled_minutes &#39;30&#39;
+        option ratio_limit &#39;2.0000&#39;
+        option rename_partial_files &#39;true&#39;
+        option rpc_bind_address &#39;0.0.0.0&#39;
+        option rpc_enabled &#39;true&#39;
+        option rpc_host_whitelist_enabled &#39;false&#39;
+        option rpc_port &#39;9091&#39;
+        option rpc_url &#39;/transmission/&#39;
+        option rpc_whitelist_enabled &#39;false&#39;
+        option scrape_paused_torrents_enabled &#39;true&#39;
+        option script_torrent_done_enabled &#39;false&#39;
+        option seed_queue_enabled &#39;false&#39;
+        option speed_limit_down_enabled &#39;false&#39;
+        option speed_limit_up_enabled &#39;false&#39;
+        option start_added_torrents &#39;true&#39;
+        option umask &#39;18&#39;
+        option utp_enabled &#39;true&#39;
+        option scrape_paused_torrents &#39;true&#39;
+        option watch_dir_enabled &#39;false&#39;
+        option enabled &#39;1&#39;
+        option user &#39;root&#39;
+        option group &#39;root&#39;
+        option upload_slots_per_torrent &#39;10&#39;
+        option download_dir &#39;/mnt/ext4/transmission&#39;
+        option incomplete_dir_enabled &#39;true&#39;
+        option incomplete_dir &#39;/mnt/ext4/transmission/incomplete&#39;
+        option trash_original_torrent_files &#39;true&#39;
+        option rpc_authentication_required &#39;true&#39;
+        option rpc_username &#39;rpc_username&#39;
+        option rpc_password &#39;rpc_password&#39;
+        option ratio_limit_enabled &#39;true&#39;
+        option config_dir &#39;/etc/transmission&#39;
     ```
 
 3. 之后重启 `transmission` 服务即可使用

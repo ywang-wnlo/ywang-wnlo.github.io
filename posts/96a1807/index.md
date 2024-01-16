@@ -15,7 +15,7 @@
 
 ```bash
 sudo apt update
-sudo apt install build-essential ccache ecj fastjar file g++ gawk \
+sudo apt install build-essential ccache ecj fastjar file g&#43;&#43; gawk \
 gettext git java-propose-classpath libelf-dev libncurses5-dev \
 libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \
 python3-distutils python3-setuptools python3-dev rsync subversion \
@@ -59,7 +59,7 @@ make menuconfig
 
 以小米 R3G 路由器为例，应该将他们配置成如下图所示
 
-![平台配置](Target-Config.png "平台配置")
+![平台配置](Target-Config.png &#34;平台配置&#34;)
 
 ### 获取交叉编译链
 
@@ -92,7 +92,7 @@ make menuconfig
 
 对于 `MentoHUST` 来说，在 `Network` 中的 `Ruijie` 找到对应选项并配置成 `M` 即可，如下图
 
-![MentoHUST 配置](MentoHUST-Config.png "MentoHUST 配置")
+![MentoHUST 配置](MentoHUST-Config.png &#34;MentoHUST 配置&#34;)
 
 配置完成后就可以进行编译了，编译命令也很简单，以 `MentoHUST` 为例如下所示
 
@@ -100,7 +100,7 @@ make menuconfig
 make package/mentohust/compile V=s -j
 ```
 
-编译完成后，`.ipk` 文件会生成在  `./bin/packages/<YourArchitecture>/base` 目录下，将其拷贝到路由器上就可以通过 `opkg` 进行安装使用了
+编译完成后，`.ipk` 文件会生成在  `./bin/packages/&lt;YourArchitecture&gt;/base` 目录下，将其拷贝到路由器上就可以通过 `opkg` 进行安装使用了
 
 ## 参考资料
 

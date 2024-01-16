@@ -1,13 +1,13 @@
 # FeelIt 主题的配置以及魔改记录
 
 
-{{< admonition warning "写在最前" >}}
+{{&lt; admonition warning &#34;写在最前&#34; &gt;}}
 以下大部分修改在 [FixIt](https://github.com/hugo-fixit/FixIt) 主题中已经得到了解决，所以个人已经切换到了 FixIt 主题
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition abstract >}}
+{{&lt; admonition abstract &gt;}}
 本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 简介
 
@@ -50,50 +50,50 @@ cp -r themes/FeelIt/exampleSite/hugo.toml .
 diff --git a/layouts/_default/summary.html b/layouts/_default/summary.html
 index d782d495..c44ca583 100644
 --- a/layouts/_default/summary.html
-+++ b/layouts/_default/summary.html
-@@ -26,15 +26,8 @@
+&#43;&#43;&#43; b/layouts/_default/summary.html
+@@ -26,15 &#43;26,8 @@
 
      {{- /* Meta */ -}}
-     <div class="post-meta">
--        {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
+     &lt;div class=&#34;post-meta&#34;&gt;
+-        {{- $author := $params.author | default .Site.Author.name | default (T &#34;author&#34;) -}}
 -        {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
--        <span class="post-author">
--            {{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Icon" (dict "Class" "fa-solid fa-user-circle fa-fw") "Content" $author -}}
--            {{- partial "plugin/link.html" $options -}}
--        </span>
+-        &lt;span class=&#34;post-author&#34;&gt;
+-            {{- $options := dict &#34;Class&#34; &#34;author&#34; &#34;Destination&#34; $authorLink &#34;Title&#34; &#34;Author&#34; &#34;Rel&#34; &#34;author&#34; &#34;Icon&#34; (dict &#34;Class&#34; &#34;fa-solid fa-user-circle fa-fw&#34;) &#34;Content&#34; $author -}}
+-            {{- partial &#34;plugin/link.html&#34; $options -}}
+-        &lt;/span&gt;
 -
-         {{- with .Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format -}}
--            &nbsp;<span class="post-publish">
-+            <span class="post-publish">
-                 {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "publishedOnDate" | safeHTML -}}
-             </span>
+         {{- with .Site.Params.dateFormat | default &#34;2006-01-02&#34; | .PublishDate.Format -}}
+-            &amp;nbsp;&lt;span class=&#34;post-publish&#34;&gt;
+&#43;            &lt;span class=&#34;post-publish&#34;&gt;
+                 {{- printf `&lt;time datetime=&#34;%v&#34;&gt;%v&lt;/time&gt;` . . | dict &#34;Date&#34; | T &#34;publishedOnDate&#34; | safeHTML -}}
+             &lt;/span&gt;
          {{- end -}}
 
 diff --git a/layouts/posts/single.html b/layouts/posts/single.html
 index 1a6e66c9..07c34eba 100644
 --- a/layouts/posts/single.html
-+++ b/layouts/posts/single.html
-@@ -43,20 +43,13 @@
+&#43;&#43;&#43; b/layouts/posts/single.html
+@@ -43,20 &#43;43,13 @@
              {{- /* Meta */ -}}
-             <div class="post-meta">
-                 <div class="post-meta-line">
--                    {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
+             &lt;div class=&#34;post-meta&#34;&gt;
+                 &lt;div class=&#34;post-meta-line&#34;&gt;
+-                    {{- $author := $params.author | default .Site.Author.name | default (T &#34;author&#34;) -}}
 -                    {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
--                    <span class="post-author">
--                        {{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Icon" (dict "Class" "fa-solid fa-user-circle fa-fw") "Content" $author -}}
--                        {{- partial "plugin/link.html" $options -}}
--                    </span>
+-                    &lt;span class=&#34;post-author&#34;&gt;
+-                        {{- $options := dict &#34;Class&#34; &#34;author&#34; &#34;Destination&#34; $authorLink &#34;Title&#34; &#34;Author&#34; &#34;Rel&#34; &#34;author&#34; &#34;Icon&#34; (dict &#34;Class&#34; &#34;fa-solid fa-user-circle fa-fw&#34;) &#34;Content&#34; $author -}}
+-                        {{- partial &#34;plugin/link.html&#34; $options -}}
+-                    &lt;/span&gt;
 -
                      {{- $categories := slice -}}
                      {{- range .Params.categories -}}
-                         {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-                         {{- $categories = $categories | append (printf `<a href="%v"><i class="fa-regular fa-folder fa-fw"></i>%v</a>` $category.RelPermalink $category.Title) -}}
+                         {{- $category := partialCached &#34;function/path.html&#34; . . | printf &#34;/categories/%v&#34; | $.Site.GetPage -}}
+                         {{- $categories = $categories | append (printf `&lt;a href=&#34;%v&#34;&gt;&lt;i class=&#34;fa-regular fa-folder fa-fw&#34;&gt;&lt;/i&gt;%v&lt;/a&gt;` $category.RelPermalink $category.Title) -}}
                      {{- end -}}
-                     {{- with delimit $categories "&nbsp;" -}}
--                        &nbsp;<span class="post-category">
-+                        <span class="post-category">
-                             {{- dict "Categories" . | T "publishedInCategories" | safeHTML -}}
-                         </span>
+                     {{- with delimit $categories &#34;&amp;nbsp;&#34; -}}
+-                        &amp;nbsp;&lt;span class=&#34;post-category&#34;&gt;
+&#43;                        &lt;span class=&#34;post-category&#34;&gt;
+                             {{- dict &#34;Categories&#34; . | T &#34;publishedInCategories&#34; | safeHTML -}}
+                         &lt;/span&gt;
                      {{- end -}}
 ```
 
@@ -105,182 +105,182 @@ index 1a6e66c9..07c34eba 100644
 diff --git a/assets/css/_custom.scss b/assets/css/_custom.scss
 index 37edf904..539f920c 100644
 --- a/assets/css/_custom.scss
-+++ b/assets/css/_custom.scss
-@@ -2,3 +2,90 @@
+&#43;&#43;&#43; b/assets/css/_custom.scss
+@@ -2,3 &#43;2,90 @@
  // Custom style
  // 自定义样式
  // ==============================
-+
-+// reward
-+article .reward-container {
-+    margin: 1em 0 0;
-+    padding: 1em 0;
-+    text-align: center;
-+    border-top: 1px solid #f0f0f0;
-+
-+    button {
-+        margin: .5em;
-+        background: transparent;
-+        color: #fc6423;
-+        cursor: pointer;
-+        line-height: 2;
-+        padding: 0 15px;
-+        border: 2px solid #fc6423;
-+        border-radius: 2px;
-+        outline: 0;
-+        transition: all 0.2s ease-in-out;
-+        vertical-align: text-top;
-+    }
-+
-+    button:hover {
-+        color: #fefefe;
-+        background-color: #fc6423;
-+        transition: .5s
-+    }
-+
-+    .post-reward {
-+        display: none;
-+        padding-top: 20px;
-+
-+        &.active {
-+            display: block;
-+        }
-+
-+        div {
-+            display: inline-block;
-+
-+            span {
-+            display: block;
-+            }
-+        }
-+
-+        img {
-+            display: inline-block;
-+            margin: .5em 2em 0;
-+            max-width: 100%;
-+            width: 180px;
-+        }
-+    }
-+}
-+
-+// copyright
-+article .post-copyright ul {
-+    list-style: none;
-+    overflow: hidden;
-+    padding: 0.5em 1em;
-+    position: relative;
-+    border-left: 3px solid #ff2a2a;
-+    margin: 1em 0 0;
-+
-+    background-color: rgba(#ddd, .2);
-+
-+    [theme=dark] & {
-+        background-color: rgba(#666, .2);
-+    }
-+
-+    a, a::before, a::after {
-+        text-decoration: none;
-+
-+        color: $single-link-color;
-+
-+        [theme=dark] & {
-+            color: $single-link-color-dark;
-+        }
-+    }
-+
-+    a:active,
-+    a:hover {
-+        color: $single-link-hover-color;
-+
-+        [theme=dark] & {
-+            color: $single-link-hover-color-dark;
-+        }
-+    }
-+}
+&#43;
+&#43;// reward
+&#43;article .reward-container {
+&#43;    margin: 1em 0 0;
+&#43;    padding: 1em 0;
+&#43;    text-align: center;
+&#43;    border-top: 1px solid #f0f0f0;
+&#43;
+&#43;    button {
+&#43;        margin: .5em;
+&#43;        background: transparent;
+&#43;        color: #fc6423;
+&#43;        cursor: pointer;
+&#43;        line-height: 2;
+&#43;        padding: 0 15px;
+&#43;        border: 2px solid #fc6423;
+&#43;        border-radius: 2px;
+&#43;        outline: 0;
+&#43;        transition: all 0.2s ease-in-out;
+&#43;        vertical-align: text-top;
+&#43;    }
+&#43;
+&#43;    button:hover {
+&#43;        color: #fefefe;
+&#43;        background-color: #fc6423;
+&#43;        transition: .5s
+&#43;    }
+&#43;
+&#43;    .post-reward {
+&#43;        display: none;
+&#43;        padding-top: 20px;
+&#43;
+&#43;        &amp;.active {
+&#43;            display: block;
+&#43;        }
+&#43;
+&#43;        div {
+&#43;            display: inline-block;
+&#43;
+&#43;            span {
+&#43;            display: block;
+&#43;            }
+&#43;        }
+&#43;
+&#43;        img {
+&#43;            display: inline-block;
+&#43;            margin: .5em 2em 0;
+&#43;            max-width: 100%;
+&#43;            width: 180px;
+&#43;        }
+&#43;    }
+&#43;}
+&#43;
+&#43;// copyright
+&#43;article .post-copyright ul {
+&#43;    list-style: none;
+&#43;    overflow: hidden;
+&#43;    padding: 0.5em 1em;
+&#43;    position: relative;
+&#43;    border-left: 3px solid #ff2a2a;
+&#43;    margin: 1em 0 0;
+&#43;
+&#43;    background-color: rgba(#ddd, .2);
+&#43;
+&#43;    [theme=dark] &amp; {
+&#43;        background-color: rgba(#666, .2);
+&#43;    }
+&#43;
+&#43;    a, a::before, a::after {
+&#43;        text-decoration: none;
+&#43;
+&#43;        color: $single-link-color;
+&#43;
+&#43;        [theme=dark] &amp; {
+&#43;            color: $single-link-color-dark;
+&#43;        }
+&#43;    }
+&#43;
+&#43;    a:active,
+&#43;    a:hover {
+&#43;        color: $single-link-hover-color;
+&#43;
+&#43;        [theme=dark] &amp; {
+&#43;            color: $single-link-hover-color-dark;
+&#43;        }
+&#43;    }
+&#43;}
 
 diff --git a/layouts/partials/single/copyright.html b/layouts/partials/single/copyright.html
 new file mode 100644
 index 00000000..b5130edb
 --- /dev/null
-+++ b/layouts/partials/single/copyright.html
-@@ -0,0 +1,20 @@
-+{{- $params := .Scratch.Get "params" -}}
-+
-+{{ if or .Params.copyright (and .Site.Params.footer.copyright (ne .Params.copyright false)) -}}
-+<div class="post-copyright">
-+    <ul>
-+        <li class="post-copyright-author">
-+            <strong>本文作者：</strong>
-+            {{ $params.author | default .Site.Author.name }}
-+        </li>
-+        <li class="post-copyright-link">
-+            <strong>本文链接：</strong>
-+            <a href="{{ .Permalink }}" title="{{ $params.title }}">{{ .Permalink }}</a>
-+        </li>
-+        <li class="post-copyright-license">
-+            <strong>版权声明：</strong>
-+            本博客所有文章除特别声明外，均采用 {{ .Site.Params.footer.license | safeHTML }} 许可协议。转载请注明出处！
-+        </li>
-+    </ul>
-+</div>
-+{{- end }}
+&#43;&#43;&#43; b/layouts/partials/single/copyright.html
+@@ -0,0 &#43;1,20 @@
+&#43;{{- $params := .Scratch.Get &#34;params&#34; -}}
+&#43;
+&#43;{{ if or .Params.copyright (and .Site.Params.footer.copyright (ne .Params.copyright false)) -}}
+&#43;&lt;div class=&#34;post-copyright&#34;&gt;
+&#43;    &lt;ul&gt;
+&#43;        &lt;li class=&#34;post-copyright-author&#34;&gt;
+&#43;            &lt;strong&gt;本文作者：&lt;/strong&gt;
+&#43;            {{ $params.author | default .Site.Author.name }}
+&#43;        &lt;/li&gt;
+&#43;        &lt;li class=&#34;post-copyright-link&#34;&gt;
+&#43;            &lt;strong&gt;本文链接：&lt;/strong&gt;
+&#43;            &lt;a href=&#34;{{ .Permalink }}&#34; title=&#34;{{ $params.title }}&#34;&gt;{{ .Permalink }}&lt;/a&gt;
+&#43;        &lt;/li&gt;
+&#43;        &lt;li class=&#34;post-copyright-license&#34;&gt;
+&#43;            &lt;strong&gt;版权声明：&lt;/strong&gt;
+&#43;            本博客所有文章除特别声明外，均采用 {{ .Site.Params.footer.license | safeHTML }} 许可协议。转载请注明出处！
+&#43;        &lt;/li&gt;
+&#43;    &lt;/ul&gt;
+&#43;&lt;/div&gt;
+&#43;{{- end }}
 
 diff --git a/layouts/partials/single/footer.html b/layouts/partials/single/footer.html
 index 9f02be9b..d9abf429 100644
 --- a/layouts/partials/single/footer.html
-+++ b/layouts/partials/single/footer.html
-@@ -1,6 +1,10 @@
- {{- $params := .Scratch.Get "params" -}}
+&#43;&#43;&#43; b/layouts/partials/single/footer.html
+@@ -1,6 &#43;1,10 @@
+ {{- $params := .Scratch.Get &#34;params&#34; -}}
 
- <div class="post-footer" id="post-footer">
-+    {{- partial "single/reward.html" . -}}
-+
-+    {{- partial "single/copyright.html" . -}}
-+
-     <div class="post-info">
+ &lt;div class=&#34;post-footer&#34; id=&#34;post-footer&#34;&gt;
+&#43;    {{- partial &#34;single/reward.html&#34; . -}}
+&#43;
+&#43;    {{- partial &#34;single/copyright.html&#34; . -}}
+&#43;
+     &lt;div class=&#34;post-info&#34;&gt;
          {{- with .Params.tags -}}
-         <div class="post-info-tag">
+         &lt;div class=&#34;post-info-tag&#34;&gt;
 
 diff --git a/layouts/partials/single/reward.html b/layouts/partials/single/reward.html
 new file mode 100644
 index 00000000..84f25d39
 --- /dev/null
-+++ b/layouts/partials/single/reward.html
-@@ -0,0 +1,34 @@
-+{{- $params := .Scratch.Get "params" -}} {{ if or .Params.reward (and
-+.Site.Params.footer.reward.enable (ne .Params.reward false)) -}}
-+<div class="reward-container">
-+    {{ $Reward := .Site.Params.footer.reward}}
-+    <div>{{ $Reward.comment | default "请我一杯咖啡吧！" }}</div>
-+    <button>{{ $Reward.donate | default "赞赏" }}</button>
-+    <div class="post-reward">
-+        {{ if $Reward.wechatpay -}}
-+        <div>
-+            {{ $WechatpayName := $Reward.wechatpayname | default "微信" }}
-+            <img src="{{ $Reward.wechatpay }}" alt="{{ $WechatpayName }}" />
-+            <span>{{ $WechatpayName }}</span>
-+        </div>
-+        {{- end }} {{ if $Reward.alipay -}}
-+        <div>
-+            {{ $AlipayName := $Reward.alipayname | default "支付宝" }}
-+            <img src="{{ $Reward.alipay }}" alt="{{ $AlipayName }}" />
-+            <span>{{ $AlipayName }}</span>
-+        </div>
-+        {{- end }}
-+    </div>
-+</div>
-+
-+<script type="text/javascript">
-+    function registerPostReward() {
-+        const button = document.querySelector(".reward-container button");
-+        if (!button) return;
-+        button.addEventListener("click", () => {
-+            document.querySelector(".post-reward").classList.toggle("active");
-+        });
-+    }
-+    registerPostReward();
-+</script>
-+{{- end }}
+&#43;&#43;&#43; b/layouts/partials/single/reward.html
+@@ -0,0 &#43;1,34 @@
+&#43;{{- $params := .Scratch.Get &#34;params&#34; -}} {{ if or .Params.reward (and
+&#43;.Site.Params.footer.reward.enable (ne .Params.reward false)) -}}
+&#43;&lt;div class=&#34;reward-container&#34;&gt;
+&#43;    {{ $Reward := .Site.Params.footer.reward}}
+&#43;    &lt;div&gt;{{ $Reward.comment | default &#34;请我一杯咖啡吧！&#34; }}&lt;/div&gt;
+&#43;    &lt;button&gt;{{ $Reward.donate | default &#34;赞赏&#34; }}&lt;/button&gt;
+&#43;    &lt;div class=&#34;post-reward&#34;&gt;
+&#43;        {{ if $Reward.wechatpay -}}
+&#43;        &lt;div&gt;
+&#43;            {{ $WechatpayName := $Reward.wechatpayname | default &#34;微信&#34; }}
+&#43;            &lt;img src=&#34;{{ $Reward.wechatpay }}&#34; alt=&#34;{{ $WechatpayName }}&#34; /&gt;
+&#43;            &lt;span&gt;{{ $WechatpayName }}&lt;/span&gt;
+&#43;        &lt;/div&gt;
+&#43;        {{- end }} {{ if $Reward.alipay -}}
+&#43;        &lt;div&gt;
+&#43;            {{ $AlipayName := $Reward.alipayname | default &#34;支付宝&#34; }}
+&#43;            &lt;img src=&#34;{{ $Reward.alipay }}&#34; alt=&#34;{{ $AlipayName }}&#34; /&gt;
+&#43;            &lt;span&gt;{{ $AlipayName }}&lt;/span&gt;
+&#43;        &lt;/div&gt;
+&#43;        {{- end }}
+&#43;    &lt;/div&gt;
+&#43;&lt;/div&gt;
+&#43;
+&#43;&lt;script type=&#34;text/javascript&#34;&gt;
+&#43;    function registerPostReward() {
+&#43;        const button = document.querySelector(&#34;.reward-container button&#34;);
+&#43;        if (!button) return;
+&#43;        button.addEventListener(&#34;click&#34;, () =&gt; {
+&#43;            document.querySelector(&#34;.post-reward&#34;).classList.toggle(&#34;active&#34;);
+&#43;        });
+&#43;    }
+&#43;    registerPostReward();
+&#43;&lt;/script&gt;
+&#43;{{- end }}
 ```
 
 由于是个人自用，所以就直接写中文了，没有按照 `i18n` 的方式进行修改
@@ -291,10 +291,10 @@ index 00000000..84f25d39
 
 ```diff
     img {
-+       display: block;
+&#43;       display: block;
         max-width: 100%;
         min-height: 1em;
-+       margin: 1em auto;
+&#43;       margin: 1em auto;
     }
 ```
 
@@ -305,21 +305,21 @@ index 00000000..84f25d39
 ```diff
     .single {
 -       width: 70%;
-+       width: 50%;
+&#43;       width: 50%;
     }
 
     .archive {
 -       width: 60%;
-+       width: 50%;
+&#43;       width: 50%;
     }
 ```
 
 另外个人选择的评论系统是 `utterances`，其默认最大宽度是 `760px`，有点略窄，所以个人也对其进行了修改，直接在 `assets/css/_custom.scss` 中覆盖即可
 
 ```diff
-+.utterances {
-+    max-width: 95%;
-+}
+&#43;.utterances {
+&#43;    max-width: 95%;
+&#43;}
 ```
 
 ## 文章头部增加标签
@@ -330,62 +330,62 @@ index 00000000..84f25d39
 diff --git a/layouts/posts/single.html b/layouts/posts/single.html
 index 07c34eba..dac28fdb 100644
 --- a/layouts/posts/single.html
-+++ b/layouts/posts/single.html
-@@ -53,6 +53,15 @@
-                             {{- dict "Categories" . | T "publishedInCategories" | safeHTML -}}
-                         </span>
+&#43;&#43;&#43; b/layouts/posts/single.html
+@@ -53,6 &#43;53,15 @@
+                             {{- dict &#34;Categories&#34; . | T &#34;publishedInCategories&#34; | safeHTML -}}
+                         &lt;/span&gt;
                      {{- end -}}
-+                    {{- with .Params.tags -}}
-+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{ T "tags" }}:&nbsp;
-+                    {{- range $index, $value := . -}}
-+                        <span>
-+                        {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
-+                        <a href="{{ $tag.RelPermalink }}"><i class="fa fa-tag fa-fw"></i>{{ $tag.Title }}</a>&nbsp;
-+                        </span>
-+                    {{- end -}}
-+                    {{- end -}}
-                 </div>
-                 <div class="post-meta-line">
-                     {{- with .Site.Params.dateformat | default "2006-01-02" | .PublishDate.Format -}}
+&#43;                    {{- with .Params.tags -}}
+&#43;                    &amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;{{ T &#34;tags&#34; }}:&amp;nbsp;
+&#43;                    {{- range $index, $value := . -}}
+&#43;                        &lt;span&gt;
+&#43;                        {{- $tag := partialCached &#34;function/path.html&#34; $value $value | printf &#34;/tags/%v&#34; | $.Site.GetPage -}}
+&#43;                        &lt;a href=&#34;{{ $tag.RelPermalink }}&#34;&gt;&lt;i class=&#34;fa fa-tag fa-fw&#34;&gt;&lt;/i&gt;{{ $tag.Title }}&lt;/a&gt;&amp;nbsp;
+&#43;                        &lt;/span&gt;
+&#43;                    {{- end -}}
+&#43;                    {{- end -}}
+                 &lt;/div&gt;
+                 &lt;div class=&#34;post-meta-line&#34;&gt;
+                     {{- with .Site.Params.dateformat | default &#34;2006-01-02&#34; | .PublishDate.Format -}}
 ```
 
 ## 改用 `highlight.js`
 
 Hugo 的默认语法高亮是使用的 `Chroma`，但是 `Chroma` 的语法高亮效果不是很好，而且 FeetIt 的代码配色也不太好看（尤其是 Diff），所以个人选择改用 `highlight.js`
 
-{{< admonition failure "废弃方案" false >}}
+{{&lt; admonition failure &#34;废弃方案&#34; false &gt;}}
 ~~首先在 `layouts/partials/assets.html` 添加 `hisghlight.js` 的样式和脚本，这里选了 `github-dark` 的样式~~
 
 ```diff
 diff --git a/layouts/partials/assets.html b/layouts/partials/assets.html
 index 15ae2653..da783b30 100644
 --- a/layouts/partials/assets.html
-+++ b/layouts/partials/assets.html
-@@ -90,6 +90,12 @@
-     {{- $config = T "copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
+&#43;&#43;&#43; b/layouts/partials/assets.html
+@@ -90,6 &#43;90,12 @@
+     {{- $config = T &#34;copyToClipboard&#34; | dict &#34;copyTitle&#34; | dict &#34;code&#34; | merge $config -}}
  {{- end -}}
 
-+{{- /* highlight.js */ -}}
-+{{- $source := "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/github-dark.min.css" -}}
-+{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-+{{- $source := "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js" -}}
-+{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-+
+&#43;{{- /* highlight.js */ -}}
+&#43;{{- $source := &#34;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/github-dark.min.css&#34; -}}
+&#43;{{- dict &#34;Source&#34; $source &#34;Fingerprint&#34; $fingerprint | dict &#34;Scratch&#34; .Scratch &#34;Data&#34; | partial &#34;scratch/style.html&#34; -}}
+&#43;{{- $source := &#34;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js&#34; -}}
+&#43;{{- dict &#34;Source&#34; $source &#34;Fingerprint&#34; $fingerprint | dict &#34;Scratch&#34; .Scratch &#34;Data&#34; | partial &#34;scratch/script.html&#34; -}}
+&#43;
  {{- /* Sharer.js */ -}}
  {{- if $params.share.enable -}}
-     {{- $source := $cdn.sharerJS | default "lib/sharer/sharer.min.js" -}}
+     {{- $source := $cdn.sharerJS | default &#34;lib/sharer/sharer.min.js&#34; -}}
 ```
 
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 首先在主题配置里面添加 `hisghlight.js` 的样式和脚本，这里选了 `github-dark` 的样式
 
 ```toml
 [params.page.library]
     [params.page.library.css]
-        highlightCSS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/github-dark.min.css"
+        highlightCSS = &#34;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/github-dark.min.css&#34;
     [params.page.library.js]
-        highlightJS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js"
+        highlightJS = &#34;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js&#34;
 ```
 
 然后还得在 `assets/js/theme.js` 中调用 `highlightAll` 方法
@@ -394,12 +394,12 @@ index 15ae2653..da783b30 100644
 diff --git a/assets/js/theme.js b/assets/js/theme.js
 index f57a8f11..1686f376 100644
 --- a/assets/js/theme.js
-+++ b/assets/js/theme.js
-@@ -373,6 +373,7 @@ class Theme {
+&#43;&#43;&#43; b/assets/js/theme.js
+@@ -373,6 &#43;373,7 @@ class Theme {
                  $chroma.insertBefore($header, $chroma.firstChild);
              }
          });
-+        hljs.highlightAll();
+&#43;        hljs.highlightAll();
      }
 
      initTable() {
@@ -423,72 +423,72 @@ index f57a8f11..1686f376 100644
 diff --git a/layouts/partials/single/footer.html b/layouts/partials/single/footer.html
 index 1b553dc5..77bca6b4 100644
 --- a/layouts/partials/single/footer.html
-+++ b/layouts/partials/single/footer.html
-@@ -1,6 +1,8 @@
- {{- $params := .Scratch.Get "params" -}}
+&#43;&#43;&#43; b/layouts/partials/single/footer.html
+@@ -1,6 &#43;1,8 @@
+ {{- $params := .Scratch.Get &#34;params&#34; -}}
 
- <div class="post-footer" id="post-footer">
-+    {{- partial "single/related.html" . -}}
-+
-     {{- partial "single/reward.html" . -}}
+ &lt;div class=&#34;post-footer&#34; id=&#34;post-footer&#34;&gt;
+&#43;    {{- partial &#34;single/related.html&#34; . -}}
+&#43;
+     {{- partial &#34;single/reward.html&#34; . -}}
 
-     {{- partial "single/copyright.html" . -}}
+     {{- partial &#34;single/copyright.html&#34; . -}}
 
 diff --git a/layouts/partials/single/related.html b/layouts/partials/single/related.html
 new file mode 100644
 index 00000000..d209e33a
 --- /dev/null
-+++ b/layouts/partials/single/related.html
-@@ -0,0 +1,49 @@
-+{{- $params := .Scratch.Get "params" -}}
-+
-+{{- $excludePageUrl := .RelPermalink -}}
-+
-+{{- $relatedposts := dict -}}
-+
-+{{- with .Params.tags }}
-+    {{- range $value := . }}
-+        {{- $curTag := (lower $value) }}
-+        {{- if ne $curTag "todo" }}
-+            {{- $posts := index $.Site.Taxonomies.tags $curTag }}
-+            {{- if gt (len $posts.Pages) 1 }}
-+                {{- range $posts.Pages }}
-+                {{- if ne .RelPermalink $excludePageUrl }}
-+                    {{- if not (isset $relatedposts .RelPermalink) }}
-+                        {{- $relatedPoints := (len (intersect .Params.tags $.Params.tags)) }}
-+                        {{- $dictValue := (dict "Title" .Title "Points" $relatedPoints "Tags" .Params.tags "Href" .RelPermalink ) }}
-+                        {{- $relatedposts = $relatedposts | merge (dict .RelPermalink $dictValue) }}
-+                    {{- end }}
-+                {{- end }}
-+                {{- end }}
-+            {{- end }}
-+        {{- end }}
-+    {{- end }}
-+{{ end }}
-+
-+{{- $relatedposts = (sort $relatedposts "Title" "desc") -}}
-+{{- $relatedposts = (sort $relatedposts "Points" "desc") -}}
-+
-+{{- if gt (len $relatedposts) 0 }}
-+<div class="related-posts">
-+    <h2 id="related-posts-head">相关文章推荐</h2>
-+    <ul>
-+        {{- range $value := first 5 $relatedposts }}
-+        <li class="related-post-item">
-+            <a class="related-post-link" href="{{ $value.Href }}" title="{{ $value.Title }}">{{ $value.Title }}</a>&nbsp;&nbsp;
-+            {{- range $tag := $value.Tags -}}
-+            {{- $tag := partialCached "function/path.html" $tag $tag | printf "/tags/%v" | $.Site.GetPage -}}
-+            {{ if in $.Params.tags $tag.Title }}
-+            <a class="tag-same" href="{{ $tag.RelPermalink }}"><i class="fa fa-tag fa-fw"></i>{{ $tag.Title }}</a>&nbsp;
-+            {{- else }}
-+            <a class="tag-diff" href="{{ $tag.RelPermalink }}"><i class="fa fa-tag fa-fw"></i>{{ $tag.Title }}</a>&nbsp;
-+            {{- end }}
-+            {{- end }}
-+        </li>
-+        {{- end }}
-+    </ul>
-+</div>
-+{{ end }}
+&#43;&#43;&#43; b/layouts/partials/single/related.html
+@@ -0,0 &#43;1,49 @@
+&#43;{{- $params := .Scratch.Get &#34;params&#34; -}}
+&#43;
+&#43;{{- $excludePageUrl := .RelPermalink -}}
+&#43;
+&#43;{{- $relatedposts := dict -}}
+&#43;
+&#43;{{- with .Params.tags }}
+&#43;    {{- range $value := . }}
+&#43;        {{- $curTag := (lower $value) }}
+&#43;        {{- if ne $curTag &#34;todo&#34; }}
+&#43;            {{- $posts := index $.Site.Taxonomies.tags $curTag }}
+&#43;            {{- if gt (len $posts.Pages) 1 }}
+&#43;                {{- range $posts.Pages }}
+&#43;                {{- if ne .RelPermalink $excludePageUrl }}
+&#43;                    {{- if not (isset $relatedposts .RelPermalink) }}
+&#43;                        {{- $relatedPoints := (len (intersect .Params.tags $.Params.tags)) }}
+&#43;                        {{- $dictValue := (dict &#34;Title&#34; .Title &#34;Points&#34; $relatedPoints &#34;Tags&#34; .Params.tags &#34;Href&#34; .RelPermalink ) }}
+&#43;                        {{- $relatedposts = $relatedposts | merge (dict .RelPermalink $dictValue) }}
+&#43;                    {{- end }}
+&#43;                {{- end }}
+&#43;                {{- end }}
+&#43;            {{- end }}
+&#43;        {{- end }}
+&#43;    {{- end }}
+&#43;{{ end }}
+&#43;
+&#43;{{- $relatedposts = (sort $relatedposts &#34;Title&#34; &#34;desc&#34;) -}}
+&#43;{{- $relatedposts = (sort $relatedposts &#34;Points&#34; &#34;desc&#34;) -}}
+&#43;
+&#43;{{- if gt (len $relatedposts) 0 }}
+&#43;&lt;div class=&#34;related-posts&#34;&gt;
+&#43;    &lt;h2 id=&#34;related-posts-head&#34;&gt;相关文章推荐&lt;/h2&gt;
+&#43;    &lt;ul&gt;
+&#43;        {{- range $value := first 5 $relatedposts }}
+&#43;        &lt;li class=&#34;related-post-item&#34;&gt;
+&#43;            &lt;a class=&#34;related-post-link&#34; href=&#34;{{ $value.Href }}&#34; title=&#34;{{ $value.Title }}&#34;&gt;{{ $value.Title }}&lt;/a&gt;&amp;nbsp;&amp;nbsp;
+&#43;            {{- range $tag := $value.Tags -}}
+&#43;            {{- $tag := partialCached &#34;function/path.html&#34; $tag $tag | printf &#34;/tags/%v&#34; | $.Site.GetPage -}}
+&#43;            {{ if in $.Params.tags $tag.Title }}
+&#43;            &lt;a class=&#34;tag-same&#34; href=&#34;{{ $tag.RelPermalink }}&#34;&gt;&lt;i class=&#34;fa fa-tag fa-fw&#34;&gt;&lt;/i&gt;{{ $tag.Title }}&lt;/a&gt;&amp;nbsp;
+&#43;            {{- else }}
+&#43;            &lt;a class=&#34;tag-diff&#34; href=&#34;{{ $tag.RelPermalink }}&#34;&gt;&lt;i class=&#34;fa fa-tag fa-fw&#34;&gt;&lt;/i&gt;{{ $tag.Title }}&lt;/a&gt;&amp;nbsp;
+&#43;            {{- end }}
+&#43;            {{- end }}
+&#43;        &lt;/li&gt;
+&#43;        {{- end }}
+&#43;    &lt;/ul&gt;
+&#43;&lt;/div&gt;
+&#43;{{ end }}
 ```
 
 `css` 样式改得不太好看，有兴趣的可以自己修改一下，具体的可以参考这个 [commit：文章底部增加相关推荐](https://github.com/ywang-wnlo/FeelIt/commit/4933bceb09358f9ac1ae249c78ebb34dae6be3ed)

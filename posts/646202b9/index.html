@@ -10,7 +10,7 @@
 <meta name="description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析" /><meta name="keywords" content='page cache, buffer IO, kernel, writeback' /><meta itemprop="name" content="page cache 回写机制">
 <meta itemprop="description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析"><meta itemprop="datePublished" content="2021-11-19T16:24:30+08:00" />
 <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00" />
-<meta itemprop="wordCount" content="7342">
+<meta itemprop="wordCount" content="7370">
 <meta itemprop="keywords" content="page cache,buffer IO,kernel,writeback," /><meta property="og:title" content="page cache 回写机制" />
 <meta property="og:description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析" />
 <meta property="og:type" content="article" />
@@ -34,7 +34,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/646202b9\/"
-    },"genre": "posts","keywords": "page cache, buffer IO, kernel, writeback","wordcount":  7342 ,
+    },"genre": "posts","keywords": "page cache, buffer IO, kernel, writeback","wordcount":  7370 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/646202b9\/","datePublished": "2021-11-19T16:24:30+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +46,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="乐园" data-alt="乐园" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -66,7 +66,7 @@
                 href="/categories/"
                 
                 
-              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +92,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" data-title="/logo.png" data-alt="/logo.png" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -135,7 +135,7 @@
                   href="/categories/"
                   
                   
-                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -152,18 +152,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container container-reverse"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>page cache 回写机制</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" data-title="Zeus" data-alt="Zeus" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>
-          <span class="post-category">收录于 <a href="/categories/io-stack/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2021-11-19 16:24:30"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2021-11-19">2021-11-19</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="7342 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 7400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 15 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="page cache 回写机制">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/io-stack/" class="post-category" title="分类 - IO Stack"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div><div class="post-meta-line"><span title="发布于 2021-11-19 16:24:30"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-11-19">2021-11-19</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="7370 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 7400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 15 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="page cache 回写机制">
               <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
             </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -234,14 +228,14 @@
         <div class="admonition-content">本文最后更新于 2022-11-16，文中内容可能已过时。</div>
       </div>
     </div><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121"target="_blank" rel="external nofollow noopener noreferrer">v5.4.121</a></p>
-<h2 id="writeback-回写">writeback 回写</h2>
-<p>在 <a href="/posts/9ba60726/">page cache 简介</a> 有过介绍</p>
+<h2 id="writeback-回写" class="heading-element">
+  <a href="#writeback-%e5%9b%9e%e5%86%99" class="heading-mark"></a>writeback 回写</h2><p>在 <a href="/posts/9ba60726/">page cache 简介</a> 有过介绍</p>
 <p>buffer IO 通过 page cache 进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能</p>
 <p>写入到 page cache 的数据不会立刻写入后端设备，而是标记为“脏”，并被加入到脏页链表，后续由内核中的回写进程周期性的将脏页写回到底层存储设备</p>
 <p>下面主要分析 page cache 回写机制的策略和实现</p>
-<h2 id="相关结构体">相关结构体</h2>
-<h3 id="底层设备信息">底层设备信息</h3>
-<p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>backing_dev_info</code> 结构体，主要用与记录底层的设备信息</p>
+<h2 id="相关结构体" class="heading-element">
+  <a href="#%e7%9b%b8%e5%85%b3%e7%bb%93%e6%9e%84%e4%bd%93" class="heading-mark"></a>相关结构体</h2><h3 id="底层设备信息" class="heading-element">
+  <a href="#%e5%ba%95%e5%b1%82%e8%ae%be%e5%a4%87%e4%bf%a1%e6%81%af" class="heading-mark"></a>底层设备信息</h3><p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>backing_dev_info</code> 结构体，主要用与记录底层的设备信息</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -343,13 +337,13 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="初始化">初始化</h4>
-<p>该结构体只会由 <code>mm/backing-dev.c</code> 中的 <code>bdi_alloc_node</code> 函数来申请内存空间并调用 <code>bdi_init</code> 初始化</p>
-<h4 id="部分字段说明">部分字段说明</h4>
-<ol>
+</div><h4 id="初始化" class="heading-element">
+  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96" class="heading-mark"></a>初始化</h4><p>该结构体只会由 <code>mm/backing-dev.c</code> 中的 <code>bdi_alloc_node</code> 函数来申请内存空间并调用 <code>bdi_init</code> 初始化</p>
+<h4 id="部分字段说明" class="heading-element">
+  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e" class="heading-mark"></a>部分字段说明</h4><ol>
 <li>
 <p><code>name</code> 字段</p>
-<p><figure><a class="lightgallery" href="/posts/646202b9/bdi_name.png?size=large" data-thumbnail="/posts/646202b9/bdi_name.png?size=small" data-sub-html="<h2>name 字段</h2><p>name 字段</p>"><img loading="lazy" src="/posts/646202b9/bdi_name.png" srcset="/posts/646202b9/bdi_name.png?size=small, /posts/646202b9/bdi_name.png?size=medium 1.5x, /posts/646202b9/bdi_name.png?size=large 2x" sizes="auto" data-title="name 字段" data-alt="name 字段" style="--width: 452px;--aspect-ratio: 452 / 159;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">name 字段</figcaption>
+<p><figure><a class="lightgallery" href="/posts/646202b9/bdi_name.png?size=large" data-thumbnail="/posts/646202b9/bdi_name.png?size=small" data-sub-html="<h2>name 字段</h2><p>name 字段</p>"><img loading="lazy" src="/posts/646202b9/bdi_name.png" alt="name 字段" srcset="/posts/646202b9/bdi_name.png?size=small, /posts/646202b9/bdi_name.png?size=medium 1.5x, /posts/646202b9/bdi_name.png?size=large 2x" sizes="auto" data-title="name 字段" style="--width: 452px;--aspect-ratio: 452 / 159;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">name 字段</figcaption>
   </figure></p>
 <p>在 <code>block/blk-core.c</code> 中 <code>blk_alloc_queue_node</code> 会调用 <code>bdi_alloc_node</code> 来初始化该结构体，其中 <code>name</code> 字段赋值为 <code>&quot;block&quot;</code></p>
 </li>
@@ -360,20 +354,20 @@
 <li>
 <p><code>dev_name</code> 字段</p>
 <p>在 <code>mm/backing-dev.c</code> 的 <code>bdi_register_va</code> 还会对 <code>dev_name</code> 进行赋值</p>
-<p><figure><a class="lightgallery" href="/posts/646202b9/bdi_dev_name.png?size=large" data-thumbnail="/posts/646202b9/bdi_dev_name.png?size=small" data-sub-html="<h2>dev_name 字段</h2><p>dev_name 字段</p>"><img loading="lazy" src="/posts/646202b9/bdi_dev_name.png" srcset="/posts/646202b9/bdi_dev_name.png?size=small, /posts/646202b9/bdi_dev_name.png?size=medium 1.5x, /posts/646202b9/bdi_dev_name.png?size=large 2x" sizes="auto" data-title="dev_name 字段" data-alt="dev_name 字段" style="--width: 864px;--aspect-ratio: 864 / 269;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">dev_name 字段</figcaption>
+<p><figure><a class="lightgallery" href="/posts/646202b9/bdi_dev_name.png?size=large" data-thumbnail="/posts/646202b9/bdi_dev_name.png?size=small" data-sub-html="<h2>dev_name 字段</h2><p>dev_name 字段</p>"><img loading="lazy" src="/posts/646202b9/bdi_dev_name.png" alt="dev_name 字段" srcset="/posts/646202b9/bdi_dev_name.png?size=small, /posts/646202b9/bdi_dev_name.png?size=medium 1.5x, /posts/646202b9/bdi_dev_name.png?size=large 2x" sizes="auto" data-title="dev_name 字段" style="--width: 864px;--aspect-ratio: 864 / 269;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">dev_name 字段</figcaption>
   </figure></p>
 <p>根据调用栈溯源可以发现，<code>mm/backing-dev.c</code> 的 <code>bdi_register_owner</code> 将 <code>fmt</code> 和 <code>args</code> 传递到 <code>bdi_register_va</code>，最终会将主设备号和次设备号拼接组合后进行赋值</p>
 </li>
 <li>
 <p><code>owner</code> 字段</p>
 <p>在 <code>mm/backing-dev.c</code> 的 <code>bdi_register_owner</code> 还会对 <code>owner</code> 进行赋值</p>
-<p><figure><a class="lightgallery" href="/posts/646202b9/bdi_owner.png?size=large" data-thumbnail="/posts/646202b9/bdi_owner.png?size=small" data-sub-html="<h2>owner 字段</h2><p>owner 字段</p>"><img loading="lazy" src="/posts/646202b9/bdi_owner.png" srcset="/posts/646202b9/bdi_owner.png?size=small, /posts/646202b9/bdi_owner.png?size=medium 1.5x, /posts/646202b9/bdi_owner.png?size=large 2x" sizes="auto" data-title="owner 字段" data-alt="owner 字段" style="--width: 923px;--aspect-ratio: 923 / 247;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">owner 字段</figcaption>
+<p><figure><a class="lightgallery" href="/posts/646202b9/bdi_owner.png?size=large" data-thumbnail="/posts/646202b9/bdi_owner.png?size=small" data-sub-html="<h2>owner 字段</h2><p>owner 字段</p>"><img loading="lazy" src="/posts/646202b9/bdi_owner.png" alt="owner 字段" srcset="/posts/646202b9/bdi_owner.png?size=small, /posts/646202b9/bdi_owner.png?size=medium 1.5x, /posts/646202b9/bdi_owner.png?size=large 2x" sizes="auto" data-title="owner 字段" style="--width: 923px;--aspect-ratio: 923 / 247;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">owner 字段</figcaption>
   </figure></p>
 <p>实际赋值的为 <code>disk</code> 对应的 <code>dev</code>，通过 <code>disk_to_dev</code> 宏转换得到</p>
 </li>
 </ol>
-<h3 id="设备回写管理">设备回写管理</h3>
-<p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>bdi_writeback</code> 结构体，用于管理一个块设备的回写，同时支持 <code>cgroup</code> 进行限制</p>
+<h3 id="设备回写管理" class="heading-element">
+  <a href="#%e8%ae%be%e5%a4%87%e5%9b%9e%e5%86%99%e7%ae%a1%e7%90%86" class="heading-mark"></a>设备回写管理</h3><p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>bdi_writeback</code> 结构体，用于管理一个块设备的回写，同时支持 <code>cgroup</code> 进行限制</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -531,10 +525,10 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="初始化-1">初始化</h4>
-<p>该结构体由 <code>mm/backing-dev.c</code> 中的 <code>wb_init</code> 函数初始化</p>
-<div class="mermaid" id="id-3"></div><h4 id="部分字段说明-1">部分字段说明</h4>
-<ol>
+</div><h4 id="初始化-1" class="heading-element">
+  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96-1" class="heading-mark"></a>初始化</h4><p>该结构体由 <code>mm/backing-dev.c</code> 中的 <code>wb_init</code> 函数初始化</p>
+<div class="mermaid" id="id-3"></div><h4 id="部分字段说明-1" class="heading-element">
+  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e-1" class="heading-mark"></a>部分字段说明</h4><ol>
 <li>
 <p><code>b_dirty</code> 字段</p>
 <p>暂存所有的脏 inode 的链表</p>
@@ -568,8 +562,8 @@
 <p>为了保护 <code>work_list</code> 以及 <code>dwork</code> 调度的自旋锁</p>
 </li>
 </ol>
-<h3 id="回写任务">回写任务</h3>
-<p>在 <code>fs/fs-writeback.c</code> 中定义了 <code>wb_writeback_work</code> 结构体，用于描述一次回写任务的相关参数</p>
+<h3 id="回写任务" class="heading-element">
+  <a href="#%e5%9b%9e%e5%86%99%e4%bb%bb%e5%8a%a1" class="heading-mark"></a>回写任务</h3><p>在 <code>fs/fs-writeback.c</code> 中定义了 <code>wb_writeback_work</code> 结构体，用于描述一次回写任务的相关参数</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -733,8 +727,8 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="部分字段说明-2">部分字段说明</h4>
-<ol>
+</div><h4 id="部分字段说明-2" class="heading-element">
+  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e-2" class="heading-mark"></a>部分字段说明</h4><ol>
 <li>
 <p><code>sync_mode</code> 字段</p>
 <p><code>WB_SYNC_NONE</code>：绝大部分回写任务的配置，不会等待回写真正落盘，下发写命令后就返回</p>
@@ -761,21 +755,21 @@
 <p>值为 1 表示当前任务是阈值回写任务 <code>sync</code> 系统调用手动触发的回写任务。<code>sync</code> 系统调用详情参考 <a href="#sync">后续小节</a></p>
 </li>
 </ol>
-<h2 id="回写线程">回写线程</h2>
-<p>前面说过 <code>bdi_writeback</code> 结构体中 <code>struct delayed_work dwork</code> 就是关键的负责 page cache 回写工作的结构体</p>
-<h3 id="初始化-2">初始化</h3>
-<p><code>wb_init</code> 函数会对 <code>wb-&gt;dwork</code> 赋值，注册实际的工作函数 <code>wb_workfn</code></p>
+<h2 id="回写线程" class="heading-element">
+  <a href="#%e5%9b%9e%e5%86%99%e7%ba%bf%e7%a8%8b" class="heading-mark"></a>回写线程</h2><p>前面说过 <code>bdi_writeback</code> 结构体中 <code>struct delayed_work dwork</code> 就是关键的负责 page cache 回写工作的结构体</p>
+<h3 id="初始化-2" class="heading-element">
+  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96-2" class="heading-mark"></a>初始化</h3><p><code>wb_init</code> 函数会对 <code>wb-&gt;dwork</code> 赋值，注册实际的工作函数 <code>wb_workfn</code></p>
 <p>由于这是个 <code>delayed_work</code>，注册的工作函数不会立即执行，需要后续利用 <code>mod_delayed_work</code> 来修改 <code>delayed_work</code> 内置的定时器时间来唤醒</p>
-<p><figure><a class="lightgallery" href="/posts/646202b9/wb_init.png?size=large" data-thumbnail="/posts/646202b9/wb_init.png?size=small" data-sub-html="<h2>wb_init 调用图</h2><p>wb_init 调用图</p>"><img loading="lazy" src="/posts/646202b9/wb_init.png" srcset="/posts/646202b9/wb_init.png?size=small, /posts/646202b9/wb_init.png?size=medium 1.5x, /posts/646202b9/wb_init.png?size=large 2x" sizes="auto" data-title="wb_init 调用图" data-alt="wb_init 调用图" style="--width: 1281px;--aspect-ratio: 1281 / 795;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">wb_init 调用图</figcaption>
+<p><figure><a class="lightgallery" href="/posts/646202b9/wb_init.png?size=large" data-thumbnail="/posts/646202b9/wb_init.png?size=small" data-sub-html="<h2>wb_init 调用图</h2><p>wb_init 调用图</p>"><img loading="lazy" src="/posts/646202b9/wb_init.png" alt="wb_init 调用图" srcset="/posts/646202b9/wb_init.png?size=small, /posts/646202b9/wb_init.png?size=medium 1.5x, /posts/646202b9/wb_init.png?size=large 2x" sizes="auto" data-title="wb_init 调用图" style="--width: 1281px;--aspect-ratio: 1281 / 795;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">wb_init 调用图</figcaption>
   </figure></p>
 <p>(P.S. 图片中函数开头为 <code>cg</code> 代表和 <code>cgroup</code> 相关，同一层级多个同名函数和宏定义的编译控制有关)</p>
 <p>根据函数调用图，大致分析可知，当设备申请 <code>queue</code> 时会初始化 <code>backing_dev_info</code> 结构体和 <code>bdi_writeback</code> 结构体，以及初始化回写线程</p>
-<h3 id="立即唤醒">立即唤醒</h3>
-<p>虽然 <code>dwork</code> 是个 <code>delayed_work</code>，但是我们可以在调用 <code>mod_delayed_work</code> 将延时设置为 0，来立即唤醒回写线程</p>
-<p><figure><a class="lightgallery" href="/posts/646202b9/dwork_callers.png?size=large" data-thumbnail="/posts/646202b9/dwork_callers.png?size=small" data-sub-html="<h2>dwork 调用图</h2><p>dwork 调用图</p>"><img loading="lazy" src="/posts/646202b9/dwork_callers.png" srcset="/posts/646202b9/dwork_callers.png?size=small, /posts/646202b9/dwork_callers.png?size=medium 1.5x, /posts/646202b9/dwork_callers.png?size=large 2x" sizes="auto" data-title="dwork 调用图" data-alt="dwork 调用图" style="--width: 408px;--aspect-ratio: 408 / 233;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">dwork 调用图</figcaption>
+<h3 id="立即唤醒" class="heading-element">
+  <a href="#%e7%ab%8b%e5%8d%b3%e5%94%a4%e9%86%92" class="heading-mark"></a>立即唤醒</h3><p>虽然 <code>dwork</code> 是个 <code>delayed_work</code>，但是我们可以在调用 <code>mod_delayed_work</code> 将延时设置为 0，来立即唤醒回写线程</p>
+<p><figure><a class="lightgallery" href="/posts/646202b9/dwork_callers.png?size=large" data-thumbnail="/posts/646202b9/dwork_callers.png?size=small" data-sub-html="<h2>dwork 调用图</h2><p>dwork 调用图</p>"><img loading="lazy" src="/posts/646202b9/dwork_callers.png" alt="dwork 调用图" srcset="/posts/646202b9/dwork_callers.png?size=small, /posts/646202b9/dwork_callers.png?size=medium 1.5x, /posts/646202b9/dwork_callers.png?size=large 2x" sizes="auto" data-title="dwork 调用图" style="--width: 408px;--aspect-ratio: 408 / 233;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">dwork 调用图</figcaption>
   </figure></p>
-<h4 id="wb_wakeup"><code>wb_wakeup</code></h4>
-<p><code>wb_wakeup</code> 就是修改延时为 0，直接唤醒回写线程</p>
+<h4 id="wb_wakeup" class="heading-element">
+  <a href="#wb_wakeup" class="heading-mark"></a><code>wb_wakeup</code></h4><p><code>wb_wakeup</code> 就是修改延时为 0，直接唤醒回写线程</p>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -797,8 +791,8 @@
 </span></span><span class="line"><span class="cl">	<span class="nf">spin_unlock_bh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wb</span><span class="o">-&gt;</span><span class="n">work_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="wb_queue_work"><code>wb_queue_work</code></h4>
-<p><code>wb_queue_work</code> 将一个回写任务插入到队列尾部，然后修改延时为 0，立即唤醒回写线程</p>
+</div><h4 id="wb_queue_work" class="heading-element">
+  <a href="#wb_queue_work" class="heading-mark"></a><code>wb_queue_work</code></h4><p><code>wb_queue_work</code> 将一个回写任务插入到队列尾部，然后修改延时为 0，立即唤醒回写线程</p>
 <div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -842,8 +836,8 @@
 </span></span><span class="line"><span class="cl">	<span class="nf">spin_unlock_bh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wb</span><span class="o">-&gt;</span><span class="n">work_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="定时唤醒">定时唤醒</h3>
-<p>定时唤醒主要是由 <code>wb_wakeup_delayed</code> 来实现的，而时间间隔在 <code>mm/page-writeback.c</code> 进行了定义</p>
+</div><h3 id="定时唤醒" class="heading-element">
+  <a href="#%e5%ae%9a%e6%97%b6%e5%94%a4%e9%86%92" class="heading-mark"></a>定时唤醒</h3><p>定时唤醒主要是由 <code>wb_wakeup_delayed</code> 来实现的，而时间间隔在 <code>mm/page-writeback.c</code> 进行了定义</p>
 <div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -919,7 +913,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>wb_wakeup_delayed</code> 使用 5s 作为时间间隔，当调用 <code>wb_wakeup_delayed</code> 后，回写线程会在 5s 后被唤醒</p>
-<p><figure><a class="lightgallery" href="/posts/646202b9/wb_wakeup_delayed.png?size=large" data-thumbnail="/posts/646202b9/wb_wakeup_delayed.png?size=small" data-sub-html="<h2>wb_wakeup_delayed 调用图</h2><p>wb_wakeup_delayed 调用图</p>"><img loading="lazy" src="/posts/646202b9/wb_wakeup_delayed.png" srcset="/posts/646202b9/wb_wakeup_delayed.png?size=small, /posts/646202b9/wb_wakeup_delayed.png?size=medium 1.5x, /posts/646202b9/wb_wakeup_delayed.png?size=large 2x" sizes="auto" data-title="wb_wakeup_delayed 调用图" data-alt="wb_wakeup_delayed 调用图" style="--width: 385px;--aspect-ratio: 385 / 100;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">wb_wakeup_delayed 调用图</figcaption>
+<p><figure><a class="lightgallery" href="/posts/646202b9/wb_wakeup_delayed.png?size=large" data-thumbnail="/posts/646202b9/wb_wakeup_delayed.png?size=small" data-sub-html="<h2>wb_wakeup_delayed 调用图</h2><p>wb_wakeup_delayed 调用图</p>"><img loading="lazy" src="/posts/646202b9/wb_wakeup_delayed.png" alt="wb_wakeup_delayed 调用图" srcset="/posts/646202b9/wb_wakeup_delayed.png?size=small, /posts/646202b9/wb_wakeup_delayed.png?size=medium 1.5x, /posts/646202b9/wb_wakeup_delayed.png?size=large 2x" sizes="auto" data-title="wb_wakeup_delayed 调用图" style="--width: 385px;--aspect-ratio: 385 / 100;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">wb_wakeup_delayed 调用图</figcaption>
   </figure></p>
 <p>定时唤醒只会在两种情形下被调用：</p>
 <ul>
@@ -927,13 +921,13 @@
 <li><code>wb_workfn</code>：当回写线程处理完 <code>work_list</code> 上的所有任务后，如果仍有脏 <code>inode</code> 在 <code>b_{dirty|io|more_io}</code> 上时，开启定时唤醒</li>
 </ul>
 <p>简单的讲，就是只要存在脏 <code>inode</code> 在 <code>b_{dirty|io|more_io}</code> 上时，内核的回写线程每 5s 内肯定会被唤醒一次</p>
-<h3 id="释放销毁">释放销毁</h3>
-<p><figure><a class="lightgallery" href="/posts/646202b9/release_bdi.png?size=large" data-thumbnail="/posts/646202b9/release_bdi.png?size=small" data-sub-html="<h2>release_bdi 调用图</h2><p>release_bdi 调用图</p>"><img loading="lazy" src="/posts/646202b9/release_bdi.png" srcset="/posts/646202b9/release_bdi.png?size=small, /posts/646202b9/release_bdi.png?size=medium 1.5x, /posts/646202b9/release_bdi.png?size=large 2x" sizes="auto" data-title="release_bdi 调用图" data-alt="release_bdi 调用图" style="--width: 634px;--aspect-ratio: 634 / 283;background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">release_bdi 调用图</figcaption>
+<h3 id="释放销毁" class="heading-element">
+  <a href="#%e9%87%8a%e6%94%be%e9%94%80%e6%af%81" class="heading-mark"></a>释放销毁</h3><p><figure><a class="lightgallery" href="/posts/646202b9/release_bdi.png?size=large" data-thumbnail="/posts/646202b9/release_bdi.png?size=small" data-sub-html="<h2>release_bdi 调用图</h2><p>release_bdi 调用图</p>"><img loading="lazy" src="/posts/646202b9/release_bdi.png" alt="release_bdi 调用图" srcset="/posts/646202b9/release_bdi.png?size=small, /posts/646202b9/release_bdi.png?size=medium 1.5x, /posts/646202b9/release_bdi.png?size=large 2x" sizes="auto" data-title="release_bdi 调用图" style="--width: 634px;--aspect-ratio: 634 / 283;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">release_bdi 调用图</figcaption>
   </figure></p>
 <p>当需要对整个 <code>backing_dev_info</code> 结构释放时，也会立即唤醒内核回写线程，并且会下刷现有的所有工作</p>
-<div class="mermaid" id="id-10"></div><h2 id="细节分析">细节分析</h2>
-<h3 id="tag-and-write"><code>tag-and-write</code></h3>
-<p>该机制会在 <code>write_pages</code> 时先快速对下刷范围内的脏页进行标记，后续只对标记过的脏页进行下刷</p>
+<div class="mermaid" id="id-10"></div><h2 id="细节分析" class="heading-element">
+  <a href="#%e7%bb%86%e8%8a%82%e5%88%86%e6%9e%90" class="heading-mark"></a>细节分析</h2><h3 id="tag-and-write" class="heading-element">
+  <a href="#tag-and-write" class="heading-mark"></a><code>tag-and-write</code></h3><p>该机制会在 <code>write_pages</code> 时先快速对下刷范围内的脏页进行标记，后续只对标记过的脏页进行下刷</p>
 <p>首先回写任务的参数会通过 <code>fs/fs-writeback.c</code> 的 <code>writeback_sb_inodes</code> 函数传递给 <code>struct writeback_control wbc</code></p>
 <p>后续在 <code>mm/page-writeback.c</code> 中 <code>write_cache_pages</code> 就会根据 <code>wbc</code> 的 <code>tagged_writepages</code> 字段进行判断，配置不同的 <code>tag</code>，以及是否需要快速遍历脏页并标记</p>
 <div class="highlight" id="id-11"><div class="chroma">
@@ -1341,8 +1335,8 @@
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">pages</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="range_cyclic"><code>range_cyclic</code></h3>
-<p><code>range_cyclic</code> 早在内核的 v2.6.18-rc1 版本就已经实现，可以参考 <a href="https://github.com/torvalds/linux/commit/111ebb6e6f7bd7de6d722c5848e95621f43700d9"target="_blank" rel="external nofollow noopener noreferrer">111ebb6</a> 的提交信息辅助理解</p>
+</div><h3 id="range_cyclic" class="heading-element">
+  <a href="#range_cyclic" class="heading-mark"></a><code>range_cyclic</code></h3><p><code>range_cyclic</code> 早在内核的 v2.6.18-rc1 版本就已经实现，可以参考 <a href="https://github.com/torvalds/linux/commit/111ebb6e6f7bd7de6d722c5848e95621f43700d9"target="_blank" rel="external nofollow noopener noreferrer">111ebb6</a> 的提交信息辅助理解</p>
 <div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1488,8 +1482,8 @@
 </span></span><span class="line"><span class="cl">		<span class="n">mapping</span><span class="o">-&gt;</span><span class="n">writeback_index</span> <span class="o">=</span> <span class="n">done_index</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>range_cyclic</code> 开启后会使用 <code>mapping-&gt;writeback_index</code> 作为本次回写的起始地址，并会在完成本次回写流程（回写页数限制或者到达文件末尾）后更新 <code>mapping-&gt;writeback_index</code></p>
-<h3 id="定期回写">定期回写</h3>
-<p>定期回写的任务声明在 <code>fs/fs-writeback.c</code> 的 <code>wb_check_old_data_flush</code> 函数中，而这个函数则是被 <code>wb_workfn</code> 调用</p>
+<h3 id="定期回写" class="heading-element">
+  <a href="#%e5%ae%9a%e6%9c%9f%e5%9b%9e%e5%86%99" class="heading-mark"></a>定期回写</h3><p>定期回写的任务声明在 <code>fs/fs-writeback.c</code> 的 <code>wb_check_old_data_flush</code> 函数中，而这个函数则是被 <code>wb_workfn</code> 调用</p>
 <div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1567,8 +1561,8 @@
 <p>生成的回写任务交给 <code>fs/fs-writeback.c</code> 的 <code>wb_writeback</code> 函数处理</p>
 <p>并且定期回写属于一种后台回写，优先级较低，只有在 <code>wb-&gt;work_list</code> 为空时才会执行</p>
 <p><code>wb_writeback</code> 执行定期回写时只会选择在至脏时间在当前时间 30s 之前的 <code>inode</code> 的所有脏页进行回写</p>
-<h3 id="阈值回写">阈值回写</h3>
-<p>针对脏页率内核中有两个阈值，10% 和 20%</p>
+<h3 id="阈值回写" class="heading-element">
+  <a href="#%e9%98%88%e5%80%bc%e5%9b%9e%e5%86%99" class="heading-mark"></a>阈值回写</h3><p>针对脏页率内核中有两个阈值，10% 和 20%</p>
 <div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1607,9 +1601,9 @@
 <p>而当脏页率达到 20% 之后则会触发前台回写，此时的函数调用和逻辑和上面基本一致，不同点在于当脏页率超过 20% 后会在 <code>balance_dirty_pages</code> 的循环中无法跳出，因此线程会阻塞，直到脏页率降低至 20% 以下，跳出循环，启用后台回写</p>
 </li>
 </ol>
-<h2 id="手动触发回写">手动触发回写</h2>
-<h3 id="sync"><code>sync</code></h3>
-<p><code>sync</code> 系统调用会同步所有的 page cache</p>
+<h2 id="手动触发回写" class="heading-element">
+  <a href="#%e6%89%8b%e5%8a%a8%e8%a7%a6%e5%8f%91%e5%9b%9e%e5%86%99" class="heading-mark"></a>手动触发回写</h2><h3 id="sync" class="heading-element">
+  <a href="#sync" class="heading-mark"></a><code>sync</code></h3><p><code>sync</code> 系统调用会同步所有的 page cache</p>
 <p>在 <code>bash</code> 上直接输入 <code>sync</code> 命令就会触发 <code>sync</code> 系统调用</p>
 <div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1694,8 +1688,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="fsync-和-fdatasync"><code>fsync</code> 和 <code>fdatasync</code></h3>
-<p><code>fsync</code> 和 <code>fdatasync</code> 系统调用则可以更加细粒度的下刷脏页，他们的下刷对象是一个文件</p>
+<h3 id="fsync-和-fdatasync" class="heading-element">
+  <a href="#fsync-%e5%92%8c-fdatasync" class="heading-mark"></a><code>fsync</code> 和 <code>fdatasync</code></h3><p><code>fsync</code> 和 <code>fdatasync</code> 系统调用则可以更加细粒度的下刷脏页，他们的下刷对象是一个文件</p>
 <div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1961,8 +1955,8 @@
 </div>
 </div><p>无论 <code>fsync</code> 还是 <code>fdatasync</code> 都会调用 <code>file_write_and_wait_range</code> 下刷 page cache 中的脏页。而在 indoe 本身元数据只是时间戳是脏时，<code>fdatasync</code> 就会跳过 <code>sync_inode_metadata</code>，不将元数据一起下刷到底层设备上；<code>fsync</code> 则不会跳过元数据的下刷。</p>
 <p>因此 <code>fsync</code> 至少需要两次 IO 写操作，开销比 <code>fdatasync</code> 更大</p>
-<h3 id="open-时带有-o_sync"><code>open</code> 时带有 <code>O_SYNC</code></h3>
-<p>如果在打开一个文件时带了 <code>O_SYNC</code> 标记，则会在写入 page cache 后，再次调用 <code>vfs_fsync_range</code> 将数据下刷到底层设备上</p>
+<h3 id="open-时带有-o_sync" class="heading-element">
+  <a href="#open-%e6%97%b6%e5%b8%a6%e6%9c%89-o_sync" class="heading-mark"></a><code>open</code> 时带有 <code>O_SYNC</code></h3><p>如果在打开一个文件时带了 <code>O_SYNC</code> 标记，则会在写入 page cache 后，再次调用 <code>vfs_fsync_range</code> 将数据下刷到底层设备上</p>
 <div class="mermaid" id="id-23"></div><p>在 <code>ext4</code>、<code>f2fs</code> 等文件系统 <code>write</code> 系统调用会使用 <code>new_sync_write</code> 来调用实际文件系统注册的 <code>read_iter</code> 函数</p>
 <p>而 <code>new_sync_write</code> 调用先调用 <code>iocb_flags</code> 将用户配置的 <code>O_SYNC</code> 进行解析，为 <code>struct kiocb</code> 的 <code>ki_flags</code> 字段生成标记</p>
 <div class="mermaid" id="id-24"></div><p>和之前一样，大多数文件系统会直接使用或者参考通用的 <code>generic_file_write_iter</code> 来实现 <code>read_iter</code> 函数，这里针对 <code>generic_file_write_iter</code> 进行分析</p>
@@ -2075,8 +2069,8 @@
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="参考资料">参考资料</h2>
-<ul>
+</div><h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
 <li><a href="https://blog.csdn.net/jasonactions/article/details/117292233"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】VFS 基础学习笔记 - 7. page cache 回写</a></li>
 <li><a href="https://blog.csdn.net/u011649400/article/details/96505600"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】VFS 源码分析 - Page Cache Writeback 脏页回写机制</a></li>
 <li>以及在评论区的某位不愿透露姓名的 dalao 的笔记</li>
@@ -2085,7 +2079,7 @@
     <ul>
         <li class="post-copyright-author">
             <strong>本文作者：</strong>
-            Zeus
+            
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
@@ -2096,52 +2090,16 @@
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div>
-
-<div class="related-posts">
-    <h2 id="related-posts-head">相关文章推荐</h2>
-    <ul>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-same" href="/tags/buffer-io/"><i class="fa fa-tag fa-fw"></i>buffer IO</a>&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-same" href="/tags/writeback/"><i class="fa fa-tag fa-fw"></i>writeback</a>&nbsp;
-            <a class="tag-diff" href="/tags/todo/"><i class="fa fa-tag fa-fw"></i>todo</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a>&nbsp;&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/xnu/"><i class="fa fa-tag fa-fw"></i>XNU</a>&nbsp;
-            <a class="tag-diff" href="/tags/linux/"><i class="fa fa-tag fa-fw"></i>Linux</a>&nbsp;
-            <a class="tag-diff" href="/tags/cgroup/"><i class="fa fa-tag fa-fw"></i>cgroup</a>&nbsp;
-            <a class="tag-same" href="/tags/page-cache/"><i class="fa fa-tag fa-fw"></i>page cache</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/ipc/"><i class="fa fa-tag fa-fw"></i>IPC</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%87%AA%E6%97%8B%E9%94%81/"><i class="fa fa-tag fa-fw"></i>自旋锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E4%BA%92%E6%96%A5%E9%94%81/"><i class="fa fa-tag fa-fw"></i>互斥锁</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"><i class="fa fa-tag fa-fw"></i>虚拟地址</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%88%86%E9%A1%B5/"><i class="fa fa-tag fa-fw"></i>分页</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD/"><i class="fa fa-tag fa-fw"></i>缺页中断</a>&nbsp;
-            <a class="tag-diff" href="/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/"><i class="fa fa-tag fa-fw"></i>多级页表</a>&nbsp;
-            <a class="tag-diff" href="/tags/tlb/"><i class="fa fa-tag fa-fw"></i>TLB</a>&nbsp;
-        </li>
-        <li class="related-post-item">
-            <a class="related-post-link" href="/posts/4f0d345c/" title="io_uring 内核源码分析">io_uring 内核源码分析</a>&nbsp;&nbsp;
-            <a class="tag-diff" href="/tags/%E5%BC%82%E6%AD%A5-io/"><i class="fa fa-tag fa-fw"></i>异步 IO</a>&nbsp;
-            <a class="tag-same" href="/tags/kernel/"><i class="fa fa-tag fa-fw"></i>kernel</a>&nbsp;
-            <a class="tag-diff" href="/tags/liburing/"><i class="fa fa-tag fa-fw"></i>liburing</a>&nbsp;
-            <a class="tag-diff" href="/tags/io_uring/"><i class="fa fa-tag fa-fw"></i>io_uring</a>&nbsp;
-        </li>
-    </ul>
-</div>
-<div class="post-reward">
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a></li><li>
+          <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
+          <a href="/posts/4f0d345c/" title="io_uring 内核源码分析">io_uring 内核源码分析</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
     <label class="reward-button" for="fi-reward">赞赏</label>
-    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" data-title="Zeus 支付宝" data-alt="Zeus 支付宝" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
-          </div><div><img loading="lazy" src="/images/wechatpay.png" data-title="Zeus 微信" data-alt="Zeus 微信" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
   </div><div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -2149,18 +2107,16 @@
       <div class="post-info-mod">
         <span title="更新于 2022-11-16 10:33:39">更新于 2022-11-16&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/646202b9/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span></span>
-      </div>
-    </div>
-  </div>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/646202b9/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/page-cache/' class="post-tag">page cache</a><a href='/tags/buffer-io/' class="post-tag">buffer IO</a><a href='/tags/kernel/' class="post-tag">kernel</a><a href='/tags/writeback/' class="post-tag">writeback</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/page-cache/" class="post-tag" title="标签 - page cache">page cache</a><a href="/tags/buffer-io/" class="post-tag" title="标签 - buffer IO">buffer IO</a><a href="/tags/kernel/" class="post-tag" title="标签 - kernel">kernel</a><a href="/tags/writeback/" class="post-tag" title="标签 - writeback">writeback</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -2192,11 +2148,14 @@
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -2204,5 +2163,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/lunr@2.3.9/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"data":{"id-10":"graph TD\nrelease_bdi --\u003e bdi_unregister --\u003e wb_shutdown\nrelease_bdi ---\u003e wb_exit","id-14":"graph TD\ndo_writepages --\u003e writepages(\"mapping-\u003ea_ops-\u003ewritepages()\")\ndo_writepages --\u003e generic_writepages --\u003e write_cache_pages","id-17":"graph TD\nwb_wakeup -.-\u003e wb_workfn --\u003e|通常情况| wb_do_writeback --\u003e wb_check_old_data_flush","id-19":"graph TD\ngeneric_perform_write --\u003e balance_dirty_pages_ratelimited --\u003e balance_dirty_pages --\u003e wb_start_background_writeback --\u003e wb_wakeup\nwb_wakeup -.-\u003e wb_workfn --\u003e|通常情况| wb_do_writeback --\u003e|wb_over_bg_thresh| wb_check_background_flush","id-23":"graph LR\nwrite系统调用 --\u003e ksys_write --\u003e vfs_write --\u003e __vfs_write --\u003e|ext4,f2fs等文件系统| new_sync_write","id-24":"graph TD\nnew_sync_write --\u003e init_sync_kiocb --\u003e iocb_flags\nnew_sync_write --\u003e iov_iter_init\nnew_sync_write --\u003e call_write_iter","id-3":"graph TD\nbdi_init --\u003e cgwb_bdi_init --\u003e wb_init"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"pangu":{"enable":true,"selector":"article"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"data":{"id-10":"graph TD\nrelease_bdi --\u003e bdi_unregister --\u003e wb_shutdown\nrelease_bdi ---\u003e wb_exit","id-14":"graph TD\ndo_writepages --\u003e writepages(\"mapping-\u003ea_ops-\u003ewritepages()\")\ndo_writepages --\u003e generic_writepages --\u003e write_cache_pages","id-17":"graph TD\nwb_wakeup -.-\u003e wb_workfn --\u003e|通常情况| wb_do_writeback --\u003e wb_check_old_data_flush","id-19":"graph TD\ngeneric_perform_write --\u003e balance_dirty_pages_ratelimited --\u003e balance_dirty_pages --\u003e wb_start_background_writeback --\u003e wb_wakeup\nwb_wakeup -.-\u003e wb_workfn --\u003e|通常情况| wb_do_writeback --\u003e|wb_over_bg_thresh| wb_check_background_flush","id-23":"graph LR\nwrite系统调用 --\u003e ksys_write --\u003e vfs_write --\u003e __vfs_write --\u003e|ext4,f2fs等文件系统| new_sync_write","id-24":"graph TD\nnew_sync_write --\u003e init_sync_kiocb --\u003e iocb_flags\nnew_sync_write --\u003e iov_iter_init\nnew_sync_write --\u003e call_write_iter","id-3":"graph TD\nbdi_init --\u003e cgwb_bdi_init --\u003e wb_init"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
