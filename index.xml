@@ -4,9 +4,17 @@
     <link>https://ywang-wnlo.github.io/</link>
     <description>一个新时代农民工的随手笔记</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Mon, 11 Dec 2023 18:56:18 &#43;0800</lastBuildDate>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 19 Jan 2024 12:41:18 &#43;0800</lastBuildDate>
       <atom:link href="https://ywang-wnlo.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+  <title>解决 kex_exchange_identification 报错</title>
+  <link>https://ywang-wnlo.github.io/posts/a23842fe/</link>
+  <pubDate>Fri, 19 Jan 2024 12:41:18 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/a23842fe/</guid>
+  <description><![CDATA[本文主要记录了解决 git pull 时出现 kex_exchange_identification: Connection closed by remote host 报错的方法]]></description>
+</item>
+<item>
   <title>从 C 过渡到 C&#43;&#43;</title>
   <link>https://ywang-wnlo.github.io/posts/89c4acb1/</link>
   <pubDate>Sun, 24 Sep 2023 11:48:03 &#43;0800</pubDate>
@@ -69,14 +77,6 @@
   <author>Zeus</author>
   <guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
   <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置]]></description>
-</item>
-<item>
-  <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
-  <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
-  <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
-  <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
 </item>
 </channel>
 </rss>

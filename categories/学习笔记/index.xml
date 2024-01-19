@@ -20,5 +20,13 @@
   <guid>https://ywang-wnlo.github.io/posts/89c4acb1/</guid>
   <description><![CDATA[本文介绍了 C++ 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数]]></description>
 </item>
+<item>
+  <title>Python 环境隔离</title>
+  <link>https://ywang-wnlo.github.io/posts/28f3e4d7/</link>
+  <pubDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/28f3e4d7/</guid>
+  <description><![CDATA[Python 作为最常用的脚本语言，有着非常丰富的第三方库，但是这也导致了 Python 的环境管理非常必要。本文将介绍 Python 的几个常用环境管理工具，以及如何使用它们。]]></description>
+</item>
 </channel>
 </rss>
