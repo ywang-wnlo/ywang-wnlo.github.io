@@ -17,8 +17,8 @@
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/646202b9/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-11-19T16:24:30+08:00" />
 <meta property="article:modified_time" content="2022-11-16T10:33:39+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="page cache 回写机制"/>
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="page cache 回写机制"/>
 <meta name="twitter:description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -1383,48 +1383,48 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[PATCH] writeback: fix range handling
-</span></span><span class="line"><span class="cl">When a writeback_control&#39;s `start&#39; and `end&#39; fields are used to
-</span></span><span class="line"><span class="cl">indicate a one-byte-range starting at file offset zero, the required
-</span></span><span class="line"><span class="cl">values of .start=0,.end=0 mean that the -&gt;writepages() implementation
-</span></span><span class="line"><span class="cl">has no way of telling that it is being asked to perform a range
-</span></span><span class="line"><span class="cl">request.  Because we&#39;re currently overloading (start == 0 &amp;&amp; end == 0)
-</span></span><span class="line"><span class="cl">to mean &#34;this is not a write-a-range request&#34;.
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">[</span><span class="n">PATCH</span><span class="p">]</span> <span class="n">writeback</span><span class="p">:</span> <span class="n">fix</span> <span class="nb">range</span> <span class="n">handling</span>
+</span></span><span class="line"><span class="cl"><span class="n">When</span> <span class="n">a</span> <span class="n">writeback_control</span><span class="s1">&#39;s `start&#39;</span> <span class="ow">and</span> <span class="err">`</span><span class="n">end</span><span class="s1">&#39; fields are used to</span>
+</span></span><span class="line"><span class="cl"><span class="n">indicate</span> <span class="n">a</span> <span class="n">one</span><span class="o">-</span><span class="n">byte</span><span class="o">-</span><span class="nb">range</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">file</span> <span class="n">offset</span> <span class="n">zero</span><span class="p">,</span> <span class="n">the</span> <span class="n">required</span>
+</span></span><span class="line"><span class="cl"><span class="n">values</span> <span class="n">of</span> <span class="o">.</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="o">.</span><span class="n">end</span><span class="o">=</span><span class="mi">0</span> <span class="n">mean</span> <span class="n">that</span> <span class="n">the</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">implementation</span>
+</span></span><span class="line"><span class="cl"><span class="n">has</span> <span class="n">no</span> <span class="n">way</span> <span class="n">of</span> <span class="n">telling</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">being</span> <span class="n">asked</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">a</span> <span class="nb">range</span>
+</span></span><span class="line"><span class="cl"><span class="n">request</span><span class="o">.</span>  <span class="n">Because</span> <span class="n">we</span><span class="s1">&#39;re currently overloading (start == 0 &amp;&amp; end == 0)</span>
+</span></span><span class="line"><span class="cl"><span class="n">to</span> <span class="n">mean</span> <span class="s2">&#34;this is not a write-a-range request&#34;</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">To make all this sane, the patch changes range of writeback_control.
+</span></span><span class="line"><span class="cl"><span class="n">To</span> <span class="n">make</span> <span class="n">all</span> <span class="n">this</span> <span class="n">sane</span><span class="p">,</span> <span class="n">the</span> <span class="n">patch</span> <span class="n">changes</span> <span class="nb">range</span> <span class="n">of</span> <span class="n">writeback_control</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">So caller does: If it is calling -&gt;writepages() to write pages, it
-</span></span><span class="line"><span class="cl">sets range (range_start/end or range_cyclic) always.
+</span></span><span class="line"><span class="cl"><span class="n">So</span> <span class="n">caller</span> <span class="n">does</span><span class="p">:</span> <span class="n">If</span> <span class="n">it</span> <span class="n">is</span> <span class="n">calling</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">to</span> <span class="n">write</span> <span class="n">pages</span><span class="p">,</span> <span class="n">it</span>
+</span></span><span class="line"><span class="cl"><span class="n">sets</span> <span class="nb">range</span> <span class="p">(</span><span class="n">range_start</span><span class="o">/</span><span class="n">end</span> <span class="ow">or</span> <span class="n">range_cyclic</span><span class="p">)</span> <span class="n">always</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">And if range_cyclic is true, -&gt;writepages() thinks the range is
-</span></span><span class="line"><span class="cl">cyclic, otherwise it just uses range_start and range_end.
+</span></span><span class="line"><span class="cl"><span class="n">And</span> <span class="k">if</span> <span class="n">range_cyclic</span> <span class="n">is</span> <span class="bp">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">thinks</span> <span class="n">the</span> <span class="nb">range</span> <span class="n">is</span>
+</span></span><span class="line"><span class="cl"><span class="n">cyclic</span><span class="p">,</span> <span class="n">otherwise</span> <span class="n">it</span> <span class="n">just</span> <span class="n">uses</span> <span class="n">range_start</span> <span class="ow">and</span> <span class="n">range_end</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">This patch does,
+</span></span><span class="line"><span class="cl"><span class="n">This</span> <span class="n">patch</span> <span class="n">does</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    - Add LLONG_MAX, LLONG_MIN, ULLONG_MAX to include/linux/kernel.h
-</span></span><span class="line"><span class="cl">      -1 is usually ok for range_end (type is long long). But, if someone did,
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">Add</span> <span class="n">LLONG_MAX</span><span class="p">,</span> <span class="n">LLONG_MIN</span><span class="p">,</span> <span class="n">ULLONG_MAX</span> <span class="n">to</span> <span class="n">include</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-</span><span class="mi">1</span> <span class="n">is</span> <span class="n">usually</span> <span class="n">ok</span> <span class="k">for</span> <span class="n">range_end</span> <span class="p">(</span><span class="n">type</span> <span class="n">is</span> <span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="o">.</span> <span class="n">But</span><span class="p">,</span> <span class="k">if</span> <span class="n">someone</span> <span class="n">did</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		range_end += val;		range_end is &#34;val - 1&#34;
-</span></span><span class="line"><span class="cl">		u64val = range_end &gt;&gt; bits;	u64val is &#34;~(0ULL)&#34;
+</span></span><span class="line"><span class="cl">		<span class="n">range_end</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>		<span class="n">range_end</span> <span class="n">is</span> <span class="s2">&#34;val - 1&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">u64val</span> <span class="o">=</span> <span class="n">range_end</span> <span class="o">&gt;&gt;</span> <span class="n">bits</span><span class="p">;</span>	<span class="n">u64val</span> <span class="n">is</span> <span class="s2">&#34;~(0ULL)&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      or something, they are wrong. So, this adds LLONG_MAX to avoid nasty
-</span></span><span class="line"><span class="cl">      things, and uses LLONG_MAX for range_end.
+</span></span><span class="line"><span class="cl">      <span class="ow">or</span> <span class="n">something</span><span class="p">,</span> <span class="n">they</span> <span class="n">are</span> <span class="n">wrong</span><span class="o">.</span> <span class="n">So</span><span class="p">,</span> <span class="n">this</span> <span class="n">adds</span> <span class="n">LLONG_MAX</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">nasty</span>
+</span></span><span class="line"><span class="cl">      <span class="n">things</span><span class="p">,</span> <span class="ow">and</span> <span class="n">uses</span> <span class="n">LLONG_MAX</span> <span class="k">for</span> <span class="n">range_end</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    - All callers of -&gt;writepages() sets range_start/end or range_cyclic.
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">All</span> <span class="n">callers</span> <span class="n">of</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">sets</span> <span class="n">range_start</span><span class="o">/</span><span class="n">end</span> <span class="ow">or</span> <span class="n">range_cyclic</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    - Fix updates of -&gt;writeback_index. It seems already bit strange.
-</span></span><span class="line"><span class="cl">      If it starts at 0 and ended by check of nr_to_write, this last
-</span></span><span class="line"><span class="cl">      index may reduce chance to scan end of file.  So, this updates
-</span></span><span class="line"><span class="cl">      -&gt;writeback_index only if range_cyclic is true or whole-file is
-</span></span><span class="line"><span class="cl">      scanned.
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">Fix</span> <span class="n">updates</span> <span class="n">of</span> <span class="o">-&gt;</span><span class="n">writeback_index</span><span class="o">.</span> <span class="n">It</span> <span class="n">seems</span> <span class="n">already</span> <span class="n">bit</span> <span class="n">strange</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">If</span> <span class="n">it</span> <span class="n">starts</span> <span class="n">at</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">ended</span> <span class="n">by</span> <span class="n">check</span> <span class="n">of</span> <span class="n">nr_to_write</span><span class="p">,</span> <span class="n">this</span> <span class="n">last</span>
+</span></span><span class="line"><span class="cl">      <span class="n">index</span> <span class="n">may</span> <span class="n">reduce</span> <span class="n">chance</span> <span class="n">to</span> <span class="n">scan</span> <span class="n">end</span> <span class="n">of</span> <span class="n">file</span><span class="o">.</span>  <span class="n">So</span><span class="p">,</span> <span class="n">this</span> <span class="n">updates</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-&gt;</span><span class="n">writeback_index</span> <span class="n">only</span> <span class="k">if</span> <span class="n">range_cyclic</span> <span class="n">is</span> <span class="bp">true</span> <span class="ow">or</span> <span class="n">whole</span><span class="o">-</span><span class="n">file</span> <span class="n">is</span>
+</span></span><span class="line"><span class="cl">      <span class="n">scanned</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Signed-off-by: OGAWA Hirofumi &lt;hirofumi@mail.parknet.co.jp&gt;
-</span></span><span class="line"><span class="cl">Cc: Nathan Scott &lt;nathans@sgi.com&gt;
-</span></span><span class="line"><span class="cl">Cc: Anton Altaparmakov &lt;aia21@cantab.net&gt;
-</span></span><span class="line"><span class="cl">Cc: Steven French &lt;sfrench@us.ibm.com&gt;
-</span></span><span class="line"><span class="cl">Cc: &#34;Vladimir V. Saveliev&#34; &lt;vs@namesys.com&gt;
-</span></span><span class="line"><span class="cl">Signed-off-by: Andrew Morton &lt;akpm@osdl.org&gt;
-</span></span><span class="line"><span class="cl">Signed-off-by: Linus Torvalds &lt;torvalds@osdl.org&gt;</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">Signed</span><span class="o">-</span><span class="n">off</span><span class="o">-</span><span class="n">by</span><span class="p">:</span> <span class="n">OGAWA</span> <span class="n">Hirofumi</span> <span class="o">&lt;</span><span class="n">hirofumi</span><span class="err">@</span><span class="n">mail</span><span class="o">.</span><span class="n">parknet</span><span class="o">.</span><span class="n">co</span><span class="o">.</span><span class="n">jp</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="n">Nathan</span> <span class="n">Scott</span> <span class="o">&lt;</span><span class="n">nathans</span><span class="err">@</span><span class="n">sgi</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="n">Anton</span> <span class="n">Altaparmakov</span> <span class="o">&lt;</span><span class="n">aia21</span><span class="err">@</span><span class="n">cantab</span><span class="o">.</span><span class="n">net</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="n">Steven</span> <span class="n">French</span> <span class="o">&lt;</span><span class="n">sfrench</span><span class="err">@</span><span class="n">us</span><span class="o">.</span><span class="n">ibm</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="s2">&#34;Vladimir V. Saveliev&#34;</span> <span class="o">&lt;</span><span class="n">vs</span><span class="err">@</span><span class="n">namesys</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Signed</span><span class="o">-</span><span class="n">off</span><span class="o">-</span><span class="n">by</span><span class="p">:</span> <span class="n">Andrew</span> <span class="n">Morton</span> <span class="o">&lt;</span><span class="n">akpm</span><span class="err">@</span><span class="n">osdl</span><span class="o">.</span><span class="n">org</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Signed</span><span class="o">-</span><span class="n">off</span><span class="o">-</span><span class="n">by</span><span class="p">:</span> <span class="n">Linus</span> <span class="n">Torvalds</span> <span class="o">&lt;</span><span class="n">torvalds</span><span class="err">@</span><span class="n">osdl</span><span class="o">.</span><span class="n">org</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>range_cyclic</code> 和 <code>range_start/end</code> 互斥</p>
 <ul>
@@ -2152,7 +2152,7 @@
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
