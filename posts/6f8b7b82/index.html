@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>电信光猫中兴 F7010C 折腾记录 - 乐园</title><meta name="author" content="Zeus">
+<meta name="author-link" content="https://github.com/ywang-wnlo">
+<meta name="description" content="本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等" /><meta name="keywords" content='光猫, 超管密码, IPv6, 安卓抓包, SSL, ImmortalWrt' /><meta itemprop="name" content="电信光猫中兴 F7010C 折腾记录">
+<meta itemprop="description" content="本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等"><meta itemprop="datePublished" content="2024-02-01T12:26:19+08:00" />
+<meta itemprop="dateModified" content="2024-02-01T12:26:19+08:00" />
+<meta itemprop="wordCount" content="2166">
+<meta itemprop="keywords" content="光猫,超管密码,IPv6,安卓抓包,SSL,ImmortalWrt," /><meta property="og:title" content="电信光猫中兴 F7010C 折腾记录" />
+<meta property="og:description" content="本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ywang-wnlo.github.io/posts/6f8b7b82/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-01T12:26:19+08:00" />
+<meta property="article:modified_time" content="2024-02-01T12:26:19+08:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="电信光猫中兴 F7010C 折腾记录"/>
+<meta name="twitter:description" content="本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等"/>
+<meta name="application-name" content="乐园">
+<meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/6f8b7b82/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/a23842fe/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "电信光猫中兴 F7010C 折腾记录",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ywang-wnlo.github.io\/posts\/6f8b7b82\/"
+    },"genre": "posts","keywords": "光猫, 超管密码, IPv6, 安卓抓包, SSL, ImmortalWrt","wordcount":  2166 ,
+    "url": "https:\/\/ywang-wnlo.github.io\/posts\/6f8b7b82\/","datePublished": "2024-02-01T12:26:19+08:00","dateModified": "2024-02-01T12:26:19+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Zeus"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/"
+                
+                
+              ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/"
+                  
+                  
+                ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>电信光猫中兴 F7010C 折腾记录</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" class="post-category" title="分类 - 路由器"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 路由器</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-01 12:26:19"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-01">2024-02-01</time></span>&nbsp;<span title="2166 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="电信光猫中兴 F7010C 折腾记录">
+              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+            </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题描述">问题描述</a></li>
+    <li><a href="#解锁超管密码">解锁超管密码</a>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#配置安卓抓包环境">配置安卓抓包环境</a></li>
+        <li><a href="#抓包获取超管密码">抓包获取超管密码</a></li>
+      </ul>
+    </li>
+    <li><a href="#ipv6-配置">IPv6 配置</a>
+      <ul>
+        <li><a href="#光猫拨号">光猫拨号</a></li>
+        <li><a href="#改用-slaac">改用 SLAAC</a></li>
+        <li><a href="#路由器配置">路由器配置</a>
+          <ul>
+            <li><a href="#wan6-配置">wan6 配置</a></li>
+            <li><a href="#wan-配置">wan 配置</a></li>
+            <li><a href="#lan-配置">lan 配置</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#验证">验证</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="问题描述" class="heading-element">
+  <a href="#%e9%97%ae%e9%a2%98%e6%8f%8f%e8%bf%b0" class="heading-mark"></a>问题描述</h2><p>近期家里更新了千兆宽带，电信光猫换成了中兴 F7010C，默认光猫拨号，安装人员不给改桥接，而且路由器还获取不到 IPv6 地址</p>
+<p>尝试过对路由器的 IPv6 进行配置，但是发现无论怎么配置，都无法获取到 IPv6 地址，并且也尝试了设备直连光猫，也无法获取到 IPv6 地址，因此怀疑是光猫的问题，所以才有了这一段折腾</p>
+<p>主要参考了网上的一些资料，个人根据自己的情况和理解做了一些修改</p>
+<h2 id="解锁超管密码" class="heading-element">
+  <a href="#%e8%a7%a3%e9%94%81%e8%b6%85%e7%ae%a1%e5%af%86%e7%a0%81" class="heading-mark"></a>解锁超管密码</h2><p>网上给出的解锁 F7010C 的解锁方式都是通过对电信的官方 APP《小翼管家》进行抓包，然后借助抓包软件的断点和重写功能，来修改请求的内容，从而获取超管密码</p>
+<h3 id="前言" class="heading-element">
+  <a href="#%e5%89%8d%e8%a8%80" class="heading-mark"></a>前言</h3><p>现在对安卓的 APP 进行抓包，其实还是比较困难的。
+首先当前的网络包基本都是 HTTPS 加密的，为了能够抓到 HTTPS 的包，需要通过中间人攻击的方式来查看 HTTPS 的明文内容</p>
+<p>当客户端与抓包软件的代理服务器进行通信时，抓包软件需要重签远程服务器的 SSL 证书。
+为了保证客户端与抓包软件成功进行 SSL 握手通信，需要将抓包软件的 CA 根证书安装到客户端本地的证书管理中心</p>
+<p>但是安卓 7.0 之后，由于 Google 的安全策略，用户自行安装的用户证书不再被信任，因此需要进行额外的配置</p>
+<h3 id="配置安卓抓包环境" class="heading-element">
+  <a href="#%e9%85%8d%e7%bd%ae%e5%ae%89%e5%8d%93%e6%8a%93%e5%8c%85%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置安卓抓包环境</h3><p>由于自行安装的用户证书不再被信任，但是系统证书还是可以被信任的，因此需要将抓包软件的 CA 根证书导入到系统证书中</p>
+<p>但是系统证书通常在 <code>/system</code> 目录下，而 <code>/system</code> 目录是只读的，因此需要先将 <code>/system</code> 目录挂载为可读写的目录，然后再将证书导入到系统证书中</p>
+<p>这意味着需要 root 权限，所以个人改用安卓模拟器来进行抓包。
+安装模拟器的过程就不再赘述了，个人选择了 MuMu 模拟器</p>
+<p>首先在设置中开启 root 权限和 system 读写权限</p>
+<p><figure><a class="lightgallery" href="./MuMu-%e5%bc%80%e5%90%afroot%e6%9d%83%e9%99%90.png?size=large" data-thumbnail="./MuMu-开启root权限.png?size=small" data-sub-html="<h2>开启 root 权限</h2><p>开启 root 权限</p>"><img loading="lazy" src="./MuMu-%e5%bc%80%e5%90%afroot%e6%9d%83%e9%99%90.png" alt="开启 root 权限" srcset="./MuMu-%e5%bc%80%e5%90%afroot%e6%9d%83%e9%99%90.png?size=small, ./MuMu-%e5%bc%80%e5%90%afroot%e6%9d%83%e9%99%90.png?size=medium 1.5x, ./MuMu-%e5%bc%80%e5%90%afroot%e6%9d%83%e9%99%90.png?size=large 2x" data-title="开启 root 权限" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">开启 root 权限</figcaption>
+  </figure></p>
+<p><figure><a class="lightgallery" href="./MuMu-%e5%bc%80%e5%90%afsystem%e8%af%bb%e5%86%99%e6%9d%83%e9%99%90.png?size=large" data-thumbnail="./MuMu-开启system读写权限.png?size=small" data-sub-html="<h2>开启 system 读写权限</h2><p>开启 system 读写权限</p>"><img loading="lazy" src="./MuMu-%e5%bc%80%e5%90%afsystem%e8%af%bb%e5%86%99%e6%9d%83%e9%99%90.png" alt="开启 system 读写权限" srcset="./MuMu-%e5%bc%80%e5%90%afsystem%e8%af%bb%e5%86%99%e6%9d%83%e9%99%90.png?size=small, ./MuMu-%e5%bc%80%e5%90%afsystem%e8%af%bb%e5%86%99%e6%9d%83%e9%99%90.png?size=medium 1.5x, ./MuMu-%e5%bc%80%e5%90%afsystem%e8%af%bb%e5%86%99%e6%9d%83%e9%99%90.png?size=large 2x" data-title="开启 system 读写权限" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">开启 system 读写权限</figcaption>
+  </figure></p>
+<p>抓包工具选择了 <a href="https://reqable.com/zh-CN/"target="_blank" rel="external nofollow noopener noreferrer">Reqable</a>，这是一款国人开发的抓包工具，有中文界面，并且支持断点和重写功能，而且免费的社区版功能也足够使用了</p>
+<p>安装证书的方式，Reqable 给了非常详细的图文教程，主要的不同在于需要对 <code>/system</code> 重新挂载，然后再通过 <code>adb</code> 将证书导入到系统证书中</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 下载证书 reqable-ca.crt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 通过 adb 连接模拟器，端口号可以在模拟器的【问题诊断】中查看</span>
+</span></span><span class="line"><span class="cl"><span class="n">adb</span> <span class="n">connect</span> <span class="mf">127.0</span><span class="p">.</span><span class="py">0</span><span class="p">.</span><span class="mf">1</span><span class="err">:</span><span class="n">xxxxx</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">adb</span> <span class="n">shell</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 切换到 root 用户，注意需要在模拟器中确认</span>
+</span></span><span class="line"><span class="cl"><span class="n">su</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 重新挂载 /system 目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">mount </span><span class="n">-o</span> <span class="n">remount</span><span class="p">,</span><span class="n">rw</span> <span class="p">/</span><span class="n">system</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 退出 root 用户</span>
+</span></span><span class="line"><span class="cl"><span class="n">exit</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 退出 adb shell</span>
+</span></span><span class="line"><span class="cl"><span class="n">exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 将证书导入到系统证书中</span>
+</span></span><span class="line"><span class="cl"><span class="n">adb</span> <span class="n">push</span> <span class="nb">reqable-ca</span><span class="p">.</span><span class="py">crt</span> <span class="p">/</span><span class="n">system</span><span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">security</span><span class="p">/</span><span class="n">cacerts</span><span class="p">/</span><span class="n">xxxxx</span><span class="p">.</span><span class="mf">0</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="抓包获取超管密码" class="heading-element">
+  <a href="#%e6%8a%93%e5%8c%85%e8%8e%b7%e5%8f%96%e8%b6%85%e7%ae%a1%e5%af%86%e7%a0%81" class="heading-mark"></a>抓包获取超管密码</h3><p>配置好 CA 证书之后，就可以开始尝试抓包了，流程如下：</p>
+<ol>
+<li>
+<p>先打开《小翼管家》APP，绑定好电信光猫，先点进去【网关设置】界面
+<figure><a class="lightgallery" href="./%e5%b0%8f%e7%bf%bc%e7%ae%a1%e5%ae%b6-%e7%bd%91%e5%85%b3%e8%ae%be%e7%bd%ae.jpg?size=large" data-thumbnail="./小翼管家-网关设置.jpg?size=small" data-sub-html="<h2>小翼管家-网关设置</h2><p>小翼管家-网关设置</p>"><img loading="lazy" src="./%e5%b0%8f%e7%bf%bc%e7%ae%a1%e5%ae%b6-%e7%bd%91%e5%85%b3%e8%ae%be%e7%bd%ae.jpg" alt="小翼管家-网关设置" srcset="./%e5%b0%8f%e7%bf%bc%e7%ae%a1%e5%ae%b6-%e7%bd%91%e5%85%b3%e8%ae%be%e7%bd%ae.jpg?size=small, ./%e5%b0%8f%e7%bf%bc%e7%ae%a1%e5%ae%b6-%e7%bd%91%e5%85%b3%e8%ae%be%e7%bd%ae.jpg?size=medium 1.5x, ./%e5%b0%8f%e7%bf%bc%e7%ae%a1%e5%ae%b6-%e7%bd%91%e5%85%b3%e8%ae%be%e7%bd%ae.jpg?size=large 2x" data-title="小翼管家-网关设置" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">小翼管家-网关设置</figcaption>
+  </figure></p>
+</li>
+<li>
+<p>配置 WiFi 的代理后，在抓包软件中启动抓包，然后在《小翼管家》中切换【指示灯】</p>
+</li>
+<li>
+<p>查看抓到的包中，找到形如 <code>https://xxxx.189cube.com/device/api?token=xxxx</code> 的请求，并配置断点
+<figure><a class="lightgallery" href="./Reqable-%e6%89%be%e8%af%b7%e6%b1%82.png?size=large" data-thumbnail="./Reqable-找请求.png?size=small" data-sub-html="<h2>Reqable-找请求</h2><p>Reqable-找请求</p>"><img loading="lazy" src="./Reqable-%e6%89%be%e8%af%b7%e6%b1%82.png" alt="Reqable-找请求" srcset="./Reqable-%e6%89%be%e8%af%b7%e6%b1%82.png?size=small, ./Reqable-%e6%89%be%e8%af%b7%e6%b1%82.png?size=medium 1.5x, ./Reqable-%e6%89%be%e8%af%b7%e6%b1%82.png?size=large 2x" data-title="Reqable-找请求" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Reqable-找请求</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="./Reqable-%e9%85%8d%e7%bd%ae%e6%96%ad%e7%82%b9.png?size=large" data-thumbnail="./Reqable-配置断点.png?size=small" data-sub-html="<h2>Reqable-配置断点</h2><p>Reqable-配置断点</p>"><img loading="lazy" src="./Reqable-%e9%85%8d%e7%bd%ae%e6%96%ad%e7%82%b9.png" alt="Reqable-配置断点" srcset="./Reqable-%e9%85%8d%e7%bd%ae%e6%96%ad%e7%82%b9.png?size=small, ./Reqable-%e9%85%8d%e7%bd%ae%e6%96%ad%e7%82%b9.png?size=medium 1.5x, ./Reqable-%e9%85%8d%e7%bd%ae%e6%96%ad%e7%82%b9.png?size=large 2x" data-title="Reqable-配置断点" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Reqable-配置断点</figcaption>
+  </figure></p>
+</li>
+<li>
+<p>再次切换【指示灯】，请求就会在断点停下，复制下面的请求内容，并执行（如果手速慢了，可能会导致请求超时，再次切换【指示灯】即可）
+<figure><a class="lightgallery" href="./Reqable-%e6%9b%bf%e6%8d%a2%e8%af%b7%e6%b1%82%e5%86%85%e5%ae%b9.png?size=large" data-thumbnail="./Reqable-替换请求内容.png?size=small" data-sub-html="<h2>Reqable-替换请求内容</h2><p>Reqable-替换请求内容</p>"><img loading="lazy" src="./Reqable-%e6%9b%bf%e6%8d%a2%e8%af%b7%e6%b1%82%e5%86%85%e5%ae%b9.png" alt="Reqable-替换请求内容" srcset="./Reqable-%e6%9b%bf%e6%8d%a2%e8%af%b7%e6%b1%82%e5%86%85%e5%ae%b9.png?size=small, ./Reqable-%e6%9b%bf%e6%8d%a2%e8%af%b7%e6%b1%82%e5%86%85%e5%ae%b9.png?size=medium 1.5x, ./Reqable-%e6%9b%bf%e6%8d%a2%e8%af%b7%e6%b1%82%e5%86%85%e5%ae%b9.png?size=large 2x" data-title="Reqable-替换请求内容" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Reqable-替换请求内容</figcaption>
+  </figure></p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;Params&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;MethodName&#34;</span><span class="p">:</span> <span class="s2">&#34;GetTAPasswd&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;RPCMethod&#34;</span><span class="p">:</span> <span class="s2">&#34;CallMethod&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;ObjectPath&#34;</span><span class="p">:</span> <span class="s2">&#34;/com/ctc/igd1/Telecom/System&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;InterfaceName&#34;</span><span class="p">:</span> <span class="s2">&#34;com.ctc.igd1.SysCmd&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;ServiceName&#34;</span><span class="p">:</span> <span class="s2">&#34;com.ctc.igd1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查看返回的结果，其中一段看似随机的字符串就是超管密码
+<figure><a class="lightgallery" href="./Reqable-%e8%8e%b7%e5%8f%96%e8%b6%85%e7%ae%a1%e5%af%86%e7%a0%81.png?size=large" data-thumbnail="./Reqable-获取超管密码.png?size=small" data-sub-html="<h2>Reqable-获取超管密码</h2><p>Reqable-获取超管密码</p>"><img loading="lazy" src="./Reqable-%e8%8e%b7%e5%8f%96%e8%b6%85%e7%ae%a1%e5%af%86%e7%a0%81.png" alt="Reqable-获取超管密码" srcset="./Reqable-%e8%8e%b7%e5%8f%96%e8%b6%85%e7%ae%a1%e5%af%86%e7%a0%81.png?size=small, ./Reqable-%e8%8e%b7%e5%8f%96%e8%b6%85%e7%ae%a1%e5%af%86%e7%a0%81.png?size=medium 1.5x, ./Reqable-%e8%8e%b7%e5%8f%96%e8%b6%85%e7%ae%a1%e5%af%86%e7%a0%81.png?size=large 2x" data-title="Reqable-获取超管密码" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Reqable-获取超管密码</figcaption>
+  </figure></p>
+</li>
+</ol>
+<h2 id="ipv6-配置" class="heading-element">
+  <a href="#ipv6-%e9%85%8d%e7%bd%ae" class="heading-mark"></a>IPv6 配置</h2><p>由于设备直连都无法获取 IPv6 地址，但是光猫自身又有 IPv6 地址，并且可以访问 IPv6 网络，因此怀疑是光猫的 IPv6 分配有问题</p>
+<h3 id="光猫拨号" class="heading-element">
+  <a href="#%e5%85%89%e7%8c%ab%e6%8b%a8%e5%8f%b7" class="heading-mark"></a>光猫拨号</h3><p>在【网络-网络设置-网络连接】中没有做任何修改，维持了光猫拨号的方案，如图</p>
+<p><figure><a class="lightgallery" href="./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%bd%91%e7%bb%9c%e8%ae%be%e7%bd%ae-%e7%bd%91%e7%bb%9c%e8%bf%9e%e6%8e%a5.png?size=large" data-thumbnail="./光猫-网络-网络设置-网络连接.png?size=small" data-sub-html="<h2>光猫-网络-网络设置-网络连接</h2><p>光猫-网络-网络设置-网络连接</p>"><img loading="lazy" src="./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%bd%91%e7%bb%9c%e8%ae%be%e7%bd%ae-%e7%bd%91%e7%bb%9c%e8%bf%9e%e6%8e%a5.png" alt="光猫-网络-网络设置-网络连接" srcset="./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%bd%91%e7%bb%9c%e8%ae%be%e7%bd%ae-%e7%bd%91%e7%bb%9c%e8%bf%9e%e6%8e%a5.png?size=small, ./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%bd%91%e7%bb%9c%e8%ae%be%e7%bd%ae-%e7%bd%91%e7%bb%9c%e8%bf%9e%e6%8e%a5.png?size=medium 1.5x, ./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%bd%91%e7%bb%9c%e8%ae%be%e7%bd%ae-%e7%bd%91%e7%bb%9c%e8%bf%9e%e6%8e%a5.png?size=large 2x" data-title="光猫-网络-网络设置-网络连接" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">光猫-网络-网络设置-网络连接</figcaption>
+  </figure></p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">IP模式</span><span class="p">:</span><span class="w"> </span><span class="l">IPv4&amp;IPv6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IPv6信息</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">地址获取方式</span><span class="p">:</span><span class="w"> </span><span class="l">AutoConfigured</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">获取前缀</span><span class="p">:</span><span class="w"> </span><span class="l">√</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">前缀获取方式</span><span class="p">:</span><span class="w"> </span><span class="l">PrefixDelegation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">DNS获取方式</span><span class="p">:</span><span class="w"> </span><span class="l">DHCPv6</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="改用-slaac" class="heading-element">
+  <a href="#%e6%94%b9%e7%94%a8-slaac" class="heading-mark"></a>改用 SLAAC</h3><p>在【网络-用户侧管理-IPv6设置】中，关闭 DHCPv6，改用 SLAAC 方式，如图</p>
+<p><figure><a class="lightgallery" href="./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%94%a8%e6%88%b7%e4%be%a7%e7%ae%a1%e7%90%86-IPv6%e8%ae%be%e7%bd%ae.png?size=large" data-thumbnail="./光猫-网络-用户侧管理-IPv6设置.png?size=small" data-sub-html="<h2>光猫-网络-用户侧管理-IPv6设置</h2><p>光猫-网络-用户侧管理-IPv6设置</p>"><img loading="lazy" src="./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%94%a8%e6%88%b7%e4%be%a7%e7%ae%a1%e7%90%86-IPv6%e8%ae%be%e7%bd%ae.png" alt="光猫-网络-用户侧管理-IPv6设置" srcset="./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%94%a8%e6%88%b7%e4%be%a7%e7%ae%a1%e7%90%86-IPv6%e8%ae%be%e7%bd%ae.png?size=small, ./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%94%a8%e6%88%b7%e4%be%a7%e7%ae%a1%e7%90%86-IPv6%e8%ae%be%e7%bd%ae.png?size=medium 1.5x, ./%e5%85%89%e7%8c%ab-%e7%bd%91%e7%bb%9c-%e7%94%a8%e6%88%b7%e4%be%a7%e7%ae%a1%e7%90%86-IPv6%e8%ae%be%e7%bd%ae.png?size=large 2x" data-title="光猫-网络-用户侧管理-IPv6设置" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">光猫-网络-用户侧管理-IPv6设置</figcaption>
+  </figure></p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">启动DHCPv6服务器</span><span class="p">:</span><span class="w"> </span><span class="l">X</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">slaac前缀使能</span><span class="p">:</span><span class="w"> </span><span class="l">√</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>二者都是 IPv6 网络中用于为主机分配 IPv6 地址的协议，但它们的工作方式、类型和功能略有不同。具体差别就不再赘述了，可以参考 <a href="https://juejin.cn/s/slaac%20vs%20dhcpv6"target="_blank" rel="external nofollow noopener noreferrer">slaac vs dhcpv6</a></p>
+<h3 id="路由器配置" class="heading-element">
+  <a href="#%e8%b7%af%e7%94%b1%e5%99%a8%e9%85%8d%e7%bd%ae" class="heading-mark"></a>路由器配置</h3><p>路由器型号还是之前的红米 AC2100，不过刷了 ImmortalWrt 的最新版（23.05.1），仅作参考</p>
+<h4 id="wan6-配置" class="heading-element">
+  <a href="#wan6-%e9%85%8d%e7%bd%ae" class="heading-mark"></a>wan6 配置</h4><p>首先要在配置下 wan6 接口，没有的话就添加一个，如图</p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e5%b8%b8%e8%a7%84.png?size=large" data-thumbnail="./ImmortalWRT-接口-wan6-常规.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-wan6-常规</h2><p>ImmortalWRT-接口-wan6-常规</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e5%b8%b8%e8%a7%84.png" alt="ImmortalWRT-接口-wan6-常规" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e5%b8%b8%e8%a7%84.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e5%b8%b8%e8%a7%84.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e5%b8%b8%e8%a7%84.png?size=large 2x" data-title="ImmortalWRT-接口-wan6-常规" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-wan6-常规</figcaption>
+  </figure></p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">接口</span><span class="p">:</span><span class="w"> </span><span class="l">wan6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">协议</span><span class="p">:</span><span class="w"> </span><span class="l">DHCPv6 客户端</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">设备</span><span class="p">:</span><span class="w"> </span><span class="l">wan</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>【高级设置】中，保持默认配置</p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%ab%98%e7%ba%a7.png?size=large" data-thumbnail="./ImmortalWRT-接口-wan6-高级.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-wan6-高级</h2><p>ImmortalWRT-接口-wan6-高级</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%ab%98%e7%ba%a7.png" alt="ImmortalWRT-接口-wan6-高级" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%ab%98%e7%ba%a7.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%ab%98%e7%ba%a7.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%ab%98%e7%ba%a7.png?size=large 2x" data-title="ImmortalWRT-接口-wan6-高级" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-wan6-高级</figcaption>
+  </figure></p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">委托 IPv6 前缀</span><span class="p">:</span><span class="w"> </span><span class="l">√</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IPv6 分配长度</span><span class="p">:</span><span class="w"> </span><span class="l">已禁用</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>【防火墙设置】选择和 wan 接口一样的防火墙，如图</p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%98%b2%e7%81%ab%e5%a2%99.png?size=large" data-thumbnail="./ImmortalWRT-接口-wan6-防火墙.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-wan6-防火墙</h2><p>ImmortalWRT-接口-wan6-防火墙</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%98%b2%e7%81%ab%e5%a2%99.png" alt="ImmortalWRT-接口-wan6-防火墙" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%98%b2%e7%81%ab%e5%a2%99.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%98%b2%e7%81%ab%e5%a2%99.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-%e9%98%b2%e7%81%ab%e5%a2%99.png?size=large 2x" data-title="ImmortalWRT-接口-wan6-防火墙" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-wan6-防火墙</figcaption>
+  </figure></p>
+<p>【DHCP 服务器】中，默认关闭</p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-DHCP.png?size=large" data-thumbnail="./ImmortalWRT-接口-wan6-DHCP.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-wan6 - DHCP</h2><p>ImmortalWRT-接口-wan6-DHCP</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-DHCP.png" alt="ImmortalWRT-接口-wan6 - DHCP" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-DHCP.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-DHCP.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan6-DHCP.png?size=large 2x" data-title="ImmortalWRT-接口-wan6-DHCP" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-wan6 - DHCP</figcaption>
+  </figure></p>
+<h4 id="wan-配置" class="heading-element">
+  <a href="#wan-%e9%85%8d%e7%bd%ae" class="heading-mark"></a>wan 配置</h4><p>wan 接口的【高级设置】中，保持默认配置</p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-%e9%ab%98%e7%ba%a7.png?size=large" data-thumbnail="./ImmortalWRT-接口-wan-高级.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-wan-高级</h2><p>ImmortalWRT-接口-wan-高级</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-%e9%ab%98%e7%ba%a7.png" alt="ImmortalWRT-接口-wan-高级" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-%e9%ab%98%e7%ba%a7.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-%e9%ab%98%e7%ba%a7.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-%e9%ab%98%e7%ba%a7.png?size=large 2x" data-title="ImmortalWRT-接口-wan-高级" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-wan-高级</figcaption>
+  </figure></p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">委托 IPv6 前缀</span><span class="p">:</span><span class="w"> </span><span class="l">√</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">IPv6 分配长度</span><span class="p">:</span><span class="w"> </span><span class="l">已禁用</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>【DHCP 服务器 - 常规设置】选中 <code>忽略此接口</code></p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-%e5%b8%b8%e8%a7%84.png?size=large" data-thumbnail="./ImmortalWRT-接口-wan-DHCP-常规.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-wan - DHCP-常规</h2><p>ImmortalWRT-接口-wan-DHCP-常规</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-%e5%b8%b8%e8%a7%84.png" alt="ImmortalWRT-接口-wan - DHCP-常规" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-%e5%b8%b8%e8%a7%84.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-%e5%b8%b8%e8%a7%84.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-%e5%b8%b8%e8%a7%84.png?size=large 2x" data-title="ImmortalWRT-接口-wan-DHCP-常规" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-wan - DHCP-常规</figcaption>
+  </figure></p>
+<p>【DHCP 服务器 - IPv6 设置】中，勾上 <code>指定的主接口</code>，并且全部选择 <code>中继模式</code></p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-IPv6.png?size=large" data-thumbnail="./ImmortalWRT-接口-wan-DHCP-IPv6.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-wan - DHCP - IPv6</h2><p>ImmortalWRT-接口-wan-DHCP-IPv6</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-IPv6.png" alt="ImmortalWRT-接口-wan - DHCP - IPv6" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-IPv6.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-IPv6.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-wan-DHCP-IPv6.png?size=large 2x" data-title="ImmortalWRT-接口-wan-DHCP-IPv6" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-wan - DHCP - IPv6</figcaption>
+  </figure></p>
+<h4 id="lan-配置" class="heading-element">
+  <a href="#lan-%e9%85%8d%e7%bd%ae" class="heading-mark"></a>lan 配置</h4><p>最后在 lan 接口的【DHCP 服务器 - IPv6 设置】中，也全部选择 <code>中继模式</code>，就完事了，之后重启路由器就 ok 了</p>
+<p><figure><a class="lightgallery" href="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-lan-DHCP-IPv6.png?size=large" data-thumbnail="./ImmortalWRT-接口-lan-DHCP-IPv6.png?size=small" data-sub-html="<h2>ImmortalWRT-接口-lan - DHCP - IPv6</h2><p>ImmortalWRT-接口-lan-DHCP-IPv6</p>"><img loading="lazy" src="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-lan-DHCP-IPv6.png" alt="ImmortalWRT-接口-lan - DHCP - IPv6" srcset="./ImmortalWRT-%e6%8e%a5%e5%8f%a3-lan-DHCP-IPv6.png?size=small, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-lan-DHCP-IPv6.png?size=medium 1.5x, ./ImmortalWRT-%e6%8e%a5%e5%8f%a3-lan-DHCP-IPv6.png?size=large 2x" data-title="ImmortalWRT-接口-lan-DHCP-IPv6" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">ImmortalWRT-接口-lan - DHCP - IPv6</figcaption>
+  </figure></p>
+<h2 id="验证" class="heading-element">
+  <a href="#%e9%aa%8c%e8%af%81" class="heading-mark"></a>验证</h2><p>可以在下面的网站中验证 IPv6 是否配置成功</p>
+<ul>
+<li><a href="https://ipw.cn/"target="_blank" rel="external nofollow noopener noreferrer">IP查询</a></li>
+<li><a href="http://test-ipv6.com/"target="_blank" rel="external nofollow noopener noreferrer">IPv6 连接测试</a></li>
+</ul>
+<h2 id="参考资料" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
+<li><a href="https://blog.bbskali.cn/3644.html"target="_blank" rel="external nofollow noopener noreferrer">【个人博客】破解天翼网关4.0 ZXHN F7010C超级管理员密码</a></li>
+<li><a href="https://www.dledu.cn/340.html"target="_blank" rel="external nofollow noopener noreferrer">【个人博客】使用Fiddler抓包软件获取电信天翼网关4.0超级管理员密码的方法</a></li>
+<li><a href="https://mumu.163.com/help/20221018/35047_1047210.html"target="_blank" rel="external nofollow noopener noreferrer">【MuMu 模拟器】MuMu模拟器X版本如何安装证书？</a></li>
+<li><a href="https://mumu.163.com/help/20230214/35047_1073151.html"target="_blank" rel="external nofollow noopener noreferrer">【MuMu 模拟器】MuMu模拟器12如何连接adb？</a></li>
+<li><a href="https://juejin.cn/s/slaac%20vs%20dhcpv6"target="_blank" rel="external nofollow noopener noreferrer">【掘金】slaac vs dhcpv6</a></li>
+<li><a href="https://blog.csdn.net/Cx2008Lxl/article/details/127483568"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】OpenWrt IPv6配置</a></li>
+</ul>
+</div><div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/6f8b7b82/" title="电信光猫中兴 F7010C 折腾记录">https://ywang-wnlo.github.io/posts/6f8b7b82/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div><h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/a23842fe/" title="解决 kex_exchange_identification 报错">解决 kex_exchange_identification 报错</a></li><li>
+          <a href="/posts/e6410576/" title="小米 WR30U 解锁并刷机">小米 WR30U 解锁并刷机</a></li><li>
+          <a href="/posts/76f6af57/" title="从 SSLEOFError 到正确配置 Proxy">从 SSLEOFError 到正确配置 Proxy</a></li><li>
+          <a href="/posts/2e7aa01a/" title="解决 pip 安装第三方包时因 SSL 报错">解决 pip 安装第三方包时因 SSL 报错</a></li><li>
+          <a href="/posts/51140c4a/" title="OpenWrt 配置使用">OpenWrt 配置使用</a></li></ul><div class="post-reward">
+    <div class="comment">请我一杯咖啡吧！</div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward">赞赏</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+          </div></div>
+  </div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-02-01 12:26:19">更新于 2024-02-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/6f8b7b82/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E5%85%89%E7%8C%AB/" class="post-tag" title="标签 - 光猫">光猫</a><a href="/tags/%E8%B6%85%E7%AE%A1%E5%AF%86%E7%A0%81/" class="post-tag" title="标签 - 超管密码">超管密码</a><a href="/tags/ipv6/" class="post-tag" title="标签 - IPv6">IPv6</a><a href="/tags/%E5%AE%89%E5%8D%93%E6%8A%93%E5%8C%85/" class="post-tag" title="标签 - 安卓抓包">安卓抓包</a><a href="/tags/ssl/" class="post-tag" title="标签 - SSL">SSL</a><a href="/tags/immortalwrt/" class="post-tag" title="标签 - ImmortalWrt">ImmortalWrt</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/a23842fe/" class="post-nav-item" rel="prev" title="解决 kex_exchange_identification 报错"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>解决 kex_exchange_identification 报错</a></div>
+</div>
+<div id="comments"><div id="giscus">
+          <script
+            src="https://giscus.app/client.js"
+            data-repo="ywang-wnlo/ywang-wnlo.github.io"
+            data-repo-id="R_kgDOGTSTcQ"
+            data-category="announcements"
+            data-category-id="DIC_kwDOGTSTcc4CZaXg"
+            data-mapping="pathname"
+            data-strict="0"
+            
+            data-theme="preferred_color_scheme"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-lang="zh-CN"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async
+            defer
+          ></script>
+        </div>
+        <noscript>
+          Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

@@ -4,9 +4,17 @@
     <link>https://ywang-wnlo.github.io/</link>
     <description>一个新时代农民工的随手笔记</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 19 Jan 2024 12:41:18 &#43;0800</lastBuildDate>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Thu, 01 Feb 2024 12:26:19 &#43;0800</lastBuildDate>
       <atom:link href="https://ywang-wnlo.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+  <title>电信光猫中兴 F7010C 折腾记录</title>
+  <link>https://ywang-wnlo.github.io/posts/6f8b7b82/</link>
+  <pubDate>Thu, 01 Feb 2024 12:26:19 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/6f8b7b82/</guid>
+  <description><![CDATA[本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等]]></description>
+</item>
+<item>
   <title>解决 kex_exchange_identification 报错</title>
   <link>https://ywang-wnlo.github.io/posts/a23842fe/</link>
   <pubDate>Fri, 19 Jan 2024 12:41:18 &#43;0800</pubDate>
@@ -69,14 +77,6 @@
   <author>Zeus</author>
   <guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
   <description><![CDATA[本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下]]></description>
-</item>
-<item>
-  <title>Ubuntu 环境配置大合集</title>
-  <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
-  <pubDate>Thu, 24 Nov 2022 17:16:00 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
-  <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置]]></description>
 </item>
 </channel>
 </rss>
