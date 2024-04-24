@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
   <head>
-	<meta name="generator" content="Hugo 0.122.0">
+	<meta name="generator" content="Hugo 0.118.2">
     
       <meta name="theme" content='FixIt v0.3.2-RC'>
     
@@ -15,8 +15,8 @@
 <meta property="og:description" content="一个新时代农民工的随手笔记" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ywang-wnlo.github.io/" />
-
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="乐园"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="乐园"/>
 <meta name="twitter:description" content="一个新时代农民工的随手笔记"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -148,6 +148,10 @@
     </a><a href="https://blog.csdn.net/CoolBoySilverBullet" title="CSDN"target="_blank" rel="external nofollow noopener noreferrer me"><i data-svg-src="/images/icons/csdn.min.svg" aria-hidden="true"></i>
     </a><a href="mailto:ywang_wnlo@qq.com" title="Email" rel=" me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a></div><h3 class="home-disclaimer">我永远喜欢 Homura.jpg</h3></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2e7aa01a/">解决 pip 安装第三方包时因 SSL 报错</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>&nbsp;<span class="post-publish" title='2022-03-08 14:37:08'>发布于 <time datetime="2022-03-08">2022-03-08</time></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" class="post-category" title="分类 - 日常踩坑"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 日常踩坑</a></span></div><div class="content">好久没用 python，最近重新下载安装好 python 后发现用 pip 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的。本文主要记录了其解决办法</div><div class="post-footer">
+    <a href="/posts/2e7aa01a/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/' class="post-tag">日常踩坑</a><a href='/tags/pip/' class="post-tag">pip</a><a href='/tags/python/' class="post-tag">python</a><a href='/tags/ssl/' class="post-tag">SSL</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/4bc1e607/">自定义配置 RocksDB 进行 YCSB 测试</a>
   </h2><div class="post-meta"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>&nbsp;<span class="post-publish" title='2021-12-26 00:20:25'>发布于 <time datetime="2021-12-26">2021-12-26</time></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category" title="分类 - 测试"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div><div class="content">本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法</div><div class="post-footer">
     <a href="/posts/4bc1e607/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/' class="post-tag">日常踩坑</a><a href='/tags/maven/' class="post-tag">Maven</a><a href='/tags/rocksdb/' class="post-tag">RocksDB</a><a href='/tags/ycsb/' class="post-tag">YCSB</a></div></div>
@@ -167,10 +171,6 @@
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/935ae1f0/">rm -r 与 rmdir 区别</a>
   </h2><div class="post-meta"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>&nbsp;<span class="post-publish" title='2021-11-24 19:47:38'>发布于 <time datetime="2021-11-24">2021-11-24</time></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a>&ensp;<a href="/categories/shell/" class="post-category" title="分类 - Shell"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Shell</a></span></div><div class="content">本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程</div><div class="post-footer">
     <a href="/posts/935ae1f0/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/shell/' class="post-tag">Shell</a><a href='/tags/strace/' class="post-tag">strace</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/4143201a/">Hexo 插件推荐以及使用小技巧</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span>&nbsp;<span class="post-publish" title='2021-11-22 14:12:15'>发布于 <time datetime="2021-11-22">2021-11-22</time></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category" title="分类 - 博客"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 博客</a></span></div><div class="content">Hexo 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。本文主要记录 Hexo 的部分插件使用以及一些小技巧</div><div class="post-footer">
-    <a href="/posts/4143201a/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/hexo/' class="post-tag">Hexo</a><a href='/tags/next/' class="post-tag">NexT</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item">
           <span class="page-link">
@@ -196,8 +196,12 @@
           <span class="page-link">
             <a href="/page/6/">6</a>
           </span>
+        </li><li class="page-item">
+          <span class="page-link">
+            <a href="/page/7/">7</a>
+          </span>
         </li></ul></div></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">

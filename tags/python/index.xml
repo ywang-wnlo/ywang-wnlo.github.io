@@ -4,7 +4,15 @@
     <link>https://ywang-wnlo.github.io/tags/python/</link>
     <description>python - 标签 | 乐园</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+  <title>Python 使用 matplotlib 画图</title>
+  <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
+  <pubDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
+  <description><![CDATA[本文将介绍如何使用 Python 的 <code>matplotlib</code> 库画图，记录一些常用的画图 demo 代码]]></description>
+</item>
+<item>
   <title>Python 环境隔离</title>
   <link>https://ywang-wnlo.github.io/posts/28f3e4d7/</link>
   <pubDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</pubDate>

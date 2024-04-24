@@ -17,8 +17,8 @@
 <meta property="og:url" content="https://ywang-wnlo.github.io/posts/89c4acb1/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-09-24T11:48:03+08:00" />
 <meta property="article:modified_time" content="2023-12-13T16:55:30+08:00" />
-
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="从 C 过渡到 C&#43;&#43;"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从 C 过渡到 C&#43;&#43;"/>
 <meta name="twitter:description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数"/>
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -208,7 +208,14 @@
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="前言" class="heading-element">
+      </div><div class="content" id="content"><div class="details admonition note open">
+      <div class="details-summary admonition-title">
+        <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      </div>
+      <div class="details-content">
+        <div class="admonition-content">本文最后更新于 2023-12-13，文中内容可能已过时。</div>
+      </div>
+    </div><h2 id="前言" class="heading-element">
   <a href="#%e5%89%8d%e8%a8%80" class="heading-mark"></a>前言</h2><p>由于 C 语言缺乏对 Map、Set 等数据结构的支持，在写算法题时，经常需要自己实现这些数据结构或者借助第三方库，例如 <a href="https://troydhanson.github.io/uthash/userguide.html"target="_blank" rel="external nofollow noopener noreferrer">uthash</a> 等。</p>
 <p>但是很难保证，线上笔试的编译环境是否支持这些第三方库，因此为了秋招以及重温对 C++ 的理解，最近在重新梳理 C++ 的知识。</p>
 <h2 id="字符串以及文件操作" class="heading-element">
@@ -1509,7 +1516,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">

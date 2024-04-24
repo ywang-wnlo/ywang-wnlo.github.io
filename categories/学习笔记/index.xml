@@ -4,7 +4,15 @@
     <link>https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
     <description>学习笔记 - 分类 | 乐园</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Mon, 11 Dec 2023 18:56:18 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+  <title>Python 使用 matplotlib 画图</title>
+  <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
+  <pubDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</pubDate>
+  <author>Zeus</author>
+  <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
+  <description><![CDATA[本文将介绍如何使用 Python 的 <code>matplotlib</code> 库画图，记录一些常用的画图 demo 代码]]></description>
+</item>
+<item>
   <title>个人简历相关的基础知识梳理</title>
   <link>https://ywang-wnlo.github.io/posts/2c65e859/</link>
   <pubDate>Mon, 11 Dec 2023 18:56:18 &#43;0800</pubDate>
