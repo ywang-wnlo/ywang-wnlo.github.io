@@ -1,16 +1,22 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具 - 分类 - 乐园</title>
     <link>https://ywang-wnlo.github.io/categories/%E5%B7%A5%E5%85%B7/</link>
-    <description>工具 - 分类 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/categories/%E5%B7%A5%E5%85%B7/" rel="self" type="application/rss+xml" /><item>
-  <title>从论文的图中提取数据</title>
-  <link>https://ywang-wnlo.github.io/posts/139abad8/</link>
-  <pubDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/139abad8/</guid>
-  <description><![CDATA[有时候我们需要从论文的图中提取数据，这时候可以使用一些工具来帮助我们。本文介绍了一个非常方便的工具 <code>WebPlotDigitizer</code>，无需安装，直接在网页上即可使用。]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Fri, 22 Sep 2023 00:19:31 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从论文的图中提取数据</title>
+      <link>https://ywang-wnlo.github.io/posts/139abad8/</link>
+      <pubDate>Fri, 22 Sep 2023 00:19:31 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/139abad8/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%B7%A5%E5%85%B7/">工具</category>
+      <description>有时候我们需要从论文的图中提取数据，这时候可以使用一些工具来帮助我们。本文介绍了一个非常方便的工具 &lt;code&gt;WebPlotDigitizer&lt;/code&gt;，无需安装，直接在网页上即可使用。</description>
+    </item>
+  </channel>
 </rss>

@@ -6,24 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>Ubuntu 环境配置大合集 - 乐园</title><meta name="author" content="Zeus">
-<meta name="author-link" content="https://github.com/ywang-wnlo">
-<meta name="description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置" /><meta name="keywords" content='Ubuntu, Linux, nano, vim, perl, timedatectl, VNC, ldconfig' /><meta itemprop="name" content="Ubuntu 环境配置大合集">
-<meta itemprop="description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置"><meta itemprop="datePublished" content="2022-11-24T17:16:00+08:00" />
-<meta itemprop="dateModified" content="2023-09-15T20:33:57+08:00" />
-<meta itemprop="wordCount" content="551">
-<meta itemprop="keywords" content="Ubuntu,Linux,nano,vim,perl,timedatectl,VNC,ldconfig," /><meta property="og:title" content="Ubuntu 环境配置大合集" />
-<meta property="og:description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ywang-wnlo.github.io/posts/72a4cdfd/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-11-24T17:16:00+08:00" />
-<meta property="article:modified_time" content="2023-09-15T20:33:57+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ubuntu 环境配置大合集"/>
-<meta name="twitter:description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置"/>
+<meta name="description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置"><meta name="keywords" content='Ubuntu, Linux, nano, vim, perl, timedatectl, VNC, ldconfig'>
+  <meta itemprop="name" content="Ubuntu 环境配置大合集">
+  <meta itemprop="description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置">
+  <meta itemprop="datePublished" content="2022-11-24T17:16:00+08:00">
+  <meta itemprop="dateModified" content="2023-09-15T20:33:57+08:00">
+  <meta itemprop="wordCount" content="544">
+  <meta itemprop="keywords" content="Ubuntu,Linux,Nano,Vim,Perl,Timedatectl,VNC,Ldconfig"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/72a4cdfd/">
+  <meta property="og:site_name" content="乐园">
+  <meta property="og:title" content="Ubuntu 环境配置大合集">
+  <meta property="og:description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-11-24T17:16:00+08:00">
+    <meta property="article:modified_time" content="2023-09-15T20:33:57+08:00">
+    <meta property="article:tag" content="Ubuntu">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Nano">
+    <meta property="article:tag" content="Vim">
+    <meta property="article:tag" content="Perl">
+    <meta property="article:tag" content="Timedatectl">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ubuntu 环境配置大合集">
+  <meta name="twitter:description" content="本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置">
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/72a4cdfd/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/b8506868/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/e6410576/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/72a4cdfd/" title="Ubuntu 环境配置大合集 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/b8506868/" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/e6410576/" title="小米 WR30U 解锁并刷机" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/72a4cdfd/index.md" title="Ubuntu 环境配置大合集 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
   {
@@ -34,7 +45,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/72a4cdfd\/"
-    },"genre": "posts","keywords": "Ubuntu, Linux, nano, vim, perl, timedatectl, VNC, ldconfig","wordcount":  551 ,
+    },"genre": "posts","keywords": "Ubuntu, Linux, nano, vim, perl, timedatectl, VNC, ldconfig","wordcount":  544 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/72a4cdfd\/","datePublished": "2022-11-24T17:16:00+08:00","dateModified": "2023-09-15T20:33:57+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +57,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -57,16 +68,16 @@
               ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
               <a
                 class="menu-link"
-                href="/tags/"
-                
-                
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
-              <a
-                class="menu-link"
                 href="/categories/"
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +103,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -125,17 +136,17 @@
               class="menu-item"
             ><a
                   class="menu-link"
-                  href="/tags/"
-                  
-                  
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
-              class="menu-item"
-            ><a
-                  class="menu-link"
                   href="/categories/"
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -157,9 +168,8 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Ubuntu 环境配置大合集</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a></span></div><div class="post-meta-line"><span title="发布于 2022-11-24 17:16:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-24">2022-11-24</time></span>&nbsp;<span title="更新于 2023-09-15 20:33:57"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-15">2023-09-15</time></span>&nbsp;<span title="551 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Ubuntu 环境配置大合集">
-              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
-            </span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a></span></div><div class="post-meta-line"><span title="发布于 2022-11-24 17:16:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-24">2022-11-24</time></span>&nbsp;<span title="更新于 2023-09-15 20:33:57"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-15">2023-09-15</time></span>&nbsp;<span title="544 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Ubuntu 环境配置大合集"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -183,9 +193,12 @@
         <div class="admonition-content">本文最后更新于 2023-09-15，文中内容可能已过时。</div>
       </div>
     </div><p>本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置</p>
-<h2 id="修改默认编辑器为-vim" class="heading-element">
-  <a href="#%e4%bf%ae%e6%94%b9%e9%bb%98%e8%ae%a4%e7%bc%96%e8%be%91%e5%99%a8%e4%b8%ba-vim" class="heading-mark"></a>修改默认编辑器为 vim</h2><p>一般 Ubuntu 的默认编辑器是 nano，用起来非常不顺手，可以通过下面命令修改</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<h2 id="修改默认编辑器为-vim" class="heading-element"><span>修改默认编辑器为 vim</span>
+  <a href="#%e4%bf%ae%e6%94%b9%e9%bb%98%e8%ae%a4%e7%bc%96%e8%be%91%e5%99%a8%e4%b8%ba-vim" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>一般 Ubuntu 的默认编辑器是 nano，用起来非常不顺手，可以通过下面命令修改</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -194,8 +207,11 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo update-alternatives --config editor
 </span></span><span class="line"><span class="cl"><span class="c1"># 然后选择为 vim.basic 即可</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="解决报错-perl-warning-setting-locale-failed" class="heading-element">
-  <a href="#%e8%a7%a3%e5%86%b3%e6%8a%a5%e9%94%99-perl-warning-setting-locale-failed" class="heading-mark"></a>解决报错 perl: warning: Setting locale failed</h2><div class="highlight" id="id-2"><div class="chroma">
+</div><h2 id="解决报错-perl-warning-setting-locale-failed" class="heading-element"><span>解决报错 perl: warning: Setting locale failed</span>
+  <a href="#%e8%a7%a3%e5%86%b3%e6%8a%a5%e9%94%99-perl-warning-setting-locale-failed" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -212,7 +228,7 @@
 </div>
 </div><p>然后重新登录 shell 或者手动执行一下 <code>export LC_ALL=&quot;en_US.UTF-8&quot;</code></p>
 <p>然后再执行</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -223,9 +239,12 @@
 </span></span><span class="line"><span class="cl">sudo dpkg-reconfigure locales
 </span></span><span class="line"><span class="cl"><span class="c1"># 配置过程中选择 en_US.UTF-8 一路确定即可</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="配置时区" class="heading-element">
-  <a href="#%e9%85%8d%e7%bd%ae%e6%97%b6%e5%8c%ba" class="heading-mark"></a>配置时区</h2><p>Ubuntu 默认时间是 UTC 时间，可以通过修改时区来显示本地的时间</p>
-<div class="highlight" id="id-4"><div class="chroma">
+</div><h2 id="配置时区" class="heading-element"><span>配置时区</span>
+  <a href="#%e9%85%8d%e7%bd%ae%e6%97%b6%e5%8c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Ubuntu 默认时间是 UTC 时间，可以通过修改时区来显示本地的时间</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -246,11 +265,14 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 配置当前时区为 Asia/Shanghai</span>
 </span></span><span class="line"><span class="cl">sudo timedatectl set-timezone Asia/Shanghai</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="远程-vnc" class="heading-element">
-  <a href="#%e8%bf%9c%e7%a8%8b-vnc" class="heading-mark"></a>远程 VNC</h2><ul>
+</div><h2 id="远程-vnc" class="heading-element"><span>远程 VNC</span>
+  <a href="#%e8%bf%9c%e7%a8%8b-vnc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
 <li>服务器</li>
 </ul>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -287,9 +309,12 @@
 <li>客户端</li>
 </ul>
 <p>在 Windows 直接下载 <a href="https://www.realvnc.com/en/connect/download/viewer/"target="_blank" rel="external nofollow noopener noreferrer">VNC Viewer</a> 配置好相应的 IP 以及端口即可</p>
-<h2 id="找不到库文件" class="heading-element">
-  <a href="#%e6%89%be%e4%b8%8d%e5%88%b0%e5%ba%93%e6%96%87%e4%bb%b6" class="heading-mark"></a>找不到库文件</h2><p>有时候编译出来的程序会找不到库文件，形如 <code>error while loading shared libraries: xxx.so.x: cannot open shared object file: No such file or directory</code> 的错误，可以通过下面的方法解决</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<h2 id="找不到库文件" class="heading-element"><span>找不到库文件</span>
+  <a href="#%e6%89%be%e4%b8%8d%e5%88%b0%e5%ba%93%e6%96%87%e4%bb%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>有时候编译出来的程序会找不到库文件，形如 <code>error while loading shared libraries: xxx.so.x: cannot open shared object file: No such file or directory</code> 的错误，可以通过下面的方法解决</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -297,8 +322,11 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ldconfig</span></span></code></pre></td></tr></table>
 </div>
 </div><p>之后再执行程序就可以了</p>
-<h2 id="参考资料" class="heading-element">
-  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
+<h2 id="参考资料" class="heading-element"><span>参考资料</span>
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
 <li><a href="https://man7.org/linux/man-pages/man1/update-alternatives.1.html"target="_blank" rel="external nofollow noopener noreferrer">【man】update-alternatives</a></li>
 <li><a href="https://stackoverflow.com/questions/2499794/how-to-fix-a-locale-setting-warning-from-perl"target="_blank" rel="external nofollow noopener noreferrer">【stackoverflow】How to fix a locale setting warning from Perl</a></li>
 <li><a href="https://linuxhint.com/how-to-use-timedatectl-ubuntu/"target="_blank" rel="external nofollow noopener noreferrer">【linuxhint】timedatectl</a></li>
@@ -313,21 +341,22 @@
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
-            <a href="https://ywang-wnlo.github.io/posts/72a4cdfd/" title="Ubuntu 环境配置大合集">https://ywang-wnlo.github.io/posts/72a4cdfd/</a>
+            <a href="https://ywang-wnlo.github.io/posts/72a4cdfd/" title="">https://ywang-wnlo.github.io/posts/72a4cdfd/</a>
         </li>
         <li class="post-copyright-license">
             <strong>版权声明：</strong>
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div><h2 id="see-also">相关内容</h2>
+</div><hr class="awesome-hr" />
+    <h2 id="see-also">相关内容</h2>
     <ul><li>
           <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
           <a href="/posts/f2cdf8a6/" title="美化 Shell 之 Linux Zsh 篇">美化 Shell 之 Linux Zsh 篇</a></li><li>
-          <a href="/posts/935ae1f0/" title="rm -r 与 rmdir 区别">rm -r 与 rmdir 区别</a></li></ul><div class="post-reward">
+          <a href="/posts/935ae1f0/" title="Rm -R 与 Rmdir 区别">Rm -R 与 Rmdir 区别</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
-    <label class="reward-button" for="fi-reward">赞赏</label>
+    <label class="reward-button" for="fi-reward"><i class="fa-solid fa-qrcode fa-fw" aria-hidden="true"></i>赞赏</label>
     <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
           </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
@@ -346,16 +375,14 @@
       </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/ubuntu/" class="post-tag" title="标签 - Ubuntu">Ubuntu</a><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a><a href="/tags/nano/" class="post-tag" title="标签 - nano">nano</a><a href="/tags/vim/" class="post-tag" title="标签 - vim">vim</a><a href="/tags/perl/" class="post-tag" title="标签 - perl">perl</a><a href="/tags/timedatectl/" class="post-tag" title="标签 - timedatectl">timedatectl</a><a href="/tags/vnc/" class="post-tag" title="标签 - VNC">VNC</a><a href="/tags/ldconfig/" class="post-tag" title="标签 - ldconfig">ldconfig</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/ubuntu/" class="post-tag" title="标签 - Ubuntu">Ubuntu</a><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a><a href="/tags/nano/" class="post-tag" title="标签 - Nano">Nano</a><a href="/tags/vim/" class="post-tag" title="标签 - Vim">Vim</a><a href="/tags/perl/" class="post-tag" title="标签 - Perl">Perl</a><a href="/tags/timedatectl/" class="post-tag" title="标签 - Timedatectl">Timedatectl</a><a href="/tags/vnc/" class="post-tag" title="标签 - VNC">VNC</a><a href="/tags/ldconfig/" class="post-tag" title="标签 - Ldconfig">Ldconfig</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
-  </div>
-
-  <div class="post-nav"><a href="/posts/b8506868/" class="post-nav-item" rel="prev" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</a>
+  </div><div class="post-nav"><a href="/posts/b8506868/" class="post-nav-item" rel="prev" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</a>
       <a href="/posts/e6410576/" class="post-nav-item" rel="next" title="小米 WR30U 解锁并刷机">小米 WR30U 解锁并刷机<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-<div id="comments"><div id="giscus">
+<div id="comments"><div id="giscus" class="comment">
           <script
             src="https://giscus.app/client.js"
             data-repo="ywang-wnlo/ywang-wnlo.github.io"
@@ -382,16 +409,16 @@
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.132.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.11">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
-          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
-    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.11"};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

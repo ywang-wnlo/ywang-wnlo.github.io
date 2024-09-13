@@ -1,16 +1,22 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>timedatectl - 标签 - 乐园</title>
+    <title>Timedatectl - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/timedatectl/</link>
-    <description>timedatectl - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Thu, 24 Nov 2022 17:16:00 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/timedatectl/" rel="self" type="application/rss+xml" /><item>
-  <title>Ubuntu 环境配置大合集</title>
-  <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
-  <pubDate>Thu, 24 Nov 2022 17:16:00 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
-  <description><![CDATA[本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Fri, 15 Sep 2023 20:33:57 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/timedatectl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu 环境配置大合集</title>
+      <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
+      <pubDate>Thu, 24 Nov 2022 17:16:00 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/linux/">Linux</category>
+      <description>本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置</description>
+    </item>
+  </channel>
 </rss>

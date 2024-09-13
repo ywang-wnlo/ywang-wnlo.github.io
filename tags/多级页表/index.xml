@@ -1,16 +1,14 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>多级页表 - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/</link>
-    <description>多级页表 - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Mon, 11 Dec 2023 18:56:18 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/" rel="self" type="application/rss+xml" /><item>
-  <title>个人简历相关的基础知识梳理</title>
-  <link>https://ywang-wnlo.github.io/posts/2c65e859/</link>
-  <pubDate>Mon, 11 Dec 2023 18:56:18 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/2c65e859/</guid>
-  <description><![CDATA[个人自用的简历相关的基础知识梳理，未来可能会对每个小方向进行展开]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate></lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
 </rss>

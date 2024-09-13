@@ -1,4 +1,4 @@
-# rm -r 与 rmdir 区别
+# Rm -R 与 Rmdir 区别
 
 
 ## 背景

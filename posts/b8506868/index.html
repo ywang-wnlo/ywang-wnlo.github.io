@@ -6,24 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用 - 乐园</title><meta name="author" content="Zeus">
-<meta name="author-link" content="https://github.com/ywang-wnlo">
-<meta name="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法" /><meta name="keywords" content='日常踩坑, RocksDB, ZNS, QEMU, grub' /><meta itemprop="name" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
-<meta itemprop="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法"><meta itemprop="datePublished" content="2022-11-22T22:54:45+08:00" />
-<meta itemprop="dateModified" content="2023-09-18T19:13:39+08:00" />
-<meta itemprop="wordCount" content="1699">
-<meta itemprop="keywords" content="日常踩坑,RocksDB,ZNS,QEMU,grub," /><meta property="og:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用" />
-<meta property="og:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ywang-wnlo.github.io/posts/b8506868/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-11-22T22:54:45+08:00" />
-<meta property="article:modified_time" content="2023-09-18T19:13:39+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用"/>
-<meta name="twitter:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法"/>
+<meta name="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法"><meta name="keywords" content='日常踩坑, RocksDB, ZNS, QEMU, grub'>
+  <meta itemprop="name" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
+  <meta itemprop="description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法">
+  <meta itemprop="datePublished" content="2022-11-22T22:54:45+08:00">
+  <meta itemprop="dateModified" content="2023-09-18T19:13:39+08:00">
+  <meta itemprop="wordCount" content="1680">
+  <meta itemprop="keywords" content="日常踩坑,RocksDB,ZNS,QEMU,Grub"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/b8506868/">
+  <meta property="og:site_name" content="乐园">
+  <meta property="og:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
+  <meta property="og:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-11-22T22:54:45+08:00">
+    <meta property="article:modified_time" content="2023-09-18T19:13:39+08:00">
+    <meta property="article:tag" content="日常踩坑">
+    <meta property="article:tag" content="RocksDB">
+    <meta property="article:tag" content="ZNS">
+    <meta property="article:tag" content="QEMU">
+    <meta property="article:tag" content="Grub">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
+  <meta name="twitter:description" content="本文主要记录自己在利用 RocksDB &#43; ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法">
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/b8506868/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/3b7ae835/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/72a4cdfd/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/b8506868/" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/3b7ae835/" title="Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/72a4cdfd/" title="Ubuntu 环境配置大合集" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/b8506868/index.md" title="利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
   {
@@ -34,7 +44,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/b8506868\/"
-    },"genre": "posts","keywords": "日常踩坑, RocksDB, ZNS, QEMU, grub","wordcount":  1699 ,
+    },"genre": "posts","keywords": "日常踩坑, RocksDB, ZNS, QEMU, grub","wordcount":  1680 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/b8506868\/","datePublished": "2022-11-22T22:54:45+08:00","dateModified": "2023-09-18T19:13:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +56,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -57,16 +67,16 @@
               ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
               <a
                 class="menu-link"
-                href="/tags/"
-                
-                
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
-              <a
-                class="menu-link"
                 href="/categories/"
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +102,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -125,17 +135,17 @@
               class="menu-item"
             ><a
                   class="menu-link"
-                  href="/tags/"
-                  
-                  
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
-              class="menu-item"
-            ><a
-                  class="menu-link"
                   href="/categories/"
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -157,9 +167,8 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category" title="分类 - 测试"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div><div class="post-meta-line"><span title="发布于 2022-11-22 22:54:45"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-22">2022-11-22</time></span>&nbsp;<span title="更新于 2023-09-18 19:13:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-18">2023-09-18</time></span>&nbsp;<span title="1699 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">
-              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
-            </span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category" title="分类 - 测试"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div><div class="post-meta-line"><span title="发布于 2022-11-22 22:54:45"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-22">2022-11-22</time></span>&nbsp;<span title="更新于 2023-09-18 19:13:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-18">2023-09-18</time></span>&nbsp;<span title="1680 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -202,15 +211,24 @@
         <div class="admonition-content">本文最后更新于 2023-09-18，文中内容可能已过时。</div>
       </div>
     </div><p>本文主要记录自己在利用 <a href="https://github.com/facebook/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">RocksDB</a> + <a href="https://github.com/westerndigitalcorporation/zenfs"target="_blank" rel="external nofollow noopener noreferrer">ZenFS</a> 测试 <a href="https://zonedstorage.io/docs/introduction/zns"target="_blank" rel="external nofollow noopener noreferrer">ZNS</a> 过程中遇到的一些问题以及相应的解决办法</p>
-<h2 id="配置-zns-环境" class="heading-element">
-  <a href="#%e9%85%8d%e7%bd%ae-zns-%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置 ZNS 环境</h2><p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS 设备类型是基于闪存的 SSD。但是 ZNS SSD 目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
-<h3 id="配置-femu" class="heading-element">
-  <a href="#%e9%85%8d%e7%bd%ae-femu" class="heading-mark"></a>配置 FEMU</h3><p>官网给了 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#zoned-block-device-emulation-with-null_blk"target="_blank" rel="external nofollow noopener noreferrer">null_blk</a> 以及 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#nvme-zoned-namespace-device-emulation-with-qemu"target="_blank" rel="external nofollow noopener noreferrer">QEMU</a> 的配置方法，但是个人对 <a href="https://github.com/vtess/FEMU"target="_blank" rel="external nofollow noopener noreferrer">FEMU</a> 比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用 FEMU 模拟 ZNS 搭建环境</p>
+<h2 id="配置-zns-环境" class="heading-element"><span>配置 ZNS 环境</span>
+  <a href="#%e9%85%8d%e7%bd%ae-zns-%e7%8e%af%e5%a2%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>ZNS 全称 Zoned Namespaces，中文一般译为分区命名空间，当今最常见的 ZNS 设备类型是基于闪存的 SSD。但是 ZNS SSD 目前还没有在消费级市场出货，只能通过软件模拟来搭建环境</p>
+<h3 id="配置-femu" class="heading-element"><span>配置 FEMU</span>
+  <a href="#%e9%85%8d%e7%bd%ae-femu" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>官网给了 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#zoned-block-device-emulation-with-null_blk"target="_blank" rel="external nofollow noopener noreferrer">null_blk</a> 以及 <a href="https://zonedstorage.io/docs/getting-started/zbd-emulation#nvme-zoned-namespace-device-emulation-with-qemu"target="_blank" rel="external nofollow noopener noreferrer">QEMU</a> 的配置方法，但是个人对 <a href="https://github.com/vtess/FEMU"target="_blank" rel="external nofollow noopener noreferrer">FEMU</a> 比较熟悉，可以理解成 QEMU 的 fork，支持模拟固态盘内部固件逻辑，于是采用 FEMU 模拟 ZNS 搭建环境</p>
 <p>FEMU 的环境搭建比较简单，参考其 <a href="https://github.com/vtess/FEMU#installation"target="_blank" rel="external nofollow noopener noreferrer">官方仓库 README</a> 操作即可</p>
 <p><strong>容易踩坑：</strong> 但是需要注意 ZNS 对 Linux 内核版本有要求，<strong>必须在 5.10 以上</strong>，因此推荐安装 Ubuntu 22.04 LTS。
 不建议手动更新内核，过程复杂耗时，而且（<code>sudo make headers_install</code> 安装内核用户头文件过程中）存在一定的风险性</p>
-<h3 id="qemu-制作和安装系统镜像" class="heading-element">
-  <a href="#qemu-%e5%88%b6%e4%bd%9c%e5%92%8c%e5%ae%89%e8%a3%85%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f" class="heading-mark"></a>QEMU 制作和安装系统镜像</h3><div class="highlight" id="id-1"><div class="chroma">
+<h3 id="qemu-制作和安装系统镜像" class="heading-element"><span>QEMU 制作和安装系统镜像</span>
+  <a href="#qemu-%e5%88%b6%e4%bd%9c%e5%92%8c%e5%ae%89%e8%a3%85%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -240,7 +258,7 @@
 </span></span><span class="line"><span class="cl">qemu-system-x86_64 -m 2G -hda u22s.qcow2 -vnc :1</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后在虚拟内将内核启动时输出改为打印到串口</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -250,7 +268,7 @@
 </span></span><span class="line"><span class="cl">sudo vim /etc/default/grub</span></span></code></pre></td></tr></table>
 </div>
 </div><p>保证按照下面的配置</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -278,7 +296,7 @@
 </span></span><span class="line"><span class="cl"><span class="na">GRUB_DISABLE_RECOVERY</span><span class="o">=</span><span class="s">&#34;true&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后更新重启即可</p>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -292,7 +310,7 @@
 </span></span><span class="line"><span class="cl">sudo poweroff</span></span></code></pre></td></tr></table>
 </div>
 </div><p>之后就可以不需要 vnc 连接了，可以加上 <code>-nographic</code> 使用了，例如</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -301,12 +319,18 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 举例</span>
 </span></span><span class="line"><span class="cl">qemu-system-x86_64 -enable-kvm -cpu host -smp<span class="o">=</span><span class="m">16</span> -m 4G -hda u22s.qcow2 -nographic</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="配置-rocksdb-环境" class="heading-element">
-  <a href="#%e9%85%8d%e7%bd%ae-rocksdb-%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置 RocksDB 环境</h2><p><a href="https://github.com/facebook/rocksdb/blob/main/INSTALL.md"target="_blank" rel="external nofollow noopener noreferrer">RocksDB 官方仓库的 Wiki</a> 有较为详细的安装指导</p>
-<h3 id="环境以及依赖安装" class="heading-element">
-  <a href="#%e7%8e%af%e5%a2%83%e4%bb%a5%e5%8f%8a%e4%be%9d%e8%b5%96%e5%ae%89%e8%a3%85" class="heading-mark"></a>环境以及依赖安装</h3><p>以 Ubuntu 为例：</p>
+</div><h2 id="配置-rocksdb-环境" class="heading-element"><span>配置 RocksDB 环境</span>
+  <a href="#%e9%85%8d%e7%bd%ae-rocksdb-%e7%8e%af%e5%a2%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><a href="https://github.com/facebook/rocksdb/blob/main/INSTALL.md"target="_blank" rel="external nofollow noopener noreferrer">RocksDB 官方仓库的 Wiki</a> 有较为详细的安装指导</p>
+<h3 id="环境以及依赖安装" class="heading-element"><span>环境以及依赖安装</span>
+  <a href="#%e7%8e%af%e5%a2%83%e4%bb%a5%e5%8f%8a%e4%be%9d%e8%b5%96%e5%ae%89%e8%a3%85" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>以 Ubuntu 为例：</p>
 <p><strong>容易踩坑：</strong> 一定要记得按照顺序来，先安装好所有依赖再编译</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -337,11 +361,14 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># sudo apt install liblz4-dev</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># sudo apt install libzstd-dev</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="编译-rocksdb-库以及测试工具" class="heading-element">
-  <a href="#%e7%bc%96%e8%af%91-rocksdb-%e5%ba%93%e4%bb%a5%e5%8f%8a%e6%b5%8b%e8%af%95%e5%b7%a5%e5%85%b7" class="heading-mark"></a>编译 RocksDB 库以及测试工具</h3><p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
+</div><h3 id="编译-rocksdb-库以及测试工具" class="heading-element"><span>编译 RocksDB 库以及测试工具</span>
+  <a href="#%e7%bc%96%e8%af%91-rocksdb-%e5%ba%93%e4%bb%a5%e5%8f%8a%e6%b5%8b%e8%af%95%e5%b7%a5%e5%85%b7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>如果要在 ZNS 上测试，可以暂时跳过该小节，等配置好 ZenFS 后再进行</p>
 <p>如果要用 YCSB 来测试，就需要编译 Java 版本的 jar 包，具体过程可以参考 <a href="/posts/4bc1e607/">这篇博文</a></p>
 <p>用 <code>db_bench</code> 测试就直接 <code>make db_bench</code> 即可，可以加上 <code>DEBUG_LEVEL=0</code> 保证编译成 release 版本</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -358,10 +385,16 @@
 </div>
 </div><p><strong>容易踩坑：</strong> 如果 <code>-j</code> 会全核一起编译，在核多内存少的情况下可能会报内存资源不足的错误，可以参考 <a href="https://blog.csdn.net/weixin_44796670/article/details/121234446"target="_blank" rel="external nofollow noopener noreferrer">这篇博客</a> 利用 swap “增加”可用内存大小，或者限制下编译的并发度，例如 <code>-j8</code></p>
 <p>利用 <code>db_bench</code> 测试可以参考 <a href="https://github.com/facebook/rocksdb/wiki/Performance-Benchmarks"target="_blank" rel="external nofollow noopener noreferrer">官方测试</a> 的方式，利用 <a href="https://github.com/facebook/rocksdb/blob/main/tools/benchmark.sh"target="_blank" rel="external nofollow noopener noreferrer"><code>benchmark.sh</code></a> 来测试，当然也可以直接运行 <code>db_bench</code></p>
-<h2 id="配置-zenfs-环境" class="heading-element">
-  <a href="#%e9%85%8d%e7%bd%ae-zenfs-%e7%8e%af%e5%a2%83" class="heading-mark"></a>配置 ZenFS 环境</h2><p><a href="https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md"target="_blank" rel="external nofollow noopener noreferrer">ZenFS 官方仓库</a>其实给了相应的指导，这里重新梳理下</p>
-<h3 id="安装-libzbd" class="heading-element">
-  <a href="#%e5%ae%89%e8%a3%85-libzbd" class="heading-mark"></a>安装 libzbd</h3><div class="highlight" id="id-8"><div class="chroma">
+<h2 id="配置-zenfs-环境" class="heading-element"><span>配置 ZenFS 环境</span>
+  <a href="#%e9%85%8d%e7%bd%ae-zenfs-%e7%8e%af%e5%a2%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><a href="https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md"target="_blank" rel="external nofollow noopener noreferrer">ZenFS 官方仓库</a>其实给了相应的指导，这里重新梳理下</p>
+<h3 id="安装-libzbd" class="heading-element"><span>安装 libzbd</span>
+  <a href="#%e5%ae%89%e8%a3%85-libzbd" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -402,9 +435,12 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 安装</span>
 </span></span><span class="line"><span class="cl">sudo make install</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="zenfs-插件编译" class="heading-element">
-  <a href="#zenfs-%e6%8f%92%e4%bb%b6%e7%bc%96%e8%af%91" class="heading-mark"></a>ZenFS 插件编译</h3><p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
-<div class="highlight" id="id-9"><div class="chroma">
+</div><h3 id="zenfs-插件编译" class="heading-element"><span>ZenFS 插件编译</span>
+  <a href="#zenfs-%e6%8f%92%e4%bb%b6%e7%bc%96%e8%af%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>然后需要切换回 RocksDB 的目录，将 ZenFS 加入其中进行编译</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -448,11 +484,17 @@
 </span></span><span class="line"><span class="cl">make -j</span></span></code></pre></td></tr></table>
 </div>
 </div><p>至此所有测试需要的环境已经基本搭建好了</p>
-<h2 id="测试" class="heading-element">
-  <a href="#%e6%b5%8b%e8%af%95" class="heading-mark"></a>测试</h2><p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为 <code>nvme1n1</code></p>
-<h3 id="利用-zenfs-的测试脚本测试" class="heading-element">
-  <a href="#%e5%88%a9%e7%94%a8-zenfs-%e7%9a%84%e6%b5%8b%e8%af%95%e8%84%9a%e6%9c%ac%e6%b5%8b%e8%af%95" class="heading-mark"></a>利用 zenfs 的测试脚本测试</h3><p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO 调度器，制作文件系统以及自动配置 RocksDB 参数，但是参数配置的不够合理，需要自行修改</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<h2 id="测试" class="heading-element"><span>测试</span>
+  <a href="#%e6%b5%8b%e8%af%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>接下来简单介绍下测试过程，假设 ZNS 固态盘的设备名为 <code>nvme1n1</code></p>
+<h3 id="利用-zenfs-的测试脚本测试" class="heading-element"><span>利用 zenfs 的测试脚本测试</span>
+  <a href="#%e5%88%a9%e7%94%a8-zenfs-%e7%9a%84%e6%b5%8b%e8%af%95%e8%84%9a%e6%9c%ac%e6%b5%8b%e8%af%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>zenfs 内置了一个测试脚本，只需指定设备名。脚本会设置 IO 调度器，制作文件系统以及自动配置 RocksDB 参数，但是参数配置的不够合理，需要自行修改</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -462,9 +504,12 @@
 </span></span><span class="line"><span class="cl">sudo ./plugin/zenfs/tests/zenfs_base_performance.sh nvme1n1</span></span></code></pre></td></tr></table>
 </div>
 </div><p>该脚本会运行多个测试，而且每个测试会运行多个不同的 value 大小，运行时间较长，最后的测试结果汇总在 <code>results/zenfs-nvme1n1-baseline_performance</code> 目录下</p>
-<h3 id="直接-db_bench-测试" class="heading-element">
-  <a href="#%e7%9b%b4%e6%8e%a5-db_bench-%e6%b5%8b%e8%af%95" class="heading-mark"></a>直接 db_bench 测试</h3><p>首先配置底层 IO 调度器为 <code>mq-deadline</code> 用户保持有序性（因为 ZNS 只支持追加写</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<h3 id="直接-db_bench-测试" class="heading-element"><span>直接 db_bench 测试</span>
+  <a href="#%e7%9b%b4%e6%8e%a5-db_bench-%e6%b5%8b%e8%af%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>首先配置底层 IO 调度器为 <code>mq-deadline</code> 用户保持有序性（因为 ZNS 只支持追加写</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -472,7 +517,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> mq-deadline <span class="p">|</span> sudo tee /sys/block/nvme1n1/queue/scheduler</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>容易踩坑：</strong> 利用 <code>zenfs</code> 创建 ZenFS 文件系统，其中 <strong><code>zbd</code> 后直接给出设备名</strong>即可，不需要给出设备路径；而且需要指定 <code>aux_path</code> 用于存放 LOG 和 LOCK 文件，推荐放在非 ZNS 设备上，并且使用<strong>绝对路径</strong></p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -488,7 +533,7 @@
 </span></span><span class="line"><span class="cl">sudo ./plugin/zenfs/util/zenfs mkfs --zbd<span class="o">=</span>nvme1n1 --aux-path<span class="o">=</span>/home/femu/zenfs-aux</span></span></code></pre></td></tr></table>
 </div>
 </div><p>制作好文件系统后，就可以用 <code>db_bench</code> 进行测试了</p>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -497,8 +542,11 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> rocksdb
 </span></span><span class="line"><span class="cl">sudo ./db_bench --fs_uri<span class="o">=</span>zenfs://dev:nvme1n1 --benchmarks<span class="o">=</span>fillrandom --use_direct_io_for_flush_and_compaction</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="参考资料" class="heading-element">
-  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
+</div><h2 id="参考资料" class="heading-element"><span>参考资料</span>
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
 <li><a href="https://github.com/facebook/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】RocksDB</a></li>
 <li><a href="https://github.com/westerndigitalcorporation/zenfs"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】ZenFS</a></li>
 <li><a href="https://zonedstorage.io/docs/introduction/zns"target="_blank" rel="external nofollow noopener noreferrer">【zonedstorage】ZNS</a></li>
@@ -518,23 +566,24 @@
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
-            <a href="https://ywang-wnlo.github.io/posts/b8506868/" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">https://ywang-wnlo.github.io/posts/b8506868/</a>
+            <a href="https://ywang-wnlo.github.io/posts/b8506868/" title="">https://ywang-wnlo.github.io/posts/b8506868/</a>
         </li>
         <li class="post-copyright-license">
             <strong>版权声明：</strong>
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div><h2 id="see-also">相关内容</h2>
+</div><hr class="awesome-hr" />
+    <h2 id="see-also">相关内容</h2>
     <ul><li>
           <a href="/posts/4bc1e607/" title="自定义配置 RocksDB 进行 YCSB 测试">自定义配置 RocksDB 进行 YCSB 测试</a></li><li>
-          <a href="/posts/a23842fe/" title="解决 kex_exchange_identification 报错">解决 kex_exchange_identification 报错</a></li><li>
+          <a href="/posts/a23842fe/" title="解决 Kex_exchange_identification 报错">解决 Kex_exchange_identification 报错</a></li><li>
           <a href="/posts/89f2ed7d/" title="Debug 从入门到入土">Debug 从入门到入土</a></li><li>
           <a href="/posts/76f6af57/" title="从 SSLEOFError 到正确配置 Proxy">从 SSLEOFError 到正确配置 Proxy</a></li><li>
-          <a href="/posts/29e0b18c/" title="修复 chrome 打不开微信或者部分第三方应用内链接">修复 chrome 打不开微信或者部分第三方应用内链接</a></li></ul><div class="post-reward">
+          <a href="/posts/29e0b18c/" title="修复 Chrome 打不开微信或者部分第三方应用内链接">修复 Chrome 打不开微信或者部分第三方应用内链接</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
-    <label class="reward-button" for="fi-reward">赞赏</label>
+    <label class="reward-button" for="fi-reward"><i class="fa-solid fa-qrcode fa-fw" aria-hidden="true"></i>赞赏</label>
     <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
           </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
@@ -553,16 +602,14 @@
       </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" class="post-tag" title="标签 - 日常踩坑">日常踩坑</a><a href="/tags/rocksdb/" class="post-tag" title="标签 - RocksDB">RocksDB</a><a href="/tags/zns/" class="post-tag" title="标签 - ZNS">ZNS</a><a href="/tags/qemu/" class="post-tag" title="标签 - QEMU">QEMU</a><a href="/tags/grub/" class="post-tag" title="标签 - grub">grub</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/" class="post-tag" title="标签 - 日常踩坑">日常踩坑</a><a href="/tags/rocksdb/" class="post-tag" title="标签 - RocksDB">RocksDB</a><a href="/tags/zns/" class="post-tag" title="标签 - ZNS">ZNS</a><a href="/tags/qemu/" class="post-tag" title="标签 - QEMU">QEMU</a><a href="/tags/grub/" class="post-tag" title="标签 - Grub">Grub</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
-  </div>
-
-  <div class="post-nav"><a href="/posts/3b7ae835/" class="post-nav-item" rel="prev" title="Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter</a>
+  </div><div class="post-nav"><a href="/posts/3b7ae835/" class="post-nav-item" rel="prev" title="Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; MadVR &#43; Xy-SubFilter"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; MadVR &#43; Xy-SubFilter</a>
       <a href="/posts/72a4cdfd/" class="post-nav-item" rel="next" title="Ubuntu 环境配置大合集">Ubuntu 环境配置大合集<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-<div id="comments"><div id="giscus">
+<div id="comments"><div id="giscus" class="comment">
           <script
             src="https://giscus.app/client.js"
             data-repo="ywang-wnlo/ywang-wnlo.github.io"
@@ -589,16 +636,16 @@
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.132.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.11">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
-          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
-    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.11"};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

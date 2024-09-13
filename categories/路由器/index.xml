@@ -1,56 +1,62 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>路由器 - 分类 - 乐园</title>
     <link>https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/</link>
-    <description>路由器 - 分类 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Thu, 01 Feb 2024 12:26:19 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="self" type="application/rss+xml" /><item>
-  <title>电信光猫中兴 F7010C 折腾记录</title>
-  <link>https://ywang-wnlo.github.io/posts/6f8b7b82/</link>
-  <pubDate>Thu, 01 Feb 2024 12:26:19 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/6f8b7b82/</guid>
-  <description><![CDATA[本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等]]></description>
-</item>
-<item>
-  <title>小米 WR30U 解锁并刷机</title>
-  <link>https://ywang-wnlo.github.io/posts/e6410576/</link>
-  <pubDate>Mon, 21 Aug 2023 14:25:43 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
-  <description><![CDATA[本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下]]></description>
-</item>
-<item>
-  <title>OpenWrt 手动编译 ipk</title>
-  <link>https://ywang-wnlo.github.io/posts/96a1807/</link>
-  <pubDate>Mon, 01 Nov 2021 11:08:42 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/96a1807/</guid>
-  <description><![CDATA[OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录自己手动编译 OpenWrt 的 ipk 文件的过程]]></description>
-</item>
-<item>
-  <title>Breed 介绍、刷入和使用</title>
-  <link>https://ywang-wnlo.github.io/posts/53d6c2d9/</link>
-  <pubDate>Sun, 31 Oct 2021 23:00:37 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/53d6c2d9/</guid>
-  <description><![CDATA[Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟”。本文主要记录 Breed 的介绍、刷入和使用过程]]></description>
-</item>
-<item>
-  <title>OpenWrt 配置使用</title>
-  <link>https://ywang-wnlo.github.io/posts/51140c4a/</link>
-  <pubDate>Thu, 28 Oct 2021 16:17:24 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/51140c4a/</guid>
-  <description><![CDATA[OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的配置和使用过程]]></description>
-</item>
-<item>
-  <title>OpenWrt 简介和安装</title>
-  <link>https://ywang-wnlo.github.io/posts/8507aaa1/</link>
-  <pubDate>Thu, 28 Oct 2021 16:16:44 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/8507aaa1/</guid>
-  <description><![CDATA[OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的简介和安装过程]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Thu, 01 Feb 2024 12:26:19 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>电信光猫中兴 F7010C 折腾记录</title>
+      <link>https://ywang-wnlo.github.io/posts/6f8b7b82/</link>
+      <pubDate>Thu, 01 Feb 2024 12:26:19 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/6f8b7b82/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等</description>
+    </item>
+    <item>
+      <title>小米 WR30U 解锁并刷机</title>
+      <link>https://ywang-wnlo.github.io/posts/e6410576/</link>
+      <pubDate>Mon, 21 Aug 2023 14:25:43 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下</description>
+    </item>
+    <item>
+      <title>OpenWrt 手动编译 ipk</title>
+      <link>https://ywang-wnlo.github.io/posts/96a1807/</link>
+      <pubDate>Mon, 01 Nov 2021 11:08:42 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/96a1807/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录自己手动编译 OpenWrt 的 ipk 文件的过程</description>
+    </item>
+    <item>
+      <title>Breed 介绍、刷入和使用</title>
+      <link>https://ywang-wnlo.github.io/posts/53d6c2d9/</link>
+      <pubDate>Sun, 31 Oct 2021 23:00:37 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/53d6c2d9/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟”。本文主要记录 Breed 的介绍、刷入和使用过程</description>
+    </item>
+    <item>
+      <title>OpenWrt 配置使用</title>
+      <link>https://ywang-wnlo.github.io/posts/51140c4a/</link>
+      <pubDate>Thu, 28 Oct 2021 16:17:24 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/51140c4a/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的配置和使用过程</description>
+    </item>
+    <item>
+      <title>OpenWrt 简介和安装</title>
+      <link>https://ywang-wnlo.github.io/posts/8507aaa1/</link>
+      <pubDate>Thu, 28 Oct 2021 16:16:44 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/8507aaa1/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的简介和安装过程</description>
+    </item>
+  </channel>
 </rss>

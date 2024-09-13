@@ -1,4 +1,4 @@
-# 解决 kex_exchange_identification 报错
+# 解决 Kex_exchange_identification 报错
 
 
 ## 踩坑

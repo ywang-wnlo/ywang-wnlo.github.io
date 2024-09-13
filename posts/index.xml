@@ -1,88 +1,304 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>所有文章 - 乐园</title>
     <link>https://ywang-wnlo.github.io/posts/</link>
-    <description>所有文章 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-  <title>Python 使用 matplotlib 画图</title>
-  <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
-  <pubDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
-  <description><![CDATA[本文将介绍如何使用 Python 的 <code>matplotlib</code> 库画图，记录一些常用的画图 demo 代码]]></description>
-</item>
-<item>
-  <title>电信光猫中兴 F7010C 折腾记录</title>
-  <link>https://ywang-wnlo.github.io/posts/6f8b7b82/</link>
-  <pubDate>Thu, 01 Feb 2024 12:26:19 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/6f8b7b82/</guid>
-  <description><![CDATA[本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等]]></description>
-</item>
-<item>
-  <title>解决 kex_exchange_identification 报错</title>
-  <link>https://ywang-wnlo.github.io/posts/a23842fe/</link>
-  <pubDate>Fri, 19 Jan 2024 12:41:18 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/a23842fe/</guid>
-  <description><![CDATA[本文主要记录了解决 git pull 时出现 kex_exchange_identification: Connection closed by remote host 报错的方法]]></description>
-</item>
-<item>
-  <title>个人简历相关的基础知识梳理</title>
-  <link>https://ywang-wnlo.github.io/posts/2c65e859/</link>
-  <pubDate>Mon, 11 Dec 2023 18:56:18 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/2c65e859/</guid>
-  <description><![CDATA[个人自用的简历相关的基础知识梳理，未来可能会对每个小方向进行展开]]></description>
-</item>
-<item>
-  <title>从 C 过渡到 C&#43;&#43;</title>
-  <link>https://ywang-wnlo.github.io/posts/89c4acb1/</link>
-  <pubDate>Sun, 24 Sep 2023 11:48:03 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/89c4acb1/</guid>
-  <description><![CDATA[本文介绍了 C++ 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数]]></description>
-</item>
-<item>
-  <title>从论文的图中提取数据</title>
-  <link>https://ywang-wnlo.github.io/posts/139abad8/</link>
-  <pubDate>Fri, 22 Sep 2023 00:19:31 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/139abad8/</guid>
-  <description><![CDATA[有时候我们需要从论文的图中提取数据，这时候可以使用一些工具来帮助我们。本文介绍了一个非常方便的工具 <code>WebPlotDigitizer</code>，无需安装，直接在网页上即可使用。]]></description>
-</item>
-<item>
-  <title>Python 环境隔离</title>
-  <link>https://ywang-wnlo.github.io/posts/28f3e4d7/</link>
-  <pubDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/28f3e4d7/</guid>
-  <description><![CDATA[Python 作为最常用的脚本语言，有着非常丰富的第三方库，但是这也导致了 Python 的环境管理非常必要。本文将介绍 Python 的几个常用环境管理工具，以及如何使用它们。]]></description>
-</item>
-<item>
-  <title>FeelIt 主题的配置以及魔改记录</title>
-  <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
-  <pubDate>Fri, 15 Sep 2023 21:30:20 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
-  <description><![CDATA[本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改]]></description>
-</item>
-<item>
-  <title>更换博客框架至 Hugo</title>
-  <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
-  <pubDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
-  <description><![CDATA[本文主要记录了自己迁移博客至 Hugo 的过程中遇到的问题，以及一些小技巧]]></description>
-</item>
-<item>
-  <title>Debug 从入门到入土</title>
-  <link>https://ywang-wnlo.github.io/posts/89f2ed7d/</link>
-  <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
-  <description><![CDATA[写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Wed, 24 Apr 2024 23:12:40 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python 使用 matplotlib 画图</title>
+      <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
+      <pubDate>Wed, 24 Apr 2024 23:12:40 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</category>
+      <description>本文将介绍如何使用 Python 的 &lt;code&gt;matplotlib&lt;/code&gt; 库画图，记录一些常用的画图 demo 代码</description>
+    </item>
+    <item>
+      <title>电信光猫中兴 F7010C 折腾记录</title>
+      <link>https://ywang-wnlo.github.io/posts/6f8b7b82/</link>
+      <pubDate>Thu, 01 Feb 2024 12:26:19 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/6f8b7b82/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>本文主要记录个人对电信光猫中兴 F7010C 折腾记录，主要包括解锁超管密码和 IPv6 配置等</description>
+    </item>
+    <item>
+      <title>解决 kex_exchange_identification 报错</title>
+      <link>https://ywang-wnlo.github.io/posts/a23842fe/</link>
+      <pubDate>Fri, 19 Jan 2024 12:41:18 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/a23842fe/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>本文主要记录了解决 git pull 时出现 kex_exchange_identification: Connection closed by remote host 报错的方法</description>
+    </item>
+    <item>
+      <title>从 C 过渡到 C&#43;&#43;</title>
+      <link>https://ywang-wnlo.github.io/posts/89c4acb1/</link>
+      <pubDate>Sun, 24 Sep 2023 11:48:03 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/89c4acb1/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</category>
+      <description>本文介绍了 C++ 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数</description>
+    </item>
+    <item>
+      <title>从论文的图中提取数据</title>
+      <link>https://ywang-wnlo.github.io/posts/139abad8/</link>
+      <pubDate>Fri, 22 Sep 2023 00:19:31 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/139abad8/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%B7%A5%E5%85%B7/">工具</category>
+      <description>有时候我们需要从论文的图中提取数据，这时候可以使用一些工具来帮助我们。本文介绍了一个非常方便的工具 &lt;code&gt;WebPlotDigitizer&lt;/code&gt;，无需安装，直接在网页上即可使用。</description>
+    </item>
+    <item>
+      <title>Python 环境隔离</title>
+      <link>https://ywang-wnlo.github.io/posts/28f3e4d7/</link>
+      <pubDate>Thu, 21 Sep 2023 21:34:35 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/28f3e4d7/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</category>
+      <description>Python 作为最常用的脚本语言，有着非常丰富的第三方库，但是这也导致了 Python 的环境管理非常必要。本文将介绍 Python 的几个常用环境管理工具，以及如何使用它们。</description>
+    </item>
+    <item>
+      <title>FeelIt 主题的配置以及魔改记录</title>
+      <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
+      <pubDate>Fri, 15 Sep 2023 21:30:20 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改</description>
+    </item>
+    <item>
+      <title>更换博客框架至 Hugo</title>
+      <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
+      <pubDate>Thu, 14 Sep 2023 21:33:18 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>本文主要记录了自己迁移博客至 Hugo 的过程中遇到的问题，以及一些小技巧</description>
+    </item>
+    <item>
+      <title>Debug 从入门到入土</title>
+      <link>https://ywang-wnlo.github.io/posts/89f2ed7d/</link>
+      <pubDate>Sat, 09 Sep 2023 23:35:41 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）</description>
+    </item>
+    <item>
+      <title>小米 WR30U 解锁并刷机</title>
+      <link>https://ywang-wnlo.github.io/posts/e6410576/</link>
+      <pubDate>Mon, 21 Aug 2023 14:25:43 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/e6410576/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>本文主要记录个人对小米 WR30U 路由器的解锁和刷机过程，由于 WR30U 的解锁 ssh 和刷机的过程中有一些细节需要注意，因此记录一下</description>
+    </item>
+    <item>
+      <title>Ubuntu 环境配置大合集</title>
+      <link>https://ywang-wnlo.github.io/posts/72a4cdfd/</link>
+      <pubDate>Thu, 24 Nov 2022 17:16:00 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/72a4cdfd/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/linux/">Linux</category>
+      <description>本文主要记录个人使用 Ubuntu 中遇到的各种琐碎问题的解决方法，以及环境配置</description>
+    </item>
+    <item>
+      <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
+      <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
+      <pubDate>Tue, 22 Nov 2022 22:54:45 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%B5%8B%E8%AF%95/">测试</category>
+      <description>本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法</description>
+    </item>
+    <item>
+      <title>Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter</title>
+      <link>https://ywang-wnlo.github.io/posts/3b7ae835/</link>
+      <pubDate>Wed, 16 Nov 2022 23:03:35 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/3b7ae835/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/">软件配置</category>
+      <description>本文主要来源于 VCB-Studio 官网的科普教程，个人重新了梳理，记录 Windows 平台最强播放器组合 —— Potplayer + LAV Filters + madVR + xy-SubFilter 的配置过程</description>
+    </item>
+    <item>
+      <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+      <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
+      <pubDate>Wed, 16 Nov 2022 13:43:05 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/shell/">Shell</category>
+      <description>本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置</description>
+    </item>
+    <item>
+      <title>美化 Shell 之 Linux Zsh 篇</title>
+      <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
+      <pubDate>Wed, 16 Nov 2022 11:04:47 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/linux/">Linux</category>
+      <category domain="https://ywang-wnlo.github.io/categories/shell/">Shell</category>
+      <description>本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置</description>
+    </item>
+    <item>
+      <title>从 SSLEOFError 到正确配置 Proxy</title>
+      <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
+      <pubDate>Tue, 29 Mar 2022 13:48:31 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程</description>
+    </item>
+    <item>
+      <title>修复 chrome 打不开微信或者部分第三方应用内链接</title>
+      <link>https://ywang-wnlo.github.io/posts/29e0b18c/</link>
+      <pubDate>Mon, 14 Mar 2022 16:09:34 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/29e0b18c/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>最近电脑有个问题持续了好久：当默认浏览器设置为 chrome 时，并且 chrome 已经打开的情况下，在微信内通过默认浏览器打开总是没有反应。本文主要记录了修复 chrome 打不开微信或者部分第三方应用内链接的过程</description>
+    </item>
+    <item>
+      <title>解决 pip 安装第三方包时因 SSL 报错</title>
+      <link>https://ywang-wnlo.github.io/posts/2e7aa01a/</link>
+      <pubDate>Tue, 08 Mar 2022 14:37:08 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/2e7aa01a/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>好久没用 python，最近重新下载安装好 python 后发现用 pip 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的。本文主要记录了其解决办法</description>
+    </item>
+    <item>
+      <title>自定义配置 RocksDB 进行 YCSB 测试</title>
+      <link>https://ywang-wnlo.github.io/posts/4bc1e607/</link>
+      <pubDate>Sun, 26 Dec 2021 00:20:25 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4bc1e607/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%B5%8B%E8%AF%95/">测试</category>
+      <description>本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法</description>
+    </item>
+    <item>
+      <title>Hexo 配置主流搜索引擎收录流程记录</title>
+      <link>https://ywang-wnlo.github.io/posts/abac0c46/</link>
+      <pubDate>Wed, 08 Dec 2021 22:00:29 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/abac0c46/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</description>
+    </item>
+    <item>
+      <title>page cache 简介</title>
+      <link>https://ywang-wnlo.github.io/posts/9ba60726/</link>
+      <pubDate>Sun, 05 Dec 2021 22:22:08 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/9ba60726/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/io-stack/">IO Stack</category>
+      <description>page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析</description>
+    </item>
+    <item>
+      <title>NexT 主题的配置使用记录</title>
+      <link>https://ywang-wnlo.github.io/posts/9a0b7c3b/</link>
+      <pubDate>Sat, 04 Dec 2021 16:49:51 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/9a0b7c3b/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。本文主要记录 NexT 主题的配置使用记录</description>
+    </item>
+    <item>
+      <title>rm -r 与 rmdir 区别</title>
+      <link>https://ywang-wnlo.github.io/posts/935ae1f0/</link>
+      <pubDate>Wed, 24 Nov 2021 19:47:38 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/935ae1f0/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/linux/">Linux</category>
+      <category domain="https://ywang-wnlo.github.io/categories/shell/">Shell</category>
+      <description>本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程</description>
+    </item>
+    <item>
+      <title>Hexo 插件推荐以及使用小技巧</title>
+      <link>https://ywang-wnlo.github.io/posts/4143201a/</link>
+      <pubDate>Mon, 22 Nov 2021 14:12:15 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4143201a/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>Hexo 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。本文主要记录 Hexo 的部分插件使用以及一些小技巧</description>
+    </item>
+    <item>
+      <title>page cache 回写机制</title>
+      <link>https://ywang-wnlo.github.io/posts/646202b9/</link>
+      <pubDate>Fri, 19 Nov 2021 16:24:30 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/646202b9/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/io-stack/">IO Stack</category>
+      <description>page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析</description>
+    </item>
+    <item>
+      <title>OpenWrt 手动编译 ipk</title>
+      <link>https://ywang-wnlo.github.io/posts/96a1807/</link>
+      <pubDate>Mon, 01 Nov 2021 11:08:42 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/96a1807/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录自己手动编译 OpenWrt 的 ipk 文件的过程</description>
+    </item>
+    <item>
+      <title>Breed 介绍、刷入和使用</title>
+      <link>https://ywang-wnlo.github.io/posts/53d6c2d9/</link>
+      <pubDate>Sun, 31 Oct 2021 23:00:37 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/53d6c2d9/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>Breed 是国内个人 hackpascal 开发的闭源 Bootloader，也被称为“不死鸟”。本文主要记录 Breed 的介绍、刷入和使用过程</description>
+    </item>
+    <item>
+      <title>io_uring 内核源码分析</title>
+      <link>https://ywang-wnlo.github.io/posts/4f0d345c/</link>
+      <pubDate>Sat, 30 Oct 2021 16:18:05 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4f0d345c/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/io-stack/">IO Stack</category>
+      <description>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的内核源码分析</description>
+    </item>
+    <item>
+      <title>io_uring 用户库源码分析</title>
+      <link>https://ywang-wnlo.github.io/posts/d7259d1d/</link>
+      <pubDate>Fri, 29 Oct 2021 09:49:00 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/d7259d1d/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/io-stack/">IO Stack</category>
+      <description>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的用户库源码分析</description>
+    </item>
+    <item>
+      <title>io_uring 简介和使用</title>
+      <link>https://ywang-wnlo.github.io/posts/c142853f/</link>
+      <pubDate>Thu, 28 Oct 2021 16:18:05 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/c142853f/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/io-stack/">IO Stack</category>
+      <description>io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的简介和使用</description>
+    </item>
+    <item>
+      <title>OpenWrt 配置使用</title>
+      <link>https://ywang-wnlo.github.io/posts/51140c4a/</link>
+      <pubDate>Thu, 28 Oct 2021 16:17:24 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/51140c4a/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的配置和使用过程</description>
+    </item>
+    <item>
+      <title>OpenWrt 简介和安装</title>
+      <link>https://ywang-wnlo.github.io/posts/8507aaa1/</link>
+      <pubDate>Thu, 28 Oct 2021 16:16:44 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/8507aaa1/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</category>
+      <description>OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的 Linux 操作系统项目，提供了具有软件包管理功能的完全可写的文件系统。本文主要记录 OpenWrt 的简介和安装过程</description>
+    </item>
+    <item>
+      <title>LaTeX 常用语法记录</title>
+      <link>https://ywang-wnlo.github.io/posts/2033aa70/</link>
+      <pubDate>Tue, 19 Oct 2021 10:08:41 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/2033aa70/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/latex/">LaTeX</category>
+      <description>LaTeX 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要记录一些常用的 LaTeX 语法</description>
+    </item>
+    <item>
+      <title>LaTeX 制作 PPT</title>
+      <link>https://ywang-wnlo.github.io/posts/499c5a19/</link>
+      <pubDate>Tue, 19 Oct 2021 10:08:37 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/499c5a19/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/latex/">LaTeX</category>
+      <description>LaTeX 除了可以用来制作论文之外，还可以用来制作 PPT。本文主要简单介绍 Beamer 模板的使用</description>
+    </item>
+    <item>
+      <title>LaTeX 环境配置</title>
+      <link>https://ywang-wnlo.github.io/posts/4f94956/</link>
+      <pubDate>Tue, 19 Oct 2021 10:08:26 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4f94956/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/latex/">LaTeX</category>
+      <description>LaTex 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要介绍 LaTeX 的环境配置，包括网页环境和本地环境</description>
+    </item>
+    <item>
+      <title>LaTeX 基础介绍</title>
+      <link>https://ywang-wnlo.github.io/posts/a4752f87/</link>
+      <pubDate>Tue, 19 Oct 2021 10:07:39 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/a4752f87/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/latex/">LaTeX</category>
+      <description>TeX 是一个排版软件，而 LaTeX 是基于 TeX 开发的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文简单介绍 LaTeX 的基础知识</description>
+    </item>
+  </channel>
 </rss>

@@ -1,16 +1,22 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>VSCode - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/vscode/</link>
-    <description>VSCode - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Tue, 19 Oct 2021 10:08:26 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/vscode/" rel="self" type="application/rss+xml" /><item>
-  <title>LaTeX 环境配置</title>
-  <link>https://ywang-wnlo.github.io/posts/4f94956/</link>
-  <pubDate>Tue, 19 Oct 2021 10:08:26 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/4f94956/</guid>
-  <description><![CDATA[LaTex 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要介绍 LaTeX 的环境配置，包括网页环境和本地环境]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Tue, 12 Sep 2023 11:30:56 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LaTeX 环境配置</title>
+      <link>https://ywang-wnlo.github.io/posts/4f94956/</link>
+      <pubDate>Tue, 19 Oct 2021 10:08:26 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4f94956/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/latex/">LaTeX</category>
+      <description>LaTex 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要介绍 LaTeX 的环境配置，包括网页环境和本地环境</description>
+    </item>
+  </channel>
 </rss>

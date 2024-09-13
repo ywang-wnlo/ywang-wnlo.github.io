@@ -1,16 +1,22 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>addr2line - 标签 - 乐园</title>
+    <title>Addr2line - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/addr2line/</link>
-    <description>addr2line - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/addr2line/" rel="self" type="application/rss+xml" /><item>
-  <title>Debug 从入门到入土</title>
-  <link>https://ywang-wnlo.github.io/posts/89f2ed7d/</link>
-  <pubDate>Sat, 09 Sep 2023 23:35:41 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
-  <description><![CDATA[写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Mon, 11 Sep 2023 18:44:19 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/addr2line/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debug 从入门到入土</title>
+      <link>https://ywang-wnlo.github.io/posts/89f2ed7d/</link>
+      <pubDate>Sat, 09 Sep 2023 23:35:41 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/89f2ed7d/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C++ 的 segment fault 为例）</description>
+    </item>
+  </channel>
 </rss>

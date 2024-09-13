@@ -6,24 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>自定义配置 RocksDB 进行 YCSB 测试 - 乐园</title><meta name="author" content="Zeus">
-<meta name="author-link" content="https://github.com/ywang-wnlo">
-<meta name="description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法" /><meta name="keywords" content='日常踩坑, Maven, RocksDB, YCSB' /><meta itemprop="name" content="自定义配置 RocksDB 进行 YCSB 测试">
-<meta itemprop="description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法"><meta itemprop="datePublished" content="2021-12-26T00:20:25+08:00" />
-<meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00" />
-<meta itemprop="wordCount" content="1633">
-<meta itemprop="keywords" content="日常踩坑,Maven,RocksDB,YCSB," /><meta property="og:title" content="自定义配置 RocksDB 进行 YCSB 测试" />
-<meta property="og:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ywang-wnlo.github.io/posts/4bc1e607/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-12-26T00:20:25+08:00" />
-<meta property="article:modified_time" content="2022-11-16T10:33:39+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="自定义配置 RocksDB 进行 YCSB 测试"/>
-<meta name="twitter:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法"/>
+<meta name="description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法"><meta name="keywords" content='日常踩坑, Maven, RocksDB, YCSB'>
+  <meta itemprop="name" content="自定义配置 RocksDB 进行 YCSB 测试">
+  <meta itemprop="description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法">
+  <meta itemprop="datePublished" content="2021-12-26T00:20:25+08:00">
+  <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00">
+  <meta itemprop="wordCount" content="1625">
+  <meta itemprop="keywords" content="日常踩坑,Maven,RocksDB,YCSB"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/4bc1e607/">
+  <meta property="og:site_name" content="乐园">
+  <meta property="og:title" content="自定义配置 RocksDB 进行 YCSB 测试">
+  <meta property="og:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-12-26T00:20:25+08:00">
+    <meta property="article:modified_time" content="2022-11-16T10:33:39+08:00">
+    <meta property="article:tag" content="日常踩坑">
+    <meta property="article:tag" content="Maven">
+    <meta property="article:tag" content="RocksDB">
+    <meta property="article:tag" content="YCSB">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="自定义配置 RocksDB 进行 YCSB 测试">
+  <meta name="twitter:description" content="本文主要记录在利用 YCSB 使用配置文件测试 RocksDB 的过程中遇到的一些问题以及相应的解决办法">
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/4bc1e607/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/abac0c46/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/2e7aa01a/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/4bc1e607/" title="自定义配置 RocksDB 进行 YCSB 测试 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/abac0c46/" title="Hexo 配置主流搜索引擎收录流程记录" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/2e7aa01a/" title="解决 pip 安装第三方包时因 SSL 报错" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/4bc1e607/index.md" title="自定义配置 RocksDB 进行 YCSB 测试 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
   {
@@ -34,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/4bc1e607\/"
-    },"genre": "posts","keywords": "日常踩坑, Maven, RocksDB, YCSB","wordcount":  1633 ,
+    },"genre": "posts","keywords": "日常踩坑, Maven, RocksDB, YCSB","wordcount":  1625 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/4bc1e607\/","datePublished": "2021-12-26T00:20:25+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +55,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -57,16 +66,16 @@
               ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
               <a
                 class="menu-link"
-                href="/tags/"
-                
-                
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
-              <a
-                class="menu-link"
                 href="/categories/"
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +101,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -125,17 +134,17 @@
               class="menu-item"
             ><a
                   class="menu-link"
-                  href="/tags/"
-                  
-                  
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
-              class="menu-item"
-            ><a
-                  class="menu-link"
                   href="/categories/"
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -157,9 +166,8 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>自定义配置 RocksDB 进行 YCSB 测试</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category" title="分类 - 测试"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div><div class="post-meta-line"><span title="发布于 2021-12-26 00:20:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-26">2021-12-26</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="1633 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="自定义配置 RocksDB 进行 YCSB 测试">
-              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
-            </span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category" title="分类 - 测试"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 测试</a></span></div><div class="post-meta-line"><span title="发布于 2021-12-26 00:20:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-26">2021-12-26</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="1625 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="自定义配置 RocksDB 进行 YCSB 测试"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -183,15 +191,21 @@
         <div class="admonition-content">本文最后更新于 2022-11-16，文中内容可能已过时。</div>
       </div>
     </div><p>本文主要记录在利用 <a href="https://github.com/brianfrankcooper/YCSB"target="_blank" rel="external nofollow noopener noreferrer">YCSB</a> 使用配置文件测试 <a href="https://github.com/facebook/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">RocksDB</a> 的过程中遇到的一些问题以及相应的解决办法</p>
-<h2 id="简介" class="heading-element">
-  <a href="#%e7%ae%80%e4%bb%8b" class="heading-mark"></a>简介</h2><p>YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服务进行基础测试的工具，支持目前常见的 NoSQL 数据库产品，如 HBase、MongoDB、OrientDB、Redis 等等</p>
+<h2 id="简介" class="heading-element"><span>简介</span>
+  <a href="#%e7%ae%80%e4%bb%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>YCSB 的全程是 Yahoo! Cloud Serving Benchmark，是雅虎开发的用来对云服务进行基础测试的工具，支持目前常见的 NoSQL 数据库产品，如 HBase、MongoDB、OrientDB、Redis 等等</p>
 <p>RocksDB 是一个具有键/值接口的存储引擎，其中键和值是任意字节流。它是在 Facebook（Meta） 基于 LevelDB 开发的，并为 LevelDB API 提供向后兼容的支持</p>
-<h2 id="编译-rocksdb" class="heading-element">
-  <a href="#%e7%bc%96%e8%af%91-rocksdb" class="heading-mark"></a>编译 RocksDB</h2><p>由于 YCSB 是用 Java 实现的，一般测试的数据库都需要提供 Java 版本的 <code>.jar</code> 包</p>
+<h2 id="编译-rocksdb" class="heading-element"><span>编译 RocksDB</span>
+  <a href="#%e7%bc%96%e8%af%91-rocksdb" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>由于 YCSB 是用 Java 实现的，一般测试的数据库都需要提供 Java 版本的 <code>.jar</code> 包</p>
 <p>虽然 RocksDB 最初是 C++ 的一个库（因为是嵌入式数据库），但是后续也提供了 Java 的 API 以及可以通过源码编译出 <code>.jar</code> 包，也可以直接通过 <code>Maven</code> 获取</p>
 <p>官方在 GitHub 上给出了 <a href="https://github.com/facebook/rocksdb/wiki/RocksJava-Basics"target="_blank" rel="external nofollow noopener noreferrer">Java 版本的介绍</a>，编译过程也很简单</p>
 <p>首先需要保证机器上安装好了 Java 的环境，必须在 1.7+ 版本以上，例如，安装 <code>openjdk-8-jdk</code> 包即可</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -199,7 +213,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install openjdk-8-jdk</span></span></code></pre></td></tr></table>
 </div>
 </div><p>同时 RocksDB 本身还有一些环境需要安装，<a href="https://github.com/facebook/rocksdb/blob/main/INSTALL.md"target="_blank" rel="external nofollow noopener noreferrer">官方</a> 也给出来了</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -207,7 +221,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev</span></span></code></pre></td></tr></table>
 </div>
 </div><p>实际编译 jar 包时，需要提前配置好环境变量</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -215,7 +229,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">&#34;/usr/lib/jvm/java-8-openjdk-amd64&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>实际编译时，有两个中版本可以选择，其中 <code>rocksdbjava</code> 是 debug 版本，而 <code>rocksdbjavastatic</code> 这是 release 版本，不过官方在 Java 版说明中没有提及，我是在 <a href="https://github.com/facebook/rocksdb/blob/main/Makefile"target="_blank" rel="external nofollow noopener noreferrer">Makefile 文件</a> 中找到的</p>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -224,10 +238,13 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">make -j<span class="k">$(</span>nproc<span class="k">)</span> rocksdbjava
 </span></span><span class="line"><span class="cl">make -j<span class="k">$(</span>nproc<span class="k">)</span> rocksdbjavastatic</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="编译-ycsb" class="heading-element">
-  <a href="#%e7%bc%96%e8%af%91-ycsb" class="heading-mark"></a>编译 YCSB</h2><p>YCSB 在 2019/10/17 的 <a href="https://github.com/brianfrankcooper/YCSB/commit/4a990099a667c9226d5c33de7971f8b7ede9ffc0"target="_blank" rel="external nofollow noopener noreferrer">4a99009</a> 增加了对 RocksDB 配置文件的支持，然而目前官方给出的 release 版本还是 0.17.0，并且发布时间是 2019/10/6，因此我们只能选择从源码开始编译了</p>
+</div><h2 id="编译-ycsb" class="heading-element"><span>编译 YCSB</span>
+  <a href="#%e7%bc%96%e8%af%91-ycsb" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>YCSB 在 2019/10/17 的 <a href="https://github.com/brianfrankcooper/YCSB/commit/4a990099a667c9226d5c33de7971f8b7ede9ffc0"target="_blank" rel="external nofollow noopener noreferrer">4a99009</a> 增加了对 RocksDB 配置文件的支持，然而目前官方给出的 release 版本还是 0.17.0，并且发布时间是 2019/10/6，因此我们只能选择从源码开始编译了</p>
 <p>根据 <a href="https://github.com/brianfrankcooper/YCSB/tree/master/rocksdb"target="_blank" rel="external nofollow noopener noreferrer">官方给出的流程</a></p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -239,7 +256,7 @@
 </span></span><span class="line"><span class="cl">mvn -pl site.ycsb:rocksdb-binding -am clean package</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时编译好的文件在 <code>./rocksdb/target/</code> 目录下</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -249,7 +266,7 @@
 </span></span><span class="line"><span class="cl">rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar</span></span></code></pre></td></tr></table>
 </div>
 </div><p>该 <code>.jar</code> 包其实只是 YCSB 和 RocksDB 之间的中间件，实际使用的 RocksDB 的 <code>.jar</code> 包以及其他的依赖包则是在 <code>./rocksdb/target/dependency/</code> 目录下</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -271,9 +288,12 @@
 <li>如果使用原本 RocksDB 则可以简单的通过修改这个版本信息，重新编译利用 <code>Maven</code> 重新下载</li>
 <li>如果使用的是自己修改过源码的 RocksDB 则需要将自行编译的 RocksDB 的 <code>.jar</code> 包移到该目录下，并且删除旧的 <code>.jar</code> 包</li>
 </ul>
-<h2 id="修复报错" class="heading-element">
-  <a href="#%e4%bf%ae%e5%a4%8d%e6%8a%a5%e9%94%99" class="heading-mark"></a>修复报错</h2><p>但此时如果使用 <code>./bin/ycsb.sh</code> 来进行测试，会报错</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<h2 id="修复报错" class="heading-element"><span>修复报错</span>
+  <a href="#%e4%bf%ae%e5%a4%8d%e6%8a%a5%e9%94%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>但此时如果使用 <code>./bin/ycsb.sh</code> 来进行测试，会报错</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -313,7 +333,7 @@
 </div><p>主要是使用的 <code>./bin/ycsb.sh</code> 脚本有 bug，<a href="https://github.com/brianfrankcooper/YCSB/issues/1105"target="_blank" rel="external nofollow noopener noreferrer">官方已经知道</a>，<a href="https://github.com/brianfrankcooper/YCSB/pull/908"target="_blank" rel="external nofollow noopener noreferrer">并尝试修复</a>，不过好像仍然没有解决</p>
 <p>目前可以手动将 <code>htrace</code> 的包的依赖加入 RocksDB 中，并重新编译，利用 <code>Maven</code> 下载到 <code>./rocksdb/target/dependency/</code> 目录下</p>
 <p>可以手动将 <code>./core/pom.xml</code> 中 <code>htrace</code> 的依赖信息复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -358,7 +378,7 @@
 </div>
 </div><p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
 <p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试，还会报错</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -438,7 +458,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">[</span>TOTAL_GC_TIME_%<span class="o">]</span>, Time<span class="o">(</span>%<span class="o">)</span>, 0.0</span></span></code></pre></td></tr></table>
 </div>
 </div><p>原因和之前一样，再次将 <code>HdrHistogram</code> 相关的依赖，从 <code>./core/pom.xml</code> 复制添加到 <code>./rocksdb/pom.xml</code> 中</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -493,9 +513,12 @@
 </div>
 </div><p>然后利用 <code>mvn -pl site.ycsb:rocksdb-binding -am clean package</code> 重新编译</p>
 <p>这时再次利用 <code>./bin/ycsb.sh</code> 来进行测试就已经正常了</p>
-<h2 id="自定义配置-rocksdb-进行-ycsb-测试" class="heading-element">
-  <a href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%85%8d%e7%bd%ae-rocksdb-%e8%bf%9b%e8%a1%8c-ycsb-%e6%b5%8b%e8%af%95" class="heading-mark"></a>自定义配置 RocksDB 进行 YCSB 测试</h2><p>自定义配置 RocksDB 的方式就很简单了，在 YCSB 测试时增加 <code>rocksdb.optionsfile</code> 参数并给出配置文件的路径即可</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<h2 id="自定义配置-rocksdb-进行-ycsb-测试" class="heading-element"><span>自定义配置 RocksDB 进行 YCSB 测试</span>
+  <a href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%85%8d%e7%bd%ae-rocksdb-%e8%bf%9b%e8%a1%8c-ycsb-%e6%b5%8b%e8%af%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>自定义配置 RocksDB 的方式就很简单了，在 YCSB 测试时增加 <code>rocksdb.optionsfile</code> 参数并给出配置文件的路径即可</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -508,8 +531,11 @@
 <li>配置文件可以参考 <a href="https://github.com/facebook/rocksdb/blob/main/examples/rocksdb_option_file_example.ini"target="_blank" rel="external nofollow noopener noreferrer">RocksDB 官方的例子</a> 修改</li>
 <li>也可以先不加测试文件，执行一次 <code>./bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/ycsb-rocksdb-data</code>，让 YCSB 自己生成，然后根据 RocksDB 测试目录（<code>/tmp/ycsb-rocksdb-data</code>）下的 <code>OPTIONS-000009</code> 的配置文件来修改</li>
 </ul>
-<h2 id="参考资料" class="heading-element">
-  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
+<h2 id="参考资料" class="heading-element"><span>参考资料</span>
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
 <li><a href="https://github.com/facebook/rocksdb/wiki/RocksJava-Basics"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】RocksJava Basics</a></li>
 <li><a href="https://man7.org/linux/man-pages/man1/nproc.1.html"target="_blank" rel="external nofollow noopener noreferrer">【man】nproc(1) — Linux manual page</a></li>
 <li><a href="https://github.com/brianfrankcooper/YCSB/issues/1105"target="_blank" rel="external nofollow noopener noreferrer">【GitHub】Cannot execute YCSB #1105</a></li>
@@ -524,23 +550,24 @@
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
-            <a href="https://ywang-wnlo.github.io/posts/4bc1e607/" title="自定义配置 RocksDB 进行 YCSB 测试">https://ywang-wnlo.github.io/posts/4bc1e607/</a>
+            <a href="https://ywang-wnlo.github.io/posts/4bc1e607/" title="">https://ywang-wnlo.github.io/posts/4bc1e607/</a>
         </li>
         <li class="post-copyright-license">
             <strong>版权声明：</strong>
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div><h2 id="see-also">相关内容</h2>
+</div><hr class="awesome-hr" />
+    <h2 id="see-also">相关内容</h2>
     <ul><li>
           <a href="/posts/b8506868/" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</a></li><li>
-          <a href="/posts/a23842fe/" title="解决 kex_exchange_identification 报错">解决 kex_exchange_identification 报错</a></li><li>
+          <a href="/posts/a23842fe/" title="解决 Kex_exchange_identification 报错">解决 Kex_exchange_identification 报错</a></li><li>
           <a href="/posts/89f2ed7d/" title="Debug 从入门到入土">Debug 从入门到入土</a></li><li>
           <a href="/posts/76f6af57/" title="从 SSLEOFError 到正确配置 Proxy">从 SSLEOFError 到正确配置 Proxy</a></li><li>
-          <a href="/posts/29e0b18c/" title="修复 chrome 打不开微信或者部分第三方应用内链接">修复 chrome 打不开微信或者部分第三方应用内链接</a></li></ul><div class="post-reward">
+          <a href="/posts/29e0b18c/" title="修复 Chrome 打不开微信或者部分第三方应用内链接">修复 Chrome 打不开微信或者部分第三方应用内链接</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
-    <label class="reward-button" for="fi-reward">赞赏</label>
+    <label class="reward-button" for="fi-reward"><i class="fa-solid fa-qrcode fa-fw" aria-hidden="true"></i>赞赏</label>
     <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
           </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
@@ -563,12 +590,10 @@
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
-  </div>
-
-  <div class="post-nav"><a href="/posts/abac0c46/" class="post-nav-item" rel="prev" title="Hexo 配置主流搜索引擎收录流程记录"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Hexo 配置主流搜索引擎收录流程记录</a>
-      <a href="/posts/2e7aa01a/" class="post-nav-item" rel="next" title="解决 pip 安装第三方包时因 SSL 报错">解决 pip 安装第三方包时因 SSL 报错<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  </div><div class="post-nav"><a href="/posts/abac0c46/" class="post-nav-item" rel="prev" title="Hexo 配置主流搜索引擎收录流程记录"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Hexo 配置主流搜索引擎收录流程记录</a>
+      <a href="/posts/2e7aa01a/" class="post-nav-item" rel="next" title="解决 Pip 安装第三方包时因 SSL 报错">解决 Pip 安装第三方包时因 SSL 报错<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-<div id="comments"><div id="giscus">
+<div id="comments"><div id="giscus" class="comment">
           <script
             src="https://giscus.app/client.js"
             data-repo="ywang-wnlo/ywang-wnlo.github.io"
@@ -595,16 +620,16 @@
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.132.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.11">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
-          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
-    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.11"};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

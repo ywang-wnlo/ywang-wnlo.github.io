@@ -1,32 +1,38 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>NexT - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/next/</link>
-    <description>NexT - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Wed, 08 Dec 2021 22:00:29 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/next/" rel="self" type="application/rss+xml" /><item>
-  <title>Hexo 配置主流搜索引擎收录流程记录</title>
-  <link>https://ywang-wnlo.github.io/posts/abac0c46/</link>
-  <pubDate>Wed, 08 Dec 2021 22:00:29 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/abac0c46/</guid>
-  <description><![CDATA[想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录]]></description>
-</item>
-<item>
-  <title>NexT 主题的配置使用记录</title>
-  <link>https://ywang-wnlo.github.io/posts/9a0b7c3b/</link>
-  <pubDate>Sat, 04 Dec 2021 16:49:51 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/9a0b7c3b/</guid>
-  <description><![CDATA[NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。本文主要记录 NexT 主题的配置使用记录]]></description>
-</item>
-<item>
-  <title>Hexo 插件推荐以及使用小技巧</title>
-  <link>https://ywang-wnlo.github.io/posts/4143201a/</link>
-  <pubDate>Mon, 22 Nov 2021 14:12:15 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/4143201a/</guid>
-  <description><![CDATA[Hexo 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。本文主要记录 Hexo 的部分插件使用以及一些小技巧]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Wed, 16 Nov 2022 10:33:39 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/next/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hexo 配置主流搜索引擎收录流程记录</title>
+      <link>https://ywang-wnlo.github.io/posts/abac0c46/</link>
+      <pubDate>Wed, 08 Dec 2021 22:00:29 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/abac0c46/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>想让网站能够被更多的人阅读，搜索引擎带来的流量必不可少。本文主要介绍如何配置 Hexo 并被主流的搜索引擎（Google、Bing）收录</description>
+    </item>
+    <item>
+      <title>NexT 主题的配置使用记录</title>
+      <link>https://ywang-wnlo.github.io/posts/9a0b7c3b/</link>
+      <pubDate>Sat, 04 Dec 2021 16:49:51 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/9a0b7c3b/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>NexT 主题是 Hexo 上使用最广，同时在 GitHub 上也是 Star 最多的主题，bug 修复和功能更新也比较快。本文主要记录 NexT 主题的配置使用记录</description>
+    </item>
+    <item>
+      <title>Hexo 插件推荐以及使用小技巧</title>
+      <link>https://ywang-wnlo.github.io/posts/4143201a/</link>
+      <pubDate>Mon, 22 Nov 2021 14:12:15 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4143201a/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>Hexo 是一个快速、简洁且高效的博客框架，个人只需用 Markdown 来写文档，并且拥有丰富的插件和主题。本文主要记录 Hexo 的部分插件使用以及一些小技巧</description>
+    </item>
+  </channel>
 </rss>

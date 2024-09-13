@@ -1,32 +1,40 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shell - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/shell/</link>
-    <description>Shell - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Wed, 16 Nov 2022 13:43:05 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/shell/" rel="self" type="application/rss+xml" /><item>
-  <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
-  <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
-  <pubDate>Wed, 16 Nov 2022 13:43:05 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
-  <description><![CDATA[本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置]]></description>
-</item>
-<item>
-  <title>美化 Shell 之 Linux Zsh 篇</title>
-  <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
-  <pubDate>Wed, 16 Nov 2022 11:04:47 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
-  <description><![CDATA[本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置]]></description>
-</item>
-<item>
-  <title>rm -r 与 rmdir 区别</title>
-  <link>https://ywang-wnlo.github.io/posts/935ae1f0/</link>
-  <pubDate>Wed, 24 Nov 2021 19:47:38 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/935ae1f0/</guid>
-  <description><![CDATA[本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Wed, 16 Nov 2022 19:20:41 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>美化 Shell 之 Windows/Linux PowerShell 篇</title>
+      <link>https://ywang-wnlo.github.io/posts/8ad4716e/</link>
+      <pubDate>Wed, 16 Nov 2022 13:43:05 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/8ad4716e/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/shell/">Shell</category>
+      <description>本文主要记录自己在 Windows 平台上美化 Shell 的过程，主要包括 PowerShell、Oh My Posh、Powerlevel10k、Nerd 字体等工具的安装以及配置</description>
+    </item>
+    <item>
+      <title>美化 Shell 之 Linux Zsh 篇</title>
+      <link>https://ywang-wnlo.github.io/posts/f2cdf8a6/</link>
+      <pubDate>Wed, 16 Nov 2022 11:04:47 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/f2cdf8a6/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/linux/">Linux</category>
+      <category domain="https://ywang-wnlo.github.io/categories/shell/">Shell</category>
+      <description>本文主要记录自己在 Linux 平台上美化 Shell 的过程，主要包括 Zsh、Oh My Zsh、Powerlevel10k 等工具的安装以及配置</description>
+    </item>
+    <item>
+      <title>rm -r 与 rmdir 区别</title>
+      <link>https://ywang-wnlo.github.io/posts/935ae1f0/</link>
+      <pubDate>Wed, 24 Nov 2021 19:47:38 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/935ae1f0/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/linux/">Linux</category>
+      <category domain="https://ywang-wnlo.github.io/categories/shell/">Shell</category>
+      <description>本文主要介绍 rm -r 与 rmdir 的区别，以及通过 strace 查看 rm -r 的过程</description>
+    </item>
+  </channel>
 </rss>

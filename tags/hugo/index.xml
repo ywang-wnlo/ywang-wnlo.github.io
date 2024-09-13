@@ -1,24 +1,30 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/hugo/</link>
-    <description>Hugo - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Fri, 15 Sep 2023 21:30:20 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/hugo/" rel="self" type="application/rss+xml" /><item>
-  <title>FeelIt 主题的配置以及魔改记录</title>
-  <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
-  <pubDate>Fri, 15 Sep 2023 21:30:20 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
-  <description><![CDATA[本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改]]></description>
-</item>
-<item>
-  <title>更换博客框架至 Hugo</title>
-  <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
-  <pubDate>Thu, 14 Sep 2023 21:33:18 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
-  <description><![CDATA[本文主要记录了自己迁移博客至 Hugo 的过程中遇到的问题，以及一些小技巧]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Mon, 18 Sep 2023 09:38:20 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FeelIt 主题的配置以及魔改记录</title>
+      <link>https://ywang-wnlo.github.io/posts/bfcf6dfe/</link>
+      <pubDate>Fri, 15 Sep 2023 21:30:20 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/bfcf6dfe/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>本文主要记录了使用 Hugo 的 FeelIt 主题的配置过程，以及对主题的一些修改</description>
+    </item>
+    <item>
+      <title>更换博客框架至 Hugo</title>
+      <link>https://ywang-wnlo.github.io/posts/4dea1ffb/</link>
+      <pubDate>Thu, 14 Sep 2023 21:33:18 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/4dea1ffb/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%8D%9A%E5%AE%A2/">博客</category>
+      <description>本文主要记录了自己迁移博客至 Hugo 的过程中遇到的问题，以及一些小技巧</description>
+    </item>
+  </channel>
 </rss>

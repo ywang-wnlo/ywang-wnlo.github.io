@@ -1,4 +1,4 @@
-# Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; madVR &#43; xy-SubFilter
+# Windows 平台最强播放器组合 —— Potplayer &#43; LAV Filters &#43; MadVR &#43; Xy-SubFilter
 
 
 本文主要来源于 VCB-Studio 官网的 [科普教程](https://vcb-s.com/archives/7228)，个人重新梳理进行备份

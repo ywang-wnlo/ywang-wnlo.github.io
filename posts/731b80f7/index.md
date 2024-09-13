@@ -1,4 +1,4 @@
-# Python 使用 matplotlib 画图
+# Python 使用 Matplotlib 画图
 
 
 本文将介绍如何使用 Python 的 `matplotlib` 库画图，记录一些常用的画图 demo 代码

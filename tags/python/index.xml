@@ -1,40 +1,46 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python - 标签 - 乐园</title>
+    <title>Python - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/python/</link>
-    <description>python - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
-  <title>Python 使用 matplotlib 画图</title>
-  <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
-  <pubDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
-  <description><![CDATA[本文将介绍如何使用 Python 的 <code>matplotlib</code> 库画图，记录一些常用的画图 demo 代码]]></description>
-</item>
-<item>
-  <title>Python 环境隔离</title>
-  <link>https://ywang-wnlo.github.io/posts/28f3e4d7/</link>
-  <pubDate>Thu, 21 Sep 2023 21:34:35 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/28f3e4d7/</guid>
-  <description><![CDATA[Python 作为最常用的脚本语言，有着非常丰富的第三方库，但是这也导致了 Python 的环境管理非常必要。本文将介绍 Python 的几个常用环境管理工具，以及如何使用它们。]]></description>
-</item>
-<item>
-  <title>从 SSLEOFError 到正确配置 Proxy</title>
-  <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
-  <pubDate>Tue, 29 Mar 2022 13:48:31 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
-  <description><![CDATA[本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程]]></description>
-</item>
-<item>
-  <title>解决 pip 安装第三方包时因 SSL 报错</title>
-  <link>https://ywang-wnlo.github.io/posts/2e7aa01a/</link>
-  <pubDate>Tue, 08 Mar 2022 14:37:08 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/2e7aa01a/</guid>
-  <description><![CDATA[好久没用 python，最近重新下载安装好 python 后发现用 pip 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的。本文主要记录了其解决办法]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Wed, 24 Apr 2024 23:12:40 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python 使用 matplotlib 画图</title>
+      <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
+      <pubDate>Wed, 24 Apr 2024 23:12:40 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</category>
+      <description>本文将介绍如何使用 Python 的 &lt;code&gt;matplotlib&lt;/code&gt; 库画图，记录一些常用的画图 demo 代码</description>
+    </item>
+    <item>
+      <title>Python 环境隔离</title>
+      <link>https://ywang-wnlo.github.io/posts/28f3e4d7/</link>
+      <pubDate>Thu, 21 Sep 2023 21:34:35 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/28f3e4d7/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</category>
+      <description>Python 作为最常用的脚本语言，有着非常丰富的第三方库，但是这也导致了 Python 的环境管理非常必要。本文将介绍 Python 的几个常用环境管理工具，以及如何使用它们。</description>
+    </item>
+    <item>
+      <title>从 SSLEOFError 到正确配置 Proxy</title>
+      <link>https://ywang-wnlo.github.io/posts/76f6af57/</link>
+      <pubDate>Tue, 29 Mar 2022 13:48:31 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/76f6af57/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>本文主要参考 Python 遭遇 ProxyError 问题记录 重新梳理改写。主要记录了从 SSLEOFError 到正确配置 Proxy 的过程</description>
+    </item>
+    <item>
+      <title>解决 pip 安装第三方包时因 SSL 报错</title>
+      <link>https://ywang-wnlo.github.io/posts/2e7aa01a/</link>
+      <pubDate>Tue, 08 Mar 2022 14:37:08 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/2e7aa01a/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%97%A5%E5%B8%B8%E8%B8%A9%E5%9D%91/">日常踩坑</category>
+      <description>好久没用 python，最近重新下载安装好 python 后发现用 pip 安装第三方包一直失败。经过一番折腾发现，如果报错信息符合下面两种，一般都是因为网络连接时 SSL 认证失败导致的。本文主要记录了其解决办法</description>
+    </item>
+  </channel>
 </rss>

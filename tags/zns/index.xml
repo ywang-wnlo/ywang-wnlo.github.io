@@ -1,16 +1,22 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ZNS - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/zns/</link>
-    <description>ZNS - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/zns/" rel="self" type="application/rss+xml" /><item>
-  <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
-  <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
-  <pubDate>Tue, 22 Nov 2022 22:54:45 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
-  <description><![CDATA[本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Mon, 18 Sep 2023 19:13:39 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/zns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</title>
+      <link>https://ywang-wnlo.github.io/posts/b8506868/</link>
+      <pubDate>Tue, 22 Nov 2022 22:54:45 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/b8506868/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E6%B5%8B%E8%AF%95/">测试</category>
+      <description>本文主要记录自己在利用 RocksDB + ZenFS 测试 ZNS 过程中遇到的一些问题以及相应的解决办法</description>
+    </item>
+  </channel>
 </rss>

@@ -1,16 +1,22 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>matplotlib - 标签 - 乐园</title>
+    <title>Matplotlib - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/matplotlib/</link>
-    <description>matplotlib - 标签 | 乐园</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
-      <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster><lastBuildDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</lastBuildDate><atom:link href="https://ywang-wnlo.github.io/tags/matplotlib/" rel="self" type="application/rss+xml" /><item>
-  <title>Python 使用 matplotlib 画图</title>
-  <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
-  <pubDate>Wed, 24 Apr 2024 23:12:40 &#43;0800</pubDate>
-  <author>Zeus</author>
-  <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
-  <description><![CDATA[本文将介绍如何使用 Python 的 <code>matplotlib</code> 库画图，记录一些常用的画图 demo 代码]]></description>
-</item>
-</channel>
+    <description>一个新时代农民工的随手笔记</description>
+    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <language>zh-CN</language>
+    <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
+    <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
+    <lastBuildDate>Wed, 24 Apr 2024 23:12:40 +0800</lastBuildDate>
+    <atom:link href="https://ywang-wnlo.github.io/tags/matplotlib/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python 使用 matplotlib 画图</title>
+      <link>https://ywang-wnlo.github.io/posts/731b80f7/</link>
+      <pubDate>Wed, 24 Apr 2024 23:12:40 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/731b80f7/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</category>
+      <description>本文将介绍如何使用 Python 的 &lt;code&gt;matplotlib&lt;/code&gt; 库画图，记录一些常用的画图 demo 代码</description>
+    </item>
+  </channel>
 </rss>

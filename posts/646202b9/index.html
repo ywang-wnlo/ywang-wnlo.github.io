@@ -5,25 +5,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>page cache 回写机制 - 乐园</title><meta name="author" content="Zeus">
-<meta name="author-link" content="https://github.com/ywang-wnlo">
-<meta name="description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析" /><meta name="keywords" content='page cache, buffer IO, kernel, writeback' /><meta itemprop="name" content="page cache 回写机制">
-<meta itemprop="description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析"><meta itemprop="datePublished" content="2021-11-19T16:24:30+08:00" />
-<meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00" />
-<meta itemprop="wordCount" content="7370">
-<meta itemprop="keywords" content="page cache,buffer IO,kernel,writeback," /><meta property="og:title" content="page cache 回写机制" />
-<meta property="og:description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ywang-wnlo.github.io/posts/646202b9/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-11-19T16:24:30+08:00" />
-<meta property="article:modified_time" content="2022-11-16T10:33:39+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="page cache 回写机制"/>
-<meta name="twitter:description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析"/>
+    <title>Page Cache 回写机制 - 乐园</title><meta name="author" content="Zeus">
+<meta name="description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析"><meta name="keywords" content='page cache, buffer IO, kernel, writeback'>
+  <meta itemprop="name" content="page cache 回写机制">
+  <meta itemprop="description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析">
+  <meta itemprop="datePublished" content="2021-11-19T16:24:30+08:00">
+  <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00">
+  <meta itemprop="wordCount" content="7683">
+  <meta itemprop="keywords" content="Page Cache,Buffer IO,Kernel,Writeback"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/646202b9/">
+  <meta property="og:site_name" content="乐园">
+  <meta property="og:title" content="page cache 回写机制">
+  <meta property="og:description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-11-19T16:24:30+08:00">
+    <meta property="article:modified_time" content="2022-11-16T10:33:39+08:00">
+    <meta property="article:tag" content="Page Cache">
+    <meta property="article:tag" content="Buffer IO">
+    <meta property="article:tag" content="Kernel">
+    <meta property="article:tag" content="Writeback">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="page cache 回写机制">
+  <meta name="twitter:description" content="page cache 回写机制是 Linux 内核中的一个重要的机制，本文主要介绍 page cache 回写机制的策略和源码分析">
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/646202b9/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/96a1807/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/4143201a/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/646202b9/" title="page cache 回写机制 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/96a1807/" title="OpenWrt 手动编译 ipk" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/4143201a/" title="Hexo 插件推荐以及使用小技巧" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/646202b9/index.md" title="page cache 回写机制 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
   {
@@ -34,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/646202b9\/"
-    },"genre": "posts","keywords": "page cache, buffer IO, kernel, writeback","wordcount":  7370 ,
+    },"genre": "posts","keywords": "page cache, buffer IO, kernel, writeback","wordcount":  7683 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/646202b9\/","datePublished": "2021-11-19T16:24:30+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +55,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -57,16 +66,16 @@
               ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
               <a
                 class="menu-link"
-                href="/tags/"
-                
-                
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
-              <a
-                class="menu-link"
                 href="/categories/"
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +101,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -125,17 +134,17 @@
               class="menu-item"
             ><a
                   class="menu-link"
-                  href="/tags/"
-                  
-                  
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
-              class="menu-item"
-            ><a
-                  class="menu-link"
                   href="/categories/"
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -155,11 +164,10 @@
   </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>page cache 回写机制</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Page Cache 回写机制</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/io-stack/" class="post-category" title="分类 - IO Stack"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div><div class="post-meta-line"><span title="发布于 2021-11-19 16:24:30"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-11-19">2021-11-19</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="7370 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 7400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 15 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="page cache 回写机制">
-              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
-            </span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/io-stack/" class="post-category" title="分类 - IO Stack"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div><div class="post-meta-line"><span title="发布于 2021-11-19 16:24:30"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-11-19">2021-11-19</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="7683 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 7700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 16 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Page Cache 回写机制"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -228,15 +236,24 @@
         <div class="admonition-content">本文最后更新于 2022-11-16，文中内容可能已过时。</div>
       </div>
     </div><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121"target="_blank" rel="external nofollow noopener noreferrer">v5.4.121</a></p>
-<h2 id="writeback-回写" class="heading-element">
-  <a href="#writeback-%e5%9b%9e%e5%86%99" class="heading-mark"></a>writeback 回写</h2><p>在 <a href="/posts/9ba60726/">page cache 简介</a> 有过介绍</p>
+<h2 id="writeback-回写" class="heading-element"><span>writeback 回写</span>
+  <a href="#writeback-%e5%9b%9e%e5%86%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>在 <a href="/posts/9ba60726/">page cache 简介</a> 有过介绍</p>
 <p>buffer IO 通过 page cache 进行缓存，减少对底层存储设备的直接读写，同时能够提高整体性能</p>
 <p>写入到 page cache 的数据不会立刻写入后端设备，而是标记为“脏”，并被加入到脏页链表，后续由内核中的回写进程周期性的将脏页写回到底层存储设备</p>
 <p>下面主要分析 page cache 回写机制的策略和实现</p>
-<h2 id="相关结构体" class="heading-element">
-  <a href="#%e7%9b%b8%e5%85%b3%e7%bb%93%e6%9e%84%e4%bd%93" class="heading-mark"></a>相关结构体</h2><h3 id="底层设备信息" class="heading-element">
-  <a href="#%e5%ba%95%e5%b1%82%e8%ae%be%e5%a4%87%e4%bf%a1%e6%81%af" class="heading-mark"></a>底层设备信息</h3><p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>backing_dev_info</code> 结构体，主要用与记录底层的设备信息</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<h2 id="相关结构体" class="heading-element"><span>相关结构体</span>
+  <a href="#%e7%9b%b8%e5%85%b3%e7%bb%93%e6%9e%84%e4%bd%93" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="底层设备信息" class="heading-element"><span>底层设备信息</span>
+  <a href="#%e5%ba%95%e5%b1%82%e8%ae%be%e5%a4%87%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>backing_dev_info</code> 结构体，主要用与记录底层的设备信息</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -337,10 +354,16 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="初始化" class="heading-element">
-  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96" class="heading-mark"></a>初始化</h4><p>该结构体只会由 <code>mm/backing-dev.c</code> 中的 <code>bdi_alloc_node</code> 函数来申请内存空间并调用 <code>bdi_init</code> 初始化</p>
-<h4 id="部分字段说明" class="heading-element">
-  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e" class="heading-mark"></a>部分字段说明</h4><ol>
+</div><h4 id="初始化" class="heading-element"><span>初始化</span>
+  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>该结构体只会由 <code>mm/backing-dev.c</code> 中的 <code>bdi_alloc_node</code> 函数来申请内存空间并调用 <code>bdi_init</code> 初始化</p>
+<h4 id="部分字段说明" class="heading-element"><span>部分字段说明</span>
+  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
 <li>
 <p><code>name</code> 字段</p>
 <p><figure><a class="lightgallery" href="/posts/646202b9/bdi_name.png?size=large" data-thumbnail="/posts/646202b9/bdi_name.png?size=small" data-sub-html="<h2>name 字段</h2><p>name 字段</p>"><img loading="lazy" src="/posts/646202b9/bdi_name.png" alt="name 字段" srcset="/posts/646202b9/bdi_name.png?size=small, /posts/646202b9/bdi_name.png?size=medium 1.5x, /posts/646202b9/bdi_name.png?size=large 2x" data-title="name 字段" style="--width: 452px;--aspect-ratio: 452 / 159;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">name 字段</figcaption>
@@ -366,9 +389,12 @@
 <p>实际赋值的为 <code>disk</code> 对应的 <code>dev</code>，通过 <code>disk_to_dev</code> 宏转换得到</p>
 </li>
 </ol>
-<h3 id="设备回写管理" class="heading-element">
-  <a href="#%e8%ae%be%e5%a4%87%e5%9b%9e%e5%86%99%e7%ae%a1%e7%90%86" class="heading-mark"></a>设备回写管理</h3><p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>bdi_writeback</code> 结构体，用于管理一个块设备的回写，同时支持 <code>cgroup</code> 进行限制</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<h3 id="设备回写管理" class="heading-element"><span>设备回写管理</span>
+  <a href="#%e8%ae%be%e5%a4%87%e5%9b%9e%e5%86%99%e7%ae%a1%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>在 <code>include/linux/backing-dev-defs.h</code> 中定义了 <code>bdi_writeback</code> 结构体，用于管理一个块设备的回写，同时支持 <code>cgroup</code> 进行限制</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -525,10 +551,19 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="初始化-1" class="heading-element">
-  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96-1" class="heading-mark"></a>初始化</h4><p>该结构体由 <code>mm/backing-dev.c</code> 中的 <code>wb_init</code> 函数初始化</p>
-<div class="mermaid" id="id-3"></div><h4 id="部分字段说明-1" class="heading-element">
-  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e-1" class="heading-mark"></a>部分字段说明</h4><ol>
+</div><h4 id="初始化-1" class="heading-element"><span>初始化</span>
+  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>该结构体由 <code>mm/backing-dev.c</code> 中的 <code>wb_init</code> 函数初始化</p>
+<pre class="mermaid">graph TD
+bdi_init --> cgwb_bdi_init --> wb_init</pre>
+<template>graph TD
+bdi_init --> cgwb_bdi_init --> wb_init</template><h4 id="部分字段说明-1" class="heading-element"><span>部分字段说明</span>
+  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
 <li>
 <p><code>b_dirty</code> 字段</p>
 <p>暂存所有的脏 inode 的链表</p>
@@ -562,9 +597,12 @@
 <p>为了保护 <code>work_list</code> 以及 <code>dwork</code> 调度的自旋锁</p>
 </li>
 </ol>
-<h3 id="回写任务" class="heading-element">
-  <a href="#%e5%9b%9e%e5%86%99%e4%bb%bb%e5%8a%a1" class="heading-mark"></a>回写任务</h3><p>在 <code>fs/fs-writeback.c</code> 中定义了 <code>wb_writeback_work</code> 结构体，用于描述一次回写任务的相关参数</p>
-<div class="highlight" id="id-4"><div class="chroma">
+<h3 id="回写任务" class="heading-element"><span>回写任务</span>
+  <a href="#%e5%9b%9e%e5%86%99%e4%bb%bb%e5%8a%a1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>在 <code>fs/fs-writeback.c</code> 中定义了 <code>wb_writeback_work</code> 结构体，用于描述一次回写任务的相关参数</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -622,7 +660,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>后续通过 <code>include/linux/writeback.h</code> 中的 <code>writeback_control</code> 结构体封装，传递给底层的 <code>writepages</code> 函数</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -727,8 +765,11 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="部分字段说明-2" class="heading-element">
-  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e-2" class="heading-mark"></a>部分字段说明</h4><ol>
+</div><h4 id="部分字段说明-2" class="heading-element"><span>部分字段说明</span>
+  <a href="#%e9%83%a8%e5%88%86%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e-2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
 <li>
 <p><code>sync_mode</code> 字段</p>
 <p><code>WB_SYNC_NONE</code>：绝大部分回写任务的配置，不会等待回写真正落盘，下发写命令后就返回</p>
@@ -755,22 +796,34 @@
 <p>值为 1 表示当前任务是阈值回写任务 <code>sync</code> 系统调用手动触发的回写任务。<code>sync</code> 系统调用详情参考 <a href="#sync">后续小节</a></p>
 </li>
 </ol>
-<h2 id="回写线程" class="heading-element">
-  <a href="#%e5%9b%9e%e5%86%99%e7%ba%bf%e7%a8%8b" class="heading-mark"></a>回写线程</h2><p>前面说过 <code>bdi_writeback</code> 结构体中 <code>struct delayed_work dwork</code> 就是关键的负责 page cache 回写工作的结构体</p>
-<h3 id="初始化-2" class="heading-element">
-  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96-2" class="heading-mark"></a>初始化</h3><p><code>wb_init</code> 函数会对 <code>wb-&gt;dwork</code> 赋值，注册实际的工作函数 <code>wb_workfn</code></p>
+<h2 id="回写线程" class="heading-element"><span>回写线程</span>
+  <a href="#%e5%9b%9e%e5%86%99%e7%ba%bf%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>前面说过 <code>bdi_writeback</code> 结构体中 <code>struct delayed_work dwork</code> 就是关键的负责 page cache 回写工作的结构体</p>
+<h3 id="初始化-2" class="heading-element"><span>初始化</span>
+  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96-2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>wb_init</code> 函数会对 <code>wb-&gt;dwork</code> 赋值，注册实际的工作函数 <code>wb_workfn</code></p>
 <p>由于这是个 <code>delayed_work</code>，注册的工作函数不会立即执行，需要后续利用 <code>mod_delayed_work</code> 来修改 <code>delayed_work</code> 内置的定时器时间来唤醒</p>
 <p><figure><a class="lightgallery" href="/posts/646202b9/wb_init.png?size=large" data-thumbnail="/posts/646202b9/wb_init.png?size=small" data-sub-html="<h2>wb_init 调用图</h2><p>wb_init 调用图</p>"><img loading="lazy" src="/posts/646202b9/wb_init.png" alt="wb_init 调用图" srcset="/posts/646202b9/wb_init.png?size=small, /posts/646202b9/wb_init.png?size=medium 1.5x, /posts/646202b9/wb_init.png?size=large 2x" data-title="wb_init 调用图" style="--width: 1281px;--aspect-ratio: 1281 / 795;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">wb_init 调用图</figcaption>
   </figure></p>
 <p>(P.S. 图片中函数开头为 <code>cg</code> 代表和 <code>cgroup</code> 相关，同一层级多个同名函数和宏定义的编译控制有关)</p>
 <p>根据函数调用图，大致分析可知，当设备申请 <code>queue</code> 时会初始化 <code>backing_dev_info</code> 结构体和 <code>bdi_writeback</code> 结构体，以及初始化回写线程</p>
-<h3 id="立即唤醒" class="heading-element">
-  <a href="#%e7%ab%8b%e5%8d%b3%e5%94%a4%e9%86%92" class="heading-mark"></a>立即唤醒</h3><p>虽然 <code>dwork</code> 是个 <code>delayed_work</code>，但是我们可以在调用 <code>mod_delayed_work</code> 将延时设置为 0，来立即唤醒回写线程</p>
+<h3 id="立即唤醒" class="heading-element"><span>立即唤醒</span>
+  <a href="#%e7%ab%8b%e5%8d%b3%e5%94%a4%e9%86%92" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>虽然 <code>dwork</code> 是个 <code>delayed_work</code>，但是我们可以在调用 <code>mod_delayed_work</code> 将延时设置为 0，来立即唤醒回写线程</p>
 <p><figure><a class="lightgallery" href="/posts/646202b9/dwork_callers.png?size=large" data-thumbnail="/posts/646202b9/dwork_callers.png?size=small" data-sub-html="<h2>dwork 调用图</h2><p>dwork 调用图</p>"><img loading="lazy" src="/posts/646202b9/dwork_callers.png" alt="dwork 调用图" srcset="/posts/646202b9/dwork_callers.png?size=small, /posts/646202b9/dwork_callers.png?size=medium 1.5x, /posts/646202b9/dwork_callers.png?size=large 2x" data-title="dwork 调用图" style="--width: 408px;--aspect-ratio: 408 / 233;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">dwork 调用图</figcaption>
   </figure></p>
-<h4 id="wb_wakeup" class="heading-element">
-  <a href="#wb_wakeup" class="heading-mark"></a><code>wb_wakeup</code></h4><p><code>wb_wakeup</code> 就是修改延时为 0，直接唤醒回写线程</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<h4 id="wb_wakeup" class="heading-element"><span><code>wb_wakeup</code></span>
+  <a href="#wb_wakeup" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><code>wb_wakeup</code> 就是修改延时为 0，直接唤醒回写线程</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -791,9 +844,12 @@
 </span></span><span class="line"><span class="cl">	<span class="nf">spin_unlock_bh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wb</span><span class="o">-&gt;</span><span class="n">work_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="wb_queue_work" class="heading-element">
-  <a href="#wb_queue_work" class="heading-mark"></a><code>wb_queue_work</code></h4><p><code>wb_queue_work</code> 将一个回写任务插入到队列尾部，然后修改延时为 0，立即唤醒回写线程</p>
-<div class="highlight" id="id-7"><div class="chroma">
+</div><h4 id="wb_queue_work" class="heading-element"><span><code>wb_queue_work</code></span>
+  <a href="#wb_queue_work" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><code>wb_queue_work</code> 将一个回写任务插入到队列尾部，然后修改延时为 0，立即唤醒回写线程</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -836,9 +892,12 @@
 </span></span><span class="line"><span class="cl">	<span class="nf">spin_unlock_bh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wb</span><span class="o">-&gt;</span><span class="n">work_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="定时唤醒" class="heading-element">
-  <a href="#%e5%ae%9a%e6%97%b6%e5%94%a4%e9%86%92" class="heading-mark"></a>定时唤醒</h3><p>定时唤醒主要是由 <code>wb_wakeup_delayed</code> 来实现的，而时间间隔在 <code>mm/page-writeback.c</code> 进行了定义</p>
-<div class="highlight" id="id-8"><div class="chroma">
+</div><h3 id="定时唤醒" class="heading-element"><span>定时唤醒</span>
+  <a href="#%e5%ae%9a%e6%97%b6%e5%94%a4%e9%86%92" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>定时唤醒主要是由 <code>wb_wakeup_delayed</code> 来实现的，而时间间隔在 <code>mm/page-writeback.c</code> 进行了定义</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -857,7 +916,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nf">EXPORT_SYMBOL_GPL</span><span class="p">(</span><span class="n">dirty_writeback_interval</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-9"><div class="chroma">
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -921,16 +980,30 @@
 <li><code>wb_workfn</code>：当回写线程处理完 <code>work_list</code> 上的所有任务后，如果仍有脏 <code>inode</code> 在 <code>b_{dirty|io|more_io}</code> 上时，开启定时唤醒</li>
 </ul>
 <p>简单的讲，就是只要存在脏 <code>inode</code> 在 <code>b_{dirty|io|more_io}</code> 上时，内核的回写线程每 5s 内肯定会被唤醒一次</p>
-<h3 id="释放销毁" class="heading-element">
-  <a href="#%e9%87%8a%e6%94%be%e9%94%80%e6%af%81" class="heading-mark"></a>释放销毁</h3><p><figure><a class="lightgallery" href="/posts/646202b9/release_bdi.png?size=large" data-thumbnail="/posts/646202b9/release_bdi.png?size=small" data-sub-html="<h2>release_bdi 调用图</h2><p>release_bdi 调用图</p>"><img loading="lazy" src="/posts/646202b9/release_bdi.png" alt="release_bdi 调用图" srcset="/posts/646202b9/release_bdi.png?size=small, /posts/646202b9/release_bdi.png?size=medium 1.5x, /posts/646202b9/release_bdi.png?size=large 2x" data-title="release_bdi 调用图" style="--width: 634px;--aspect-ratio: 634 / 283;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">release_bdi 调用图</figcaption>
+<h3 id="释放销毁" class="heading-element"><span>释放销毁</span>
+  <a href="#%e9%87%8a%e6%94%be%e9%94%80%e6%af%81" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><figure><a class="lightgallery" href="/posts/646202b9/release_bdi.png?size=large" data-thumbnail="/posts/646202b9/release_bdi.png?size=small" data-sub-html="<h2>release_bdi 调用图</h2><p>release_bdi 调用图</p>"><img loading="lazy" src="/posts/646202b9/release_bdi.png" alt="release_bdi 调用图" srcset="/posts/646202b9/release_bdi.png?size=small, /posts/646202b9/release_bdi.png?size=medium 1.5x, /posts/646202b9/release_bdi.png?size=large 2x" data-title="release_bdi 调用图" style="--width: 634px;--aspect-ratio: 634 / 283;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">release_bdi 调用图</figcaption>
   </figure></p>
 <p>当需要对整个 <code>backing_dev_info</code> 结构释放时，也会立即唤醒内核回写线程，并且会下刷现有的所有工作</p>
-<div class="mermaid" id="id-10"></div><h2 id="细节分析" class="heading-element">
-  <a href="#%e7%bb%86%e8%8a%82%e5%88%86%e6%9e%90" class="heading-mark"></a>细节分析</h2><h3 id="tag-and-write" class="heading-element">
-  <a href="#tag-and-write" class="heading-mark"></a><code>tag-and-write</code></h3><p>该机制会在 <code>write_pages</code> 时先快速对下刷范围内的脏页进行标记，后续只对标记过的脏页进行下刷</p>
+<pre class="mermaid">graph TD
+release_bdi --> bdi_unregister --> wb_shutdown
+release_bdi ---> wb_exit</pre>
+<template>graph TD
+release_bdi --> bdi_unregister --> wb_shutdown
+release_bdi ---> wb_exit</template><h2 id="细节分析" class="heading-element"><span>细节分析</span>
+  <a href="#%e7%bb%86%e8%8a%82%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="tag-and-write" class="heading-element"><span><code>tag-and-write</code></span>
+  <a href="#tag-and-write" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>该机制会在 <code>write_pages</code> 时先快速对下刷范围内的脏页进行标记，后续只对标记过的脏页进行下刷</p>
 <p>首先回写任务的参数会通过 <code>fs/fs-writeback.c</code> 的 <code>writeback_sb_inodes</code> 函数传递给 <code>struct writeback_control wbc</code></p>
 <p>后续在 <code>mm/page-writeback.c</code> 中 <code>write_cache_pages</code> 就会根据 <code>wbc</code> 的 <code>tagged_writepages</code> 字段进行判断，配置不同的 <code>tag</code>，以及是否需要快速遍历脏页并标记</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -1270,7 +1343,7 @@
 </span></span><span class="line"><span class="cl"><span class="nf">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">write_cache_pages</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在 <code>fs/fs-writeback.c</code> 中 <code>writeback_chunk_size</code> 里面的注释也对这个流程进行了描述</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1335,9 +1408,12 @@
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">pages</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="range_cyclic" class="heading-element">
-  <a href="#range_cyclic" class="heading-mark"></a><code>range_cyclic</code></h3><p><code>range_cyclic</code> 早在内核的 v2.6.18-rc1 版本就已经实现，可以参考 <a href="https://github.com/torvalds/linux/commit/111ebb6e6f7bd7de6d722c5848e95621f43700d9"target="_blank" rel="external nofollow noopener noreferrer">111ebb6</a> 的提交信息辅助理解</p>
-<div class="highlight" id="id-13"><div class="chroma">
+</div><h3 id="range_cyclic" class="heading-element"><span><code>range_cyclic</code></span>
+  <a href="#range_cyclic" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>range_cyclic</code> 早在内核的 v2.6.18-rc1 版本就已经实现，可以参考 <a href="https://github.com/torvalds/linux/commit/111ebb6e6f7bd7de6d722c5848e95621f43700d9"target="_blank" rel="external nofollow noopener noreferrer">111ebb6</a> 的提交信息辅助理解</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1383,56 +1459,61 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[PATCH] writeback: fix range handling
-</span></span><span class="line"><span class="cl">When a writeback_control&#39;s `start&#39; and `end&#39; fields are used to
-</span></span><span class="line"><span class="cl">indicate a one-byte-range starting at file offset zero, the required
-</span></span><span class="line"><span class="cl">values of .start=0,.end=0 mean that the -&gt;writepages() implementation
-</span></span><span class="line"><span class="cl">has no way of telling that it is being asked to perform a range
-</span></span><span class="line"><span class="cl">request.  Because we&#39;re currently overloading (start == 0 &amp;&amp; end == 0)
-</span></span><span class="line"><span class="cl">to mean &#34;this is not a write-a-range request&#34;.
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">[</span><span class="n">PATCH</span><span class="p">]</span> <span class="n">writeback</span><span class="p">:</span> <span class="n">fix</span> <span class="nb">range</span> <span class="n">handling</span>
+</span></span><span class="line"><span class="cl"><span class="n">When</span> <span class="n">a</span> <span class="n">writeback_control</span><span class="s1">&#39;s `start&#39;</span> <span class="ow">and</span> <span class="err">`</span><span class="n">end</span><span class="s1">&#39; fields are used to</span>
+</span></span><span class="line"><span class="cl"><span class="n">indicate</span> <span class="n">a</span> <span class="n">one</span><span class="o">-</span><span class="n">byte</span><span class="o">-</span><span class="nb">range</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">file</span> <span class="n">offset</span> <span class="n">zero</span><span class="p">,</span> <span class="n">the</span> <span class="n">required</span>
+</span></span><span class="line"><span class="cl"><span class="n">values</span> <span class="n">of</span> <span class="o">.</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="o">.</span><span class="n">end</span><span class="o">=</span><span class="mi">0</span> <span class="n">mean</span> <span class="n">that</span> <span class="n">the</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">implementation</span>
+</span></span><span class="line"><span class="cl"><span class="n">has</span> <span class="n">no</span> <span class="n">way</span> <span class="n">of</span> <span class="n">telling</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">being</span> <span class="n">asked</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">a</span> <span class="nb">range</span>
+</span></span><span class="line"><span class="cl"><span class="n">request</span><span class="o">.</span>  <span class="n">Because</span> <span class="n">we</span><span class="s1">&#39;re currently overloading (start == 0 &amp;&amp; end == 0)</span>
+</span></span><span class="line"><span class="cl"><span class="n">to</span> <span class="n">mean</span> <span class="s2">&#34;this is not a write-a-range request&#34;</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">To make all this sane, the patch changes range of writeback_control.
+</span></span><span class="line"><span class="cl"><span class="n">To</span> <span class="n">make</span> <span class="n">all</span> <span class="n">this</span> <span class="n">sane</span><span class="p">,</span> <span class="n">the</span> <span class="n">patch</span> <span class="n">changes</span> <span class="nb">range</span> <span class="n">of</span> <span class="n">writeback_control</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">So caller does: If it is calling -&gt;writepages() to write pages, it
-</span></span><span class="line"><span class="cl">sets range (range_start/end or range_cyclic) always.
+</span></span><span class="line"><span class="cl"><span class="n">So</span> <span class="n">caller</span> <span class="n">does</span><span class="p">:</span> <span class="n">If</span> <span class="n">it</span> <span class="n">is</span> <span class="n">calling</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">to</span> <span class="n">write</span> <span class="n">pages</span><span class="p">,</span> <span class="n">it</span>
+</span></span><span class="line"><span class="cl"><span class="n">sets</span> <span class="nb">range</span> <span class="p">(</span><span class="n">range_start</span><span class="o">/</span><span class="n">end</span> <span class="ow">or</span> <span class="n">range_cyclic</span><span class="p">)</span> <span class="n">always</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">And if range_cyclic is true, -&gt;writepages() thinks the range is
-</span></span><span class="line"><span class="cl">cyclic, otherwise it just uses range_start and range_end.
+</span></span><span class="line"><span class="cl"><span class="n">And</span> <span class="k">if</span> <span class="n">range_cyclic</span> <span class="n">is</span> <span class="bp">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">thinks</span> <span class="n">the</span> <span class="nb">range</span> <span class="n">is</span>
+</span></span><span class="line"><span class="cl"><span class="n">cyclic</span><span class="p">,</span> <span class="n">otherwise</span> <span class="n">it</span> <span class="n">just</span> <span class="n">uses</span> <span class="n">range_start</span> <span class="ow">and</span> <span class="n">range_end</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">This patch does,
+</span></span><span class="line"><span class="cl"><span class="n">This</span> <span class="n">patch</span> <span class="n">does</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    - Add LLONG_MAX, LLONG_MIN, ULLONG_MAX to include/linux/kernel.h
-</span></span><span class="line"><span class="cl">      -1 is usually ok for range_end (type is long long). But, if someone did,
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">Add</span> <span class="n">LLONG_MAX</span><span class="p">,</span> <span class="n">LLONG_MIN</span><span class="p">,</span> <span class="n">ULLONG_MAX</span> <span class="n">to</span> <span class="n">include</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-</span><span class="mi">1</span> <span class="n">is</span> <span class="n">usually</span> <span class="n">ok</span> <span class="k">for</span> <span class="n">range_end</span> <span class="p">(</span><span class="n">type</span> <span class="n">is</span> <span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="o">.</span> <span class="n">But</span><span class="p">,</span> <span class="k">if</span> <span class="n">someone</span> <span class="n">did</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		range_end += val;		range_end is &#34;val - 1&#34;
-</span></span><span class="line"><span class="cl">		u64val = range_end &gt;&gt; bits;	u64val is &#34;~(0ULL)&#34;
+</span></span><span class="line"><span class="cl">		<span class="n">range_end</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>		<span class="n">range_end</span> <span class="n">is</span> <span class="s2">&#34;val - 1&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">u64val</span> <span class="o">=</span> <span class="n">range_end</span> <span class="o">&gt;&gt;</span> <span class="n">bits</span><span class="p">;</span>	<span class="n">u64val</span> <span class="n">is</span> <span class="s2">&#34;~(0ULL)&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      or something, they are wrong. So, this adds LLONG_MAX to avoid nasty
-</span></span><span class="line"><span class="cl">      things, and uses LLONG_MAX for range_end.
+</span></span><span class="line"><span class="cl">      <span class="ow">or</span> <span class="n">something</span><span class="p">,</span> <span class="n">they</span> <span class="n">are</span> <span class="n">wrong</span><span class="o">.</span> <span class="n">So</span><span class="p">,</span> <span class="n">this</span> <span class="n">adds</span> <span class="n">LLONG_MAX</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">nasty</span>
+</span></span><span class="line"><span class="cl">      <span class="n">things</span><span class="p">,</span> <span class="ow">and</span> <span class="n">uses</span> <span class="n">LLONG_MAX</span> <span class="k">for</span> <span class="n">range_end</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    - All callers of -&gt;writepages() sets range_start/end or range_cyclic.
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">All</span> <span class="n">callers</span> <span class="n">of</span> <span class="o">-&gt;</span><span class="n">writepages</span><span class="p">()</span> <span class="n">sets</span> <span class="n">range_start</span><span class="o">/</span><span class="n">end</span> <span class="ow">or</span> <span class="n">range_cyclic</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    - Fix updates of -&gt;writeback_index. It seems already bit strange.
-</span></span><span class="line"><span class="cl">      If it starts at 0 and ended by check of nr_to_write, this last
-</span></span><span class="line"><span class="cl">      index may reduce chance to scan end of file.  So, this updates
-</span></span><span class="line"><span class="cl">      -&gt;writeback_index only if range_cyclic is true or whole-file is
-</span></span><span class="line"><span class="cl">      scanned.
+</span></span><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">Fix</span> <span class="n">updates</span> <span class="n">of</span> <span class="o">-&gt;</span><span class="n">writeback_index</span><span class="o">.</span> <span class="n">It</span> <span class="n">seems</span> <span class="n">already</span> <span class="n">bit</span> <span class="n">strange</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">If</span> <span class="n">it</span> <span class="n">starts</span> <span class="n">at</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">ended</span> <span class="n">by</span> <span class="n">check</span> <span class="n">of</span> <span class="n">nr_to_write</span><span class="p">,</span> <span class="n">this</span> <span class="n">last</span>
+</span></span><span class="line"><span class="cl">      <span class="n">index</span> <span class="n">may</span> <span class="n">reduce</span> <span class="n">chance</span> <span class="n">to</span> <span class="n">scan</span> <span class="n">end</span> <span class="n">of</span> <span class="n">file</span><span class="o">.</span>  <span class="n">So</span><span class="p">,</span> <span class="n">this</span> <span class="n">updates</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-&gt;</span><span class="n">writeback_index</span> <span class="n">only</span> <span class="k">if</span> <span class="n">range_cyclic</span> <span class="n">is</span> <span class="bp">true</span> <span class="ow">or</span> <span class="n">whole</span><span class="o">-</span><span class="n">file</span> <span class="n">is</span>
+</span></span><span class="line"><span class="cl">      <span class="n">scanned</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Signed-off-by: OGAWA Hirofumi &lt;hirofumi@mail.parknet.co.jp&gt;
-</span></span><span class="line"><span class="cl">Cc: Nathan Scott &lt;nathans@sgi.com&gt;
-</span></span><span class="line"><span class="cl">Cc: Anton Altaparmakov &lt;aia21@cantab.net&gt;
-</span></span><span class="line"><span class="cl">Cc: Steven French &lt;sfrench@us.ibm.com&gt;
-</span></span><span class="line"><span class="cl">Cc: &#34;Vladimir V. Saveliev&#34; &lt;vs@namesys.com&gt;
-</span></span><span class="line"><span class="cl">Signed-off-by: Andrew Morton &lt;akpm@osdl.org&gt;
-</span></span><span class="line"><span class="cl">Signed-off-by: Linus Torvalds &lt;torvalds@osdl.org&gt;</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">Signed</span><span class="o">-</span><span class="n">off</span><span class="o">-</span><span class="n">by</span><span class="p">:</span> <span class="n">OGAWA</span> <span class="n">Hirofumi</span> <span class="o">&lt;</span><span class="n">hirofumi</span><span class="err">@</span><span class="n">mail</span><span class="o">.</span><span class="n">parknet</span><span class="o">.</span><span class="n">co</span><span class="o">.</span><span class="n">jp</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="n">Nathan</span> <span class="n">Scott</span> <span class="o">&lt;</span><span class="n">nathans</span><span class="err">@</span><span class="n">sgi</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="n">Anton</span> <span class="n">Altaparmakov</span> <span class="o">&lt;</span><span class="n">aia21</span><span class="err">@</span><span class="n">cantab</span><span class="o">.</span><span class="n">net</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="n">Steven</span> <span class="n">French</span> <span class="o">&lt;</span><span class="n">sfrench</span><span class="err">@</span><span class="n">us</span><span class="o">.</span><span class="n">ibm</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cc</span><span class="p">:</span> <span class="s2">&#34;Vladimir V. Saveliev&#34;</span> <span class="o">&lt;</span><span class="n">vs</span><span class="err">@</span><span class="n">namesys</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Signed</span><span class="o">-</span><span class="n">off</span><span class="o">-</span><span class="n">by</span><span class="p">:</span> <span class="n">Andrew</span> <span class="n">Morton</span> <span class="o">&lt;</span><span class="n">akpm</span><span class="err">@</span><span class="n">osdl</span><span class="o">.</span><span class="n">org</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Signed</span><span class="o">-</span><span class="n">off</span><span class="o">-</span><span class="n">by</span><span class="p">:</span> <span class="n">Linus</span> <span class="n">Torvalds</span> <span class="o">&lt;</span><span class="n">torvalds</span><span class="err">@</span><span class="n">osdl</span><span class="o">.</span><span class="n">org</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>range_cyclic</code> 和 <code>range_start/end</code> 互斥</p>
 <ul>
 <li>当开启 <code>range_cyclic</code> 将无视 <code>range_start/end</code> 的值</li>
 <li>否则底层 <code>writepages</code> 函数则使用 <code>range_start/end</code> 作为写的范围</li>
 </ul>
-<div class="mermaid" id="id-14"></div><p>结合实际代码，在 <code>mm/page-writeback.c</code> 的 <code>write_cache_pages</code> 函数中有以下片段</p>
-<div class="highlight" id="id-15"><div class="chroma">
+<pre class="mermaid">graph TD
+do_writepages --> writepages("mapping->a_ops->writepages()")
+do_writepages --> generic_writepages --> write_cache_pages</pre>
+<template>graph TD
+do_writepages --> writepages("mapping->a_ops->writepages()")
+do_writepages --> generic_writepages --> write_cache_pages</template><p>结合实际代码，在 <code>mm/page-writeback.c</code> 的 <code>write_cache_pages</code> 函数中有以下片段</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1482,9 +1563,12 @@
 </span></span><span class="line"><span class="cl">		<span class="n">mapping</span><span class="o">-&gt;</span><span class="n">writeback_index</span> <span class="o">=</span> <span class="n">done_index</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>range_cyclic</code> 开启后会使用 <code>mapping-&gt;writeback_index</code> 作为本次回写的起始地址，并会在完成本次回写流程（回写页数限制或者到达文件末尾）后更新 <code>mapping-&gt;writeback_index</code></p>
-<h3 id="定期回写" class="heading-element">
-  <a href="#%e5%ae%9a%e6%9c%9f%e5%9b%9e%e5%86%99" class="heading-mark"></a>定期回写</h3><p>定期回写的任务声明在 <code>fs/fs-writeback.c</code> 的 <code>wb_check_old_data_flush</code> 函数中，而这个函数则是被 <code>wb_workfn</code> 调用</p>
-<div class="highlight" id="id-16"><div class="chroma">
+<h3 id="定期回写" class="heading-element"><span>定期回写</span>
+  <a href="#%e5%ae%9a%e6%9c%9f%e5%9b%9e%e5%86%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>定期回写的任务声明在 <code>fs/fs-writeback.c</code> 的 <code>wb_check_old_data_flush</code> 函数中，而这个函数则是被 <code>wb_workfn</code> 调用</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1557,13 +1641,19 @@
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="mermaid" id="id-17"></div><p>首先要保证当前时间在上次定期回写的 5s （和定期唤醒的时间间隔一致）后，并且当前存在脏页，才会生成一次定期回写的任务，也就是说每 5s 内最多触发一次定期回写</p>
+</div><pre class="mermaid">graph TD
+wb_wakeup -.-> wb_workfn -->|通常情况| wb_do_writeback --> wb_check_old_data_flush</pre>
+<template>graph TD
+wb_wakeup -.-> wb_workfn -->|通常情况| wb_do_writeback --> wb_check_old_data_flush</template><p>首先要保证当前时间在上次定期回写的 5s （和定期唤醒的时间间隔一致）后，并且当前存在脏页，才会生成一次定期回写的任务，也就是说每 5s 内最多触发一次定期回写</p>
 <p>生成的回写任务交给 <code>fs/fs-writeback.c</code> 的 <code>wb_writeback</code> 函数处理</p>
 <p>并且定期回写属于一种后台回写，优先级较低，只有在 <code>wb-&gt;work_list</code> 为空时才会执行</p>
 <p><code>wb_writeback</code> 执行定期回写时只会选择在至脏时间在当前时间 30s 之前的 <code>inode</code> 的所有脏页进行回写</p>
-<h3 id="阈值回写" class="heading-element">
-  <a href="#%e9%98%88%e5%80%bc%e5%9b%9e%e5%86%99" class="heading-mark"></a>阈值回写</h3><p>针对脏页率内核中有两个阈值，10% 和 20%</p>
-<div class="highlight" id="id-18"><div class="chroma">
+<h3 id="阈值回写" class="heading-element"><span>阈值回写</span>
+  <a href="#%e9%98%88%e5%80%bc%e5%9b%9e%e5%86%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>针对脏页率内核中有两个阈值，10% 和 20%</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1594,18 +1684,29 @@
 <li>
 <p>bg_thresh 后台阈值</p>
 <p>当脏页率达到 10% 时会以后台的方式进行回写</p>
-<div class="mermaid" id="id-19"></div><p>当用户 <code>write</code> 调用使用 <code>generic_perform_write</code> 来写 page cache 时，会调用 <code>balance_dirty_pages_ratelimited</code> 来检查脏页率，当脏页率超过 10% 就会调用 <code>balance_dirty_pages</code> 来唤醒 <code>wb_workfn</code> 来进行下刷脏页，此时并不会阻塞当前的 <code>write</code> 过程</p>
+<pre class="mermaid">graph TD
+generic_perform_write --> balance_dirty_pages_ratelimited --> balance_dirty_pages --> wb_start_background_writeback --> wb_wakeup
+wb_wakeup -.-> wb_workfn -->|通常情况| wb_do_writeback -->|wb_over_bg_thresh| wb_check_background_flush</pre>
+<template>graph TD
+generic_perform_write --> balance_dirty_pages_ratelimited --> balance_dirty_pages --> wb_start_background_writeback --> wb_wakeup
+wb_wakeup -.-> wb_workfn -->|通常情况| wb_do_writeback -->|wb_over_bg_thresh| wb_check_background_flush</template><p>当用户 <code>write</code> 调用使用 <code>generic_perform_write</code> 来写 page cache 时，会调用 <code>balance_dirty_pages_ratelimited</code> 来检查脏页率，当脏页率超过 10% 就会调用 <code>balance_dirty_pages</code> 来唤醒 <code>wb_workfn</code> 来进行下刷脏页，此时并不会阻塞当前的 <code>write</code> 过程</p>
 </li>
 <li>
 <p>thresh 前台阈值</p>
 <p>而当脏页率达到 20% 之后则会触发前台回写，此时的函数调用和逻辑和上面基本一致，不同点在于当脏页率超过 20% 后会在 <code>balance_dirty_pages</code> 的循环中无法跳出，因此线程会阻塞，直到脏页率降低至 20% 以下，跳出循环，启用后台回写</p>
 </li>
 </ol>
-<h2 id="手动触发回写" class="heading-element">
-  <a href="#%e6%89%8b%e5%8a%a8%e8%a7%a6%e5%8f%91%e5%9b%9e%e5%86%99" class="heading-mark"></a>手动触发回写</h2><h3 id="sync" class="heading-element">
-  <a href="#sync" class="heading-mark"></a><code>sync</code></h3><p><code>sync</code> 系统调用会同步所有的 page cache</p>
+<h2 id="手动触发回写" class="heading-element"><span>手动触发回写</span>
+  <a href="#%e6%89%8b%e5%8a%a8%e8%a7%a6%e5%8f%91%e5%9b%9e%e5%86%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="sync" class="heading-element"><span><code>sync</code></span>
+  <a href="#sync" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>sync</code> 系统调用会同步所有的 page cache</p>
 <p>在 <code>bash</code> 上直接输入 <code>sync</code> 命令就会触发 <code>sync</code> 系统调用</p>
-<div class="highlight" id="id-20"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1688,9 +1789,12 @@
 </ul>
 </li>
 </ul>
-<h3 id="fsync-和-fdatasync" class="heading-element">
-  <a href="#fsync-%e5%92%8c-fdatasync" class="heading-mark"></a><code>fsync</code> 和 <code>fdatasync</code></h3><p><code>fsync</code> 和 <code>fdatasync</code> 系统调用则可以更加细粒度的下刷脏页，他们的下刷对象是一个文件</p>
-<div class="highlight" id="id-21"><div class="chroma">
+<h3 id="fsync-和-fdatasync" class="heading-element"><span><code>fsync</code> 和 <code>fdatasync</code></span>
+  <a href="#fsync-%e5%92%8c-fdatasync" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>fsync</code> 和 <code>fdatasync</code> 系统调用则可以更加细粒度的下刷脏页，他们的下刷对象是一个文件</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1814,7 +1918,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>fsync</code> 和 <code>fdatasync</code> 会调用文件系统注册的 <code>f_op-&gt;fsync()</code> 函数进行脏页的下刷。很多文件系统会使用或者参考通用的 <code>generic_file_fsync</code> 来实现，这里针对 <code>__generic_file_fsync</code> 进行分析</p>
-<div class="highlight" id="id-22"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1955,12 +2059,25 @@
 </div>
 </div><p>无论 <code>fsync</code> 还是 <code>fdatasync</code> 都会调用 <code>file_write_and_wait_range</code> 下刷 page cache 中的脏页。而在 indoe 本身元数据只是时间戳是脏时，<code>fdatasync</code> 就会跳过 <code>sync_inode_metadata</code>，不将元数据一起下刷到底层设备上；<code>fsync</code> 则不会跳过元数据的下刷。</p>
 <p>因此 <code>fsync</code> 至少需要两次 IO 写操作，开销比 <code>fdatasync</code> 更大</p>
-<h3 id="open-时带有-o_sync" class="heading-element">
-  <a href="#open-%e6%97%b6%e5%b8%a6%e6%9c%89-o_sync" class="heading-mark"></a><code>open</code> 时带有 <code>O_SYNC</code></h3><p>如果在打开一个文件时带了 <code>O_SYNC</code> 标记，则会在写入 page cache 后，再次调用 <code>vfs_fsync_range</code> 将数据下刷到底层设备上</p>
-<div class="mermaid" id="id-23"></div><p>在 <code>ext4</code>、<code>f2fs</code> 等文件系统 <code>write</code> 系统调用会使用 <code>new_sync_write</code> 来调用实际文件系统注册的 <code>read_iter</code> 函数</p>
+<h3 id="open-时带有-o_sync" class="heading-element"><span><code>open</code> 时带有 <code>O_SYNC</code></span>
+  <a href="#open-%e6%97%b6%e5%b8%a6%e6%9c%89-o_sync" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>如果在打开一个文件时带了 <code>O_SYNC</code> 标记，则会在写入 page cache 后，再次调用 <code>vfs_fsync_range</code> 将数据下刷到底层设备上</p>
+<pre class="mermaid">graph LR
+write系统调用 --> ksys_write --> vfs_write --> __vfs_write -->|ext4,f2fs等文件系统| new_sync_write</pre>
+<template>graph LR
+write系统调用 --> ksys_write --> vfs_write --> __vfs_write -->|ext4,f2fs等文件系统| new_sync_write</template><p>在 <code>ext4</code>、<code>f2fs</code> 等文件系统 <code>write</code> 系统调用会使用 <code>new_sync_write</code> 来调用实际文件系统注册的 <code>read_iter</code> 函数</p>
 <p>而 <code>new_sync_write</code> 调用先调用 <code>iocb_flags</code> 将用户配置的 <code>O_SYNC</code> 进行解析，为 <code>struct kiocb</code> 的 <code>ki_flags</code> 字段生成标记</p>
-<div class="mermaid" id="id-24"></div><p>和之前一样，大多数文件系统会直接使用或者参考通用的 <code>generic_file_write_iter</code> 来实现 <code>read_iter</code> 函数，这里针对 <code>generic_file_write_iter</code> 进行分析</p>
-<div class="highlight" id="id-25"><div class="chroma">
+<pre class="mermaid">graph TD
+new_sync_write --> init_sync_kiocb --> iocb_flags
+new_sync_write --> iov_iter_init
+new_sync_write --> call_write_iter</pre>
+<template>graph TD
+new_sync_write --> init_sync_kiocb --> iocb_flags
+new_sync_write --> iov_iter_init
+new_sync_write --> call_write_iter</template><p>和之前一样，大多数文件系统会直接使用或者参考通用的 <code>generic_file_write_iter</code> 来实现 <code>read_iter</code> 函数，这里针对 <code>generic_file_write_iter</code> 进行分析</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2028,7 +2145,7 @@
 </span></span><span class="line"><span class="cl"><span class="nf">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">generic_file_write_iter</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在 <code>__generic_file_write_iter</code> 完成之后，实际的数据已经被写入 page cache，之后会调用 <code>generic_write_sync</code> 会将刚刚写入 page cache 的数据通过 <code>vfs_fsync_range</code> 下刷到底层设备上</p>
-<div class="highlight" id="id-26"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2069,8 +2186,11 @@
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="参考资料" class="heading-element">
-  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark"></a>参考资料</h2><ul>
+</div><h2 id="参考资料" class="heading-element"><span>参考资料</span>
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
 <li><a href="https://blog.csdn.net/jasonactions/article/details/117292233"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】VFS 基础学习笔记 - 7. page cache 回写</a></li>
 <li><a href="https://blog.csdn.net/u011649400/article/details/96505600"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】VFS 源码分析 - Page Cache Writeback 脏页回写机制</a></li>
 <li>以及在评论区的某位不愿透露姓名的 dalao 的笔记</li>
@@ -2083,21 +2203,22 @@
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
-            <a href="https://ywang-wnlo.github.io/posts/646202b9/" title="page cache 回写机制">https://ywang-wnlo.github.io/posts/646202b9/</a>
+            <a href="https://ywang-wnlo.github.io/posts/646202b9/" title="">https://ywang-wnlo.github.io/posts/646202b9/</a>
         </li>
         <li class="post-copyright-license">
             <strong>版权声明：</strong>
             本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
     </ul>
-</div><h2 id="see-also">相关内容</h2>
+</div><hr class="awesome-hr" />
+    <h2 id="see-also">相关内容</h2>
     <ul><li>
-          <a href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a></li><li>
+          <a href="/posts/9ba60726/" title="Page Cache 简介">Page Cache 简介</a></li><li>
           <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
-          <a href="/posts/4f0d345c/" title="io_uring 内核源码分析">io_uring 内核源码分析</a></li></ul><div class="post-reward">
+          <a href="/posts/4f0d345c/" title="Io_uring 内核源码分析">Io_uring 内核源码分析</a></li></ul><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
-    <label class="reward-button" for="fi-reward">赞赏</label>
+    <label class="reward-button" for="fi-reward"><i class="fa-solid fa-qrcode fa-fw" aria-hidden="true"></i>赞赏</label>
     <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
           </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
@@ -2116,16 +2237,14 @@
       </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/page-cache/" class="post-tag" title="标签 - page cache">page cache</a><a href="/tags/buffer-io/" class="post-tag" title="标签 - buffer IO">buffer IO</a><a href="/tags/kernel/" class="post-tag" title="标签 - kernel">kernel</a><a href="/tags/writeback/" class="post-tag" title="标签 - writeback">writeback</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/page-cache/" class="post-tag" title="标签 - Page Cache">Page Cache</a><a href="/tags/buffer-io/" class="post-tag" title="标签 - Buffer IO">Buffer IO</a><a href="/tags/kernel/" class="post-tag" title="标签 - Kernel">Kernel</a><a href="/tags/writeback/" class="post-tag" title="标签 - Writeback">Writeback</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
-  </div>
-
-  <div class="post-nav"><a href="/posts/96a1807/" class="post-nav-item" rel="prev" title="OpenWrt 手动编译 ipk"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>OpenWrt 手动编译 ipk</a>
+  </div><div class="post-nav"><a href="/posts/96a1807/" class="post-nav-item" rel="prev" title="OpenWrt 手动编译 Ipk"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>OpenWrt 手动编译 Ipk</a>
       <a href="/posts/4143201a/" class="post-nav-item" rel="next" title="Hexo 插件推荐以及使用小技巧">Hexo 插件推荐以及使用小技巧<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-<div id="comments"><div id="giscus">
+<div id="comments"><div id="giscus" class="comment">
           <script
             src="https://giscus.app/client.js"
             data-repo="ywang-wnlo/ywang-wnlo.github.io"
@@ -2152,16 +2271,20 @@
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.132.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.11">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
-          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
-    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"data":{"id-10":"graph TD\nrelease_bdi --\u003e bdi_unregister --\u003e wb_shutdown\nrelease_bdi ---\u003e wb_exit","id-14":"graph TD\ndo_writepages --\u003e writepages(\"mapping-\u003ea_ops-\u003ewritepages()\")\ndo_writepages --\u003e generic_writepages --\u003e write_cache_pages","id-17":"graph TD\nwb_wakeup -.-\u003e wb_workfn --\u003e|通常情况| wb_do_writeback --\u003e wb_check_old_data_flush","id-19":"graph TD\ngeneric_perform_write --\u003e balance_dirty_pages_ratelimited --\u003e balance_dirty_pages --\u003e wb_start_background_writeback --\u003e wb_wakeup\nwb_wakeup -.-\u003e wb_workfn --\u003e|通常情况| wb_do_writeback --\u003e|wb_over_bg_thresh| wb_check_background_flush","id-23":"graph LR\nwrite系统调用 --\u003e ksys_write --\u003e vfs_write --\u003e __vfs_write --\u003e|ext4,f2fs等文件系统| new_sync_write","id-24":"graph TD\nnew_sync_write --\u003e init_sync_kiocb --\u003e iocb_flags\nnew_sync_write --\u003e iov_iter_init\nnew_sync_write --\u003e call_write_iter","id-3":"graph TD\nbdi_init --\u003e cgwb_bdi_init --\u003e wb_init"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    window.mermaid = mermaid;
+    window.mermaid.themes = ["default","dark"];
+  </script><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.11"};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

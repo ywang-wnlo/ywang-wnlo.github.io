@@ -6,24 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>从 C 过渡到 C&#43;&#43; - 乐园</title><meta name="author" content="Zeus">
-<meta name="author-link" content="https://github.com/ywang-wnlo">
-<meta name="description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数" /><meta name="keywords" content='C, C&#43;&#43;, 语法' /><meta itemprop="name" content="从 C 过渡到 C&#43;&#43;">
-<meta itemprop="description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数"><meta itemprop="datePublished" content="2023-09-24T11:48:03+08:00" />
-<meta itemprop="dateModified" content="2023-12-13T16:55:30+08:00" />
-<meta itemprop="wordCount" content="4924">
-<meta itemprop="keywords" content="C,C&#43;&#43;,语法," /><meta property="og:title" content="从 C 过渡到 C&#43;&#43;" />
-<meta property="og:description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ywang-wnlo.github.io/posts/89c4acb1/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-09-24T11:48:03+08:00" />
-<meta property="article:modified_time" content="2023-12-13T16:55:30+08:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="从 C 过渡到 C&#43;&#43;"/>
-<meta name="twitter:description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数"/>
+<meta name="description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数"><meta name="keywords" content='C, C&#43;&#43;, 语法'>
+  <meta itemprop="name" content="从 C 过渡到 C&#43;&#43;">
+  <meta itemprop="description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数">
+  <meta itemprop="datePublished" content="2023-09-24T11:48:03+08:00">
+  <meta itemprop="dateModified" content="2023-12-13T16:55:30+08:00">
+  <meta itemprop="wordCount" content="4927">
+  <meta itemprop="keywords" content="C,C&#43;&#43;,语法"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/89c4acb1/">
+  <meta property="og:site_name" content="乐园">
+  <meta property="og:title" content="从 C 过渡到 C&#43;&#43;">
+  <meta property="og:description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-09-24T11:48:03+08:00">
+    <meta property="article:modified_time" content="2023-12-13T16:55:30+08:00">
+    <meta property="article:tag" content="C">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="语法">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从 C 过渡到 C&#43;&#43;">
+  <meta name="twitter:description" content="本文介绍了 C&#43;&#43; 中的字符串以及文件操作，STL 中的容器与容器适配器，以及常用的成员函数">
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ywang-wnlo.github.io/posts/89c4acb1/" /><link rel="prev" href="https://ywang-wnlo.github.io/posts/139abad8/" /><link rel="next" href="https://ywang-wnlo.github.io/posts/2c65e859/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/89c4acb1/" title="从 C 过渡到 C&#43;&#43; - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/139abad8/" title="从论文的图中提取数据" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/2c65e859/" title="个人简历相关的基础知识梳理" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/89c4acb1/index.md" title="从 C 过渡到 C++ - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
   {
@@ -34,7 +42,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/89c4acb1\/"
-    },"genre": "posts","keywords": "C, C\u002b\u002b, 语法","wordcount":  4924 ,
+    },"genre": "posts","keywords": "C, C\u002b\u002b, 语法","wordcount":  4927 ,
     "url": "https:\/\/ywang-wnlo.github.io\/posts\/89c4acb1\/","datePublished": "2023-09-24T11:48:03+08:00","dateModified": "2023-12-13T16:55:30+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -46,7 +54,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -57,16 +65,16 @@
               ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
               <a
                 class="menu-link"
-                href="/tags/"
-                
-                
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
-              <a
-                class="menu-link"
                 href="/categories/"
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/posts/"
@@ -92,7 +100,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="/logo.png" data-title="/logo.png" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -125,17 +133,17 @@
               class="menu-item"
             ><a
                   class="menu-link"
-                  href="/tags/"
-                  
-                  
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
-              class="menu-item"
-            ><a
-                  class="menu-link"
                   href="/categories/"
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -157,9 +165,8 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>从 C 过渡到 C&#43;&#43;</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category" title="分类 - 学习笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 学习笔记</a></span></div><div class="post-meta-line"><span title="发布于 2023-09-24 11:48:03"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-24">2023-09-24</time></span>&nbsp;<span title="更新于 2023-12-13 16:55:30"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-13">2023-12-13</time></span>&nbsp;<span title="4924 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 10 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="从 C 过渡到 C&#43;&#43;">
-              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
-            </span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category" title="分类 - 学习笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 学习笔记</a></span></div><div class="post-meta-line"><span title="发布于 2023-09-24 11:48:03"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-24">2023-09-24</time></span>&nbsp;<span title="更新于 2023-12-13 16:55:30"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-13">2023-12-13</time></span>&nbsp;<span title="4927 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 10 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="从 C 过渡到 C&#43;&#43;"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -208,21 +215,30 @@
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><div class="details admonition note open">
+      </div><div class="content" id="content"><div class="details admonition warning open">
       <div class="details-summary admonition-title">
-        <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+        <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
       </div>
       <div class="details-content">
         <div class="admonition-content">本文最后更新于 2023-12-13，文中内容可能已过时。</div>
       </div>
-    </div><h2 id="前言" class="heading-element">
-  <a href="#%e5%89%8d%e8%a8%80" class="heading-mark"></a>前言</h2><p>由于 C 语言缺乏对 Map、Set 等数据结构的支持，在写算法题时，经常需要自己实现这些数据结构或者借助第三方库，例如 <a href="https://troydhanson.github.io/uthash/userguide.html"target="_blank" rel="external nofollow noopener noreferrer">uthash</a> 等。</p>
+    </div><h2 id="前言" class="heading-element"><span>前言</span>
+  <a href="#%e5%89%8d%e8%a8%80" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>由于 C 语言缺乏对 Map、Set 等数据结构的支持，在写算法题时，经常需要自己实现这些数据结构或者借助第三方库，例如 <a href="https://troydhanson.github.io/uthash/userguide.html"target="_blank" rel="external nofollow noopener noreferrer">uthash</a> 等。</p>
 <p>但是很难保证，线上笔试的编译环境是否支持这些第三方库，因此为了秋招以及重温对 C++ 的理解，最近在重新梳理 C++ 的知识。</p>
-<h2 id="字符串以及文件操作" class="heading-element">
-  <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%bb%a5%e5%8f%8a%e6%96%87%e4%bb%b6%e6%93%8d%e4%bd%9c" class="heading-mark"></a>字符串以及文件操作</h2><h3 id="字符串" class="heading-element">
-  <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2" class="heading-mark"></a>字符串</h3><p>C++ 支持字符串类型，即 <code>string</code>，而 C 语言中没有字符串类型，只能使用字符数组来表示字符串。
+<h2 id="字符串以及文件操作" class="heading-element"><span>字符串以及文件操作</span>
+  <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%bb%a5%e5%8f%8a%e6%96%87%e4%bb%b6%e6%93%8d%e4%bd%9c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="字符串" class="heading-element"><span>字符串</span>
+  <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>C++ 支持字符串类型，即 <code>string</code>，而 C 语言中没有字符串类型，只能使用字符数组来表示字符串。
 C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</code> 头文件中。</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -248,7 +264,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>针对 <code>string</code> 类型的变量，可以继续用 <code>[]</code> 进行索引，也可以使用 <code>size()</code> 函数获取字符串的长度。</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -280,7 +296,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>C++ 中的字符串类型和字符数组之间可以相互转换，只需使用 <code>c_str()</code> 函数以及 <code>string</code> 构造函数进行转换即可。</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -315,9 +331,12 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="标准输入输出" class="heading-element">
-  <a href="#%e6%a0%87%e5%87%86%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba" class="heading-mark"></a>标准输入输出</h3><p><code>cin</code> 和 <code>cout</code> 是 C++ 的标准输入输出流，分别对应于 C 语言中的 <code>scanf</code> 和 <code>printf</code>。</p>
-<div class="highlight" id="id-4"><div class="chroma">
+</div><h3 id="标准输入输出" class="heading-element"><span>标准输入输出</span>
+  <a href="#%e6%a0%87%e5%87%86%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>cin</code> 和 <code>cout</code> 是 C++ 的标准输入输出流，分别对应于 C 语言中的 <code>scanf</code> 和 <code>printf</code>。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -343,7 +362,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>然而 <code>cout</code> 的格式化输出较为麻烦，例如输出一个浮点数，需要指定精度、小数点后保留的位数等。</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -371,9 +390,12 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时我会继续使用 <code>printf</code>。</p>
-<h3 id="文件输入输出" class="heading-element">
-  <a href="#%e6%96%87%e4%bb%b6%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba" class="heading-mark"></a>文件输入输出</h3><p>C++ 中的文件输入输出流分别为 <code>ifstream</code> 和 <code>ofstream</code>，分别对应于 C 语言中的 <code>fopen</code> 和 <code>fprintf</code>。</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<h3 id="文件输入输出" class="heading-element"><span>文件输入输出</span>
+  <a href="#%e6%96%87%e4%bb%b6%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>C++ 中的文件输入输出流分别为 <code>ifstream</code> 和 <code>ofstream</code>，分别对应于 C 语言中的 <code>fopen</code> 和 <code>fprintf</code>。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -404,12 +426,18 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="其他常用函数" class="heading-element">
-  <a href="#%e5%85%b6%e4%bb%96%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0" class="heading-mark"></a>其他常用函数</h3><h4 id="getline-和-eof" class="heading-element">
-  <a href="#getline-%e5%92%8c-eof" class="heading-mark"></a><code>getline</code> 和 <code>eof</code></h4><p><code>getline</code> 函数用于读取一行字符串，其第一个参数为输入流，第二个参数为字符串变量。
+</div><h3 id="其他常用函数" class="heading-element"><span>其他常用函数</span>
+  <a href="#%e5%85%b6%e4%bb%96%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="getline-和-eof" class="heading-element"><span><code>getline</code> 和 <code>eof</code></span>
+  <a href="#getline-%e5%92%8c-eof" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><code>getline</code> 函数用于读取一行字符串，其第一个参数为输入流，第二个参数为字符串变量。
 获取的字符串不包含换行符。</p>
 <p><code>eof</code> 函数用于判断输入流是否已经读取到文件末尾。</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -444,10 +472,13 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="stoistolstollstofstodstold" class="heading-element">
-  <a href="#stoistolstollstofstodstold" class="heading-mark"></a><code>stoi</code>、<code>stol</code>、<code>stoll</code>、<code>stof</code>、<code>stod</code>、<code>stold</code></h4><p><code>stoi</code>、<code>stol</code>、<code>stoll</code>、<code>stof</code>、<code>stod</code>、<code>stold</code> 函数用于将字符串转换为整数、长整数、长长整数、浮点数、双精度浮点数、长双精度浮点数。
+</div><h4 id="stoistolstollstofstodstold" class="heading-element"><span><code>stoi</code>、<code>stol</code>、<code>stoll</code>、<code>stof</code>、<code>stod</code>、<code>stold</code></span>
+  <a href="#stoistolstollstofstodstold" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><code>stoi</code>、<code>stol</code>、<code>stoll</code>、<code>stof</code>、<code>stod</code>、<code>stold</code> 函数用于将字符串转换为整数、长整数、长长整数、浮点数、双精度浮点数、长双精度浮点数。
 他们的用法类似，只是返回值类型不同。</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -480,17 +511,26 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="stl" class="heading-element">
-  <a href="#stl" class="heading-mark"></a>STL</h2><p>STL 即标准模板库是 C++ 中的一个重要组成部分，包含了很多常用的数据结构和算法，例如 <code>vector</code>、<code>map</code>、<code>set</code>、<code>sort</code> 等。</p>
-<h3 id="容器与容器适配器" class="heading-element">
-  <a href="#%e5%ae%b9%e5%99%a8%e4%b8%8e%e5%ae%b9%e5%99%a8%e9%80%82%e9%85%8d%e5%99%a8" class="heading-mark"></a>容器与容器适配器</h3><p>C++ 的 STL 包含基础的容器和容器适配器，容器适配器是基础容器的封装，提供了一些特殊的功能。</p>
+</div><h2 id="stl" class="heading-element"><span>STL</span>
+  <a href="#stl" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>STL 即标准模板库是 C++ 中的一个重要组成部分，包含了很多常用的数据结构和算法，例如 <code>vector</code>、<code>map</code>、<code>set</code>、<code>sort</code> 等。</p>
+<h3 id="容器与容器适配器" class="heading-element"><span>容器与容器适配器</span>
+  <a href="#%e5%ae%b9%e5%99%a8%e4%b8%8e%e5%ae%b9%e5%99%a8%e9%80%82%e9%85%8d%e5%99%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>C++ 的 STL 包含基础的容器和容器适配器，容器适配器是基础容器的封装，提供了一些特殊的功能。</p>
 <ul>
 <li>序列式容器：<code>vector</code>、<code>deque</code>、<code>forward_list</code>、<code>list</code>、<code>array</code></li>
 <li>关联式容器：<code>set</code>、<code>map</code>、<code>unordered_set</code>、<code>unordered_map</code></li>
 <li>容器适配器：<code>stack</code>、<code>queue</code>、<code>priority_queue</code></li>
 </ul>
-<h3 id="向量-vector" class="heading-element">
-  <a href="#%e5%90%91%e9%87%8f-vector" class="heading-mark"></a>向量 <code>vector</code></h3><p><code>vector</code> 容器类似于 C 语言中的数组，但是 <code>vector</code> 的长度可以动态变化，其常用的成员函数有：</p>
+<h3 id="向量-vector" class="heading-element"><span>向量 <code>vector</code></span>
+  <a href="#%e5%90%91%e9%87%8f-vector" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>vector</code> 容器类似于 C 语言中的数组，但是 <code>vector</code> 的长度可以动态变化，其常用的成员函数有：</p>
 <ul>
 <li><code>push_back(xxx)</code>：在数组末尾添加一个元素</li>
 <li><code>pop_back()</code>：删除数组末尾的一个元素</li>
@@ -505,7 +545,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 <li><code>front()</code>：获取数组的首元素</li>
 <li><code>back()</code>：获取数组的末尾元素</li>
 </ul>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -588,9 +628,12 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="快速排序" class="heading-element">
-  <a href="#%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f" class="heading-mark"></a>快速排序</h3><p>C++ 中的快速排序函数为 <code>sort</code>，包含在 <code>algorithm</code> 头文件中，其第一个参数为数组的首地址，第二个参数为数组的末尾地址，第三个参数为比较函数。</p>
-<div class="highlight" id="id-10"><div class="chroma">
+</div><h3 id="快速排序" class="heading-element"><span>快速排序</span>
+  <a href="#%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>C++ 中的快速排序函数为 <code>sort</code>，包含在 <code>algorithm</code> 头文件中，其第一个参数为数组的首地址，第二个参数为数组的末尾地址，第三个参数为比较函数。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -651,8 +694,11 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="双端队列-deque" class="heading-element">
-  <a href="#%e5%8f%8c%e7%ab%af%e9%98%9f%e5%88%97-deque" class="heading-mark"></a>双端队列 <code>deque</code></h3><p><code>deque</code> 容器就是双端队列，可以在队列的首部和末尾添加元素以及删除元素，其常用的成员函数有：</p>
+</div><h3 id="双端队列-deque" class="heading-element"><span>双端队列 <code>deque</code></span>
+  <a href="#%e5%8f%8c%e7%ab%af%e9%98%9f%e5%88%97-deque" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>deque</code> 容器就是双端队列，可以在队列的首部和末尾添加元素以及删除元素，其常用的成员函数有：</p>
 <ul>
 <li><code>push_back(xxx)</code>：在队列末尾添加一个元素</li>
 <li><code>pop_back()</code>：删除队列末尾的一个元素</li>
@@ -668,7 +714,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 <li><code>front()</code>：获取队列的首元素</li>
 <li><code>back()</code>：获取队列的末尾元素</li>
 </ul>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -751,8 +797,11 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="队列-queue" class="heading-element">
-  <a href="#%e9%98%9f%e5%88%97-queue" class="heading-mark"></a>队列 <code>queue</code></h3><p><code>queue</code> 容器就是队列，只能在队列的末尾添加元素，在队列的首部删除元素，其常用的成员函数有：</p>
+</div><h3 id="队列-queue" class="heading-element"><span>队列 <code>queue</code></span>
+  <a href="#%e9%98%9f%e5%88%97-queue" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>queue</code> 容器就是队列，只能在队列的末尾添加元素，在队列的首部删除元素，其常用的成员函数有：</p>
 <ul>
 <li><code>push(xxx)</code>：在队列末尾添加一个元素</li>
 <li><code>pop()</code>：删除队列首部的一个元素</li>
@@ -762,7 +811,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 <li><code>front()</code>：获取队列的首元素</li>
 <li><code>back()</code>：获取队列的末尾元素</li>
 </ul>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -811,8 +860,11 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="栈-stack" class="heading-element">
-  <a href="#%e6%a0%88-stack" class="heading-mark"></a>栈 <code>stack</code></h3><p><code>stack</code> 容器 就是栈，只能在栈的末尾添加元素，在栈的末尾删除元素，其常用的成员函数有：</p>
+</div><h3 id="栈-stack" class="heading-element"><span>栈 <code>stack</code></span>
+  <a href="#%e6%a0%88-stack" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>stack</code> 容器 就是栈，只能在栈的末尾添加元素，在栈的末尾删除元素，其常用的成员函数有：</p>
 <ul>
 <li><code>push(xxx)</code>：在栈末尾添加一个元素</li>
 <li><code>pop()</code>：删除栈末尾的一个元素</li>
@@ -821,7 +873,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 <li><code>size()</code>：获取栈的长度</li>
 <li><code>top()</code>：获取栈顶元素</li>
 </ul>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -862,8 +914,11 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="优先级队列-priority_queue" class="heading-element">
-  <a href="#%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97-priority_queue" class="heading-mark"></a>优先级队列 <code>priority_queue</code></h3><p><code>priority_queue</code> 容器就是优先级队列，其底层实现为堆，其常用的成员函数有：</p>
+</div><h3 id="优先级队列-priority_queue" class="heading-element"><span>优先级队列 <code>priority_queue</code></span>
+  <a href="#%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97-priority_queue" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>priority_queue</code> 容器就是优先级队列，其底层实现为堆，其常用的成员函数有：</p>
 <ul>
 <li><code>push(xxx)</code>：在队列末尾添加一个元素</li>
 <li><code>pop()</code>：删除队列首部的一个元素</li>
@@ -872,12 +927,15 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 <li><code>size()</code>：获取队列的长度</li>
 <li><code>top()</code>：获取队列的首元素</li>
 </ul>
-<h4 id="大顶堆小顶堆" class="heading-element">
-  <a href="#%e5%a4%a7%e9%a1%b6%e5%a0%86%e5%b0%8f%e9%a1%b6%e5%a0%86" class="heading-mark"></a>大顶堆、小顶堆</h4><ul>
+<h4 id="大顶堆小顶堆" class="heading-element"><span>大顶堆、小顶堆</span>
+  <a href="#%e5%a4%a7%e9%a1%b6%e5%a0%86%e5%b0%8f%e9%a1%b6%e5%a0%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
 <li>默认情况下，<code>priority_queue</code> 容器使用的比较函数为 <code>less</code>，即从大到小的顺序排列,被称为大顶堆、大根堆;</li>
 <li>如果想要实现从小到大的顺序排列，也就是小顶堆、小根堆，需要使用 <code>greater</code> 比较函数。</li>
 </ul>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -944,8 +1002,11 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="集合-set" class="heading-element">
-  <a href="#%e9%9b%86%e5%90%88-set" class="heading-mark"></a>集合 <code>set</code></h3><p><code>set</code> 容器就是集合，其底层实现为红黑树，其常用的成员函数有：</p>
+</div><h3 id="集合-set" class="heading-element"><span>集合 <code>set</code></span>
+  <a href="#%e9%9b%86%e5%90%88-set" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>set</code> 容器就是集合，其底层实现为红黑树，其常用的成员函数有：</p>
 <ul>
 <li><code>insert(xxx)</code>：在集合中插入一个元素</li>
 <li><code>emplace(xxx)</code>：在集合中插入一个元素，与 <code>insert</code> 的区别是，<code>emplace</code> 效率更高</li>
@@ -958,7 +1019,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 <li><code>count(xxx)</code>：查找集合中是否存在某个元素，如果存在则返回 1，否则返回 0</li>
 <li><code>find(xxx)</code>：查找集合中是否存在某个元素，如果存在则返回该元素的迭代器，否则返回 <code>end()</code> 迭代器</li>
 </ul>
-<div class="highlight" id="id-15"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1041,8 +1102,11 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="映射-map" class="heading-element">
-  <a href="#%e6%98%a0%e5%b0%84-map" class="heading-mark"></a>映射 <code>map</code></h3><p><code>map</code> 容器就是映射，其底层实现也为红黑树，其常用的成员函数有：</p>
+</div><h3 id="映射-map" class="heading-element"><span>映射 <code>map</code></span>
+  <a href="#%e6%98%a0%e5%b0%84-map" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>map</code> 容器就是映射，其底层实现也为红黑树，其常用的成员函数有：</p>
 <ul>
 <li><code>[]</code>：获取映射中某个元素的值，如果不存在则会创建该元素并赋值为 0</li>
 <li><code>at(k)</code>：获取映射中某个元素的值，如果不存在则会抛出异常</li>
@@ -1057,7 +1121,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 <li><code>count(k)</code>：查找映射中是否存在某个元素，如果存在则返回 1，否则返回 0</li>
 <li><code>find(k)</code>：查找映射中是否存在某个元素，如果存在则返回该元素的迭代器，否则返回 <code>end()</code> 迭代器</li>
 </ul>
-<div class="highlight" id="id-16"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1144,9 +1208,12 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="无序集合-unordered_set" class="heading-element">
-  <a href="#%e6%97%a0%e5%ba%8f%e9%9b%86%e5%90%88-unordered_set" class="heading-mark"></a>无序集合 <code>unordered_set</code></h3><p><code>unordered_set</code> 容器就是无序集合，其底层实现为哈希表，其常用的成员函数和 <code>set</code> 容器相同。</p>
-<div class="highlight" id="id-17"><div class="chroma">
+</div><h3 id="无序集合-unordered_set" class="heading-element"><span>无序集合 <code>unordered_set</code></span>
+  <a href="#%e6%97%a0%e5%ba%8f%e9%9b%86%e5%90%88-unordered_set" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>unordered_set</code> 容器就是无序集合，其底层实现为哈希表，其常用的成员函数和 <code>set</code> 容器相同。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1229,9 +1296,12 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="哈希表-unordered_map" class="heading-element">
-  <a href="#%e5%93%88%e5%b8%8c%e8%a1%a8-unordered_map" class="heading-mark"></a>哈希表 <code>unordered_map</code></h3><p><code>unordered_map</code> 容器就是哈希表，其底层实现为哈希表，其常用的成员函数和 <code>map</code> 容器相同。</p>
-<div class="highlight" id="id-18"><div class="chroma">
+</div><h3 id="哈希表-unordered_map" class="heading-element"><span>哈希表 <code>unordered_map</code></span>
+  <a href="#%e5%93%88%e5%b8%8c%e8%a1%a8-unordered_map" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>unordered_map</code> 容器就是哈希表，其底层实现为哈希表，其常用的成员函数和 <code>map</code> 容器相同。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1310,15 +1380,21 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="其他" class="heading-element">
-  <a href="#%e5%85%b6%e4%bb%96" class="heading-mark"></a>其他</h2><h3 id="元组-tuple" class="heading-element">
-  <a href="#%e5%85%83%e7%bb%84-tuple" class="heading-mark"></a>元组 <code>tuple</code></h3><p><code>tuple</code> 容器就是元组，其常用的成员函数有：</p>
+</div><h2 id="其他" class="heading-element"><span>其他</span>
+  <a href="#%e5%85%b6%e4%bb%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="元组-tuple" class="heading-element"><span>元组 <code>tuple</code></span>
+  <a href="#%e5%85%83%e7%bb%84-tuple" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>tuple</code> 容器就是元组，其常用的成员函数有：</p>
 <ul>
 <li><code>get&lt;i&gt;(tuple)</code>：获取元组中第 <code>i</code> 个元素的值</li>
 <li><code>make_tuple(xxx, xxx, ……)</code>：创建一个元组</li>
 <li><code>tie(xxx, xxx, ……)</code>：将元组中的值赋值给变量</li>
 </ul>
-<div class="highlight" id="id-19"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1391,14 +1467,17 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="二元组-pair" class="heading-element">
-  <a href="#%e4%ba%8c%e5%85%83%e7%bb%84-pair" class="heading-mark"></a>二元组 pair</h3><p><code>pair</code> 容器就是二元组，是元组的特例，其常用的成员函数有：</p>
+</div><h3 id="二元组-pair" class="heading-element"><span>二元组 pair</span>
+  <a href="#%e4%ba%8c%e5%85%83%e7%bb%84-pair" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>pair</code> 容器就是二元组，是元组的特例，其常用的成员函数有：</p>
 <ul>
 <li><code>first</code>：获取二元组的第一个元素的值</li>
 <li><code>second</code>：获取二元组的第二个元素的值</li>
 <li><code>make_pair(xxx, xxx)</code>：创建一个二元组</li>
 </ul>
-<div class="highlight" id="id-20"><div class="chroma">
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1451,7 +1530,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
-            <a href="https://ywang-wnlo.github.io/posts/89c4acb1/" title="从 C 过渡到 C&#43;&#43;">https://ywang-wnlo.github.io/posts/89c4acb1/</a>
+            <a href="https://ywang-wnlo.github.io/posts/89c4acb1/" title="">https://ywang-wnlo.github.io/posts/89c4acb1/</a>
         </li>
         <li class="post-copyright-license">
             <strong>版权声明：</strong>
@@ -1461,7 +1540,7 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 </div><div class="post-reward">
     <div class="comment">请我一杯咖啡吧！</div>
     <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
-    <label class="reward-button" for="fi-reward">赞赏</label>
+    <label class="reward-button" for="fi-reward"><i class="fa-solid fa-qrcode fa-fw" aria-hidden="true"></i>赞赏</label>
     <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
           </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
           </div></div>
@@ -1484,12 +1563,10 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
-  </div>
-
-  <div class="post-nav"><a href="/posts/139abad8/" class="post-nav-item" rel="prev" title="从论文的图中提取数据"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>从论文的图中提取数据</a>
+  </div><div class="post-nav"><a href="/posts/139abad8/" class="post-nav-item" rel="prev" title="从论文的图中提取数据"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>从论文的图中提取数据</a>
       <a href="/posts/2c65e859/" class="post-nav-item" rel="next" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-<div id="comments"><div id="giscus">
+<div id="comments"><div id="giscus" class="comment">
           <script
             src="https://giscus.app/client.js"
             data-repo="ywang-wnlo/ywang-wnlo.github.io"
@@ -1516,16 +1593,16 @@ C++ 中的字符串类型为 <code>string</code>，其定义在 <code>string</co
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.132.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.11">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
-          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
-    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.9/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.9/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.11"};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
