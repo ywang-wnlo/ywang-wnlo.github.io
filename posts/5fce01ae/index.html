@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>基于 QEMU 的 Linux 内核编译和安装 - 乐园</title><meta name="author" content="Zeus">
+<meta name="description" content="本文主要记录个人做存储系统研究时，在 QEMU 环境下编译和安装 Linux 内核的过程"><meta name="keywords" content='QEMU, Linux, kernel'>
+  <meta itemprop="name" content="基于 QEMU 的 Linux 内核编译和安装">
+  <meta itemprop="description" content="本文主要记录个人做存储系统研究时，在 QEMU 环境下编译和安装 Linux 内核的过程">
+  <meta itemprop="datePublished" content="2024-10-10T22:55:32+08:00">
+  <meta itemprop="dateModified" content="2024-10-10T22:55:32+08:00">
+  <meta itemprop="wordCount" content="1137">
+  <meta itemprop="keywords" content="QEMU,Linux,Kernel"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/5fce01ae/">
+  <meta property="og:site_name" content="乐园">
+  <meta property="og:title" content="基于 QEMU 的 Linux 内核编译和安装">
+  <meta property="og:description" content="本文主要记录个人做存储系统研究时，在 QEMU 环境下编译和安装 Linux 内核的过程">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-10T22:55:32+08:00">
+    <meta property="article:modified_time" content="2024-10-10T22:55:32+08:00">
+    <meta property="article:tag" content="QEMU">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Kernel">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="基于 QEMU 的 Linux 内核编译和安装">
+  <meta name="twitter:description" content="本文主要记录个人做存储系统研究时，在 QEMU 环境下编译和安装 Linux 内核的过程">
+<meta name="application-name" content="乐园">
+<meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/5fce01ae/" title="基于 QEMU 的 Linux 内核编译和安装 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/731b80f7/" title="Python 使用 matplotlib 画图" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/5fce01ae/index.md" title="基于 QEMU 的 Linux 内核编译和安装 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="F3QOKaQRQaSAxN-JLDLGD21CCU5CkZRssZYwX-Mn-Zc" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "基于 QEMU 的 Linux 内核编译和安装",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ywang-wnlo.github.io\/posts\/5fce01ae\/"
+    },"genre": "posts","keywords": "QEMU, Linux, kernel","wordcount":  1137 ,
+    "url": "https:\/\/ywang-wnlo.github.io\/posts\/5fce01ae\/","datePublished": "2024-10-10T22:55:32+08:00","dateModified": "2024-10-10T22:55:32+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Zeus"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/"
+                
+                
+              ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/"
+                  
+                  
+                ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>基于 QEMU 的 Linux 内核编译和安装</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a></span></div><div class="post-meta-line"><span title="发布于 2024-10-10 22:55:32"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-10">2024-10-10</time></span>&nbsp;<span title="1137 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="基于 QEMU 的 Linux 内核编译和安装"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装虚拟机系统">安装虚拟机系统</a></li>
+    <li><a href="#共享目录">共享目录</a></li>
+    <li><a href="#编译内核">编译内核</a></li>
+    <li><a href="#卸载内核">卸载内核</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p>本文主要记录个人做存储系统研究时，在 QEMU 环境下编译和安装 Linux 内核的过程</p>
+<h2 id="安装虚拟机系统" class="heading-element"><span>安装虚拟机系统</span>
+  <a href="#%e5%ae%89%e8%a3%85%e8%99%9a%e6%8b%9f%e6%9c%ba%e7%b3%bb%e7%bb%9f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>之前在 <a href="/posts/b8506868/#qemu-%e5%88%b6%e4%bd%9c%e5%92%8c%e5%ae%89%e8%a3%85%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f">利用 RocksDB + ZenFS 测试 ZNS 的环境搭建和使用</a> 给出过借助 VNC 进行图形化安装的步骤，这里再给出仅通过终端进行安装的步骤</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 下载 Ubuntu 镜像</span>
+</span></span><span class="line"><span class="cl">wget https://releases.ubuntu.com/24.04.1/ubuntu-24.04.1-live-server-amd64.iso
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 制作磁盘镜像，大小随意</span>
+</span></span><span class="line"><span class="cl">qemu-img create -f qcow2 u24s.qcow2 80G
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ubuntu 镜像挂在 cdrom 上启动</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -enable-kvm 用于开启 KVM 虚拟化</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -boot once=d 用于只从 cdrom 启动一次</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -nographic 用于关闭图形界面</span>
+</span></span><span class="line"><span class="cl">qemu-system-x86_64 -m 8G -smp <span class="m">4</span> -enable-kvm -nographic -hda u24s.qcow2 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -cdrom ubuntu-24.04.1-live-server-amd64.iso -boot <span class="nv">once</span><span class="o">=</span>d</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/5fce01ae/grub1.png?size=large" data-thumbnail="/posts/5fce01ae/grub1.png?size=small" data-sub-html="<h2>按 &lt;code&gt;e&lt;/code&gt; 进入编辑模式</h2><p>按 e 进入编辑模式</p>"><img loading="lazy" src="/posts/5fce01ae/grub1.png" alt="按 &lt;code&gt;e&lt;/code&gt; 进入编辑模式" srcset="/posts/5fce01ae/grub1.png?size=small, /posts/5fce01ae/grub1.png?size=medium 1.5x, /posts/5fce01ae/grub1.png?size=large 2x" data-title="按 e 进入编辑模式" style="--width: 1786px;--aspect-ratio: 1786 / 1030;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">按 <code>e</code> 进入编辑模式</figcaption>
+  </figure></p>
+<p>然后在 grub menu 按 <code>e</code> 进入编辑模式</p>
+<p><figure><a class="lightgallery" href="/posts/5fce01ae/grub2.png?size=large" data-thumbnail="/posts/5fce01ae/grub2.png?size=small" data-sub-html="<h2>新增 console=ttyS0</h2><p>新增 console=ttyS0</p>"><img loading="lazy" src="/posts/5fce01ae/grub2.png" alt="新增 console=ttyS0" srcset="/posts/5fce01ae/grub2.png?size=small, /posts/5fce01ae/grub2.png?size=medium 1.5x, /posts/5fce01ae/grub2.png?size=large 2x" data-title="新增 console=ttyS0" style="--width: 1786px;--aspect-ratio: 1786 / 1030;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">新增 console=ttyS0</figcaption>
+  </figure></p>
+<p>然后在 vmlinuz 那一行新增 <code>console=ttyS0</code>，之后 <code>ctrl+x</code> 启动即可</p>
+<p>安装完毕后，后续启动命令可以简化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">qemu-system-x86_64 -m 8G -smp <span class="m">4</span> -enable-kvm -nographic -hda u24s.qcow2</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是此时的启动过程中的 grub menu 不会显示，还需要修改下 grub 配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo vim /etc/default/grub
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改下面三个配置项</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#GRUB_TIMEOUT_STYLE=hidden</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TERMINAL</span><span class="o">=</span>console
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo update-grub
+</span></span><span class="line"><span class="cl">sudo poweroff</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果想通过 ssh 登陆虚拟机，启动参数可以加一个端口转发</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">qemu-system-x86_64 -m 8G -smp <span class="m">4</span> -enable-kvm -nographic -hda u24s.qcow2 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -net nic,model<span class="o">=</span>virtio -net user,hostfwd<span class="o">=</span>tcp::6666-:22</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后就可以在物理机器上通过 ssh 登陆虚拟机了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -p <span class="m">6666</span> <span class="o">[</span>user<span class="o">]</span>@localhost</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="共享目录" class="heading-element"><span>共享目录</span>
+  <a href="#%e5%85%b1%e4%ba%ab%e7%9b%ae%e5%bd%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>为了加速内核编译，可以在物理机器上编译内核，然后将编译好的内核文件借助共享目录传输到虚拟机中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 在物理机器上创建共享目录</span>
+</span></span><span class="line"><span class="cl">mkdir -p xxx/share
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动虚拟机时挂载共享目录</span>
+</span></span><span class="line"><span class="cl">qemu-system-x86_64 -m 8G -smp <span class="m">4</span> -enable-kvm -nographic -hda u24s.qcow2 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -fsdev local,path<span class="o">=</span>xxx/share,id<span class="o">=</span>share_dir,security_model<span class="o">=</span>none <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -device virtio-9p-pci,fsdev<span class="o">=</span>share_dir,mount_tag<span class="o">=</span>hostshare <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -net nic,model<span class="o">=</span>virtio -net user,hostfwd<span class="o">=</span>tcp::6666-:22</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果报错，很有可能是 <code>qemu</code> 不支持 <code>9p</code>，需要从源码编译 <code>qemu</code>，在 <code>configure</code> 时加上 <code>--enable-virtfs</code> 选项即可</p>
+<p>之后在虚拟机中挂载共享目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 虚拟机中挂载共享目录</span>
+</span></span><span class="line"><span class="cl">sudo mkdir -p /mnt/share
+</span></span><span class="line"><span class="cl">sudo mount -t 9p -o <span class="nv">trans</span><span class="o">=</span>virtio hostshare /mnt/share/ -oversion<span class="o">=</span>9p2000.L</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果报错，很有可能是虚拟机的内核不支持 <code>9p</code>，需要编译内核，是打开以下内核配置选项：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CONFIG_NET_9P=y
+</span></span><span class="line"><span class="cl">CONFIG_NET_9P_VIRTIO=y
+</span></span><span class="line"><span class="cl">CONFIG_NET_9P_DEBUG=y (Optional)
+</span></span><span class="line"><span class="cl">CONFIG_9P_FS=y
+</span></span><span class="line"><span class="cl">CONFIG_9P_FS_POSIX_ACL=y
+</span></span><span class="line"><span class="cl">CONFIG_PCI=y
+</span></span><span class="line"><span class="cl">CONFIG_VIRTIO_PCI=y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CONFIG_PCI=y
+</span></span><span class="line"><span class="cl">CONFIG_VIRTIO_PCI=y
+</span></span><span class="line"><span class="cl">CONFIG_PCI_HOST_GENERIC=y (only needed for the QEMU Arm &#39;virt&#39; board)</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="编译内核" class="heading-element"><span>编译内核</span>
+  <a href="#%e7%bc%96%e8%af%91%e5%86%85%e6%a0%b8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>在物理机上准备环境</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 编译工具，词法语法分析库</span>
+</span></span><span class="line"><span class="cl">sudo apt install build-essential bison flex
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果编译时缺少 openssl 的相关头文件，需要安装相关库</span>
+</span></span><span class="line"><span class="cl">sudo apt install libssl-dev
+</span></span><span class="line"><span class="cl"><span class="c1"># 利用 make menuconfig 图形界面配置编译选项需要安装 ncurses 环境：</span>
+</span></span><span class="line"><span class="cl">sudo apt install libncurses5-dev
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载 kernel 源码，解压</span>
+</span></span><span class="line"><span class="cl">wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.xxx.tar.xz
+</span></span><span class="line"><span class="cl">tar xvf linux-5.4.xxx.tar.xz
+</span></span><span class="line"><span class="cl">mv linux-5.4.xxx xxx/share/</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在虚拟机内获取内核配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mount -t 9p -o <span class="nv">trans</span><span class="o">=</span>virtio hostshare /mnt/share/ -oversion<span class="o">=</span>9p2000.L
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mnt/share/linux-5.4.xxx
+</span></span><span class="line"><span class="cl">sudo make oldconfig</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在物理机上编译内核</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 解决 make Error 问题</span>
+</span></span><span class="line"><span class="cl">sudo scripts/config --set-str SYSTEM_TRUSTED_KEYS <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">sudo scripts/config --set-str SYSTEM_REVOCATION_KEYS <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 编译内核和模块, -j24 表示使用 24 个线程编译, 可以根据自己的 CPU 核心数和内存大小调整</span>
+</span></span><span class="line"><span class="cl">sudo make -j24</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在虚拟机内安装内核</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 去除调试信息，解决 initrd.img 过大的问题</span>
+</span></span><span class="line"><span class="cl">sudo make <span class="nv">INSTALL_MOD_STRIP</span><span class="o">=</span><span class="m">1</span> modules_install
+</span></span><span class="line"><span class="cl">sudo make install
+</span></span><span class="line"><span class="cl">sudo poweroff</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="卸载内核" class="heading-element"><span>卸载内核</span>
+  <a href="#%e5%8d%b8%e8%bd%bd%e5%86%85%e6%a0%b8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>开发过程中可能会有 bug，需要在虚拟机卸载有问题的内核</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 删除 /lib/modules/ 目录下以内核的版本号为名称的目录</span>
+</span></span><span class="line"><span class="cl">sudo rm -rf /lib/modules/5.4.xxx+/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># （可选）删除 /usr/src/linux/ 目录下不需要的内核源码</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># sudo rm -rf /usr/src/linux-headers-5.4.xxx</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除 /boot 目录下启动的内核和内核映像文件</span>
+</span></span><span class="line"><span class="cl">sudo rm /boot/*5.4.xxx*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 更改 grub 的配置文件，删除不需要的内核启动列表 </span>
+</span></span><span class="line"><span class="cl">sudo update-grub2</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="参考资料" class="heading-element"><span>参考资料</span>
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li><a href="https://www.qemu.org/docs/master/system/invocation.html"target="_blank" rel="external nofollow noopener noreferrer">【QEMU】Invocation</a></li>
+<li><a href="https://wiki.qemu.org/Documentation/9psetup"target="_blank" rel="external nofollow noopener noreferrer">【QEMU】Invocation</a></li>
+<li><a href="https://askubuntu.com/questions/1329538/compiling-the-kernel-5-11-11"target="_blank" rel="external nofollow noopener noreferrer">【ask ubuntu】No rule to make target &lsquo;debian/canonical-certs.pem&rsquo;</a></li>
+<li><a href="https://blog.csdn.net/gatieme/article/details/82912921"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】qemu 中使用 9p virtio, 支持 host 和 guest 中共享目录</a></li>
+<li><a href="https://blog.csdn.net/qq_39819990/article/details/113788313"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】解决 Linux 编译内核模块 (initrd.img) 过大的问题</a></li>
+</ul>
+</div><div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/5fce01ae/" title="">https://ywang-wnlo.github.io/posts/5fce01ae/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div><hr class="awesome-hr" />
+    <h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
+          <a href="/posts/72a4cdfd/" title="Ubuntu 环境配置大合集">Ubuntu 环境配置大合集</a></li><li>
+          <a href="/posts/b8506868/" title="利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用">利用 RocksDB &#43; ZenFS 测试 ZNS 的环境搭建和使用</a></li><li>
+          <a href="/posts/f2cdf8a6/" title="美化 Shell 之 Linux Zsh 篇">美化 Shell 之 Linux Zsh 篇</a></li><li>
+          <a href="/posts/9ba60726/" title="Page Cache 简介">Page Cache 简介</a></li></ul><div class="post-reward">
+    <div class="comment">请我一杯咖啡吧！</div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><i class="fa-solid fa-qrcode fa-fw" aria-hidden="true"></i>赞赏</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+          </div></div>
+  </div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-10-10 22:55:32">更新于 2024-10-10&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/5fce01ae/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/qemu/" class="post-tag" title="标签 - QEMU">QEMU</a><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a><a href="/tags/kernel/" class="post-tag" title="标签 - Kernel">Kernel</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/731b80f7/" class="post-nav-item" rel="prev" title="Python 使用 Matplotlib 画图"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Python 使用 Matplotlib 画图</a></div>
+</div>
+<div id="comments"><div id="giscus" class="comment">
+          <script
+            src="https://giscus.app/client.js"
+            data-repo="ywang-wnlo/ywang-wnlo.github.io"
+            data-repo-id="R_kgDOGTSTcQ"
+            data-category="announcements"
+            data-category-id="DIC_kwDOGTSTcc4CZaXg"
+            data-mapping="pathname"
+            data-strict="0"
+            
+            data-theme="preferred_color_scheme"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-lang="zh-CN"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async
+            defer
+          ></script>
+        </div>
+        <noscript>
+          Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.132.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.11">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.11"};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
