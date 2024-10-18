@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
     <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
-    <lastBuildDate>Thu, 10 Oct 2024 22:55:32 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 19 Oct 2024 00:19:36 +0800</lastBuildDate>
     <atom:link href="https://ywang-wnlo.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于 QEMU 的 Linux 内核编译和安装</title>

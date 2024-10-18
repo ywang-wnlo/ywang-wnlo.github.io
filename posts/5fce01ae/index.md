@@ -20,6 +20,9 @@ qemu-img create -f qcow2 u24s.qcow2 80G
 # -nographic 用于关闭图形界面
 qemu-system-x86_64 -m 8G -smp 4 -enable-kvm -nographic -hda u24s.qcow2 \
         -cdrom ubuntu-24.04.1-live-server-amd64.iso -boot once=d
+
+# 如果报了 could not load PC BIOS &#39;bios-256k.bin&#39; 错误，安装 seabios 即可
+sudo apt install seabios
 ```
 
 ![按 `e` 进入编辑模式](grub1.png &#34;按 e 进入编辑模式&#34;)

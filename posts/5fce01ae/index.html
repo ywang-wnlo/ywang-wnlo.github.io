@@ -10,8 +10,8 @@
   <meta itemprop="name" content="基于 QEMU 的 Linux 内核编译和安装">
   <meta itemprop="description" content="本文主要记录个人做存储系统研究时，在 QEMU 环境下编译和安装 Linux 内核的过程">
   <meta itemprop="datePublished" content="2024-10-10T22:55:32+08:00">
-  <meta itemprop="dateModified" content="2024-10-10T22:55:32+08:00">
-  <meta itemprop="wordCount" content="1137">
+  <meta itemprop="dateModified" content="2024-10-19T00:19:36+08:00">
+  <meta itemprop="wordCount" content="1163">
   <meta itemprop="keywords" content="QEMU,Linux,Kernel"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/5fce01ae/">
   <meta property="og:site_name" content="乐园">
   <meta property="og:title" content="基于 QEMU 的 Linux 内核编译和安装">
@@ -20,7 +20,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-10-10T22:55:32+08:00">
-    <meta property="article:modified_time" content="2024-10-10T22:55:32+08:00">
+    <meta property="article:modified_time" content="2024-10-19T00:19:36+08:00">
     <meta property="article:tag" content="QEMU">
     <meta property="article:tag" content="Linux">
     <meta property="article:tag" content="Kernel">
@@ -42,8 +42,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ywang-wnlo.github.io\/posts\/5fce01ae\/"
-    },"genre": "posts","keywords": "QEMU, Linux, kernel","wordcount":  1137 ,
-    "url": "https:\/\/ywang-wnlo.github.io\/posts\/5fce01ae\/","datePublished": "2024-10-10T22:55:32+08:00","dateModified": "2024-10-10T22:55:32+08:00","publisher": {
+    },"genre": "posts","keywords": "QEMU, Linux, kernel","wordcount":  1163 ,
+    "url": "https:\/\/ywang-wnlo.github.io\/posts\/5fce01ae\/","datePublished": "2024-10-10T22:55:32+08:00","dateModified": "2024-10-19T00:19:36+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -165,7 +165,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>基于 QEMU 的 Linux 内核编译和安装</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a></span></div><div class="post-meta-line"><span title="发布于 2024-10-10 22:55:32"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-10">2024-10-10</time></span>&nbsp;<span title="1137 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="基于 QEMU 的 Linux 内核编译和安装"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a></span></div><div class="post-meta-line"><span title="发布于 2024-10-10 22:55:32"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-10">2024-10-10</time></span>&nbsp;<span title="更新于 2024-10-19 00:19:36"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-19">2024-10-19</time></span>&nbsp;<span title="1163 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="基于 QEMU 的 Linux 内核编译和安装"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
           </span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
@@ -201,6 +201,9 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 下载 Ubuntu 镜像</span>
@@ -214,7 +217,10 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># -boot once=d 用于只从 cdrom 启动一次</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># -nographic 用于关闭图形界面</span>
 </span></span><span class="line"><span class="cl">qemu-system-x86_64 -m 8G -smp <span class="m">4</span> -enable-kvm -nographic -hda u24s.qcow2 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -cdrom ubuntu-24.04.1-live-server-amd64.iso -boot <span class="nv">once</span><span class="o">=</span>d</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -cdrom ubuntu-24.04.1-live-server-amd64.iso -boot <span class="nv">once</span><span class="o">=</span>d
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果报了 could not load PC BIOS &#39;bios-256k.bin&#39; 错误，安装 seabios 即可</span>
+</span></span><span class="line"><span class="cl">sudo apt install seabios</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><a class="lightgallery" href="/posts/5fce01ae/grub1.png?size=large" data-thumbnail="/posts/5fce01ae/grub1.png?size=small" data-sub-html="<h2>按 &lt;code&gt;e&lt;/code&gt; 进入编辑模式</h2><p>按 e 进入编辑模式</p>"><img loading="lazy" src="/posts/5fce01ae/grub1.png" alt="按 &lt;code&gt;e&lt;/code&gt; 进入编辑模式" srcset="/posts/5fce01ae/grub1.png?size=small, /posts/5fce01ae/grub1.png?size=medium 1.5x, /posts/5fce01ae/grub1.png?size=large 2x" data-title="按 e 进入编辑模式" style="--width: 1786px;--aspect-ratio: 1786 / 1030;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">按 <code>e</code> 进入编辑模式</figcaption>
   </figure></p>
@@ -493,7 +499,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-10-10 22:55:32">更新于 2024-10-10&nbsp;</span>
+        <span title="更新于 2024-10-19 00:19:36">更新于 2024-10-19&nbsp;</span>
       </div><div class="post-info-license">
             <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
           </div></div><div class="post-info-line">
