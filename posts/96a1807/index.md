@@ -1,4 +1,4 @@
-# OpenWrt 手动编译 Ipk
+# OpenWrt 手动编译 ipk
 
 
 ## `.ipk` 文件

@@ -12,7 +12,7 @@
   <meta itemprop="datePublished" content="2021-10-19T10:08:41+08:00">
   <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00">
   <meta itemprop="wordCount" content="347">
-  <meta itemprop="keywords" content="LaTeX,Todo"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/2033aa70/">
+  <meta itemprop="keywords" content="LaTeX,todo"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/2033aa70/">
   <meta property="og:site_name" content="乐园">
   <meta property="og:title" content="LaTeX 常用语法记录">
   <meta property="og:description" content="LaTeX 是一种基于 TeX 的排版系统，可以理解成 LaTeX 通过对 TeX 进行封装，使用 TeX 作为它的格式化引擎，使得排版文字变得更加方便。本文主要记录一些常用的 LaTeX 语法">
@@ -22,7 +22,7 @@
     <meta property="article:published_time" content="2021-10-19T10:08:41+08:00">
     <meta property="article:modified_time" content="2022-11-16T10:33:39+08:00">
     <meta property="article:tag" content="LaTeX">
-    <meta property="article:tag" content="Todo">
+    <meta property="article:tag" content="todo">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="LaTeX 常用语法记录">
@@ -49,8 +49,8 @@
         "name": "Zeus"
       },"description": ""
   }
-  </script></head>
-  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
       <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
@@ -209,52 +209,52 @@
   </a>
 </h2><p>常用的长度单位</p>
 <table>
-<thead>
-<tr>
-<th>单位</th>
-<th>含义</th>
-<th>换算成 pt</th>
-<th>换成算成 mm</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>pt</td>
-<td>基本单位</td>
-<td>1 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>mm</td>
-<td>毫米</td>
-<td>2.84 pt</td>
-<td>1 mm</td>
-</tr>
-<tr>
-<td>cm</td>
-<td>厘米</td>
-<td>28.4 pt</td>
-<td>10 mm</td>
-</tr>
-<tr>
-<td>in</td>
-<td>英寸</td>
-<td>72.27 pt</td>
-<td>0.35146 mm</td>
-</tr>
-<tr>
-<td>ex</td>
-<td>当前字体的 x 字母高度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>em</td>
-<td>当前字体的 m 字母宽度</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>单位</th>
+          <th>含义</th>
+          <th>换算成 pt</th>
+          <th>换成算成 mm</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pt</td>
+          <td>基本单位</td>
+          <td>1 pt</td>
+          <td>0.35146 mm</td>
+      </tr>
+      <tr>
+          <td>mm</td>
+          <td>毫米</td>
+          <td>2.84 pt</td>
+          <td>1 mm</td>
+      </tr>
+      <tr>
+          <td>cm</td>
+          <td>厘米</td>
+          <td>28.4 pt</td>
+          <td>10 mm</td>
+      </tr>
+      <tr>
+          <td>in</td>
+          <td>英寸</td>
+          <td>72.27 pt</td>
+          <td>0.35146 mm</td>
+      </tr>
+      <tr>
+          <td>ex</td>
+          <td>当前字体的 x 字母高度</td>
+          <td>-</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>em</td>
+          <td>当前字体的 m 字母宽度</td>
+          <td>-</td>
+          <td>-</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="空行" class="heading-element"><span>空行</span>
   <a href="#%e7%a9%ba%e8%a1%8c" class="heading-mark">
@@ -397,46 +397,46 @@
 </div>
 </div><p>其中 <code>bibfile</code> 为 <code>.bib</code> 文件的名，而 <code>stylename</code> 是风格名称，以 overleaf 为例，有如下选项</p>
 <table>
-<thead>
-<tr>
-<th>stylename</th>
-<th>output</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>abbrc</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc" srcset="/posts/2033aa70/BibtexStylesAbbrc.png?size=small, /posts/2033aa70/BibtexStylesAbbrc.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesAbbrc.png?size=large 2x" data-title="BibtexStylesAbbrc" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-<tr>
-<td>acm</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm" srcset="/posts/2033aa70/BibtexStylesAcm.png?size=small, /posts/2033aa70/BibtexStylesAcm.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesAcm.png?size=large 2x" data-title="BibtexStylesAcm" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-<tr>
-<td>alpha</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha" srcset="/posts/2033aa70/BibtexStylesAlpha.png?size=small, /posts/2033aa70/BibtexStylesAlpha.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesAlpha.png?size=large 2x" data-title="BibtexStylesAlpha" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-<tr>
-<td>apalike</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike" srcset="/posts/2033aa70/BibtexStylesApalike.png?size=small, /posts/2033aa70/BibtexStylesApalike.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesApalike.png?size=large 2x" data-title="BibtexStylesApalike" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-<tr>
-<td>ieeetr</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr" srcset="/posts/2033aa70/BibtexStylesIeeetr.png?size=small, /posts/2033aa70/BibtexStylesIeeetr.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesIeeetr.png?size=large 2x" data-title="BibtexStylesIeeetr" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-<tr>
-<td>plain</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain" srcset="/posts/2033aa70/BibtexStylesPlain.png?size=small, /posts/2033aa70/BibtexStylesPlain.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesPlain.png?size=large 2x" data-title="BibtexStylesPlain" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-<tr>
-<td>siam</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam" srcset="/posts/2033aa70/BibtexStylesSiam.png?size=small, /posts/2033aa70/BibtexStylesSiam.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesSiam.png?size=large 2x" data-title="BibtexStylesSiam" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-<tr>
-<td>unsrt</td>
-<td><img loading="lazy" src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt" srcset="/posts/2033aa70/BibtexStylesUnsrt.png?size=small, /posts/2033aa70/BibtexStylesUnsrt.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesUnsrt.png?size=large 2x" data-title="BibtexStylesUnsrt" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>stylename</th>
+          <th>output</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>abbrc</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesAbbrc.png" alt="BibtexStylesAbbrc" srcset="/posts/2033aa70/BibtexStylesAbbrc.png?size=small, /posts/2033aa70/BibtexStylesAbbrc.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesAbbrc.png?size=large 2x" data-title="BibtexStylesAbbrc" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>acm</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesAcm.png" alt="BibtexStylesAcm" srcset="/posts/2033aa70/BibtexStylesAcm.png?size=small, /posts/2033aa70/BibtexStylesAcm.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesAcm.png?size=large 2x" data-title="BibtexStylesAcm" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>alpha</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesAlpha.png" alt="BibtexStylesAlpha" srcset="/posts/2033aa70/BibtexStylesAlpha.png?size=small, /posts/2033aa70/BibtexStylesAlpha.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesAlpha.png?size=large 2x" data-title="BibtexStylesAlpha" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>apalike</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesApalike.png" alt="BibtexStylesApalike" srcset="/posts/2033aa70/BibtexStylesApalike.png?size=small, /posts/2033aa70/BibtexStylesApalike.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesApalike.png?size=large 2x" data-title="BibtexStylesApalike" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>ieeetr</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesIeeetr.png" alt="BibtexStylesIeeetr" srcset="/posts/2033aa70/BibtexStylesIeeetr.png?size=small, /posts/2033aa70/BibtexStylesIeeetr.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesIeeetr.png?size=large 2x" data-title="BibtexStylesIeeetr" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>plain</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesPlain.png" alt="BibtexStylesPlain" srcset="/posts/2033aa70/BibtexStylesPlain.png?size=small, /posts/2033aa70/BibtexStylesPlain.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesPlain.png?size=large 2x" data-title="BibtexStylesPlain" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>siam</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesSiam.png" alt="BibtexStylesSiam" srcset="/posts/2033aa70/BibtexStylesSiam.png?size=small, /posts/2033aa70/BibtexStylesSiam.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesSiam.png?size=large 2x" data-title="BibtexStylesSiam" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>unsrt</td>
+          <td><img loading="lazy" src="/posts/2033aa70/BibtexStylesUnsrt.png" alt="BibtexStylesUnsrt" srcset="/posts/2033aa70/BibtexStylesUnsrt.png?size=small, /posts/2033aa70/BibtexStylesUnsrt.png?size=medium 1.5x, /posts/2033aa70/BibtexStylesUnsrt.png?size=large 2x" data-title="BibtexStylesUnsrt" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="todo" class="heading-element"><span>TODO</span>
   <a href="#todo" class="heading-mark">
@@ -470,7 +470,7 @@
 </div><hr class="awesome-hr" />
     <h2 id="see-also">相关内容</h2>
     <ul><li>
-          <a href="/posts/9ba60726/" title="Page Cache 简介">Page Cache 简介</a></li><li>
+          <a href="/posts/9ba60726/" title="page cache 简介">page cache 简介</a></li><li>
           <a href="/posts/499c5a19/" title="LaTeX 制作 PPT">LaTeX 制作 PPT</a></li><li>
           <a href="/posts/4f94956/" title="LaTeX 环境配置">LaTeX 环境配置</a></li><li>
           <a href="/posts/a4752f87/" title="LaTeX 基础介绍">LaTeX 基础介绍</a></li></ul><div class="post-reward">
@@ -495,12 +495,11 @@
       </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/latex/" class="post-tag" title="标签 - LaTeX">LaTeX</a><a href="/tags/todo/" class="post-tag" title="标签 - Todo">Todo</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/latex/" class="post-tag" title="标签 - LaTeX">LaTeX</a><a href="/tags/todo/" class="post-tag" title="标签 - todo">todo</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
-  </div><div class="post-nav"><a href="/posts/499c5a19/" class="post-nav-item" rel="prev" title="LaTeX 制作 PPT"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>LaTeX 制作 PPT</a>
-      <a href="/posts/8507aaa1/" class="post-nav-item" rel="next" title="OpenWrt 简介和安装">OpenWrt 简介和安装<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  </div><div class="post-nav"><a href="/posts/499c5a19/" class="post-nav-item" rel="prev" title="LaTeX 制作 PPT"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>LaTeX 制作 PPT</a><a href="/posts/8507aaa1/" class="post-nav-item" rel="next" title="OpenWrt 简介和安装">OpenWrt 简介和安装<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="giscus" class="comment">
           <script
@@ -529,7 +528,7 @@
 
   <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.132.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.11">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
@@ -540,5 +539,5 @@
     <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.11"};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.13"};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Assert - 标签 - 乐园</title>
+    <title>assert - 标签 - 乐园</title>
     <link>https://ywang-wnlo.github.io/tags/assert/</link>
     <description>一个新时代农民工的随手笔记</description>
-    <generator>Hugo 0.132.2 &amp; FixIt v0.3.11</generator>
+    <generator>Hugo 0.136.5 &amp; FixIt v0.3.13</generator>
     <language>zh-CN</language>
     <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
     <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
