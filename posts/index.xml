@@ -8,8 +8,16 @@
     <language>zh-CN</language>
     <managingEditor>ywang_wnlo@qq.com (Zeus)</managingEditor>
     <webMaster>ywang_wnlo@qq.com (Zeus)</webMaster>
-    <lastBuildDate>Fri, 13 Dec 2024 15:13:32 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2024 19:11:03 +0800</lastBuildDate>
     <atom:link href="https://ywang-wnlo.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 brew 安装特定版本软件</title>
+      <link>https://ywang-wnlo.github.io/posts/89785ced/</link>
+      <pubDate>Fri, 13 Dec 2024 19:11:03 +0800</pubDate><author>ywang_wnlo@qq.com (Zeus)</author>
+      <guid>https://ywang-wnlo.github.io/posts/89785ced/</guid>
+      <category domain="https://ywang-wnlo.github.io/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/">软件配置</category>
+      <description>本文主要记录使用 brew 命令安装特定版本软件的方法</description>
+    </item>
     <item>
       <title>基于 QEMU 的 Linux 内核编译和安装</title>
       <link>https://ywang-wnlo.github.io/posts/5fce01ae/</link>
