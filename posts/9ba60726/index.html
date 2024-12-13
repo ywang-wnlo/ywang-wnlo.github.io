@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>page cache 简介 - 乐园</title><meta name="author" content="Zeus">
+<meta name="description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析"><meta name="keywords" content='page cache, buffer IO, kernel, page cache, writeback, todo'>
+  <meta itemprop="name" content="page cache 简介">
+  <meta itemprop="description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析">
+  <meta itemprop="datePublished" content="2021-12-05T22:22:08+08:00">
+  <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00">
+  <meta itemprop="wordCount" content="3932">
+  <meta itemprop="keywords" content="buffer IO,kernel,page cache,writeback,todo"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/9ba60726/">
+  <meta property="og:site_name" content="乐园">
+  <meta property="og:title" content="page cache 简介">
+  <meta property="og:description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-12-05T22:22:08+08:00">
+    <meta property="article:modified_time" content="2022-11-16T10:33:39+08:00">
+    <meta property="article:tag" content="buffer IO">
+    <meta property="article:tag" content="kernel">
+    <meta property="article:tag" content="page cache">
+    <meta property="article:tag" content="writeback">
+    <meta property="article:tag" content="todo">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="page cache 简介">
+  <meta name="twitter:description" content="page cache 是 Linux 内核中的一个缓存层，用于加速 IO 操作。本文主要介绍 page cache 的简介和源码分析">
+<meta name="application-name" content="乐园">
+<meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/9ba60726/" title="page cache 简介 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/9a0b7c3b/" title="NexT 主题的配置使用记录" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/abac0c46/" title="Hexo 配置主流搜索引擎收录流程记录" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/9ba60726/index.md" title="page cache 简介 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="WtuW58utXXU1CDjb0DEleiEYVlV5TcukwneXP3uysiw" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "page cache 简介",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/"
+    },"genre": "posts","keywords": "page cache, buffer IO, kernel, page cache, writeback, todo","wordcount":  3932 ,
+    "url": "https:\/\/ywang-wnlo.github.io\/posts\/9ba60726\/","datePublished": "2021-12-05T22:22:08+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Zeus"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/"
+                
+                
+              ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="乐园"><img loading="lazy" src="/logo.png" alt="乐园" data-title="乐园" width="26" height="26" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">乐园</span></a><span class="header-subtitle">一个新时代农民工的随手笔记</span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/"
+                  
+                  
+                ><i class="fa fa-home fa-fw fa-sm" aria-hidden="true"></i> 首页</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container container-reverse"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>page cache 简介</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ywang-wnlo" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/b2c92c9e56f63a626d05dad763973724?s=32&amp;d=" alt="Zeus" data-title="Zeus" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Zeus</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/io-stack/" class="post-category" title="分类 - IO Stack"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IO Stack</a></span></div><div class="post-meta-line"><span title="发布于 2021-12-05 22:22:08"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-05">2021-12-05</time></span>&nbsp;<span title="更新于 2022-11-16 10:33:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2022-11-16">2022-11-16</time></span>&nbsp;<span title="3932 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="page cache 简介"><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#page-cache">page cache</a></li>
+    <li><a href="#直接-io-与-缓存-io">直接 IO 与 缓存 IO</a></li>
+    <li><a href="#linux-io-栈">Linux IO 栈</a></li>
+    <li><a href="#linux-中的具体实现">Linux 中的具体实现</a>
+      <ul>
+        <li><a href="#相关结构体">相关结构体</a>
+          <ul>
+            <li><a href="#超级块-super_block">超级块 <code>super_block</code></a></li>
+            <li><a href="#索引节点-inode">索引节点 <code>inode</code></a></li>
+            <li><a href="#文件-file">文件 <code>file</code></a></li>
+            <li><a href="#目录项-dentry">目录项 <code>dentry</code></a></li>
+            <li><a href="#页缓存-address_space">页缓存 <code>address_space</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#常用函数">常用函数</a>
+          <ul>
+            <li><a href="#从底层填充">从底层填充</a></li>
+            <li><a href="#写入修改">写入修改</a></li>
+            <li><a href="#其他">其他</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><div class="details admonition warning open">
+      <div class="details-summary admonition-title">
+        <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      </div>
+      <div class="details-content">
+        <div class="admonition-content">本文最后更新于 2022-11-16，文中内容可能已过时。</div>
+      </div>
+    </div><p>当前内容基于 Linux Kernel <a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tag/?h=v5.4.121"target="_blank" rel="external nofollow noopener noreferrer">v5.4.121</a></p>
+<h2 id="page-cache" class="heading-element"><span>page cache</span>
+  <a href="#page-cache" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>由于磁盘 HDD 甚至于现在广泛使用的固态硬盘 SSD 的读写速度都远小于内存 DRAM 的读写速度，为了避免每次读取数据都要直接访问这些低速的底层存储设备，Linux 在利用 DRAM 实现了一个缓存层，缓存的粒度是 page，因此也叫 page cache，中文一般称为页（面）缓存</p>
+<p>经过这层 page cache 的作用，IO 的性能得到了显著的提升。不过由于 DRAM 具有易失性，在掉电后数据会丢失，因此内核中的 <a href="/posts/646202b9/">回写机制</a> 定时将 page cache 中的数据下刷到设备上，保证数据的持久化。此外内核还在 page cache 中实现了巧妙的预读机制<!-- todo -->提升了顺序读性能</p>
+<h2 id="直接-io-与-缓存-io" class="heading-element"><span>直接 IO 与 缓存 IO</span>
+  <a href="#%e7%9b%b4%e6%8e%a5-io-%e4%b8%8e-%e7%bc%93%e5%ad%98-io" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>在拥有 page cache 这一层缓存后，写数据就有了三种不同的策略：</p>
+<ol>
+<li>不经过缓存，直接写底层存储设备，但同时要使缓存中数据失效，也叫不缓存（nowrite）</li>
+<li>只写缓存，缓存中数据定期刷到底层存储设备上，也叫写回（write back）</li>
+<li>同时写缓存和底层存储设备，也叫写穿（write through）</li>
+</ol>
+<p>前两种就是 Linux 在 IO 栈中支持的直接 IO（direct IO）和缓存 IO（buffer IO）</p>
+<p>第三种策略虽然能非常简单保证缓存和底层设备的一致性，不过基于时间局部性原理，page cache 中的数据可能只是中间态，会被频繁修改，每次写穿会产生大量的开销</p>
+<h2 id="linux-io-栈" class="heading-element"><span>Linux IO 栈</span>
+  <a href="#linux-io-%e6%a0%88" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>详细的 Linux IO 栈图如下（来源于 <a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram"target="_blank" rel="external nofollow noopener noreferrer">Thomas-Krenn-Wiki</a>）：</p>
+<p><figure><a class="lightgallery" href="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=large" data-thumbnail="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=small" data-sub-html="<h2>Linux IO 栈</h2><p>Linux IO 栈</p>"><img loading="lazy" src="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png" alt="Linux IO 栈" srcset="/posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=small, /posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=medium 1.5x, /posts/9ba60726/Linux-storage-stack-diagram_v4.10.png?size=large 2x" data-title="Linux IO 栈" style="--width: 1755px;--aspect-ratio: 1755 / 2487;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Linux IO 栈</figcaption>
+  </figure></p>
+<p>其实简化一下，可以分为文件系统、块层和设备驱动层这三层</p>
+<p><figure><a class="lightgallery" href="/posts/9ba60726/simple_IO_stack.png?size=large" data-thumbnail="/posts/9ba60726/simple_IO_stack.png?size=small" data-sub-html="<h2>简化的 Linux IO 栈</h2><p>简化的 Linux IO 栈</p>"><img loading="lazy" src="/posts/9ba60726/simple_IO_stack.png" alt="简化的 Linux IO 栈" srcset="/posts/9ba60726/simple_IO_stack.png?size=small, /posts/9ba60726/simple_IO_stack.png?size=medium 1.5x, /posts/9ba60726/simple_IO_stack.png?size=large 2x" data-title="简化的 Linux IO 栈" style="--width: 300px;--aspect-ratio: 300 / 351;background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">简化的 Linux IO 栈</figcaption>
+  </figure></p>
+<h2 id="linux-中的具体实现" class="heading-element"><span>Linux 中的具体实现</span>
+  <a href="#linux-%e4%b8%ad%e7%9a%84%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>这里介绍和 page cache 相关的主要结构体和一些常用的函数</p>
+<h3 id="相关结构体" class="heading-element"><span>相关结构体</span>
+  <a href="#%e7%9b%b8%e5%85%b3%e7%bb%93%e6%9e%84%e4%bd%93" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="超级块-super_block" class="heading-element"><span>超级块 <code>super_block</code></span>
+  <a href="#%e8%b6%85%e7%ba%a7%e5%9d%97-super_block" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>每个文件系统都有 <code>super_block</code> 结构体，用于存储该文件系统的特定信息</p>
+<p>其定义在 <code>include/linux/fs.h</code> 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">super_block</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">s_list</span><span class="p">;</span>		<span class="cm">/* Keep this first */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">dev_t</span>			<span class="n">s_dev</span><span class="p">;</span>		<span class="cm">/* search index; _not_ kdev_t */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">char</span>		<span class="n">s_blocksize_bits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">s_blocksize</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">loff_t</span>			<span class="n">s_maxbytes</span><span class="p">;</span>	<span class="cm">/* Max file size */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">file_system_type</span>	<span class="o">*</span><span class="n">s_type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">super_operations</span>	<span class="o">*</span><span class="n">s_op</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">dquot_operations</span>	<span class="o">*</span><span class="n">dq_op</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">quotactl_ops</span>	<span class="o">*</span><span class="n">s_qcop</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">export_operations</span> <span class="o">*</span><span class="n">s_export_op</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">s_flags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">s_iflags</span><span class="p">;</span>	<span class="cm">/* internal SB_I_* flags */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">s_magic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">dentry</span>		<span class="o">*</span><span class="n">s_root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">rw_semaphore</span>	<span class="n">s_umount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span>			<span class="n">s_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_t</span>		<span class="n">s_active</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_SECURITY
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="kt">void</span>                    <span class="o">*</span><span class="n">s_security</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">const</span> <span class="k">struct</span> <span class="n">xattr_handler</span> <span class="o">**</span><span class="n">s_xattr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_FS_ENCRYPTION
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">const</span> <span class="k">struct</span> <span class="n">fscrypt_operations</span>	<span class="o">*</span><span class="n">s_cop</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">key</span>		<span class="o">*</span><span class="n">s_master_keys</span><span class="p">;</span> <span class="cm">/* master crypto keys in use */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_FS_VERITY
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">const</span> <span class="k">struct</span> <span class="n">fsverity_operations</span> <span class="o">*</span><span class="n">s_vop</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">hlist_bl_head</span>	<span class="n">s_roots</span><span class="p">;</span>	<span class="cm">/* alternate root dentries for NFS */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">s_mounts</span><span class="p">;</span>	<span class="cm">/* list of mounts; _not_ for fs use */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">block_device</span>	<span class="o">*</span><span class="n">s_bdev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">backing_dev_info</span> <span class="o">*</span><span class="n">s_bdi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">mtd_info</span>		<span class="o">*</span><span class="n">s_mtd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">hlist_node</span>	<span class="n">s_instances</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span>		<span class="n">s_quota_types</span><span class="p">;</span>	<span class="cm">/* Bitmask of supported quota types */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">quota_info</span>	<span class="n">s_dquot</span><span class="p">;</span>	<span class="cm">/* Diskquota specific options */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">sb_writers</span>	<span class="n">s_writers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Keep s_fs_info, s_time_gran, s_fsnotify_mask, and
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * s_fsnotify_marks together for cache efficiency. They are frequently
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * accessed and rarely modified.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span>			<span class="o">*</span><span class="n">s_fs_info</span><span class="p">;</span>	<span class="cm">/* Filesystem private info */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Granularity of c/m/atime in ns (cannot be worse than a second) */</span>
+</span></span><span class="line"><span class="cl">	<span class="n">u32</span>			<span class="n">s_time_gran</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Time limits for c/m/atime in seconds */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">time64_t</span>		   <span class="n">s_time_min</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">time64_t</span>		   <span class="n">s_time_max</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_FSNOTIFY
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="n">__u32</span>			<span class="n">s_fsnotify_mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">fsnotify_mark_connector</span> <span class="n">__rcu</span>	<span class="o">*</span><span class="n">s_fsnotify_marks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span>			<span class="n">s_id</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>	<span class="cm">/* Informational name */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uuid_t</span>			<span class="n">s_uuid</span><span class="p">;</span>		<span class="cm">/* UUID */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span>		<span class="n">s_max_links</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">fmode_t</span>			<span class="n">s_mode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * The next field is for VFS *only*. No filesystems have any business
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * even looking at it. You had been warned.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">mutex</span> <span class="n">s_vfs_rename_mutex</span><span class="p">;</span>	<span class="cm">/* Kludge */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Filesystem subtype.  If non-empty the filesystem type field
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * in /proc/mounts will be &#34;type.subtype&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s_subtype</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">dentry_operations</span> <span class="o">*</span><span class="n">s_d_op</span><span class="p">;</span> <span class="cm">/* default d_op for dentries */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Saved pool identifier for cleancache (-1 means none)
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">cleancache_poolid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">shrinker</span> <span class="n">s_shrink</span><span class="p">;</span>	<span class="cm">/* per-sb shrinker handle */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Number of inodes with nlink == 0 but still referenced */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_long_t</span> <span class="n">s_remove_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Pending fsnotify inode refs */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_long_t</span> <span class="n">s_fsnotify_inode_refs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Being remounted read-only */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">s_readonly_remount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* AIO completions deferred from interrupt context */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">workqueue_struct</span> <span class="o">*</span><span class="n">s_dio_done_wq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">hlist_head</span> <span class="n">s_pins</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Owning user namespace and default context in which to
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * interpret filesystem uids, gids, quotas, device nodes,
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * xattrs and security labels.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">user_namespace</span> <span class="o">*</span><span class="n">s_user_ns</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * The list_lru structure is essentially just a pointer to a table
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * of per-node lru lists, each of which has its own spinlock.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * There is no need to put them into separate cachelines.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_lru</span>		<span class="n">s_dentry_lru</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_lru</span>		<span class="n">s_inode_lru</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">rcu_head</span>		<span class="n">rcu</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">work_struct</span>	<span class="n">destroy_work</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">mutex</span>		<span class="n">s_sync_lock</span><span class="p">;</span>	<span class="cm">/* sync serialisation lock */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Indicates how deep in a filesystem stack this SB is
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">s_stack_depth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* s_inode_list_lock protects s_inodes */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">spinlock_t</span>		<span class="n">s_inode_list_lock</span> <span class="n">____cacheline_aligned_in_smp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">s_inodes</span><span class="p">;</span>	<span class="cm">/* all inodes */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">spinlock_t</span>		<span class="n">s_inode_wblist_lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">s_inodes_wb</span><span class="p">;</span>	<span class="cm">/* writeback inodes */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>super_block</code> 通常在挂载文件系统时会从底层存储设备上读取并构建，并且需要同步回底层存储设备</p>
+<h4 id="索引节点-inode" class="heading-element"><span>索引节点 <code>inode</code></span>
+  <a href="#%e7%b4%a2%e5%bc%95%e8%8a%82%e7%82%b9-inode" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>而 <code>inode</code> 则是文件系统中最重要的一个结构体，用于保存一个文件的元数据以及其在底层设备上的位置信息等（在 Linux 下一切皆是文件，目录也是一种文件）</p>
+<p>其定义也在 <code>include/linux/fs.h</code> 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Keep mostly read-only and often accessed (especially for
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * the RCU path lookup and &#39;stat&#39; data) fields at the beginning
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * of the &#39;struct inode&#39;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">inode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// inode 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">umode_t</span>			<span class="n">i_mode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">short</span>		<span class="n">i_opflags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">kuid_t</span>			<span class="n">i_uid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">kgid_t</span>			<span class="n">i_gid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span>		<span class="n">i_flags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_FS_POSIX_ACL
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">posix_acl</span>	<span class="o">*</span><span class="n">i_acl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">posix_acl</span>	<span class="o">*</span><span class="n">i_default_acl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">inode_operations</span>	<span class="o">*</span><span class="n">i_op</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">super_block</span>	<span class="o">*</span><span class="n">i_sb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// page cache 相关
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">struct</span> <span class="n">address_space</span>	<span class="o">*</span><span class="n">i_mapping</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_SECURITY
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="kt">void</span>			<span class="o">*</span><span class="n">i_security</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Stat data, not accessed from path walking */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">i_ino</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Filesystems may only read i_nlink directly.  They shall use the
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * following functions for modification:
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 *
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 *    (set|clear|inc|drop)_nlink
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 *    inode_(inc|dec)_link_count
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i_nlink</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">__i_nlink</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">dev_t</span>			<span class="n">i_rdev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">loff_t</span>			<span class="n">i_size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">timespec64</span>	<span class="n">i_atime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">timespec64</span>	<span class="n">i_mtime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">timespec64</span>	<span class="n">i_ctime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">spinlock_t</span>		<span class="n">i_lock</span><span class="p">;</span>	<span class="cm">/* i_blocks, i_bytes, maybe i_size */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">short</span>          <span class="n">i_bytes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">u8</span>			<span class="n">i_blkbits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">u8</span>			<span class="n">i_write_hint</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">blkcnt_t</span>		<span class="n">i_blocks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef __NEED_I_SIZE_ORDERED
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="kt">seqcount_t</span>		<span class="n">i_size_seqcount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Misc */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">i_state</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">rw_semaphore</span>	<span class="n">i_rwsem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">dirtied_when</span><span class="p">;</span>	<span class="cm">/* jiffies of first dirtying */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">dirtied_time_when</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">hlist_node</span>	<span class="n">i_hash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">i_io_list</span><span class="p">;</span>	<span class="cm">/* backing dev IO list */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_CGROUP_WRITEBACK
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">bdi_writeback</span>	<span class="o">*</span><span class="n">i_wb</span><span class="p">;</span>		<span class="cm">/* the associated cgroup wb */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* foreign inode detection, see wbc_detach_inode() */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span>			<span class="n">i_wb_frn_winner</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">u16</span>			<span class="n">i_wb_frn_avg_time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">u16</span>			<span class="n">i_wb_frn_history</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">i_lru</span><span class="p">;</span>		<span class="cm">/* inode LRU list */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">i_sb_list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">i_wb_list</span><span class="p">;</span>	<span class="cm">/* backing dev writeback list */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">hlist_head</span>	<span class="n">i_dentry</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">rcu_head</span>		<span class="n">i_rcu</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic64_t</span>		<span class="n">i_version</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic64_t</span>		<span class="n">i_sequence</span><span class="p">;</span> <span class="cm">/* see futex */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_t</span>		<span class="n">i_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_t</span>		<span class="n">i_dio_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_t</span>		<span class="n">i_writecount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if defined(CONFIG_IMA) || defined(CONFIG_FILE_LOCKING)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="kt">atomic_t</span>		<span class="n">i_readcount</span><span class="p">;</span> <span class="cm">/* struct files open RO */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">const</span> <span class="k">struct</span> <span class="n">file_operations</span>	<span class="o">*</span><span class="n">i_fop</span><span class="p">;</span>	<span class="cm">/* former -&gt;i_op-&gt;default_file_ops */</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">free_inode</span><span class="p">)(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">file_lock_context</span>	<span class="o">*</span><span class="n">i_flctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">address_space</span>	<span class="n">i_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">i_devices</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">pipe_inode_info</span>	<span class="o">*</span><span class="n">i_pipe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">block_device</span>	<span class="o">*</span><span class="n">i_bdev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">cdev</span>		<span class="o">*</span><span class="n">i_cdev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">char</span>			<span class="o">*</span><span class="n">i_link</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">unsigned</span>		<span class="n">i_dir_seq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">__u32</span>			<span class="n">i_generation</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_FSNOTIFY
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="n">__u32</span>			<span class="n">i_fsnotify_mask</span><span class="p">;</span> <span class="cm">/* all events this inode cares about */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">fsnotify_mark_connector</span> <span class="n">__rcu</span>	<span class="o">*</span><span class="n">i_fsnotify_marks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_FS_ENCRYPTION
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">fscrypt_info</span>	<span class="o">*</span><span class="n">i_crypt_info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_FS_VERITY
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">fsverity_info</span>	<span class="o">*</span><span class="n">i_verity_info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span>			<span class="o">*</span><span class="n">i_private</span><span class="p">;</span> <span class="cm">/* fs or device private pointer */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>与 <code>super_block</code> 一样，<code>inode</code> 也是从底层存储设备上读取并构建的，并且也需要同步回底层存储设备</p>
+<h4 id="文件-file" class="heading-element"><span>文件 <code>file</code></span>
+  <a href="#%e6%96%87%e4%bb%b6-file" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><code>file</code> 其实是已经打开的底层存储设备上的文件在内存中的表示。与前面两个结构体有所不同，底层存储设备上并不会存储，该结构体只是内核抽象出来的，仅仅存在于内存中，方便管理</p>
+<p>其定义也在 <code>include/linux/fs.h</code> 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">file</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">llist_node</span>	<span class="n">fu_llist</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">rcu_head</span> 	<span class="n">fu_rcuhead</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="n">f_u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">path</span>		<span class="n">f_path</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">inode</span>		<span class="o">*</span><span class="n">f_inode</span><span class="p">;</span>	<span class="cm">/* cached value */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">file_operations</span>	<span class="o">*</span><span class="n">f_op</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Protects f_ep_links, f_flags.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Must not be taken from IRQ context.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">spinlock_t</span>		<span class="n">f_lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">enum</span> <span class="n">rw_hint</span>		<span class="n">f_write_hint</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_long_t</span>		<span class="n">f_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span> 		<span class="n">f_flags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">fmode_t</span>			<span class="n">f_mode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">mutex</span>		<span class="n">f_pos_lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">loff_t</span>			<span class="n">f_pos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">fown_struct</span>	<span class="n">f_owner</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">cred</span>	<span class="o">*</span><span class="n">f_cred</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">file_ra_state</span>	<span class="n">f_ra</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">u64</span>			<span class="n">f_version</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_SECURITY
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="kt">void</span>			<span class="o">*</span><span class="n">f_security</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="cm">/* needed for tty driver, and maybe others */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span>			<span class="o">*</span><span class="n">private_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_EPOLL
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="cm">/* Used by fs/eventpoll.c to link all the hooks to this file */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">f_ep_links</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">f_tfile_llink</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="cm">/* #ifdef CONFIG_EPOLL */</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">address_space</span>	<span class="o">*</span><span class="n">f_mapping</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">errseq_t</span>		<span class="n">f_wb_err</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">__attribute__</span><span class="p">((</span><span class="nf">aligned</span><span class="p">(</span><span class="mi">4</span><span class="p">)));</span>	<span class="cm">/* lest something weird decides that 2 is OK */</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>每个 file 都与一个 inode 对应</p>
+<h4 id="目录项-dentry" class="heading-element"><span>目录项 <code>dentry</code></span>
+  <a href="#%e7%9b%ae%e5%bd%95%e9%a1%b9-dentry" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><code>dentry</code> 与 <code>file</code> 类似，底层设备上并不会存储，该结构体也是内核抽象出来的，针对目录文件进行特殊的管理</p>
+<p>目录项相对于文件具有更高的热度，同时为了加速打开文件时的路径解析，内核中还实现了目录项缓存 <code>dcache</code> 用于缓存 <code>dentry</code></p>
+<p>其定义在 <code>include/linux/dcache.h</code> 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">dentry</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* RCU lookup touched fields */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">d_flags</span><span class="p">;</span>		<span class="cm">/* protected by d_lock */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">seqcount_t</span> <span class="n">d_seq</span><span class="p">;</span>		<span class="cm">/* per dentry seqlock */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">hlist_bl_node</span> <span class="n">d_hash</span><span class="p">;</span>	<span class="cm">/* lookup hash list */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">dentry</span> <span class="o">*</span><span class="n">d_parent</span><span class="p">;</span>	<span class="cm">/* parent directory */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">qstr</span> <span class="n">d_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">d_inode</span><span class="p">;</span>		<span class="cm">/* Where the name belongs to - NULL is
+</span></span></span><span class="line"><span class="cl"><span class="cm">					 * negative */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">d_iname</span><span class="p">[</span><span class="n">DNAME_INLINE_LEN</span><span class="p">];</span>	<span class="cm">/* small names */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Ref lookup also touches following */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">lockref</span> <span class="n">d_lockref</span><span class="p">;</span>	<span class="cm">/* per-dentry lock and refcount */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">dentry_operations</span> <span class="o">*</span><span class="n">d_op</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">super_block</span> <span class="o">*</span><span class="n">d_sb</span><span class="p">;</span>	<span class="cm">/* The root of the dentry tree */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">d_time</span><span class="p">;</span>		<span class="cm">/* used by d_revalidate */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="o">*</span><span class="n">d_fsdata</span><span class="p">;</span>			<span class="cm">/* fs-specific data */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">list_head</span> <span class="n">d_lru</span><span class="p">;</span>		<span class="cm">/* LRU list */</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">wait_queue_head_t</span> <span class="o">*</span><span class="n">d_wait</span><span class="p">;</span>	<span class="cm">/* in-lookup ones only */</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span> <span class="n">d_child</span><span class="p">;</span>	<span class="cm">/* child of parent list */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span> <span class="n">d_subdirs</span><span class="p">;</span>	<span class="cm">/* our children */</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * d_alias and d_rcu can share memory
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">hlist_node</span> <span class="n">d_alias</span><span class="p">;</span>	<span class="cm">/* inode alias list */</span>
+</span></span><span class="line"><span class="cl">		<span class="k">struct</span> <span class="n">hlist_bl_node</span> <span class="n">d_in_lookup_hash</span><span class="p">;</span>	<span class="cm">/* only for in-lookup ones */</span>
+</span></span><span class="line"><span class="cl">	 	<span class="k">struct</span> <span class="n">rcu_head</span> <span class="n">d_rcu</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="n">d_u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>因为目录也是文件，所以每个 <code>dentry</code> 也会与一个 <code>inode</code> 对应</p>
+<h4 id="页缓存-address_space" class="heading-element"><span>页缓存 <code>address_space</code></span>
+  <a href="#%e9%a1%b5%e7%bc%93%e5%ad%98-address_space" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>在 <code>inode</code> 结构体中可以看见一个类型为 <code>address_space</code> 结构体指针的 <code>i_mapping</code> 字段，其实它就是 page cache 的核心结构体</p>
+<p>其定义也在 <code>include/linux/fs.h</code> 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct address_space - Contents of a cacheable, mappable object.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @host: Owner, either the inode or the block_device.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @i_pages: Cached pages.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @gfp_mask: Memory allocation flags to use for allocating pages.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @i_mmap_writable: Number of VM_SHARED mappings.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @nr_thps: Number of THPs in the pagecache (non-shmem only).
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @i_mmap: Tree of private and shared mappings.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @i_mmap_rwsem: Protects @i_mmap and @i_mmap_writable.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @nrpages: Number of page entries, protected by the i_pages lock.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @nrexceptional: Shadow or DAX entries, protected by the i_pages lock.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @writeback_index: Writeback starts here.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @a_ops: Methods.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @flags: Error bits and flags (AS_*).
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @wb_err: The most recent error which has occurred.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @private_lock: For use by the owner of the address_space.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @private_list: For use by the owner of the address_space.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @private_data: For use by the owner of the address_space.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">address_space</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 指向文件 inode
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">struct</span> <span class="n">inode</span>		<span class="o">*</span><span class="n">host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 当前文件缓存的所有 page
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">struct</span> <span class="n">xarray</span>		<span class="n">i_pages</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">gfp_t</span>			<span class="n">gfp_mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_t</span>		<span class="n">i_mmap_writable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_READ_ONLY_THP_FOR_FS
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="cm">/* number of thp, only for non-shmem files */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">atomic_t</span>		<span class="n">nr_thps</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">rb_root_cached</span>	<span class="n">i_mmap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">rw_semaphore</span>	<span class="n">i_mmap_rwsem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">nrpages</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">nrexceptional</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">pgoff_t</span>			<span class="n">writeback_index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="k">struct</span> <span class="n">address_space_operations</span> <span class="o">*</span><span class="n">a_ops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">flags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">errseq_t</span>		<span class="n">wb_err</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">spinlock_t</span>		<span class="n">private_lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">private_list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span>			<span class="o">*</span><span class="n">private_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nf">__attribute__</span><span class="p">((</span><span class="nf">aligned</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span><span class="p">))))</span> <span class="n">__randomize_layout</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * On most architectures that alignment is already the case; but
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * must be enforced here for CRIS, to let the least significant bit
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * of struct page&#39;s &#34;mapping&#34; pointer be used for PAGE_MAPPING_ANON.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">request_queue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">block_device</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">dev_t</span>			<span class="n">bd_dev</span><span class="p">;</span>  <span class="cm">/* not a kdev_t - it&#39;s a search key */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span>			<span class="n">bd_openers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span>		<span class="n">bd_inode</span><span class="p">;</span>	<span class="cm">/* will die */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">super_block</span> <span class="o">*</span>	<span class="n">bd_super</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">mutex</span>		<span class="n">bd_mutex</span><span class="p">;</span>	<span class="cm">/* open/close mutex */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="o">*</span>			<span class="n">bd_claiming</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="o">*</span>			<span class="n">bd_holder</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span>			<span class="n">bd_holders</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span>			<span class="n">bd_write_holder</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef CONFIG_SYSFS
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">bd_holder_disks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="k">struct</span> <span class="n">block_device</span> <span class="o">*</span>	<span class="n">bd_contains</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span>		<span class="n">bd_block_size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">u8</span>			<span class="n">bd_partno</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">hd_struct</span> <span class="o">*</span>	<span class="n">bd_part</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* number of times partitions within this device have been opened. */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span>		<span class="n">bd_part_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span>			<span class="n">bd_invalidated</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">gendisk</span> <span class="o">*</span>	<span class="n">bd_disk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">request_queue</span> <span class="o">*</span>  <span class="n">bd_queue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">backing_dev_info</span> <span class="o">*</span><span class="n">bd_bdi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">list_head</span>	<span class="n">bd_list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Private data.  You must have bd_claim&#39;ed the block_device
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * to use this.  NOTE:  bd_claim allows an owner to claim
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * the same device multiple times, the owner must take special
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * care to not mess up bd_private for that case.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">long</span>		<span class="n">bd_private</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* The counter of freeze processes */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span>			<span class="n">bd_fsfreeze_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Mutex for freeze */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">mutex</span>		<span class="n">bd_fsfreeze_mutex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">__randomize_layout</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>每一个 <code>address_space</code> 与一个 <code>inode</code> 对应，同时 <code>file</code> 中的 <code>f_mapping</code> 字段通常由该文件的 <code>inode</code> 中 <code>i_mapping</code> 赋值，也就是说每个文件都会有独自的 <code>file</code>、<code>inode</code> 以及 <code>address_space</code> 结构体</p>
+<p><code>address_space</code> 结构体 <code>struct xarray i_pages</code> 就是该文件的 page cache 中缓存的所有物理页。它是通过基数树这一结构进行管理的，而 <code>xarray</code> 只是在基数树上进行了一层封装</p>
+<h3 id="常用函数" class="heading-element"><span>常用函数</span>
+  <a href="#%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>通常 <code>address_space</code> 上会挂载一个 <code>address_space_operations</code> 结构，用于自定义对 page cache 中的页面操作的函数</p>
+<p><code>address_space_operations</code> 结构定义也在 <code>include/linux/fs.h</code> 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">address_space_operations</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">writepage</span><span class="p">)(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="n">page</span><span class="p">,</span> <span class="k">struct</span> <span class="n">writeback_control</span> <span class="o">*</span><span class="n">wbc</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">readpage</span><span class="p">)(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Write back some dirty pages from this mapping. */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">writepages</span><span class="p">)(</span><span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">writeback_control</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Set a page dirty.  Return true if this dirtied it */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">set_page_dirty</span><span class="p">)(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="n">page</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * Reads in the requested pages. Unlike -&gt;readpage(), this is
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * PURELY used for read-ahead!.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">readpages</span><span class="p">)(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">,</span> <span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="n">mapping</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">pages</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">nr_pages</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">write_begin</span><span class="p">)(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="n">mapping</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="kt">loff_t</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">len</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">flags</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="k">struct</span> <span class="n">page</span> <span class="o">**</span><span class="n">pagep</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">fsdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">write_end</span><span class="p">)(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="n">mapping</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="kt">loff_t</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">len</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">copied</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="n">page</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">fsdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Unfortunately this kludge is needed for FIBMAP. Don&#39;t use it */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">sector_t</span> <span class="p">(</span><span class="o">*</span><span class="n">bmap</span><span class="p">)(</span><span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="p">,</span> <span class="kt">sector_t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">invalidatepage</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">releasepage</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">,</span> <span class="kt">gfp_t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">freepage</span><span class="p">)(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">ssize_t</span> <span class="p">(</span><span class="o">*</span><span class="n">direct_IO</span><span class="p">)(</span><span class="k">struct</span> <span class="n">kiocb</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">iov_iter</span> <span class="o">*</span><span class="n">iter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * migrate the contents of a page to the specified target. If
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * migrate_mode is MIGRATE_ASYNC, it must not block.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">migratepage</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">,</span> <span class="k">enum</span> <span class="n">migrate_mode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">isolate_page</span><span class="p">)(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">,</span> <span class="kt">isolate_mode_t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">putback_page</span><span class="p">)(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">launder_page</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">is_partially_uptodate</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="kt">unsigned</span> <span class="kt">long</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">is_dirty_writeback</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">,</span> <span class="kt">bool</span> <span class="o">*</span><span class="p">,</span> <span class="kt">bool</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">error_remove_page</span><span class="p">)(</span><span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* swapfile support */</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">swap_activate</span><span class="p">)(</span><span class="k">struct</span> <span class="n">swap_info_struct</span> <span class="o">*</span><span class="n">sis</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="kt">sector_t</span> <span class="o">*</span><span class="n">span</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">swap_deactivate</span><span class="p">)(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里简要介绍一下其中通用的部分常用函数</p>
+<h4 id="从底层填充" class="heading-element"><span>从底层填充</span>
+  <a href="#%e4%bb%8e%e5%ba%95%e5%b1%82%e5%a1%ab%e5%85%85" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>当打开一个文件后，page cache 不会立即缓存这个文件的所有数据页，而是随着对文件的读写来逐渐填充的</p>
+<p><code>readpage</code> 和 <code>readpages</code> 就是将底层存储设备上的一个或者多个页的数据读到 page cache 中</p>
+<h4 id="写入修改" class="heading-element"><span>写入修改</span>
+  <a href="#%e5%86%99%e5%85%a5%e4%bf%ae%e6%94%b9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>page cache 的写入较为复杂，主要分为三个阶段：</p>
+<ol>
+<li><code>write_begin</code> 主要负责查找、或者分配新的物理页，并将其锁定，有时还需要先从底层读取最新的数据页</li>
+<li><code>writepage</code> 或者 <code>writepages</code> 就是负责对这些物理页的实际写入过程</li>
+<li><code>write_end</code> 主要负责解锁这些物理页，并且更新 <code>inode</code> 中的元数据信息，例如 <code>i_size</code></li>
+</ol>
+<h4 id="其他" class="heading-element"><span>其他</span>
+  <a href="#%e5%85%b6%e4%bb%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><code>direct_IO</code> 则是负责不经过 page cache 的直接 IO 的实现</p>
+<p>需要注意的是，当需要读的数据在 page cache 中缓存的和底层存储数据不一致时，也就是 <code>page</code> 为 <code>dirty</code> 状态时，通常需要调用 <code>filemap_write_and_wait</code> 或者 <code>filemap_write_and_wait_range</code> 先将这部分脏数据写到底层设备之后，才能执行 direct read</p>
+<h2 id="参考资料" class="heading-element"><span>参考资料</span>
+  <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li><a href="https://www.thomas-krenn.com/en/wiki/Linux_Storage_Stack_Diagram"target="_blank" rel="external nofollow noopener noreferrer">【Thomas-Krenn-Wiki】Linux Storage Stack Diagram</a></li>
+<li><a href="https://blog.csdn.net/juS3Ve/article/details/82322637"target="_blank" rel="external nofollow noopener noreferrer">【CSDN】浅墨: 聊聊 Linux IO (中) —— Linux 内核中的 IO 栈</a></li>
+<li><a href="https://www.doc-developpement-durable.org/file/Projets-informatiques/cours-&amp;-manuels-informatiques/Linux/Linux%20Kernel%20Development,%203rd%20Edition.pdf"target="_blank" rel="external nofollow noopener noreferrer">【LKD】Linux Kernel Development (3rd Edition)</a></li>
+<li><a href="https://kernel.taobao.org/2018/05/The-XArray-data-structure/"target="_blank" rel="external nofollow noopener noreferrer">【阿里云技术博客】The Xarray Data Structure</a></li>
+<li><a href="https://lwn.net/Articles/254856/"target="_blank" rel="external nofollow noopener noreferrer">【LWN】Some VFS address space operations changes</a></li>
+<li><a href="https://www.cnblogs.com/linhaostudy/p/10196915.html"target="_blank" rel="external nofollow noopener noreferrer">【博客园】Page Cache 与 Page 回写</a></li>
+</ul>
+</div><div class="post-copyright">
+    <ul>
+        <li class="post-copyright-author">
+            <strong>本文作者：</strong>
+            Zeus
+        </li>
+        <li class="post-copyright-link">
+            <strong>本文链接：</strong>
+            <a href="https://ywang-wnlo.github.io/posts/9ba60726/" title="">https://ywang-wnlo.github.io/posts/9ba60726/</a>
+        </li>
+        <li class="post-copyright-license">
+            <strong>版权声明：</strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div><hr class="awesome-hr" />
+    <h2 id="see-also">相关内容</h2>
+    <ul><li>
+          <a href="/posts/646202b9/" title="page cache 回写机制">page cache 回写机制</a></li><li>
+          <a href="/posts/2c65e859/" title="个人简历相关的基础知识梳理">个人简历相关的基础知识梳理</a></li><li>
+          <a href="/posts/5fce01ae/" title="基于 QEMU 的 Linux 内核编译和安装">基于 QEMU 的 Linux 内核编译和安装</a></li><li>
+          <a href="/posts/4f0d345c/" title="io_uring 内核源码分析">io_uring 内核源码分析</a></li><li>
+          <a href="/posts/2033aa70/" title="LaTeX 常用语法记录">LaTeX 常用语法记录</a></li></ul><div class="post-reward">
+    <div class="comment">请我一杯咖啡吧！</div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><i class="fa-solid fa-qrcode fa-fw" aria-hidden="true"></i>赞赏</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/alipay.jpg" alt="Zeus 支付宝" data-title="Zeus 支付宝" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>支付宝</span>
+          </div><div><img loading="lazy" src="/images/wechatpay.png" alt="Zeus 微信" data-title="Zeus 微信" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>微信</span>
+          </div></div>
+  </div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2022-11-16 10:33:39">更新于 2022-11-16&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/9ba60726/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span></span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/buffer-io/" class="post-tag" title="标签 - buffer IO">buffer IO</a><a href="/tags/kernel/" class="post-tag" title="标签 - kernel">kernel</a><a href="/tags/page-cache/" class="post-tag" title="标签 - page cache">page cache</a><a href="/tags/writeback/" class="post-tag" title="标签 - writeback">writeback</a><a href="/tags/todo/" class="post-tag" title="标签 - todo">todo</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/9a0b7c3b/" class="post-nav-item" rel="prev" title="NexT 主题的配置使用记录"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>NexT 主题的配置使用记录</a><a href="/posts/abac0c46/" class="post-nav-item" rel="next" title="Hexo 配置主流搜索引擎收录流程记录">Hexo 配置主流搜索引擎收录流程记录<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="giscus" class="comment">
+          <script
+            src="https://giscus.app/client.js"
+            data-repo="ywang-wnlo/ywang-wnlo.github.io"
+            data-repo-id="R_kgDOGTSTcQ"
+            data-category="announcements"
+            data-category-id="DIC_kwDOGTSTcc4CZaXg"
+            data-mapping="pathname"
+            data-strict="0"
+            
+            data-theme="preferred_color_scheme"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-lang="zh-CN"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async
+            defer
+          ></script>
+        </div>
+        <noscript>
+          Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
+        </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ywang-wnlo"target="_blank" rel="external nofollow noopener noreferrer">Zeus</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fab fa-fw fa-creative-commons"></i> BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="https://unpkg.com/lightgallery@2.7.2/css/lightgallery-bundle.min.css"><link rel="preload" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/katex@0.16.10/dist/katex.min.css"></noscript><link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/silver/pace-theme-minimal.css"><script src="https://unpkg.com/autocomplete.js@0.38.1/dist/autocomplete.min.js" defer></script><script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/lightgallery.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="https://unpkg.com/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/katex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/auto-render.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/copy-tex.min.js" defer></script><script src="https://unpkg.com/katex@0.16.10/dist/contrib/mhchem.min.js" defer></script><script src="https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js" defer></script><script src="https://vercount.one/js" async defer></script><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark_dimmed","lightTheme":"light","origin":"https://giscus.app"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"pangu":{"enable":true,"selector":"article"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.13"};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
