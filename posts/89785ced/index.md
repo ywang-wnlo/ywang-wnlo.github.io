@@ -87,5 +87,5 @@ brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/HEAD/Formu
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/89785ced/  
+> URL: https://blog.linkcoder.vip/posts/89785ced/  
 

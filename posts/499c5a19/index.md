@@ -69,5 +69,5 @@ Beamer 中通常会用一对 `\begin{frame}`、`\end{frame}` 来制作一页幻�
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/499c5a19/  
+> URL: https://blog.linkcoder.vip/posts/499c5a19/  
 

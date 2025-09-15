@@ -673,5 +673,5 @@ transmission 是一个轻量级跨平台的 BT 下载客户端
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/51140c4a/  
+> URL: https://blog.linkcoder.vip/posts/51140c4a/  
 

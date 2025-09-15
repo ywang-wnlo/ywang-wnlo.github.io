@@ -87,5 +87,5 @@ oh-my-posh init pwsh --config &#34;$env:POSH_THEMES_PATH/powerlevel10k_rainbow.o
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/8ad4716e/  
+> URL: https://blog.linkcoder.vip/posts/8ad4716e/  
 

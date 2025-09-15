@@ -153,5 +153,5 @@ hexo deploy -m (git log -1 --pretty=format:%s)
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/4143201a/  
+> URL: https://blog.linkcoder.vip/posts/4143201a/  
 

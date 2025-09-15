@@ -161,5 +161,5 @@ madVR 个人没有折腾，直接用默认配置
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/3b7ae835/  
+> URL: https://blog.linkcoder.vip/posts/3b7ae835/  
 

@@ -119,5 +119,5 @@ $E=mc^2$
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/2033aa70/  
+> URL: https://blog.linkcoder.vip/posts/2033aa70/  
 

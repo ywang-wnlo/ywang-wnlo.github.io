@@ -744,5 +744,5 @@ int main() {
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/89c4acb1/  
+> URL: https://blog.linkcoder.vip/posts/89c4acb1/  
 

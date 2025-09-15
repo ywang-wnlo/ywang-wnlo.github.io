@@ -726,5 +726,5 @@ test: test.c:5: main: Assertion `a == 2&#39; failed.
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/89f2ed7d/  
+> URL: https://blog.linkcoder.vip/posts/89f2ed7d/  
 

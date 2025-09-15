@@ -31,5 +31,5 @@ pdfTeX、XeTeX 和 LuaTeX 都是在原有的 TeX 停止更新后进行修改增�
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/a4752f87/  
+> URL: https://blog.linkcoder.vip/posts/a4752f87/  
 

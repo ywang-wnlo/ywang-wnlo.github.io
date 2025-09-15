@@ -595,5 +595,5 @@ page cache 的写入较为复杂，主要分为三个阶段：
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/9ba60726/  
+> URL: https://blog.linkcoder.vip/posts/9ba60726/  
 

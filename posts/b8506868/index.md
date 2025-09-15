@@ -230,5 +230,5 @@ sudo ./db_bench --fs_uri=zenfs://dev:nvme1n1 --benchmarks=fillrandom --use_direc
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/b8506868/  
+> URL: https://blog.linkcoder.vip/posts/b8506868/  
 

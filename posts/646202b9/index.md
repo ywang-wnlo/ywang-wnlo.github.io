@@ -1146,5 +1146,5 @@ static inline ssize_t generic_write_sync(struct kiocb *iocb, ssize_t count)
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/646202b9/  
+> URL: https://blog.linkcoder.vip/posts/646202b9/  
 

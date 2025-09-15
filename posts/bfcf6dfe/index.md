@@ -505,5 +505,5 @@ index 00000000..d209e33a
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/bfcf6dfe/  
+> URL: https://blog.linkcoder.vip/posts/bfcf6dfe/  
 

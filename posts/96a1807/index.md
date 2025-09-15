@@ -113,5 +113,5 @@ make package/mentohust/compile V=s -j
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/96a1807/  
+> URL: https://blog.linkcoder.vip/posts/96a1807/  
 

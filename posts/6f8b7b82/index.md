@@ -203,5 +203,5 @@ IPv6 分配长度: 已禁用
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/6f8b7b82/  
+> URL: https://blog.linkcoder.vip/posts/6f8b7b82/  
 

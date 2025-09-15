@@ -12,7 +12,7 @@
   <meta itemprop="datePublished" content="2023-09-09T23:35:41+08:00">
   <meta itemprop="dateModified" content="2025-03-27T19:33:19+08:00">
   <meta itemprop="wordCount" content="5312">
-  <meta itemprop="keywords" content="日常踩坑,Debug,addr2line,gdb,objdump,coredump,assert,反汇编"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/89f2ed7d/">
+  <meta itemprop="keywords" content="日常踩坑,Debug,addr2line,gdb,objdump,coredump,assert,反汇编"><meta property="og:url" content="https://blog.linkcoder.vip/posts/89f2ed7d/">
   <meta property="og:site_name" content="乐园">
   <meta property="og:title" content="Debug 从入门到入土">
   <meta property="og:description" content="写代码难免遇到 bug，调试解决 bug 的快慢很影响开发的效率。本文主要是梳理并记录下个人经常用的调试方法（主要以 C/C&#43;&#43; 的 segment fault 为例）">
@@ -34,7 +34,7 @@
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/89f2ed7d/" title="Debug 从入门到入土 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/e6410576/" title="小米 WR30U 解锁并刷机" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/4dea1ffb/" title="更换博客框架至 Hugo" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/89f2ed7d/index.md" title="Debug 从入门到入土 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://blog.linkcoder.vip/posts/89f2ed7d/" title="Debug 从入门到入土 - 乐园" /><link rel="prev" type="text/html" href="https://blog.linkcoder.vip/posts/e6410576/" title="小米 WR30U 解锁并刷机" /><link rel="next" type="text/html" href="https://blog.linkcoder.vip/posts/4dea1ffb/" title="更换博客框架至 Hugo" /><link rel="alternate" type="text/markdown" href="https://blog.linkcoder.vip/posts/89f2ed7d/index.md" title="Debug 从入门到入土 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="inxg63efgs0LT89F71M_3khLLWw1uxcfc3mNm9UvbAk" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
   {
@@ -44,9 +44,9 @@
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https:\/\/ywang-wnlo.github.io\/posts\/89f2ed7d\/"
+      "@id": "https:\/\/blog.linkcoder.vip\/posts\/89f2ed7d\/"
     },"genre": "posts","keywords": "日常踩坑, Debug, addr2line, gdb, objdump, coredump, assert, 反汇编","wordcount":  5312 ,
-    "url": "https:\/\/ywang-wnlo.github.io\/posts\/89f2ed7d\/","datePublished": "2023-09-09T23:35:41+08:00","dateModified": "2025-03-27T19:33:19+08:00","publisher": {
+    "url": "https:\/\/blog.linkcoder.vip\/posts\/89f2ed7d\/","datePublished": "2023-09-09T23:35:41+08:00","dateModified": "2025-03-27T19:33:19+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -1454,7 +1454,7 @@
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
-            <a href="https://ywang-wnlo.github.io/posts/89f2ed7d/" title="">https://ywang-wnlo.github.io/posts/89f2ed7d/</a>
+            <a href="https://blog.linkcoder.vip/posts/89f2ed7d/" title="">https://blog.linkcoder.vip/posts/89f2ed7d/</a>
         </li>
         <li class="post-copyright-license">
             <strong>版权声明：</strong>

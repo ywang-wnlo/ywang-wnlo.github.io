@@ -184,5 +184,5 @@ sudo update-grub2
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/5fce01ae/  
+> URL: https://blog.linkcoder.vip/posts/5fce01ae/  
 

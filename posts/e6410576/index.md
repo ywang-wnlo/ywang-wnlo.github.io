@@ -158,5 +158,5 @@ ImmortalWrt 是 OpenWrt 的一个分支，相比于 OpenWrt 有更多的软件�
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/e6410576/  
+> URL: https://blog.linkcoder.vip/posts/e6410576/  
 

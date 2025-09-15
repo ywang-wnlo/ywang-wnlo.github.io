@@ -12,7 +12,7 @@
   <meta itemprop="datePublished" content="2021-10-29T09:49:00+08:00">
   <meta itemprop="dateModified" content="2022-11-16T10:33:39+08:00">
   <meta itemprop="wordCount" content="1525">
-  <meta itemprop="keywords" content="异步 IO,liburing,io_uring"><meta property="og:url" content="https://ywang-wnlo.github.io/posts/d7259d1d/">
+  <meta itemprop="keywords" content="异步 IO,liburing,io_uring"><meta property="og:url" content="https://blog.linkcoder.vip/posts/d7259d1d/">
   <meta property="og:site_name" content="乐园">
   <meta property="og:title" content="io_uring 用户库源码分析">
   <meta property="og:description" content="io_uring 是 Linux 在 5.1 版本引入的一套新的异步 IO 实现。本文主要介绍 io_uring 的用户库源码分析">
@@ -31,7 +31,7 @@
 <meta name="application-name" content="乐园">
 <meta name="apple-mobile-web-app-title" content="乐园"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ywang-wnlo.github.io/posts/d7259d1d/" title="io_uring 用户库源码分析 - 乐园" /><link rel="prev" type="text/html" href="https://ywang-wnlo.github.io/posts/c142853f/" title="io_uring 简介和使用" /><link rel="next" type="text/html" href="https://ywang-wnlo.github.io/posts/4f0d345c/" title="io_uring 内核源码分析" /><link rel="alternate" type="text/markdown" href="https://ywang-wnlo.github.io/posts/d7259d1d/index.md" title="io_uring 用户库源码分析 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://blog.linkcoder.vip/posts/d7259d1d/" title="io_uring 用户库源码分析 - 乐园" /><link rel="prev" type="text/html" href="https://blog.linkcoder.vip/posts/c142853f/" title="io_uring 简介和使用" /><link rel="next" type="text/html" href="https://blog.linkcoder.vip/posts/4f0d345c/" title="io_uring 内核源码分析" /><link rel="alternate" type="text/markdown" href="https://blog.linkcoder.vip/posts/d7259d1d/index.md" title="io_uring 用户库源码分析 - 乐园"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/all.min.css"></noscript><link rel="preload" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css"></noscript><meta name="google-site-verification" content="inxg63efgs0LT89F71M_3khLLWw1uxcfc3mNm9UvbAk" /><meta name="msvalidate.01" content="65AB321A829DD5542989CC078C3ABD9E" /><script type="application/ld+json">
   {
@@ -41,9 +41,9 @@
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https:\/\/ywang-wnlo.github.io\/posts\/d7259d1d\/"
+      "@id": "https:\/\/blog.linkcoder.vip\/posts\/d7259d1d\/"
     },"genre": "posts","keywords": "异步 IO, liburing, io_uring","wordcount":  1525 ,
-    "url": "https:\/\/ywang-wnlo.github.io\/posts\/d7259d1d\/","datePublished": "2021-10-29T09:49:00+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
+    "url": "https:\/\/blog.linkcoder.vip\/posts\/d7259d1d\/","datePublished": "2021-10-29T09:49:00+08:00","dateModified": "2022-11-16T10:33:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -345,7 +345,7 @@ __io_uring_submit --> __sys_io_uring_enter --> __sys_io_uring_enter2 --> syscall
         </li>
         <li class="post-copyright-link">
             <strong>本文链接：</strong>
-            <a href="https://ywang-wnlo.github.io/posts/d7259d1d/" title="">https://ywang-wnlo.github.io/posts/d7259d1d/</a>
+            <a href="https://blog.linkcoder.vip/posts/d7259d1d/" title="">https://blog.linkcoder.vip/posts/d7259d1d/</a>
         </li>
         <li class="post-copyright-license">
             <strong>版权声明：</strong>

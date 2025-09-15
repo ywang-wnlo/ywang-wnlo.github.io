@@ -127,5 +127,5 @@ ax2.plot((1 - d, 1 &#43; d), (1 - d, 1 &#43; d), **kwargs)
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/731b80f7/  
+> URL: https://blog.linkcoder.vip/posts/731b80f7/  
 

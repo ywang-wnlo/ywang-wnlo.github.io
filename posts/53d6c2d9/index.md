@@ -183,5 +183,5 @@ Breed 的刷入和固件刷入流程基本一致：
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/53d6c2d9/  
+> URL: https://blog.linkcoder.vip/posts/53d6c2d9/  
 

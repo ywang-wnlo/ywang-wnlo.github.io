@@ -229,5 +229,5 @@ Caused by: java.lang.ClassNotFoundException: org.HdrHistogram.EncodableHistogram
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/4bc1e607/  
+> URL: https://blog.linkcoder.vip/posts/4bc1e607/  
 

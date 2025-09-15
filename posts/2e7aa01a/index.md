@@ -91,5 +91,5 @@ python -m pip install pip==20.2.4 -i http://pypi.doubanio.com/simple/ --trusted-
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/2e7aa01a/  
+> URL: https://blog.linkcoder.vip/posts/2e7aa01a/  
 

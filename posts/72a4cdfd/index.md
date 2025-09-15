@@ -94,5 +94,5 @@ sudo ldconfig
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/72a4cdfd/  
+> URL: https://blog.linkcoder.vip/posts/72a4cdfd/  
 

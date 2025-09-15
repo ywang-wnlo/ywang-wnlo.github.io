@@ -43,5 +43,5 @@ OpenWrt 是一个针对嵌入式设备（通常是路由器或者软路由）的
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/8507aaa1/  
+> URL: https://blog.linkcoder.vip/posts/8507aaa1/  
 

@@ -649,5 +649,5 @@ io_iopoll_getevents --&gt; io_do_iopoll --&gt; iopoll[&#34;f_op-&gt;iopoll&#34;]
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/4f0d345c/  
+> URL: https://blog.linkcoder.vip/posts/4f0d345c/  
 

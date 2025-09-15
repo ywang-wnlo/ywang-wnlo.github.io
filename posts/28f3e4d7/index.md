@@ -134,5 +134,5 @@ conda remove &lt;package_name&gt;
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/28f3e4d7/  
+> URL: https://blog.linkcoder.vip/posts/28f3e4d7/  
 

@@ -115,5 +115,5 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/f2cdf8a6/  
+> URL: https://blog.linkcoder.vip/posts/f2cdf8a6/  
 

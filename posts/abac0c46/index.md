@@ -148,5 +148,5 @@ Bing 的站点地图爬取一般几分钟就会完成，之后只需静静等待
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/abac0c46/  
+> URL: https://blog.linkcoder.vip/posts/abac0c46/  
 

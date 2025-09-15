@@ -306,5 +306,5 @@ You can also insert Latin text in your document
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/4f94956/  
+> URL: https://blog.linkcoder.vip/posts/4f94956/  
 

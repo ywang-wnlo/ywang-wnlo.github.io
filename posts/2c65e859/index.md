@@ -5,5 +5,5 @@ _**本文已加密，因此其原始内容不可见！**_
 ---
 
 > 作者: [Zeus](https://github.com/ywang-wnlo)  
-> URL: https://ywang-wnlo.github.io/posts/2c65e859/  
+> URL: https://blog.linkcoder.vip/posts/2c65e859/  
 
